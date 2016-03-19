@@ -1,56 +1,90 @@
 package com.facundolinlaud.supergame;
 
 import com.badlogic.ashley.core.Engine;
-import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.facundolinlaud.supergame.components.InputComponent;
-import com.facundolinlaud.supergame.components.PositionComponent;
-import com.facundolinlaud.supergame.components.RenderComponent;
-import com.facundolinlaud.supergame.components.VelocityComponent;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.utils.Array;
 import com.facundolinlaud.supergame.engine.GameResources;
+import com.facundolinlaud.supergame.managers.ScreenManager;
+import com.facundolinlaud.supergame.systems.CameraFocusSystem;
 import com.facundolinlaud.supergame.systems.InputMovementSystem;
 import com.facundolinlaud.supergame.systems.RenderSystem;
 import com.facundolinlaud.supergame.screens.WorldScreen;
 
-public class Game extends ApplicationAdapter {
-	private final static int FRAMES_PER_SECOND = 60;
+import java.util.Arrays;
+import java.util.List;
 
+public class Game extends ApplicationAdapter {
 	private Engine engine;
-	private Screen screen;
 	private SpriteBatch batch;
+	private BitmapFont bitmapFont;
+	private ScreenManager screenManager;
 
 	@Override
 	public void create () {
 		engine = new Engine();
 		batch = new SpriteBatch();
-		GameResources gameResources = new GameResources(engine, batch);
+		bitmapFont = new BitmapFont();
 
-		addSystems();
+		initializeScreen();
+		initializeSystems();
 
-		screen = new WorldScreen(gameResources);
+		/**/
+		Texture txt = new Texture("player/player1.png");
+		List<TextureRegion> textures = Arrays.asList(
+				new TextureRegion(txt, 0, 64, 32, 32),
+				new TextureRegion(txt, 32, 64, 32, 32),
+				new TextureRegion(txt, 64, 64, 32, 32)
+		);
+
+		animation = new Animation(0.25f, new Array(textures.toArray()), Animation.PlayMode.LOOP);
+		/**/
 	}
 
-	private void addSystems() {
-		InputMovementSystem inputMovementSystem = new InputMovementSystem();
-		engine.addSystem(inputMovementSystem);
+	private void initializeScreen() {
+		screenManager = new ScreenManager(new GameResources(engine, batch));
+		screenManager.loadWorldScreen();
+	}
 
+	private void initializeSystems() {
 		RenderSystem renderSystem = new RenderSystem(batch);
 		engine.addSystem(renderSystem);
 	}
+
+	float keyFrame = 0;
+	Animation animation;
 
 	@Override
 	public void render () {
 		float deltaTime = Gdx.graphics.getDeltaTime();
 
 		clearScreen();
-		screen.render(deltaTime);
+		screenManager.getCurrentScreen().render(deltaTime);
+
 		batch.begin();
 		engine.update(deltaTime);
+
+
+
+
+		/**/
+		keyFrame += deltaTime;
+		TextureRegion t = animation.getKeyFrame(keyFrame, true);
+		batch.draw(t, 50, 50);
+		System.out.println(keyFrame);
+		/**/
+
+
+
+
+
 		batch.end();
 	}
 
@@ -64,12 +98,16 @@ public class Game extends ApplicationAdapter {
 	@Override
 	public void resize(int width, int height) {
 		super.resize(width, height);
-		screen.resize(width, height);
+
+		if(screenManager.getCurrentScreen() != null)
+			screenManager.getCurrentScreen().resize(width, height);
 	}
 
 	@Override
 	public void dispose() {
-		screen.dispose();
+		if(screenManager.getCurrentScreen() != null)
+			screenManager.getCurrentScreen().dispose();
+
 		super.dispose();
 	}
 }

@@ -8,11 +8,14 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.facundolinlaud.supergame.components.InputComponent;
-import com.facundolinlaud.supergame.components.PositionComponent;
-import com.facundolinlaud.supergame.components.RenderComponent;
-import com.facundolinlaud.supergame.components.VelocityComponent;
+import com.facundolinlaud.supergame.components.*;
 import com.facundolinlaud.supergame.engine.GameResources;
+import com.facundolinlaud.supergame.helper.AnimationType;
+import com.facundolinlaud.supergame.systems.AnimationSystem;
+import com.facundolinlaud.supergame.systems.CameraFocusSystem;
+import com.facundolinlaud.supergame.systems.InputMovementSystem;
+
+import java.util.Arrays;
 
 /**
  * Created by facundo on 3/18/16.
@@ -21,8 +24,6 @@ public class WorldScreen implements Screen {
     private static final int Z = 0;
 
     private GameResources gameResources;
-
-    private PositionComponent playerPositionComponent;
 
     /* Tile map */
     private TiledMap map;
@@ -34,7 +35,20 @@ public class WorldScreen implements Screen {
 
         initializeMap();
         initializePlayer();
+        initializeSystems();
     }
+
+    private void initializeSystems() {
+        AnimationSystem animationSystem = new AnimationSystem();
+        gameResources.engine.addSystem(animationSystem);
+
+        InputMovementSystem inputMovementSystem = new InputMovementSystem();
+        gameResources.engine.addSystem(inputMovementSystem);
+
+        CameraFocusSystem cameraFocusSystem = new CameraFocusSystem(camera);
+        gameResources.engine.addSystem(cameraFocusSystem);
+    }
+
 
     private void initializeMap(){
         float width = Gdx.graphics.getWidth();
@@ -48,20 +62,20 @@ public class WorldScreen implements Screen {
     }
 
     private void initializePlayer(){
-        playerPositionComponent = new PositionComponent(0, 0);
-
         gameResources.engine.addEntity(new Entity()
-                .add(playerPositionComponent)
+                .add(new PositionComponent(0, 0))
                 .add(new InputComponent())
-                .add(new VelocityComponent(2f))
-                .add(new RenderComponent(new Texture("player/player1.png"))));
+                .add(new VelocityComponent(1.9f))
+                .add(new RenderComponent())
+                .add(new AnimationComponent(Arrays.asList(
+                        AnimationType.DOWN, AnimationType.LEFT, AnimationType.RIGHT, AnimationType.UP),
+                        new Texture("player/player2.png"))));
+//                .add(new RenderComponent(new Texture("player/player1.png"))));
     }
 
     @Override
     public void render(float delta) {
-        camera.position.set(playerPositionComponent.x, playerPositionComponent.y, Z);
         gameResources.batch.setProjectionMatrix(camera.combined);
-        camera.update();
 
         renderer.setView(camera);
         renderer.render();

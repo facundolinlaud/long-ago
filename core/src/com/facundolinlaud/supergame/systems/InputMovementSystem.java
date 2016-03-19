@@ -16,9 +16,9 @@ import com.facundolinlaud.supergame.helper.Mappers;
  * Created by facundo on 3/17/16.
  */
 public class InputMovementSystem extends IteratingSystem  {
-    private ComponentMapper<PositionComponent> position = Mappers.position;
-    private ComponentMapper<VelocityComponent> velocity = Mappers.velocity;
-    private ComponentMapper<InputComponent> input = Mappers.input;
+    private ComponentMapper<PositionComponent> pm = Mappers.position;
+    private ComponentMapper<VelocityComponent> vm = Mappers.velocity;
+    private ComponentMapper<InputComponent> im = Mappers.input;
 
 
     public InputMovementSystem() {
@@ -27,24 +27,21 @@ public class InputMovementSystem extends IteratingSystem  {
 
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
-        PositionComponent position= this.position.get(entity);
-        VelocityComponent velocity = this.velocity.get(entity);
-        InputComponent input = this.input.get(entity);
+        PositionComponent position= this.pm.get(entity);
+        VelocityComponent velocity = this.vm.get(entity);
+        InputComponent input = this.im.get(entity);
+
+        input.direction.x = InputHelper.NONE;
+        input.direction.y = InputHelper.NONE;
 
         if(Gdx.input.isKeyPressed(Input.Keys.A)){
             input.direction.x = InputHelper.LEFT;
         }else if(Gdx.input.isKeyPressed(Input.Keys.D)){
             input.direction.x = InputHelper.RIGHT;
-        }else{
-            input.direction.x = InputHelper.NONE;
-        }
-
-        if(Gdx.input.isKeyPressed(Input.Keys.S)){
+        }else if(Gdx.input.isKeyPressed(Input.Keys.S)){
             input.direction.y = InputHelper.DOWN;
         }else if(Gdx.input.isKeyPressed(Input.Keys.W)){
             input.direction.y = InputHelper.UP;
-        }else{
-            input.direction.y = InputHelper.NONE;
         }
 
         position.x += input.direction.x * (velocity.velocity * (deltaTime + 1));

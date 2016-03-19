@@ -13,8 +13,8 @@ import com.facundolinlaud.supergame.helper.Mappers;
  * Created by facundo on 3/18/16.
  */
 public class RenderSystem extends IteratingSystem {
-    private ComponentMapper<PositionComponent> position = Mappers.position;
-    private ComponentMapper<RenderComponent> render = Mappers.render;
+    private ComponentMapper<PositionComponent> pm = Mappers.position;
+    private ComponentMapper<RenderComponent> rm = Mappers.render;
 
     private SpriteBatch spriteBatch;
 
@@ -25,8 +25,8 @@ public class RenderSystem extends IteratingSystem {
 
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
-        PositionComponent positionComponent = position.get(entity);
-        RenderComponent renderComponent = render.get(entity);
+        PositionComponent positionComponent = pm.get(entity);
+        RenderComponent renderComponent = rm.get(entity);
 
         spriteBatch.draw(renderComponent.texture, positionComponent.x, positionComponent.y);
     }
