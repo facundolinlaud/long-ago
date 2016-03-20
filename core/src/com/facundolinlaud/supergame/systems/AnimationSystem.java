@@ -31,7 +31,7 @@ public class AnimationSystem extends IteratingSystem {
         RenderComponent render = rm.get(entity);
 
         AnimationType type;
-        boolean toggleAnimation = true;
+        boolean shouldToggleAnimation = true;
 
         if(input.direction.x < 0)
             type = AnimationType.LEFT;
@@ -43,10 +43,10 @@ public class AnimationSystem extends IteratingSystem {
             type = AnimationType.UP;
         else {
             type = AnimationType.STAND;
-            toggleAnimation = false;
+            shouldToggleAnimation = false;
         }
 
-        animation.toggle(toggleAnimation);
+        animation.toggle(shouldToggleAnimation);
         animation.setCurrentType(type);
         render.texture = animation.getCurrentTextureAndTick(deltaTime);
     }

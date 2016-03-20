@@ -35,17 +35,6 @@ public class Game extends ApplicationAdapter {
 
 		initializeScreen();
 		initializeSystems();
-
-		/**/
-		Texture txt = new Texture("player/player1.png");
-		List<TextureRegion> textures = Arrays.asList(
-				new TextureRegion(txt, 0, 64, 32, 32),
-				new TextureRegion(txt, 32, 64, 32, 32),
-				new TextureRegion(txt, 64, 64, 32, 32)
-		);
-
-		animation = new Animation(0.25f, new Array(textures.toArray()), Animation.PlayMode.LOOP);
-		/**/
 	}
 
 	private void initializeScreen() {
@@ -58,33 +47,14 @@ public class Game extends ApplicationAdapter {
 		engine.addSystem(renderSystem);
 	}
 
-	float keyFrame = 0;
-	Animation animation;
-
 	@Override
 	public void render () {
 		float deltaTime = Gdx.graphics.getDeltaTime();
 
 		clearScreen();
 		screenManager.getCurrentScreen().render(deltaTime);
-
 		batch.begin();
 		engine.update(deltaTime);
-
-
-
-
-		/**/
-		keyFrame += deltaTime;
-		TextureRegion t = animation.getKeyFrame(keyFrame, true);
-		batch.draw(t, 50, 50);
-		System.out.println(keyFrame);
-		/**/
-
-
-
-
-
 		batch.end();
 	}
 

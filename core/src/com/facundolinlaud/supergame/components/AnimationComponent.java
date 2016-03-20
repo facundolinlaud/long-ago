@@ -18,11 +18,11 @@ public class AnimationComponent implements Component {
     private static final int FRAME_COLUMNS = 4;
     public static final int TILE_HEIGHT = 48;
     public static final int TILE_WIDTH = 32;
-    public static final int STAND_STILL_KEY_FRAME = 3;
-    public static final float FRAME_DURATION = 0.2f;
+    public static final float STANDING_STILL_KEY_FRAME = 2f;
+    public static final float FRAME_DURATION = 0.1f;
 
     private Map<AnimationType, Animation> animations;
-    public Animation currentAnimation;
+    private Animation currentAnimation;
     private AnimationType type;
     private float stateTime;
 
@@ -43,22 +43,28 @@ public class AnimationComponent implements Component {
                 frames[e] = tmp[i][e];
             }
 
-            animations.put(animationTypes.get(i), new Animation(FRAME_DURATION, Array.with(frames), Animation.PlayMode.LOOP));
+            animations.put(animationTypes.get(i), new Animation(FRAME_DURATION, Array.with(frames), Animation.PlayMode.NORMAL));
         }
     }
 
     public void setCurrentType(AnimationType type){
-        if(!type.equals(this.type) && !type.equals(AnimationType.STAND)) {
+        if (!type.equals(this.type) && !type.equals(AnimationType.STAND)) {
             this.type = type;
             this.currentAnimation = animations.get(type);
         }
     }
 
     public void toggle(boolean state){
-        if(state)
+        if(state){
             currentAnimation.setPlayMode(Animation.PlayMode.LOOP);
-        else
+        }else{
             currentAnimation.setPlayMode(Animation.PlayMode.NORMAL);
+            showStandingTexture();
+        }
+    }
+
+    private void showStandingTexture() {
+        stateTime = FRAME_DURATION * STANDING_STILL_KEY_FRAME;
     }
 
     public TextureRegion getCurrentTextureAndTick(float deltaTime){
