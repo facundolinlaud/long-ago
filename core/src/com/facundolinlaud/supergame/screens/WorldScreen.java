@@ -6,6 +6,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.facundolinlaud.supergame.components.*;
@@ -54,7 +55,7 @@ public class WorldScreen implements Screen {
         float width = Gdx.graphics.getWidth();
         float height = Gdx.graphics.getHeight();
 
-        map = new TmxMapLoader().load("map/test1.tmx");
+        map = new TmxMapLoader().load("map/test2.tmx");
         renderer = new OrthogonalTiledMapRenderer(map, gameResources.batch);
 
         camera = new OrthographicCamera();
@@ -70,15 +71,20 @@ public class WorldScreen implements Screen {
                 .add(new AnimationComponent(Arrays.asList(
                         AnimationType.DOWN, AnimationType.LEFT, AnimationType.RIGHT, AnimationType.UP),
                         new Texture("player/player2.png"))));
-//                .add(new RenderComponent(new Texture("player/player1.png"))));
     }
 
     @Override
     public void render(float delta) {
         gameResources.batch.setProjectionMatrix(camera.combined);
-
         renderer.setView(camera);
-        renderer.render();
+        renderer.render(new int[]{0});
+
+        gameResources.batch.begin();
+        gameResources.engine.update(delta);
+        gameResources.font.draw(gameResources.batch, "FPS: " + Gdx.graphics.getFramesPerSecond(), 0, 0);
+        gameResources.batch.end();
+
+        renderer.render(new int[]{1, 2});
     }
 
     @Override

@@ -48,6 +48,7 @@ public class AnimationSystem extends IteratingSystem {
 
         animation.toggle(shouldToggleAnimation);
         animation.setCurrentType(type);
+
         render.texture = animation.getCurrentTextureAndTick(deltaTime);
     }
 }

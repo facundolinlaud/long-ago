@@ -3,42 +3,31 @@ package com.facundolinlaud.supergame;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.utils.Array;
 import com.facundolinlaud.supergame.engine.GameResources;
 import com.facundolinlaud.supergame.managers.ScreenManager;
-import com.facundolinlaud.supergame.systems.CameraFocusSystem;
-import com.facundolinlaud.supergame.systems.InputMovementSystem;
 import com.facundolinlaud.supergame.systems.RenderSystem;
-import com.facundolinlaud.supergame.screens.WorldScreen;
-
-import java.util.Arrays;
-import java.util.List;
 
 public class Game extends ApplicationAdapter {
 	private Engine engine;
 	private SpriteBatch batch;
-	private BitmapFont bitmapFont;
+	private BitmapFont font;
 	private ScreenManager screenManager;
 
 	@Override
 	public void create () {
 		engine = new Engine();
 		batch = new SpriteBatch();
-		bitmapFont = new BitmapFont();
+		font = new BitmapFont();
 
 		initializeScreen();
 		initializeSystems();
 	}
 
 	private void initializeScreen() {
-		screenManager = new ScreenManager(new GameResources(engine, batch));
+		screenManager = new ScreenManager(new GameResources(engine, batch, font));
 		screenManager.loadWorldScreen();
 	}
 
@@ -49,13 +38,10 @@ public class Game extends ApplicationAdapter {
 
 	@Override
 	public void render () {
-		float deltaTime = Gdx.graphics.getDeltaTime();
-
 		clearScreen();
+
+		float deltaTime = Gdx.graphics.getDeltaTime();
 		screenManager.getCurrentScreen().render(deltaTime);
-		batch.begin();
-		engine.update(deltaTime);
-		batch.end();
 	}
 
 
