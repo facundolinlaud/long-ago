@@ -6,7 +6,6 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.facundolinlaud.supergame.components.*;
@@ -14,7 +13,8 @@ import com.facundolinlaud.supergame.engine.GameResources;
 import com.facundolinlaud.supergame.helper.AnimationType;
 import com.facundolinlaud.supergame.systems.AnimationSystem;
 import com.facundolinlaud.supergame.systems.CameraFocusSystem;
-import com.facundolinlaud.supergame.systems.InputMovementSystem;
+import com.facundolinlaud.supergame.systems.KeyboardSystem;
+import com.facundolinlaud.supergame.systems.MovementSystem;
 
 import java.util.Arrays;
 
@@ -43,8 +43,11 @@ public class WorldScreen implements Screen {
         AnimationSystem animationSystem = new AnimationSystem();
         gameResources.engine.addSystem(animationSystem);
 
-        InputMovementSystem inputMovementSystem = new InputMovementSystem();
-        gameResources.engine.addSystem(inputMovementSystem);
+        KeyboardSystem keyboardSystem = new KeyboardSystem();
+        gameResources.engine.addSystem(keyboardSystem);
+
+        MovementSystem movementSystem = new MovementSystem();
+        gameResources.engine.addSystem(movementSystem);
 
         CameraFocusSystem cameraFocusSystem = new CameraFocusSystem(camera);
         gameResources.engine.addSystem(cameraFocusSystem);
@@ -66,6 +69,7 @@ public class WorldScreen implements Screen {
         gameResources.engine.addEntity(new Entity()
                 .add(new PositionComponent(0, 0))
                 .add(new InputComponent())
+                .add(new KeyboardComponent())
                 .add(new VelocityComponent(1.9f))
                 .add(new RenderComponent())
                 .add(new AnimationComponent(Arrays.asList(

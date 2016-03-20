@@ -12,4 +12,5 @@ public class Mappers {
     public static final ComponentMapper<RenderComponent> render = ComponentMapper.getFor(RenderComponent.class);
     public static final ComponentMapper<InputComponent> input = ComponentMapper.getFor(InputComponent.class);
     public static final ComponentMapper<AnimationComponent> animation = ComponentMapper.getFor(AnimationComponent.class);
+    public static final ComponentMapper<KeyboardComponent> keyboard = ComponentMapper.getFor(KeyboardComponent.class);
 }
