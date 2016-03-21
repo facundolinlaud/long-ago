@@ -15,7 +15,6 @@ import com.facundolinlaud.supergame.helper.Mappers;
  * Created by facundo on 3/19/16.
  */
 public class AnimationSystem extends IteratingSystem {
-    private ComponentMapper<PositionComponent> pm = Mappers.position;
     private ComponentMapper<InputComponent> im = Mappers.input;
     private ComponentMapper<AnimationComponent> am = Mappers.animation;
     private ComponentMapper<RenderComponent> rm = Mappers.render;

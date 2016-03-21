@@ -6,6 +6,7 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.ashley.systems.SortedIteratingSystem;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.facundolinlaud.supergame.components.PositionComponent;
 import com.facundolinlaud.supergame.components.RenderComponent;
 import com.facundolinlaud.supergame.helper.Mappers;
@@ -31,7 +32,10 @@ public class RenderSystem extends SortedIteratingSystem {
         PositionComponent positionComponent = pm.get(entity);
         RenderComponent renderComponent = rm.get(entity);
 
-        spriteBatch.draw(renderComponent.texture, positionComponent.x, positionComponent.y);
+        TextureRegion texture = renderComponent.texture;
+        float width = texture.getRegionWidth() / 32f;
+        float height = texture.getRegionHeight() / 32f;
+        spriteBatch.draw(texture, positionComponent.x, positionComponent.y, width, height);
     }
 
     private static class ZComparator implements Comparator<Entity> {

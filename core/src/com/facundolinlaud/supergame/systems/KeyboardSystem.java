@@ -7,7 +7,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.facundolinlaud.supergame.components.InputComponent;
 import com.facundolinlaud.supergame.components.KeyboardComponent;
-import com.facundolinlaud.supergame.helper.InputHelper;
+import com.facundolinlaud.supergame.helper.InputType;
 import com.facundolinlaud.supergame.helper.Mappers;
 
 /**
@@ -33,18 +33,18 @@ public class KeyboardSystem extends EntitySystem {
         int x, y;
 
         if(A)
-            x = InputHelper.LEFT;
+            x = InputType.LEFT;
         else if(D)
-            x = InputHelper.RIGHT;
+            x = InputType.RIGHT;
         else
-            x = InputHelper.NONE;
+            x = InputType.NONE;
 
         if(W)
-            y = InputHelper.UP;
+            y = InputType.UP;
         else if(S)
-            y = InputHelper.DOWN;
+            y = InputType.DOWN;
         else
-            y = InputHelper.NONE;
+            y = InputType.NONE;
 
 
         for(Entity entity : entities){

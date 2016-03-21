@@ -16,8 +16,4 @@ public class InputComponent implements Component {
     public InputComponent(Vector2 direction) {
         this.direction = direction;
     }
-
-    public void stop() {
-        this.direction = new Vector2(0, 0);
-    }
 }
