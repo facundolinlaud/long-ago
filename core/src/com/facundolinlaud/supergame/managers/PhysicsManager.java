@@ -1,7 +1,6 @@
 package com.facundolinlaud.supergame.managers;
 
 import com.badlogic.gdx.graphics.Camera;
-import com.badlogic.gdx.maps.Map;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
@@ -60,5 +59,9 @@ public class PhysicsManager {
 
     public void render(){
         physicsDebugRenderer.render(world, camera.combined);
+    }
+
+    public World getWorld(){
+        return this.world;
     }
 }
