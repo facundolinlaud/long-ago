@@ -15,6 +15,8 @@ import com.facundolinlaud.supergame.helper.Mappers;
  * Created by facundo on 3/20/16.
  */
 public class PhysicsSystem extends IteratingSystem {
+    public static final float UPDATE_TIME_STEP = 1 / 45f;
+
     private ComponentMapper<PositionComponent> pm = Mappers.position;
     private ComponentMapper<BodyComponent> bm = Mappers.body;
 
@@ -24,6 +26,12 @@ public class PhysicsSystem extends IteratingSystem {
         super(Family.all(BodyComponent.class, PositionComponent.class).get());
 
         this.world = world;
+    }
+
+    @Override
+    public void update(float deltaTime) {
+        super.update(deltaTime);
+        world.step(UPDATE_TIME_STEP, 6, 2);
     }
 
     @Override

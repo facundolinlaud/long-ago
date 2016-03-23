@@ -5,16 +5,16 @@ import com.badlogic.gdx.physics.box2d.*;
 /**
  * Created by facundo on 3/20/16.
  */
-public class Bodies {
+public class BodiesFactory {
 
-    public static final float RADIUS = 0.5f;
+    public static final float RADIUS = 0.4f;
     public static final float DENSITY = 0.5f;
     public static final float FRICTION = 0.4f;
     public static final float RESTITUTION = 0.6f;
 
     private World world;
 
-    public Bodies(World world) {
+    public BodiesFactory(World world) {
         this.world = world;
     }
 
@@ -37,11 +37,8 @@ public class Bodies {
         circle.setRadius(RADIUS);
 
         // Create a fixture definition to apply our shape to
-        FixtureDef fixtureDef = new FixtureDef();
+        FixtureDef fixtureDef = createFixtureDefinition();
         fixtureDef.shape = circle;
-        fixtureDef.density = DENSITY;
-        fixtureDef.friction = FRICTION;
-        fixtureDef.restitution = RESTITUTION; // Make it bounce a little bit
 
         // Create our fixture and attach it to the body
         Fixture fixture = body.createFixture(fixtureDef);
@@ -51,5 +48,31 @@ public class Bodies {
         circle.dispose();
 
         return body;
+    }
+
+    public Body createObstacle(float x, float y, float width, float height){
+        BodyDef bodyDef = new BodyDef();
+        bodyDef.type = BodyDef.BodyType.StaticBody;
+        bodyDef.position.set(x, y);
+        Body body = world.createBody(bodyDef);
+        PolygonShape square = new PolygonShape();
+        square.setAsBox(width / 2, height / 2);
+
+        FixtureDef fixtureDef = createFixtureDefinition();
+        fixtureDef.shape = square;
+
+        Fixture fixture = body.createFixture(fixtureDef);
+        square.dispose();
+
+        return body;
+    }
+
+    private FixtureDef createFixtureDefinition(){
+        FixtureDef fixtureDef = new FixtureDef();
+        fixtureDef.density = DENSITY;
+        fixtureDef.friction = FRICTION;
+        fixtureDef.restitution = RESTITUTION; // Make it bounce a little bit
+
+        return fixtureDef;
     }
 }
