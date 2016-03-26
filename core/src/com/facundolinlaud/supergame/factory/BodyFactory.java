@@ -69,6 +69,30 @@ public class BodyFactory {
         return body;
     }
 
+    public Body createItem() {
+        BodyDef bodyDef = new BodyDef();
+        bodyDef.type = BodyDef.BodyType.DynamicBody;
+        bodyDef.fixedRotation = true;
+
+        Body body = world.createBody(bodyDef);
+
+        CircleShape circle = new CircleShape();
+        circle.setRadius(RADIUS);
+
+        FixtureDef fixtureDef = new FixtureDef();
+        fixtureDef.density = 5f;
+        fixtureDef.friction = 2f;
+        fixtureDef.restitution = 0.1f;
+
+        fixtureDef.shape = circle;
+
+        Fixture fixture = body.createFixture(fixtureDef);
+        circle.dispose();
+
+        body.setLinearDamping(2.5f);
+        return body;
+    }
+
     private FixtureDef createFixtureDefinition(){
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.density = DENSITY;

@@ -33,6 +33,7 @@ public class PhysicsManager {
         this.map = map;
 
         initialize();
+        populateObstacles();
     }
 
     private void initialize(){
@@ -40,7 +41,9 @@ public class PhysicsManager {
         world = new World(new Vector2(0, 0), doSleep);
         physicsDebugRenderer = new Box2DDebugRenderer();
         bodyFactory = new BodyFactory(world);
+    }
 
+    private void populateObstacles(){
         MapLayer layer = map.getLayers().get(COLLISION_LAYER);
         MapObjects objects = layer.getObjects();
         Iterator<MapObject> objectIt = objects.iterator();

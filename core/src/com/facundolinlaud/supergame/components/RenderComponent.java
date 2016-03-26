@@ -12,7 +12,9 @@ public class RenderComponent implements Component {
     public TextureRegion texture;
     public RenderPriority priority;
 
-    public RenderComponent() {}
+    public RenderComponent() {
+        this.priority = RenderPriority.createNormalRenderPriority();
+    }
 
     public RenderComponent(TextureRegion texture) {
         this.texture = texture;

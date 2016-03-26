@@ -15,4 +15,6 @@ public class Mappers {
     public static final ComponentMapper<KeyboardComponent> keyboard = ComponentMapper.getFor(KeyboardComponent.class);
     public static final ComponentMapper<BodyComponent> body = ComponentMapper.getFor(BodyComponent.class);
     public static final ComponentMapper<HealthComponent> health = ComponentMapper.getFor(HealthComponent.class);
+    public static final ComponentMapper<ItemComponent> item = ComponentMapper.getFor(ItemComponent.class);
+    public static final ComponentMapper<GathererComponent> gatherer = ComponentMapper.getFor(GathererComponent.class);
 }

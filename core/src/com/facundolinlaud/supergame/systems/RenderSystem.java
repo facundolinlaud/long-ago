@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.facundolinlaud.supergame.components.PositionComponent;
 import com.facundolinlaud.supergame.components.RenderComponent;
 import com.facundolinlaud.supergame.helper.Mappers;
+import com.facundolinlaud.supergame.helper.RenderPriority;
 
 import java.util.Comparator;
 

@@ -6,6 +6,7 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
 import com.facundolinlaud.supergame.components.HealthComponent;
+import com.facundolinlaud.supergame.components.KeyboardComponent;
 import com.facundolinlaud.supergame.helper.Mappers;
 import com.facundolinlaud.supergame.ui.ProfileUI;
 
@@ -18,7 +19,7 @@ public class ProfileUISystem extends IteratingSystem {
     private ProfileUI profileUI;
 
     public ProfileUISystem(ProfileUI profileUI) {
-        super(Family.all(HealthComponent.class).get());
+        super(Family.all(HealthComponent.class, KeyboardComponent.class).get());
         this.profileUI = profileUI;
     }
 
