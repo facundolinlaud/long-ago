@@ -31,9 +31,11 @@ public class PhysicsManager {
     public PhysicsManager(Camera camera, TiledMap map) {
         this.camera = camera;
         this.map = map;
+
+        initialize();
     }
 
-    public void initialize(){
+    private void initialize(){
         boolean doSleep = true;
         world = new World(new Vector2(0, 0), doSleep);
         physicsDebugRenderer = new Box2DDebugRenderer();

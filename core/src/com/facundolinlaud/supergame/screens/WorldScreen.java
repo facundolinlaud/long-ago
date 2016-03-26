@@ -10,12 +10,11 @@ import com.facundolinlaud.supergame.helper.AnimationType;
 import com.facundolinlaud.supergame.helper.BodiesFactory;
 import com.facundolinlaud.supergame.managers.MapManager;
 import com.facundolinlaud.supergame.managers.PhysicsManager;
+import com.facundolinlaud.supergame.managers.UIManager;
 import com.facundolinlaud.supergame.systems.*;
 
 import java.util.Arrays;
 
-// * ver si extender PositionComponent para usarlo con physicsSystem
-// * ver si el chabon de youtube lo encara de alguna manera diferente (en el video y en su github)
 // * ver si la animacion la puedo encarar por el lado de getLinearVelocity
 
 /**
@@ -31,16 +30,14 @@ public class WorldScreen implements Screen {
     private MapManager mapManager;
     private PhysicsManager physicsManager;
     private BodiesFactory bodiesFactory;
+    private UIManager uiManager;
 
     public WorldScreen(GameResources res) {
         this.res = res;
 
         mapManager = new MapManager(res.batch);
-        mapManager.initialize();
-
         physicsManager = new PhysicsManager(mapManager.getCamera(), mapManager.getMap());
-        physicsManager.initialize();
-
+        uiManager = new UIManager();
         bodiesFactory = new BodiesFactory(physicsManager.getWorld());
 
         initializePlayer();
@@ -53,12 +50,14 @@ public class WorldScreen implements Screen {
         res.engine.addSystem(new MovementSystem());
         res.engine.addSystem(new CameraFocusSystem(mapManager.getCamera()));
         res.engine.addSystem(new PhysicsSystem(physicsManager.getWorld()));
+
+        uiManager.initializeSystems(res.engine);
     }
 
 
     private void initializePlayer(){
         res.engine.addEntity(new Entity()
-                .add(new PositionComponent(20, 20))
+                .add(new PositionComponent(20, 50))
                 .add(new InputComponent())
                 .add(new KeyboardComponent())
                 .add(new VelocityComponent(1.9f))
@@ -66,7 +65,8 @@ public class WorldScreen implements Screen {
                 .add(new BodyComponent(bodiesFactory.createDefault()))
                 .add(new AnimationComponent(Arrays.asList(
                         AnimationType.DOWN, AnimationType.LEFT, AnimationType.RIGHT, AnimationType.UP),
-                        new Texture(PATH_TO_PLAYER_SPRITE))));
+                        new Texture(PATH_TO_PLAYER_SPRITE)))
+                .add(new HealthComponent()));
     }
 
     @Override
@@ -75,11 +75,11 @@ public class WorldScreen implements Screen {
 
         res.batch.begin();
         res.engine.update(delta);
-        res.font.draw(res.batch, "FPS: " + Gdx.graphics.getFramesPerSecond(), 0, 0);
         res.batch.end();
 
         mapManager.renderUpperLayer();
         physicsManager.render();
+        uiManager.render();
     }
 
     @Override

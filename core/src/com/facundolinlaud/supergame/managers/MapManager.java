@@ -13,7 +13,7 @@ import com.facundolinlaud.supergame.helper.Dimensions;
  * Created by facundo on 3/23/16.
  */
 public class MapManager {
-    public static final String PATH_TO_TILE_MAP = "map/test4.tmx";
+    public static final String PATH_TO_TILE_MAP = "map/test5.tmx";
     public static final int VIEWPORT_WIDTH_IN_METERS = 32;
     public static final int[] BASE_LAYERS = new int[]{0, 1};
     public static final int[] UPPER_LAYERS = new int[]{2};
@@ -27,9 +27,11 @@ public class MapManager {
 
     public MapManager(SpriteBatch batch) {
         this.batch = batch;
+
+        initialize();
     }
 
-    public void initialize(){
+    private void initialize(){
         float width = Gdx.graphics.getWidth();
         float height = Gdx.graphics.getHeight();
 

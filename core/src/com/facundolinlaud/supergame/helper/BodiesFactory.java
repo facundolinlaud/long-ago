@@ -28,6 +28,7 @@ public class BodiesFactory {
         // Set our body's starting position in the world
         float x = 0, y = 0;
         bodyDef.position.set(x + Dimensions.BOX_2D_OFFSET, y + Dimensions.BOX_2D_OFFSET);
+        bodyDef.fixedRotation = true;
 
         // Create our body in the world using our body definition
         Body body = world.createBody(bodyDef);
