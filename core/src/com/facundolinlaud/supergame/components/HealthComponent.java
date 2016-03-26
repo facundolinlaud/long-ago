@@ -10,7 +10,6 @@ public class HealthComponent implements Component {
 
     public float health;
 
-
     public HealthComponent() {
         this.health = DEFAULT_HEALTH;
     }

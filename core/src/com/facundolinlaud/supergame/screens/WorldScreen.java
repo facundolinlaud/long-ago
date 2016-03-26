@@ -1,19 +1,13 @@
 package com.facundolinlaud.supergame.screens;
 
-import com.badlogic.ashley.core.Entity;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Texture;
-import com.facundolinlaud.supergame.components.*;
 import com.facundolinlaud.supergame.engine.GameResources;
-import com.facundolinlaud.supergame.helper.AnimationType;
-import com.facundolinlaud.supergame.helper.BodiesFactory;
+import com.facundolinlaud.supergame.factory.BodyFactory;
+import com.facundolinlaud.supergame.factory.EntityFactory;
 import com.facundolinlaud.supergame.managers.MapManager;
 import com.facundolinlaud.supergame.managers.PhysicsManager;
 import com.facundolinlaud.supergame.managers.UIManager;
 import com.facundolinlaud.supergame.systems.*;
-
-import java.util.Arrays;
 
 // * ver si la animacion la puedo encarar por el lado de getLinearVelocity
 
@@ -21,15 +15,12 @@ import java.util.Arrays;
  * Created by facundo on 3/18/16.
  */
 public class WorldScreen implements Screen {
-    private static final int Z = 0;
-    public static final String PATH_TO_PLAYER_SPRITE = "player/player2.png";
-    public static final int VIEWPORT_WIDTH_IN_METERS = 32;
-
     private GameResources res;
 
     private MapManager mapManager;
     private PhysicsManager physicsManager;
-    private BodiesFactory bodiesFactory;
+    private BodyFactory bodyFactory;
+    private EntityFactory entityFactory;
     private UIManager uiManager;
 
     public WorldScreen(GameResources res) {
@@ -38,10 +29,15 @@ public class WorldScreen implements Screen {
         mapManager = new MapManager(res.batch);
         physicsManager = new PhysicsManager(mapManager.getCamera(), mapManager.getMap());
         uiManager = new UIManager();
-        bodiesFactory = new BodiesFactory(physicsManager.getWorld());
+        bodyFactory = new BodyFactory(physicsManager.getWorld());
+        entityFactory = new EntityFactory();
 
-        initializePlayer();
+        initializeEntities();
         initializeSystems();
+    }
+
+    private void initializeEntities(){
+        res.engine.addEntity(entityFactory.createPlayerWithBody(bodyFactory.createPlayer()));
     }
 
     private void initializeSystems() {
@@ -52,21 +48,6 @@ public class WorldScreen implements Screen {
         res.engine.addSystem(new PhysicsSystem(physicsManager.getWorld()));
 
         uiManager.initializeSystems(res.engine);
-    }
-
-
-    private void initializePlayer(){
-        res.engine.addEntity(new Entity()
-                .add(new PositionComponent(20, 50))
-                .add(new InputComponent())
-                .add(new KeyboardComponent())
-                .add(new VelocityComponent(1.9f))
-                .add(new RenderComponent())
-                .add(new BodyComponent(bodiesFactory.createDefault()))
-                .add(new AnimationComponent(Arrays.asList(
-                        AnimationType.DOWN, AnimationType.LEFT, AnimationType.RIGHT, AnimationType.UP),
-                        new Texture(PATH_TO_PLAYER_SPRITE)))
-                .add(new HealthComponent()));
     }
 
     @Override

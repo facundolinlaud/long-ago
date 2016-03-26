@@ -1,11 +1,12 @@
-package com.facundolinlaud.supergame.helper;
+package com.facundolinlaud.supergame.factory;
 
 import com.badlogic.gdx.physics.box2d.*;
+import com.facundolinlaud.supergame.helper.Dimensions;
 
 /**
  * Created by facundo on 3/20/16.
  */
-public class BodiesFactory {
+public class BodyFactory {
 
     public static final float RADIUS = 0.4f;
     public static final float DENSITY = 0.5f;
@@ -14,11 +15,11 @@ public class BodiesFactory {
 
     private World world;
 
-    public BodiesFactory(World world) {
+    public BodyFactory(World world) {
         this.world = world;
     }
 
-    public Body createDefault(){
+    public Body createPlayer(){
         // First we create a body definition
         BodyDef bodyDef = new BodyDef();
 

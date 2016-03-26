@@ -4,7 +4,7 @@
   <image source="tilesets/world1.png" width="512" height="384"/>
  </tileset>
  <tileset firstgid="193" name="trees3" tilewidth="32" tileheight="96">
-  <image source="tilesets/trees3.png" width="192" height="96"/>
+  <image source="tilesets/trees/trees3.png" width="192" height="96"/>
  </tileset>
  <tileset firstgid="199" name="world2" tilewidth="32" tileheight="32">
   <image source="tilesets/world2.png" width="1601" height="704"/>
