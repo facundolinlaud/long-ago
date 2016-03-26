@@ -7,7 +7,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.facundolinlaud.supergame.systems.ui.InventoryUISystem;
 import com.facundolinlaud.supergame.systems.ui.ProfileUISystem;
+import com.facundolinlaud.supergame.ui.InventoryUI;
 import com.facundolinlaud.supergame.ui.ProfileUI;
 
 /**
@@ -22,17 +24,19 @@ public class UIManager {
     private Table table;
 
     private ProfileUI profileUI;
+    private InventoryUI inventoryUI;
 
     public UIManager() {
         this.skin = new Skin(Gdx.files.internal(SKIN_JSON_PATH));
         this.stage = new Stage(new ScreenViewport());
 
         this.table = new Table(skin);
-        this.table.setWidth(stage.getWidth());
-        this.table.setHeight(stage.getHeight());
+        this.table.setFillParent(true);
         this.table.align(Align.topLeft);
+        this.table.setDebug(true);
 
         this.profileUI = new ProfileUI(table, skin);
+        this.inventoryUI = new InventoryUI(table, skin);
 
         stage.addActor(table);
         Gdx.input.setInputProcessor(stage);
@@ -40,6 +44,7 @@ public class UIManager {
 
     public void initializeSystems(Engine engine){
         engine.addSystem(new ProfileUISystem(profileUI));
+        engine.addSystem(new InventoryUISystem(inventoryUI));
     }
 
     public void render(){

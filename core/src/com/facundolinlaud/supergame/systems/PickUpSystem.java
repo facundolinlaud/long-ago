@@ -31,7 +31,7 @@ public class PickUpSystem extends EntitySystem {
         if(Gdx.input.isKeyJustPressed(Input.Keys.E)) {
             for (Entity taker : takers) {
                 PositionComponent takerPosition = pm.get(taker);
-                Rectangle rectangle = new Rectangle(takerPosition.x - 1, takerPosition.y - 1, takerPosition.x + 1, takerPosition.y + 1);
+                Rectangle rectangle = new Rectangle(takerPosition.x - 1, takerPosition.y - 1, 2, 2);
 
                 for (Entity item : items) {
                     PositionComponent itemPosition = pm.get(item);
@@ -39,11 +39,17 @@ public class PickUpSystem extends EntitySystem {
                     if(rectangle.contains(itemPosition.x, itemPosition.y)){
                         GathererComponent gatherer = gm.get(taker);
                         gatherer.addItem(item);
-
-                        item.removeAll();
+                        deleteItemFromWorld(item);
                     }
                 }
             }
         }
+    }
+
+    private void deleteItemFromWorld(Entity item) {
+        item.remove(PickupableComponent.class);
+        item.remove(PositionComponent.class);
+        item.remove(RenderComponent.class);
+        item.remove(BodyComponent.class);
     }
 }

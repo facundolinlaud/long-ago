@@ -17,7 +17,7 @@ public class GathererComponent implements Component {
 
     public GathererComponent() {
         bagSize = DEFAULT_BAG_SIZE;
-        items = new ArrayList<Entity>();
+        items = new ArrayList<>();
     }
 
     public void addItem(Entity entity){

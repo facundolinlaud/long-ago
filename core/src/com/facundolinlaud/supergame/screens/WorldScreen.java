@@ -46,7 +46,9 @@ public class WorldScreen implements Screen {
 
     private void initializeEntities(){
         res.engine.addEntity(entityFactory.createPlayerWithBody(bodyFactory.createPlayer()));
-        res.engine.addEntity(entityFactory.createItemWithBody(bodyFactory.createItem()));
+        for(float i = 0; i < 8; i++){
+            res.engine.addEntity(entityFactory.createItemWithBody(bodyFactory.createItem()));
+        }
     }
 
     private void initializeSystems() {

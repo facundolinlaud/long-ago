@@ -7,13 +7,15 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 /**
  * Created by facundo on 3/25/16.
  */
-public class ProfileUI implements UI {
+public class ProfileUI extends UI {
     public static final String DEFAULT_THEME = "default";
 
     private final Label healthLabel;
     private final Label fpsLabel;
 
-    public ProfileUI(Table parentTable, Skin skin) {
+    public ProfileUI(Table root, Skin skin) {
+        super(root, skin);
+
         Table table = new Table(skin);
         table.setWidth(300);
         table.setHeight(300);
@@ -23,11 +25,11 @@ public class ProfileUI implements UI {
         healthLabel = new Label("HEALTH", skin, DEFAULT_THEME);
         fpsLabel = new Label("FPS", skin, DEFAULT_THEME);
 
-        table.add(healthLabel).colspan(0);
+        table.add(healthLabel).left();
         table.row();
-        table.add(fpsLabel);
+        table.add(fpsLabel).left();
 
-        parentTable.add(table);
+        root.add(table);
     }
 
     public void setHealth(float health){
