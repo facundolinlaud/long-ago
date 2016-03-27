@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.facundolinlaud.supergame.helper.Dimensions;
+import com.facundolinlaud.supergame.utils.Dimensions;
 
 /**
  * Created by facundo on 3/23/16.

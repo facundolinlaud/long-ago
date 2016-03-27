@@ -3,14 +3,12 @@ package com.facundolinlaud.supergame.systems;
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
-import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.ashley.systems.SortedIteratingSystem;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.facundolinlaud.supergame.components.PositionComponent;
 import com.facundolinlaud.supergame.components.RenderComponent;
-import com.facundolinlaud.supergame.helper.Mappers;
-import com.facundolinlaud.supergame.helper.RenderPriority;
+import com.facundolinlaud.supergame.utils.Mappers;
 
 import java.util.Comparator;
 

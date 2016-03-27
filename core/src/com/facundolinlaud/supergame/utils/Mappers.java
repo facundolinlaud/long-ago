@@ -1,4 +1,4 @@
-package com.facundolinlaud.supergame.helper;
+package com.facundolinlaud.supergame.utils;
 
 import com.badlogic.ashley.core.ComponentMapper;
 import com.facundolinlaud.supergame.components.*;

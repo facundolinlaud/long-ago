@@ -1,4 +1,4 @@
-package com.facundolinlaud.supergame.helper;
+package com.facundolinlaud.supergame.utils;
 
 /**
  * Created by facundo on 3/18/16.

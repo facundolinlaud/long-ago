@@ -6,7 +6,7 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.facundolinlaud.supergame.components.BagComponent;
 import com.facundolinlaud.supergame.components.KeyboardComponent;
-import com.facundolinlaud.supergame.helper.Mappers;
+import com.facundolinlaud.supergame.utils.Mappers;
 import com.facundolinlaud.supergame.service.InventoryUIService;
 
 /**

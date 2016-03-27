@@ -1,9 +1,8 @@
 package com.facundolinlaud.supergame.components;
 
 import com.badlogic.ashley.core.Component;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.facundolinlaud.supergame.helper.RenderPriority;
+import com.facundolinlaud.supergame.utils.RenderPriority;
 
 /**
  * Created by facundo on 3/18/16.

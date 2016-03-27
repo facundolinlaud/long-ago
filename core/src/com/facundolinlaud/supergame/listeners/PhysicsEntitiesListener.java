@@ -6,7 +6,7 @@ import com.badlogic.ashley.core.EntityListener;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 import com.facundolinlaud.supergame.components.BodyComponent;
-import com.facundolinlaud.supergame.helper.Mappers;
+import com.facundolinlaud.supergame.utils.Mappers;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -7,7 +7,7 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
 import com.facundolinlaud.supergame.components.HealthComponent;
 import com.facundolinlaud.supergame.components.KeyboardComponent;
-import com.facundolinlaud.supergame.helper.Mappers;
+import com.facundolinlaud.supergame.utils.Mappers;
 import com.facundolinlaud.supergame.ui.ProfileUI;
 
 /**

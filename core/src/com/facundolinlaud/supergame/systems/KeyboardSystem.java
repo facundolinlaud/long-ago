@@ -7,8 +7,8 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.facundolinlaud.supergame.components.InputComponent;
 import com.facundolinlaud.supergame.components.KeyboardComponent;
-import com.facundolinlaud.supergame.helper.InputType;
-import com.facundolinlaud.supergame.helper.Mappers;
+import com.facundolinlaud.supergame.utils.InputType;
+import com.facundolinlaud.supergame.utils.Mappers;
 
 /**
  * Created by facundo on 3/20/16.

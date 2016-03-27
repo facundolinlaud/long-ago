@@ -5,8 +5,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.facundolinlaud.supergame.components.*;
-import com.facundolinlaud.supergame.helper.AnimationType;
-import com.facundolinlaud.supergame.helper.RenderPriority;
+import com.facundolinlaud.supergame.utils.AnimationType;
+import com.facundolinlaud.supergame.utils.RenderPriority;
 
 import java.util.Arrays;
 

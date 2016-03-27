@@ -8,7 +8,7 @@ import com.facundolinlaud.supergame.components.BodyComponent;
 import com.facundolinlaud.supergame.components.InputComponent;
 import com.facundolinlaud.supergame.components.PositionComponent;
 import com.facundolinlaud.supergame.components.VelocityComponent;
-import com.facundolinlaud.supergame.helper.Mappers;
+import com.facundolinlaud.supergame.utils.Mappers;
 
 /**
  * Created by facundo on 3/17/16.

@@ -11,7 +11,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.facundolinlaud.supergame.factory.BodyFactory;
-import com.facundolinlaud.supergame.helper.Dimensions;
+import com.facundolinlaud.supergame.utils.Dimensions;
 
 import java.util.Iterator;
 

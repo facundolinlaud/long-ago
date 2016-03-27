@@ -8,8 +8,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.facundolinlaud.supergame.components.BodyComponent;
 import com.facundolinlaud.supergame.components.PositionComponent;
-import com.facundolinlaud.supergame.helper.Dimensions;
-import com.facundolinlaud.supergame.helper.Mappers;
+import com.facundolinlaud.supergame.utils.Dimensions;
+import com.facundolinlaud.supergame.utils.Mappers;
 
 /**
  * Created by facundo on 3/20/16.

@@ -7,8 +7,8 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import com.facundolinlaud.supergame.components.AnimationComponent;
 import com.facundolinlaud.supergame.components.InputComponent;
 import com.facundolinlaud.supergame.components.RenderComponent;
-import com.facundolinlaud.supergame.helper.AnimationType;
-import com.facundolinlaud.supergame.helper.Mappers;
+import com.facundolinlaud.supergame.utils.AnimationType;
+import com.facundolinlaud.supergame.utils.Mappers;
 
 /**
  * Created by facundo on 3/19/16.

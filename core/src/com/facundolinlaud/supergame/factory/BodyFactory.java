@@ -1,7 +1,7 @@
 package com.facundolinlaud.supergame.factory;
 
 import com.badlogic.gdx.physics.box2d.*;
-import com.facundolinlaud.supergame.helper.Dimensions;
+import com.facundolinlaud.supergame.utils.Dimensions;
 
 /**
  * Created by facundo on 3/20/16.

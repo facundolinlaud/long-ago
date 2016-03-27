@@ -6,17 +6,17 @@ import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.facundolinlaud.supergame.service.InventoryUIService;
+import com.facundolinlaud.supergame.utils.observer.Observable;
+import com.facundolinlaud.supergame.utils.observer.events.InventoryEvent;
 
 /**
  * Created by facundo on 3/26/16.
  */
-public class InventoryUI implements UI {
+public class InventoryUI extends Observable implements UI {
     public static final String DEFAULT_THEME = "default";
 
     private Table table;
     private List itemsList;
-    private InventoryUIService uiService;
 
     public InventoryUI(Skin skin) {
         this.table = new Table(skin);
@@ -39,14 +39,13 @@ public class InventoryUI implements UI {
         return this.table;
     }
 
-    public void setUiService(InventoryUIService uiService) {
-        this.uiService = uiService;
-    }
-
     private class ItemClickListener extends ClickListener {
         @Override
         public void clicked(InputEvent event, float x, float y) {
-            uiService.clickedItem(itemsList.getSelectedIndex());
+            int selectedIndex = itemsList.getSelectedIndex();
+
+            if(selectedIndex >= 0)
+                notifyObservers(InventoryEvent.class, new InventoryEvent(selectedIndex));
         }
     }
 }
