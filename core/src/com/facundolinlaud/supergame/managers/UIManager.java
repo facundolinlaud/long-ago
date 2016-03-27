@@ -5,18 +5,14 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.facundolinlaud.supergame.service.InventoryUIService;
 import com.facundolinlaud.supergame.service.impl.InventoryUIServiceImpl;
 import com.facundolinlaud.supergame.systems.ui.InventoryUISystem;
 import com.facundolinlaud.supergame.systems.ui.ProfileUISystem;
 import com.facundolinlaud.supergame.ui.InventoryUI;
-import com.facundolinlaud.supergame.ui.ProfileUI;
-import com.facundolinlaud.supergame.ui.RootUI;
+import com.facundolinlaud.supergame.ui.OverlayUI;
 import com.facundolinlaud.supergame.utils.observer.events.InventoryEvent;
-import com.sun.corba.se.spi.orbutil.fsm.Input;
 
 /**
  * Created by facundo on 3/25/16.
@@ -29,7 +25,8 @@ public class UIManager {
     private Skin skin;
     private Stage stage;
 
-    private RootUI rootUI;
+    private OverlayUI hud;
+    private InventoryUI inventoryUI;
 
     private InventoryUIService inventoryUIService;
 
@@ -38,21 +35,25 @@ public class UIManager {
         this.stage = new Stage(new ScreenViewport());
         this.skin.addRegions(new TextureAtlas(Gdx.files.internal(TEXTURE_ATLAS_PATH)));
 
-        this.rootUI = new RootUI(skin);
-        this.inventoryUIService = new InventoryUIServiceImpl(this.rootUI.getInventoryUI());
+        this.hud = new OverlayUI(skin);
+        this.inventoryUI = new InventoryUI(stage, skin);
+        this.inventoryUIService = new InventoryUIServiceImpl(inventoryUI);
 
-        this.stage.addActor(rootUI.getUI());
-        Gdx.input.setInputProcessor(stage);
-
+        addUIToStage();
         addObservers();
     }
 
+    private void addUIToStage() {
+        this.stage.addActor(this.hud.getUI());
+        Gdx.input.setInputProcessor(stage);
+    }
+
     private void addObservers(){
-        this.rootUI.getInventoryUI().addObserver(InventoryEvent.class, this.inventoryUIService);
+        this.inventoryUI.addObserver(InventoryEvent.class, this.inventoryUIService);
     }
 
     public void initializeSystems(Engine engine){
-        engine.addSystem(new ProfileUISystem(this.rootUI.getProfileUI()));
+        engine.addSystem(new ProfileUISystem(this.hud.getProfileUI()));
         engine.addSystem(new InventoryUISystem(this.inventoryUIService));
     }
 

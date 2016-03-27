@@ -43,4 +43,5 @@ public class InventoryUIServiceImpl implements InventoryUIService {
     public void handle(InventoryEvent event) {
         bm.get(gatherer).items.remove(event.getSelectedItem());
     }
+
 }
