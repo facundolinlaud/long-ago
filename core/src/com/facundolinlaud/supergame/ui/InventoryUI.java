@@ -1,47 +1,52 @@
 package com.facundolinlaud.supergame.ui;
 
-import com.badlogic.ashley.core.ComponentMapper;
-import com.badlogic.ashley.core.Entity;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.List;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.facundolinlaud.supergame.components.ItemComponent;
-import com.facundolinlaud.supergame.helper.Mappers;
-
-import java.util.stream.Collectors;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.facundolinlaud.supergame.service.InventoryUIService;
 
 /**
  * Created by facundo on 3/26/16.
  */
-public class InventoryUI extends UI {
+public class InventoryUI implements UI {
     public static final String DEFAULT_THEME = "default";
 
-    private ComponentMapper<ItemComponent> im = Mappers.item;
+    private Table table;
     private List itemsList;
+    private InventoryUIService uiService;
 
-    public InventoryUI(Table root, Skin skin) {
-        super(root, skin);
+    public InventoryUI(Skin skin) {
+        this.table = new Table(skin);
 
-        int width = 400;
-        int height = 600;
+        this.itemsList = new List(skin, DEFAULT_THEME);
+        this.itemsList.addListener(new ItemClickListener());
 
-        Table table = new Table(skin);
-        table.setWidth(width);
-        table.setHeight(height);
-        table.setPosition(root.getWidth() - width, root.getHeight() - height);
-
-        itemsList = new List(skin, DEFAULT_THEME);
-        itemsList.setFillParent(true);
-        itemsList.clearItems();
-
-        table.add(itemsList);
-        root.add(table).right();
+        ScrollPane scrollPane = new ScrollPane(itemsList, skin);
+        scrollPane.setScrollBarPositions(true, true);
+        scrollPane.setFlickScroll(false);
+        this.table.add(scrollPane).expand().fill();
     }
 
-    public void update(java.util.List<Entity> entities){
-        if(entities.size() != itemsList.getItems().size){
-            itemsList.clearItems();
-            itemsList.setItems(entities.stream().map(e -> im.get(e).name).collect(Collectors.toList()));
+    public void update(Object[] items){
+        itemsList.setItems(items);
+    }
+
+    @Override
+    public Table getUI() {
+        return this.table;
+    }
+
+    public void setUiService(InventoryUIService uiService) {
+        this.uiService = uiService;
+    }
+
+    private class ItemClickListener extends ClickListener {
+        @Override
+        public void clicked(InputEvent event, float x, float y) {
+            uiService.clickedItem(itemsList.getSelectedIndex());
         }
     }
 }

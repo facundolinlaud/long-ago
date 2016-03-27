@@ -9,13 +9,13 @@ import java.util.List;
 /**
  * Created by facundo on 3/26/16.
  */
-public class GathererComponent implements Component {
+public class BagComponent implements Component {
     private final static float DEFAULT_BAG_SIZE = 10f;
 
     public float bagSize;
     public List<Entity> items;
 
-    public GathererComponent() {
+    public BagComponent() {
         bagSize = DEFAULT_BAG_SIZE;
         items = new ArrayList<>();
     }

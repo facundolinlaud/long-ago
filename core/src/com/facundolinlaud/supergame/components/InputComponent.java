@@ -8,9 +8,11 @@ import com.badlogic.gdx.math.Vector2;
  */
 public class InputComponent implements Component {
     public Vector2 direction;
+    public boolean gathering;
 
     public InputComponent() {
-        direction = new Vector2();
+        this.direction = new Vector2();
+        this.gathering = false;
     }
 
     public InputComponent(Vector2 direction) {

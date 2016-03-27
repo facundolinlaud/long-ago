@@ -2,8 +2,6 @@ package com.facundolinlaud.supergame.systems;
 
 import com.badlogic.ashley.core.*;
 import com.badlogic.ashley.utils.ImmutableArray;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Rectangle;
 import com.facundolinlaud.supergame.components.*;
 import com.facundolinlaud.supergame.helper.Mappers;
@@ -13,7 +11,8 @@ import com.facundolinlaud.supergame.helper.Mappers;
  */
 public class PickUpSystem extends EntitySystem {
     private ComponentMapper<PositionComponent> pm = Mappers.position;
-    private ComponentMapper<GathererComponent> gm = Mappers.gatherer;
+    private ComponentMapper<BagComponent> bm = Mappers.bag;
+    private ComponentMapper<InputComponent> im = Mappers.input;
 
     private ImmutableArray<Entity> items;
     private ImmutableArray<Entity> takers;
@@ -23,13 +22,15 @@ public class PickUpSystem extends EntitySystem {
     @Override
     public void addedToEngine(Engine engine) {
         items = engine.getEntitiesFor(Family.all(PickupableComponent.class, ItemComponent.class, PositionComponent.class).get());
-        takers = engine.getEntitiesFor(Family.all(GathererComponent.class, PositionComponent.class).get());
+        takers = engine.getEntitiesFor(Family.all(BagComponent.class, PositionComponent.class, InputComponent.class).get());
     }
 
     @Override
     public void update(float deltaTime) {
-        if(Gdx.input.isKeyJustPressed(Input.Keys.E)) {
-            for (Entity taker : takers) {
+        for (Entity taker : takers) {
+            boolean isGathering = im.get(taker).gathering;
+
+            if(isGathering) {
                 PositionComponent takerPosition = pm.get(taker);
                 Rectangle rectangle = new Rectangle(takerPosition.x - 1, takerPosition.y - 1, 2, 2);
 
@@ -37,8 +38,8 @@ public class PickUpSystem extends EntitySystem {
                     PositionComponent itemPosition = pm.get(item);
 
                     if(rectangle.contains(itemPosition.x, itemPosition.y)){
-                        GathererComponent gatherer = gm.get(taker);
-                        gatherer.addItem(item);
+                        BagComponent bag = bm.get(taker);
+                        bag.addItem(item);
                         deleteItemFromWorld(item);
                     }
                 }
@@ -49,7 +50,6 @@ public class PickUpSystem extends EntitySystem {
     private void deleteItemFromWorld(Entity item) {
         item.remove(PickupableComponent.class);
         item.remove(PositionComponent.class);
-        item.remove(RenderComponent.class);
         item.remove(BodyComponent.class);
     }
 }

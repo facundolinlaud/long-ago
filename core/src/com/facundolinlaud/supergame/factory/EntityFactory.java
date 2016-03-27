@@ -29,7 +29,7 @@ public class EntityFactory {
                         AnimationType.DOWN, AnimationType.LEFT, AnimationType.RIGHT, AnimationType.UP),
                         new Texture(PATH_TO_PLAYER_TEXTURE)))
                 .add(new HealthComponent())
-                .add(new GathererComponent());
+                .add(new BagComponent());
     }
 
     public Entity createItemWithBody(Body body) {

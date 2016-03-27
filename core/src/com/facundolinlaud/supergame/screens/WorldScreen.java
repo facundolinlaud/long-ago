@@ -53,7 +53,7 @@ public class WorldScreen implements Screen {
 
     private void initializeSystems() {
         res.engine.addSystem(new AnimationSystem());
-        res.engine.addSystem(new WASDSystem());
+        res.engine.addSystem(new KeyboardSystem());
         res.engine.addSystem(new MovementSystem());
         res.engine.addSystem(new CameraFocusSystem(mapManager.getCamera()));
         res.engine.addSystem(new PhysicsSystem(physicsManager.getWorld()));

@@ -80,7 +80,7 @@ public class BodyFactory {
         circle.setRadius(RADIUS);
 
         FixtureDef fixtureDef = new FixtureDef();
-        fixtureDef.density = 5f;
+        fixtureDef.density = 1f;
         fixtureDef.friction = 2f;
         fixtureDef.restitution = 0.1f;
 
@@ -89,7 +89,7 @@ public class BodyFactory {
         Fixture fixture = body.createFixture(fixtureDef);
         circle.dispose();
 
-        body.setLinearDamping(2.5f);
+        body.setLinearDamping(3f);
         return body;
     }
 

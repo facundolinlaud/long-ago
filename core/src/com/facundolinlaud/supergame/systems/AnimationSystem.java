@@ -6,7 +6,6 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.facundolinlaud.supergame.components.AnimationComponent;
 import com.facundolinlaud.supergame.components.InputComponent;
-import com.facundolinlaud.supergame.components.PositionComponent;
 import com.facundolinlaud.supergame.components.RenderComponent;
 import com.facundolinlaud.supergame.helper.AnimationType;
 import com.facundolinlaud.supergame.helper.Mappers;

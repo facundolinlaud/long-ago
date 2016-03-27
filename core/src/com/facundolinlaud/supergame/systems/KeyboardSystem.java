@@ -13,23 +13,25 @@ import com.facundolinlaud.supergame.helper.Mappers;
 /**
  * Created by facundo on 3/20/16.
  */
-public class WASDSystem extends EntitySystem {
+public class KeyboardSystem extends EntitySystem {
     private ComponentMapper<InputComponent> im = Mappers.input;
 
     private ImmutableArray<Entity> entities;
 
-    public WASDSystem() {}
+    public KeyboardSystem() {}
 
     public void addedToEngine(Engine engine) {
         entities = engine.getEntitiesFor(Family.all(InputComponent.class, KeyboardComponent.class).get());
     }
 
     public void update(float deltaTime) {
-        Vector2 direction = resolveDirection();
+        Vector2 resolvedDirection = resolveDirection();
+        boolean gathering = Gdx.input.isKeyJustPressed(Input.Keys.E);
 
         for(Entity entity : entities){
             InputComponent input = im.get(entity);
-            input.direction = direction;
+            input.direction = resolvedDirection;
+            input.gathering = gathering;
         }
     }
 
