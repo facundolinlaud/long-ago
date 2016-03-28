@@ -12,15 +12,15 @@ import com.facundolinlaud.supergame.systems.ui.InventoryUISystem;
 import com.facundolinlaud.supergame.systems.ui.ProfileUISystem;
 import com.facundolinlaud.supergame.ui.InventoryUI;
 import com.facundolinlaud.supergame.ui.OverlayUI;
-import com.facundolinlaud.supergame.utils.observer.events.InventoryEvent;
+import com.facundolinlaud.supergame.utils.observer.events.ItemDroppedEvent;
 
 /**
  * Created by facundo on 3/25/16.
  */
 public class UIManager {
     public static final String DEFAULT_THEME = "default";
-    public static final String SKIN_JSON_PATH = "ui/uiskin.json";
-    public static final String TEXTURE_ATLAS_PATH = "ui/uiskin.atlas";
+    public static final String SKIN_JSON_PATH = "ui/first_iteration/uiskin.json";
+    public static final String TEXTURE_ATLAS_PATH = "ui/first_iteration/uiskin.atlas";
 
     private Skin skin;
     private Stage stage;
@@ -49,7 +49,7 @@ public class UIManager {
     }
 
     private void addObservers(){
-        this.inventoryUI.addObserver(InventoryEvent.class, this.inventoryUIService);
+        this.inventoryUI.addObserver(ItemDroppedEvent.class, this.inventoryUIService);
     }
 
     public void initializeSystems(Engine engine){

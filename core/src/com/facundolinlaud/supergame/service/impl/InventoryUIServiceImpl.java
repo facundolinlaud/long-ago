@@ -4,17 +4,20 @@ import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.facundolinlaud.supergame.components.BagComponent;
 import com.facundolinlaud.supergame.components.ItemComponent;
+import com.facundolinlaud.supergame.components.PickupableComponent;
+import com.facundolinlaud.supergame.components.PositionComponent;
 import com.facundolinlaud.supergame.service.InventoryUIService;
 import com.facundolinlaud.supergame.ui.InventoryUI;
 import com.facundolinlaud.supergame.utils.Mappers;
-import com.facundolinlaud.supergame.utils.observer.events.InventoryEvent;
+import com.facundolinlaud.supergame.utils.observer.events.ItemDroppedEvent;
 
 /**
  * Created by facundo on 3/27/16.
  */
 public class InventoryUIServiceImpl implements InventoryUIService {
-    private ComponentMapper<ItemComponent> im = Mappers.item;
+    private ComponentMapper<ItemComponent> itc = Mappers.item;
     private ComponentMapper<BagComponent> bm = Mappers.bag;
+    private ComponentMapper<PositionComponent> pm = Mappers.position;
 
     private InventoryUI ui;
     private Entity gatherer;
@@ -31,17 +34,17 @@ public class InventoryUIServiceImpl implements InventoryUIService {
     @Override
     public void update(Entity entity, BagComponent bag) {
         setGatherer(entity);
-        ui.update(bag.items.stream().map(e -> im.get(e).name).toArray());
+        ui.update(bag.items.stream().map(e -> itc.get(e).name).toArray());
     }
 
     @Override
-    public void clickedItem(int index) {
-        bm.get(gatherer).items.remove(index);
-    }
+    public void handle(ItemDroppedEvent event) {
+        PositionComponent gathererPosition = pm.get(gatherer);
 
-    @Override
-    public void handle(InventoryEvent event) {
-        bm.get(gatherer).items.remove(event.getSelectedItem());
+        Entity item = bm.get(gatherer).items.remove(event.getItemIndex());
+
+        item.add(new PositionComponent(gathererPosition));
+        item.add(new PickupableComponent());
     }
 
 }

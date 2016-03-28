@@ -18,6 +18,12 @@ public class PositionComponent implements Component {
         this.y = y;
     }
 
+    public PositionComponent(PositionComponent positionComponent) {
+        overridePhysicsSystem = true;
+        this.x = positionComponent.x;
+        this.y = positionComponent.y;
+    }
+
     public void set(float x, float y){
         overridePhysicsSystem = true;
         this.x = x;

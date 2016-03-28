@@ -9,13 +9,13 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.facundolinlaud.supergame.utils.observer.Observable;
-import com.facundolinlaud.supergame.utils.observer.events.InventoryEvent;
+import com.facundolinlaud.supergame.utils.observer.events.ItemDroppedEvent;
 
 /**
  * Created by facundo on 3/26/16.
  */
 public class InventoryUI extends Observable implements UI {
-    public static final String DEFAULT_THEME = "default";
+    public static final String DEFAULT_THEME = "rpg";
     public static final String WINDOW_TITLE = "Inventory";
 
     private boolean visible;
@@ -38,6 +38,7 @@ public class InventoryUI extends Observable implements UI {
         float height = 400f;
 
         window = new Window(WINDOW_TITLE, skin, DEFAULT_THEME);
+        window.getTitleTable().center().top().padLeft(30); // temporal
         window.setPosition(Gdx.graphics.getWidth() - width, Gdx.graphics.getHeight() - height);
         window.setSize(width, height);
         window.setDebug(true);
@@ -75,11 +76,11 @@ public class InventoryUI extends Observable implements UI {
     private class ItemClickListener extends ClickListener {
         @Override
         public void clicked(InputEvent event, float x, float y) {
-            int selectedIndex = itemsList.getSelectedIndex();
+            int itemIndex = itemsList.getSelectedIndex();
 
-            if(selectedIndex >= 0) {
-                notifyObservers(InventoryEvent.class, new InventoryEvent(selectedIndex));
-                itemsList.setSelectedIndex(selectedIndex - 1);
+            if(itemIndex >= 0) {
+                notifyObservers(ItemDroppedEvent.class, new ItemDroppedEvent(itemIndex));
+                itemsList.setSelectedIndex(itemIndex - 1);
             }
         }
     }
