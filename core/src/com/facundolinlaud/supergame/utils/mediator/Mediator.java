@@ -1,7 +1,7 @@
 package com.facundolinlaud.supergame.utils.mediator;
 
 
-import com.facundolinlaud.supergame.utils.mediator.event.Event;
+import com.facundolinlaud.supergame.utils.mediator.events.Event;
 
 import java.util.HashMap;
 import java.util.Map;

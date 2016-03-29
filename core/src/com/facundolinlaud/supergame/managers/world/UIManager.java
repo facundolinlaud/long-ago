@@ -15,7 +15,8 @@ import com.facundolinlaud.supergame.systems.ui.InventoryUISystem;
 import com.facundolinlaud.supergame.systems.ui.ProfileUISystem;
 import com.facundolinlaud.supergame.ui.InventoryUI;
 import com.facundolinlaud.supergame.ui.OverlayUI;
-import com.facundolinlaud.supergame.utils.observer.events.ItemDroppedEvent;
+import com.facundolinlaud.supergame.utils.mediator.Mediator;
+import com.facundolinlaud.supergame.utils.mediator.events.ItemDroppedEvent;
 
 /**
  * Created by facundo on 3/25/16.
@@ -27,6 +28,7 @@ public class UIManager implements Manager {
 
     private Skin skin;
     private Stage stage;
+    private Mediator uiMediator;
 
     private OverlayUI hud;
     private InventoryUI inventoryUI;
@@ -39,6 +41,7 @@ public class UIManager implements Manager {
         this.stage = new Stage(new ScreenViewport());
         this.stage.setDebugAll(true);
         this.skin.addRegions(new TextureAtlas(Gdx.files.internal(TEXTURE_ATLAS_PATH)));
+        this.uiMediator = new Mediator();
 
         initializeUI();
         initializeServices();
@@ -48,7 +51,7 @@ public class UIManager implements Manager {
 
     private void initializeUI() {
         this.hud = new OverlayUI(skin);
-        this.inventoryUI = new InventoryUI(stage, skin, this.hud.getItemDropZone());
+        this.inventoryUI = new InventoryUI(uiMediator, stage, skin, this.hud.getItemDropZone());
     }
 
     private void initializeServices() {
@@ -62,7 +65,7 @@ public class UIManager implements Manager {
     }
 
     private void addObservers(){
-        this.inventoryUI.addObserver(ItemDroppedEvent.class, this.inventoryUIService);
+        this.uiMediator.subscribe(ItemDroppedEvent.class, this.inventoryUIService);
     }
 
     public void initializeSystems(Engine engine){

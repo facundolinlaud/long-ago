@@ -8,13 +8,14 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
-import com.facundolinlaud.supergame.utils.observer.Observable;
-import com.facundolinlaud.supergame.utils.observer.events.ItemDroppedEvent;
+import com.facundolinlaud.supergame.utils.mediator.Mediator;
+import com.facundolinlaud.supergame.utils.mediator.Messenger;
+import com.facundolinlaud.supergame.utils.mediator.events.ItemDroppedEvent;
 
 /**
  * Created by facundo on 3/26/16.
  */
-public class InventoryUI extends Observable implements UI {
+public class InventoryUI implements UI, Messenger {
     public static final String DEFAULT_THEME = "rpg";
     public static final String WINDOW_TITLE = "Inventory";
 
@@ -25,11 +26,13 @@ public class InventoryUI extends Observable implements UI {
     private Window window;
     private List itemsList;
     private Table itemDropZone;
+    private Mediator uiMediator;
 
-    public InventoryUI(Stage stage, Skin skin, Table itemDropZone) {
+    public InventoryUI(Mediator uiMediator, Stage stage, Skin skin, Table itemDropZone) {
         this.skin = skin;
         this.stage = stage;
         this.itemDropZone = itemDropZone;
+        this.uiMediator = uiMediator;
 
         itemsList = createList();
         ScrollPane scrollPane = createScrollPane();
@@ -82,7 +85,7 @@ public class InventoryUI extends Observable implements UI {
             @Override
             public void drop(DragAndDrop.Source source, DragAndDrop.Payload payload, float x, float y, int pointer) {
                 int index = (int) payload.getObject();
-                notifyObservers(ItemDroppedEvent.class, new ItemDroppedEvent(index));
+                uiMediator.raise(InventoryUI.this, ItemDroppedEvent.class, new ItemDroppedEvent(index));
                 itemsList.setSelectedIndex(index - 1);
             }
         });

@@ -9,7 +9,7 @@ import com.facundolinlaud.supergame.components.PositionComponent;
 import com.facundolinlaud.supergame.service.InventoryUIService;
 import com.facundolinlaud.supergame.ui.InventoryUI;
 import com.facundolinlaud.supergame.utils.Mappers;
-import com.facundolinlaud.supergame.utils.observer.events.ItemDroppedEvent;
+import com.facundolinlaud.supergame.utils.mediator.events.ItemDroppedEvent;
 
 /**
  * Created by facundo on 3/27/16.
@@ -46,5 +46,4 @@ public class InventoryUIServiceImpl implements InventoryUIService {
         item.add(new PositionComponent(gathererPosition));
         item.add(new PickupableComponent());
     }
-
 }
