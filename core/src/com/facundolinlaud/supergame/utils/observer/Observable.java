@@ -1,6 +1,7 @@
 package com.facundolinlaud.supergame.utils.observer;
 
-import com.facundolinlaud.supergame.utils.observer.events.Event;
+
+import com.facundolinlaud.supergame.utils.events.Event;
 
 import java.util.HashMap;
 import java.util.Map;

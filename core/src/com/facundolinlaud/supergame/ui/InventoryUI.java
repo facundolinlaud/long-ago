@@ -10,7 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import com.facundolinlaud.supergame.utils.mediator.Mediator;
 import com.facundolinlaud.supergame.utils.mediator.Messenger;
-import com.facundolinlaud.supergame.utils.mediator.events.ItemDroppedEvent;
+import com.facundolinlaud.supergame.utils.events.ItemDroppedEvent;
 
 /**
  * Created by facundo on 3/26/16.

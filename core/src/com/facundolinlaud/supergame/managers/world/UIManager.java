@@ -16,7 +16,7 @@ import com.facundolinlaud.supergame.systems.ui.ProfileUISystem;
 import com.facundolinlaud.supergame.ui.InventoryUI;
 import com.facundolinlaud.supergame.ui.OverlayUI;
 import com.facundolinlaud.supergame.utils.mediator.Mediator;
-import com.facundolinlaud.supergame.utils.mediator.events.ItemDroppedEvent;
+import com.facundolinlaud.supergame.utils.events.ItemDroppedEvent;
 
 /**
  * Created by facundo on 3/25/16.

@@ -9,7 +9,7 @@ import com.facundolinlaud.supergame.components.PositionComponent;
 import com.facundolinlaud.supergame.service.InventoryUIService;
 import com.facundolinlaud.supergame.ui.InventoryUI;
 import com.facundolinlaud.supergame.utils.Mappers;
-import com.facundolinlaud.supergame.utils.mediator.events.ItemDroppedEvent;
+import com.facundolinlaud.supergame.utils.events.ItemDroppedEvent;
 
 /**
  * Created by facundo on 3/27/16.

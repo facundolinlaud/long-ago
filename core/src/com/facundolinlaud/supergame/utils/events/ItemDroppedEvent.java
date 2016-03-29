@@ -1,4 +1,4 @@
-package com.facundolinlaud.supergame.utils.mediator.events;
+package com.facundolinlaud.supergame.utils.events;
 
 /**
  * Created by facundo on 3/27/16.

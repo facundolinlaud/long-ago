@@ -1,6 +1,7 @@
 package com.facundolinlaud.supergame.utils.observer;
 
-import com.facundolinlaud.supergame.utils.observer.events.Event;
+
+import com.facundolinlaud.supergame.utils.events.Event;
 
 /**
  * Created by facundo on 3/27/16.
