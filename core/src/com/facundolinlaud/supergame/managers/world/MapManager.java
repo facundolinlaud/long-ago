@@ -1,4 +1,4 @@
-package com.facundolinlaud.supergame.managers;
+package com.facundolinlaud.supergame.managers.world;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
@@ -7,12 +7,13 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.facundolinlaud.supergame.managers.Manager;
 import com.facundolinlaud.supergame.utils.Dimensions;
 
 /**
  * Created by facundo on 3/23/16.
  */
-public class MapManager {
+public class MapManager implements Manager {
     public static final String PATH_TO_TILE_MAP = "map/test5.tmx";
     public static final int VIEWPORT_WIDTH_IN_METERS = 32;
     public static final int[] BASE_LAYERS = new int[]{0, 1};
@@ -28,20 +29,22 @@ public class MapManager {
     public MapManager(SpriteBatch batch) {
         this.batch = batch;
 
-        initialize();
+        initializeMap();
+        initializeCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     }
 
-    private void initialize(){
-        float width = Gdx.graphics.getWidth();
-        float height = Gdx.graphics.getHeight();
-
-        map = new TmxMapLoader().load(PATH_TO_TILE_MAP);
-        mapRenderer = new OrthogonalTiledMapRenderer(map, Dimensions.ONE_PIXEL_IN_METERS, batch);
-        camera = new OrthographicCamera();
-        camera.setToOrtho(false, VIEWPORT_WIDTH_IN_METERS, VIEWPORT_WIDTH_IN_METERS * (height / width));
+    private void initializeCamera(float width, float height) {
+        this.camera = new OrthographicCamera();
+        this.camera.setToOrtho(false, VIEWPORT_WIDTH_IN_METERS, VIEWPORT_WIDTH_IN_METERS * (height / width));
     }
 
-    public void renderBaseLayer(){
+    private void initializeMap() {
+        this.map = new TmxMapLoader().load(PATH_TO_TILE_MAP);
+        this.mapRenderer = new OrthogonalTiledMapRenderer(this.map, Dimensions.ONE_PIXEL_IN_METERS, this.batch);
+    }
+
+    @Override
+    public void render() {
         batch.setProjectionMatrix(camera.combined);
         mapRenderer.setView(camera);
         mapRenderer.render(BASE_LAYERS);
@@ -69,4 +72,5 @@ public class MapManager {
     public TiledMap getMap(){
         return this.map;
     }
+
 }

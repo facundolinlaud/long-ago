@@ -21,7 +21,7 @@ public class PhysicsEntitiesListener implements EntityListener {
     private Map<Entity, Body> entitiesToBodies;
 
     public PhysicsEntitiesListener(World world) {
-        this.entitiesToBodies = new HashMap<Entity, Body>();
+        this.entitiesToBodies = new HashMap<>();
         this.world = world;
     }
 

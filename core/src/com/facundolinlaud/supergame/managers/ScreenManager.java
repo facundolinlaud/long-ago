@@ -1,5 +1,6 @@
 package com.facundolinlaud.supergame.managers;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.facundolinlaud.supergame.engine.GameResources;
 import com.facundolinlaud.supergame.screens.WorldScreen;
@@ -7,7 +8,7 @@ import com.facundolinlaud.supergame.screens.WorldScreen;
 /**
  * Created by facundo on 3/19/16.
  */
-public class ScreenManager {
+public class ScreenManager implements Manager {
     private GameResources gameResources;
     private Screen currentScreen;
 
@@ -26,5 +27,10 @@ public class ScreenManager {
 
     public void loadWorldScreen(){
         setCurrentScreen(new WorldScreen(gameResources));
+    }
+
+    @Override
+    public void render() {
+        this.currentScreen.render(Gdx.graphics.getDeltaTime());
     }
 }

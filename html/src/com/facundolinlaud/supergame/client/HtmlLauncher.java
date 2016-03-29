@@ -3,7 +3,7 @@ package com.facundolinlaud.supergame.client;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.backends.gwt.GwtApplication;
 import com.badlogic.gdx.backends.gwt.GwtApplicationConfiguration;
-import com.facundolinlaud.supergame.Game;
+import com.facundolinlaud.supergame.engine.Game;
 
 public class HtmlLauncher extends GwtApplication {
 

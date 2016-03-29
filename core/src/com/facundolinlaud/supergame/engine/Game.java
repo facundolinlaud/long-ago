@@ -1,4 +1,4 @@
-package com.facundolinlaud.supergame;
+package com.facundolinlaud.supergame.engine;
 
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.gdx.ApplicationAdapter;
@@ -36,9 +36,7 @@ public class Game extends ApplicationAdapter {
 	@Override
 	public void render () {
 		clearScreen();
-
-		float deltaTime = Gdx.graphics.getDeltaTime();
-		screenManager.getCurrentScreen().render(deltaTime);
+		screenManager.render();
 	}
 
 

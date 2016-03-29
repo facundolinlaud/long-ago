@@ -34,7 +34,7 @@ public class InventoryUIServiceImpl implements InventoryUIService {
     @Override
     public void update(Entity entity, BagComponent bag) {
         setGatherer(entity);
-        ui.update(bag.items.stream().map(e -> itc.get(e).name).toArray());
+        ui.updateItems(bag.items.stream().map(e -> itc.get(e).name).toArray());
     }
 
     @Override

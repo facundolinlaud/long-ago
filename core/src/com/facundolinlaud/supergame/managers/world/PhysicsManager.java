@@ -1,4 +1,4 @@
-package com.facundolinlaud.supergame.managers;
+package com.facundolinlaud.supergame.managers.world;
 
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.maps.MapLayer;
@@ -11,6 +11,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.facundolinlaud.supergame.factory.BodyFactory;
+import com.facundolinlaud.supergame.managers.Manager;
 import com.facundolinlaud.supergame.utils.Dimensions;
 
 import java.util.Iterator;
@@ -18,7 +19,7 @@ import java.util.Iterator;
 /**
  * Created by facundo on 3/22/16.
  */
-public class PhysicsManager {
+public class PhysicsManager implements Manager {
     public static final String COLLISION_LAYER = "collision";
 
     private Camera camera;
@@ -62,6 +63,7 @@ public class PhysicsManager {
         }
     }
 
+    @Override
     public void render(){
         physicsDebugRenderer.render(world, camera.combined);
     }

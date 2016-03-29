@@ -7,9 +7,9 @@ import com.facundolinlaud.supergame.engine.GameResources;
 import com.facundolinlaud.supergame.factory.BodyFactory;
 import com.facundolinlaud.supergame.factory.EntityFactory;
 import com.facundolinlaud.supergame.listeners.PhysicsEntitiesListener;
-import com.facundolinlaud.supergame.managers.MapManager;
-import com.facundolinlaud.supergame.managers.PhysicsManager;
-import com.facundolinlaud.supergame.managers.UIManager;
+import com.facundolinlaud.supergame.managers.world.MapManager;
+import com.facundolinlaud.supergame.managers.world.PhysicsManager;
+import com.facundolinlaud.supergame.managers.world.UIManager;
 import com.facundolinlaud.supergame.systems.*;
 
 // * ver si la animacion la puedo encarar por el lado de getLinearVelocity
@@ -22,9 +22,10 @@ public class WorldScreen implements Screen {
 
     private MapManager mapManager;
     private PhysicsManager physicsManager;
+    private UIManager uiManager;
+
     private BodyFactory bodyFactory;
     private EntityFactory entityFactory;
-    private UIManager uiManager;
 
     public WorldScreen(GameResources res) {
         this.res = res;
@@ -46,6 +47,7 @@ public class WorldScreen implements Screen {
 
     private void initializeEntities(){
         res.engine.addEntity(entityFactory.createPlayerWithBody(bodyFactory.createPlayer()));
+
         for(float i = 0; i < 8; i++){
             res.engine.addEntity(entityFactory.createItemWithBody(bodyFactory.createItem()));
         }
@@ -64,7 +66,7 @@ public class WorldScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        mapManager.renderBaseLayer();
+        mapManager.render();
 
         res.batch.begin();
         res.engine.update(delta);
