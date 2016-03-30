@@ -1,26 +1,26 @@
 package com.facundolinlaud.supergame.ui.services.impl;
 
 import com.facundolinlaud.supergame.ui.services.ProfileUIService;
-import com.facundolinlaud.supergame.ui.view.ProfileUI;
+import com.facundolinlaud.supergame.ui.view.OverlayUI;
 
 /**
  * Created by facundo on 3/29/16.
  */
 public class ProfileUIServiceImpl implements ProfileUIService {
 
-    private ProfileUI profileUI;
+    private OverlayUI overlayUI;
 
-    public ProfileUIServiceImpl(ProfileUI profileUI) {
-        this.profileUI = profileUI;
+    public ProfileUIServiceImpl(OverlayUI overlayUI) {
+        this.overlayUI = overlayUI;
     }
 
     @Override
     public void setHealth(float health) {
-        this.profileUI.setHealth(health);
+        overlayUI.setHealth(health);
     }
 
     @Override
     public void setFPS(int fps) {
-        this.profileUI.setFPS(fps);
+        overlayUI.setFPS(fps);
     }
 }

@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import com.facundolinlaud.supergame.ui.model.Item;
+import com.facundolinlaud.supergame.ui.view.utils.Themes;
 import com.facundolinlaud.supergame.utils.mediator.Mediator;
 
 import java.util.List;
@@ -13,14 +14,14 @@ import java.util.List;
  * Created by facundo on 3/30/16.
  */
 public class InventoryWindow extends Window {
-    public static final String THEME = "rpg";
     public static final String TITLE = "Inventory";
 
     private Grid grid;
 
     public InventoryWindow(Skin skin, int maxItemsAmount, Mediator uiMediator, DragAndDrop dragAndDrop) {
-        super(TITLE, skin, THEME);
+        super(TITLE, skin, Themes.CLASSIC.toString());
 
+        setVisible(false);
         adjustTitlePosition();
         adjustSize(maxItemsAmount);
         initializeGrid(skin, maxItemsAmount, uiMediator, dragAndDrop);

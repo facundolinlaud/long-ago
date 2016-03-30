@@ -33,7 +33,7 @@ public class EntityFactory {
                 .add(new BagComponent());
     }
 
-    private Entity getBaseItemEntity(String texturePath, int x, int y){
+    private Entity createBaseItemEntity(String texturePath, int x, int y){
         return new Entity()
                 .add(new PositionComponent(x, y))
                 .add(new RenderComponent(new TextureRegion(new Texture(texturePath)), new RenderPriority(1)))
@@ -42,12 +42,12 @@ public class EntityFactory {
     }
 
     public Entity createCoinsItemWithBody(Body body) {
-        return getBaseItemEntity(PATH_TO_COINS_TEXTURE, 20, 45)
+        return createBaseItemEntity(PATH_TO_COINS_TEXTURE, 20, 45)
                 .add(new BodyComponent(body));
     }
 
     public Entity createWordItemWithBody(Body body) {
-        return getBaseItemEntity(PATH_TO_SWORD_TEXTURE, 21, 45)
+        return createBaseItemEntity(PATH_TO_SWORD_TEXTURE, 21, 45)
                 .add(new BodyComponent(body));
     }
 }

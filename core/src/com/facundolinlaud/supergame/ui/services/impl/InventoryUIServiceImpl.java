@@ -5,7 +5,7 @@ import com.badlogic.ashley.core.Entity;
 import com.facundolinlaud.supergame.components.*;
 import com.facundolinlaud.supergame.ui.model.Item;
 import com.facundolinlaud.supergame.ui.services.InventoryUIService;
-import com.facundolinlaud.supergame.ui.view.inventory.InventoryUI;
+import com.facundolinlaud.supergame.ui.view.InventoryUI;
 import com.facundolinlaud.supergame.utils.Mappers;
 import com.facundolinlaud.supergame.utils.events.Event;
 import com.facundolinlaud.supergame.utils.events.ItemDroppedEvent;

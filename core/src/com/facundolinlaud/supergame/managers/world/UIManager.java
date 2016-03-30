@@ -13,7 +13,7 @@ import com.facundolinlaud.supergame.ui.services.impl.InventoryUIServiceImpl;
 import com.facundolinlaud.supergame.ui.services.impl.ProfileUIServiceImpl;
 import com.facundolinlaud.supergame.systems.ui.InventoryUISystem;
 import com.facundolinlaud.supergame.systems.ui.ProfileUISystem;
-import com.facundolinlaud.supergame.ui.view.inventory.InventoryUI;
+import com.facundolinlaud.supergame.ui.view.InventoryUI;
 import com.facundolinlaud.supergame.ui.view.OverlayUI;
 import com.facundolinlaud.supergame.utils.events.ItemsPositionSwapEvent;
 import com.facundolinlaud.supergame.utils.mediator.Mediator;
@@ -23,7 +23,6 @@ import com.facundolinlaud.supergame.utils.events.ItemDroppedEvent;
  * Created by facundo on 3/25/16.
  */
 public class UIManager implements Manager {
-    public static final String DEFAULT_THEME = "default";
     public static final String SKIN_JSON_PATH = "ui/second_iteration/uiskin.json";
     public static final String TEXTURE_ATLAS_PATH = "ui/second_iteration/uiskin.atlas";
 
@@ -57,11 +56,11 @@ public class UIManager implements Manager {
 
     private void initializeServices() {
         this.inventoryUIService = new InventoryUIServiceImpl(inventoryUI);
-        this.profileUIService = new ProfileUIServiceImpl(this.hud.getProfileUI());
+        this.profileUIService = new ProfileUIServiceImpl(this.hud);
     }
 
     private void addUIToStage() {
-        this.stage.addActor(this.hud.getUI());
+        this.stage.addActor(this.hud.get());
         Gdx.input.setInputProcessor(stage);
     }
 
@@ -71,7 +70,7 @@ public class UIManager implements Manager {
     }
 
     public void initializeSystems(Engine engine){
-        engine.addSystem(new ProfileUISystem(this.hud.getProfileUI()));
+        engine.addSystem(new ProfileUISystem(this.hud));
         engine.addSystem(new InventoryUISystem(this.inventoryUIService));
     }
 

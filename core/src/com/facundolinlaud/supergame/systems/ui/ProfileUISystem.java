@@ -8,8 +8,8 @@ import com.badlogic.gdx.Gdx;
 import com.facundolinlaud.supergame.components.HealthComponent;
 import com.facundolinlaud.supergame.components.KeyboardComponent;
 import com.facundolinlaud.supergame.ui.services.ProfileUIService;
+import com.facundolinlaud.supergame.ui.view.OverlayUI;
 import com.facundolinlaud.supergame.utils.Mappers;
-import com.facundolinlaud.supergame.ui.view.ProfileUI;
 
 /**
  * Created by facundo on 3/25/16.
@@ -19,22 +19,22 @@ public class ProfileUISystem extends IteratingSystem {
 
     private ProfileUIService profileUIService;
 
-    private ProfileUI profileUI;
+    private OverlayUI overlayUI;
 
-    public ProfileUISystem(ProfileUI profileUI) {
+    public ProfileUISystem(OverlayUI overlayUI) {
         super(Family.all(HealthComponent.class, KeyboardComponent.class).get());
-        this.profileUI = profileUI;
+        this.overlayUI = overlayUI;
     }
 
     @Override
     public void update(float deltaTime) {
         super.update(deltaTime);
-        profileUI.setFPS(Gdx.graphics.getFramesPerSecond());
+        overlayUI.setFPS(Gdx.graphics.getFramesPerSecond());
     }
 
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
         HealthComponent health = hm.get(entity);
-        profileUI.setHealth(health.health);
+        overlayUI.setHealth(health.health);
     }
 }
