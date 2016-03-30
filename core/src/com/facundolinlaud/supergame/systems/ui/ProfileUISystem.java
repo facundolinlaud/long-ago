@@ -7,9 +7,9 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
 import com.facundolinlaud.supergame.components.HealthComponent;
 import com.facundolinlaud.supergame.components.KeyboardComponent;
-import com.facundolinlaud.supergame.service.ProfileUIService;
+import com.facundolinlaud.supergame.ui.services.ProfileUIService;
 import com.facundolinlaud.supergame.utils.Mappers;
-import com.facundolinlaud.supergame.ui.ProfileUI;
+import com.facundolinlaud.supergame.ui.view.ProfileUI;
 
 /**
  * Created by facundo on 3/25/16.

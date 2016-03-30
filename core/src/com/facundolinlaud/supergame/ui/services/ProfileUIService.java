@@ -1,4 +1,4 @@
-package com.facundolinlaud.supergame.service;
+package com.facundolinlaud.supergame.ui.services;
 
 /**
  * Created by facundo on 3/29/16.

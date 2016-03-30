@@ -5,6 +5,6 @@ import com.facundolinlaud.supergame.utils.events.Event;
 /**
  * Created by facundo on 3/29/16.
  */
-public interface Receiver<T extends Event> {
-    void handle(T event);
+public interface Receiver {
+    void handle(Event event);
 }

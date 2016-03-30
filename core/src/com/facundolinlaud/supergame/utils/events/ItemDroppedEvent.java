@@ -1,16 +1,18 @@
 package com.facundolinlaud.supergame.utils.events;
 
+import com.facundolinlaud.supergame.ui.model.Item;
+
 /**
  * Created by facundo on 3/27/16.
  */
 public class ItemDroppedEvent extends Event {
-    private int itemIndex;
+    private Item item;
 
-    public ItemDroppedEvent(int itemIndex) {
-        this.itemIndex = itemIndex;
+    public ItemDroppedEvent(Item item) {
+        this.item = item;
     }
 
-    public int getItemIndex() {
-        return itemIndex;
+    public Item getItem() {
+        return item;
     }
 }

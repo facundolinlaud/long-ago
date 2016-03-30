@@ -49,7 +49,11 @@ public class WorldScreen implements Screen {
         res.engine.addEntity(entityFactory.createPlayerWithBody(bodyFactory.createPlayer()));
 
         for(float i = 0; i < 8; i++){
-            res.engine.addEntity(entityFactory.createItemWithBody(bodyFactory.createItem()));
+            res.engine.addEntity(entityFactory.createCoinsItemWithBody(bodyFactory.createItem()));
+        }
+
+        for(float i = 0; i < 4; i++){
+            res.engine.addEntity(entityFactory.createWordItemWithBody(bodyFactory.createItem()));
         }
     }
 

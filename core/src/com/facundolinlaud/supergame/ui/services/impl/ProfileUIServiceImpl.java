@@ -1,7 +1,7 @@
-package com.facundolinlaud.supergame.service.impl;
+package com.facundolinlaud.supergame.ui.services.impl;
 
-import com.facundolinlaud.supergame.service.ProfileUIService;
-import com.facundolinlaud.supergame.ui.ProfileUI;
+import com.facundolinlaud.supergame.ui.services.ProfileUIService;
+import com.facundolinlaud.supergame.ui.view.ProfileUI;
 
 /**
  * Created by facundo on 3/29/16.

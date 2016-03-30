@@ -16,6 +16,7 @@ import java.util.Arrays;
 public class EntityFactory {
     public static final String PATH_TO_PLAYER_TEXTURE = "sprites/main_player.png";
     public static final String PATH_TO_COINS_TEXTURE = "sprites/items/coins.png";
+    public static final String PATH_TO_SWORD_TEXTURE = "sprites/items/sword.png";
 
     public Entity createPlayerWithBody(Body body){
         return new Entity()
@@ -32,12 +33,21 @@ public class EntityFactory {
                 .add(new BagComponent());
     }
 
-    public Entity createItemWithBody(Body body) {
+    private Entity getBaseItemEntity(String texturePath, int x, int y){
         return new Entity()
-                .add(new PositionComponent(20, 45))
-                .add(new RenderComponent(new TextureRegion(new Texture(PATH_TO_COINS_TEXTURE)), new RenderPriority(1)))
+                .add(new PositionComponent(x, y))
+                .add(new RenderComponent(new TextureRegion(new Texture(texturePath)), new RenderPriority(1)))
                 .add(new PickupableComponent())
-                .add(new ItemComponent())
+                .add(new ItemComponent());
+    }
+
+    public Entity createCoinsItemWithBody(Body body) {
+        return getBaseItemEntity(PATH_TO_COINS_TEXTURE, 20, 45)
+                .add(new BodyComponent(body));
+    }
+
+    public Entity createWordItemWithBody(Body body) {
+        return getBaseItemEntity(PATH_TO_SWORD_TEXTURE, 21, 45)
                 .add(new BodyComponent(body));
     }
 }

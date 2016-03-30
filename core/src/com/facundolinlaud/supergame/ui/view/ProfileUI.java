@@ -1,4 +1,4 @@
-package com.facundolinlaud.supergame.ui;
+package com.facundolinlaud.supergame.ui.view;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;

@@ -4,12 +4,10 @@ import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.facundolinlaud.supergame.components.BagComponent;
 import com.facundolinlaud.supergame.components.KeyboardComponent;
 import com.facundolinlaud.supergame.utils.Mappers;
-import com.facundolinlaud.supergame.service.InventoryUIService;
+import com.facundolinlaud.supergame.ui.services.InventoryUIService;
 
 /**
  * Created by facundo on 3/26/16.

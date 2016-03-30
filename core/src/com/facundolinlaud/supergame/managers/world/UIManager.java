@@ -7,14 +7,15 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.facundolinlaud.supergame.managers.Manager;
-import com.facundolinlaud.supergame.service.InventoryUIService;
-import com.facundolinlaud.supergame.service.ProfileUIService;
-import com.facundolinlaud.supergame.service.impl.InventoryUIServiceImpl;
-import com.facundolinlaud.supergame.service.impl.ProfileUIServiceImpl;
+import com.facundolinlaud.supergame.ui.services.InventoryUIService;
+import com.facundolinlaud.supergame.ui.services.ProfileUIService;
+import com.facundolinlaud.supergame.ui.services.impl.InventoryUIServiceImpl;
+import com.facundolinlaud.supergame.ui.services.impl.ProfileUIServiceImpl;
 import com.facundolinlaud.supergame.systems.ui.InventoryUISystem;
 import com.facundolinlaud.supergame.systems.ui.ProfileUISystem;
-import com.facundolinlaud.supergame.ui.InventoryUI;
-import com.facundolinlaud.supergame.ui.OverlayUI;
+import com.facundolinlaud.supergame.ui.view.inventory.InventoryUI;
+import com.facundolinlaud.supergame.ui.view.OverlayUI;
+import com.facundolinlaud.supergame.utils.events.ItemsPositionSwapEvent;
 import com.facundolinlaud.supergame.utils.mediator.Mediator;
 import com.facundolinlaud.supergame.utils.events.ItemDroppedEvent;
 
@@ -23,8 +24,8 @@ import com.facundolinlaud.supergame.utils.events.ItemDroppedEvent;
  */
 public class UIManager implements Manager {
     public static final String DEFAULT_THEME = "default";
-    public static final String SKIN_JSON_PATH = "ui/first_iteration/uiskin.json";
-    public static final String TEXTURE_ATLAS_PATH = "ui/first_iteration/uiskin.atlas";
+    public static final String SKIN_JSON_PATH = "ui/second_iteration/uiskin.json";
+    public static final String TEXTURE_ATLAS_PATH = "ui/second_iteration/uiskin.atlas";
 
     private Skin skin;
     private Stage stage;
@@ -46,7 +47,7 @@ public class UIManager implements Manager {
         initializeUI();
         initializeServices();
         addUIToStage();
-        addObservers();
+        subscribeReceivers();
     }
 
     private void initializeUI() {
@@ -64,8 +65,9 @@ public class UIManager implements Manager {
         Gdx.input.setInputProcessor(stage);
     }
 
-    private void addObservers(){
+    private void subscribeReceivers(){
         this.uiMediator.subscribe(ItemDroppedEvent.class, this.inventoryUIService);
+        this.uiMediator.subscribe(ItemsPositionSwapEvent.class, this.inventoryUIService);
     }
 
     public void initializeSystems(Engine engine){
