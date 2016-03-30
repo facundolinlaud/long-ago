@@ -7,10 +7,10 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.facundolinlaud.supergame.managers.Manager;
-import com.facundolinlaud.supergame.ui.services.InventoryUIService;
-import com.facundolinlaud.supergame.ui.services.ProfileUIService;
-import com.facundolinlaud.supergame.ui.services.impl.InventoryUIServiceImpl;
-import com.facundolinlaud.supergame.ui.services.impl.ProfileUIServiceImpl;
+import com.facundolinlaud.supergame.ui.controller.InventoryUIController;
+import com.facundolinlaud.supergame.ui.controller.ProfileUIController;
+import com.facundolinlaud.supergame.ui.controller.impl.InventoryUIControllerImpl;
+import com.facundolinlaud.supergame.ui.controller.impl.ProfileUIControllerImpl;
 import com.facundolinlaud.supergame.systems.ui.InventoryUISystem;
 import com.facundolinlaud.supergame.systems.ui.ProfileUISystem;
 import com.facundolinlaud.supergame.ui.view.InventoryUI;
@@ -33,8 +33,8 @@ public class UIManager implements Manager {
     private OverlayUI hud;
     private InventoryUI inventoryUI;
 
-    private InventoryUIService inventoryUIService;
-    private ProfileUIService profileUIService;
+    private InventoryUIController inventoryUIController;
+    private ProfileUIController profileUIController;
 
     public UIManager() {
         this.skin = new Skin(Gdx.files.internal(SKIN_JSON_PATH));
@@ -55,8 +55,8 @@ public class UIManager implements Manager {
     }
 
     private void initializeServices() {
-        this.inventoryUIService = new InventoryUIServiceImpl(inventoryUI);
-        this.profileUIService = new ProfileUIServiceImpl(this.hud);
+        this.inventoryUIController = new InventoryUIControllerImpl(inventoryUI);
+        this.profileUIController = new ProfileUIControllerImpl(this.hud);
     }
 
     private void addUIToStage() {
@@ -65,13 +65,13 @@ public class UIManager implements Manager {
     }
 
     private void subscribeReceivers(){
-        this.uiMediator.subscribe(ItemDroppedEvent.class, this.inventoryUIService);
-        this.uiMediator.subscribe(ItemsPositionSwapEvent.class, this.inventoryUIService);
+        this.uiMediator.subscribe(ItemDroppedEvent.class, this.inventoryUIController);
+        this.uiMediator.subscribe(ItemsPositionSwapEvent.class, this.inventoryUIController);
     }
 
     public void initializeSystems(Engine engine){
         engine.addSystem(new ProfileUISystem(this.hud));
-        engine.addSystem(new InventoryUISystem(this.inventoryUIService));
+        engine.addSystem(new InventoryUISystem(this.inventoryUIController));
     }
 
     @Override

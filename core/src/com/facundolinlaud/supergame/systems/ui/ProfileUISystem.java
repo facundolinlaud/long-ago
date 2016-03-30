@@ -7,7 +7,7 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
 import com.facundolinlaud.supergame.components.HealthComponent;
 import com.facundolinlaud.supergame.components.KeyboardComponent;
-import com.facundolinlaud.supergame.ui.services.ProfileUIService;
+import com.facundolinlaud.supergame.ui.controller.ProfileUIController;
 import com.facundolinlaud.supergame.ui.view.OverlayUI;
 import com.facundolinlaud.supergame.utils.Mappers;
 
@@ -17,7 +17,7 @@ import com.facundolinlaud.supergame.utils.Mappers;
 public class ProfileUISystem extends IteratingSystem {
     private ComponentMapper<HealthComponent> hm = Mappers.health;
 
-    private ProfileUIService profileUIService;
+    private ProfileUIController profileUIController;
 
     private OverlayUI overlayUI;
 

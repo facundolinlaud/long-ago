@@ -7,7 +7,7 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import com.facundolinlaud.supergame.components.BagComponent;
 import com.facundolinlaud.supergame.components.KeyboardComponent;
 import com.facundolinlaud.supergame.utils.Mappers;
-import com.facundolinlaud.supergame.ui.services.InventoryUIService;
+import com.facundolinlaud.supergame.ui.controller.InventoryUIController;
 
 /**
  * Created by facundo on 3/26/16.
@@ -15,16 +15,16 @@ import com.facundolinlaud.supergame.ui.services.InventoryUIService;
 public class InventoryUISystem extends IteratingSystem {
     private ComponentMapper<BagComponent> bm = Mappers.bag;
 
-    private InventoryUIService inventoryUIService;
+    private InventoryUIController inventoryUIController;
 
-    public InventoryUISystem(InventoryUIService inventoryUIService) {
+    public InventoryUISystem(InventoryUIController inventoryUIController) {
         super(Family.all(BagComponent.class, KeyboardComponent.class).get());
-        this.inventoryUIService = inventoryUIService;
+        this.inventoryUIController = inventoryUIController;
     }
 
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
         BagComponent bag = bm.get(entity);
-        inventoryUIService.update(entity, bag);
+        inventoryUIController.update(entity, bag);
     }
 }

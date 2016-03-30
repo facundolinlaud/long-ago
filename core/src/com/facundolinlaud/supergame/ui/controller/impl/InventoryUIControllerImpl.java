@@ -1,10 +1,10 @@
-package com.facundolinlaud.supergame.ui.services.impl;
+package com.facundolinlaud.supergame.ui.controller.impl;
 
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.facundolinlaud.supergame.components.*;
 import com.facundolinlaud.supergame.ui.model.Item;
-import com.facundolinlaud.supergame.ui.services.InventoryUIService;
+import com.facundolinlaud.supergame.ui.controller.InventoryUIController;
 import com.facundolinlaud.supergame.ui.view.InventoryUI;
 import com.facundolinlaud.supergame.utils.Mappers;
 import com.facundolinlaud.supergame.utils.events.Event;
@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * Created by facundo on 3/27/16.
  */
-public class InventoryUIServiceImpl implements InventoryUIService {
+public class InventoryUIControllerImpl implements InventoryUIController {
     private ComponentMapper<ItemComponent> itc = Mappers.item;
     private ComponentMapper<BagComponent> bm = Mappers.bag;
     private ComponentMapper<PositionComponent> pm = Mappers.position;
@@ -26,7 +26,7 @@ public class InventoryUIServiceImpl implements InventoryUIService {
     private InventoryUI ui;
     private Entity gatherer;
 
-    public InventoryUIServiceImpl(InventoryUI ui) {
+    public InventoryUIControllerImpl(InventoryUI ui) {
         this.ui = ui;
     }
 
