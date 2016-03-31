@@ -49,4 +49,14 @@ public class Item {
     public void setPositionInBag(int positionInBag) {
         this.positionInBag = positionInBag;
     }
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "name='" + name + '\'' +
+                ", weight=" + weight +
+                ", positionInBag=" + positionInBag +
+                ", textureRegion=" + textureRegion +
+                '}';
+    }
 }

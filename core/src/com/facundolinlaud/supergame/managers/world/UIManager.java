@@ -7,14 +7,19 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.facundolinlaud.supergame.managers.Manager;
+import com.facundolinlaud.supergame.systems.ui.AttributesUISystem;
+import com.facundolinlaud.supergame.ui.controller.AttributesUIController;
 import com.facundolinlaud.supergame.ui.controller.InventoryUIController;
 import com.facundolinlaud.supergame.ui.controller.ProfileUIController;
+import com.facundolinlaud.supergame.ui.controller.impl.AttributesUIControllerImpl;
 import com.facundolinlaud.supergame.ui.controller.impl.InventoryUIControllerImpl;
 import com.facundolinlaud.supergame.ui.controller.impl.ProfileUIControllerImpl;
 import com.facundolinlaud.supergame.systems.ui.InventoryUISystem;
 import com.facundolinlaud.supergame.systems.ui.ProfileUISystem;
+import com.facundolinlaud.supergame.ui.view.AttributesUI;
 import com.facundolinlaud.supergame.ui.view.InventoryUI;
 import com.facundolinlaud.supergame.ui.view.OverlayUI;
+import com.facundolinlaud.supergame.utils.events.AttributeUpgradeEvent;
 import com.facundolinlaud.supergame.utils.events.ItemsPositionSwapEvent;
 import com.facundolinlaud.supergame.utils.mediator.Mediator;
 import com.facundolinlaud.supergame.utils.events.ItemDroppedEvent;
@@ -32,9 +37,11 @@ public class UIManager implements Manager {
 
     private OverlayUI hud;
     private InventoryUI inventoryUI;
+    private AttributesUI attributesUI;
 
     private InventoryUIController inventoryUIController;
     private ProfileUIController profileUIController;
+    private AttributesUIController attributesUIController;
 
     public UIManager() {
         this.skin = new Skin(Gdx.files.internal(SKIN_JSON_PATH));
@@ -52,11 +59,13 @@ public class UIManager implements Manager {
     private void initializeUI() {
         this.hud = new OverlayUI(skin);
         this.inventoryUI = new InventoryUI(uiMediator, stage, skin, this.hud.getItemDropZone());
+        this.attributesUI = new AttributesUI(uiMediator, stage, skin);
     }
 
     private void initializeServices() {
-        this.inventoryUIController = new InventoryUIControllerImpl(inventoryUI);
         this.profileUIController = new ProfileUIControllerImpl(this.hud);
+        this.inventoryUIController = new InventoryUIControllerImpl(this.inventoryUI);
+        this.attributesUIController = new AttributesUIControllerImpl(this.attributesUI);
     }
 
     private void addUIToStage() {
@@ -67,11 +76,13 @@ public class UIManager implements Manager {
     private void subscribeReceivers(){
         this.uiMediator.subscribe(ItemDroppedEvent.class, this.inventoryUIController);
         this.uiMediator.subscribe(ItemsPositionSwapEvent.class, this.inventoryUIController);
+        this.uiMediator.subscribe(AttributeUpgradeEvent.class, this.attributesUIController);
     }
 
     public void initializeSystems(Engine engine){
         engine.addSystem(new ProfileUISystem(this.hud));
         engine.addSystem(new InventoryUISystem(this.inventoryUIController));
+        engine.addSystem(new AttributesUISystem(this.attributesUIController));
     }
 
     @Override

@@ -17,4 +17,5 @@ public class Mappers {
     public static final ComponentMapper<HealthComponent> health = ComponentMapper.getFor(HealthComponent.class);
     public static final ComponentMapper<ItemComponent> item = ComponentMapper.getFor(ItemComponent.class);
     public static final ComponentMapper<BagComponent> bag = ComponentMapper.getFor(BagComponent.class);
+    public static final ComponentMapper<AttributesComponent> attributes = ComponentMapper.getFor(AttributesComponent.class);
 }

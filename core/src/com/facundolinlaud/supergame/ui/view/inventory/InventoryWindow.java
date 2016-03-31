@@ -48,6 +48,6 @@ public class InventoryWindow extends Window {
     }
 
     public void update(List<Item> items){
-        grid.update(items);
+        if(isVisible()) grid.update(items);
     }
 }

@@ -30,7 +30,8 @@ public class EntityFactory {
                         AnimationType.DOWN, AnimationType.LEFT, AnimationType.RIGHT, AnimationType.UP),
                         new Texture(PATH_TO_PLAYER_TEXTURE)))
                 .add(new HealthComponent())
-                .add(new BagComponent());
+                .add(new BagComponent())
+                .add(new AttributesComponent());
     }
 
     private Entity createBaseItemEntity(String texturePath, int x, int y){
