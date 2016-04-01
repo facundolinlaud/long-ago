@@ -5,6 +5,10 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.facundolinlaud.supergame.components.*;
+import com.facundolinlaud.supergame.components.items.ItemComponent;
+import com.facundolinlaud.supergame.components.items.PickupableComponent;
+import com.facundolinlaud.supergame.components.player.BagComponent;
+import com.facundolinlaud.supergame.components.player.KeyboardComponent;
 import com.facundolinlaud.supergame.utils.AnimationType;
 import com.facundolinlaud.supergame.utils.RenderPriority;
 

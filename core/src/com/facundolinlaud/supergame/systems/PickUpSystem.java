@@ -4,6 +4,9 @@ import com.badlogic.ashley.core.*;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.math.Rectangle;
 import com.facundolinlaud.supergame.components.*;
+import com.facundolinlaud.supergame.components.items.ItemComponent;
+import com.facundolinlaud.supergame.components.items.PickupableComponent;
+import com.facundolinlaud.supergame.components.player.BagComponent;
 import com.facundolinlaud.supergame.utils.Mappers;
 
 /**

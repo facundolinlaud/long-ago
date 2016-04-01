@@ -1,7 +1,7 @@
 package com.facundolinlaud.supergame.ui.controller;
 
 import com.badlogic.ashley.core.Entity;
-import com.facundolinlaud.supergame.components.BagComponent;
+import com.facundolinlaud.supergame.components.player.BagComponent;
 import com.facundolinlaud.supergame.utils.mediator.Receiver;
 
 /**

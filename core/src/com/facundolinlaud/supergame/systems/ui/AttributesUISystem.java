@@ -5,7 +5,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.facundolinlaud.supergame.components.AttributesComponent;
-import com.facundolinlaud.supergame.components.KeyboardComponent;
+import com.facundolinlaud.supergame.components.player.KeyboardComponent;
 import com.facundolinlaud.supergame.ui.controller.AttributesUIController;
 import com.facundolinlaud.supergame.utils.Mappers;
 

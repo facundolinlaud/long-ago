@@ -17,7 +17,7 @@ public class AttributesWindow extends Window {
     public AttributesWindow(Mediator uiMediator, Skin skin) {
         super(TITLE, skin, Themes.CLASSIC.toString());
 
-        setVisible(true);
+        setVisible(false);
         this.grid = new Grid(uiMediator, skin);
         add(this.grid).expandX().fillX();
         setSize(270, 300);

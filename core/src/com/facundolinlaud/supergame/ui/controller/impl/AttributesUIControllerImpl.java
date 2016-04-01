@@ -3,7 +3,6 @@ package com.facundolinlaud.supergame.ui.controller.impl;
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.facundolinlaud.supergame.components.AttributesComponent;
-import com.facundolinlaud.supergame.components.ItemComponent;
 import com.facundolinlaud.supergame.ui.controller.AttributesUIController;
 import com.facundolinlaud.supergame.ui.model.Attributes;
 import com.facundolinlaud.supergame.ui.view.AttributesUI;

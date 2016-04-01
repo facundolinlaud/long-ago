@@ -2,6 +2,9 @@ package com.facundolinlaud.supergame.utils;
 
 import com.badlogic.ashley.core.ComponentMapper;
 import com.facundolinlaud.supergame.components.*;
+import com.facundolinlaud.supergame.components.items.ItemComponent;
+import com.facundolinlaud.supergame.components.player.BagComponent;
+import com.facundolinlaud.supergame.components.player.KeyboardComponent;
 
 /**
  * Created by facundo on 3/17/16.

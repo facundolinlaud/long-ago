@@ -1,4 +1,4 @@
-package com.facundolinlaud.supergame.components;
+package com.facundolinlaud.supergame.components.items;
 
 import com.badlogic.ashley.core.Component;
 
