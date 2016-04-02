@@ -33,34 +33,34 @@ public class AnimationSystem extends IteratingSystem {
     private ComponentMapper<SpriteComponent> sm = Mappers.sprite;
 
     public AnimationSystem() {
-        super(Family.all(AnimationComponent.class, WearComponent.class, InputComponent.class).get());
+        super(Family.all(AnimationComponent.class, WearComponent.class, InputComponent.class, RenderComponent.class).get());
     }
 
     private void initialize(Entity entity) {
-        System.out.println("initialize init: " + System.currentTimeMillis());
+        long start = System.currentTimeMillis();
 
         WearComponent wearComponent = wm.get(entity);
         AnimationComponent animationComponent = am.get(entity);
 
-        List<Entity> wearables = wearComponent.asList();
-        List<Texture> wearablesTextures = wearables.stream().map(e -> sm.get(e).texture).collect(Collectors.toList());
+        List<Texture> wearablesTextures = wearComponent
+            .asList()
+            .stream()
+            .map(e -> sm.get(e).texture)
+            .collect(Collectors.toList());
 
         animationComponent.setAnimations(AnimationHelper.texturesToFrames(wearablesTextures, FRAME_DURATION));
         animationComponent.setCurrentType(AnimationType.WALKING_RIGHT);
 
-        entity.add(new RenderComponent(new SpriteRenderPositionStrategyImpl()));
-
-        System.out.println("initialize end: " + System.currentTimeMillis());
+        System.out.println("Sprite rendered in " + (System.currentTimeMillis() - start) + " ms");
     }
 
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
-        RenderComponent render = rm.get(entity);
-
-        if(render == null) initialize(entity);
-        render = rm.get(entity);
-
         AnimationComponent animation  = am.get(entity);
+
+        if(!animation.isInitialized()) initialize(entity);
+
+        RenderComponent render = rm.get(entity);
         InputComponent input = im.get(entity);
 
         boolean shouldAnimate = true;

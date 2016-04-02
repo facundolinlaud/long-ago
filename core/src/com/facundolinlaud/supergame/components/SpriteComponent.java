@@ -12,4 +12,8 @@ public class SpriteComponent implements Component {
     public SpriteComponent(Texture texture) {
         this.texture = texture;
     }
+
+    public SpriteComponent(String pathToTexture) {
+        this.texture = new Texture(pathToTexture);
+    }
 }

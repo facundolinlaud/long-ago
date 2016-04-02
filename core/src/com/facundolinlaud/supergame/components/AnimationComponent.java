@@ -48,4 +48,8 @@ public class AnimationComponent implements Component {
     public void setAnimations(Map<AnimationType, Animation> animations){
         this.animations = animations;
     }
+
+    public boolean isInitialized(){
+        return !(this.animations == null);
+    }
 }

@@ -24,6 +24,6 @@ public class WearComponent implements Component {
     }
 
     public List<Entity> asList(){
-        return wearables.values().stream().collect(Collectors.toList());
+        return wearables.keySet().stream().sorted((e1, e2) -> e1.getRenderPriority() - e2.getRenderPriority()).map(e -> wearables.get(e)).collect(Collectors.toList());
     }
 }
