@@ -20,7 +20,7 @@ public class AttributesUI implements UI {
         this.window = new AttributesWindow(uiMediator, skin);
 
         stage.addActor(window);
-        stage.addListener(new ToggleWindowListener(window, Input.Keys.C));
+        stage.addListener(new ToggleWindowListener(window, Input.Keys.P));
     }
 
     public void update(Attributes attributes){

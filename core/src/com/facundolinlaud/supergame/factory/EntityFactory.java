@@ -21,11 +21,14 @@ import java.util.Map;
  * Created by facundo on 3/25/16.
  */
 public class EntityFactory {
-    public static final String PATH_TO_COINS_TEXTURE = "sprites/items/coins.png";
-    public static final String PATH_TO_SWORD_TEXTURE = "sprites/items/sword.png";
-    public static final String PATH_TO_PLAYER_TEXTURE = "sprites/living/body/light.png";
-    public static final String PATH_TO_MAIL_TEXTURE = "sprites/items/armor/mail.png";
-    public static final String PATH_TO_METAL_PANTS_TEXTURE = "sprites/items/pants/metal_pants.png";
+    public static final String PATH_TO_COINS_PICTURE = "pictures/items/others/coins.png";
+    public static final String PATH_TO_SWORD_PICTURE = "pictures/items/weapons/sword.png";
+    public static final String PATH_TO_METAL_BOOTS_PICTURE = "pictures/items/boots/metal_boots.png";
+    public static final String PATH_TO_MAIL_PICTURE = "pictures/items/armor/chain.png";
+
+    public static final String PATH_TO_PLAYER_SPRITE = "sprites/living/body/light.png";
+    public static final String PATH_TO_MAIL_SPRITE = "sprites/items/armor/mail.png";
+    public static final String PATH_TO_METAL_BOOTS_SPRITE = "sprites/items/boots/metal_boots.png";
 
     public Entity createPlayerWithBody(Body body){
         return new Entity()
@@ -44,11 +47,17 @@ public class EntityFactory {
 
     private Map<WearType, Entity> createWearables() {
         HashMap<WearType, Entity> wearables = new HashMap<>();
-        wearables.put(WearType.BODY, new Entity().add(new SpriteComponent(PATH_TO_PLAYER_TEXTURE)));
-        wearables.put(WearType.CHEST, new Entity().add(new SpriteComponent(PATH_TO_MAIL_TEXTURE)));
-        wearables.put(WearType.PANTS, new Entity().add(new SpriteComponent(PATH_TO_METAL_PANTS_TEXTURE)));
+        wearables.put(WearType.BODY, new Entity().add(new SpriteComponent(PATH_TO_PLAYER_SPRITE)));
+        wearables.put(WearType.CHEST, createEquipable("Mail armor", 2f, PATH_TO_MAIL_SPRITE, PATH_TO_MAIL_PICTURE));
+        wearables.put(WearType.SHOES, createEquipable("Plate boots", 5f, PATH_TO_METAL_BOOTS_SPRITE, PATH_TO_METAL_BOOTS_PICTURE));
 
         return wearables;
+    }
+
+    private Entity createEquipable(String name, float weight, String texturePath, String picture){
+        return new Entity()
+                .add(new ItemComponent(name, weight, picture))
+                .add(new SpriteComponent(texturePath));
     }
 
     private Entity createBaseItemEntity(String texturePath, int x, int y){
@@ -56,16 +65,16 @@ public class EntityFactory {
                 .add(new PositionComponent(x, y))
                 .add(new RenderComponent(new TextureRegion(new Texture(texturePath)), new RenderPriority(1)))
                 .add(new PickupableComponent())
-                .add(new ItemComponent());
+                .add(new ItemComponent(new Texture(texturePath)));
     }
 
     public Entity createCoinsItemWithBody(Body body) {
-        return createBaseItemEntity(PATH_TO_COINS_TEXTURE, 21, 45)
+        return createBaseItemEntity(PATH_TO_COINS_PICTURE, 21, 45)
                 .add(new BodyComponent(body));
     }
 
     public Entity createWordItemWithBody(Body body) {
-        return createBaseItemEntity(PATH_TO_SWORD_TEXTURE, 21, 45)
+        return createBaseItemEntity(PATH_TO_SWORD_PICTURE, 21, 45)
                 .add(new BodyComponent(body));
     }
 }

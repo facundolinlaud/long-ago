@@ -27,7 +27,7 @@ public class SlotSource extends Source {
     public Payload dragStart(InputEvent event, float x, float y, int pointer) {
         Item item = slot.getItem();
         Payload payload = new Payload();
-        payload.setDragActor(new Image(item.getTextureRegion()));
+        payload.setDragActor(new Image(item.getPicture()));
         payload.setObject(item);
 
         return payload;

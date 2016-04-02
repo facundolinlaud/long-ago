@@ -14,13 +14,14 @@ import java.util.List;
  * Created by facundo on 4/1/16.
  */
 public class AnimationHelper {
+    private final static int FRAME_SIZE = 64;
+
     public static HashMap<AnimationType, Animation> texturesToFrames(List<Texture> textures, float frameDuration){
         return splitTextureIntoFrames(mixTextures(textures), frameDuration);
     }
 
     private static HashMap<AnimationType, Animation> splitTextureIntoFrames(Texture sheet, float frameDuration){
         int rows = AnimationType.values().length;
-        final int frameSize = 64;
 
         HashMap<AnimationType, Animation> animations = new HashMap<>();
 
@@ -31,10 +32,10 @@ public class AnimationHelper {
             TextureRegion[] frames = new TextureRegion[columns];
 
             for(int col = 0; col < columns; col++){
-                int x = col * frameSize;
-                int y = row * frameSize;
+                int x = col * FRAME_SIZE;
+                int y = row * FRAME_SIZE;
 
-                frames[col] = new TextureRegion(sheet, x, y, frameSize, frameSize);
+                frames[col] = new TextureRegion(sheet, x, y, FRAME_SIZE, FRAME_SIZE);
             }
 
             animations.put(animationType, new Animation(frameDuration, Array.with(frames), Animation.PlayMode.NORMAL));

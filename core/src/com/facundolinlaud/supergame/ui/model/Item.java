@@ -1,21 +1,30 @@
 package com.facundolinlaud.supergame.ui.model;
 
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.Texture;
 
 /**
  * Created by facundo on 3/30/16.
  */
 public class Item {
+    public static final int NO_BAG_POSITION = -1;
+
     private String name;
     private float weight;
     private int positionInBag;
-    private TextureRegion textureRegion;
+    private Texture picture;
 
-    public Item(String name, float weight, int positionInBag, TextureRegion textureRegion) {
+    public Item(String name, float weight, int positionInBag, Texture picture) {
         this.name = name;
         this.weight = weight;
         this.positionInBag = positionInBag;
-        this.textureRegion = textureRegion;
+        this.picture = picture;
+    }
+
+    public Item(String name, float weight, Texture picture) {
+        this.name = name;
+        this.weight = weight;
+        this.positionInBag = NO_BAG_POSITION;
+        this.picture = picture;
     }
 
     public String getName() {
@@ -34,12 +43,12 @@ public class Item {
         this.weight = weight;
     }
 
-    public TextureRegion getTextureRegion() {
-        return textureRegion;
+    public Texture getPicture() {
+        return picture;
     }
 
-    public void setTextureRegion(TextureRegion textureRegion) {
-        this.textureRegion = textureRegion;
+    public void setPicture(Texture picture) {
+        this.picture = picture;
     }
 
     public int getPositionInBag() {
@@ -56,7 +65,7 @@ public class Item {
                 "name='" + name + '\'' +
                 ", weight=" + weight +
                 ", positionInBag=" + positionInBag +
-                ", textureRegion=" + textureRegion +
+                ", picture=" + picture +
                 '}';
     }
 }

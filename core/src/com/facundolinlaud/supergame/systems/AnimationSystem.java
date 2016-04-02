@@ -24,42 +24,17 @@ import java.util.stream.Collectors;
  * Created by facundo on 3/31/16.
  */
 public class AnimationSystem extends IteratingSystem {
-    private static final float FRAME_DURATION = 0.1f;
-
     private ComponentMapper<AnimationComponent> am = Mappers.animation;
     private ComponentMapper<RenderComponent> rm = Mappers.render;
     private ComponentMapper<InputComponent> im = Mappers.input;
-    private ComponentMapper<WearComponent> wm = Mappers.wear;
-    private ComponentMapper<SpriteComponent> sm = Mappers.sprite;
 
     public AnimationSystem() {
         super(Family.all(AnimationComponent.class, WearComponent.class, InputComponent.class, RenderComponent.class).get());
     }
 
-    private void initialize(Entity entity) {
-        long start = System.currentTimeMillis();
-
-        WearComponent wearComponent = wm.get(entity);
-        AnimationComponent animationComponent = am.get(entity);
-
-        List<Texture> wearablesTextures = wearComponent
-            .asList()
-            .stream()
-            .map(e -> sm.get(e).texture)
-            .collect(Collectors.toList());
-
-        animationComponent.setAnimations(AnimationHelper.texturesToFrames(wearablesTextures, FRAME_DURATION));
-        animationComponent.setCurrentType(AnimationType.WALKING_RIGHT);
-
-        System.out.println("Sprite rendered in " + (System.currentTimeMillis() - start) + " ms");
-    }
-
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
-        AnimationComponent animation  = am.get(entity);
-
-        if(!animation.isInitialized()) initialize(entity);
-
+        AnimationComponent animation = am.get(entity);
         RenderComponent render = rm.get(entity);
         InputComponent input = im.get(entity);
 

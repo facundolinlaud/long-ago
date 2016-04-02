@@ -8,11 +8,12 @@ public enum WearType {
     HAIR(1, false, false),
     EYES(2, false, false),
     HELMET(3, false, true),
-    CHEST(4, false, true),
-    PANTS(5, false, true),
-    SHOES(6, false, true),
-    WEAPON(7, true, false),
-    SHIELD(8, false, true);
+    PANTS(4, false, true),
+    CHEST(5, false, true),
+    GLOVES(6, false, true),
+    SHOES(7, false, true),
+    WEAPON(8, true, false),
+    SHIELD(9, false, true);
 
     private int renderPriority;
     private boolean hasAttackComponent;

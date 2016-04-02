@@ -24,7 +24,6 @@ public class InventoryUIControllerImpl implements InventoryUIController {
     private ComponentMapper<ItemComponent> itc = Mappers.item;
     private ComponentMapper<BagComponent> bm = Mappers.bag;
     private ComponentMapper<PositionComponent> pm = Mappers.position;
-    private ComponentMapper<RenderComponent> rm = Mappers.render;
 
     private InventoryUI ui;
     private Entity gatherer;
@@ -48,9 +47,7 @@ public class InventoryUIControllerImpl implements InventoryUIController {
             Entity e = bag.items.get(i);
 
             ItemComponent itemComponent = itc.get(e);
-            RenderComponent renderComponent = rm.get(e);
-
-            items.add(new Item(itemComponent.name, itemComponent.weight, i, renderComponent.texture));
+            items.add(new Item(itemComponent.name, itemComponent.weight, i, itemComponent.picture));
         }
 
         ui.updateItems(items);

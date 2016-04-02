@@ -2,11 +2,15 @@ package com.facundolinlaud.supergame.screens;
 
 import com.badlogic.ashley.core.Family;
 import com.badlogic.gdx.Screen;
+import com.facundolinlaud.supergame.components.AnimationComponent;
 import com.facundolinlaud.supergame.components.BodyComponent;
+import com.facundolinlaud.supergame.components.SpriteComponent;
+import com.facundolinlaud.supergame.components.player.WearComponent;
 import com.facundolinlaud.supergame.engine.GameResources;
 import com.facundolinlaud.supergame.factory.BodyFactory;
 import com.facundolinlaud.supergame.factory.EntityFactory;
 import com.facundolinlaud.supergame.listeners.PhysicsEntitiesListener;
+import com.facundolinlaud.supergame.listeners.SpriteEntitiesListener;
 import com.facundolinlaud.supergame.managers.world.MapManager;
 import com.facundolinlaud.supergame.managers.world.PhysicsManager;
 import com.facundolinlaud.supergame.managers.world.UIManager;
@@ -43,6 +47,9 @@ public class WorldScreen implements Screen {
 
     private void initializeListeners() {
         res.engine.addEntityListener(Family.all(BodyComponent.class).get(), new PhysicsEntitiesListener(physicsManager.getWorld()));
+        res.engine.addEntityListener(
+                Family.all(WearComponent.class, AnimationComponent.class).get(),
+                new SpriteEntitiesListener());
     }
 
     private void initializeEntities(){
