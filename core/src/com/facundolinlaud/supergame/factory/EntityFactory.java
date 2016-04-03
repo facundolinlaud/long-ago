@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.facundolinlaud.supergame.components.*;
+import com.facundolinlaud.supergame.components.items.EquipableComponent;
 import com.facundolinlaud.supergame.components.items.ItemComponent;
 import com.facundolinlaud.supergame.components.items.PickupableComponent;
 import com.facundolinlaud.supergame.components.player.BagComponent;
@@ -48,15 +49,16 @@ public class EntityFactory {
     private Map<WearType, Entity> createWearables() {
         HashMap<WearType, Entity> wearables = new HashMap<>();
         wearables.put(WearType.BODY, new Entity().add(new SpriteComponent(PATH_TO_PLAYER_SPRITE)));
-        wearables.put(WearType.CHEST, createEquipable("Mail armor", 2f, PATH_TO_MAIL_SPRITE, PATH_TO_MAIL_PICTURE));
-        wearables.put(WearType.SHOES, createEquipable("Plate boots", 5f, PATH_TO_METAL_BOOTS_SPRITE, PATH_TO_METAL_BOOTS_PICTURE));
+        wearables.put(WearType.CHEST, createEquipable("Mail armor", PATH_TO_MAIL_SPRITE, PATH_TO_MAIL_PICTURE));
+        wearables.put(WearType.SHOES, createEquipable("Plate boots", PATH_TO_METAL_BOOTS_SPRITE, PATH_TO_METAL_BOOTS_PICTURE));
 
         return wearables;
     }
 
-    private Entity createEquipable(String name, float weight, String texturePath, String picture){
+    private Entity createEquipable(String name, String texturePath, String picture){
         return new Entity()
-                .add(new ItemComponent(name, weight, picture))
+                .add(new EquipableComponent(4, 5))
+                .add(new ItemComponent(name, picture))
                 .add(new SpriteComponent(texturePath));
     }
 

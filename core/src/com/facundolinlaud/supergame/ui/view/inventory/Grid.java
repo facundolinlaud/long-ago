@@ -5,6 +5,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import com.badlogic.gdx.utils.Align;
 import com.facundolinlaud.supergame.ui.model.Item;
+import com.facundolinlaud.supergame.ui.view.cross.SlotSource;
+import com.facundolinlaud.supergame.ui.view.cross.SlotType;
 import com.facundolinlaud.supergame.utils.mediator.Mediator;
 
 import java.util.ArrayList;
@@ -16,7 +18,7 @@ import java.util.List;
 public class Grid extends Table {
     public final static int ITEMS_PER_ROW = 5;
 
-    private List<Slot> slots;
+    private List<InventorySlot> slots;
 
     public Grid(Skin skin, int itemsAmount, Mediator uiMediator, DragAndDrop dragAndDrop) {
         super(skin);
@@ -25,12 +27,12 @@ public class Grid extends Table {
         this.slots = new ArrayList<>();
 
         for(int i = 1; i <= itemsAmount; i++){
-            Slot slot = new Slot(skin);
+            InventorySlot slot = new InventorySlot(skin);
 
             add(slot);
             slots.add(slot);
-            dragAndDrop.addSource(new SlotSource(slot, skin));
-            dragAndDrop.addTarget(new SlotTarget(slot, uiMediator));
+            dragAndDrop.addSource(new SlotSource(slot, skin, SlotType.INVENTORY_SLOT));
+            dragAndDrop.addTarget(new InventorySlotTarget(slot, uiMediator));
 
             if(i > 0 && i % 5 == 0) row();
         }

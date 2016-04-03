@@ -2,12 +2,13 @@ package com.facundolinlaud.supergame.ui.controller.impl;
 
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
-import com.facundolinlaud.supergame.components.*;
+import com.facundolinlaud.supergame.components.PositionComponent;
 import com.facundolinlaud.supergame.components.items.ItemComponent;
 import com.facundolinlaud.supergame.components.items.PickupableComponent;
 import com.facundolinlaud.supergame.components.player.BagComponent;
-import com.facundolinlaud.supergame.ui.model.Item;
 import com.facundolinlaud.supergame.ui.controller.InventoryUIController;
+import com.facundolinlaud.supergame.ui.model.Item;
+import com.facundolinlaud.supergame.ui.model.inventory.Invented;
 import com.facundolinlaud.supergame.ui.view.InventoryUI;
 import com.facundolinlaud.supergame.utils.Mappers;
 import com.facundolinlaud.supergame.utils.events.Event;
@@ -46,8 +47,8 @@ public class InventoryUIControllerImpl implements InventoryUIController {
         for(int i = 0; i < bag.items.size(); i++){
             Entity e = bag.items.get(i);
 
-            ItemComponent itemComponent = itc.get(e);
-            items.add(new Item(itemComponent.name, itemComponent.weight, i, itemComponent.picture));
+            ItemComponent item = itc.get(e);
+            items.add(new Item(item.name, item.picture, new Invented(i)));
         }
 
         ui.updateItems(items);
@@ -65,7 +66,7 @@ public class InventoryUIControllerImpl implements InventoryUIController {
     private void itemDropped(ItemDroppedEvent event){
         PositionComponent gathererPosition = pm.get(gatherer);
 
-        Entity item = bm.get(gatherer).items.remove(event.getItem().getPositionInBag());
+        Entity item = bm.get(gatherer).items.remove(event.getItem().getInvented().getPositionInBag());
 
         item.add(new PositionComponent(gathererPosition));
         item.add(new PickupableComponent());
@@ -76,11 +77,11 @@ public class InventoryUIControllerImpl implements InventoryUIController {
     private void itemsPositionSwapped(ItemsPositionSwapEvent event) {
         BagComponent bag = bm.get(gatherer);
 
-        Entity a = bag.items.get(event.getFirstItem().getPositionInBag());
-        Entity b = bag.items.get(event.getSecondItem().getPositionInBag());
+        Entity a = bag.items.get(event.getFirstItem().getInvented().getPositionInBag());
+        Entity b = bag.items.get(event.getSecondItem().getInvented().getPositionInBag());
 
-        bag.items.set(event.getSecondItem().getPositionInBag(), a);
-        bag.items.set(event.getFirstItem().getPositionInBag(), b);
+        bag.items.set(event.getSecondItem().getInvented().getPositionInBag(), a);
+        bag.items.set(event.getFirstItem().getInvented().getPositionInBag(), b);
 
         System.out.println(event.getFirstItem().getName() + " and " + event.getSecondItem().getName() + " swapped");
     }

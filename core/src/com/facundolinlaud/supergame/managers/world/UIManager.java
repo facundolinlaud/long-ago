@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.facundolinlaud.supergame.managers.Manager;
 import com.facundolinlaud.supergame.systems.ui.AttributesUISystem;
@@ -25,6 +26,7 @@ import com.facundolinlaud.supergame.ui.view.InventoryUI;
 import com.facundolinlaud.supergame.ui.view.OverlayUI;
 import com.facundolinlaud.supergame.utils.events.AttributeUpgradeEvent;
 import com.facundolinlaud.supergame.utils.events.ItemsPositionSwapEvent;
+import com.facundolinlaud.supergame.utils.events.UnequipItemEvent;
 import com.facundolinlaud.supergame.utils.mediator.Mediator;
 import com.facundolinlaud.supergame.utils.events.ItemDroppedEvent;
 
@@ -32,12 +34,14 @@ import com.facundolinlaud.supergame.utils.events.ItemDroppedEvent;
  * Created by facundo on 3/25/16.
  */
 public class UIManager implements Manager {
-    public static final String SKIN_JSON_PATH = "ui/second_iteration/uiskin.json";
-    public static final String TEXTURE_ATLAS_PATH = "ui/second_iteration/uiskin.atlas";
+    private static final String SKIN_JSON_PATH = "ui/second_iteration/uiskin.json";
+    private static final String TEXTURE_ATLAS_PATH = "ui/second_iteration/uiskin.atlas";
+    private static final int MIN_DRAG_TIME_IN_MILLISECONDS = 10;
 
     private Skin skin;
     private Stage stage;
     private Mediator uiMediator;
+    private DragAndDrop dragAndDrop;
 
     private OverlayUI hud;
     private InventoryUI inventoryUI;
@@ -54,19 +58,25 @@ public class UIManager implements Manager {
         this.stage = new Stage(new ScreenViewport());
         this.stage.setDebugAll(true);
         this.skin.addRegions(new TextureAtlas(Gdx.files.internal(TEXTURE_ATLAS_PATH)));
-        this.uiMediator = new Mediator();
 
+        initializeUIResources();
         initializeUI();
         initializeServices();
         addUIToStage();
         subscribeReceivers();
     }
 
+    private void initializeUIResources(){
+        this.uiMediator = new Mediator();
+        this.dragAndDrop = new DragAndDrop();
+        this.dragAndDrop.setDragTime(MIN_DRAG_TIME_IN_MILLISECONDS);
+    }
+
     private void initializeUI() {
         this.hud = new OverlayUI(skin);
-        this.inventoryUI = new InventoryUI(uiMediator, stage, skin, this.hud.getItemDropZone());
+        this.inventoryUI = new InventoryUI(uiMediator, stage, skin, dragAndDrop, hud.getItemDropZone());
         this.attributesUI = new AttributesUI(uiMediator, stage, skin);
-        this.equipmentUI = new EquipmentUI(uiMediator, stage, skin);
+        this.equipmentUI = new EquipmentUI(uiMediator, stage, skin, dragAndDrop);
     }
 
     private void initializeServices() {
@@ -85,6 +95,7 @@ public class UIManager implements Manager {
         this.uiMediator.subscribe(ItemDroppedEvent.class, this.inventoryUIController);
         this.uiMediator.subscribe(ItemsPositionSwapEvent.class, this.inventoryUIController);
         this.uiMediator.subscribe(AttributeUpgradeEvent.class, this.attributesUIController);
+        this.uiMediator.subscribe(UnequipItemEvent.class, this.equipmentUIController);
     }
 
     public void initializeSystems(Engine engine){

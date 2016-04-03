@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import com.facundolinlaud.supergame.ui.model.Item;
 import com.facundolinlaud.supergame.ui.view.utils.Themes;
 import com.facundolinlaud.supergame.utils.WearType;
+import com.facundolinlaud.supergame.utils.mediator.Mediator;
 
 import java.util.Map;
 
@@ -18,21 +19,21 @@ public class EquipmentWindow extends Window {
 
     private Grid grid;
 
-    public EquipmentWindow(Skin skin, DragAndDrop dragAndDrop) {
+    public EquipmentWindow(Skin skin, Mediator uiMediator, DragAndDrop dragAndDrop) {
         super(TITLE, skin, Themes.CLASSIC.toString());
 
         setVisible(true);
         adjustTitlePosition();
         setSize(265, 265);
-        initializeGrid(skin);
+        initializeGrid(skin, uiMediator, dragAndDrop);
     }
 
     private void adjustTitlePosition() {
         getTitleTable().center().top().padLeft(55);
     }
 
-    private void initializeGrid(Skin skin) {
-        this.grid = new Grid(skin);
+    private void initializeGrid(Skin skin, Mediator uiMediator, DragAndDrop dragAndDrop) {
+        this.grid = new Grid(skin, uiMediator, dragAndDrop);
         add(this.grid);
     }
 

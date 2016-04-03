@@ -1,8 +1,7 @@
-package com.facundolinlaud.supergame.ui.view.inventory;
+package com.facundolinlaud.supergame.ui.view.cross;
 
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Payload;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Source;
@@ -15,12 +14,14 @@ public class SlotSource extends Source {
 
     private Skin skin;
     private Slot slot;
+    private SlotType slotType;
 
-    public SlotSource(Slot slot, Skin skin) {
+    public SlotSource(Slot slot, Skin skin, SlotType slotType) {
         super(slot);
 
         this.skin = skin;
         this.slot = slot;
+        this.slotType = slotType;
     }
 
     @Override
@@ -31,5 +32,9 @@ public class SlotSource extends Source {
         payload.setObject(item);
 
         return payload;
+    }
+
+    public SlotType getSlotType(){
+        return this.slotType;
     }
 }

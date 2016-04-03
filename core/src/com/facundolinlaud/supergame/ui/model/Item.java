@@ -1,30 +1,37 @@
 package com.facundolinlaud.supergame.ui.model;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.facundolinlaud.supergame.ui.model.equipment.Equipable;
+import com.facundolinlaud.supergame.ui.model.inventory.Invented;
 
 /**
  * Created by facundo on 3/30/16.
  */
 public class Item {
-    public static final int NO_BAG_POSITION = -1;
-
     private String name;
-    private float weight;
-    private int positionInBag;
     private Texture picture;
+    private Equipable equipable;
+    private Invented invented;
 
-    public Item(String name, float weight, int positionInBag, Texture picture) {
+    public Item(String name, Texture picture, Invented invented) {
         this.name = name;
-        this.weight = weight;
-        this.positionInBag = positionInBag;
         this.picture = picture;
+        this.equipable = null;
+        this.invented = invented;
     }
 
-    public Item(String name, float weight, Texture picture) {
+    public Item(String name, Texture picture, Equipable equipable) {
         this.name = name;
-        this.weight = weight;
-        this.positionInBag = NO_BAG_POSITION;
         this.picture = picture;
+        this.equipable = equipable;
+        this.invented = null;
+    }
+
+    public Item(String name, Texture picture, Equipable equipable, Invented invented) {
+        this.name = name;
+        this.picture = picture;
+        this.equipable = equipable;
+        this.invented = invented;
     }
 
     public String getName() {
@@ -35,14 +42,6 @@ public class Item {
         this.name = name;
     }
 
-    public float getWeight() {
-        return weight;
-    }
-
-    public void setWeight(float weight) {
-        this.weight = weight;
-    }
-
     public Texture getPicture() {
         return picture;
     }
@@ -51,21 +50,27 @@ public class Item {
         this.picture = picture;
     }
 
-    public int getPositionInBag() {
-        return positionInBag;
+    public Equipable getEquipable() {
+        return equipable;
     }
 
-    public void setPositionInBag(int positionInBag) {
-        this.positionInBag = positionInBag;
+    public void setEquipable(Equipable equipable) {
+        this.equipable = equipable;
     }
 
-    @Override
-    public String toString() {
-        return "Item{" +
-                "name='" + name + '\'' +
-                ", weight=" + weight +
-                ", positionInBag=" + positionInBag +
-                ", picture=" + picture +
-                '}';
+    public Invented getInvented() {
+        return invented;
+    }
+
+    public void setInvented(Invented invented) {
+        this.invented = invented;
+    }
+
+    public boolean isEquipable(){
+        return !(equipable == null);
+    }
+
+    public boolean isInvented(){
+        return !(invented == null);
     }
 }

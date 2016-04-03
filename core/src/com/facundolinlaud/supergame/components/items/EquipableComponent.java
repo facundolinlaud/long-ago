@@ -7,9 +7,19 @@ import com.facundolinlaud.supergame.utils.WearType;
  * Created by facundo on 3/31/16.
  */
 public class EquipableComponent implements Component {
-    public WearType wearType;
+    private static final int DEFAULT_ATTACK = 1;
+    private static final int DEFAULT_DEFENSE = 1;
 
-    public EquipableComponent(WearType wearType) {
-        this.wearType = wearType;
+    public int attack;
+    public int defense;
+
+    public EquipableComponent() {
+        this.attack = DEFAULT_ATTACK;
+        this.defense = DEFAULT_DEFENSE;
+    }
+
+    public EquipableComponent(int attack, int defense) {
+        this.attack = attack;
+        this.defense = defense;
     }
 }

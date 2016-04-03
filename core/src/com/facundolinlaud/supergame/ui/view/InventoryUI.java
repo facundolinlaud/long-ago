@@ -17,24 +17,16 @@ import java.util.List;
  * Created by facundo on 3/26/16.
  */
 public class InventoryUI implements UI {
-    private static final int MIN_DRAG_TIME_IN_MILLISECONDS = 10;
     private static final int ITEM_COUNT = 17;
 
     private InventoryWindow window;
 
-    public InventoryUI(Mediator uiMediator, Stage stage, Skin skin, Table itemDropZone) {
-        this.window = new InventoryWindow(skin, ITEM_COUNT, uiMediator, createDragAndDrop(itemDropZone, uiMediator));
+    public InventoryUI(Mediator uiMediator, Stage stage, Skin skin, DragAndDrop dragAndDrop, Table itemDropZone) {
+        this.window = new InventoryWindow(skin, ITEM_COUNT, uiMediator, dragAndDrop);
 
         stage.addActor(window);
         stage.addListener(new ToggleWindowListener(window, Input.Keys.I));
-    }
-
-    private DragAndDrop createDragAndDrop(Table itemDropZone, Mediator uiMediator){
-        DragAndDrop dragAndDrop = new DragAndDrop();
-        dragAndDrop.setDragTime(MIN_DRAG_TIME_IN_MILLISECONDS);
         dragAndDrop.addTarget(new DropAreaTarget(itemDropZone, uiMediator));
-
-        return dragAndDrop;
     }
 
     public void updateItems(List<Item> items){

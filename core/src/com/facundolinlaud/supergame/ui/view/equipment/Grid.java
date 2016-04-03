@@ -2,9 +2,14 @@ package com.facundolinlaud.supergame.ui.view.equipment;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import com.badlogic.gdx.utils.Align;
 import com.facundolinlaud.supergame.ui.model.Item;
+import com.facundolinlaud.supergame.ui.view.cross.SlotSource;
+import com.facundolinlaud.supergame.ui.view.cross.SlotType;
+import com.facundolinlaud.supergame.ui.view.inventory.InventorySlotTarget;
 import com.facundolinlaud.supergame.utils.WearType;
+import com.facundolinlaud.supergame.utils.mediator.Mediator;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,9 +19,9 @@ import java.util.Map;
  */
 public class Grid extends Table {
 
-    private Map<WearType, Slot> slots;
+    private Map<WearType, EquipmentSlot> slots;
 
-    public Grid(Skin skin) {
+    public Grid(Skin skin, Mediator uiMediator, DragAndDrop dragAndDrop) {
         super(skin);
 
         this.slots = new HashMap<>();
@@ -31,8 +36,11 @@ public class Grid extends Table {
 
                 boolean shouldAddSlotHere = wt != null;
 
-                Slot slot = new Slot(skin, wt);
+                EquipmentSlot slot = new EquipmentSlot(skin, wt);
                 slot.setVisible(shouldAddSlotHere);
+
+                dragAndDrop.addSource(new SlotSource(slot, skin, SlotType.EQUIPMENT_SLOT));
+//                dragAndDrop.addTarget(new InventorySlotTarget(slot, uiMediator));
 
                 if(shouldAddSlotHere) slots.put(wt, slot);
                 add(slot).pad(5);
@@ -54,7 +62,7 @@ public class Grid extends Table {
         for(WearType wt : slots.keySet()){
             Item item = items.get(wt);
 
-            Slot slot = slots.get(wt);
+            EquipmentSlot slot = slots.get(wt);
             slot.clearItem();
 
             if(item != null){

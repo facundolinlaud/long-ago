@@ -21,8 +21,8 @@ public class EquipmentUI implements UI {
 
     private EquipmentWindow window;
 
-    public EquipmentUI(Mediator uiMediator, Stage stage, Skin skin) {
-        this.window = new EquipmentWindow(skin, createDragAndDrop(uiMediator));
+    public EquipmentUI(Mediator uiMediator, Stage stage, Skin skin, DragAndDrop dragAndDrop) {
+        this.window = new EquipmentWindow(skin, uiMediator, dragAndDrop);
 
         stage.addActor(window);
         stage.addListener(new ToggleWindowListener(window, Input.Keys.C));

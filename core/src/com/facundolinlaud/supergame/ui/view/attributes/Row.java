@@ -2,9 +2,6 @@ package com.facundolinlaud.supergame.ui.view.attributes;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.Value;
-import com.badlogic.gdx.utils.Align;
-import com.facundolinlaud.supergame.ui.view.inventory.AddValue;
 import com.facundolinlaud.supergame.utils.mediator.Mediator;
 
 /**
