@@ -40,7 +40,7 @@ public class Grid extends Table {
                 slot.setVisible(shouldAddSlotHere);
 
                 dragAndDrop.addSource(new SlotSource(slot, skin, SlotType.EQUIPMENT_SLOT));
-//                dragAndDrop.addTarget(new InventorySlotTarget(slot, uiMediator));
+                dragAndDrop.addTarget(new EquipmentSlotTarget(slot, uiMediator, wt));
 
                 if(shouldAddSlotHere) slots.put(wt, slot);
                 add(slot).pad(5);
@@ -69,12 +69,5 @@ public class Grid extends Table {
                 slot.setItem(item);
             }
         }
-
-//        slots.values().stream().forEach(s -> s.clearItem());
-//        items.keySet().stream().forEach(wt -> slots.get(wt).setItem(items.get(wt)));
-
-//        for(WearType wt : items.keySet()){
-//            slots.get(wt).setItem(items.get(wt));
-//        }
     }
 }

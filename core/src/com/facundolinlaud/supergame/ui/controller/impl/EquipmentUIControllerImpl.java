@@ -13,6 +13,7 @@ import com.facundolinlaud.supergame.ui.model.equipment.Equipable;
 import com.facundolinlaud.supergame.ui.view.EquipmentUI;
 import com.facundolinlaud.supergame.utils.Mappers;
 import com.facundolinlaud.supergame.utils.WearType;
+import com.facundolinlaud.supergame.utils.events.EquipItemEvent;
 import com.facundolinlaud.supergame.utils.events.Event;
 import com.facundolinlaud.supergame.utils.events.UnequipItemEvent;
 
@@ -65,7 +66,11 @@ public class EquipmentUIControllerImpl implements EquipmentUIController {
 
     @Override
     public void handle(Event event) {
-        onUnequipItemEvent((UnequipItemEvent) event);
+        if(event instanceof UnequipItemEvent){
+            onUnequipItemEvent((UnequipItemEvent) event);
+        }else if(event instanceof EquipItemEvent){
+            onEquipItemEvent((EquipItemEvent) event);
+        }
     }
 
     private void onUnequipItemEvent(UnequipItemEvent event){
@@ -75,5 +80,18 @@ public class EquipmentUIControllerImpl implements EquipmentUIController {
         Entity itemEntity = wearComponent.wearables.remove(item.getEquipable().getWearType());
         BagComponent bagComponent = bm.get(equipper);
         bagComponent.addItem(itemEntity);
+
+        System.out.println(item.getEquipable() + " unequipped");
+    }
+
+    private void onEquipItemEvent(EquipItemEvent event) {
+        Item item = event.getItem();
+
+        BagComponent bagComponent = bm.get(equipper);
+        Entity itemEntity = bagComponent.items.remove(item.getInvented().getPositionInBag());
+        WearComponent wearComponent = wm.get(equipper);
+        wearComponent.wearables.put(item.getEquipable().getWearType(), itemEntity);
+
+        System.out.println(item.getEquipable() + " equipped");
     }
 }

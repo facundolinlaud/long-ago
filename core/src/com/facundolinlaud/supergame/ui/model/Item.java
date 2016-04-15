@@ -1,6 +1,8 @@
 package com.facundolinlaud.supergame.ui.model;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.facundolinlaud.supergame.components.items.EquipableComponent;
+import com.facundolinlaud.supergame.components.items.ItemComponent;
 import com.facundolinlaud.supergame.ui.model.equipment.Equipable;
 import com.facundolinlaud.supergame.ui.model.inventory.Invented;
 

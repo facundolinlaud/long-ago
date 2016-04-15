@@ -6,7 +6,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Target;
 import com.facundolinlaud.supergame.ui.model.Item;
 import com.facundolinlaud.supergame.ui.view.cross.Slot;
 import com.facundolinlaud.supergame.ui.view.cross.SlotSource;
-import com.facundolinlaud.supergame.utils.events.InventoryAndEquipmentItemSwapEvent;
 import com.facundolinlaud.supergame.utils.events.ItemsPositionSwapEvent;
 import com.facundolinlaud.supergame.utils.events.UnequipItemEvent;
 import com.facundolinlaud.supergame.utils.mediator.Mediator;
@@ -56,16 +55,6 @@ public class InventorySlotTarget extends Target implements Messenger {
     private void handleEquipmentSourceDrop(Payload payload){
         Item equippedItem = (Item) payload.getObject();
 
-        Item inventedItem = slot.getItem();
-
-        if(inventedItem == null){
-            uiMediator.raise(this, UnequipItemEvent.class, new UnequipItemEvent(equippedItem));
-        }else if(areSwappable(equippedItem, inventedItem)){
-            uiMediator.raise(this, InventoryAndEquipmentItemSwapEvent.class, new InventoryAndEquipmentItemSwapEvent(equippedItem, inventedItem));
-        }
-    }
-
-    private boolean areSwappable(Item equippedItem, Item inventedItem) {
-        return inventedItem.isEquipable() && equippedItem.getEquipable().getWearType().equals(inventedItem.getEquipable().getWearType());
+        uiMediator.raise(this, UnequipItemEvent.class, new UnequipItemEvent(equippedItem));
     }
 }

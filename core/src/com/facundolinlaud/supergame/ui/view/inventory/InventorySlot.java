@@ -37,6 +37,9 @@ public class InventorySlot extends Slot {
 
     @Override
     public void clearItem(){
-        if(this.itemImage != null) removeActor(this.itemImage);
+        if(this.item != null){
+            removeActor(this.itemImage);
+            this.item = null;
+        }
     }
 }

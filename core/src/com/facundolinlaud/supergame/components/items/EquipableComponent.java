@@ -10,15 +10,18 @@ public class EquipableComponent implements Component {
     private static final int DEFAULT_ATTACK = 1;
     private static final int DEFAULT_DEFENSE = 1;
 
+    public WearType wearType;
     public int attack;
     public int defense;
 
-    public EquipableComponent() {
+    public EquipableComponent(WearType wearType) {
+        this.wearType = wearType;
         this.attack = DEFAULT_ATTACK;
         this.defense = DEFAULT_DEFENSE;
     }
 
-    public EquipableComponent(int attack, int defense) {
+    public EquipableComponent(WearType wearType, int attack, int defense) {
+        this.wearType = wearType;
         this.attack = attack;
         this.defense = defense;
     }

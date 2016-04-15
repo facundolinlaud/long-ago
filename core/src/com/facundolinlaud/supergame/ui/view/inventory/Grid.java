@@ -39,7 +39,7 @@ public class Grid extends Table {
     }
 
     public void update(List<Item> items){
-        slots.stream().forEach(slot -> slot.clearItem());
+        slots.stream().forEach(InventorySlot::clearItem);
 
         for(int i = 0; i < items.size(); i++){
             if(i < slots.size()){

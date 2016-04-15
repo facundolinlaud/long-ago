@@ -49,17 +49,17 @@ public class EntityFactory {
     private Map<WearType, Entity> createWearables() {
         HashMap<WearType, Entity> wearables = new HashMap<>();
         wearables.put(WearType.BODY, new Entity().add(new SpriteComponent(PATH_TO_PLAYER_SPRITE)));
-        wearables.put(WearType.CHEST, createEquipable("Mail armor", PATH_TO_MAIL_SPRITE, PATH_TO_MAIL_PICTURE));
-        wearables.put(WearType.SHOES, createEquipable("Plate boots", PATH_TO_METAL_BOOTS_SPRITE, PATH_TO_METAL_BOOTS_PICTURE));
+        addEquipable(wearables, WearType.CHEST, "Mail armor", PATH_TO_MAIL_SPRITE, PATH_TO_MAIL_PICTURE);
+        addEquipable(wearables, WearType.SHOES, "Plate boots", PATH_TO_METAL_BOOTS_SPRITE, PATH_TO_METAL_BOOTS_PICTURE);
 
         return wearables;
     }
 
-    private Entity createEquipable(String name, String texturePath, String picture){
-        return new Entity()
-                .add(new EquipableComponent(4, 5))
+    private void addEquipable(Map<WearType, Entity> wearables, WearType wearType, String name, String texturePath, String picture){
+        wearables.put(wearType, new Entity()
+                .add(new EquipableComponent(wearType, 4, 5))
                 .add(new ItemComponent(name, picture))
-                .add(new SpriteComponent(texturePath));
+                .add(new SpriteComponent(texturePath)));
     }
 
     private Entity createBaseItemEntity(String texturePath, int x, int y){

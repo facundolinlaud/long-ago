@@ -24,11 +24,8 @@ import com.facundolinlaud.supergame.ui.view.AttributesUI;
 import com.facundolinlaud.supergame.ui.view.EquipmentUI;
 import com.facundolinlaud.supergame.ui.view.InventoryUI;
 import com.facundolinlaud.supergame.ui.view.OverlayUI;
-import com.facundolinlaud.supergame.utils.events.AttributeUpgradeEvent;
-import com.facundolinlaud.supergame.utils.events.ItemsPositionSwapEvent;
-import com.facundolinlaud.supergame.utils.events.UnequipItemEvent;
+import com.facundolinlaud.supergame.utils.events.*;
 import com.facundolinlaud.supergame.utils.mediator.Mediator;
-import com.facundolinlaud.supergame.utils.events.ItemDroppedEvent;
 
 /**
  * Created by facundo on 3/25/16.
@@ -96,6 +93,7 @@ public class UIManager implements Manager {
         this.uiMediator.subscribe(ItemsPositionSwapEvent.class, this.inventoryUIController);
         this.uiMediator.subscribe(AttributeUpgradeEvent.class, this.attributesUIController);
         this.uiMediator.subscribe(UnequipItemEvent.class, this.equipmentUIController);
+        this.uiMediator.subscribe(EquipItemEvent.class, this.equipmentUIController);
     }
 
     public void initializeSystems(Engine engine){

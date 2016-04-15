@@ -3,11 +3,13 @@ package com.facundolinlaud.supergame.ui.controller.impl;
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.facundolinlaud.supergame.components.PositionComponent;
+import com.facundolinlaud.supergame.components.items.EquipableComponent;
 import com.facundolinlaud.supergame.components.items.ItemComponent;
 import com.facundolinlaud.supergame.components.items.PickupableComponent;
 import com.facundolinlaud.supergame.components.player.BagComponent;
 import com.facundolinlaud.supergame.ui.controller.InventoryUIController;
 import com.facundolinlaud.supergame.ui.model.Item;
+import com.facundolinlaud.supergame.ui.model.equipment.Equipable;
 import com.facundolinlaud.supergame.ui.model.inventory.Invented;
 import com.facundolinlaud.supergame.ui.view.InventoryUI;
 import com.facundolinlaud.supergame.utils.Mappers;
@@ -22,7 +24,8 @@ import java.util.List;
  * Created by facundo on 3/27/16.
  */
 public class InventoryUIControllerImpl implements InventoryUIController {
-    private ComponentMapper<ItemComponent> itc = Mappers.item;
+    private ComponentMapper<ItemComponent> im = Mappers.item;
+    private ComponentMapper<EquipableComponent> em = Mappers.equipable;
     private ComponentMapper<BagComponent> bm = Mappers.bag;
     private ComponentMapper<PositionComponent> pm = Mappers.position;
 
@@ -47,8 +50,15 @@ public class InventoryUIControllerImpl implements InventoryUIController {
         for(int i = 0; i < bag.items.size(); i++){
             Entity e = bag.items.get(i);
 
-            ItemComponent item = itc.get(e);
-            items.add(new Item(item.name, item.picture, new Invented(i)));
+            ItemComponent itemComponent = im.get(e);
+            EquipableComponent equipableComponent = em.get(e);
+            Equipable equipable = null;
+
+            if(equipableComponent != null){
+                equipable = new Equipable(equipableComponent.wearType, equipableComponent.attack, equipableComponent.defense);
+            }
+
+            items.add(new Item(itemComponent.name, itemComponent.picture, equipable, new Invented(i)));
         }
 
         ui.updateItems(items);
