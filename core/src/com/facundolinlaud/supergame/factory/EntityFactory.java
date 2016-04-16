@@ -40,7 +40,7 @@ public class EntityFactory {
                 .add(new BodyComponent(body))
                 .add(new WearComponent(createWearables()))
                 .add(new RenderComponent(new SpriteRenderPositionStrategyImpl()))
-                .add(new AnimationComponent())
+                .add(new SpriteStackableComponent())
                 .add(new HealthComponent())
                 .add(new BagComponent())
                 .add(new AttributesComponent());

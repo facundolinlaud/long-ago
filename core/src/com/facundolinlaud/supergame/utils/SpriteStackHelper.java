@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Created by facundo on 4/1/16.
  */
-public class AnimationHelper {
+public class SpriteStackHelper {
     private final static int FRAME_SIZE = 64;
 
     public static HashMap<AnimationType, Animation> texturesToFrames(List<Texture> textures, float frameDuration){

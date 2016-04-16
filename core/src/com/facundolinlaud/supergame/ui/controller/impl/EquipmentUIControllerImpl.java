@@ -2,7 +2,7 @@ package com.facundolinlaud.supergame.ui.controller.impl;
 
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
-import com.facundolinlaud.supergame.components.RenderComponent;
+import com.facundolinlaud.supergame.components.SpriteStackableComponent;
 import com.facundolinlaud.supergame.components.items.EquipableComponent;
 import com.facundolinlaud.supergame.components.items.ItemComponent;
 import com.facundolinlaud.supergame.components.player.BagComponent;
@@ -28,6 +28,7 @@ public class EquipmentUIControllerImpl implements EquipmentUIController {
     private ComponentMapper<ItemComponent> im = Mappers.item;
     private ComponentMapper<WearComponent> wm = Mappers.wear;
     private ComponentMapper<EquipableComponent> em = Mappers.equipable;
+    private ComponentMapper<SpriteStackableComponent> ssm = Mappers.spriteStack;
 
     private EquipmentUI ui;
     private Entity equipper;
@@ -81,6 +82,8 @@ public class EquipmentUIControllerImpl implements EquipmentUIController {
         BagComponent bagComponent = bm.get(equipper);
         bagComponent.addItem(itemEntity);
 
+        refreshEquipperSprite();
+
         System.out.println(item.getEquipable() + " unequipped");
     }
 
@@ -92,6 +95,13 @@ public class EquipmentUIControllerImpl implements EquipmentUIController {
         WearComponent wearComponent = wm.get(equipper);
         wearComponent.wearables.put(item.getEquipable().getWearType(), itemEntity);
 
+        refreshEquipperSprite();
+
         System.out.println(item.getEquipable() + " equipped");
+    }
+
+    private void refreshEquipperSprite() {
+        SpriteStackableComponent spriteStackableComponent = ssm.get(equipper);
+        spriteStackableComponent.requestRefresh();
     }
 }

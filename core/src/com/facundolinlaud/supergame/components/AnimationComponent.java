@@ -11,19 +11,10 @@ import java.util.Map;
  * Created by facundo on 3/31/16.
  */
 public class AnimationComponent implements Component {
-    private static final AnimationType DEFAULT_ANIMATION_TYPE = AnimationType.WALKING_RIGHT;
-
     private Map<AnimationType, Animation> animations;
     private AnimationType currentAnimationType;
     private Animation currentAnimation;
     private float stateTime;
-
-    public void setCurrentType(AnimationType animationType){
-        if (!animationType.equals(this.currentAnimationType) && !AnimationType.NONE.equals(animationType)) {
-            this.currentAnimationType = animationType;
-            this.currentAnimation = animations.get(animationType);
-        }
-    }
 
     public void animate(boolean state){
         if(state){
@@ -38,6 +29,15 @@ public class AnimationComponent implements Component {
         this.stateTime = 0;
     }
 
+    public void setAnimations(Map<AnimationType, Animation> animations){
+        this.animations = animations;
+    }
+
+    public void setCurrentType(AnimationType animationType){
+        this.currentAnimationType = animationType;
+        this.currentAnimation = animations.get(animationType);
+    }
+
     public TextureRegion getCurrentTextureAndTick(float deltaTime){
         TextureRegion texture = this.currentAnimation.getKeyFrame(this.stateTime);
         this.stateTime += deltaTime;
@@ -45,11 +45,7 @@ public class AnimationComponent implements Component {
         return texture;
     }
 
-    public void setAnimations(Map<AnimationType, Animation> animations){
-        this.animations = animations;
-    }
-
-    public boolean isInitialized(){
-        return !(this.animations == null);
+    public AnimationType getCurrentAnimationTypeOrDefault() {
+        return currentAnimationType == null ? AnimationType.WALKING_RIGHT : currentAnimationType;
     }
 }

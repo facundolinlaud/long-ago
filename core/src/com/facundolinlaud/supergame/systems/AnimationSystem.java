@@ -1,24 +1,15 @@
 package com.facundolinlaud.supergame.systems;
 
 import com.badlogic.ashley.core.ComponentMapper;
-import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
-import com.badlogic.gdx.graphics.Texture;
 import com.facundolinlaud.supergame.components.InputComponent;
 import com.facundolinlaud.supergame.components.RenderComponent;
 import com.facundolinlaud.supergame.components.AnimationComponent;
-import com.facundolinlaud.supergame.components.SpriteComponent;
 import com.facundolinlaud.supergame.components.player.WearComponent;
-import com.facundolinlaud.supergame.utils.AnimationHelper;
 import com.facundolinlaud.supergame.utils.AnimationType;
 import com.facundolinlaud.supergame.utils.Mappers;
-import com.facundolinlaud.supergame.utils.strategy.impl.SpriteRenderPositionStrategyImpl;
-
-import java.util.Collection;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Created by facundo on 3/31/16.

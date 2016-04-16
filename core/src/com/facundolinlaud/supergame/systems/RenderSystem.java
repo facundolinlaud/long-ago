@@ -35,12 +35,15 @@ public class RenderSystem extends SortedIteratingSystem {
         RenderComponent renderComponent = rm.get(entity);
 
         TextureRegion texture = renderComponent.texture;
-        float width = texture.getRegionWidth() / 32f;
-        float height = texture.getRegionHeight() / 32f;
 
-        Vector2 pos = renderComponent.renderPositionStrategy.process(positionComponent.x, positionComponent.y);
+        if(texture != null) {
+            float width = texture.getRegionWidth() / 32f;
+            float height = texture.getRegionHeight() / 32f;
 
-        spriteBatch.draw(texture, pos.x, pos.y, width, height);
+            Vector2 pos = renderComponent.renderPositionStrategy.process(positionComponent.x, positionComponent.y);
+
+            spriteBatch.draw(texture, pos.x, pos.y, width, height);
+        }
     }
 
     private static class ZComparator implements Comparator<Entity> {
