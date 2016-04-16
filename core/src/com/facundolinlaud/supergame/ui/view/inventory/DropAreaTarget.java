@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Payload;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Source;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Target;
 import com.facundolinlaud.supergame.ui.model.Item;
+import com.facundolinlaud.supergame.ui.view.cross.SlotSource;
 import com.facundolinlaud.supergame.utils.events.ItemDroppedEvent;
 import com.facundolinlaud.supergame.utils.mediator.Mediator;
 import com.facundolinlaud.supergame.utils.mediator.Messenger;
@@ -28,8 +29,13 @@ public class DropAreaTarget extends Target implements Messenger {
 
     @Override
     public void drop(Source source, Payload payload, float x, float y, int pointer) {
+        SlotSource slotSource = (SlotSource) source;
         Item item = (Item) payload.getObject();
 
-        uiMediator.raise(this, ItemDroppedEvent.class, new ItemDroppedEvent(item));
+        switch(slotSource.getSlotType()){
+            case INVENTORY_SLOT:
+                uiMediator.raise(this, ItemDroppedEvent.class, new ItemDroppedEvent(item));
+                break;
+        }
     }
 }
