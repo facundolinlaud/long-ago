@@ -18,7 +18,7 @@ public class AnimationComponent implements Component {
 
     public void animate(boolean state){
         if(state){
-            this.currentAnimation.setPlayMode(Animation.PlayMode.LOOP);
+            this.currentAnimation.setPlayMode(Animation.PlayMode.NORMAL);
         }else{
             this.currentAnimation.setPlayMode(Animation.PlayMode.NORMAL);
             showStandingTexture();
@@ -41,6 +41,12 @@ public class AnimationComponent implements Component {
     public TextureRegion getCurrentTextureAndTick(float deltaTime){
         TextureRegion texture = this.currentAnimation.getKeyFrame(this.stateTime);
         this.stateTime += deltaTime;
+
+        if(this.stateTime < 0.1f){
+            this.stateTime = 0.1f;
+        }else if(this.stateTime > 8*0.1f){
+            this.stateTime = 0.1f;
+        }
 
         return texture;
     }

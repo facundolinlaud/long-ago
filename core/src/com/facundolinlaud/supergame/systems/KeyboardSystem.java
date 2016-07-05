@@ -41,22 +41,17 @@ public class KeyboardSystem extends EntitySystem {
         boolean S = Gdx.input.isKeyPressed(Input.Keys.S);
         boolean D = Gdx.input.isKeyPressed(Input.Keys.D);
 
-        int x, y;
+        int x = InputType.NONE;
+        int y = InputType.NONE;
 
         if(A)
             x = InputType.LEFT;
         else if(D)
             x = InputType.RIGHT;
-        else
-            x = InputType.NONE;
-
-        if(W)
+        else if(W)
             y = InputType.UP;
         else if(S)
             y = InputType.DOWN;
-        else
-            y = InputType.NONE;
-
 
         return new Vector2(x, y);
     }

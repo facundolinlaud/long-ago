@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
  * Created by facundo on 4/15/16.
  */
 public class SpriteStackSystem extends IteratingSystem {
-    private static final float FRAME_DURATION = 0.06f;
+    private static final float FRAME_DURATION = 0.1f;
 
     private ComponentMapper<WearComponent> wm = Mappers.wear;
     private ComponentMapper<SpriteComponent> sm = Mappers.sprite;

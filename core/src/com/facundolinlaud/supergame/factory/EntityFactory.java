@@ -23,13 +23,15 @@ import java.util.Map;
  */
 public class EntityFactory {
     public static final String PATH_TO_COINS_PICTURE = "pictures/items/others/coins.png";
-    public static final String PATH_TO_SWORD_PICTURE = "pictures/items/weapons/sword.png";
+    public static final String PATH_TO_SWORD_PICTURE = "pictures/items/weapon/sword.png";
     public static final String PATH_TO_METAL_BOOTS_PICTURE = "pictures/items/boots/metal_boots.png";
     public static final String PATH_TO_MAIL_PICTURE = "pictures/items/armor/chain.png";
+    public static final String PATH_TO_SPEAR_PICTURE = "pictures/items/weapon/spear.png";
 
     public static final String PATH_TO_PLAYER_SPRITE = "sprites/living/body/light.png";
     public static final String PATH_TO_MAIL_SPRITE = "sprites/items/armor/mail.png";
     public static final String PATH_TO_METAL_BOOTS_SPRITE = "sprites/items/boots/metal_boots.png";
+    public static final String PATH_TO_SPEAR_SPRITE = "sprites/items/weapon/spear.png";
 
     public Entity createPlayerWithBody(Body body){
         return new Entity()
@@ -51,6 +53,7 @@ public class EntityFactory {
         wearables.put(WearType.BODY, new Entity().add(new SpriteComponent(PATH_TO_PLAYER_SPRITE)));
         addEquipable(wearables, WearType.CHEST, "Mail armor", PATH_TO_MAIL_SPRITE, PATH_TO_MAIL_PICTURE);
         addEquipable(wearables, WearType.SHOES, "Plate boots", PATH_TO_METAL_BOOTS_SPRITE, PATH_TO_METAL_BOOTS_PICTURE);
+        addEquipable(wearables, WearType.WEAPON, "Spear", PATH_TO_SPEAR_SPRITE, PATH_TO_SPEAR_PICTURE);
 
         return wearables;
     }
@@ -59,7 +62,8 @@ public class EntityFactory {
         wearables.put(wearType, new Entity()
                 .add(new EquipableComponent(wearType, 4, 5))
                 .add(new ItemComponent(name, picture))
-                .add(new SpriteComponent(texturePath)));
+                .add(new SpriteComponent(texturePath))
+                .add(new RenderComponent(new TextureRegion(new Texture(picture)), new RenderPriority(1))));
     }
 
     private Entity createBaseItemEntity(String texturePath, int x, int y){
