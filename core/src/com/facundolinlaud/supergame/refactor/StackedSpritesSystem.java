@@ -24,7 +24,7 @@ public class StackedSpritesSystem extends IteratingSystem {
     private ComponentMapper<AnimableSpriteComponent> animable = Mappers.animableSprite;
 
     public StackedSpritesSystem() {
-        super(Family.all(AnimableSpriteComponent.class, StackedSpritesComponent.class, RenderComponent.class).get());
+        super(Family.all(RefreshSpriteRequirementComponent.class, AnimableSpriteComponent.class, StackedSpritesComponent.class, RenderComponent.class).get());
     }
 
     @Override
@@ -40,6 +40,8 @@ public class StackedSpritesSystem extends IteratingSystem {
 
         AnimableSpriteComponent animableSpriteComponent = animable.get(entity);
         animableSpriteComponent.animations = animations;
+
+        entity.remove(RefreshSpriteRequirementComponent.class);
     }
 
     private HashMap<Status, Animation> createAnimations(Texture sprites, AnimationModel model) {

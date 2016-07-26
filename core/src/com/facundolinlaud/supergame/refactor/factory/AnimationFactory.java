@@ -13,11 +13,7 @@ public class AnimationFactory {
 
     public static final String DEFAULT_ANIMATION = "model/animations/default.json";
 
-    public void createDefault(){
-        AnimationModel animationModel = getDefaultModel();
-    }
-
-    private AnimationModel getDefaultModel(){
+    public static AnimationModel getDefaultModel(){
         ObjectMapper mapper = new ObjectMapper();
 
         try {

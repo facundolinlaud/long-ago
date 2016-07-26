@@ -5,54 +5,61 @@ import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
-import com.facundolinlaud.supergame.components.InputComponent;
+import com.facundolinlaud.supergame.refactor.Action;
+import com.facundolinlaud.supergame.refactor.Direction;
+import com.facundolinlaud.supergame.refactor.StatusComponent;
+import com.facundolinlaud.supergame.refactorno.InputComponent;
 import com.facundolinlaud.supergame.components.player.KeyboardComponent;
-import com.facundolinlaud.supergame.utils.InputType;
+import com.facundolinlaud.supergame.refactorno.InputType;
 import com.facundolinlaud.supergame.utils.Mappers;
 
 /**
  * Created by facundo on 3/20/16.
  */
 public class KeyboardSystem extends EntitySystem {
-    private ComponentMapper<InputComponent> im = Mappers.input;
+    private ComponentMapper<StatusComponent> sm = Mappers.status;
 
     private ImmutableArray<Entity> entities;
 
     public KeyboardSystem() {}
 
     public void addedToEngine(Engine engine) {
-        entities = engine.getEntitiesFor(Family.all(InputComponent.class, KeyboardComponent.class).get());
+        entities = engine.getEntitiesFor(Family.all(StatusComponent.class, KeyboardComponent.class).get());
     }
 
     public void update(float deltaTime) {
-        Vector2 resolvedDirection = resolveDirection();
         boolean gathering = Gdx.input.isKeyJustPressed(Input.Keys.E);
 
         for(Entity entity : entities){
-            InputComponent input = im.get(entity);
-            input.direction = resolvedDirection;
-            input.gathering = gathering;
+            StatusComponent status = sm.get(entity);
+
+            Direction newDirection = resolveDirection();
+
+            if(newDirection != null){
+                status.direction = newDirection;
+                status.action = Action.WALKING;
+            }else{
+                status.action = Action.STANDING;
+            }
+
+            status.gathering = gathering;
         }
     }
 
-    private Vector2 resolveDirection(){
-        boolean W = Gdx.input.isKeyPressed(Input.Keys.W);
-        boolean A = Gdx.input.isKeyPressed(Input.Keys.A);
-        boolean S = Gdx.input.isKeyPressed(Input.Keys.S);
-        boolean D = Gdx.input.isKeyPressed(Input.Keys.D);
-
-        int x = InputType.NONE;
-        int y = InputType.NONE;
+    private Direction resolveDirection(){
+        boolean W = Gdx.input.isKeyJustPressed(Input.Keys.W);
+        boolean A = Gdx.input.isKeyJustPressed(Input.Keys.A);
+        boolean S = Gdx.input.isKeyJustPressed(Input.Keys.S);
+        boolean D = Gdx.input.isKeyJustPressed(Input.Keys.D);
 
         if(A)
-            x = InputType.LEFT;
+            return Direction.LEFT;
         else if(D)
-            x = InputType.RIGHT;
+            return Direction.RIGHT;
         else if(W)
-            y = InputType.UP;
+            return Direction.UP;
         else if(S)
-            y = InputType.DOWN;
-
-        return new Vector2(x, y);
+            return Direction.DOWN;
+        else return null;
     }
 }

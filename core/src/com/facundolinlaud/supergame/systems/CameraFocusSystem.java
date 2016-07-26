@@ -5,7 +5,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.graphics.Camera;
-import com.facundolinlaud.supergame.components.InputComponent;
+import com.facundolinlaud.supergame.refactorno.InputComponent;
 import com.facundolinlaud.supergame.components.PositionComponent;
 import com.facundolinlaud.supergame.utils.Mappers;
 

@@ -6,6 +6,7 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import com.facundolinlaud.supergame.components.RenderComponent;
 import com.facundolinlaud.supergame.components.player.WearComponent;
 import com.facundolinlaud.supergame.utils.Mappers;
 
@@ -22,7 +23,7 @@ public class StackableSpriteSystem extends IteratingSystem {
     private ComponentMapper<WearComponent> wm = Mappers.wear;
 
     public StackableSpriteSystem() {
-        super(Family.all(StackedSpritesComponent.class).get());
+        super(Family.all(RefreshSpriteRequirementComponent.class, StackedSpritesComponent.class, RenderComponent.class).get());
     }
 
     @Override

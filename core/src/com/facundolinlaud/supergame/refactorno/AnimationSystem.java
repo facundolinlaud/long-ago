@@ -4,7 +4,6 @@ import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
-import com.facundolinlaud.supergame.components.InputComponent;
 import com.facundolinlaud.supergame.components.RenderComponent;
 import com.facundolinlaud.supergame.components.player.WearComponent;
 import com.facundolinlaud.supergame.utils.Mappers;

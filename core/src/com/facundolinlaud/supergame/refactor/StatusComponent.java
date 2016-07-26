@@ -8,6 +8,7 @@ import com.badlogic.ashley.core.Component;
 public class StatusComponent implements Component {
     public Action action;
     public Direction direction;
+    public boolean gathering;
 
     public StatusComponent() {}
 }

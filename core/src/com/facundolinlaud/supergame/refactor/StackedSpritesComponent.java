@@ -10,4 +10,8 @@ import com.facundolinlaud.supergame.refactor.model.AnimationModel;
 public class StackedSpritesComponent implements Component {
     public Texture stackedSprites;
     public AnimationModel animationModel;
+
+    public StackedSpritesComponent(AnimationModel animationModel) {
+        this.animationModel = animationModel;
+    }
 }

@@ -5,7 +5,10 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.facundolinlaud.supergame.components.BodyComponent;
-import com.facundolinlaud.supergame.components.InputComponent;
+import com.facundolinlaud.supergame.refactor.Action;
+import com.facundolinlaud.supergame.refactor.Direction;
+import com.facundolinlaud.supergame.refactor.StatusComponent;
+import com.facundolinlaud.supergame.refactorno.InputComponent;
 import com.facundolinlaud.supergame.components.PositionComponent;
 import com.facundolinlaud.supergame.components.VelocityComponent;
 import com.facundolinlaud.supergame.utils.Mappers;
@@ -15,7 +18,7 @@ import com.facundolinlaud.supergame.utils.Mappers;
  */
 public class MovementSystem extends IteratingSystem  {
     private ComponentMapper<VelocityComponent> vm = Mappers.velocity;
-    private ComponentMapper<InputComponent> im = Mappers.input;
+    private ComponentMapper<StatusComponent> sm = Mappers.status;
     private ComponentMapper<BodyComponent> bm = Mappers.body;
 
 
@@ -25,10 +28,30 @@ public class MovementSystem extends IteratingSystem  {
 
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
-        VelocityComponent velocity = this.vm.get(entity);
-        InputComponent input = this.im.get(entity);
-        BodyComponent body = this.bm.get(entity);
+        VelocityComponent velocity = vm.get(entity);
+        StatusComponent status = sm.get(entity);
+        BodyComponent body = bm.get(entity);
 
-        body.body.setLinearVelocity(velocity.velocity * input.direction.x * (deltaTime + 1), velocity.velocity * input.direction.y * (deltaTime + 1));
+        int toggleX = 0;
+        int toggleY = 0;
+
+        if(Action.WALKING.equals(status.action)) {
+            switch (status.direction) {
+                case UP:
+                    toggleY = 1;
+                    break;
+                case DOWN:
+                    toggleY = -1;
+                    break;
+                case LEFT:
+                    toggleX = -1;
+                    break;
+                case RIGHT:
+                    toggleX = 1;
+                    break;
+            }
+        }
+
+        body.body.setLinearVelocity(velocity.velocity * toggleX * (deltaTime + 1), velocity.velocity * toggleY * (deltaTime + 1));
     }
 }
