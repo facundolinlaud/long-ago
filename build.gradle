@@ -73,6 +73,10 @@ project(":core") {
         compile "com.badlogicgames.ashley:ashley:$ashleyVersion"
         compile "com.badlogicgames.gdx:gdx-ai:$aiVersion"
         compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
+
+        compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.7.5'
+        compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.7.5'
+        compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.7.5'
     }
 }
 

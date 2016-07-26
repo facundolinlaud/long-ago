@@ -3,6 +3,7 @@ package com.facundolinlaud.supergame.components;
 import com.badlogic.ashley.core.Component;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.facundolinlaud.supergame.refactor.model.AnimationModel;
 import com.facundolinlaud.supergame.utils.AnimationType;
 
 import java.util.Map;
@@ -11,10 +12,15 @@ import java.util.Map;
  * Created by facundo on 3/31/16.
  */
 public class AnimationComponent implements Component {
+    private AnimationModel animationModel;
     private Map<AnimationType, Animation> animations;
     private AnimationType currentAnimationType;
     private Animation currentAnimation;
     private float stateTime;
+
+    public AnimationComponent(AnimationModel animationModel) {
+        this.animationModel = animationModel;
+    }
 
     public void animate(boolean state){
         if(state){
@@ -53,5 +59,9 @@ public class AnimationComponent implements Component {
 
     public AnimationType getCurrentAnimationTypeOrDefault() {
         return currentAnimationType == null ? AnimationType.WALKING_RIGHT : currentAnimationType;
+    }
+
+    public AnimationModel getAnimationModel() {
+        return animationModel;
     }
 }

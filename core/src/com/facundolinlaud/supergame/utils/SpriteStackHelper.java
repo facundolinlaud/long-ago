@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
+import com.facundolinlaud.supergame.refactor.model.AnimationModel;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,12 +17,15 @@ import java.util.List;
 public class SpriteStackHelper {
     private final static int FRAME_SIZE = 64;
 
-    public static HashMap<AnimationType, Animation> texturesToFrames(List<Texture> textures, float frameDuration){
-        return splitTextureIntoFrames(mixTextures(textures), frameDuration);
+    public static HashMap<AnimationType, Animation> texturesToFrames(List<Texture> textures, AnimationModel animationModel){
+        return splitTextureIntoFrames(mixTextures(textures), animationModel);
     }
 
-    private static HashMap<AnimationType, Animation> splitTextureIntoFrames(Texture sheet, float frameDuration){
+    private static HashMap<AnimationType, Animation> splitTextureIntoFrames(Texture sheet, AnimationModel am){
         int rows = AnimationType.values().length;
+        float frameDuration = am.getFrameDuration();
+
+
 
         HashMap<AnimationType, Animation> animations = new HashMap<>();
 

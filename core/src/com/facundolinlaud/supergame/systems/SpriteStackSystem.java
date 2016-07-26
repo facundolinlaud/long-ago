@@ -20,8 +20,6 @@ import java.util.stream.Collectors;
  * Created by facundo on 4/15/16.
  */
 public class SpriteStackSystem extends IteratingSystem {
-    private static final float FRAME_DURATION = 0.1f;
-
     private ComponentMapper<WearComponent> wm = Mappers.wear;
     private ComponentMapper<SpriteComponent> sm = Mappers.sprite;
     private ComponentMapper<SpriteStackableComponent> ssm = Mappers.spriteStack;
@@ -59,7 +57,7 @@ public class SpriteStackSystem extends IteratingSystem {
                 .map(e -> sm.get(e).texture)
                 .collect(Collectors.toList());
 
-        animationComponent.setAnimations(SpriteStackHelper.texturesToFrames(wearablesTextures, FRAME_DURATION));
+        animationComponent.setAnimations(SpriteStackHelper.texturesToFrames(wearablesTextures, animationComponent.getAnimationModel()));
         animationComponent.setCurrentType(animationComponent.getCurrentAnimationTypeOrDefault());
 
         System.out.println("Sprite rendered in " + (System.currentTimeMillis() - start) + " ms");

@@ -5,9 +5,9 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.facundolinlaud.supergame.engine.GameResources;
 import com.facundolinlaud.supergame.managers.ScreenManager;
 import com.facundolinlaud.supergame.systems.RenderSystem;
+import com.facundolinlaud.supergame.refactor.factory.AnimationFactory;
 
 public class Game extends ApplicationAdapter {
 	private Engine engine;
@@ -16,6 +16,10 @@ public class Game extends ApplicationAdapter {
 
 	@Override
 	public void create () {
+		// debug
+		AnimationFactory animationFactory = new AnimationFactory();
+		animationFactory.createDefault();
+
 		engine = new Engine();
 		batch = new SpriteBatch();
 
