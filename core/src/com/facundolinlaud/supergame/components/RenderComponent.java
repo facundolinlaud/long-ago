@@ -19,10 +19,6 @@ public class RenderComponent implements Component {
         this.renderPositionStrategy = new DefaultRenderPositionStrategyImpl();
     }
 
-    public RenderComponent(TextureRegion texture) {
-        this.texture = texture;
-    }
-
     public RenderComponent(TextureRegion texture, RenderPriority priority) {
         this.texture = texture;
         this.priority = priority;

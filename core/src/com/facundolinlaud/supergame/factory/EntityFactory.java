@@ -11,6 +11,7 @@ import com.facundolinlaud.supergame.components.items.PickupableComponent;
 import com.facundolinlaud.supergame.components.player.BagComponent;
 import com.facundolinlaud.supergame.components.player.KeyboardComponent;
 import com.facundolinlaud.supergame.components.player.WearComponent;
+import com.facundolinlaud.supergame.managers.ResourceManager;
 import com.facundolinlaud.supergame.utils.RenderPriority;
 import com.facundolinlaud.supergame.utils.WearType;
 import com.facundolinlaud.supergame.utils.strategy.impl.SpriteRenderPositionStrategyImpl;
@@ -69,9 +70,9 @@ public class EntityFactory {
     private Entity createBaseItemEntity(String texturePath, int x, int y){
         return new Entity()
                 .add(new PositionComponent(x, y))
-                .add(new RenderComponent(new TextureRegion(new Texture(texturePath)), new RenderPriority(1)))
+                .add(new RenderComponent(new TextureRegion(ResourceManager.getTexture(texturePath)), new RenderPriority(1)))
                 .add(new PickupableComponent())
-                .add(new ItemComponent(new Texture(texturePath)));
+                .add(new ItemComponent(ResourceManager.getTexture(texturePath)));
     }
 
     public Entity createCoinsItemWithBody(Body body) {

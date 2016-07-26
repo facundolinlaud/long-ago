@@ -9,10 +9,6 @@ import com.badlogic.gdx.graphics.Texture;
 public class SpriteComponent implements Component {
     public Texture texture;
 
-    public SpriteComponent(Texture texture) {
-        this.texture = texture;
-    }
-
     public SpriteComponent(String pathToTexture) {
         this.texture = new Texture(pathToTexture);
     }

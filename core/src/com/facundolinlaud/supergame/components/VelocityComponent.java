@@ -15,9 +15,4 @@ public class VelocityComponent implements Component {
         this.velocity = velocity;
         this.max = DEFAULT_MAX;
     }
-
-    public VelocityComponent(float max, float velocity) {
-        this.max = max;
-        this.velocity = velocity;
-    }
 }
