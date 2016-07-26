@@ -12,6 +12,8 @@ import com.facundolinlaud.supergame.components.player.BagComponent;
 import com.facundolinlaud.supergame.components.player.KeyboardComponent;
 import com.facundolinlaud.supergame.components.player.WearComponent;
 import com.facundolinlaud.supergame.managers.ResourceManager;
+import com.facundolinlaud.supergame.refactorno.SpriteComponent;
+import com.facundolinlaud.supergame.refactorno.SpriteStackableComponent;
 import com.facundolinlaud.supergame.utils.RenderPriority;
 import com.facundolinlaud.supergame.utils.WearType;
 import com.facundolinlaud.supergame.utils.strategy.impl.SpriteRenderPositionStrategyImpl;

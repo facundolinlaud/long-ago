@@ -1,4 +1,4 @@
-package com.facundolinlaud.supergame.components;
+package com.facundolinlaud.supergame.refactorno;
 
 import com.badlogic.ashley.core.Component;
 import com.badlogic.gdx.graphics.Texture;

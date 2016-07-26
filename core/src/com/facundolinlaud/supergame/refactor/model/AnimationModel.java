@@ -1,5 +1,7 @@
 package com.facundolinlaud.supergame.refactor.model;
 
+import com.facundolinlaud.supergame.refactor.Status;
+
 import java.util.Map;
 
 /**
@@ -9,11 +11,11 @@ public class AnimationModel {
     private String imagePath;
     private int width, height;
     private float frameDuration;
-    private Map<String, Map<String, SubAnimationModel>> subanimations;
+    private Map<Status, SubAnimationModel> subanimations;
 
     public AnimationModel() {}
 
-    public AnimationModel(String imagePath, int width, int height, float frameDuration, Map<String, Map<String, SubAnimationModel>> subanimations) {
+    public AnimationModel(String imagePath, int width, int height, float frameDuration, Map<Status, SubAnimationModel> subanimations) {
         this.imagePath = imagePath;
         this.width = width;
         this.height = height;
@@ -33,7 +35,7 @@ public class AnimationModel {
         this.height = height;
     }
 
-    public void setSubanimations(Map<String, Map<String, SubAnimationModel>> subanimations) {
+    public void setSubanimations(Map<Status, SubAnimationModel> subanimations) {
         this.subanimations = subanimations;
     }
 
@@ -53,7 +55,7 @@ public class AnimationModel {
         return height;
     }
 
-    public Map<String, Map<String, SubAnimationModel>> getSubanimations() {
+    public Map<Status, SubAnimationModel> getSubanimations() {
         return subanimations;
     }
 

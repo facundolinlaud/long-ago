@@ -2,51 +2,40 @@
 	"imagePath": "skeleton.png",
 	"width": 60,
 	"height": 60,
+	"frameDuration": 0.15,
 	"subanimations": {
-		"up": {
-			"standing": {
-				"x": 0,
-				"y": 8,
-				"length": 1
-			},
-			"walking": {
-				"x": 1,
-				"y": 8,
-				"length": 8
-			}
-		}, "left": {
-			"standing": {
-				"x": 0,
-				"y": 9,
-				"length": 1
-			},
-			"walking": {
-				"x": 1,
-				"y": 9,
-				"length": 8
-			}
-		}, "right": {
-			"standing": {
-				"x": 0,
-				"y": 10,
-				"length": 1
-			},
-			"walking": {
-				"x": 1,
-				"y": 10,
-				"length": 8
-			}
-		}, "down": {
-			"standing": {
-				"x": 0,
-				"y": 11,
-				"length": 1
-			},
-			"walking": {
-				"x": 1,
-				"y": 11,
-				"length": 8
-			}
+		"STANDING_UP": {
+			"x": 0,
+			"y": 8,
+			"length": 1
+		}, "WALKING_UP": {
+			"x": 1,
+			"y": 8,
+			"length": 8
+		}, "STANDING_LEFT": {
+			"x": 0,
+			"y": 9,
+			"length": 1
+		}, "WALKING_LEFT": {
+			"x": 1,
+			"y": 9,
+			"length": 8
+		}, "STANDING_RIGHT": {
+			"x": 0,
+			"y": 10,
+			"length": 1
+		}, "WALKING_RIGHT": {
+			"x": 1,
+			"y": 10,
+			"length": 8
+		}, "STANDING_DOWN": {
+			"x": 0,
+			"y": 11,
+			"length": 1
+		}, "WALKING_DOWN": {
+			"x": 1,
+			"y": 11,
+			"length": 8
 		}
 	}
 }

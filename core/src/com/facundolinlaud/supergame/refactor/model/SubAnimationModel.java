@@ -27,6 +27,18 @@ public class SubAnimationModel {
         this.length = length;
     }
 
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public int getLength() {
+        return length;
+    }
+
     @Override
     public String toString() {
         return "SubAnimationModel{" +

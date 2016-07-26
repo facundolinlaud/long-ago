@@ -1,10 +1,9 @@
-package com.facundolinlaud.supergame.components;
+package com.facundolinlaud.supergame.refactorno;
 
 import com.badlogic.ashley.core.Component;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.facundolinlaud.supergame.refactor.model.AnimationModel;
-import com.facundolinlaud.supergame.utils.AnimationType;
 
 import java.util.Map;
 

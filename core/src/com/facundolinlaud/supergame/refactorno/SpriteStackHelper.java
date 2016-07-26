@@ -1,4 +1,4 @@
-package com.facundolinlaud.supergame.utils;
+package com.facundolinlaud.supergame.refactorno;
 
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import com.facundolinlaud.supergame.refactor.model.AnimationModel;
+import com.facundolinlaud.supergame.refactorno.AnimationType;
 
 import java.util.ArrayList;
 import java.util.HashMap;

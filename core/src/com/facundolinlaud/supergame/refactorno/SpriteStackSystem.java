@@ -1,4 +1,4 @@
-package com.facundolinlaud.supergame.systems;
+package com.facundolinlaud.supergame.refactorno;
 
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Engine;
@@ -6,11 +6,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.graphics.Texture;
-import com.facundolinlaud.supergame.components.AnimationComponent;
-import com.facundolinlaud.supergame.components.SpriteComponent;
-import com.facundolinlaud.supergame.components.SpriteStackableComponent;
 import com.facundolinlaud.supergame.components.player.WearComponent;
-import com.facundolinlaud.supergame.utils.SpriteStackHelper;
 import com.facundolinlaud.supergame.utils.Mappers;
 
 import java.util.List;
