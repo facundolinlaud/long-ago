@@ -18,8 +18,11 @@ import com.facundolinlaud.supergame.model.RenderPriority;
 import com.facundolinlaud.supergame.model.WearType;
 import com.facundolinlaud.supergame.utils.strategy.impl.SpriteRenderPositionStrategyImpl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Created by facundo on 27/7/16.
@@ -42,7 +45,7 @@ public class PlayerFactory {
                 .add(new StackedSpritesComponent(ModelFactory.getDefaultAnimationModel()))
                 .add(new RefreshSpriteRequirementComponent())
                 .add(new HealthComponent())
-                .add(new BagComponent())
+                .add(new BagComponent(createItems(playerModel.getInventory())))
                 .add(new AttributesComponent());
 
         return entity;
@@ -63,6 +66,10 @@ public class PlayerFactory {
         }
 
         return wearables;
+    }
+
+    private static List<Entity> createItems(List<ItemModel> itemsModels){
+        return itemsModels.stream().map(e -> createItemEntity(e)).collect(Collectors.toList());
     }
 
     private static Entity createItemEntity(ItemModel itemModel){
