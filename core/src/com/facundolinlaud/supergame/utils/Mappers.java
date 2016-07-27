@@ -7,10 +7,10 @@ import com.facundolinlaud.supergame.components.items.ItemComponent;
 import com.facundolinlaud.supergame.components.player.BagComponent;
 import com.facundolinlaud.supergame.components.player.KeyboardComponent;
 import com.facundolinlaud.supergame.components.player.WearComponent;
-import com.facundolinlaud.supergame.refactor.AnimableSpriteComponent;
-import com.facundolinlaud.supergame.refactor.StackableSpriteComponent;
-import com.facundolinlaud.supergame.refactor.StackedSpritesComponent;
-import com.facundolinlaud.supergame.refactor.StatusComponent;
+import com.facundolinlaud.supergame.components.sprite.AnimableSpriteComponent;
+import com.facundolinlaud.supergame.components.sprite.StackableSpriteComponent;
+import com.facundolinlaud.supergame.components.sprite.StackedSpritesComponent;
+import com.facundolinlaud.supergame.components.StatusComponent;
 
 /**
  * Created by facundo on 3/17/16.

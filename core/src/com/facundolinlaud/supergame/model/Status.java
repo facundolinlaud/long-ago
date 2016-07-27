@@ -1,4 +1,4 @@
-package com.facundolinlaud.supergame.refactor;
+package com.facundolinlaud.supergame.model;
 
 /**
  * Created by facundo on 26/7/16.

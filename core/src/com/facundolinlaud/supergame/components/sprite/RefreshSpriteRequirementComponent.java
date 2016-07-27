@@ -1,4 +1,4 @@
-package com.facundolinlaud.supergame.refactor;
+package com.facundolinlaud.supergame.components.sprite;
 
 import com.badlogic.ashley.core.Component;
 

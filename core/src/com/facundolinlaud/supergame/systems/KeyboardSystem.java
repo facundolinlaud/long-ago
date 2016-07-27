@@ -5,9 +5,9 @@ import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.facundolinlaud.supergame.components.player.KeyboardComponent;
-import com.facundolinlaud.supergame.refactor.Action;
-import com.facundolinlaud.supergame.refactor.Direction;
-import com.facundolinlaud.supergame.refactor.StatusComponent;
+import com.facundolinlaud.supergame.model.Action;
+import com.facundolinlaud.supergame.model.Direction;
+import com.facundolinlaud.supergame.components.StatusComponent;
 import com.facundolinlaud.supergame.utils.Mappers;
 
 /**

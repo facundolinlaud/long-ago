@@ -2,7 +2,7 @@ package com.facundolinlaud.supergame.components.player;
 
 import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.Entity;
-import com.facundolinlaud.supergame.utils.WearType;
+import com.facundolinlaud.supergame.model.WearType;
 
 import java.util.HashMap;
 import java.util.List;

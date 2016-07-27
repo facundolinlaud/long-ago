@@ -1,6 +1,6 @@
 package com.facundolinlaud.supergame.ui.model.equipment;
 
-import com.facundolinlaud.supergame.utils.WearType;
+import com.facundolinlaud.supergame.model.WearType;
 
 /**
  * Created by facundo on 4/2/16.

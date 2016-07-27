@@ -4,7 +4,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.facundolinlaud.supergame.ui.model.Item;
 import com.facundolinlaud.supergame.ui.view.cross.Slot;
-import com.facundolinlaud.supergame.utils.WearType;
+import com.facundolinlaud.supergame.model.WearType;
 
 /**
  * Created by facundo on 4/2/16.

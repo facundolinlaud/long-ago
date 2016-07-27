@@ -1,6 +1,6 @@
-package com.facundolinlaud.supergame.refactor.model;
+package com.facundolinlaud.supergame.model.sprite;
 
-import com.facundolinlaud.supergame.refactor.Status;
+import com.facundolinlaud.supergame.model.Status;
 
 import java.util.Map;
 

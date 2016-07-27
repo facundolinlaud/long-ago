@@ -1,4 +1,4 @@
-package com.facundolinlaud.supergame.refactor;
+package com.facundolinlaud.supergame.systems.sprite;
 
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
@@ -6,6 +6,9 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.facundolinlaud.supergame.components.RenderComponent;
+import com.facundolinlaud.supergame.components.StatusComponent;
+import com.facundolinlaud.supergame.components.sprite.AnimableSpriteComponent;
+import com.facundolinlaud.supergame.model.Status;
 import com.facundolinlaud.supergame.utils.Mappers;
 
 /**

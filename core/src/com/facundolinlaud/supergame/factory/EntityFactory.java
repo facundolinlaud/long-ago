@@ -1,7 +1,6 @@
 package com.facundolinlaud.supergame.factory;
 
 import com.badlogic.ashley.core.Entity;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.facundolinlaud.supergame.components.*;
@@ -11,11 +10,13 @@ import com.facundolinlaud.supergame.components.items.PickupableComponent;
 import com.facundolinlaud.supergame.components.player.BagComponent;
 import com.facundolinlaud.supergame.components.player.KeyboardComponent;
 import com.facundolinlaud.supergame.components.player.WearComponent;
+import com.facundolinlaud.supergame.components.sprite.AnimableSpriteComponent;
+import com.facundolinlaud.supergame.components.sprite.RefreshSpriteRequirementComponent;
+import com.facundolinlaud.supergame.components.sprite.StackableSpriteComponent;
+import com.facundolinlaud.supergame.components.sprite.StackedSpritesComponent;
 import com.facundolinlaud.supergame.managers.ResourceManager;
-import com.facundolinlaud.supergame.refactor.*;
-import com.facundolinlaud.supergame.refactor.factory.AnimationFactory;
-import com.facundolinlaud.supergame.utils.RenderPriority;
-import com.facundolinlaud.supergame.utils.WearType;
+import com.facundolinlaud.supergame.model.RenderPriority;
+import com.facundolinlaud.supergame.model.WearType;
 import com.facundolinlaud.supergame.utils.strategy.impl.SpriteRenderPositionStrategyImpl;
 
 import java.util.HashMap;

@@ -10,9 +10,9 @@ import com.facundolinlaud.supergame.listeners.PhysicsEntitiesListener;
 import com.facundolinlaud.supergame.managers.world.MapManager;
 import com.facundolinlaud.supergame.managers.world.PhysicsManager;
 import com.facundolinlaud.supergame.managers.world.UIManager;
-import com.facundolinlaud.supergame.refactor.AnimableSpriteSystem;
-import com.facundolinlaud.supergame.refactor.StackableSpriteSystem;
-import com.facundolinlaud.supergame.refactor.StackedSpritesSystem;
+import com.facundolinlaud.supergame.systems.sprite.AnimableSpriteSystem;
+import com.facundolinlaud.supergame.systems.sprite.StackableSpriteSystem;
+import com.facundolinlaud.supergame.systems.sprite.StackedSpritesSystem;
 import com.facundolinlaud.supergame.systems.*;
 
 // * ver si la animacion la puedo encarar por el lado de getLinearVelocity

@@ -2,7 +2,7 @@ package com.facundolinlaud.supergame.ui.controller.impl;
 
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
-import com.facundolinlaud.supergame.refactor.RefreshSpriteRequirementComponent;
+import com.facundolinlaud.supergame.components.sprite.RefreshSpriteRequirementComponent;
 import com.facundolinlaud.supergame.components.items.EquipableComponent;
 import com.facundolinlaud.supergame.components.items.ItemComponent;
 import com.facundolinlaud.supergame.components.player.BagComponent;
@@ -12,7 +12,7 @@ import com.facundolinlaud.supergame.ui.model.Item;
 import com.facundolinlaud.supergame.ui.model.equipment.Equipable;
 import com.facundolinlaud.supergame.ui.view.EquipmentUI;
 import com.facundolinlaud.supergame.utils.Mappers;
-import com.facundolinlaud.supergame.utils.WearType;
+import com.facundolinlaud.supergame.model.WearType;
 import com.facundolinlaud.supergame.utils.events.EquipItemEvent;
 import com.facundolinlaud.supergame.utils.events.Event;
 import com.facundolinlaud.supergame.utils.events.UnequipItemEvent;

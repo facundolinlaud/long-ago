@@ -7,8 +7,7 @@ import com.badlogic.gdx.utils.Align;
 import com.facundolinlaud.supergame.ui.model.Item;
 import com.facundolinlaud.supergame.ui.view.cross.SlotSource;
 import com.facundolinlaud.supergame.ui.view.cross.SlotType;
-import com.facundolinlaud.supergame.ui.view.inventory.InventorySlotTarget;
-import com.facundolinlaud.supergame.utils.WearType;
+import com.facundolinlaud.supergame.model.WearType;
 import com.facundolinlaud.supergame.utils.mediator.Mediator;
 
 import java.util.HashMap;

@@ -1,7 +1,7 @@
 package com.facundolinlaud.supergame.components.items;
 
 import com.badlogic.ashley.core.Component;
-import com.facundolinlaud.supergame.utils.WearType;
+import com.facundolinlaud.supergame.model.WearType;
 
 /**
  * Created by facundo on 3/31/16.

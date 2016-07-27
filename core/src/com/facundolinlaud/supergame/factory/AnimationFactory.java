@@ -1,7 +1,7 @@
-package com.facundolinlaud.supergame.refactor.factory;
+package com.facundolinlaud.supergame.factory;
 
 import com.badlogic.gdx.Gdx;
-import com.facundolinlaud.supergame.refactor.model.AnimationModel;
+import com.facundolinlaud.supergame.model.sprite.AnimationModel;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;

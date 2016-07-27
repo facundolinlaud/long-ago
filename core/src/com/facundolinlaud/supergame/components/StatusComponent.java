@@ -1,6 +1,8 @@
-package com.facundolinlaud.supergame.refactor;
+package com.facundolinlaud.supergame.components;
 
 import com.badlogic.ashley.core.Component;
+import com.facundolinlaud.supergame.model.Action;
+import com.facundolinlaud.supergame.model.Direction;
 
 /**
  * Created by facundo on 26/7/16.
