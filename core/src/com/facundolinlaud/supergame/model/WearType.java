@@ -5,15 +5,16 @@ package com.facundolinlaud.supergame.model;
  */
 public enum WearType {
     BODY(0, false, false),
-    HAIR(1, false, false),
-    EYES(2, false, false),
-    HELMET(3, false, true),
-    PANTS(4, false, true),
-    CHEST(5, false, true),
-    GLOVES(6, false, true),
-    SHOES(7, false, true),
-    WEAPON(8, true, false),
-    SHIELD(9, false, true);
+    HAIR_BASE(1, false, false),
+    HAIR_COLOR(2, false, false),
+    EYES(3, false, false),
+    HELMET(4, false, true),
+    PANTS(5, false, true),
+    CHEST(6, false, true),
+    GLOVES(7, false, true),
+    SHOES(8, false, true),
+    WEAPON(9, true, false),
+    SHIELD(10, false, true);
 
     private int renderPriority;
     private boolean hasAttackComponent;

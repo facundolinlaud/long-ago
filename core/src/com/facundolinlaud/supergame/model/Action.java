@@ -9,6 +9,7 @@ public enum Action {
     BLOCKING("BLOCKING"),
     WALKING("WALKING"),
     SWINGING("SWINGING"),
+    DASHING("DASHING"),
     SHOOTING("SHOOTING"),
     FALLING("FALLING");
 

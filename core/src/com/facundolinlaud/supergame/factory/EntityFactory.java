@@ -36,6 +36,8 @@ public class EntityFactory {
     public static final String PATH_TO_MAIL_SPRITE = "sprites/items/armor/mail.png";
     public static final String PATH_TO_METAL_BOOTS_SPRITE = "sprites/items/boots/metal_boots.png";
     public static final String PATH_TO_SPEAR_SPRITE = "sprites/items/weapon/spear.png";
+    public static final String PATH_TO_PLAYER_HAIR_BASE_SPRITE = "sprites/living/hair/long.png";
+    public static final String PATH_TO_PLAYER_HAIR_COLOR_SPRITE = "sprites/living/hair/long/blonde.png";
 
     public Entity createPlayerWithBody(Body body){
         return new Entity()
@@ -60,6 +62,12 @@ public class EntityFactory {
 
         Entity body = new Entity().add(new StackableSpriteComponent(ResourceManager.getTexture(PATH_TO_PLAYER_SPRITE)));
         wearables.put(WearType.BODY, body);
+
+        Entity hairBase = new Entity().add(new StackableSpriteComponent(ResourceManager.getTexture(PATH_TO_PLAYER_HAIR_BASE_SPRITE)));
+        wearables.put(WearType.HAIR_BASE, hairBase);
+
+        Entity hairColor = new Entity().add(new StackableSpriteComponent(ResourceManager.getTexture(PATH_TO_PLAYER_HAIR_COLOR_SPRITE)));
+        wearables.put(WearType.HAIR_COLOR, hairColor);
 
         addEquipable(wearables, WearType.CHEST, "Mail armor", PATH_TO_MAIL_SPRITE, PATH_TO_MAIL_PICTURE);
         addEquipable(wearables, WearType.SHOES, "Plate boots", PATH_TO_METAL_BOOTS_SPRITE, PATH_TO_METAL_BOOTS_PICTURE);
