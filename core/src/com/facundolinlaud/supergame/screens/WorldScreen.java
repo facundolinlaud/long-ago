@@ -2,20 +2,19 @@ package com.facundolinlaud.supergame.screens;
 
 import com.badlogic.ashley.core.Family;
 import com.badlogic.gdx.Screen;
+import com.facundolinlaud.supergame.aaaaaaa.DynamicEntityFactory;
+import com.facundolinlaud.supergame.aaaaaaa.ItemFactory;
+import com.facundolinlaud.supergame.aaaaaaa.PhysicsFactory;
 import com.facundolinlaud.supergame.components.BodyComponent;
 import com.facundolinlaud.supergame.engine.GameResources;
-import com.facundolinlaud.supergame.factory.BodyFactory;
-import com.facundolinlaud.supergame.factory.EntityFactory;
 import com.facundolinlaud.supergame.listeners.PhysicsEntitiesListener;
 import com.facundolinlaud.supergame.managers.world.MapManager;
 import com.facundolinlaud.supergame.managers.world.PhysicsManager;
 import com.facundolinlaud.supergame.managers.world.UIManager;
+import com.facundolinlaud.supergame.systems.*;
 import com.facundolinlaud.supergame.systems.sprite.AnimableSpriteSystem;
 import com.facundolinlaud.supergame.systems.sprite.StackableSpriteSystem;
 import com.facundolinlaud.supergame.systems.sprite.StackedSpritesSystem;
-import com.facundolinlaud.supergame.systems.*;
-
-// * ver si la animacion la puedo encarar por el lado de getLinearVelocity
 
 /**
  * Created by facundo on 3/18/16.
@@ -27,8 +26,7 @@ public class WorldScreen implements Screen {
     private PhysicsManager physicsManager;
     private UIManager uiManager;
 
-    private BodyFactory bodyFactory;
-    private EntityFactory entityFactory;
+    private PhysicsFactory physicsFactory;
 
     public WorldScreen(GameResources res) {
         this.res = res;
@@ -36,8 +34,7 @@ public class WorldScreen implements Screen {
         mapManager = new MapManager(res.batch);
         physicsManager = new PhysicsManager(mapManager.getCamera(), mapManager.getMap());
         uiManager = new UIManager();
-        bodyFactory = new BodyFactory(physicsManager.getWorld());
-        entityFactory = new EntityFactory();
+        physicsFactory = PhysicsFactory.get();
 
         initializeListeners();
         initializeEntities();
@@ -49,14 +46,14 @@ public class WorldScreen implements Screen {
     }
 
     private void initializeEntities(){
-        res.engine.addEntity(entityFactory.createPlayerWithBody(bodyFactory.createPlayer()));
+        res.engine.addEntity(DynamicEntityFactory.getPlayerEntity());
 
         for(float i = 0; i < 8; i++){
-            res.engine.addEntity(entityFactory.createCoinsItemWithBody(bodyFactory.createItem()));
+            res.engine.addEntity(ItemFactory.createCoins());
         }
 
         for(float i = 0; i < 4; i++){
-            res.engine.addEntity(entityFactory.createWordItemWithBody(bodyFactory.createItem()));
+            res.engine.addEntity(ItemFactory.createSword());
         }
     }
 

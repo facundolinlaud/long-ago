@@ -10,7 +10,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
-import com.facundolinlaud.supergame.factory.BodyFactory;
+import com.facundolinlaud.supergame.aaaaaaa.PhysicsFactory;
 import com.facundolinlaud.supergame.managers.Manager;
 import com.facundolinlaud.supergame.utils.Dimensions;
 
@@ -26,7 +26,7 @@ public class PhysicsManager implements Manager {
     private TiledMap map;
 
     private World world;
-    private BodyFactory bodyFactory;
+    private PhysicsFactory physicsFactory;
     private Box2DDebugRenderer physicsDebugRenderer;
 
     public PhysicsManager(Camera camera, TiledMap map) {
@@ -41,7 +41,8 @@ public class PhysicsManager implements Manager {
         boolean doSleep = true;
         world = new World(new Vector2(0, 0), doSleep);
         physicsDebugRenderer = new Box2DDebugRenderer();
-        bodyFactory = new BodyFactory(world);
+        physicsFactory = PhysicsFactory.get();
+        physicsFactory.setWorld(world);
     }
 
     private void populateObstacles(){
@@ -59,7 +60,7 @@ public class PhysicsManager implements Manager {
             float x = (rectangle.getX() / Dimensions.ONE_METER_IN_PIXELS) + width / 2;
             float y = (rectangle.getY() / Dimensions.ONE_METER_IN_PIXELS) + height / 2;
 
-            bodyFactory.createObstacle(x, y, width, height);
+            physicsFactory.createObstacleBody(x, y, width, height);
         }
     }
 

@@ -1,0 +1,36 @@
+{
+	"x": 20,
+	"y": 50,
+	"velocity": 1.9,
+	"body": {
+		"BODY": "sprites/living/body/light.png",
+		"HAIR_BASE": "sprites/living/hair/long.png",
+		"HAIR_COLOR": "sprites/living/hair/long/blonde.png"
+	},
+	"equipment": {
+		"CHEST": {
+			"name": "Mail armor",
+			"texture": "sprites/items/armor/mail.png",
+			"picture": "pictures/items/armor/chain.png",
+			"equipable": true,
+			"wearType": "CHEST"
+		}, "SHOES": {
+			"name": "Metal shoes",
+			"texture": "sprites/items/boots/metal_boots.png",
+			"picture": "pictures/items/boots/metal_boots.png",
+			"equipable": true,
+			"wearType": "SHOES"
+		}, "WEAPON": {
+			"name": "Mail armor",
+			"texture": "sprites/items/weapon/spear.png",
+			"picture": "pictures/items/weapon/spear.png",
+			"equipable": true,
+			"wearType": "WEAPON"
+		}
+	},
+	"inventory": [{
+		"name": "Spear",
+		"texture": "sprites/items/weapon/spear.png",
+		"picture": "pictures/items/weapon/spear.png"
+	}]
+}

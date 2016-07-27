@@ -3,21 +3,14 @@ package com.facundolinlaud.supergame.factory;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.facundolinlaud.supergame.aaaaaaa.DynamicEntityFactory;
 import com.facundolinlaud.supergame.components.*;
 import com.facundolinlaud.supergame.components.items.EquipableComponent;
 import com.facundolinlaud.supergame.components.items.ItemComponent;
 import com.facundolinlaud.supergame.components.items.PickupableComponent;
-import com.facundolinlaud.supergame.components.player.BagComponent;
-import com.facundolinlaud.supergame.components.player.KeyboardComponent;
-import com.facundolinlaud.supergame.components.player.WearComponent;
-import com.facundolinlaud.supergame.components.sprite.AnimableSpriteComponent;
-import com.facundolinlaud.supergame.components.sprite.RefreshSpriteRequirementComponent;
 import com.facundolinlaud.supergame.components.sprite.StackableSpriteComponent;
-import com.facundolinlaud.supergame.components.sprite.StackedSpritesComponent;
-import com.facundolinlaud.supergame.managers.ResourceManager;
 import com.facundolinlaud.supergame.model.RenderPriority;
 import com.facundolinlaud.supergame.model.WearType;
-import com.facundolinlaud.supergame.utils.strategy.impl.SpriteRenderPositionStrategyImpl;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -39,34 +32,34 @@ public class EntityFactory {
     public static final String PATH_TO_PLAYER_HAIR_BASE_SPRITE = "sprites/living/hair/long.png";
     public static final String PATH_TO_PLAYER_HAIR_COLOR_SPRITE = "sprites/living/hair/long/blonde.png";
 
-    public Entity createPlayerWithBody(Body body){
-        return new Entity()
-                .add(new PositionComponent(20, 50))
-                .add(new KeyboardComponent())
-                .add(new VelocityComponent(1.9f))
-                .add(new BodyComponent(body))
-                .add(new WearComponent(createWearables()))
-                .add(new RenderComponent(new SpriteRenderPositionStrategyImpl()))
-                .add(new StatusComponent())
-                .add(new AnimableSpriteComponent())
-                .add(new StackedSpritesComponent(AnimationFactory.getDefaultModel()))
-                .add(new RefreshSpriteRequirementComponent())
-
-                .add(new HealthComponent())
-                .add(new BagComponent())
-                .add(new AttributesComponent());
+    public Entity createPlayerWithBody(){
+        return DynamicEntityFactory.getPlayerEntity();
+//        return new Entity()
+//                .add(new PositionComponent(20, 50))
+//                .add(new KeyboardComponent())
+//                .add(new VelocityComponent(1.9f))
+//                .add(new BodyComponent(body))
+//                .add(new WearComponent(createWearables()))
+//                .add(new RenderComponent(new SpriteRenderPositionStrategyImpl()))
+//                .add(new StatusComponent())
+//                .add(new AnimableSpriteComponent())
+//                .add(new StackedSpritesComponent(AnimationFactory.getDefaultModel()))
+//                .add(new RefreshSpriteRequirementComponent())
+//                .add(new HealthComponent())
+//                .add(new BagComponent())
+//                .add(new AttributesComponent());
     }
 
     private Map<WearType, Entity> createWearables() {
         HashMap<WearType, Entity> wearables = new HashMap<>();
 
-        Entity body = new Entity().add(new StackableSpriteComponent(ResourceManager.getTexture(PATH_TO_PLAYER_SPRITE)));
+        Entity body = new Entity().add(new StackableSpriteComponent(TextureFactory.getTexture(PATH_TO_PLAYER_SPRITE)));
         wearables.put(WearType.BODY, body);
 
-        Entity hairBase = new Entity().add(new StackableSpriteComponent(ResourceManager.getTexture(PATH_TO_PLAYER_HAIR_BASE_SPRITE)));
+        Entity hairBase = new Entity().add(new StackableSpriteComponent(TextureFactory.getTexture(PATH_TO_PLAYER_HAIR_BASE_SPRITE)));
         wearables.put(WearType.HAIR_BASE, hairBase);
 
-        Entity hairColor = new Entity().add(new StackableSpriteComponent(ResourceManager.getTexture(PATH_TO_PLAYER_HAIR_COLOR_SPRITE)));
+        Entity hairColor = new Entity().add(new StackableSpriteComponent(TextureFactory.getTexture(PATH_TO_PLAYER_HAIR_COLOR_SPRITE)));
         wearables.put(WearType.HAIR_COLOR, hairColor);
 
         addEquipable(wearables, WearType.CHEST, "Mail armor", PATH_TO_MAIL_SPRITE, PATH_TO_MAIL_PICTURE);
@@ -80,16 +73,16 @@ public class EntityFactory {
         wearables.put(wearType, new Entity()
                 .add(new EquipableComponent(wearType, 4, 5))
                 .add(new ItemComponent(name, picture))
-                .add(new StackableSpriteComponent(ResourceManager.getTexture(texturePath)))
-                .add(new RenderComponent(new TextureRegion(ResourceManager.getTexture(picture)), new RenderPriority(1))));
+                .add(new StackableSpriteComponent(TextureFactory.getTexture(texturePath)))
+                .add(new RenderComponent(new TextureRegion(TextureFactory.getTexture(picture)), new RenderPriority(1))));
     }
 
     private Entity createBaseItemEntity(String texturePath, int x, int y){
         return new Entity()
                 .add(new PositionComponent(x, y))
-                .add(new RenderComponent(new TextureRegion(ResourceManager.getTexture(texturePath)), new RenderPriority(1)))
+                .add(new RenderComponent(new TextureRegion(TextureFactory.getTexture(texturePath)), new RenderPriority(1)))
                 .add(new PickupableComponent())
-                .add(new ItemComponent(ResourceManager.getTexture(texturePath)));
+                .add(new ItemComponent(TextureFactory.getTexture(texturePath)));
     }
 
     public Entity createCoinsItemWithBody(Body body) {

@@ -1,13 +1,15 @@
-package com.facundolinlaud.supergame.managers;
+package com.facundolinlaud.supergame.factory;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.facundolinlaud.supergame.aaaaaaa.Dumpable;
+
 import java.lang.ref.SoftReference;
 import java.util.HashMap;
 
 /**
  * Created by facundo on 7/26/16.
  */
-public class ResourceManager {
+public class TextureFactory implements Dumpable {
     /** image cache */
     private static HashMap<String, SoftReference<Texture>> textures = new HashMap<>();
 
@@ -32,5 +34,10 @@ public class ResourceManager {
                 return getTexture(imageName);
             }
         }
+    }
+
+    @Override
+    public void dump() {
+        textures.clear();
     }
 }
