@@ -1,9 +1,9 @@
-package com.facundolinlaud.supergame.aaaaaaa;
+package com.facundolinlaud.supergame.factory;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.facundolinlaud.supergame.aaaaaaa.model.ItemModel;
-import com.facundolinlaud.supergame.aaaaaaa.model.PlayerModel;
+import com.facundolinlaud.supergame.model.entity.ItemModel;
+import com.facundolinlaud.supergame.model.entity.PlayerModel;
 import com.facundolinlaud.supergame.components.*;
 import com.facundolinlaud.supergame.components.items.EquipableComponent;
 import com.facundolinlaud.supergame.components.items.ItemComponent;
@@ -14,7 +14,6 @@ import com.facundolinlaud.supergame.components.sprite.AnimableSpriteComponent;
 import com.facundolinlaud.supergame.components.sprite.RefreshSpriteRequirementComponent;
 import com.facundolinlaud.supergame.components.sprite.StackableSpriteComponent;
 import com.facundolinlaud.supergame.components.sprite.StackedSpritesComponent;
-import com.facundolinlaud.supergame.factory.TextureFactory;
 import com.facundolinlaud.supergame.model.RenderPriority;
 import com.facundolinlaud.supergame.model.WearType;
 import com.facundolinlaud.supergame.utils.strategy.impl.SpriteRenderPositionStrategyImpl;
@@ -25,7 +24,7 @@ import java.util.Map;
 /**
  * Created by facundo on 27/7/16.
  */
-public class DynamicEntityFactory {
+public class PlayerFactory {
     public static Entity getPlayerEntity(){
         return createPlayer(ModelFactory.getPlayerModel());
     }

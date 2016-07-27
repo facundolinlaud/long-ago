@@ -1,4 +1,4 @@
-package com.facundolinlaud.supergame.aaaaaaa;
+package com.facundolinlaud.supergame.factory;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -7,7 +7,6 @@ import com.facundolinlaud.supergame.components.PositionComponent;
 import com.facundolinlaud.supergame.components.RenderComponent;
 import com.facundolinlaud.supergame.components.items.ItemComponent;
 import com.facundolinlaud.supergame.components.items.PickupableComponent;
-import com.facundolinlaud.supergame.factory.TextureFactory;
 import com.facundolinlaud.supergame.model.RenderPriority;
 
 /**

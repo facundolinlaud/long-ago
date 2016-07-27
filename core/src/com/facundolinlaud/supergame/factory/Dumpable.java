@@ -1,4 +1,4 @@
-package com.facundolinlaud.supergame.aaaaaaa;
+package com.facundolinlaud.supergame.factory;
 
 /**
  * Created by facundo on 27/7/16.

@@ -2,9 +2,9 @@ package com.facundolinlaud.supergame.screens;
 
 import com.badlogic.ashley.core.Family;
 import com.badlogic.gdx.Screen;
-import com.facundolinlaud.supergame.aaaaaaa.DynamicEntityFactory;
-import com.facundolinlaud.supergame.aaaaaaa.ItemFactory;
-import com.facundolinlaud.supergame.aaaaaaa.PhysicsFactory;
+import com.facundolinlaud.supergame.factory.PlayerFactory;
+import com.facundolinlaud.supergame.factory.ItemFactory;
+import com.facundolinlaud.supergame.factory.PhysicsFactory;
 import com.facundolinlaud.supergame.components.BodyComponent;
 import com.facundolinlaud.supergame.engine.GameResources;
 import com.facundolinlaud.supergame.listeners.PhysicsEntitiesListener;
@@ -46,7 +46,7 @@ public class WorldScreen implements Screen {
     }
 
     private void initializeEntities(){
-        res.engine.addEntity(DynamicEntityFactory.getPlayerEntity());
+        res.engine.addEntity(PlayerFactory.getPlayerEntity());
 
         for(float i = 0; i < 8; i++){
             res.engine.addEntity(ItemFactory.createCoins());

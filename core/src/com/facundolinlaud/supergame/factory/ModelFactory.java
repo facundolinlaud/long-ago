@@ -1,7 +1,7 @@
-package com.facundolinlaud.supergame.aaaaaaa;
+package com.facundolinlaud.supergame.factory;
 
 import com.badlogic.gdx.Gdx;
-import com.facundolinlaud.supergame.aaaaaaa.model.PlayerModel;
+import com.facundolinlaud.supergame.model.entity.PlayerModel;
 import com.facundolinlaud.supergame.model.sprite.AnimationModel;
 import com.fasterxml.jackson.databind.ObjectMapper;
 

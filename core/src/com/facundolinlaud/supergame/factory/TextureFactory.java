@@ -1,7 +1,6 @@
 package com.facundolinlaud.supergame.factory;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.facundolinlaud.supergame.aaaaaaa.Dumpable;
 
 import java.lang.ref.SoftReference;
 import java.util.HashMap;

@@ -1,4 +1,4 @@
-package com.facundolinlaud.supergame.aaaaaaa.model;
+package com.facundolinlaud.supergame.model.entity;
 
 import com.facundolinlaud.supergame.model.WearType;
 

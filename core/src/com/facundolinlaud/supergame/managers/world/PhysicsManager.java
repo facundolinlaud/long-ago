@@ -10,7 +10,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
-import com.facundolinlaud.supergame.aaaaaaa.PhysicsFactory;
+import com.facundolinlaud.supergame.factory.PhysicsFactory;
 import com.facundolinlaud.supergame.managers.Manager;
 import com.facundolinlaud.supergame.utils.Dimensions;
 
