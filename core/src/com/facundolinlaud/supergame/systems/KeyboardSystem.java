@@ -4,13 +4,10 @@ import com.badlogic.ashley.core.*;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.math.Vector2;
+import com.facundolinlaud.supergame.components.player.KeyboardComponent;
 import com.facundolinlaud.supergame.refactor.Action;
 import com.facundolinlaud.supergame.refactor.Direction;
 import com.facundolinlaud.supergame.refactor.StatusComponent;
-import com.facundolinlaud.supergame.refactorno.InputComponent;
-import com.facundolinlaud.supergame.components.player.KeyboardComponent;
-import com.facundolinlaud.supergame.refactorno.InputType;
 import com.facundolinlaud.supergame.utils.Mappers;
 
 /**
@@ -47,10 +44,10 @@ public class KeyboardSystem extends EntitySystem {
     }
 
     private Direction resolveDirection(){
-        boolean W = Gdx.input.isKeyJustPressed(Input.Keys.W);
-        boolean A = Gdx.input.isKeyJustPressed(Input.Keys.A);
-        boolean S = Gdx.input.isKeyJustPressed(Input.Keys.S);
-        boolean D = Gdx.input.isKeyJustPressed(Input.Keys.D);
+        boolean W = Gdx.input.isKeyPressed(Input.Keys.W);
+        boolean A = Gdx.input.isKeyPressed(Input.Keys.A);
+        boolean S = Gdx.input.isKeyPressed(Input.Keys.S);
+        boolean D = Gdx.input.isKeyPressed(Input.Keys.D);
 
         if(A)
             return Direction.LEFT;

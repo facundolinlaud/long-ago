@@ -10,8 +10,9 @@ import com.facundolinlaud.supergame.listeners.PhysicsEntitiesListener;
 import com.facundolinlaud.supergame.managers.world.MapManager;
 import com.facundolinlaud.supergame.managers.world.PhysicsManager;
 import com.facundolinlaud.supergame.managers.world.UIManager;
-import com.facundolinlaud.supergame.refactorno.AnimationSystem;
-import com.facundolinlaud.supergame.refactorno.SpriteStackSystem;
+import com.facundolinlaud.supergame.refactor.AnimableSpriteSystem;
+import com.facundolinlaud.supergame.refactor.StackableSpriteSystem;
+import com.facundolinlaud.supergame.refactor.StackedSpritesSystem;
 import com.facundolinlaud.supergame.systems.*;
 
 // * ver si la animacion la puedo encarar por el lado de getLinearVelocity
@@ -60,8 +61,9 @@ public class WorldScreen implements Screen {
     }
 
     private void initializeSystems() {
-        res.engine.addSystem(new SpriteStackSystem());
-        res.engine.addSystem(new AnimationSystem());
+        res.engine.addSystem(new StackableSpriteSystem());
+        res.engine.addSystem(new StackedSpritesSystem());
+        res.engine.addSystem(new AnimableSpriteSystem());
         res.engine.addSystem(new KeyboardSystem());
         res.engine.addSystem(new MovementSystem());
         res.engine.addSystem(new CameraFocusSystem(mapManager.getCamera()));

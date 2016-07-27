@@ -7,7 +7,7 @@ import com.facundolinlaud.supergame.components.*;
 import com.facundolinlaud.supergame.components.items.ItemComponent;
 import com.facundolinlaud.supergame.components.items.PickupableComponent;
 import com.facundolinlaud.supergame.components.player.BagComponent;
-import com.facundolinlaud.supergame.refactorno.InputComponent;
+import com.facundolinlaud.supergame.refactor.StatusComponent;
 import com.facundolinlaud.supergame.utils.Mappers;
 
 /**
@@ -16,7 +16,7 @@ import com.facundolinlaud.supergame.utils.Mappers;
 public class PickUpSystem extends EntitySystem {
     private ComponentMapper<PositionComponent> pm = Mappers.position;
     private ComponentMapper<BagComponent> bm = Mappers.bag;
-    private ComponentMapper<InputComponent> im = Mappers.input;
+    private ComponentMapper<StatusComponent> sm = Mappers.status;
 
     private ImmutableArray<Entity> items;
     private ImmutableArray<Entity> takers;
@@ -26,13 +26,13 @@ public class PickUpSystem extends EntitySystem {
     @Override
     public void addedToEngine(Engine engine) {
         items = engine.getEntitiesFor(Family.all(PickupableComponent.class, ItemComponent.class, PositionComponent.class).get());
-        takers = engine.getEntitiesFor(Family.all(BagComponent.class, PositionComponent.class, InputComponent.class).get());
+        takers = engine.getEntitiesFor(Family.all(BagComponent.class, PositionComponent.class, StatusComponent.class).get());
     }
 
     @Override
     public void update(float deltaTime) {
         for (Entity taker : takers) {
-            boolean isGathering = im.get(taker).gathering;
+            boolean isGathering = sm.get(taker).gathering;
 
             if(isGathering) {
                 PositionComponent takerPosition = pm.get(taker);

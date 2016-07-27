@@ -6,9 +6,7 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.facundolinlaud.supergame.components.BodyComponent;
 import com.facundolinlaud.supergame.refactor.Action;
-import com.facundolinlaud.supergame.refactor.Direction;
 import com.facundolinlaud.supergame.refactor.StatusComponent;
-import com.facundolinlaud.supergame.refactorno.InputComponent;
 import com.facundolinlaud.supergame.components.PositionComponent;
 import com.facundolinlaud.supergame.components.VelocityComponent;
 import com.facundolinlaud.supergame.utils.Mappers;
@@ -23,7 +21,7 @@ public class MovementSystem extends IteratingSystem  {
 
 
     public MovementSystem() {
-        super(Family.all(InputComponent.class, PositionComponent.class, VelocityComponent.class, BodyComponent.class).get());
+        super(Family.all(StatusComponent.class, PositionComponent.class, VelocityComponent.class, BodyComponent.class).get());
     }
 
     @Override

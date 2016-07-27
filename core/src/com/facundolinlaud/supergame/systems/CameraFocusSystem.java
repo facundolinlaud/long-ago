@@ -5,8 +5,8 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.graphics.Camera;
-import com.facundolinlaud.supergame.refactorno.InputComponent;
 import com.facundolinlaud.supergame.components.PositionComponent;
+import com.facundolinlaud.supergame.components.player.KeyboardComponent;
 import com.facundolinlaud.supergame.utils.Mappers;
 
 /**
@@ -20,7 +20,7 @@ public class CameraFocusSystem extends IteratingSystem {
     private Camera camera;
 
     public CameraFocusSystem(Camera camera) {
-        super(Family.all(PositionComponent.class, InputComponent.class).get());
+        super(Family.all(PositionComponent.class, KeyboardComponent.class).get());
         this.camera = camera;
     }
 

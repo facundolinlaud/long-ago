@@ -42,13 +42,12 @@ public class Status {
 
         if (action != status.action) return false;
         return direction == status.direction;
-
     }
 
     @Override
     public int hashCode() {
         int result = action.hashCode();
-        result = 31 * result + (direction != null ? direction.hashCode() : 0);
+        result = 31 * result + direction.hashCode();
         return result;
     }
 

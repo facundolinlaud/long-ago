@@ -15,6 +15,10 @@ public enum Direction {
         this.name = name;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public static Direction fromString(String name){
         if(name != null){
             for (Direction d : Direction.values()) {

@@ -18,6 +18,10 @@ public enum Action {
         this.name = name;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public static Action fromString(String name){
         if(name != null){
             for (Action a : Action.values()) {

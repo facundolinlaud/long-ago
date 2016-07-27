@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.facundolinlaud.supergame.components.RenderComponent;
 import com.facundolinlaud.supergame.utils.Mappers;
 
@@ -16,8 +17,10 @@ public class AnimableSpriteSystem extends IteratingSystem {
     private ComponentMapper<RenderComponent> rm = Mappers.render;
 
     public AnimableSpriteSystem() {
-        super(Family.all(StatusComponent.class, AnimableSpriteComponent.class).get());
+        super(Family.all(StatusComponent.class, AnimableSpriteComponent.class, RenderComponent.class).get());
     }
+
+    private float stateTime = 0;
 
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
@@ -26,6 +29,9 @@ public class AnimableSpriteSystem extends IteratingSystem {
         StatusComponent statusComponent = sm.get(entity);
 
         Status status = new Status(statusComponent.action, statusComponent.direction);
-        renderComponent.texture = animableSpriteComponent.animations.get(status).getKeyFrame(deltaTime);
+
+        Animation animation = animableSpriteComponent.animations.get(status);
+        renderComponent.texture = animation.getKeyFrame(stateTime);
+        stateTime += deltaTime;
     }
 }

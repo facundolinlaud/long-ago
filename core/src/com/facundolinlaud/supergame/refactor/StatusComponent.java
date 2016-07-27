@@ -10,5 +10,8 @@ public class StatusComponent implements Component {
     public Direction direction;
     public boolean gathering;
 
-    public StatusComponent() {}
+    public StatusComponent() {
+        this.action = Action.STANDING;
+        this.direction = Direction.RIGHT;
+    }
 }

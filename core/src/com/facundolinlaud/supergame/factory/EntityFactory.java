@@ -14,12 +14,9 @@ import com.facundolinlaud.supergame.components.player.WearComponent;
 import com.facundolinlaud.supergame.managers.ResourceManager;
 import com.facundolinlaud.supergame.refactor.*;
 import com.facundolinlaud.supergame.refactor.factory.AnimationFactory;
-import com.facundolinlaud.supergame.refactorno.SpriteComponent;
-import com.facundolinlaud.supergame.refactorno.SpriteStackableComponent;
 import com.facundolinlaud.supergame.utils.RenderPriority;
 import com.facundolinlaud.supergame.utils.WearType;
 import com.facundolinlaud.supergame.utils.strategy.impl.SpriteRenderPositionStrategyImpl;
-import com.sun.deploy.model.Resource;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -42,14 +39,11 @@ public class EntityFactory {
     public Entity createPlayerWithBody(Body body){
         return new Entity()
                 .add(new PositionComponent(20, 50))
-//                .add(new InputComponent())
                 .add(new KeyboardComponent())
                 .add(new VelocityComponent(1.9f))
                 .add(new BodyComponent(body))
                 .add(new WearComponent(createWearables()))
                 .add(new RenderComponent(new SpriteRenderPositionStrategyImpl()))
-
-//                .add(new SpriteStackableComponent())
                 .add(new StatusComponent())
                 .add(new AnimableSpriteComponent())
                 .add(new StackedSpritesComponent(AnimationFactory.getDefaultModel()))
@@ -78,7 +72,6 @@ public class EntityFactory {
                 .add(new EquipableComponent(wearType, 4, 5))
                 .add(new ItemComponent(name, picture))
                 .add(new StackableSpriteComponent(ResourceManager.getTexture(texturePath)))
-//                .add(new SpriteComponent(texturePath))
                 .add(new RenderComponent(new TextureRegion(ResourceManager.getTexture(picture)), new RenderPriority(1))));
     }
 

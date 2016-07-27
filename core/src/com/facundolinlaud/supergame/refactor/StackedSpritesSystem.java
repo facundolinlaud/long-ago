@@ -55,8 +55,8 @@ public class StackedSpritesSystem extends IteratingSystem {
         for(Status status : animationsModels.keySet()){
             Array<TextureRegion> segments = new Array<>();
             SubAnimationModel subAnimation = animationsModels.get(status);
-            int x = subAnimation.getX();
-            int y = subAnimation.getY();
+            int x = subAnimation.getX() * width;
+            int y = subAnimation.getY() * height;
             int length = subAnimation.getLength();
 
             for(int i = 0; i < length; i++){

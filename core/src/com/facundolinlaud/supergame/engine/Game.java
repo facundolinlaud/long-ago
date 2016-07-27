@@ -16,10 +16,6 @@ public class Game extends ApplicationAdapter {
 
 	@Override
 	public void create () {
-		// debug
-		AnimationFactory animationFactory = new AnimationFactory();
-		animationFactory.createDefault();
-
 		engine = new Engine();
 		batch = new SpriteBatch();
 

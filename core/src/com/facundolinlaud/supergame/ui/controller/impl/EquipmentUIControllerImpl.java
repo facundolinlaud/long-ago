@@ -2,7 +2,7 @@ package com.facundolinlaud.supergame.ui.controller.impl;
 
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
-import com.facundolinlaud.supergame.refactorno.SpriteStackableComponent;
+import com.facundolinlaud.supergame.refactor.RefreshSpriteRequirementComponent;
 import com.facundolinlaud.supergame.components.items.EquipableComponent;
 import com.facundolinlaud.supergame.components.items.ItemComponent;
 import com.facundolinlaud.supergame.components.player.BagComponent;
@@ -28,7 +28,6 @@ public class EquipmentUIControllerImpl implements EquipmentUIController {
     private ComponentMapper<ItemComponent> im = Mappers.item;
     private ComponentMapper<WearComponent> wm = Mappers.wear;
     private ComponentMapper<EquipableComponent> em = Mappers.equipable;
-    private ComponentMapper<SpriteStackableComponent> ssm = Mappers.spriteStack;
 
     private EquipmentUI ui;
     private Entity equipper;
@@ -101,7 +100,6 @@ public class EquipmentUIControllerImpl implements EquipmentUIController {
     }
 
     private void refreshEquipperSprite() {
-        SpriteStackableComponent spriteStackableComponent = ssm.get(equipper);
-        spriteStackableComponent.requestRefresh();
+        equipper.add(new RefreshSpriteRequirementComponent());
     }
 }

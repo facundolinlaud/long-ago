@@ -1,7 +1,7 @@
 {
 	"imagePath": "skeleton.png",
-	"width": 60,
-	"height": 60,
+	"width": 64,
+	"height": 64,
 	"frameDuration": 0.15,
 	"subanimations": {
 		"STANDING_UP": {
@@ -22,19 +22,19 @@
 			"length": 8
 		}, "STANDING_RIGHT": {
 			"x": 0,
-			"y": 10,
+			"y": 11,
 			"length": 1
 		}, "WALKING_RIGHT": {
 			"x": 1,
-			"y": 10,
+			"y": 11,
 			"length": 8
 		}, "STANDING_DOWN": {
 			"x": 0,
-			"y": 11,
+			"y": 10,
 			"length": 1
 		}, "WALKING_DOWN": {
 			"x": 1,
-			"y": 11,
+			"y": 10,
 			"length": 8
 		}
 	}
