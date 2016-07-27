@@ -4,22 +4,20 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.facundolinlaud.supergame.utils.Dimensions;
 
 /**
- * Created by facundo on 3/20/16.
+ * Created by facundo on 27/7/16.
  */
-public class BodyFactory {
-
-    public static final float RADIUS = 0.4f;
-    public static final float DENSITY = 0.5f;
-    public static final float FRICTION = 0.4f;
-    public static final float RESTITUTION = 0.6f;
+public class PhysicsFactory {
+    private static final float RADIUS = 0.4f;
+    private static final float DENSITY = 0.5f;
+    private static final float FRICTION = 0.4f;
+    private static final float RESTITUTION = 0.6f;
+    private static PhysicsFactory instance = null;
 
     private World world;
 
-    public BodyFactory(World world) {
-        this.world = world;
-    }
+    protected PhysicsFactory() {}
 
-    public Body createPlayer(){
+    public Body createPlayerBody(){
         // First we create a body definition
         BodyDef bodyDef = new BodyDef();
 
@@ -52,7 +50,7 @@ public class BodyFactory {
         return body;
     }
 
-    public Body createObstacle(float x, float y, float width, float height){
+    public Body createObstacleBody(float x, float y, float width, float height){
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.StaticBody;
         bodyDef.position.set(x, y);
@@ -69,7 +67,7 @@ public class BodyFactory {
         return body;
     }
 
-    public Body createItem() {
+    public Body createItemBody() {
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         bodyDef.fixedRotation = true;
@@ -100,5 +98,17 @@ public class BodyFactory {
         fixtureDef.restitution = RESTITUTION; // Make it bounce a little bit
 
         return fixtureDef;
+    }
+
+    public void setWorld(World world) {
+        this.world = world;
+    }
+
+    public static PhysicsFactory get(){
+        if(instance == null){
+            instance = new PhysicsFactory();
+        }
+
+        return instance;
     }
 }

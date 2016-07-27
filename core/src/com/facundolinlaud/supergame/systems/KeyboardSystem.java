@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.*;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.utils.Timer;
 import com.facundolinlaud.supergame.components.player.KeyboardComponent;
 import com.facundolinlaud.supergame.model.Action;
 import com.facundolinlaud.supergame.model.Direction;
@@ -24,19 +25,38 @@ public class KeyboardSystem extends EntitySystem {
         entities = engine.getEntitiesFor(Family.all(StatusComponent.class, KeyboardComponent.class).get());
     }
 
+    boolean waitingForActionEnd = false;
+
     public void update(float deltaTime) {
+        if(waitingForActionEnd) return;
+
         boolean gathering = Gdx.input.isKeyJustPressed(Input.Keys.E);
+        boolean dashing = Gdx.input.isKeyJustPressed(Input.Keys.SPACE);
 
         for(Entity entity : entities){
             StatusComponent status = sm.get(entity);
 
-            Direction newDirection = resolveDirection();
+            Direction direction = resolveDirection();
 
-            if(newDirection != null){
-                status.direction = newDirection;
+            if(direction != null && !dashing){
+                status.direction = direction;
                 status.action = Action.WALKING;
             }else{
                 status.action = Action.STANDING;
+
+                if(dashing){
+                    waitingForActionEnd = true;
+                    status.action = Action.DASHING;
+
+                    float delay = 0.75f; // seconds
+
+                    Timer.schedule(new Timer.Task(){
+                        @Override
+                        public void run() {
+                            waitingForActionEnd = false;
+                        }
+                    }, delay);
+                }
             }
 
             status.gathering = gathering;

@@ -23,8 +23,6 @@ public class AnimableSpriteSystem extends IteratingSystem {
         super(Family.all(StatusComponent.class, AnimableSpriteComponent.class, RenderComponent.class).get());
     }
 
-    private float stateTime = 0;
-
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
         AnimableSpriteComponent animableSpriteComponent = asm.get(entity);
@@ -34,7 +32,7 @@ public class AnimableSpriteSystem extends IteratingSystem {
         Status status = new Status(statusComponent.action, statusComponent.direction);
 
         Animation animation = animableSpriteComponent.animations.get(status);
-        renderComponent.texture = animation.getKeyFrame(stateTime);
-        stateTime += deltaTime;
+        renderComponent.texture = animation.getKeyFrame(animableSpriteComponent.stateTime);
+        animableSpriteComponent.stateTime += deltaTime;
     }
 }

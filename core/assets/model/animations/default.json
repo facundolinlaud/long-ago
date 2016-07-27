@@ -2,7 +2,7 @@
 	"imagePath": "skeleton.png",
 	"width": 64,
 	"height": 64,
-	"frameDuration": 0.15,
+	"frameDuration": 0.1,
 	"subanimations": {
 		"STANDING_UP": {
 			"x": 0,
@@ -12,6 +12,14 @@
 			"x": 1,
 			"y": 8,
 			"length": 8
+		}, "SWINGING_UP": {
+			"x": 1,
+			"y": 12,
+			"length": 5
+		}, "DASHING_UP": {
+			"x": 1,
+			"y": 4,
+			"length": 7
 		}, "STANDING_LEFT": {
 			"x": 0,
 			"y": 9,
@@ -20,6 +28,14 @@
 			"x": 1,
 			"y": 9,
 			"length": 8
+		}, "SWINGING_LEFT": {
+			"x": 1,
+			"y": 13,
+			"length": 5
+		}, "DASHING_LEFT": {
+			"x": 1,
+			"y": 5,
+			"length": 7
 		}, "STANDING_RIGHT": {
 			"x": 0,
 			"y": 11,
@@ -28,6 +44,14 @@
 			"x": 1,
 			"y": 11,
 			"length": 8
+		}, "SWINGING_RIGHT": {
+			"x": 1,
+			"y": 15,
+			"length": 5
+		}, "DASHING_RIGHT": {
+			"x": 1,
+			"y": 7,
+			"length": 7
 		}, "STANDING_DOWN": {
 			"x": 0,
 			"y": 10,
@@ -36,6 +60,14 @@
 			"x": 1,
 			"y": 10,
 			"length": 8
+		}, "SWINGING_DOWN": {
+			"x": 1,
+			"y": 14,
+			"length": 5
+		}, "DASHING_DOWN": {
+			"x": 1,
+			"y": 6,
+			"length": 7
 		}
 	}
 }
