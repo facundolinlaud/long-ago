@@ -24,6 +24,10 @@ public class RenderComponent implements Component {
         this.priority = priority;
     }
 
+    public RenderComponent(TextureRegion texture) {
+        this.texture = texture;
+    }
+
     public RenderComponent(RenderPositionStrategy renderPositionStrategy) {
         this.renderPositionStrategy = renderPositionStrategy;
     }
