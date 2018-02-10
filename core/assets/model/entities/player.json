@@ -1,6 +1,6 @@
 {
-	"x": 5,
-	"y": 5,
+	"x": 20,
+	"y": 50,
 	"velocity": 1.9,
 	"body": {
 		"BODY": "sprites/living/body/light.png",
