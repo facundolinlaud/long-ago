@@ -88,21 +88,10 @@ public class InventoryUIControllerImpl implements InventoryUIController {
 
         item.add(new PositionComponent(gathererPosition));
         item.add(new RenderComponent(new TextureRegion(event.getItem().getPicture())));
-//        item.add(new RenderComponent(new TextureRegion(TextureFactory.getTexture("pictures/items/weapon/spear.png"))));
         item.add(new PickupableComponent());
-//        item.add(new ItemComponent(TextureFactory.getTexture(texturePath)));
         item.add(new BodyComponent(PhysicsFactory.get().createItemBody()));
 
-//        BodyComponent b = Mappers.body.get(item);
-//        b.body.setTransform(5f, 5f, b.body.getAngle());
-
-        System.out.println("---------------------------");
-        System.out.println("Item " + event.getItem().getName() + " dropped");
-
-//        PositionComponent newItemPosition = pm.get(item);
-//        System.out.println("item dropeado estaba en:         " + newItemPosition.x + ", " + newItemPosition.y);
-        System.out.println("tiene los componentes: " + item.getComponents());
-        System.out.println("---------------------------");
+        System.out.println(event.getItem().getName() + " dropped");
     }
 
     private void itemsPositionSwapped(ItemsPositionSwapEvent event) {

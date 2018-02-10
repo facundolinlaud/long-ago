@@ -14,7 +14,7 @@ import com.facundolinlaud.supergame.model.RenderPriority;
  */
 public class ItemFactory {
     public static final String PATH_TO_COINS_PICTURE = "pictures/items/others/coins.png";
-    public static final String PATH_TO_SWORD_PICTURE = "pictures/items/weapon/sword.png";
+    public static final String PATH_TO_SWORD_PICTURE = "pictures/items/weapon/saber.png";
 
     private static PhysicsFactory physicsFactory = PhysicsFactory.get();
 

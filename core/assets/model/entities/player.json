@@ -21,7 +21,7 @@
 			"equipable": true,
 			"wearType": "SHOES"
 		}, "WEAPON": {
-			"name": "Mail armor",
+			"name": "Wood spear",
 			"texture": "sprites/items/weapon/spear.png",
 			"picture": "pictures/items/weapon/spear.png",
 			"equipable": true,
@@ -29,8 +29,22 @@
 		}
 	},
 	"inventory": [{
-		"name": "Spear",
+		"name": "Wood spear",
 		"texture": "sprites/items/weapon/spear.png",
-		"picture": "pictures/items/weapon/spear.png"
+		"picture": "pictures/items/weapon/spear.png",
+		"equipable": true,
+		"wearType": "WEAPON"
+	},{
+		"name": "Saber",
+		"texture": "sprites/items/weapon/saber.png",
+		"picture": "pictures/items/weapon/saber.png",
+		"equipable": true,
+		"wearType": "WEAPON"
+	},{
+		"name": "Dagger",
+		"texture": "sprites/items/weapon/dagger.png",
+		"picture": "pictures/items/weapon/dagger.png",
+		"equipable": true,
+		"wearType": "WEAPON"
 	}]
 }
