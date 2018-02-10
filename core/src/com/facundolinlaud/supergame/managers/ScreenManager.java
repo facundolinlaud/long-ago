@@ -21,7 +21,9 @@ public class ScreenManager implements Manager {
     }
 
     public void setCurrentScreen(Screen currentScreen) {
-        if(this.currentScreen != null) this.currentScreen.dispose();
+        if(this.currentScreen != null)
+            this.currentScreen.dispose();
+
         this.currentScreen = currentScreen;
     }
 

@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.facundolinlaud.supergame.components.BodyComponent;
 import com.facundolinlaud.supergame.components.PositionComponent;
+import com.facundolinlaud.supergame.components.items.ItemComponent;
 import com.facundolinlaud.supergame.utils.Dimensions;
 import com.facundolinlaud.supergame.utils.Mappers;
 
@@ -44,6 +45,7 @@ public class PhysicsSystem extends IteratingSystem {
             body.body.setTransform(position.x, position.y, body.body.getAngle());
         }else{
             Vector2 vector = body.body.getPosition();
+
             position.x = vector.x - Dimensions.BOX_2D_OFFSET;
             position.y = vector.y - Dimensions.BOX_2D_OFFSET;
         }

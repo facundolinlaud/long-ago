@@ -26,15 +26,12 @@ public class WorldScreen implements Screen {
     private PhysicsManager physicsManager;
     private UIManager uiManager;
 
-    private PhysicsFactory physicsFactory;
-
     public WorldScreen(GameResources res) {
         this.res = res;
 
         mapManager = new MapManager(res.batch);
         physicsManager = new PhysicsManager(mapManager.getCamera(), mapManager.getMap());
         uiManager = new UIManager();
-        physicsFactory = PhysicsFactory.get();
 
         initializeListeners();
         initializeEntities();
@@ -46,9 +43,9 @@ public class WorldScreen implements Screen {
     }
 
     private void initializeEntities(){
-        res.engine.addEntity(PlayerFactory.getPlayerEntity());
+        PlayerFactory.createPlayer(res.engine);
 
-        for(float i = 0; i < 8; i++){
+        for(float i = 0; i < 14; i++){
             res.engine.addEntity(ItemFactory.createCoins());
         }
 

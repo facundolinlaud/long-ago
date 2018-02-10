@@ -5,6 +5,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.facundolinlaud.supergame.components.RenderComponent;
 import com.facundolinlaud.supergame.components.StatusComponent;
 import com.facundolinlaud.supergame.components.sprite.AnimableSpriteComponent;
@@ -32,7 +33,7 @@ public class AnimableSpriteSystem extends IteratingSystem {
         Status status = new Status(statusComponent.action, statusComponent.direction);
 
         Animation animation = animableSpriteComponent.animations.get(status);
-        renderComponent.texture = animation.getKeyFrame(animableSpriteComponent.stateTime);
+        renderComponent.texture = (TextureRegion) animation.getKeyFrame(animableSpriteComponent.stateTime);
         animableSpriteComponent.stateTime += deltaTime;
     }
 }

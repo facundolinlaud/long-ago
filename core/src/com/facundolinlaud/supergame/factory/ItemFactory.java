@@ -27,12 +27,12 @@ public class ItemFactory {
     }
 
     public static Entity createCoins() {
-        return createBaseItemEntity(PATH_TO_COINS_PICTURE, 21, 45)
+        return createBaseItemEntity(PATH_TO_COINS_PICTURE, 7, 7)
                 .add(new BodyComponent(physicsFactory.createItemBody()));
     }
 
     public static Entity createSword() {
-        return createBaseItemEntity(PATH_TO_SWORD_PICTURE, 21, 45)
+        return createBaseItemEntity(PATH_TO_SWORD_PICTURE, 6, 6)
                 .add(new BodyComponent(physicsFactory.createItemBody()));
     }
 }
