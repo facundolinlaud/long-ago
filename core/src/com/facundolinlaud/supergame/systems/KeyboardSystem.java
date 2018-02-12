@@ -2,10 +2,12 @@ package com.facundolinlaud.supergame.systems;
 
 import com.badlogic.ashley.core.*;
 import com.badlogic.ashley.utils.ImmutableArray;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.utils.Timer;
 import com.facundolinlaud.supergame.components.player.KeyboardComponent;
+import com.facundolinlaud.supergame.components.sprite.AnimableSpriteComponent;
+import com.facundolinlaud.supergame.managers.world.PlayerInputObserver;
 import com.facundolinlaud.supergame.model.Action;
 import com.facundolinlaud.supergame.model.Direction;
 import com.facundolinlaud.supergame.components.StatusComponent;
@@ -16,67 +18,65 @@ import com.facundolinlaud.supergame.utils.Mappers;
  */
 public class KeyboardSystem extends EntitySystem {
     private ComponentMapper<StatusComponent> sm = Mappers.status;
+    private ComponentMapper<AnimableSpriteComponent> asm = Mappers.animableSprite;
 
     private ImmutableArray<Entity> entities;
+    private boolean waitingForActionEnd = false;
+    private PlayerInputObserver playerInputObserver;
 
-    public KeyboardSystem() {}
+
+    public KeyboardSystem(PlayerInputObserver playerInputObserver) {
+        this.playerInputObserver = playerInputObserver;
+    }
 
     public void addedToEngine(Engine engine) {
         entities = engine.getEntitiesFor(Family.all(StatusComponent.class, KeyboardComponent.class).get());
     }
 
-    boolean waitingForActionEnd = false;
-
     public void update(float deltaTime) {
-        if(waitingForActionEnd) return;
+        if(waitingForActionEnd)
+            return;
 
-        boolean gathering = Gdx.input.isKeyJustPressed(Input.Keys.E);
-        boolean dashing = Gdx.input.isKeyJustPressed(Input.Keys.SPACE);
+        boolean isAttackingRequested = playerInputObserver.isAttackingRequested();
 
         for(Entity entity : entities){
             StatusComponent status = sm.get(entity);
+            Direction newDirection = playerInputObserver.getPlayersNewDirection();
 
-            Direction direction = resolveDirection();
-
-            if(direction != null && !dashing){
-                status.direction = direction;
+            if(newDirection != null && !isAttackingRequested){
                 status.action = Action.WALKING;
+                status.direction = newDirection;
             }else{
-                status.action = Action.STANDING;
+                if(isAttackingRequested){
+                    if(status.direction != newDirection)
+                        setSpriteIndexBackToZero(entity);
 
-                if(dashing){
-                    waitingForActionEnd = true;
                     status.action = Action.DASHING;
+                    waitingForActionEnd = true;
 
-                    float delay = 0.75f; // seconds
-
-                    Timer.schedule(new Timer.Task(){
-                        @Override
-                        public void run() {
-                            waitingForActionEnd = false;
-                        }
-                    }, delay);
+                    scheduleStatusReset();
+                }else{
+                    status.action = Action.STANDING;
                 }
             }
 
-            status.gathering = gathering;
+            status.gathering = playerInputObserver.isGatheringRequeste();
         }
     }
 
-    private Direction resolveDirection(){
-        boolean W = Gdx.input.isKeyPressed(Input.Keys.W);
-        boolean A = Gdx.input.isKeyPressed(Input.Keys.A);
-        boolean S = Gdx.input.isKeyPressed(Input.Keys.S);
-        boolean D = Gdx.input.isKeyPressed(Input.Keys.D);
+    private void scheduleStatusReset() {
+        float delay = 0.75f; // seconds
 
-        if(A)
-            return Direction.LEFT;
-        else if(D)
-            return Direction.RIGHT;
-        else if(W)
-            return Direction.UP;
-        else if(S)
-            return Direction.DOWN;
-        else return null;
+        Timer.schedule(new Timer.Task(){
+            @Override
+            public void run() {
+                waitingForActionEnd = false;
+            }
+        }, delay);
+    }
+
+    private void setSpriteIndexBackToZero(Entity entity){
+        AnimableSpriteComponent animableSprite = asm.get(entity);
+        animableSprite.resetStateTime();
     }
 }

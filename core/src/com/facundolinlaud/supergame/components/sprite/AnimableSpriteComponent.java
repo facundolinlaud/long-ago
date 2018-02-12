@@ -17,4 +17,8 @@ public class AnimableSpriteComponent implements Component {
     public AnimableSpriteComponent() {
         this.animations = new HashMap<>();
     }
+
+    public void resetStateTime(){
+        this.stateTime = 0f;
+    }
 }
