@@ -1,14 +1,17 @@
 package com.facundolinlaud.supergame.screens;
 
 import com.badlogic.ashley.core.Family;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.facundolinlaud.supergame.factory.PlayerFactory;
 import com.facundolinlaud.supergame.factory.ItemFactory;
-import com.facundolinlaud.supergame.factory.PhysicsFactory;
 import com.facundolinlaud.supergame.components.BodyComponent;
 import com.facundolinlaud.supergame.engine.GameResources;
 import com.facundolinlaud.supergame.listeners.PhysicsEntitiesListener;
 import com.facundolinlaud.supergame.managers.world.MapManager;
+import com.facundolinlaud.supergame.managers.world.PlayerInputObserver;
 import com.facundolinlaud.supergame.managers.world.PhysicsManager;
 import com.facundolinlaud.supergame.managers.world.UIManager;
 import com.facundolinlaud.supergame.systems.*;
@@ -26,20 +29,33 @@ public class WorldScreen implements Screen {
     private PhysicsManager physicsManager;
     private UIManager uiManager;
 
+    private Stage stage;
+
     public WorldScreen(GameResources res) {
         this.res = res;
 
-        mapManager = new MapManager(res.batch);
-        physicsManager = new PhysicsManager(mapManager.getCamera(), mapManager.getMap());
-        uiManager = new UIManager();
-
+        initializeStage();
+        initializeManagers();
         initializeListeners();
         initializeEntities();
         initializeSystems();
     }
 
+    private void initializeStage() {
+        this.stage = new Stage(new ScreenViewport());
+        this.stage.setDebugAll(true);
+        Gdx.input.setInputProcessor(stage);
+    }
+
+    private void initializeManagers() {
+        this.mapManager = new MapManager(res.batch);
+        this.physicsManager = new PhysicsManager(mapManager.getCamera(), mapManager.getMap());
+        this.uiManager = new UIManager(stage);
+    }
+
     private void initializeListeners() {
-        res.engine.addEntityListener(Family.all(BodyComponent.class).get(), new PhysicsEntitiesListener(physicsManager.getWorld()));
+        res.engine.addEntityListener(Family.all(BodyComponent.class).get(),
+                new PhysicsEntitiesListener(physicsManager.getWorld()));
     }
 
     private void initializeEntities(){
@@ -55,10 +71,13 @@ public class WorldScreen implements Screen {
     }
 
     private void initializeSystems() {
+        PlayerInputObserver playerInputObserver = new PlayerInputObserver();
+        stage.addListener(playerInputObserver);
+
         res.engine.addSystem(new StackableSpriteSystem());
         res.engine.addSystem(new StackedSpritesSystem());
         res.engine.addSystem(new AnimableSpriteSystem());
-        res.engine.addSystem(new KeyboardSystem());
+        res.engine.addSystem(new KeyboardSystem(playerInputObserver));
         res.engine.addSystem(new MovementSystem());
         res.engine.addSystem(new CameraFocusSystem(mapManager.getCamera()));
         res.engine.addSystem(new PhysicsSystem(physicsManager.getWorld()));

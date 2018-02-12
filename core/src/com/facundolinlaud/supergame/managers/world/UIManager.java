@@ -50,11 +50,10 @@ public class UIManager implements Manager {
     private AttributesUIController attributesUIController;
     private EquipmentUIController equipmentUIController;
 
-    public UIManager() {
+    public UIManager(Stage stage) {
         this.skin = new Skin(Gdx.files.internal(SKIN_JSON_PATH));
-        this.stage = new Stage(new ScreenViewport());
-        this.stage.setDebugAll(true);
         this.skin.addRegions(new TextureAtlas(Gdx.files.internal(TEXTURE_ATLAS_PATH)));
+        this.stage = stage;
 
         initializeUIResources();
         initializeUI();
@@ -85,7 +84,6 @@ public class UIManager implements Manager {
 
     private void addUIToStage() {
         this.stage.addActor(this.hud.get());
-        Gdx.input.setInputProcessor(stage);
     }
 
     private void subscribeReceivers(){
