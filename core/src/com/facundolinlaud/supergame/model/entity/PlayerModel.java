@@ -1,6 +1,6 @@
 package com.facundolinlaud.supergame.model.entity;
 
-import com.facundolinlaud.supergame.model.WearType;
+import com.facundolinlaud.supergame.model.EquipSlot;
 
 import java.util.List;
 import java.util.Map;
@@ -12,8 +12,8 @@ public class PlayerModel {
     private int x;
     private int y;
     private float velocity;
-    private Map<WearType, String> body;
-    private Map<WearType, ItemModel> equipment;
+    private Map<EquipSlot, String> body;
+    private Map<EquipSlot, ItemModel> equipment;
     private List<ItemModel> inventory;
 
     public PlayerModel() {}
@@ -42,19 +42,19 @@ public class PlayerModel {
         this.velocity = velocity;
     }
 
-    public Map<WearType, String> getBody() {
+    public Map<EquipSlot, String> getBody() {
         return body;
     }
 
-    public void setBody(Map<WearType, String> body) {
+    public void setBody(Map<EquipSlot, String> body) {
         this.body = body;
     }
 
-    public Map<WearType, ItemModel> getEquipment() {
+    public Map<EquipSlot, ItemModel> getEquipment() {
         return equipment;
     }
 
-    public void setEquipment(Map<WearType, ItemModel> equipment) {
+    public void setEquipment(Map<EquipSlot, ItemModel> equipment) {
         this.equipment = equipment;
     }
 

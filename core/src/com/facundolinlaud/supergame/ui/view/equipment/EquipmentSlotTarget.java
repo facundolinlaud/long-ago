@@ -6,7 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Target;
 import com.facundolinlaud.supergame.ui.model.Item;
 import com.facundolinlaud.supergame.ui.view.cross.Slot;
 import com.facundolinlaud.supergame.ui.view.cross.SlotSource;
-import com.facundolinlaud.supergame.model.WearType;
+import com.facundolinlaud.supergame.model.EquipSlot;
 import com.facundolinlaud.supergame.utils.events.EquipItemEvent;
 import com.facundolinlaud.supergame.utils.events.InventoryAndEquipmentItemSwapEvent;
 import com.facundolinlaud.supergame.utils.mediator.Mediator;
@@ -19,14 +19,14 @@ public class EquipmentSlotTarget extends Target implements Messenger {
 
     private Slot slot;
     private Mediator uiMediator;
-    private WearType wearType;
+    private EquipSlot equipSlot;
 
-    public EquipmentSlotTarget(EquipmentSlot slot, Mediator uiMediator, WearType wearType) {
+    public EquipmentSlotTarget(EquipmentSlot slot, Mediator uiMediator, EquipSlot equipSlot) {
         super(slot);
 
         this.slot = slot;
         this.uiMediator = uiMediator;
-        this.wearType = wearType;
+        this.equipSlot = equipSlot;
     }
 
     @Override
@@ -63,6 +63,6 @@ public class EquipmentSlotTarget extends Target implements Messenger {
     }
 
     private boolean isNewItemCompatibleWithSlot(Item newItem) {
-        return newItem.isEquipable() && wearType.equals(newItem.getEquipable().getWearType());
+        return newItem.isEquipable() && equipSlot.equals(newItem.getEquipable().getEquipSlot());
     }
 }
