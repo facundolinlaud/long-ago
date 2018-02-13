@@ -13,9 +13,8 @@ import com.facundolinlaud.supergame.components.sprite.AnimableSpriteComponent;
 import com.facundolinlaud.supergame.components.sprite.RefreshSpriteRequirementComponent;
 import com.facundolinlaud.supergame.components.sprite.StackableSpriteComponent;
 import com.facundolinlaud.supergame.components.sprite.StackedSpritesComponent;
-import com.facundolinlaud.supergame.engine.GameResources;
 import com.facundolinlaud.supergame.model.RenderPriority;
-import com.facundolinlaud.supergame.model.WearType;
+import com.facundolinlaud.supergame.model.EquipSlot;
 import com.facundolinlaud.supergame.model.entity.ItemModel;
 import com.facundolinlaud.supergame.model.entity.PlayerModel;
 import com.facundolinlaud.supergame.utils.strategy.impl.SpriteRenderPositionStrategyImpl;
@@ -24,7 +23,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * Created by facundo on 27/7/16.
@@ -51,23 +49,23 @@ public class PlayerFactory {
         engine.addEntity(player);
     }
 
-    private static Map<WearType, Entity> createWearablesEntities(Engine engine, PlayerModel playerModel){
-        Map<WearType, ItemModel> wearablesModels = playerModel.getEquipment();
-        Map<WearType, String> bodyModels = playerModel.getBody();
-        HashMap<WearType, Entity> wearables = new HashMap<>();
+    private static Map<EquipSlot, Entity> createWearablesEntities(Engine engine, PlayerModel playerModel){
+        Map<EquipSlot, ItemModel> wearablesModels = playerModel.getEquipment();
+        Map<EquipSlot, String> bodyModels = playerModel.getBody();
+        HashMap<EquipSlot, Entity> wearables = new HashMap<>();
 
-        for(WearType wearType : bodyModels.keySet()){
-            String texture = bodyModels.get(wearType);
+        for(EquipSlot equipSlot : bodyModels.keySet()){
+            String texture = bodyModels.get(equipSlot);
             Entity e = new Entity().add(new StackableSpriteComponent(TextureFactory.getTexture(texture)));
 
-            wearables.put(wearType, e);
+            wearables.put(equipSlot, e);
             engine.addEntity(e);
         }
 
-        for(WearType wearType : wearablesModels.keySet()){
-            Entity e = createItemEntity(wearablesModels.get(wearType));
+        for(EquipSlot equipSlot : wearablesModels.keySet()){
+            Entity e = createItemEntity(wearablesModels.get(equipSlot));
 
-            wearables.put(wearType, e);
+            wearables.put(equipSlot, e);
             engine.addEntity(e);
         }
 
@@ -93,7 +91,7 @@ public class PlayerFactory {
            .add(new RenderComponent(new TextureRegion(TextureFactory.getTexture(itemModel.getPicture())), new RenderPriority(1)));
 
         if(itemModel.isEquipable()) {
-            e.add(new EquipableComponent(itemModel.getWearType(), itemModel.getAttack(), itemModel.getDefense()))
+            e.add(new EquipableComponent(itemModel.getEquipSlot(), itemModel.getEquipType(), itemModel.getAttack(), itemModel.getDefense()))
              .add(new StackableSpriteComponent(TextureFactory.getTexture(itemModel.getTexture())));
         }
 

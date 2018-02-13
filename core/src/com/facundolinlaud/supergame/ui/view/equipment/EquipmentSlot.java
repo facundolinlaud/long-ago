@@ -4,7 +4,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.facundolinlaud.supergame.ui.model.Item;
 import com.facundolinlaud.supergame.ui.view.cross.Slot;
-import com.facundolinlaud.supergame.model.WearType;
+import com.facundolinlaud.supergame.model.EquipSlot;
 
 /**
  * Created by facundo on 4/2/16.
@@ -16,10 +16,10 @@ public class EquipmentSlot extends Slot {
     private NullEquipmentSlot nullEquipmentSlot;
     private Image itemImage;
     private Item item;
-    private WearType wearType;
+    private EquipSlot equipSlot;
 
-    public EquipmentSlot(Skin skin, WearType wearType) {
-        this.wearType = wearType;
+    public EquipmentSlot(Skin skin, EquipSlot equipSlot) {
+        this.equipSlot = equipSlot;
         this.nullEquipmentSlot = new NullEquipmentSlot(skin);
         this.itemImage = new Image();
 

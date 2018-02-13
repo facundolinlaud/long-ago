@@ -5,7 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import com.facundolinlaud.supergame.ui.model.Item;
 import com.facundolinlaud.supergame.ui.view.utils.Themes;
-import com.facundolinlaud.supergame.model.WearType;
+import com.facundolinlaud.supergame.model.EquipSlot;
 import com.facundolinlaud.supergame.utils.mediator.Mediator;
 
 import java.util.Map;
@@ -37,7 +37,7 @@ public class EquipmentWindow extends Window {
         add(this.grid);
     }
 
-    public void update(Map<WearType, Item> items){
+    public void update(Map<EquipSlot, Item> items){
         if(isVisible()){
             grid.update(items);
         }

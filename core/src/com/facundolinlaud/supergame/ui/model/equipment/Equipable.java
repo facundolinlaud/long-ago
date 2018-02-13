@@ -1,27 +1,27 @@
 package com.facundolinlaud.supergame.ui.model.equipment;
 
-import com.facundolinlaud.supergame.model.WearType;
+import com.facundolinlaud.supergame.model.EquipSlot;
 
 /**
  * Created by facundo on 4/2/16.
  */
 public class Equipable {
-    private WearType wearType;
+    private EquipSlot equipSlot;
     private int attack;
     private int defense;
 
-    public Equipable(WearType wearType, int attack, int defense) {
-        this.wearType = wearType;
+    public Equipable(EquipSlot equipSlot, int attack, int defense) {
+        this.equipSlot = equipSlot;
         this.attack = attack;
         this.defense = defense;
     }
 
-    public WearType getWearType() {
-        return wearType;
+    public EquipSlot getEquipSlot() {
+        return equipSlot;
     }
 
-    public void setWearType(WearType wearType) {
-        this.wearType = wearType;
+    public void setEquipSlot(EquipSlot equipSlot) {
+        this.equipSlot = equipSlot;
     }
 
     public int getAttack() {

@@ -7,7 +7,7 @@ import com.badlogic.gdx.utils.Align;
 import com.facundolinlaud.supergame.ui.model.Item;
 import com.facundolinlaud.supergame.ui.view.cross.SlotSource;
 import com.facundolinlaud.supergame.ui.view.cross.SlotType;
-import com.facundolinlaud.supergame.model.WearType;
+import com.facundolinlaud.supergame.model.EquipSlot;
 import com.facundolinlaud.supergame.utils.mediator.Mediator;
 
 import java.util.HashMap;
@@ -18,7 +18,7 @@ import java.util.Map;
  */
 public class Grid extends Table {
 
-    private Map<WearType, EquipmentSlot> slots;
+    private Map<EquipSlot, EquipmentSlot> slots;
 
     public Grid(Skin skin, Mediator uiMediator, DragAndDrop dragAndDrop) {
         super(skin);
@@ -27,11 +27,11 @@ public class Grid extends Table {
 
         align(Align.topLeft);
 
-        WearType wearType[][] = getDistribution();
+        EquipSlot equipSlot[][] = getDistribution();
 
-        for(int row = 0; row < wearType.length; row++){
-            for(int col = 0; col < wearType[row].length; col++){
-                WearType wt = wearType[row][col];
+        for(int row = 0; row < equipSlot.length; row++){
+            for(int col = 0; col < equipSlot[row].length; col++){
+                EquipSlot wt = equipSlot[row][col];
 
                 boolean shouldAddSlotHere = wt != null;
 
@@ -49,16 +49,16 @@ public class Grid extends Table {
         }
     }
 
-    private WearType[][] getDistribution(){
-        return new WearType[][]{
-                {null, WearType.HELMET, null},
-                {WearType.WEAPON, WearType.CHEST, WearType.SHIELD},
-                {WearType.GLOVES, WearType.PANTS, WearType.SHOES}
+    private EquipSlot[][] getDistribution(){
+        return new EquipSlot[][]{
+                {null, EquipSlot.HELMET, null},
+                {EquipSlot.WEAPON, EquipSlot.CHEST, EquipSlot.SHIELD},
+                {EquipSlot.GLOVES, EquipSlot.PANTS, EquipSlot.SHOES}
         };
     }
 
-    public void update(Map<WearType, Item> items) {
-        for(WearType wt : slots.keySet()){
+    public void update(Map<EquipSlot, Item> items) {
+        for(EquipSlot wt : slots.keySet()){
             Item item = items.get(wt);
 
             EquipmentSlot slot = slots.get(wt);

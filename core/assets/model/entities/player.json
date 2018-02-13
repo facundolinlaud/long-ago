@@ -13,19 +13,38 @@
 			"texture": "sprites/items/armor/mail.png",
 			"picture": "pictures/items/armor/chain.png",
 			"equipable": true,
-			"wearType": "CHEST"
+			"equipSlot": "CHEST"
 		}, "SHOES": {
 			"name": "Metal shoes",
 			"texture": "sprites/items/boots/metal_boots.png",
 			"picture": "pictures/items/boots/metal_boots.png",
 			"equipable": true,
-			"wearType": "SHOES"
+			"equipSlot": "SHOES"
 		}, "WEAPON": {
 			"name": "Wood spear",
 			"texture": "sprites/items/weapon/spear.png",
 			"picture": "pictures/items/weapon/spear.png",
 			"equipable": true,
-			"wearType": "WEAPON"
+			"equipSlot": "WEAPON",
+			"equipType": "SPEAR"
+		}, "HELMET" : {
+			"name": "Cloth hood",
+			"texture": "sprites/items/helmets/cloth_hood.png",
+			"picture": "pictures/items/helmets/cloth_hood.png",
+			"equipable": true,
+			"equipSlot": "HELMET"
+		}, "SHIELD" : {
+			"name": "Belt",
+			"texture": "sprites/items/belts/belt.png",
+			"picture": "pictures/items/belts/belt.png",
+			"equipable": true,
+			"equipSlot": "SHIELD"
+		}, "GLOVES" : {
+			"name": "Metal Gloves",
+			"texture": "sprites/items/gloves/metal_gloves.png",
+			"picture": "pictures/items/gloves/metal_gloves.png",
+			"equipable": true,
+			"equipSlot": "GLOVES"
 		}
 	},
 	"inventory": [{
@@ -33,18 +52,33 @@
 		"texture": "sprites/items/weapon/spear.png",
 		"picture": "pictures/items/weapon/spear.png",
 		"equipable": true,
-		"wearType": "WEAPON"
+		"equipSlot": "WEAPON",
+		"equipType": "SPEAR"
 	},{
 		"name": "Saber",
 		"texture": "sprites/items/weapon/saber.png",
 		"picture": "pictures/items/weapon/saber.png",
 		"equipable": true,
-		"wearType": "WEAPON"
+		"equipSlot": "WEAPON",
+		"equipType": "SWORD"
 	},{
 		"name": "Dagger",
 		"texture": "sprites/items/weapon/dagger.png",
 		"picture": "pictures/items/weapon/dagger.png",
 		"equipable": true,
-		"wearType": "WEAPON"
+		"equipSlot": "WEAPON",
+		"equipType": "DAGGER"
+	},{
+		"name": "Chestplate",
+		"texture": "sprites/items/armor/chestplate.png",
+		"picture": "pictures/items/armor/chestplate.png",
+		"equipable": true,
+		"equipSlot": "CHEST"
+	},{
+		"name": "Leather Boots",
+		"texture": "sprites/items/boots/leather_boots.png",
+		"picture": "pictures/items/boots/leather_boots.png",
+		"equipable": true,
+		"equipSlot": "SHOES"
 	}]
 }

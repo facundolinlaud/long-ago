@@ -1,6 +1,7 @@
 package com.facundolinlaud.supergame.model.entity;
 
-import com.facundolinlaud.supergame.model.WearType;
+import com.facundolinlaud.supergame.model.EquipSlot;
+import com.facundolinlaud.supergame.model.EquipType;
 
 /**
  * Created by facundo on 27/7/16.
@@ -10,7 +11,8 @@ public class ItemModel {
     private String texture;
     private String picture;
     private boolean equipable;
-    private WearType wearType;
+    private EquipSlot equipSlot;
+    private EquipType equipType;
     private int attack;
     private int defense;
 
@@ -48,12 +50,20 @@ public class ItemModel {
         this.equipable = equipable;
     }
 
-    public WearType getWearType() {
-        return wearType;
+    public EquipSlot getEquipSlot() {
+        return equipSlot;
     }
 
-    public void setWearType(WearType wearType) {
-        this.wearType = wearType;
+    public void setEquipSlot(EquipSlot equipSlot) {
+        this.equipSlot = equipSlot;
+    }
+
+    public EquipType getEquipType() {
+        return equipType;
+    }
+
+    public void setEquipType(EquipType equipType) {
+        this.equipType = equipType;
     }
 
     public int getAttack() {

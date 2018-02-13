@@ -8,7 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import com.facundolinlaud.supergame.ui.model.Item;
 import com.facundolinlaud.supergame.ui.view.equipment.EquipmentWindow;
 import com.facundolinlaud.supergame.ui.view.utils.ToggleWindowListener;
-import com.facundolinlaud.supergame.model.WearType;
+import com.facundolinlaud.supergame.model.EquipSlot;
 import com.facundolinlaud.supergame.utils.mediator.Mediator;
 
 import java.util.Map;
@@ -40,7 +40,7 @@ public class EquipmentUI implements UI {
         return window;
     }
 
-    public void update(Map<WearType, Item> items) {
+    public void update(Map<EquipSlot, Item> items) {
         this.window.update(items);
     }
 }

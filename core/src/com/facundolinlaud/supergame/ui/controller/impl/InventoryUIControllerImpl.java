@@ -3,7 +3,6 @@ package com.facundolinlaud.supergame.ui.controller.impl;
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.physics.box2d.Body;
 import com.facundolinlaud.supergame.components.RenderComponent;
 import com.facundolinlaud.supergame.factory.PhysicsFactory;
 import com.facundolinlaud.supergame.components.BodyComponent;
@@ -12,8 +11,6 @@ import com.facundolinlaud.supergame.components.items.EquipableComponent;
 import com.facundolinlaud.supergame.components.items.ItemComponent;
 import com.facundolinlaud.supergame.components.items.PickupableComponent;
 import com.facundolinlaud.supergame.components.player.BagComponent;
-import com.facundolinlaud.supergame.factory.TextureFactory;
-import com.facundolinlaud.supergame.model.RenderPriority;
 import com.facundolinlaud.supergame.ui.controller.InventoryUIController;
 import com.facundolinlaud.supergame.ui.model.Item;
 import com.facundolinlaud.supergame.ui.model.equipment.Equipable;
@@ -62,7 +59,7 @@ public class InventoryUIControllerImpl implements InventoryUIController {
             Equipable equipable = null;
 
             if(equipableComponent != null){
-                equipable = new Equipable(equipableComponent.wearType, equipableComponent.attack, equipableComponent.defense);
+                equipable = new Equipable(equipableComponent.equipSlot, equipableComponent.attack, equipableComponent.defense);
             }
 
             items.add(new Item(itemComponent.name, itemComponent.picture, equipable, new Invented(i)));

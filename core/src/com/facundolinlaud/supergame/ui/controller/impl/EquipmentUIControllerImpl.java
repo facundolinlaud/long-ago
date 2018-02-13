@@ -12,7 +12,7 @@ import com.facundolinlaud.supergame.ui.model.Item;
 import com.facundolinlaud.supergame.ui.model.equipment.Equipable;
 import com.facundolinlaud.supergame.ui.view.EquipmentUI;
 import com.facundolinlaud.supergame.utils.Mappers;
-import com.facundolinlaud.supergame.model.WearType;
+import com.facundolinlaud.supergame.model.EquipSlot;
 import com.facundolinlaud.supergame.utils.events.EquipItemEvent;
 import com.facundolinlaud.supergame.utils.events.Event;
 import com.facundolinlaud.supergame.utils.events.UnequipItemEvent;
@@ -44,11 +44,11 @@ public class EquipmentUIControllerImpl implements EquipmentUIController {
     @Override
     public void update(Entity entity, WearComponent wear) {
         setEquipper(entity);
-        Map<WearType, Entity> wearables = wear.wearables;
-        Map<WearType, Item> items = new HashMap<>();
+        Map<EquipSlot, Entity> wearables = wear.wearables;
+        Map<EquipSlot, Item> items = new HashMap<>();
 
-        for(WearType wearType : wearables.keySet()){
-            Entity e = wearables.get(wearType);
+        for(EquipSlot equipSlot : wearables.keySet()){
+            Entity e = wearables.get(equipSlot);
 
             ItemComponent item = im.get(e);
             if(item == null) continue;
@@ -56,9 +56,9 @@ public class EquipmentUIControllerImpl implements EquipmentUIController {
             EquipableComponent equipable = em.get(e);
 
             /* fijate que por ahi el wear type deberia estar dentro de equipable component y no en wear component */
-            items.put(wearType,
+            items.put(equipSlot,
                     new Item(item.name, item.picture,
-                    new Equipable(wearType, equipable.attack, equipable.defense)));
+                    new Equipable(equipSlot, equipable.attack, equipable.defense)));
         }
 
         ui.update(items);
@@ -77,7 +77,7 @@ public class EquipmentUIControllerImpl implements EquipmentUIController {
         Item item = event.getItem();
 
         WearComponent wearComponent = wm.get(equipper);
-        Entity itemEntity = wearComponent.wearables.remove(item.getEquipable().getWearType());
+        Entity itemEntity = wearComponent.wearables.remove(item.getEquipable().getEquipSlot());
         BagComponent bagComponent = bm.get(equipper);
         bagComponent.addItem(itemEntity);
 
@@ -92,7 +92,7 @@ public class EquipmentUIControllerImpl implements EquipmentUIController {
         BagComponent bagComponent = bm.get(equipper);
         Entity itemEntity = bagComponent.items.remove(item.getInvented().getPositionInBag());
         WearComponent wearComponent = wm.get(equipper);
-        wearComponent.wearables.put(item.getEquipable().getWearType(), itemEntity);
+        wearComponent.wearables.put(item.getEquipable().getEquipSlot(), itemEntity);
 
         refreshEquipperSprite();
 

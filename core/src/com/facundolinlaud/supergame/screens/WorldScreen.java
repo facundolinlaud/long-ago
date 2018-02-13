@@ -77,7 +77,7 @@ public class WorldScreen implements Screen {
         res.engine.addSystem(new StackableSpriteSystem());
         res.engine.addSystem(new StackedSpritesSystem());
         res.engine.addSystem(new AnimableSpriteSystem());
-        res.engine.addSystem(new KeyboardSystem(playerInputObserver));
+        res.engine.addSystem(new PlayerInputSystem(playerInputObserver));
         res.engine.addSystem(new MovementSystem());
         res.engine.addSystem(new CameraFocusSystem(mapManager.getCamera()));
         res.engine.addSystem(new PhysicsSystem(physicsManager.getWorld()));
