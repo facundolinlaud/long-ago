@@ -14,7 +14,7 @@ import com.facundolinlaud.supergame.components.sprite.RefreshSpriteRequirementCo
 import com.facundolinlaud.supergame.components.sprite.StackableSpriteComponent;
 import com.facundolinlaud.supergame.components.sprite.StackedSpritesComponent;
 import com.facundolinlaud.supergame.model.RenderPriority;
-import com.facundolinlaud.supergame.model.EquipSlot;
+import com.facundolinlaud.supergame.model.equip.EquipSlot;
 import com.facundolinlaud.supergame.model.entity.ItemModel;
 import com.facundolinlaud.supergame.model.entity.PlayerModel;
 import com.facundolinlaud.supergame.utils.strategy.impl.SpriteRenderPositionStrategyImpl;

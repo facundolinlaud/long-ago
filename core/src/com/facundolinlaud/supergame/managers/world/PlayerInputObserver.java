@@ -4,23 +4,25 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.facundolinlaud.supergame.model.Direction;
+import com.facundolinlaud.supergame.model.status.Direction;
 
 import java.util.Stack;
 
 public class PlayerInputObserver extends InputListener {
     private Stack<Direction> movementKeysPressed;
+    private Stack<Integer> skillKeysPressed;
 
     public PlayerInputObserver() {
         movementKeysPressed = new Stack<>();
+        skillKeysPressed = new Stack<>();
     }
 
-    public boolean isGatheringRequeste(){
+    public boolean isGatheringRequested(){
         return Gdx.input.isKeyJustPressed(Input.Keys.E);
     }
 
     public boolean isAttackingRequested(){
-        return Gdx.input.isKeyJustPressed(Input.Keys.SPACE);
+        return getPlayersSkillId() != null;
     }
 
     public Direction getPlayersNewDirection(){
@@ -30,6 +32,15 @@ public class PlayerInputObserver extends InputListener {
             return null;
         else
             return movementKeysPressed.peek();
+    }
+
+    public Integer getPlayersSkillId(){
+        int keysPressed = skillKeysPressed.size();
+
+        if(keysPressed == 0)
+            return null;
+        else
+            return skillKeysPressed.peek();
     }
 
     private Direction keycodeToDirection(int keycode){
@@ -47,12 +58,26 @@ public class PlayerInputObserver extends InputListener {
         return null;
     }
 
+    private Integer keycodeToSkillId(int keycode){
+        if(keycode >= 49 && keycode <= 51){
+            return new Integer(keycode - 49);
+        }
+
+        return null;
+    }
+
     @Override
     public boolean keyDown(InputEvent event, int keycode) {
         Direction direction = keycodeToDirection(keycode);
 
         if(direction != null && !movementKeysPressed.contains(direction)){
             movementKeysPressed.push(direction);
+        }
+
+        Integer skillId = keycodeToSkillId(keycode);
+
+        if(skillId != null && !skillKeysPressed.contains(skillId)){
+            skillKeysPressed.push(skillId);
         }
 
         return super.keyDown(event, keycode);

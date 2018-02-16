@@ -31,8 +31,8 @@ import com.facundolinlaud.supergame.utils.mediator.Mediator;
  * Created by facundo on 3/25/16.
  */
 public class UIManager implements Manager {
-    private static final String SKIN_JSON_PATH = "ui/second_iteration/uiskin.json";
-    private static final String TEXTURE_ATLAS_PATH = "ui/second_iteration/uiskin.atlas";
+    private static final String SKIN_JSON_PATH = "ui/skin/uiskin.json";
+    private static final String TEXTURE_ATLAS_PATH = "ui/skin/uiskin.atlas";
     private static final int MIN_DRAG_TIME_IN_MILLISECONDS = 10;
 
     private Skin skin;

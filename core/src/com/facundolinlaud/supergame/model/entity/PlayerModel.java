@@ -1,6 +1,6 @@
 package com.facundolinlaud.supergame.model.entity;
 
-import com.facundolinlaud.supergame.model.EquipSlot;
+import com.facundolinlaud.supergame.model.equip.EquipSlot;
 
 import java.util.List;
 import java.util.Map;

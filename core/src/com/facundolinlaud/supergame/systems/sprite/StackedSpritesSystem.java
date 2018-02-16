@@ -12,7 +12,7 @@ import com.facundolinlaud.supergame.components.RenderComponent;
 import com.facundolinlaud.supergame.components.sprite.AnimableSpriteComponent;
 import com.facundolinlaud.supergame.components.sprite.RefreshSpriteRequirementComponent;
 import com.facundolinlaud.supergame.components.sprite.StackedSpritesComponent;
-import com.facundolinlaud.supergame.model.Status;
+import com.facundolinlaud.supergame.model.status.Status;
 import com.facundolinlaud.supergame.model.sprite.AnimationModel;
 import com.facundolinlaud.supergame.model.sprite.SubAnimationModel;
 import com.facundolinlaud.supergame.utils.Mappers;

@@ -2,7 +2,7 @@ package com.facundolinlaud.supergame.components.sprite;
 
 import com.badlogic.ashley.core.Component;
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.facundolinlaud.supergame.model.Status;
+import com.facundolinlaud.supergame.model.status.Status;
 
 import java.util.HashMap;
 import java.util.Map;

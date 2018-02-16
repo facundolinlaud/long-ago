@@ -1,4 +1,4 @@
-package com.facundolinlaud.supergame.model;
+package com.facundolinlaud.supergame.model.equip;
 
 /**
  * Created by facundo on 3/31/16.

@@ -1,6 +1,6 @@
 package com.facundolinlaud.supergame.ui.model.equipment;
 
-import com.facundolinlaud.supergame.model.EquipSlot;
+import com.facundolinlaud.supergame.model.equip.EquipSlot;
 
 /**
  * Created by facundo on 4/2/16.

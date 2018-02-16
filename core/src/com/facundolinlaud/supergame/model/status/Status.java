@@ -1,4 +1,4 @@
-package com.facundolinlaud.supergame.model;
+package com.facundolinlaud.supergame.model.status;
 
 /**
  * Created by facundo on 26/7/16.

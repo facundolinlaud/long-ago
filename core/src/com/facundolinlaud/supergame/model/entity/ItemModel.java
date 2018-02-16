@@ -1,7 +1,7 @@
 package com.facundolinlaud.supergame.model.entity;
 
-import com.facundolinlaud.supergame.model.EquipSlot;
-import com.facundolinlaud.supergame.model.EquipType;
+import com.facundolinlaud.supergame.model.equip.EquipSlot;
+import com.facundolinlaud.supergame.model.equip.EquipType;
 
 /**
  * Created by facundo on 27/7/16.

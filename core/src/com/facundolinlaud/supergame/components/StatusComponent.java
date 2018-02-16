@@ -1,8 +1,8 @@
 package com.facundolinlaud.supergame.components;
 
 import com.badlogic.ashley.core.Component;
-import com.facundolinlaud.supergame.model.Action;
-import com.facundolinlaud.supergame.model.Direction;
+import com.facundolinlaud.supergame.model.status.Action;
+import com.facundolinlaud.supergame.model.status.Direction;
 
 /**
  * Created by facundo on 26/7/16.
@@ -10,7 +10,6 @@ import com.facundolinlaud.supergame.model.Direction;
 public class StatusComponent implements Component {
     public Action action;
     public Direction direction;
-    public boolean gathering;
 
     public StatusComponent() {
         this.action = Action.STANDING;

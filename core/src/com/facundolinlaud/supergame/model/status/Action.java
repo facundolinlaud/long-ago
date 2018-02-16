@@ -1,4 +1,4 @@
-package com.facundolinlaud.supergame.model;
+package com.facundolinlaud.supergame.model.status;
 
 /**
  * Created by facundo on 26/7/16.
@@ -33,5 +33,11 @@ public enum Action {
         }
 
         return null;
+    }
+
+    public boolean isBusy(){
+        return this == Action.DASHING || this == Action.BLOCKING ||
+               this == Action.SHOOTING || this == Action.SPELL_CASTING ||
+               this == Action.SWINGING || this == Action.FALLING;
     }
 }

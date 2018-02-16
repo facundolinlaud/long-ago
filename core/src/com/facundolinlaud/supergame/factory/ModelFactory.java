@@ -2,6 +2,7 @@ package com.facundolinlaud.supergame.factory;
 
 import com.badlogic.gdx.Gdx;
 import com.facundolinlaud.supergame.model.entity.PlayerModel;
+import com.facundolinlaud.supergame.model.skill.SkillsModel;
 import com.facundolinlaud.supergame.model.sprite.AnimationModel;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -12,8 +13,9 @@ import java.util.Map;
 /**
  * Created by facundo on 27/7/16.
  */
-public class ModelFactory implements Dumpable {
+public class ModelFactory implements Disposable {
     private static final String PLAYER_MODEL_PATH = "model/entities/player.json";
+    private static final String SKILLS_MODEL_PATH = "model/entities/skills.json";
     private static final String DEFAULT_ANIMATION_MODEL_PATH = "model/animations/default.json";
 
     private static Map<String, Object> cache = new HashMap<>();
@@ -24,6 +26,10 @@ public class ModelFactory implements Dumpable {
 
     public static AnimationModel getDefaultAnimationModel(){
         return (AnimationModel) readModel(DEFAULT_ANIMATION_MODEL_PATH, AnimationModel.class);
+    }
+
+    public static SkillsModel getAvailableSkillsModel(){
+        return (SkillsModel) readModel(SKILLS_MODEL_PATH, SkillsModel.class);
     }
 
     private static Object readModel(String modelPath, Class clazz){

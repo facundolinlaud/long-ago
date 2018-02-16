@@ -1,10 +1,12 @@
-package com.facundolinlaud.supergame.model;
+package com.facundolinlaud.supergame.model.equip;
 
 public enum EquipType {
     SPEAR("SPEAR"),
     DAGGER("DAGGER"),
     SWORD("SWORD"),
-    BOW("BOW");
+    BOW("BOW"),
+    WAND("WAND"),
+    NOT_IMPORTANT("NOT_IMPORTANT");
 
     private String name;
 

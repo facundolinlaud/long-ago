@@ -5,16 +5,15 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.facundolinlaud.supergame.factory.AvailableSkillsFactory;
 import com.facundolinlaud.supergame.factory.PlayerFactory;
 import com.facundolinlaud.supergame.factory.ItemFactory;
 import com.facundolinlaud.supergame.components.BodyComponent;
 import com.facundolinlaud.supergame.engine.GameResources;
 import com.facundolinlaud.supergame.listeners.PhysicsEntitiesListener;
-import com.facundolinlaud.supergame.managers.world.MapManager;
-import com.facundolinlaud.supergame.managers.world.PlayerInputObserver;
-import com.facundolinlaud.supergame.managers.world.PhysicsManager;
-import com.facundolinlaud.supergame.managers.world.UIManager;
+import com.facundolinlaud.supergame.managers.world.*;
 import com.facundolinlaud.supergame.systems.*;
+import com.facundolinlaud.supergame.systems.skills.SkillCastRequestSystem;
 import com.facundolinlaud.supergame.systems.sprite.AnimableSpriteSystem;
 import com.facundolinlaud.supergame.systems.sprite.StackableSpriteSystem;
 import com.facundolinlaud.supergame.systems.sprite.StackedSpritesSystem;
@@ -25,9 +24,12 @@ import com.facundolinlaud.supergame.systems.sprite.StackedSpritesSystem;
 public class WorldScreen implements Screen {
     private GameResources res;
 
+    private AvailableSkillsFactory availableSkillsFactory;
+
     private MapManager mapManager;
     private PhysicsManager physicsManager;
     private UIManager uiManager;
+    private GameSystemsManager gameSystemsManager;
 
     private Stage stage;
 
@@ -51,6 +53,7 @@ public class WorldScreen implements Screen {
         this.mapManager = new MapManager(res.batch);
         this.physicsManager = new PhysicsManager(mapManager.getCamera(), mapManager.getMap());
         this.uiManager = new UIManager(stage);
+        this.gameSystemsManager = new GameSystemsManager(res.engine);
     }
 
     private void initializeListeners() {
@@ -82,6 +85,7 @@ public class WorldScreen implements Screen {
         res.engine.addSystem(new CameraFocusSystem(mapManager.getCamera()));
         res.engine.addSystem(new PhysicsSystem(physicsManager.getWorld()));
         res.engine.addSystem(new PickUpSystem());
+        res.engine.addSystem(new SkillCastRequestSystem());
 
         uiManager.initializeSystems(res.engine);
     }

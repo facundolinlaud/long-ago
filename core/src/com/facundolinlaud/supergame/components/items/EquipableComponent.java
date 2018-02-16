@@ -1,8 +1,8 @@
 package com.facundolinlaud.supergame.components.items;
 
 import com.badlogic.ashley.core.Component;
-import com.facundolinlaud.supergame.model.EquipType;
-import com.facundolinlaud.supergame.model.EquipSlot;
+import com.facundolinlaud.supergame.model.equip.EquipType;
+import com.facundolinlaud.supergame.model.equip.EquipSlot;
 
 /**
  * Created by facundo on 3/31/16.

@@ -8,7 +8,7 @@ import java.util.HashMap;
 /**
  * Created by facundo on 7/26/16.
  */
-public class TextureFactory implements Dumpable {
+public class TextureFactory implements Disposable {
     /** image cache */
     private static HashMap<String, SoftReference<Texture>> textures = new HashMap<>();
 
