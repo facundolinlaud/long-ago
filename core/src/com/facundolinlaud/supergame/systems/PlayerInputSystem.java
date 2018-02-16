@@ -35,10 +35,6 @@ public class PlayerInputSystem extends IteratingSystem {
         this.messageDispatcher = MessageManager.getInstance();
     }
 
-    // el skill se esta requesteando infinitamente!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    // el skill se esta requesteando infinitamente!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    // el skill se esta requesteando infinitamente!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
     @Override
     protected void processEntity(Entity player, float deltaTime) {
         StatusComponent status = sm.get(player);

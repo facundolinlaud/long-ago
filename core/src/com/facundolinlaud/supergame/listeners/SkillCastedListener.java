@@ -45,13 +45,13 @@ public class SkillCastedListener implements Telegraph {
     public boolean handleMessage(Telegram msg) {
         switch(msg.message){
             case SKILL_CAST_END:
-                handleSkillCastEnd((SkillCastEndEvent) msg.extraInfo);
+                affectSurroundingEntities((SkillCastEndEvent) msg.extraInfo);
         }
 
         return true;
     }
 
-    private void handleSkillCastEnd(SkillCastEndEvent e) {
+    private void affectSurroundingEntities(SkillCastEndEvent e) {
         ImmutableArray<Entity> victims = engine.getEntitiesFor(Family.all(
                 HealthComponent.class,
                 PositionComponent.class).get());

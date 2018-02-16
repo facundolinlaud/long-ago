@@ -8,12 +8,12 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Timer;
 import com.facundolinlaud.supergame.components.PositionComponent;
 import com.facundolinlaud.supergame.components.StatusComponent;
-import com.facundolinlaud.supergame.components.sprite.AnimableSpriteComponent;
 import com.facundolinlaud.supergame.factory.AvailableSkillsFactory;
 import com.facundolinlaud.supergame.model.skill.AreaOfEffect;
 import com.facundolinlaud.supergame.model.skill.MeleeSkill;
 import com.facundolinlaud.supergame.model.status.Action;
 import com.facundolinlaud.supergame.model.status.Direction;
+import com.facundolinlaud.supergame.model.status.Status;
 import com.facundolinlaud.supergame.utils.Mappers;
 import com.facundolinlaud.supergame.utils.events.SkillCastEndEvent;
 import com.facundolinlaud.supergame.utils.events.SkillCastInitializedEvent;
@@ -41,19 +41,26 @@ public class MeleeSkillCastStrategy implements SkillCastStrategy<MeleeSkill> {
     }
 
     private void castMeleeSkill(Entity caster, MeleeSkill skill) {
-        // casting
+        dispatchCastingEvent(caster, skill);
+        applyCastingActionToCaster(caster, skill);
+        scheduleSkillExecution(caster, skill);
+    }
+
+    private void dispatchCastingEvent(Entity caster, MeleeSkill skill){
         String skillName = skill.getName();
         float castTime = skill.getCastTime();
         SkillCastInitializedEvent castInitializedEvent = new SkillCastInitializedEvent(caster, castTime, skillName);
         messageDispatcher.dispatchMessage(SKILL_CAST_INITIALIZED, castInitializedEvent);
+    }
 
-        // casting action
+    private void applyCastingActionToCaster(Entity caster, MeleeSkill skill){
         Action skillAction = skill.getCastingAction();
         StatusComponent casterStatus = sm.get(caster);
         casterStatus.setAction(skillAction);
+    }
 
-        // timer for execution
-        Timer.schedule(new MeleeSkillCastExecution(caster, skill), castTime);
+    private void scheduleSkillExecution(Entity caster, MeleeSkill skill){
+        Timer.schedule(new MeleeSkillCastExecution(caster, skill), skill.getCastTime());
     }
 
     private class MeleeSkillCastExecution extends Timer.Task {
@@ -67,25 +74,33 @@ public class MeleeSkillCastStrategy implements SkillCastStrategy<MeleeSkill> {
 
         @Override
         public void run() {
-            // executing action
-            Action executingAction = skill.getExecutingAction();
             StatusComponent casterStatus = sm.get(caster);
-            casterStatus.setAction(executingAction);
 
-            // skill casted event
+            applyExecutionActionToCaster(caster, casterStatus);
+            dispatchCastedEvent(casterStatus);
+//            applyCoolDownToCasterSkill()
+//            float cooldown = skill.getCoolDown();
+        }
+
+        private void applyExecutionActionToCaster(Entity caster, StatusComponent casterStatus){
+            Action executingAction = skill.getExecutingAction();
+            casterStatus.setAction(executingAction);
+        }
+
+        private void dispatchCastedEvent(StatusComponent casterStatus){
             PositionComponent casterPosition = pm.get(caster);
+
             Vector2 skillEffectEpicenter = getSkillEffectEpicenterFromCasterPosition(
                     casterStatus.getDirection(),
                     casterPosition.x,
                     casterPosition.y);
+
             AreaOfEffect aoe = skill.getAreaOfEffect();
             int aoeSize = skill.getAreaOfEffectSize();
             int damage = skill.getBaseDamage();
             SkillCastEndEvent event = new SkillCastEndEvent(caster, aoe, aoeSize, skillEffectEpicenter, damage);
+            
             messageDispatcher.dispatchMessage(SKILL_CAST_END, event);
-
-            // cooldown
-            float cooldown = skill.getCoolDown();
         }
 
         private Vector2 getSkillEffectEpicenterFromCasterPosition(Direction direction, float x, float y){

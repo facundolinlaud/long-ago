@@ -39,14 +39,14 @@ public class SkillCastingListener implements Telegraph {
     public boolean handleMessage(Telegram msg) {
         switch(msg.message) {
             case SKILL_CAST_REQUESTED:
-                handleSkillCasting((SkillCastRequestedEvent) msg.extraInfo);
+                requestSkillCastingWithCorrespondingStrategy((SkillCastRequestedEvent) msg.extraInfo);
                 break;
         }
 
         return true;
     }
 
-    private void handleSkillCasting(SkillCastRequestedEvent e) {
+    private void requestSkillCastingWithCorrespondingStrategy(SkillCastRequestedEvent e) {
         Entity caster = e.getCaster();
         int skillId = e.getSkillId();
         SkillType skillType = availableSkillsFactory.getSkillTypeById(skillId);
