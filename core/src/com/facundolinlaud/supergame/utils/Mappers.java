@@ -9,7 +9,6 @@ import com.facundolinlaud.supergame.components.player.KeyboardComponent;
 import com.facundolinlaud.supergame.components.player.WearComponent;
 import com.facundolinlaud.supergame.components.skills.MeleeSkillComponent;
 import com.facundolinlaud.supergame.components.skills.RangedSkillComponent;
-import com.facundolinlaud.supergame.components.skills.SkillCastRequestComponent;
 import com.facundolinlaud.supergame.components.skills.SpellSkillComponent;
 import com.facundolinlaud.supergame.components.sprite.AnimableSpriteComponent;
 import com.facundolinlaud.supergame.components.sprite.StackableSpriteComponent;
@@ -35,7 +34,6 @@ public class Mappers {
     public static final ComponentMapper<StackableSpriteComponent> stackableSprite = ComponentMapper.getFor(StackableSpriteComponent.class);
     public static final ComponentMapper<StackedSpritesComponent> stackedSprites = ComponentMapper.getFor(StackedSpritesComponent.class);
     public static final ComponentMapper<AnimableSpriteComponent> animableSprite = ComponentMapper.getFor(AnimableSpriteComponent.class);
-    public static final ComponentMapper<SkillCastRequestComponent> skillCastRequest = ComponentMapper.getFor(SkillCastRequestComponent.class);
     public static final ComponentMapper<MeleeSkillComponent> meleeSkill = ComponentMapper.getFor(MeleeSkillComponent.class);
     public static final ComponentMapper<RangedSkillComponent> rangedSkill = ComponentMapper.getFor(RangedSkillComponent.class);
     public static final ComponentMapper<SpellSkillComponent> spellSkill = ComponentMapper.getFor(SpellSkillComponent.class);

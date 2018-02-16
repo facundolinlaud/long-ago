@@ -59,8 +59,8 @@ public class PlayerInputObserver extends InputListener {
     }
 
     private Integer keycodeToSkillId(int keycode){
-        if(keycode >= 49 && keycode <= 51){
-            return new Integer(keycode - 49);
+        if(keycode >= 8 && keycode <= 10){
+            return new Integer(keycode - 8);
         }
 
         return null;

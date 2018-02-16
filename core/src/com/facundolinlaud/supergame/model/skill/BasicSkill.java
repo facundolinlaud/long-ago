@@ -22,6 +22,8 @@ public abstract class BasicSkill {
     private int areaOfEffectSize;
     private SkillType skillType;
 
+    public BasicSkill() {}
+
     public BasicSkill(String name, String picturePath, int baseDamage, float coolDown, float castTime, boolean interruptible, EquipType equipmentRequired, DamageType skillDamageType, Action castingAction, Action executingAction, AnimationFlow animationFlow, AreaOfEffect areaOfEffect, int areaOfEffectSize, SkillType skillType) {
         this.name = name;
         this.picturePath = picturePath;

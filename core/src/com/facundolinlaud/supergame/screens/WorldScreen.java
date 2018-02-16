@@ -13,7 +13,6 @@ import com.facundolinlaud.supergame.engine.GameResources;
 import com.facundolinlaud.supergame.listeners.PhysicsEntitiesListener;
 import com.facundolinlaud.supergame.managers.world.*;
 import com.facundolinlaud.supergame.systems.*;
-import com.facundolinlaud.supergame.systems.skills.SkillCastRequestSystem;
 import com.facundolinlaud.supergame.systems.sprite.AnimableSpriteSystem;
 import com.facundolinlaud.supergame.systems.sprite.StackableSpriteSystem;
 import com.facundolinlaud.supergame.systems.sprite.StackedSpritesSystem;
@@ -85,7 +84,6 @@ public class WorldScreen implements Screen {
         res.engine.addSystem(new CameraFocusSystem(mapManager.getCamera()));
         res.engine.addSystem(new PhysicsSystem(physicsManager.getWorld()));
         res.engine.addSystem(new PickUpSystem());
-        res.engine.addSystem(new SkillCastRequestSystem());
 
         uiManager.initializeSystems(res.engine);
     }

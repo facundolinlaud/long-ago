@@ -53,11 +53,4 @@ public class SkillCastingListener implements Telegraph {
 
         strategies.get(skillType).handleSkill(caster, skillId);
     }
-    // fijarme que con esto por ahi puedo hacer cosas locas
-//    Timer.schedule(new Timer.Task(){
-//        @Override
-//        public void run() {
-//            status.action = Action.STANDING;
-//        }
-//    }, delay);
 }

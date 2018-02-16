@@ -2,8 +2,7 @@ package com.facundolinlaud.supergame.model.skill;
 
 public enum AreaOfEffect {
     SQUARE("SQUARE"),
-    CIRCLE("CIRCLE"),
-    LINE("LINE");
+    CIRCLE("CIRCLE");
 
     private String name;
 

@@ -2,22 +2,20 @@ package com.facundolinlaud.supergame.systems;
 
 import com.badlogic.ashley.core.*;
 import com.badlogic.ashley.systems.IteratingSystem;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.ai.msg.MessageDispatcher;
+import com.badlogic.gdx.ai.msg.MessageManager;
 import com.badlogic.gdx.utils.Timer;
-import com.facundolinlaud.supergame.components.items.EquipableComponent;
 import com.facundolinlaud.supergame.components.player.BagComponent;
 import com.facundolinlaud.supergame.components.player.KeyboardComponent;
-import com.facundolinlaud.supergame.components.player.WearComponent;
-import com.facundolinlaud.supergame.components.skills.SkillCastRequestComponent;
 import com.facundolinlaud.supergame.components.sprite.AnimableSpriteComponent;
 import com.facundolinlaud.supergame.managers.world.PlayerInputObserver;
 import com.facundolinlaud.supergame.model.status.Action;
 import com.facundolinlaud.supergame.model.status.Direction;
 import com.facundolinlaud.supergame.components.StatusComponent;
-import com.facundolinlaud.supergame.model.equip.EquipSlot;
-import com.facundolinlaud.supergame.model.equip.EquipType;
 import com.facundolinlaud.supergame.utils.Mappers;
+import com.facundolinlaud.supergame.utils.events.SkillCastRequestedEvent;
+
+import static com.facundolinlaud.supergame.utils.MessageCode.SKILL_CAST_REQUESTED;
 
 /**
  * Created by facundo on 3/20/16.
@@ -28,12 +26,18 @@ public class PlayerInputSystem extends IteratingSystem {
     private ComponentMapper<AnimableSpriteComponent> asm = Mappers.animableSprite;
 
     private PlayerInputObserver playerInputObserver;
+    private MessageDispatcher messageDispatcher;
 
     public PlayerInputSystem(PlayerInputObserver playerInputObserver) {
         super(Family.all(StatusComponent.class, KeyboardComponent.class).get());
 
         this.playerInputObserver = playerInputObserver;
+        this.messageDispatcher = MessageManager.getInstance();
     }
+
+    // el skill se esta requesteando infinitamente!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    // el skill se esta requesteando infinitamente!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    // el skill se esta requesteando infinitamente!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
     @Override
     protected void processEntity(Entity player, float deltaTime) {
@@ -68,32 +72,13 @@ public class PlayerInputSystem extends IteratingSystem {
         status.direction = newDirection;
     }
 
-    private void handleSkillCastingCase(Entity player, StatusComponent status) {
-        Integer skillId = playerInputObserver.getPlayersSkillId();
-        player.add(new SkillCastRequestComponent(skillId));
-    }
+    private void handleSkillCastingCase(Entity caster, StatusComponent status) {
+        Integer requestedSkillId = playerInputObserver.getPlayersSkillId();
+        SkillCastRequestedEvent event = new SkillCastRequestedEvent(caster, requestedSkillId);
 
-//    private Action resolveAttackingAnimation(Entity player){
-//        Entity playerWeapon = wm.get(player).wearables.get(EquipSlot.WEAPON);
-//
-//        if(playerWeapon == null)
-//            return Action.SWINGING;
-//
-//        EquipableComponent weaponComponent = em.get(playerWeapon);
-//        EquipType equipType = weaponComponent.equipType;
-//
-//        switch(equipType){
-//            case BOW:
-//                return Action.SHOOTING;
-//            case SPEAR:
-//                return Action.DASHING;
-//            case SWORD:
-//            case DAGGER:
-//                return Action.SWINGING;
-//            default:
-//                return null;
-//        }
-//    }
+        messageDispatcher.dispatchMessage(SKILL_CAST_REQUESTED, event);
+        System.out.println("mando mensaje con skill " + requestedSkillId);
+    }
 
     private void setSpriteIndexBackToZero(Entity entity){
         AnimableSpriteComponent animableSprite = asm.get(entity);

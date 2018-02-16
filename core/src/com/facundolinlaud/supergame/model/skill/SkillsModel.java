@@ -7,6 +7,8 @@ public class SkillsModel {
     private Map<Integer, RangedSkill> rangedSkills;
     private Map<Integer, SpellSkill> spellSkills;
 
+    public SkillsModel(){}
+
     public SkillsModel(Map<Integer, MeleeSkill> meleeSkills, Map<Integer, RangedSkill> rangedSkills, Map<Integer, SpellSkill> spellSkills) {
         this.meleeSkills = meleeSkills;
         this.rangedSkills = rangedSkills;

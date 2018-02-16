@@ -1,0 +1,22 @@
+{
+	"meleeSkills" : {
+		"0": {
+			"name": "Basic dash",
+			"picturePath": "",
+			"baseDamage": 9,
+			"coolDown": 1.5,
+			"castTime": 2.0,
+			"interruptible": false,
+			"equipmentRequired": "SPEAR",
+			"skillDamageType": "DIRECT",
+			"castingAction": "STANDING",
+			"executingAction": "DASHING",
+			"animationFlow": "TRAVERSE",
+			"areaOfEffect": "CIRCLE",
+			"areaOfEffectSize": 2,
+			"skillType": "MELEE_SKILL"
+		}
+	},
+	"rangedSkills": {},
+	"spellSkills": {}
+}

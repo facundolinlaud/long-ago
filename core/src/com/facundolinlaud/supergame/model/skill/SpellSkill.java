@@ -10,6 +10,8 @@ public class SpellSkill extends BasicSkill {
     private EffectOnEnemy effectOnEnemy;
     private SkillTrigger skillTrigger;
 
+    public SpellSkill(){}
+
     public SpellSkill(String name, String picturePath, int baseDamage, float coolDown, float castTime, boolean interruptible, EquipType equipmentRequired, DamageType skillDamageType, Action castingAction, Action executingAction, AnimationFlow animationFlow, AreaOfEffect areaOfEffect, int areaOfEffectSize, SkillType skillType, float maxTravelDistance, String particlePath, boolean onlyParticle, EffectOnEnemy effectOnEnemy, SkillTrigger skillTrigger) {
         super(name, picturePath, baseDamage, coolDown, castTime, interruptible, equipmentRequired, skillDamageType, castingAction, executingAction, animationFlow, areaOfEffect, areaOfEffectSize, skillType);
         this.maxTravelDistance = maxTravelDistance;

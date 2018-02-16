@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Timer;
 import com.facundolinlaud.supergame.components.PositionComponent;
 import com.facundolinlaud.supergame.components.StatusComponent;
+import com.facundolinlaud.supergame.components.sprite.AnimableSpriteComponent;
 import com.facundolinlaud.supergame.factory.AvailableSkillsFactory;
 import com.facundolinlaud.supergame.model.skill.AreaOfEffect;
 import com.facundolinlaud.supergame.model.skill.MeleeSkill;

@@ -33,6 +33,7 @@ public class AnimableSpriteSystem extends IteratingSystem {
         Status status = new Status(statusComponent.action, statusComponent.direction);
 
         Animation animation = animableSpriteComponent.animations.get(status);
+
         renderComponent.texture = (TextureRegion) animation.getKeyFrame(animableSpriteComponent.stateTime);
         animableSpriteComponent.stateTime += deltaTime;
     }
