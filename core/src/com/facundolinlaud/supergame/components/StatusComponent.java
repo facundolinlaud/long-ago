@@ -10,24 +10,23 @@ import com.facundolinlaud.supergame.model.status.Direction;
 public class StatusComponent implements Component {
     /* TODO: do I really need to have this logic inside the component? */
 
-    private Action previousAction;
-    private Direction previousDirection;
-
     private Action action;
     private Direction direction;
+    private boolean changeInActionOrDirection;
 
     public StatusComponent() {
         this.action = Action.STANDING;
         this.direction = Direction.RIGHT;
+        this.changeInActionOrDirection = false;
     }
 
     public void setAction(Action action){
-        this.previousAction = this.action;
+        changeInActionOrDirection = action != this.action;
         this.action = action;
     }
 
     public void setDirection(Direction direction) {
-        this.previousDirection = this.direction;
+        changeInActionOrDirection = action != this.action;
         this.direction = direction;
     }
 
@@ -39,16 +38,11 @@ public class StatusComponent implements Component {
         return this.direction;
     }
 
-    public Action getPreviousAction() {
-        return previousAction;
+    public boolean isChangeInActionOrDirection() {
+        return changeInActionOrDirection;
     }
 
-    public Direction getPreviousDirection() {
-        return previousDirection;
-    }
-
-    public void syncPreviousStatus() {
-        this.previousAction = this.action;
-        this.previousDirection = this.direction;
+    public void setChangeInActionOrDirection(boolean changeInActionOrDirection) {
+        this.changeInActionOrDirection = changeInActionOrDirection;
     }
 }

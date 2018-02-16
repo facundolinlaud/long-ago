@@ -46,7 +46,6 @@ public class MeleeSkillCastStrategy implements SkillCastStrategy<MeleeSkill> {
         float castTime = skill.getCastTime();
         SkillCastInitializedEvent castInitializedEvent = new SkillCastInitializedEvent(caster, castTime, skillName);
         messageDispatcher.dispatchMessage(SKILL_CAST_INITIALIZED, castInitializedEvent);
-        System.out.println("[DISPATCHING] SKILL_CAST_INITIALIZED");
 
         // casting action
         Action skillAction = skill.getCastingAction();
@@ -55,7 +54,6 @@ public class MeleeSkillCastStrategy implements SkillCastStrategy<MeleeSkill> {
 
         // timer for execution
         Timer.schedule(new MeleeSkillCastExecution(caster, skill), castTime);
-        System.out.println("[SCHEDULE] MeleeSkillCastExecution in " + castTime + " seconds");
     }
 
     private class MeleeSkillCastExecution extends Timer.Task {
@@ -69,8 +67,6 @@ public class MeleeSkillCastStrategy implements SkillCastStrategy<MeleeSkill> {
 
         @Override
         public void run() {
-            System.out.println("[SCHEDULE RUN] MeleeSkillCastExecution");
-
             // executing action
             Action executingAction = skill.getExecutingAction();
             StatusComponent casterStatus = sm.get(caster);
@@ -87,7 +83,6 @@ public class MeleeSkillCastStrategy implements SkillCastStrategy<MeleeSkill> {
             int damage = skill.getBaseDamage();
             SkillCastEndEvent event = new SkillCastEndEvent(caster, aoe, aoeSize, skillEffectEpicenter, damage);
             messageDispatcher.dispatchMessage(SKILL_CAST_END, event);
-            System.out.println("[SCHEDULE RUN DISPATCHING] SKILL_CAST_END");
 
             // cooldown
             float cooldown = skill.getCoolDown();

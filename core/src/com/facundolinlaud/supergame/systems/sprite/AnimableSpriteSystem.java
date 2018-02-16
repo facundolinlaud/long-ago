@@ -41,7 +41,7 @@ public class AnimableSpriteSystem extends IteratingSystem {
         Direction direction = statusComponent.getDirection();
 
         putNextFrameOnRenderComponent(entity, action, direction, animableSpriteComponent);
-        tickOrResetStateTime(deltaTime, action, direction, animableSpriteComponent, statusComponent);
+        tickOrResetStateTime(deltaTime, animableSpriteComponent, statusComponent);
     }
 
     private void putNextFrameOnRenderComponent(Entity e, Action a, Direction d, AnimableSpriteComponent animableSpriteComponent) {
@@ -52,11 +52,11 @@ public class AnimableSpriteSystem extends IteratingSystem {
     }
 
     /* TODO: see if I can make this prettier */
-    private void tickOrResetStateTime(float deltaTime, Action action, Direction direction, AnimableSpriteComponent animableSpriteComponent, StatusComponent statusComponent) {
-        if(direction != statusComponent.getPreviousDirection() || action != statusComponent.getPreviousAction()) {
+    private void tickOrResetStateTime(float deltaTime, AnimableSpriteComponent animableSpriteComponent, StatusComponent statusComponent) {
+        if(statusComponent.isChangeInActionOrDirection()){
             animableSpriteComponent.stateTime = 0f;
-            statusComponent.syncPreviousStatus();
-        }else {
+            statusComponent.setChangeInActionOrDirection(false);
+        }else{
             animableSpriteComponent.stateTime += deltaTime;
         }
     }

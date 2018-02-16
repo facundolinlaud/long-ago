@@ -39,7 +39,6 @@ public class SkillCastingListener implements Telegraph {
     public boolean handleMessage(Telegram msg) {
         switch(msg.message) {
             case SKILL_CAST_REQUESTED:
-                System.out.println("[HANDLING] SKILL_CAST_REQUESTED");
                 handleSkillCasting((SkillCastRequestedEvent) msg.extraInfo);
                 break;
         }

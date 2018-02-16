@@ -6,13 +6,14 @@ package com.facundolinlaud.supergame.model.status;
 public enum Action {
     STANDING("STANDING"),
     SPELL_CASTING("SPELL_CASTING"),
+    RANGE_CASTING("RANGE_CASTING"),
+    MELEE_DASH_CASTING("MELEE_DASH_CASTING"),
     BLOCKING("BLOCKING"),
     WALKING("WALKING"),
     SWINGING("SWINGING"),
     DASHING("DASHING"),
     SHOOTING("SHOOTING"),
     FALLING("FALLING");
-
     private String name;
 
     Action(String name) {

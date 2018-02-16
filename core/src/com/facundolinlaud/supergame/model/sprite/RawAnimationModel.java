@@ -7,14 +7,14 @@ import java.util.Map;
 /**
  * Created by facundo on 7/5/16.
  */
-public class AnimationModel {
+public class RawAnimationModel {
     private int width, height;
     private float frameDuration;
     private Map<Status, SubAnimationModel> subanimations;
 
-    public AnimationModel() {}
+    public RawAnimationModel() {}
 
-    public AnimationModel(int width, int height, float frameDuration, Map<Status, SubAnimationModel> subanimations) {
+    public RawAnimationModel(int width, int height, float frameDuration, Map<Status, SubAnimationModel> subanimations) {
         this.width = width;
         this.height = height;
         this.frameDuration = frameDuration;
@@ -55,7 +55,7 @@ public class AnimationModel {
 
     @Override
     public String toString() {
-        return "AnimationModel{" +
+        return "RawAnimationModel{" +
                 "width=" + width +
                 ", height=" + height +
                 ", frameDuration=" + frameDuration +

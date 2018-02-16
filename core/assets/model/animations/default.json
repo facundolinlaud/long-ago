@@ -29,22 +29,22 @@
 		}, "WALKING_UP": {
 			"x": 0,
 			"y": 8,
-			"length": 8,
+			"length": 9,
 			"playMode": "LOOP"
 		}, "WALKING_LEFT": {
 			"x": 0,
 			"y": 9,
-			"length": 8,
+			"length": 9,
 			"playMode": "LOOP"
 		}, "WALKING_DOWN": {
 			"x": 0,
 			"y": 10,
-			"length": 8,
+			"length": 9,
 			"playMode": "LOOP"
 		}, "WALKING_RIGHT": {
 			"x": 0,
 			"y": 11,
-			"length": 8,
+			"length": 9,
 			"playMode": "LOOP"
 
 
@@ -160,6 +160,29 @@
 			"x": 1,
 			"y": 20,
 			"length": 5,
+			"playMode": "NORMAL"
+
+
+
+		}, "MELEE_DASH_CASTING_UP": {
+			"x": 0,
+			"y": 7,
+			"length": 4,
+			"playMode": "NORMAL"
+		}, "MELEE_DASH_CASTING_LEFT": {
+			"x": 0,
+			"y": 8,
+			"length": 4,
+			"playMode": "NORMAL"
+		}, "MELEE_DASH_CASTING_DOWN": {
+			"x": 0,
+			"y": 9,
+			"length": 4,
+			"playMode": "NORMAL"
+		}, "MELEE_DASH_CASTING_RIGHT": {
+			"x": 0,
+			"y": 10,
+			"length": 4,
 			"playMode": "NORMAL"
 		}
 	}

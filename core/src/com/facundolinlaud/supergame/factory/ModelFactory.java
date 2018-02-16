@@ -3,7 +3,7 @@ package com.facundolinlaud.supergame.factory;
 import com.badlogic.gdx.Gdx;
 import com.facundolinlaud.supergame.model.entity.PlayerModel;
 import com.facundolinlaud.supergame.model.skill.SkillsModel;
-import com.facundolinlaud.supergame.model.sprite.AnimationModel;
+import com.facundolinlaud.supergame.model.sprite.RawAnimationModel;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
@@ -24,8 +24,8 @@ public class ModelFactory implements Disposable {
         return (PlayerModel) readModel(PLAYER_MODEL_PATH, PlayerModel.class);
     }
 
-    public static AnimationModel getDefaultAnimationModel(){
-        return (AnimationModel) readModel(DEFAULT_ANIMATION_MODEL_PATH, AnimationModel.class);
+    public static RawAnimationModel getDefaultAnimationModel(){
+        return (RawAnimationModel) readModel(DEFAULT_ANIMATION_MODEL_PATH, RawAnimationModel.class);
     }
 
     public static SkillsModel getAvailableSkillsModel(){

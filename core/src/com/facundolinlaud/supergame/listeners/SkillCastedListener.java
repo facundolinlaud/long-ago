@@ -10,9 +10,12 @@ import com.badlogic.gdx.ai.msg.MessageManager;
 import com.badlogic.gdx.ai.msg.Telegram;
 import com.badlogic.gdx.ai.msg.Telegraph;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Timer;
 import com.facundolinlaud.supergame.components.HealthComponent;
 import com.facundolinlaud.supergame.components.PositionComponent;
+import com.facundolinlaud.supergame.components.StatusComponent;
 import com.facundolinlaud.supergame.model.skill.AreaOfEffect;
+import com.facundolinlaud.supergame.model.status.Action;
 import com.facundolinlaud.supergame.utils.Mappers;
 import com.facundolinlaud.supergame.utils.events.EntityAttackedEvent;
 import com.facundolinlaud.supergame.utils.events.SkillCastEndEvent;
@@ -24,8 +27,10 @@ import static com.facundolinlaud.supergame.utils.MessageCode.ENTITY_ATTACKED;
 import static com.facundolinlaud.supergame.utils.MessageCode.SKILL_CAST_END;
 
 public class SkillCastedListener implements Telegraph {
+    public static final float SOME_REASONABLE_TIME_TO_LET_ANIMATION_FINISH = 0.6f;
     private ComponentMapper<PositionComponent> pm = Mappers.position;
     private ComponentMapper<HealthComponent> hm = Mappers.health;
+    private ComponentMapper<StatusComponent> sm = Mappers.status;
 
     private Engine engine;
     private MessageDispatcher messageDispatcher;
@@ -40,7 +45,6 @@ public class SkillCastedListener implements Telegraph {
     public boolean handleMessage(Telegram msg) {
         switch(msg.message){
             case SKILL_CAST_END:
-                System.out.println("[HANDLING] SKILL_CAST_END");
                 handleSkillCastEnd((SkillCastEndEvent) msg.extraInfo);
         }
 
@@ -70,6 +74,8 @@ public class SkillCastedListener implements Telegraph {
                 }
             }
         }
+
+        freeCaster(caster);
     }
 
     private AreaOfEffectCheck buildAreaOfEffectChecker(AreaOfEffect aoe, int aoeSize, Vector2 pos){
@@ -87,10 +93,19 @@ public class SkillCastedListener implements Telegraph {
     private void applyEffectsToVictim(Entity victim, Entity caster, int damage) {
         HealthComponent healthComponent = hm.get(victim);
         healthComponent.health -= damage;
-        System.out.println("Damaged enemy for " + damage + " leaving him with " + healthComponent.health + " hp left");
 
         EntityAttackedEvent event = new EntityAttackedEvent(victim, caster, damage);
         messageDispatcher.dispatchMessage(ENTITY_ATTACKED, event);
-        System.out.println("[DISPATCHING] ENTITY_ATTACKED");
+    }
+
+    /* TODO: do this thing better */
+    private void freeCaster(final Entity caster) {
+        Timer.schedule(new Timer.Task() {
+            @Override
+            public void run() {
+                StatusComponent statusComponent = sm.get(caster);
+                statusComponent.setAction(Action.STANDING);
+            }
+        }, SOME_REASONABLE_TIME_TO_LET_ANIMATION_FINISH);
     }
 }

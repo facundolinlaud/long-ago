@@ -72,7 +72,6 @@ public class PlayerInputSystem extends IteratingSystem {
         Integer requestedSkillId = playerInputObserver.getPlayersSkillId();
         SkillCastRequestedEvent event = new SkillCastRequestedEvent(caster, requestedSkillId);
 
-        System.out.println("[DISPATCHING] SKILL_CAST_REQUESTED with skillId " + requestedSkillId);
         messageDispatcher.dispatchMessage(SKILL_CAST_REQUESTED, event);
     }
 }
