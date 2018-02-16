@@ -33,8 +33,8 @@ public class MovementSystem extends IteratingSystem  {
         int toggleX = 0;
         int toggleY = 0;
 
-        if(Action.WALKING.equals(status.action)) {
-            switch (status.direction) {
+        if(Action.WALKING.equals(status.getAction())) {
+            switch (status.getDirection()) {
                 case UP:
                     toggleY = 1;
                     break;

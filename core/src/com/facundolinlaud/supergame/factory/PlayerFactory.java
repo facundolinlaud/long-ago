@@ -97,4 +97,13 @@ public class PlayerFactory {
 
         return e;
     }
+
+    public static void createEnemy(Engine engine) {
+        Entity e = new Entity()
+                .add(new RenderComponent(new TextureRegion(TextureFactory.getTexture("pictures/living/static_enemy.png"))))
+                .add(new PositionComponent(25, 48))
+                .add(new HealthComponent(100));
+
+        engine.addEntity(e);
+    }
 }

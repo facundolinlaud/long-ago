@@ -40,6 +40,7 @@ public class SkillCastedListener implements Telegraph {
     public boolean handleMessage(Telegram msg) {
         switch(msg.message){
             case SKILL_CAST_END:
+                System.out.println("[HANDLING] SKILL_CAST_END");
                 handleSkillCastEnd((SkillCastEndEvent) msg.extraInfo);
         }
 
@@ -86,8 +87,10 @@ public class SkillCastedListener implements Telegraph {
     private void applyEffectsToVictim(Entity victim, Entity caster, int damage) {
         HealthComponent healthComponent = hm.get(victim);
         healthComponent.health -= damage;
+        System.out.println("Damaged enemy for " + damage + " leaving him with " + healthComponent.health + " hp left");
 
         EntityAttackedEvent event = new EntityAttackedEvent(victim, caster, damage);
         messageDispatcher.dispatchMessage(ENTITY_ATTACKED, event);
+        System.out.println("[DISPATCHING] ENTITY_ATTACKED");
     }
 }

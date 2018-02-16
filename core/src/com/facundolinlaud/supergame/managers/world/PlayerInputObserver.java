@@ -22,7 +22,7 @@ public class PlayerInputObserver extends InputListener {
     }
 
     public boolean isAttackingRequested(){
-        return getPlayersSkillId() != null;
+        return skillKeysPressed.size() > 0;
     }
 
     public Direction getPlayersNewDirection(){
@@ -40,7 +40,7 @@ public class PlayerInputObserver extends InputListener {
         if(keysPressed == 0)
             return null;
         else
-            return skillKeysPressed.peek();
+            return skillKeysPressed.pop();
     }
 
     private Direction keycodeToDirection(int keycode){

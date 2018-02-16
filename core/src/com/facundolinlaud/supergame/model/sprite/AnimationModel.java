@@ -8,23 +8,17 @@ import java.util.Map;
  * Created by facundo on 7/5/16.
  */
 public class AnimationModel {
-    private String imagePath;
     private int width, height;
     private float frameDuration;
     private Map<Status, SubAnimationModel> subanimations;
 
     public AnimationModel() {}
 
-    public AnimationModel(String imagePath, int width, int height, float frameDuration, Map<Status, SubAnimationModel> subanimations) {
-        this.imagePath = imagePath;
+    public AnimationModel(int width, int height, float frameDuration, Map<Status, SubAnimationModel> subanimations) {
         this.width = width;
         this.height = height;
         this.frameDuration = frameDuration;
         this.subanimations = subanimations;
-    }
-
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
     }
 
     public void setWidth(int width) {
@@ -41,10 +35,6 @@ public class AnimationModel {
 
     public void setFrameDuration(float frameDuration) {
         this.frameDuration = frameDuration;
-    }
-
-    public String getImagePath() {
-        return imagePath;
     }
 
     public int getWidth() {
@@ -66,8 +56,7 @@ public class AnimationModel {
     @Override
     public String toString() {
         return "AnimationModel{" +
-                "imagePath='" + imagePath + '\'' +
-                ", width=" + width +
+                "width=" + width +
                 ", height=" + height +
                 ", frameDuration=" + frameDuration +
                 ", subanimations=" + subanimations +

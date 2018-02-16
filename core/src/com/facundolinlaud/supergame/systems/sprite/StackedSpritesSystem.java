@@ -67,7 +67,7 @@ public class StackedSpritesSystem extends IteratingSystem {
                 segments.add(new TextureRegion(sprites, x + i * width, y, width, height));
             }
 
-            animations.put(status, new Animation(frameDuration, segments, Animation.PlayMode.LOOP));
+            animations.put(status, new Animation(frameDuration, segments, subAnimation.getPlayMode()));
         }
 
         return animations;

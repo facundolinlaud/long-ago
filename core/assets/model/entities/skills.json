@@ -9,7 +9,7 @@
 			"interruptible": false,
 			"equipmentRequired": "SPEAR",
 			"skillDamageType": "DIRECT",
-			"castingAction": "STANDING",
+			"castingAction": "SPELL_CASTING",
 			"executingAction": "DASHING",
 			"animationFlow": "TRAVERSE",
 			"areaOfEffect": "CIRCLE",

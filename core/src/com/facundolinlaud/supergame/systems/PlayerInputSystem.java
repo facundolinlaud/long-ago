@@ -44,7 +44,7 @@ public class PlayerInputSystem extends IteratingSystem {
         StatusComponent status = sm.get(player);
         BagComponent bag = bm.get(player);
 
-        if(status.action.isBusy())
+        if(status.getAction().isBusy())
             return;
 
         boolean isSkillCastingRequested = playerInputObserver.isAttackingRequested();
@@ -54,13 +54,9 @@ public class PlayerInputSystem extends IteratingSystem {
             handleMovementCase(status, newDirection);
         }else{
             if(isSkillCastingRequested){
-                if(status.direction != newDirection)
-                    setSpriteIndexBackToZero(player);
-
                 handleSkillCastingCase(player, status);
-                scheduleStatusReset(status);
             }else{
-                status.action = Action.STANDING;
+                status.setAction(Action.STANDING);
             }
         }
 
@@ -68,31 +64,15 @@ public class PlayerInputSystem extends IteratingSystem {
     }
 
     private void handleMovementCase(StatusComponent status, Direction newDirection) {
-        status.action = Action.WALKING;
-        status.direction = newDirection;
+        status.setAction(Action.WALKING);
+        status.setDirection(newDirection);
     }
 
     private void handleSkillCastingCase(Entity caster, StatusComponent status) {
         Integer requestedSkillId = playerInputObserver.getPlayersSkillId();
         SkillCastRequestedEvent event = new SkillCastRequestedEvent(caster, requestedSkillId);
 
+        System.out.println("[DISPATCHING] SKILL_CAST_REQUESTED with skillId " + requestedSkillId);
         messageDispatcher.dispatchMessage(SKILL_CAST_REQUESTED, event);
-        System.out.println("mando mensaje con skill " + requestedSkillId);
-    }
-
-    private void setSpriteIndexBackToZero(Entity entity){
-        AnimableSpriteComponent animableSprite = asm.get(entity);
-        animableSprite.resetStateTime();
-    }
-
-    private void scheduleStatusReset(final StatusComponent status) {
-        float delay = 0.60f; // seconds
-
-        Timer.schedule(new Timer.Task(){
-            @Override
-            public void run() {
-                status.action = Action.STANDING;
-            }
-        }, delay);
     }
 }
