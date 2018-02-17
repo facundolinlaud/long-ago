@@ -1,4 +1,4 @@
-package com.facundolinlaud.supergame.utils.strategy.impl;
+package com.facundolinlaud.supergame.strategies.impl;
 
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
@@ -13,23 +13,22 @@ import com.facundolinlaud.supergame.model.skill.AreaOfEffect;
 import com.facundolinlaud.supergame.model.skill.MeleeSkill;
 import com.facundolinlaud.supergame.model.status.Action;
 import com.facundolinlaud.supergame.model.status.Direction;
-import com.facundolinlaud.supergame.model.status.Status;
 import com.facundolinlaud.supergame.utils.Mappers;
 import com.facundolinlaud.supergame.utils.events.SkillCastEndEvent;
 import com.facundolinlaud.supergame.utils.events.SkillCastInitializedEvent;
-import com.facundolinlaud.supergame.utils.strategy.SkillCastStrategy;
+import com.facundolinlaud.supergame.strategies.SkillCastStrategy;
 
 import static com.facundolinlaud.supergame.utils.MessageCode.SKILL_CAST_END;
 import static com.facundolinlaud.supergame.utils.MessageCode.SKILL_CAST_INITIALIZED;
 
-public class MeleeSkillCastStrategy implements SkillCastStrategy<MeleeSkill> {
+public class MeleeSkillCastStrategyImpl implements SkillCastStrategy<MeleeSkill> {
     private ComponentMapper<StatusComponent> sm = Mappers.status;
     private ComponentMapper<PositionComponent> pm = Mappers.position;
 
     private MessageDispatcher messageDispatcher;
     private AvailableSkillsFactory availableSkillsFactory;
 
-    public MeleeSkillCastStrategy(AvailableSkillsFactory availableSkillsFactory) {
+    public MeleeSkillCastStrategyImpl(AvailableSkillsFactory availableSkillsFactory) {
         this.messageDispatcher = MessageManager.getInstance();
         this.availableSkillsFactory = availableSkillsFactory;
     }
@@ -99,7 +98,7 @@ public class MeleeSkillCastStrategy implements SkillCastStrategy<MeleeSkill> {
             int aoeSize = skill.getAreaOfEffectSize();
             int damage = skill.getBaseDamage();
             SkillCastEndEvent event = new SkillCastEndEvent(caster, aoe, aoeSize, skillEffectEpicenter, damage);
-            
+
             messageDispatcher.dispatchMessage(SKILL_CAST_END, event);
         }
 

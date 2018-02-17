@@ -19,9 +19,9 @@ import com.facundolinlaud.supergame.model.status.Action;
 import com.facundolinlaud.supergame.utils.Mappers;
 import com.facundolinlaud.supergame.utils.events.EntityAttackedEvent;
 import com.facundolinlaud.supergame.utils.events.SkillCastEndEvent;
-import com.facundolinlaud.supergame.utils.strategy.AreaOfEffectCheck;
-import com.facundolinlaud.supergame.utils.strategy.impl.CircleAreaOfEffectCheck;
-import com.facundolinlaud.supergame.utils.strategy.impl.SquareAreaOfEffectCheck;
+import com.facundolinlaud.supergame.strategies.AreaOfEffectCheckStrategy;
+import com.facundolinlaud.supergame.strategies.impl.CircleAreaOfEffectCheckStrategyStrategyImpl;
+import com.facundolinlaud.supergame.strategies.impl.SquareAreaOfEffectCheckStrategyStrategyImpl;
 
 import static com.facundolinlaud.supergame.utils.MessageCode.ENTITY_ATTACKED;
 import static com.facundolinlaud.supergame.utils.MessageCode.SKILL_CAST_END;
@@ -58,7 +58,7 @@ public class SkillCastedListener implements Telegraph {
 
         Entity caster = e.getCaster();
 
-        AreaOfEffectCheck aoeCheck = buildAreaOfEffectChecker(
+        AreaOfEffectCheckStrategy aoeCheck = buildAreaOfEffectChecker(
                 e.getAreaOfEffect(),
                 e.getAreaOfEffectSize(),
                 e.getSkillEffectEpicenter());
@@ -78,13 +78,13 @@ public class SkillCastedListener implements Telegraph {
         freeCaster(caster);
     }
 
-    private AreaOfEffectCheck buildAreaOfEffectChecker(AreaOfEffect aoe, int aoeSize, Vector2 pos){
-        AreaOfEffectCheck aoeCheck;
+    private AreaOfEffectCheckStrategy buildAreaOfEffectChecker(AreaOfEffect aoe, int aoeSize, Vector2 pos){
+        AreaOfEffectCheckStrategy aoeCheck;
 
         if(AreaOfEffect.CIRCLE.equals(aoe)){
-            aoeCheck = new CircleAreaOfEffectCheck(pos, aoeSize);
+            aoeCheck = new CircleAreaOfEffectCheckStrategyStrategyImpl(pos, aoeSize);
         }else{
-            aoeCheck = new SquareAreaOfEffectCheck(pos, aoeSize);
+            aoeCheck = new SquareAreaOfEffectCheckStrategyStrategyImpl(pos, aoeSize);
         }
 
         return aoeCheck;
@@ -92,13 +92,13 @@ public class SkillCastedListener implements Telegraph {
 
     private void applyEffectsToVictim(Entity victim, Entity caster, int damage) {
         HealthComponent healthComponent = hm.get(victim);
-        healthComponent.health -= damage;
+        healthComponent.currentHealth -= damage;
 
         EntityAttackedEvent event = new EntityAttackedEvent(victim, caster, damage);
         messageDispatcher.dispatchMessage(ENTITY_ATTACKED, event);
     }
 
-    /* TODO: do this thing better */
+    /* TODO: do this thing better. check isAnimationFinished in AnimableSpriteSystem maybe? */
     private void freeCaster(final Entity caster) {
         Timer.schedule(new Timer.Task() {
             @Override

@@ -1,8 +1,8 @@
-package com.facundolinlaud.supergame.utils.strategy;
+package com.facundolinlaud.supergame.strategies;
 
 import com.badlogic.gdx.math.Vector2;
 
-public interface AreaOfEffectCheck {
+public interface AreaOfEffectCheckStrategy {
     boolean isInArea(Vector2 pos);
 
     boolean isInArea(int xCheck, int yCheck);

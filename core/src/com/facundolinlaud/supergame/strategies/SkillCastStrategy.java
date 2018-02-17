@@ -1,4 +1,4 @@
-package com.facundolinlaud.supergame.utils.strategy;
+package com.facundolinlaud.supergame.strategies;
 
 import com.badlogic.ashley.core.Entity;
 import com.facundolinlaud.supergame.model.skill.BasicSkill;

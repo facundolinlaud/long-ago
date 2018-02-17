@@ -15,6 +15,7 @@ import java.util.Map;
  */
 public class ModelFactory implements Disposable {
     private static final String PLAYER_MODEL_PATH = "model/entities/player.json";
+    private static final String ENEMY_MODEL_PATH = "model/entities/enemy.json";
     private static final String SKILLS_MODEL_PATH = "model/entities/skills.json";
     private static final String DEFAULT_ANIMATION_MODEL_PATH = "model/animations/default.json";
 
@@ -22,6 +23,10 @@ public class ModelFactory implements Disposable {
 
     public static PlayerModel getPlayerModel(){
         return (PlayerModel) readModel(PLAYER_MODEL_PATH, PlayerModel.class);
+    }
+
+    public static PlayerModel getEnemyModel(){
+        return (PlayerModel) readModel(ENEMY_MODEL_PATH, PlayerModel.class);
     }
 
     public static RawAnimationModel getDefaultAnimationModel(){

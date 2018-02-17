@@ -1,14 +1,14 @@
-package com.facundolinlaud.supergame.utils.strategy.impl;
+package com.facundolinlaud.supergame.strategies.impl;
 
 import com.badlogic.gdx.math.Vector2;
-import com.facundolinlaud.supergame.utils.strategy.AreaOfEffectCheck;
+import com.facundolinlaud.supergame.strategies.AreaOfEffectCheckStrategy;
 
-public class SquareAreaOfEffectCheck implements AreaOfEffectCheck {
+public class SquareAreaOfEffectCheckStrategyStrategyImpl implements AreaOfEffectCheckStrategy {
     private int x;
     private int y;
     private int sideSize;
 
-    public SquareAreaOfEffectCheck(Vector2 pos, int sideSize) {
+    public SquareAreaOfEffectCheckStrategyStrategyImpl(Vector2 pos, int sideSize) {
         this.x = (int) pos.x;
         this.y = (int) pos.y;
         this.sideSize = sideSize;

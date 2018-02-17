@@ -165,23 +165,23 @@
 
 
 		}, "MELEE_DASH_CASTING_UP": {
-			"x": 0,
-			"y": 7,
+			"x": 4,
+			"y": 4,
 			"length": 4,
 			"playMode": "NORMAL"
 		}, "MELEE_DASH_CASTING_LEFT": {
-			"x": 0,
-			"y": 8,
+			"x": 4,
+			"y": 5,
 			"length": 4,
 			"playMode": "NORMAL"
 		}, "MELEE_DASH_CASTING_DOWN": {
-			"x": 0,
-			"y": 9,
+			"x": 4,
+			"y": 6,
 			"length": 4,
 			"playMode": "NORMAL"
 		}, "MELEE_DASH_CASTING_RIGHT": {
-			"x": 0,
-			"y": 10,
+			"x": 4,
+			"y": 7,
 			"length": 4,
 			"playMode": "NORMAL"
 		}

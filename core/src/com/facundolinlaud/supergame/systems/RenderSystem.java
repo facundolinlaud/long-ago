@@ -21,6 +21,7 @@ import java.util.Comparator;
 public class RenderSystem extends SortedIteratingSystem {
     private ComponentMapper<PositionComponent> pm = Mappers.position;
     private ComponentMapper<RenderComponent> rm = Mappers.render;
+    private static final float PX_PER_METER = 32f;
 
     private SpriteBatch spriteBatch;
 
@@ -37,8 +38,8 @@ public class RenderSystem extends SortedIteratingSystem {
         TextureRegion texture = renderComponent.texture;
 
         if(texture != null) {
-            float width = texture.getRegionWidth() / 32f;
-            float height = texture.getRegionHeight() / 32f;
+            float width = texture.getRegionWidth() / PX_PER_METER;
+            float height = texture.getRegionHeight() / PX_PER_METER;
 
             Vector2 pos = renderComponent.renderPositionStrategy.process(positionComponent.x, positionComponent.y);
 

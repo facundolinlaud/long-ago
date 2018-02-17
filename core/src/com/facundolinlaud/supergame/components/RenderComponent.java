@@ -3,8 +3,8 @@ package com.facundolinlaud.supergame.components;
 import com.badlogic.ashley.core.Component;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.facundolinlaud.supergame.model.RenderPriority;
-import com.facundolinlaud.supergame.utils.strategy.RenderPositionStrategy;
-import com.facundolinlaud.supergame.utils.strategy.impl.DefaultRenderPositionStrategyImpl;
+import com.facundolinlaud.supergame.strategies.RenderPositionStrategy;
+import com.facundolinlaud.supergame.strategies.impl.DefaultRenderPositionStrategyImpl;
 
 /**
  * Created by facundo on 3/18/16.
@@ -17,6 +17,11 @@ public class RenderComponent implements Component {
     {
         this.priority = RenderPriority.createNormalRenderPriority();
         this.renderPositionStrategy = new DefaultRenderPositionStrategyImpl();
+    }
+
+    public RenderComponent(TextureRegion texture, RenderPositionStrategy renderPositionStrategy) {
+        this.texture = texture;
+        this.renderPositionStrategy = renderPositionStrategy;
     }
 
     public RenderComponent(TextureRegion texture, RenderPriority priority) {

@@ -9,8 +9,8 @@ import com.badlogic.gdx.ai.msg.Telegraph;
 import com.facundolinlaud.supergame.factory.AvailableSkillsFactory;
 import com.facundolinlaud.supergame.model.skill.SkillType;
 import com.facundolinlaud.supergame.utils.events.SkillCastRequestedEvent;
-import com.facundolinlaud.supergame.utils.strategy.SkillCastStrategy;
-import com.facundolinlaud.supergame.utils.strategy.impl.MeleeSkillCastStrategy;
+import com.facundolinlaud.supergame.strategies.SkillCastStrategy;
+import com.facundolinlaud.supergame.strategies.impl.MeleeSkillCastStrategyImpl;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,7 +30,7 @@ public class SkillCastingListener implements Telegraph {
         this.messageDispatcher.addListener(this, SKILL_CAST_REQUESTED);
 
         this.strategies = new HashMap<>();
-        this.strategies.put(SkillType.MELEE_SKILL, new MeleeSkillCastStrategy(availableSkillsFactory));
+        this.strategies.put(SkillType.MELEE_SKILL, new MeleeSkillCastStrategyImpl(availableSkillsFactory));
 //        this.strategies.put(SkillType.RANGED_SKILL, new RangedSkillCastStrategy());
 //        this.strategies.put(SkillType.SPELL_SKILL, new SpellSkillCastStrategy());
     }

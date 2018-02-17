@@ -17,7 +17,7 @@ import com.facundolinlaud.supergame.model.RenderPriority;
 import com.facundolinlaud.supergame.model.equip.EquipSlot;
 import com.facundolinlaud.supergame.model.entity.ItemModel;
 import com.facundolinlaud.supergame.model.entity.PlayerModel;
-import com.facundolinlaud.supergame.utils.strategy.impl.SpriteRenderPositionStrategyImpl;
+import com.facundolinlaud.supergame.strategies.impl.SpriteRenderPositionStrategyImpl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -99,10 +99,18 @@ public class PlayerFactory {
     }
 
     public static void createEnemy(Engine engine) {
+        PlayerModel enemyModel = ModelFactory.getEnemyModel();
+
         Entity e = new Entity()
-                .add(new RenderComponent(new TextureRegion(TextureFactory.getTexture("pictures/living/static_enemy.png"))))
-                .add(new PositionComponent(25, 48))
-                .add(new HealthComponent(100));
+                .add(new RenderComponent(new SpriteRenderPositionStrategyImpl()))
+                .add(new PositionComponent(enemyModel.getX(), enemyModel.getY()))
+                .add(new HealthComponent(100, 99))
+                .add(new BodyComponent(PhysicsFactory.get().createItemBody()))
+                .add(new StatusComponent())
+                .add(new AnimableSpriteComponent())
+                .add(new StackedSpritesComponent(ModelFactory.getDefaultAnimationModel()))
+                .add(new RefreshSpriteRequirementComponent())
+                .add(new WearComponent(createWearablesEntities(engine, enemyModel)));
 
         engine.addEntity(e);
     }

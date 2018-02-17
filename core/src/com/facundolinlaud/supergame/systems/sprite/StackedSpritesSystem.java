@@ -33,7 +33,7 @@ public class StackedSpritesSystem extends IteratingSystem {
 
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
-        // consigo el cropping strategy de la entity
+        // consigo el cropping strategies de la entity
         // construyo las animations y las pongo en el AnimableSpriteComponent
 
         StackedSpritesComponent stackedSpritesComponent = stacked.get(entity);

@@ -61,8 +61,8 @@ public class WorldScreen implements Screen {
     }
 
     private void initializeEntities(){
-        PlayerFactory.createPlayer(res.engine);
         PlayerFactory.createEnemy(res.engine);
+        PlayerFactory.createPlayer(res.engine);
 
         for(float i = 0; i < 14; i++){
             res.engine.addEntity(ItemFactory.createCoins());
@@ -85,6 +85,7 @@ public class WorldScreen implements Screen {
         res.engine.addSystem(new CameraFocusSystem(mapManager.getCamera()));
         res.engine.addSystem(new PhysicsSystem(physicsManager.getWorld()));
         res.engine.addSystem(new PickUpSystem());
+        res.engine.addSystem(new HealthSystem(res.batch));
 
         uiManager.initializeSystems(res.engine);
     }
