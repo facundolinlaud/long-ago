@@ -17,7 +17,7 @@ import java.util.List;
  * Created by facundo on 3/26/16.
  */
 public class InventoryUI implements UI {
-    private static final int ITEM_COUNT = 17;
+    private static final int ITEM_COUNT = 20;
 
     private InventoryWindow window;
 

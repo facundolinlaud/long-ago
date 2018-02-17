@@ -46,9 +46,12 @@ public class MeleeSkillCastStrategyImpl implements SkillCastStrategy<MeleeSkill>
     }
 
     private void dispatchCastingEvent(Entity caster, MeleeSkill skill){
+        PositionComponent positionComponent = pm.get(caster);
+        Vector2 casterPosition = new Vector2(positionComponent.x, positionComponent.y);
         String skillName = skill.getName();
         float castTime = skill.getCastTime();
-        SkillCastInitializedEvent castInitializedEvent = new SkillCastInitializedEvent(caster, castTime, skillName);
+
+        SkillCastInitializedEvent castInitializedEvent = new SkillCastInitializedEvent(casterPosition, castTime, skillName);
         messageDispatcher.dispatchMessage(SKILL_CAST_INITIALIZED, castInitializedEvent);
     }
 

@@ -13,10 +13,12 @@ import com.facundolinlaud.supergame.components.RenderComponent;
 import com.facundolinlaud.supergame.components.player.KeyboardComponent;
 import com.facundolinlaud.supergame.utils.Mappers;
 
+import static com.facundolinlaud.supergame.utils.Dimensions.BOX_2D_OFFSET;
+import static com.facundolinlaud.supergame.utils.Dimensions.PX_PER_METER;
+
 public class HealthSystem extends IteratingSystem {
     private static final String HEALTH_BAR_BACKGROUND_PATH = "ui/game/health_bar_background.png";
     private static final String HEALTH_BAR_FILL_PATH = "ui/game/health_bar_fill.png";
-    private static final float PX_PER_METER = 32f;
 
     private ComponentMapper<HealthComponent> hm = Mappers.health;
     private ComponentMapper<PositionComponent> pm = Mappers.position;
@@ -41,7 +43,7 @@ public class HealthSystem extends IteratingSystem {
 
         this.xHealthBarFillOffset = 1 / PX_PER_METER;
         this.yHealthBarFillOffset = 1 / PX_PER_METER;
-        this.xHealthBarsOffset = -0.5f;
+        this.xHealthBarsOffset = -BOX_2D_OFFSET;
         this.yHealthBarsOffset = 1.8f;
 
         this.sizeOfFullHealthBar = healthBarFill.getRegionWidth();

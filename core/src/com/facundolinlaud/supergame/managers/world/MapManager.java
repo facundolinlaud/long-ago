@@ -40,7 +40,7 @@ public class MapManager implements Manager {
 
     private void initializeMap() {
         this.map = new TmxMapLoader().load(PATH_TO_TILE_MAP);
-        this.mapRenderer = new OrthogonalTiledMapRenderer(this.map, Dimensions.ONE_PIXEL_IN_METERS, this.batch);
+        this.mapRenderer = new OrthogonalTiledMapRenderer(this.map, Dimensions.METERS_PER_PX, this.batch);
     }
 
     @Override

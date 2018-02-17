@@ -1,20 +1,20 @@
 package com.facundolinlaud.supergame.utils.events;
 
-import com.badlogic.ashley.core.Entity;
+import com.badlogic.gdx.math.Vector2;
 
 public class SkillCastInitializedEvent extends Event {
-    private Entity caster;
+    private Vector2 casterPosition;
     private float castTime;
     private String skillName;
 
-    public SkillCastInitializedEvent(Entity caster, float castTime, String skillName) {
-        this.caster = caster;
+    public SkillCastInitializedEvent(Vector2 casterPosition, float castTime, String skillName) {
+        this.casterPosition = casterPosition;
         this.castTime = castTime;
         this.skillName = skillName;
     }
 
-    public Entity getCaster() {
-        return caster;
+    public Vector2 getCasterPosition() {
+        return casterPosition;
     }
 
     public float getCastTime() {

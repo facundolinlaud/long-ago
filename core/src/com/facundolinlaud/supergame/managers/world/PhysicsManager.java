@@ -54,11 +54,11 @@ public class PhysicsManager implements Manager {
             RectangleMapObject object = (RectangleMapObject) objectIt.next();
             Rectangle rectangle = object.getRectangle();
 
-            float width = rectangle.getWidth() / Dimensions.ONE_METER_IN_PIXELS;
-            float height = rectangle.getHeight() / Dimensions.ONE_METER_IN_PIXELS;
+            float width = rectangle.getWidth() / Dimensions.PX_PER_METER;
+            float height = rectangle.getHeight() / Dimensions.PX_PER_METER;
 
-            float x = (rectangle.getX() / Dimensions.ONE_METER_IN_PIXELS) + width / 2;
-            float y = (rectangle.getY() / Dimensions.ONE_METER_IN_PIXELS) + height / 2;
+            float x = (rectangle.getX() / Dimensions.PX_PER_METER) + width / 2;
+            float y = (rectangle.getY() / Dimensions.PX_PER_METER) + height / 2;
 
             physicsFactory.createObstacleBody(x, y, width, height);
         }
