@@ -20,9 +20,11 @@ public class CastingBarUI extends Group implements UI {
         Skin skin = new Skin(Gdx.files.internal(SKIN_JSON_PATH));
 
         progressBar = new ProgressBar(0f, 100f, 1f, false, skin);
-        progressBar.setHeight(0.5f * PX_PER_METER);
+        progressBar.setPosition(PX_PER_METER, 0);
+        progressBar.setHeight(0.25f * PX_PER_METER);
+        progressBar.setWidth(2 * PX_PER_METER);
 
-        float x = Gdx.graphics.getWidth() / 2 - this.getWidth() / 2 - 1.75f * PX_PER_METER;
+        float x = Gdx.graphics.getWidth() / 2 - this.getWidth() / 2 - 1.5f * PX_PER_METER;
         float y = Gdx.graphics.getHeight() / 2 - 0.5f * PX_PER_METER;
         this.setPosition(x, y);
 
