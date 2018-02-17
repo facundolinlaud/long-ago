@@ -61,14 +61,17 @@ public class WorldScreen implements Screen {
     }
 
     private void initializeEntities(){
-        PlayerFactory.createEnemy(res.engine);
+        for(int i = 0; i < 4; i++){
+            PlayerFactory.createEnemy(res.engine);
+        }
+        
         PlayerFactory.createPlayer(res.engine);
 
-        for(float i = 0; i < 14; i++){
+        for(int i = 0; i < 14; i++){
             res.engine.addEntity(ItemFactory.createCoins());
         }
 
-        for(float i = 0; i < 4; i++){
+        for(int i = 0; i < 4; i++){
             res.engine.addEntity(ItemFactory.createSword());
         }
     }
