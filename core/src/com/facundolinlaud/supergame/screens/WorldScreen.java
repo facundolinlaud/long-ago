@@ -64,7 +64,7 @@ public class WorldScreen implements Screen {
         for(int i = 0; i < 4; i++){
             PlayerFactory.createEnemy(res.engine);
         }
-        
+
         PlayerFactory.createPlayer(res.engine);
 
         for(int i = 0; i < 14; i++){
