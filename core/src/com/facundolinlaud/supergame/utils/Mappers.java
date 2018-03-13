@@ -7,9 +7,10 @@ import com.facundolinlaud.supergame.components.items.ItemComponent;
 import com.facundolinlaud.supergame.components.player.BagComponent;
 import com.facundolinlaud.supergame.components.player.KeyboardComponent;
 import com.facundolinlaud.supergame.components.player.WearComponent;
-import com.facundolinlaud.supergame.components.skills.MeleeSkillComponent;
-import com.facundolinlaud.supergame.components.skills.RangedSkillComponent;
-import com.facundolinlaud.supergame.components.skills.SpellSkillComponent;
+import com.facundolinlaud.supergame.components.skills.SkillCastingComponent;
+import com.facundolinlaud.supergame.components.skills.SkillCastedComponent;
+import com.facundolinlaud.supergame.components.skills.SkillCastingRequestComponent;
+import com.facundolinlaud.supergame.components.skills.SkillTargetedComponent;
 import com.facundolinlaud.supergame.components.sprite.AnimableSpriteComponent;
 import com.facundolinlaud.supergame.components.sprite.StackableSpriteComponent;
 import com.facundolinlaud.supergame.components.sprite.StackedSpritesComponent;
@@ -34,7 +35,8 @@ public class Mappers {
     public static final ComponentMapper<StackableSpriteComponent> stackableSprite = ComponentMapper.getFor(StackableSpriteComponent.class);
     public static final ComponentMapper<StackedSpritesComponent> stackedSprites = ComponentMapper.getFor(StackedSpritesComponent.class);
     public static final ComponentMapper<AnimableSpriteComponent> animableSprite = ComponentMapper.getFor(AnimableSpriteComponent.class);
-    public static final ComponentMapper<MeleeSkillComponent> meleeSkill = ComponentMapper.getFor(MeleeSkillComponent.class);
-    public static final ComponentMapper<RangedSkillComponent> rangedSkill = ComponentMapper.getFor(RangedSkillComponent.class);
-    public static final ComponentMapper<SpellSkillComponent> spellSkill = ComponentMapper.getFor(SpellSkillComponent.class);
+    public static final ComponentMapper<SkillCastingRequestComponent> skillCastingRequest = ComponentMapper.getFor(SkillCastingRequestComponent.class);
+    public static final ComponentMapper<SkillCastedComponent> meleeSkill = ComponentMapper.getFor(SkillCastedComponent.class);
+    public static final ComponentMapper<SkillCastingComponent> meleeSkillCasting = ComponentMapper.getFor(SkillCastingComponent.class);
+    public static final ComponentMapper<SkillTargetedComponent> skillTargeted = ComponentMapper.getFor(SkillTargetedComponent.class);
 }

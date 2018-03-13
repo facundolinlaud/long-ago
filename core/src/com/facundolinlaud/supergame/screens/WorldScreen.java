@@ -1,5 +1,6 @@
 package com.facundolinlaud.supergame.screens;
 
+import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -13,6 +14,9 @@ import com.facundolinlaud.supergame.engine.GameResources;
 import com.facundolinlaud.supergame.listeners.PhysicsEntitiesListener;
 import com.facundolinlaud.supergame.managers.world.*;
 import com.facundolinlaud.supergame.systems.*;
+import com.facundolinlaud.supergame.systems.skills.SkillCastingRequestSystem;
+import com.facundolinlaud.supergame.systems.skills.SkillCastingSystem;
+import com.facundolinlaud.supergame.systems.skills.SkillTargetedSystem;
 import com.facundolinlaud.supergame.systems.sprite.AnimableSpriteSystem;
 import com.facundolinlaud.supergame.systems.sprite.StackableSpriteSystem;
 import com.facundolinlaud.supergame.systems.sprite.StackedSpritesSystem;
@@ -23,12 +27,9 @@ import com.facundolinlaud.supergame.systems.sprite.StackedSpritesSystem;
 public class WorldScreen implements Screen {
     private GameResources res;
 
-    private AvailableSkillsFactory availableSkillsFactory;
-
     private MapManager mapManager;
     private PhysicsManager physicsManager;
     private UIManager uiManager;
-    private GameSystemsManager gameSystemsManager;
 
     private Stage stage;
 
@@ -52,7 +53,6 @@ public class WorldScreen implements Screen {
         this.mapManager = new MapManager(res.batch);
         this.physicsManager = new PhysicsManager(mapManager.getCamera(), mapManager.getMap());
         this.uiManager = new UIManager(stage);
-        this.gameSystemsManager = new GameSystemsManager(res.engine);
     }
 
     private void initializeListeners() {
@@ -79,18 +79,22 @@ public class WorldScreen implements Screen {
     private void initializeSystems() {
         PlayerInputObserver playerInputObserver = new PlayerInputObserver();
         stage.addListener(playerInputObserver);
+        Engine engine = res.engine;
 
-        res.engine.addSystem(new StackableSpriteSystem());
-        res.engine.addSystem(new StackedSpritesSystem());
-        res.engine.addSystem(new AnimableSpriteSystem());
-        res.engine.addSystem(new PlayerInputSystem(playerInputObserver));
-        res.engine.addSystem(new MovementSystem());
-        res.engine.addSystem(new CameraFocusSystem(mapManager.getCamera()));
-        res.engine.addSystem(new PhysicsSystem(physicsManager.getWorld()));
-        res.engine.addSystem(new PickUpSystem());
-        res.engine.addSystem(new HealthSystem(res.batch));
+        engine.addSystem(new StackableSpriteSystem());
+        engine.addSystem(new StackedSpritesSystem());
+        engine.addSystem(new AnimableSpriteSystem());
+        engine.addSystem(new PlayerInputSystem(playerInputObserver));
+        engine.addSystem(new MovementSystem());
+        engine.addSystem(new CameraFocusSystem(mapManager.getCamera()));
+        engine.addSystem(new PhysicsSystem(physicsManager.getWorld()));
+        engine.addSystem(new PickUpSystem());
+        engine.addSystem(new HealthSystem(res.batch));
+        engine.addSystem(new SkillCastingRequestSystem(new AvailableSkillsFactory()));
+        engine.addSystem(new SkillCastingSystem(engine));
+        engine.addSystem(new SkillTargetedSystem());
 
-        uiManager.initializeSystems(res.engine);
+        uiManager.initializeSystems(engine);
     }
 
     @Override

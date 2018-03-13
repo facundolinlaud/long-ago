@@ -39,4 +39,17 @@ public class AvailableSkillsFactory {
     public SpellSkill getSpellSkill(int id){
         return spellSkills.get(id);
     }
+
+    public BasicSkill getBasicSkill(int id, SkillType skillType) {
+        switch(skillType){
+            case MELEE_SKILL:
+                return getMeleeSkill(id);
+            case RANGED_SKILL:
+                return getRangedSkill(id);
+            case SPELL_SKILL:
+                return getSpellSkill(id);
+            default:
+                return null;
+        }
+    }
 }
