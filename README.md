@@ -1,7 +1,9 @@
-# "Supergame"
+# Supergame
+
+## A fast one minute video demo (with no sound)
+https://gfycat.com/FalseReasonableAllosaurus
 
 ## About
-
 Supergame is a long time personal RPG game project.
 
 ## Tech stack
@@ -20,3 +22,5 @@ A friend of mine recommended me trying this paradigm instead of going with the c
 ## The game
 
 Currently, you can move through the map with **WASD** keys. You can dash with a spear by pressing **space** and you can pick up whatever is on the floor with the **E** key. Furthermore, you can bring up your inventory and your equipment window by pressing the **I** and **C** keys respectively. The equipping system works so you can put on and off whatever you want and the sprite will be rendered accordingly. That took some time hehe. You can also open the attributes window by pressing **P** but any changes you make on that window won't affect the game. Attributes system is yet to be implemented.
+
+Thanks!
