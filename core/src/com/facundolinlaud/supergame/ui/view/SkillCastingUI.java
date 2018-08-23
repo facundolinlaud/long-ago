@@ -9,14 +9,15 @@ import com.badlogic.gdx.utils.Timer;
 
 import static com.facundolinlaud.supergame.utils.Dimensions.PX_PER_METER;
 
-/* TODO: refactor this. its awfull */
-public class CastingBarUI extends Group implements UI {
+/* TODO: refactor this. it's awful */
+
+public class SkillCastingUI extends Group implements UI {
     private static final String SKIN_JSON_PATH = "ui/progress_bar_skin/clean-crispy-ui.json";
 
     private ProgressBar progressBar;
     private Label skillTitle;
 
-    public CastingBarUI() {
+    public SkillCastingUI() {
         Skin skin = new Skin(Gdx.files.internal(SKIN_JSON_PATH));
 
         progressBar = new ProgressBar(0f, 100f, 1f, false, skin);
@@ -37,47 +38,16 @@ public class CastingBarUI extends Group implements UI {
         this.setVisible(false);
     }
 
-    public void setSkillTitle(String title){
-        this.skillTitle.setText(title);
-    }
+    public void update(String skillName, float castingBarValue){
+        boolean isStillCasting = castingBarValue > 0;
+        this.setVisible(isStillCasting);
 
-    public void start(String skillName, float castTime) {
-        setSkillTitle(skillName);
-        this.setVisible(true);
-
-        int repeatCount = 20;
-        float interval = castTime / repeatCount;
-        final int step = 100 / repeatCount;
-
-        new Timer().scheduleTask(new ProgressBarStepper(repeatCount, step, this), interval, interval, repeatCount);
+        skillTitle.setText(skillName);
+        progressBar.setValue(castingBarValue);
     }
 
     @Override
     public Group get() {
         return this;
-    }
-
-    class ProgressBarStepper extends Timer.Task {
-        private int i = 0;
-        private int repeatCount;
-        private int step;
-        private CastingBarUI castingBarUI;
-
-        public ProgressBarStepper(int repeatCount, int step, CastingBarUI castingBarUI) {
-            this.repeatCount = repeatCount;
-            this.step = step;
-            this.castingBarUI = castingBarUI;
-        }
-
-        @Override
-        public void run() {
-            progressBar.setValue(progressBar.getValue() + step);
-            i++;
-
-            if(i == repeatCount){
-                progressBar.setValue(0);
-                castingBarUI.setVisible(false);
-            }
-        }
     }
 }

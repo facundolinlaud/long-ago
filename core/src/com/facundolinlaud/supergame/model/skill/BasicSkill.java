@@ -10,6 +10,7 @@ public abstract class BasicSkill {
     private int baseDamage;
     private float coolDown;
     private float castTime;
+    private float lockdownTime;
 
     private boolean interruptible;
 
@@ -24,12 +25,13 @@ public abstract class BasicSkill {
 
     public BasicSkill() {}
 
-    public BasicSkill(String name, String picturePath, int baseDamage, float coolDown, float castTime, boolean interruptible, EquipType equipmentRequired, DamageType skillDamageType, Action castingAction, Action executingAction, AnimationFlow animationFlow, AreaOfEffect areaOfEffect, int areaOfEffectSize, SkillType skillType) {
+    public BasicSkill(String name, String picturePath, int baseDamage, float coolDown, float castTime, float lockdownTime, boolean interruptible, EquipType equipmentRequired, DamageType skillDamageType, Action castingAction, Action executingAction, AnimationFlow animationFlow, AreaOfEffect areaOfEffect, int areaOfEffectSize, SkillType skillType) {
         this.name = name;
         this.picturePath = picturePath;
         this.baseDamage = baseDamage;
         this.coolDown = coolDown;
         this.castTime = castTime;
+        this.lockdownTime = lockdownTime;
         this.interruptible = interruptible;
         this.equipmentRequired = equipmentRequired;
         this.skillDamageType = skillDamageType;
@@ -79,6 +81,14 @@ public abstract class BasicSkill {
 
     public void setCastTime(float castTime) {
         this.castTime = castTime;
+    }
+
+    public float getLockdownTime() {
+        return lockdownTime;
+    }
+
+    public void setLockdownTime(float lockdownTime) {
+        this.lockdownTime = lockdownTime;
     }
 
     public boolean isInterruptible() {

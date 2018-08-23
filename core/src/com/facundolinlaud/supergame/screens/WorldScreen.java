@@ -16,6 +16,7 @@ import com.facundolinlaud.supergame.managers.world.*;
 import com.facundolinlaud.supergame.systems.*;
 import com.facundolinlaud.supergame.systems.skills.SkillCastingRequestSystem;
 import com.facundolinlaud.supergame.systems.skills.SkillCastingSystem;
+import com.facundolinlaud.supergame.systems.skills.SkillLockdownSystem;
 import com.facundolinlaud.supergame.systems.skills.SkillTargetedSystem;
 import com.facundolinlaud.supergame.systems.sprite.AnimableSpriteSystem;
 import com.facundolinlaud.supergame.systems.sprite.StackableSpriteSystem;
@@ -93,6 +94,7 @@ public class WorldScreen implements Screen {
         engine.addSystem(new SkillCastingRequestSystem(new AvailableSkillsFactory()));
         engine.addSystem(new SkillCastingSystem(engine));
         engine.addSystem(new SkillTargetedSystem());
+        engine.addSystem(new SkillLockdownSystem());
 
         uiManager.initializeSystems(engine);
     }

@@ -7,14 +7,11 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import com.facundolinlaud.supergame.managers.Manager;
-import com.facundolinlaud.supergame.systems.ui.AttributesUISystem;
-import com.facundolinlaud.supergame.systems.ui.EquipmentUISystem;
+import com.facundolinlaud.supergame.systems.ui.*;
 import com.facundolinlaud.supergame.ui.controller.*;
 import com.facundolinlaud.supergame.ui.controller.impl.*;
-import com.facundolinlaud.supergame.systems.ui.InventoryUISystem;
-import com.facundolinlaud.supergame.systems.ui.ProfileUISystem;
 import com.facundolinlaud.supergame.ui.view.*;
-import com.facundolinlaud.supergame.ui.view.CastingBarUI;
+import com.facundolinlaud.supergame.ui.view.SkillCastingUI;
 import com.facundolinlaud.supergame.utils.events.*;
 import com.facundolinlaud.supergame.utils.mediator.Mediator;
 
@@ -35,13 +32,13 @@ public class UIManager implements Manager {
     private InventoryUI inventoryUI;
     private AttributesUI attributesUI;
     private EquipmentUI equipmentUI;
-    private CastingBarUI castingBarUI;
+    private SkillCastingUI skillCastingUI;
 
     private InventoryUIController inventoryUIController;
     private ProfileUIController profileUIController;
     private AttributesUIController attributesUIController;
     private EquipmentUIController equipmentUIController;
-    private CastingBarController castingBarController;
+    private SkillCastingUIController skillCastingUIController;
 
     public UIManager(Stage stage) {
         this.skin = new Skin(Gdx.files.internal(SKIN_JSON_PATH));
@@ -66,7 +63,7 @@ public class UIManager implements Manager {
         this.inventoryUI = new InventoryUI(uiMediator, stage, skin, dragAndDrop, hud.getItemDropZone());
         this.attributesUI = new AttributesUI(uiMediator, stage, skin);
         this.equipmentUI = new EquipmentUI(uiMediator, stage, skin, dragAndDrop);
-        this.castingBarUI = new CastingBarUI();
+        this.skillCastingUI = new SkillCastingUI();
     }
 
     private void initializeServices() {
@@ -74,12 +71,12 @@ public class UIManager implements Manager {
         this.inventoryUIController = new InventoryUIControllerImpl(this.inventoryUI);
         this.attributesUIController = new AttributesUIControllerImpl(this.attributesUI);
         this.equipmentUIController = new EquipmentUIControllerImpl(this.equipmentUI);
-        this.castingBarController = new CastingBarControllerImpl(this.castingBarUI);
+        this.skillCastingUIController = new SkillCastingUIControllerImpl(this.skillCastingUI);
     }
 
     private void addUIToStage() {
         this.stage.addActor(this.hud.get());
-        this.stage.addActor(this.castingBarUI);
+        this.stage.addActor(this.skillCastingUI);
     }
 
     private void subscribeReceivers(){
@@ -95,6 +92,7 @@ public class UIManager implements Manager {
         engine.addSystem(new InventoryUISystem(this.inventoryUIController));
         engine.addSystem(new AttributesUISystem(this.attributesUIController));
         engine.addSystem(new EquipmentUISystem(this.equipmentUIController));
+        engine.addSystem(new SkillCastingUISystem(this.skillCastingUIController));
     }
 
     @Override

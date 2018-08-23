@@ -5,8 +5,10 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
+import com.badlogic.gdx.utils.Timer;
 import com.facundolinlaud.supergame.components.PositionComponent;
 import com.facundolinlaud.supergame.components.StatusComponent;
+import com.facundolinlaud.supergame.components.skills.SkillLockdownComponent;
 import com.facundolinlaud.supergame.components.skills.SkillCastingComponent;
 import com.facundolinlaud.supergame.model.skill.SkillType;
 import com.facundolinlaud.supergame.model.status.Action;
@@ -36,17 +38,15 @@ public class SkillCastingSystem extends IteratingSystem {
     protected void processEntity(Entity caster, float deltaTime) {
         SkillCastingComponent skillCastingComponent = msccm.get(caster);
 
-        if(skillCastingComponent.hasJustStarted()) {
-            setCastingActionToCaster(caster, skillCastingComponent);
-            System.out.println("casting");
-        }
-
         if(skillCastingComponent.hasCastingTimeEnded()){
             setExecutingActionToCaster(caster, skillCastingComponent);
             executeSkill(caster, skillCastingComponent);
             caster.remove(SkillCastingComponent.class);
-            System.out.println("executing");
-        }
+
+            float lockdownTime = skillCastingComponent.basicSkill.getLockdownTime();
+            putCasterOnSkillLockdown(caster, lockdownTime);
+        }else if(skillCastingComponent.hasJustStarted())
+            setCastingActionToCaster(caster, skillCastingComponent);
 
         skillCastingComponent.tick(deltaTime);
     }
@@ -71,5 +71,9 @@ public class SkillCastingSystem extends IteratingSystem {
     private void executeSkillEffects(Entity caster, SkillCastingComponent skillCastingComponent){
         SkillType skillType = skillCastingComponent.skillType;
         this.strategies.get(skillType).execute(caster, skillCastingComponent.basicSkill);
+    }
+
+    private void putCasterOnSkillLockdown(Entity caster, float lockdownTime){
+        caster.add(new SkillLockdownComponent(lockdownTime));
     }
 }
