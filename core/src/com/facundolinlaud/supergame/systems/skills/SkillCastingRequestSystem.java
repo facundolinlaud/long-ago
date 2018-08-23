@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
+import com.facundolinlaud.supergame.components.StatusComponent;
 import com.facundolinlaud.supergame.components.skills.SkillCastingComponent;
 import com.facundolinlaud.supergame.components.skills.SkillCastingRequestComponent;
 import com.facundolinlaud.supergame.factory.AvailableSkillsFactory;
@@ -13,6 +14,7 @@ import com.facundolinlaud.supergame.utils.Mappers;
 
 public class SkillCastingRequestSystem extends IteratingSystem {
     private ComponentMapper<SkillCastingRequestComponent> scrm = Mappers.skillCastingRequest;
+    private ComponentMapper<StatusComponent> sm = Mappers.status;
 
     private AvailableSkillsFactory availableSkillsFactory;
 
@@ -30,7 +32,8 @@ public class SkillCastingRequestSystem extends IteratingSystem {
     }
 
     private boolean canCast(Entity caster) {
-        return true;
+        StatusComponent status = sm.get(caster);
+        return !status.getAction().isBusy();
     }
 
     private void proceedWithCasting(Entity caster) {
