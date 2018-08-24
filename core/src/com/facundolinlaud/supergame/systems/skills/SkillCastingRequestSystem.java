@@ -4,44 +4,38 @@ import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
-import com.facundolinlaud.supergame.components.StatusComponent;
-import com.facundolinlaud.supergame.components.skills.SkillCastingComponent;
 import com.facundolinlaud.supergame.components.skills.SkillCastingRequestComponent;
 import com.facundolinlaud.supergame.factory.AvailableSkillsFactory;
-import com.facundolinlaud.supergame.model.skill.BasicSkill;
 import com.facundolinlaud.supergame.model.skill.SkillType;
+import com.facundolinlaud.supergame.strategies.skills.castingrequest.KeyPressCastingRequestStrategy;
+import com.facundolinlaud.supergame.strategies.skills.castingrequest.SkillCastingRequestStrategy;
+import com.facundolinlaud.supergame.strategies.skills.castingrequest.KeyPressThenClickCastingRequestStrategy;
 import com.facundolinlaud.supergame.utils.Mappers;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class SkillCastingRequestSystem extends IteratingSystem {
     private ComponentMapper<SkillCastingRequestComponent> scrm = Mappers.skillCastingRequest;
-    private ComponentMapper<StatusComponent> sm = Mappers.status;
 
-    private AvailableSkillsFactory availableSkillsFactory;
+    private AvailableSkillsFactory skillsFactory;
+    private Map<SkillType, SkillCastingRequestStrategy> castingStrategies;
 
-    public SkillCastingRequestSystem(AvailableSkillsFactory availableSkillsFactory) {
+    public SkillCastingRequestSystem(AvailableSkillsFactory skillsFactory) {
         super(Family.all(SkillCastingRequestComponent.class).get());
-        this.availableSkillsFactory = availableSkillsFactory;
+        this.skillsFactory = skillsFactory;
+
+        this.castingStrategies = new HashMap<>();
+        this.castingStrategies.put(SkillType.MELEE_SKILL, new KeyPressCastingRequestStrategy(skillsFactory));
+        this.castingStrategies.put(SkillType.RANGED_SKILL, new KeyPressThenClickCastingRequestStrategy(skillsFactory));
     }
 
     @Override
     protected void processEntity(Entity caster, float deltaTime) {
-        if(canCast(caster))
-            proceedWithCasting(caster);
-
-        caster.remove(SkillCastingRequestComponent.class);
-    }
-
-    private boolean canCast(Entity caster) {
-        StatusComponent status = sm.get(caster);
-        return !status.getAction().isBusy();
-    }
-
-    private void proceedWithCasting(Entity caster) {
         SkillCastingRequestComponent skillCastingRequestComponent = scrm.get(caster);
         int requestedSkillId = skillCastingRequestComponent.requestedSkillId;
-        SkillType skillType = availableSkillsFactory.getSkillTypeById(requestedSkillId);
-        BasicSkill basicSkill = availableSkillsFactory.getBasicSkill(requestedSkillId, skillType);
+        SkillType skillType = skillsFactory.getSkillTypeById(requestedSkillId);
 
-        caster.add(new SkillCastingComponent(basicSkill, skillType));
+        this.castingStrategies.get(skillType).attemptToCast(caster, skillType, requestedSkillId);
     }
 }

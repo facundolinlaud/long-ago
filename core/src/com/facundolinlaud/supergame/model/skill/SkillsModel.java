@@ -5,14 +5,12 @@ import java.util.Map;
 public class SkillsModel {
     private Map<Integer, MeleeSkill> meleeSkills;
     private Map<Integer, RangedSkill> rangedSkills;
-    private Map<Integer, SpellSkill> spellSkills;
 
     public SkillsModel(){}
 
-    public SkillsModel(Map<Integer, MeleeSkill> meleeSkills, Map<Integer, RangedSkill> rangedSkills, Map<Integer, SpellSkill> spellSkills) {
+    public SkillsModel(Map<Integer, MeleeSkill> meleeSkills, Map<Integer, RangedSkill> rangedSkills) {
         this.meleeSkills = meleeSkills;
         this.rangedSkills = rangedSkills;
-        this.spellSkills = spellSkills;
     }
 
     public Map<Integer, MeleeSkill> getMeleeSkills() {
@@ -31,20 +29,11 @@ public class SkillsModel {
         this.rangedSkills = rangedSkills;
     }
 
-    public Map<Integer, SpellSkill> getSpellSkills() {
-        return spellSkills;
-    }
-
-    public void setSpellSkills(Map<Integer, SpellSkill> spellSkills) {
-        this.spellSkills = spellSkills;
-    }
-
     @Override
     public String toString() {
         return "SkillsModel{" +
                 "meleeSkills=" + meleeSkills +
                 ", rangedSkills=" + rangedSkills +
-                ", spellSkills=" + spellSkills +
                 '}';
     }
 }

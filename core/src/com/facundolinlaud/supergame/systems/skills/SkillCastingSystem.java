@@ -5,7 +5,6 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
-import com.badlogic.gdx.utils.Timer;
 import com.facundolinlaud.supergame.components.PositionComponent;
 import com.facundolinlaud.supergame.components.StatusComponent;
 import com.facundolinlaud.supergame.components.skills.SkillLockdownComponent;
@@ -14,6 +13,7 @@ import com.facundolinlaud.supergame.model.skill.SkillType;
 import com.facundolinlaud.supergame.model.status.Action;
 import com.facundolinlaud.supergame.strategies.skills.casted.MeleeSkillCastedStrategy;
 import com.facundolinlaud.supergame.strategies.skills.casted.SkillCastedStrategy;
+import com.facundolinlaud.supergame.strategies.skills.casted.RangedSkillCastedStrategy;
 import com.facundolinlaud.supergame.utils.Mappers;
 
 import java.util.HashMap;
@@ -30,8 +30,7 @@ public class SkillCastingSystem extends IteratingSystem {
 
         this.strategies = new HashMap<>();
         this.strategies.put(SkillType.MELEE_SKILL, new MeleeSkillCastedStrategy(engine));
-//        this.strategies.put(SkillType.RANGED_SKILL, new RangedSkillCastStrategy());
-//        this.strategies.put(SkillType.SPELL_SKILL, new SpellSkillCastStrategy());
+        this.strategies.put(SkillType.RANGED_SKILL, new RangedSkillCastedStrategy(engine));
     }
 
     @Override

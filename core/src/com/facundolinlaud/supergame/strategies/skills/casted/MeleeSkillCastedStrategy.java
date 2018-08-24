@@ -80,6 +80,7 @@ public class MeleeSkillCastedStrategy implements SkillCastedStrategy<MeleeSkill>
         }
     }
 
+    // TODO: there's a builtin libgdx feature for this
     private AreaOfEffectCheckStrategy buildAreaOfEffectChecker(AreaOfEffect aoe, int aoeSize, Vector2 pos){
         switch(aoe){
             case CIRCLE:

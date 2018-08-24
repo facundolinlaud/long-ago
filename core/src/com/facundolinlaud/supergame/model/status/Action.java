@@ -37,9 +37,6 @@ public enum Action {
     }
 
     public boolean isBusy(){
-        return this == Action.DASHING || this == Action.BLOCKING ||
-               this == Action.SHOOTING || this == Action.SPELL_CASTING ||
-               this == Action.SWINGING || this == Action.FALLING ||
-               this == Action.MELEE_DASH_CASTING;
+        return !(this == STANDING || this == WALKING);
     }
 }

@@ -18,6 +18,5 @@
 			"skillType": "MELEE_SKILL"
 		}
 	},
-	"rangedSkills": {},
-	"spellSkills": {}
+	"rangedSkills": {}
 }

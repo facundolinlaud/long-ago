@@ -2,8 +2,7 @@ package com.facundolinlaud.supergame.model.skill;
 
 public enum SkillType {
     MELEE_SKILL("MELEE_SKILL"),
-    RANGED_SKILL("RANGED_SKILL"),
-    SPELL_SKILL("SPELL_SKILL");
+    RANGED_SKILL("RANGED_SKILL");
 
     private String name;
 

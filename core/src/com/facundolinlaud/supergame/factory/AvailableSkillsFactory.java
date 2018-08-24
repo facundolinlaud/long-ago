@@ -7,14 +7,12 @@ import java.util.Map;
 public class AvailableSkillsFactory {
     private Map<Integer, MeleeSkill> meleeSkills;
     private Map<Integer, RangedSkill> rangedSkills;
-    private Map<Integer, SpellSkill> spellSkills;
 
     public AvailableSkillsFactory() {
         SkillsModel skillsModel = ModelFactory.getAvailableSkillsModel();
 
         meleeSkills = skillsModel.getMeleeSkills();
         rangedSkills = skillsModel.getRangedSkills();
-        spellSkills = skillsModel.getSpellSkills();
     }
 
     public SkillType getSkillTypeById(int id){
@@ -22,8 +20,6 @@ public class AvailableSkillsFactory {
             return SkillType.MELEE_SKILL;
         else if(rangedSkills.containsKey(id))
             return SkillType.RANGED_SKILL;
-        else if(spellSkills.containsKey(id))
-            return SkillType.SPELL_SKILL;
         else
             throw new RuntimeException();
     }
@@ -36,18 +32,12 @@ public class AvailableSkillsFactory {
         return rangedSkills.get(id);
     }
 
-    public SpellSkill getSpellSkill(int id){
-        return spellSkills.get(id);
-    }
-
     public BasicSkill getBasicSkill(int id, SkillType skillType) {
         switch(skillType){
             case MELEE_SKILL:
                 return getMeleeSkill(id);
             case RANGED_SKILL:
                 return getRangedSkill(id);
-            case SPELL_SKILL:
-                return getSpellSkill(id);
             default:
                 return null;
         }
