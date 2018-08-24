@@ -1,8 +1,10 @@
 package com.facundolinlaud.supergame.model.skill;
 
 public enum SkillType {
-    MELEE("MELEE"),
-    RANGED("RANGED");
+    SPELL("SPELL"),
+    NORMAL("NORMAL"),
+    PROJECTILE("PROJECTILE");
+
 
     private String name;
 

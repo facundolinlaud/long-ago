@@ -3,7 +3,7 @@
 		"0": {
 			"name": "Basic dash",
 			"picturePath": "",
-			"skillType": "MELEE",
+			"skillType": "NORMAL",
 			"skillDamageType": "DIRECT",
 			"skillTrigger": "KEY_PRESS",
 
@@ -21,7 +21,6 @@
 			"areaOfEffectSize": 2.0,
 			"baseDamage": 40.0,
 			"baseHeal": 0.0,
-			"isProjectile": false,
 			"projectileInformation": {
 				"maxTravelDistance": 0.0,
 				"particlePath": "",

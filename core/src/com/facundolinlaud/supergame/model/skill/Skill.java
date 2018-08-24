@@ -2,7 +2,6 @@ package com.facundolinlaud.supergame.model.skill;
 
 import com.facundolinlaud.supergame.model.equip.EquipType;
 import com.facundolinlaud.supergame.model.status.Action;
-import com.fasterxml.jackson.annotation.JsonSetter;
 import com.sun.istack.internal.Nullable;
 
 public class Skill {
@@ -32,7 +31,6 @@ public class Skill {
 
     /* Is it a projectile? */
     @Nullable private ProjectileInformation projectileInformation;
-    private boolean isProjectile;
 
     public Skill() {}
 
@@ -181,11 +179,6 @@ public class Skill {
     }
 
     public boolean isProjectile() {
-        return this.isProjectile;
-    }
-
-    @JsonSetter("isProjectile")
-    public void setProjectile(boolean projectile) {
-        this.isProjectile = projectile;
+        return this.skillType == SkillType.PROJECTILE;
     }
 }
