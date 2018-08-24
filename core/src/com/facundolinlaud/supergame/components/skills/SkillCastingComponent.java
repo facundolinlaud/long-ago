@@ -1,18 +1,15 @@
 package com.facundolinlaud.supergame.components.skills;
 
 import com.badlogic.ashley.core.Component;
-import com.facundolinlaud.supergame.model.skill.BasicSkill;
-import com.facundolinlaud.supergame.model.skill.SkillType;
+import com.facundolinlaud.supergame.model.skill.Skill;
 
 public class SkillCastingComponent implements Component {
-    public BasicSkill basicSkill;
-    public SkillType skillType;
+    public Skill skill;
     public float timeToCast;
 
-    public SkillCastingComponent(BasicSkill basicSkill, SkillType skillType) {
-        this.basicSkill = basicSkill;
-        this.skillType = skillType;
-        this.timeToCast = basicSkill.getCastTime();
+    public SkillCastingComponent(Skill skill) {
+        this.skill = skill;
+        this.timeToCast = skill.getCastTime();
     }
 
     public void tick(float delta){
@@ -24,6 +21,6 @@ public class SkillCastingComponent implements Component {
     }
 
     public boolean hasJustStarted(){
-        return this.timeToCast >= basicSkill.getCastTime();
+        return this.timeToCast >= skill.getCastTime();
     }
 }

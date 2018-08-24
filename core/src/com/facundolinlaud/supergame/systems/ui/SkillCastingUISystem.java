@@ -23,9 +23,9 @@ public class SkillCastingUISystem extends IteratingSystem {
     protected void processEntity(Entity entity, float deltaTime) {
         SkillCastingComponent skill = scm.get(entity);
 
-        String skillName = skill.basicSkill.getName();
+        String skillName = skill.skill.getName();
         float timeToCast = skill.timeToCast;
-        float castTime = skill.basicSkill.getCastTime();
+        float castTime = skill.skill.getCastTime();
 
         castingBarController.updateCastingBar(skillName, timeToCast, castTime);
     }

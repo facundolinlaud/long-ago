@@ -2,46 +2,39 @@ package com.facundolinlaud.supergame.model.skill;
 
 import com.facundolinlaud.supergame.model.equip.EquipType;
 import com.facundolinlaud.supergame.model.status.Action;
+import com.fasterxml.jackson.annotation.JsonSetter;
+import com.sun.istack.internal.Nullable;
 
-public abstract class BasicSkill {
+public class Skill {
     private String name;
     private String picturePath;
+    private SkillType skillType;
+    private DamageType skillDamageType;
+    private SkillTrigger skillTrigger;
 
-    private int baseDamage;
-    private float coolDown;
+    /* Restrictions */
+    private float cooldown;
     private float castTime;
     private float lockdownTime;
-
     private boolean interruptible;
-
     private EquipType equipmentRequired;
-    private DamageType skillDamageType;
+
+    /* Visuals */
     private Action castingAction;
     private Action executingAction;
     private AnimationFlow animationFlow;
+
+    /* Areas and effects */
     private AreaOfEffect areaOfEffect;
-    private int areaOfEffectSize;
-    private SkillType skillType;
+    private float areaOfEffectSize;
+    private float baseDamage;
+    private float baseHeal;
 
-    public BasicSkill() {}
+    /* Is it a projectile? */
+    @Nullable private ProjectileInformation projectileInformation;
+    private boolean isProjectile;
 
-    public BasicSkill(String name, String picturePath, int baseDamage, float coolDown, float castTime, float lockdownTime, boolean interruptible, EquipType equipmentRequired, DamageType skillDamageType, Action castingAction, Action executingAction, AnimationFlow animationFlow, AreaOfEffect areaOfEffect, int areaOfEffectSize, SkillType skillType) {
-        this.name = name;
-        this.picturePath = picturePath;
-        this.baseDamage = baseDamage;
-        this.coolDown = coolDown;
-        this.castTime = castTime;
-        this.lockdownTime = lockdownTime;
-        this.interruptible = interruptible;
-        this.equipmentRequired = equipmentRequired;
-        this.skillDamageType = skillDamageType;
-        this.castingAction = castingAction;
-        this.executingAction = executingAction;
-        this.animationFlow = animationFlow;
-        this.areaOfEffect = areaOfEffect;
-        this.areaOfEffectSize = areaOfEffectSize;
-        this.skillType = skillType;
-    }
+    public Skill() {}
 
     public String getName() {
         return name;
@@ -59,20 +52,36 @@ public abstract class BasicSkill {
         this.picturePath = picturePath;
     }
 
-    public int getBaseDamage() {
-        return baseDamage;
+    public SkillType getSkillType() {
+        return skillType;
     }
 
-    public void setBaseDamage(int baseDamage) {
-        this.baseDamage = baseDamage;
+    public void setSkillType(SkillType skillType) {
+        this.skillType = skillType;
     }
 
-    public float getCoolDown() {
-        return coolDown;
+    public DamageType getSkillDamageType() {
+        return skillDamageType;
     }
 
-    public void setCoolDown(float coolDown) {
-        this.coolDown = coolDown;
+    public void setSkillDamageType(DamageType skillDamageType) {
+        this.skillDamageType = skillDamageType;
+    }
+
+    public SkillTrigger getSkillTrigger() {
+        return skillTrigger;
+    }
+
+    public void setSkillTrigger(SkillTrigger skillTrigger) {
+        this.skillTrigger = skillTrigger;
+    }
+
+    public float getCooldown() {
+        return cooldown;
+    }
+
+    public void setCooldown(float cooldown) {
+        this.cooldown = cooldown;
     }
 
     public float getCastTime() {
@@ -107,14 +116,6 @@ public abstract class BasicSkill {
         this.equipmentRequired = equipmentRequired;
     }
 
-    public DamageType getSkillDamageType() {
-        return skillDamageType;
-    }
-
-    public void setSkillDamageType(DamageType skillDamageType) {
-        this.skillDamageType = skillDamageType;
-    }
-
     public Action getCastingAction() {
         return castingAction;
     }
@@ -147,19 +148,44 @@ public abstract class BasicSkill {
         this.areaOfEffect = areaOfEffect;
     }
 
-    public int getAreaOfEffectSize() {
+    public float getAreaOfEffectSize() {
         return areaOfEffectSize;
     }
 
-    public void setAreaOfEffectSize(int areaOfEffectSize) {
+    public void setAreaOfEffectSize(float areaOfEffectSize) {
         this.areaOfEffectSize = areaOfEffectSize;
     }
 
-    public SkillType getSkillType() {
-        return skillType;
+    public float getBaseDamage() {
+        return baseDamage;
     }
 
-    public void setSkillType(SkillType skillType) {
-        this.skillType = skillType;
+    public void setBaseDamage(float baseDamage) {
+        this.baseDamage = baseDamage;
+    }
+
+    public float getBaseHeal() {
+        return baseHeal;
+    }
+
+    public void setBaseHeal(float baseHeal) {
+        this.baseHeal = baseHeal;
+    }
+
+    public ProjectileInformation getProjectileInformation() {
+        return projectileInformation;
+    }
+
+    public void setProjectileInformation(ProjectileInformation projectileInformation) {
+        this.projectileInformation = projectileInformation;
+    }
+
+    public boolean isProjectile() {
+        return this.isProjectile;
+    }
+
+    @JsonSetter("isProjectile")
+    public void setProjectile(boolean projectile) {
+        this.isProjectile = projectile;
     }
 }

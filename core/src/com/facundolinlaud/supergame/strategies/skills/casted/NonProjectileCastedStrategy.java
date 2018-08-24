@@ -11,27 +11,27 @@ import com.facundolinlaud.supergame.components.PositionComponent;
 import com.facundolinlaud.supergame.components.StatusComponent;
 import com.facundolinlaud.supergame.components.skills.SkillTargetedComponent;
 import com.facundolinlaud.supergame.model.skill.AreaOfEffect;
-import com.facundolinlaud.supergame.model.skill.MeleeSkill;
-import com.facundolinlaud.supergame.model.skill.SkillType;
+import com.facundolinlaud.supergame.model.skill.Skill;
 import com.facundolinlaud.supergame.strategies.skills.areaofeffectcheck.AreaOfEffectCheckStrategy;
 import com.facundolinlaud.supergame.strategies.skills.areaofeffectcheck.CircleAreaOfEffectCheckStrategyStrategyImpl;
 import com.facundolinlaud.supergame.strategies.skills.areaofeffectcheck.SquareAreaOfEffectCheckStrategyStrategyImpl;
 import com.facundolinlaud.supergame.utils.Mappers;
 
-public class MeleeSkillCastedStrategy implements SkillCastedStrategy<MeleeSkill> {
+// TODO: check this because i'm trying to get rid of this melee and ranged terminology
+public class NonProjectileCastedStrategy implements SkillCastedStrategy {
     private ComponentMapper<PositionComponent> pm = Mappers.position;
     private ComponentMapper<StatusComponent> sm = Mappers.status;
 
     private Engine engine;
 
-    public MeleeSkillCastedStrategy(Engine engine) {
+    public NonProjectileCastedStrategy(Engine engine) {
         this.engine = engine;
     }
 
     @Override
-    public void execute(Entity caster, MeleeSkill meleeSkill) {
+    public void execute(Entity caster, Skill skill) {
         Vector2 epicenter = calculateEpicenter(caster);
-        affectSurroundingEntities(caster, meleeSkill, epicenter);
+        affectSurroundingEntities(caster, skill, epicenter);
     }
 
     private Vector2 calculateEpicenter(Entity caster){
@@ -59,14 +59,14 @@ public class MeleeSkillCastedStrategy implements SkillCastedStrategy<MeleeSkill>
         return new Vector2(casterPosition.x + xOffset, casterPosition.y + yOffset);
     }
 
-    private void affectSurroundingEntities(Entity caster, MeleeSkill meleeSkill, Vector2 epicenter) {
+    private void affectSurroundingEntities(Entity caster, Skill skill, Vector2 epicenter) {
         ImmutableArray<Entity> victims = engine.getEntitiesFor(Family.all(
                 HealthComponent.class,
                 PositionComponent.class).get());
 
         AreaOfEffectCheckStrategy aoeCheck = buildAreaOfEffectChecker(
-                meleeSkill.getAreaOfEffect(),
-                meleeSkill.getAreaOfEffectSize(),
+                skill.getAreaOfEffect(),
+                skill.getAreaOfEffectSize(),
                 epicenter);
 
         for(Entity victim : victims){
@@ -74,14 +74,14 @@ public class MeleeSkillCastedStrategy implements SkillCastedStrategy<MeleeSkill>
                 PositionComponent victimPosition = pm.get(victim);
 
                 if(aoeCheck.isInArea(victimPosition.x, victimPosition.y)){
-                    applyEffectsToVictim(caster, victim, meleeSkill);
+                    applyEffectsToVictim(caster, victim, skill);
                 }
             }
         }
     }
 
     // TODO: there's a builtin libgdx feature for this
-    private AreaOfEffectCheckStrategy buildAreaOfEffectChecker(AreaOfEffect aoe, int aoeSize, Vector2 pos){
+    private AreaOfEffectCheckStrategy buildAreaOfEffectChecker(AreaOfEffect aoe, float aoeSize, Vector2 pos){
         switch(aoe){
             case CIRCLE:
                 return new CircleAreaOfEffectCheckStrategyStrategyImpl(pos, aoeSize);
@@ -90,7 +90,7 @@ public class MeleeSkillCastedStrategy implements SkillCastedStrategy<MeleeSkill>
         }
     }
 
-    private void applyEffectsToVictim(Entity caster, Entity victim, MeleeSkill meleeSkill) {
-        victim.add(new SkillTargetedComponent(caster, meleeSkill, SkillType.MELEE_SKILL));
+    private void applyEffectsToVictim(Entity caster, Entity victim, Skill skill) {
+        victim.add(new SkillTargetedComponent(caster, skill));
     }
 }

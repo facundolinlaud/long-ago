@@ -6,7 +6,7 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.facundolinlaud.supergame.components.HealthComponent;
 import com.facundolinlaud.supergame.components.skills.SkillTargetedComponent;
-import com.facundolinlaud.supergame.model.skill.BasicSkill;
+import com.facundolinlaud.supergame.model.skill.Skill;
 import com.facundolinlaud.supergame.utils.Mappers;
 
 public class SkillTargetedSystem extends IteratingSystem {
@@ -22,8 +22,8 @@ public class SkillTargetedSystem extends IteratingSystem {
     protected void processEntity(Entity target, float deltaTime) {
         SkillTargetedComponent skillTargetedComponent = stm.get(target);
         HealthComponent healthComponent = hm.get(target);
-        BasicSkill basicSkill = skillTargetedComponent.basicSkill;
-        float baseDamage = basicSkill.getBaseDamage();
+        Skill skill = skillTargetedComponent.skill;
+        float baseDamage = skill.getBaseDamage();
 
         healthComponent.currentHealth -= baseDamage;
 

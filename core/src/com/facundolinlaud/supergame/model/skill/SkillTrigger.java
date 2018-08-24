@@ -1,7 +1,7 @@
 package com.facundolinlaud.supergame.model.skill;
 
 public enum SkillTrigger {
-    KEY_PRES("KEY_PRESS"),
+    KEY_PRESS("KEY_PRESS"),
     KEY_PRESS_THEN_CLICK("KEY_PRESS_THEN_CLICK");
 
     private String name;

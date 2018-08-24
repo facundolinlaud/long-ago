@@ -11,26 +11,22 @@ import com.facundolinlaud.supergame.components.skills.SkillLockdownComponent;
 import com.facundolinlaud.supergame.components.skills.SkillCastingComponent;
 import com.facundolinlaud.supergame.model.skill.SkillType;
 import com.facundolinlaud.supergame.model.status.Action;
-import com.facundolinlaud.supergame.strategies.skills.casted.MeleeSkillCastedStrategy;
+import com.facundolinlaud.supergame.strategies.skills.casted.NonProjectileCastedStrategy;
+import com.facundolinlaud.supergame.strategies.skills.casted.ProjectileCastedStrategy;
 import com.facundolinlaud.supergame.strategies.skills.casted.SkillCastedStrategy;
-import com.facundolinlaud.supergame.strategies.skills.casted.RangedSkillCastedStrategy;
 import com.facundolinlaud.supergame.utils.Mappers;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class SkillCastingSystem extends IteratingSystem {
     private ComponentMapper<SkillCastingComponent> msccm = Mappers.meleeSkillCasting;
     private ComponentMapper<StatusComponent> sm = Mappers.status;
 
-    private Map<SkillType, SkillCastedStrategy> strategies;
+    private Engine engine;
 
     public SkillCastingSystem(Engine engine) {
         super(Family.all(PositionComponent.class, StatusComponent.class, SkillCastingComponent.class).get());
-
-        this.strategies = new HashMap<>();
-        this.strategies.put(SkillType.MELEE_SKILL, new MeleeSkillCastedStrategy(engine));
-        this.strategies.put(SkillType.RANGED_SKILL, new RangedSkillCastedStrategy(engine));
+        this.engine = engine;
     }
 
     @Override
@@ -42,7 +38,7 @@ public class SkillCastingSystem extends IteratingSystem {
             executeSkill(caster, skillCastingComponent);
             caster.remove(SkillCastingComponent.class);
 
-            float lockdownTime = skillCastingComponent.basicSkill.getLockdownTime();
+            float lockdownTime = skillCastingComponent.skill.getLockdownTime();
             putCasterOnSkillLockdown(caster, lockdownTime);
         }else if(skillCastingComponent.hasJustStarted())
             setCastingActionToCaster(caster, skillCastingComponent);
@@ -52,7 +48,7 @@ public class SkillCastingSystem extends IteratingSystem {
 
     private void setCastingActionToCaster(Entity caster, SkillCastingComponent skillCastingComponent) {
         StatusComponent casterStatus = sm.get(caster);
-        Action castingAction = skillCastingComponent.basicSkill.getCastingAction();
+        Action castingAction = skillCastingComponent.skill.getCastingAction();
         casterStatus.setAction(castingAction);
     }
 
@@ -63,13 +59,20 @@ public class SkillCastingSystem extends IteratingSystem {
 
     private void setExecutingActionToCaster(Entity caster, SkillCastingComponent skillCastingComponent){
         StatusComponent casterStatus = sm.get(caster);
-        Action executingAction = skillCastingComponent.basicSkill.getExecutingAction();
+        Action executingAction = skillCastingComponent.skill.getExecutingAction();
         casterStatus.setAction(executingAction);
     }
 
     private void executeSkillEffects(Entity caster, SkillCastingComponent skillCastingComponent){
-        SkillType skillType = skillCastingComponent.skillType;
-        this.strategies.get(skillType).execute(caster, skillCastingComponent.basicSkill);
+        SkillCastedStrategy strategy;
+
+        if(skillCastingComponent.skill.isProjectile()) {
+            strategy = new ProjectileCastedStrategy(engine);
+        }else{
+            strategy = new NonProjectileCastedStrategy(engine);
+        }
+
+        strategy.execute(caster, skillCastingComponent.skill);
     }
 
     private void putCasterOnSkillLockdown(Entity caster, float lockdownTime){

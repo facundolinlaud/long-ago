@@ -6,7 +6,10 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.facundolinlaud.supergame.components.skills.SkillCastingRequestComponent;
 import com.facundolinlaud.supergame.factory.AvailableSkillsFactory;
+import com.facundolinlaud.supergame.model.skill.Skill;
+import com.facundolinlaud.supergame.model.skill.SkillTrigger;
 import com.facundolinlaud.supergame.model.skill.SkillType;
+import com.facundolinlaud.supergame.strategies.skills.castingrequest.BaseCastingRequestStrategy;
 import com.facundolinlaud.supergame.strategies.skills.castingrequest.KeyPressCastingRequestStrategy;
 import com.facundolinlaud.supergame.strategies.skills.castingrequest.SkillCastingRequestStrategy;
 import com.facundolinlaud.supergame.strategies.skills.castingrequest.KeyPressThenClickCastingRequestStrategy;
@@ -19,23 +22,23 @@ public class SkillCastingRequestSystem extends IteratingSystem {
     private ComponentMapper<SkillCastingRequestComponent> scrm = Mappers.skillCastingRequest;
 
     private AvailableSkillsFactory skillsFactory;
-    private Map<SkillType, SkillCastingRequestStrategy> castingStrategies;
+    private Map<SkillTrigger, BaseCastingRequestStrategy> castingStrategies;
 
     public SkillCastingRequestSystem(AvailableSkillsFactory skillsFactory) {
         super(Family.all(SkillCastingRequestComponent.class).get());
         this.skillsFactory = skillsFactory;
 
         this.castingStrategies = new HashMap<>();
-        this.castingStrategies.put(SkillType.MELEE_SKILL, new KeyPressCastingRequestStrategy(skillsFactory));
-        this.castingStrategies.put(SkillType.RANGED_SKILL, new KeyPressThenClickCastingRequestStrategy(skillsFactory));
+        this.castingStrategies.put(SkillTrigger.KEY_PRESS, new KeyPressCastingRequestStrategy());
+        this.castingStrategies.put(SkillTrigger.KEY_PRESS_THEN_CLICK, new KeyPressThenClickCastingRequestStrategy());
     }
 
     @Override
     protected void processEntity(Entity caster, float deltaTime) {
         SkillCastingRequestComponent skillCastingRequestComponent = scrm.get(caster);
         int requestedSkillId = skillCastingRequestComponent.requestedSkillId;
-        SkillType skillType = skillsFactory.getSkillTypeById(requestedSkillId);
+        Skill skill = skillsFactory.getSkillById(requestedSkillId);
 
-        this.castingStrategies.get(skillType).attemptToCast(caster, skillType, requestedSkillId);
+        this.castingStrategies.get(skill.getSkillTrigger()).attemptToCast(caster, skill);
     }
 }
