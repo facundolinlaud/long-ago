@@ -4,14 +4,15 @@ import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
-import com.badlogic.gdx.ai.msg.MessageDispatcher;
-import com.badlogic.gdx.ai.msg.MessageManager;
 import com.facundolinlaud.supergame.components.StatusComponent;
 import com.facundolinlaud.supergame.components.player.BagComponent;
 import com.facundolinlaud.supergame.components.player.KeyboardComponent;
 import com.facundolinlaud.supergame.components.skills.SkillCastingRequestComponent;
+import com.facundolinlaud.supergame.components.skills.SkillClickComponent;
 import com.facundolinlaud.supergame.components.sprite.AnimableSpriteComponent;
+import com.facundolinlaud.supergame.factory.AvailableSkillsFactory;
 import com.facundolinlaud.supergame.managers.world.PlayerInputObserver;
+import com.facundolinlaud.supergame.model.skill.Skill;
 import com.facundolinlaud.supergame.model.status.Action;
 import com.facundolinlaud.supergame.model.status.Direction;
 import com.facundolinlaud.supergame.utils.Mappers;
@@ -25,13 +26,12 @@ public class PlayerInputSystem extends IteratingSystem {
     private ComponentMapper<AnimableSpriteComponent> asm = Mappers.animableSprite;
 
     private PlayerInputObserver playerInputObserver;
-    private MessageDispatcher messageDispatcher;
+    private AvailableSkillsFactory skillsFactory;
 
-    public PlayerInputSystem(PlayerInputObserver playerInputObserver) {
+    public PlayerInputSystem(PlayerInputObserver playerInputObserver, AvailableSkillsFactory skillsFactory) {
         super(Family.all(StatusComponent.class, KeyboardComponent.class).get());
-
         this.playerInputObserver = playerInputObserver;
-        this.messageDispatcher = MessageManager.getInstance();
+        this.skillsFactory = skillsFactory;
     }
 
     @Override
@@ -65,6 +65,11 @@ public class PlayerInputSystem extends IteratingSystem {
 
     private void handleSkillCastingCase(Entity caster, StatusComponent status) {
         Integer requestedSkillId = playerInputObserver.getPlayersSkillId();
-        caster.add(new SkillCastingRequestComponent(requestedSkillId));
+        Skill requestedSkill = skillsFactory.getSkillById(requestedSkillId);
+
+        if(requestedSkill.isProjectile())
+            caster.add(new SkillClickComponent());
+
+        caster.add(new SkillCastingRequestComponent(requestedSkill));
     }
 }

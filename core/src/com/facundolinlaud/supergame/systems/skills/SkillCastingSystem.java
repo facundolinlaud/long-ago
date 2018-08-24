@@ -13,7 +13,9 @@ import com.facundolinlaud.supergame.model.skill.Skill;
 import com.facundolinlaud.supergame.model.skill.SkillType;
 import com.facundolinlaud.supergame.model.status.Action;
 import com.facundolinlaud.supergame.strategies.skills.casting.NormalSkillCastingStrategy;
+import com.facundolinlaud.supergame.strategies.skills.casting.ProjectileSkillCastingStrategy;
 import com.facundolinlaud.supergame.strategies.skills.casting.SkillCastingStrategy;
+import com.facundolinlaud.supergame.strategies.skills.casting.SpellSkillCastingStrategy;
 import com.facundolinlaud.supergame.utils.Mappers;
 
 import java.util.HashMap;
@@ -30,8 +32,8 @@ public class SkillCastingSystem extends IteratingSystem {
 
         this.castingStrategies = new HashMap<>();
         this.castingStrategies.put(SkillType.NORMAL, new NormalSkillCastingStrategy(engine));
-        this.castingStrategies.put(SkillType.SPELL, new NormalSkillCastingStrategy(engine));
-        this.castingStrategies.put(SkillType.PROJECTILE, new NormalSkillCastingStrategy(engine));
+        this.castingStrategies.put(SkillType.SPELL, new SpellSkillCastingStrategy(engine));
+        this.castingStrategies.put(SkillType.PROJECTILE, new ProjectileSkillCastingStrategy());
     }
 
     @Override
