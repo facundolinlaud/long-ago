@@ -12,6 +12,8 @@ public class SpellSkillEpicenterStrategy implements SkillEpicenterStrategy {
     @Override
     public Vector2 calculate(Entity caster) {
         SkillClickComponent clickComponent = scm.get(caster);
+        caster.remove(SkillClickComponent.class);
+
         return clickComponent.getClickedPosition();
     }
 }

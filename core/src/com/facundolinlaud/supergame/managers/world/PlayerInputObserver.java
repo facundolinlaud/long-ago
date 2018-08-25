@@ -2,15 +2,20 @@ package com.facundolinlaud.supergame.managers.world;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.facundolinlaud.supergame.model.status.Direction;
+import com.facundolinlaud.supergame.utils.Dimensions;
 
 import java.util.Stack;
 
-public class PlayerInputObserver extends InputListener {
+public class PlayerInputObserver extends ClickListener {
     private Stack<Direction> movementKeysPressed;
     private Stack<Integer> skillKeysPressed;
+    private Vector2 latestClickedPosition;
+    private boolean isClicking;
 
     public PlayerInputObserver() {
         movementKeysPressed = new Stack<>();
@@ -66,6 +71,14 @@ public class PlayerInputObserver extends InputListener {
         return null;
     }
 
+    public Vector2 getLatestClickedPositionInMetersRelativeToScreenCenter() {
+        return Dimensions.calculateGlobalPositionInPixelsToMetersRelativeToCenter(latestClickedPosition);
+    }
+
+    public boolean isClicking() {
+        return this.isClicking;
+    }
+
     @Override
     public boolean keyDown(InputEvent event, int keycode) {
         Direction direction = keycodeToDirection(keycode);
@@ -91,5 +104,23 @@ public class PlayerInputObserver extends InputListener {
             movementKeysPressed.remove(direction);
 
         return super.keyUp(event, keycode);
+    }
+
+    @Override
+    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+        System.out.println("touch down: " + x + ", " + y);
+        this.isClicking = true;
+        this.latestClickedPosition = new Vector2(x, y);
+
+        return super.touchDown(event, x, y, pointer, button);
+    }
+
+
+    @Override
+    public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+        System.out.println("touch up");
+        this.isClicking = false;
+
+        super.touchUp(event, x, y, pointer, button);
     }
 }

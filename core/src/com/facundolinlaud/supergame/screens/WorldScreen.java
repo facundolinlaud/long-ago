@@ -89,7 +89,7 @@ public class WorldScreen implements Screen {
         engine.addSystem(new PickUpSystem());
         engine.addSystem(new HealthSystem(res.batch));
         engine.addSystem(new KeyPressSkillCastingRequestSystem());
-        engine.addSystem(new KeyPressThenClickCastingRequestSystem());
+        engine.addSystem(new KeyPressThenClickCastingRequestSystem(playerInputObserver));
         engine.addSystem(new SkillCastingSystem(engine));
         engine.addSystem(new SkillTargetedSystem());
         engine.addSystem(new SkillLockdownSystem());

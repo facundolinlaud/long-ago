@@ -13,6 +13,7 @@ import com.facundolinlaud.supergame.components.sprite.AnimableSpriteComponent;
 import com.facundolinlaud.supergame.factory.AvailableSkillsFactory;
 import com.facundolinlaud.supergame.managers.world.PlayerInputObserver;
 import com.facundolinlaud.supergame.model.skill.Skill;
+import com.facundolinlaud.supergame.model.skill.SkillType;
 import com.facundolinlaud.supergame.model.status.Action;
 import com.facundolinlaud.supergame.model.status.Direction;
 import com.facundolinlaud.supergame.utils.Mappers;
@@ -66,8 +67,9 @@ public class PlayerInputSystem extends IteratingSystem {
     private void handleSkillCastingCase(Entity caster, StatusComponent status) {
         Integer requestedSkillId = playerInputObserver.getPlayersSkillId();
         Skill requestedSkill = skillsFactory.getSkillById(requestedSkillId);
+        SkillType skillType = requestedSkill.getSkillType();
 
-        if(requestedSkill.isProjectile())
+        if(skillType == SkillType.SPELL || skillType == SkillType.PROJECTILE)
             caster.add(new SkillClickComponent());
 
         caster.add(new SkillCastingRequestComponent(requestedSkill));

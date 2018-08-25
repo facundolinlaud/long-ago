@@ -11,11 +11,11 @@ public class SpellSkillCastingStrategy implements SkillCastingStrategy {
 
     public SpellSkillCastingStrategy(Engine engine) {
         this.skillCastedProsecutor = new SkillCastedProsecutor(engine, new SpellSkillEpicenterStrategy());
-        System.out.println("boom!");
     }
 
     @Override
     public void executeSkillEffects(Entity caster, Skill skill) {
         this.skillCastedProsecutor.execute(caster, skill);
+        System.out.println("boom!");
     }
 }
