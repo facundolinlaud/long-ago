@@ -108,7 +108,6 @@ public class PlayerInputObserver extends ClickListener {
 
     @Override
     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-        System.out.println("touch down: " + x + ", " + y);
         this.isClicking = true;
         this.latestClickedPosition = new Vector2(x, y);
 
@@ -118,7 +117,6 @@ public class PlayerInputObserver extends ClickListener {
 
     @Override
     public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-        System.out.println("touch up");
         this.isClicking = false;
 
         super.touchUp(event, x, y, pointer, button);

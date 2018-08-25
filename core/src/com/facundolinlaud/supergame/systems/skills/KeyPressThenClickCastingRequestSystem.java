@@ -45,12 +45,8 @@ public class KeyPressThenClickCastingRequestSystem extends IteratingSystem {
     private Vector2 calculateClickedPositionInMeters(Entity caster){
         PositionComponent positionComponent = pm.get(caster);
         Vector2 clickedPosition = playerInputObserver.getLatestClickedPositionInMetersRelativeToScreenCenter();
-
-        System.out.println("clicked: " + clickedPosition.x + ", " + clickedPosition.y);
-        System.out.println("caster: " + positionComponent.x + ", " + positionComponent.y);
         clickedPosition.add(positionComponent.x, positionComponent.y);
 
-        System.out.println("result: " + clickedPosition);
         return clickedPosition;
     }
 }
