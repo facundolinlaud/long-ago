@@ -6,7 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Target;
 import com.facundolinlaud.supergame.ui.model.Item;
 import com.facundolinlaud.supergame.ui.view.cross.Slot;
 import com.facundolinlaud.supergame.ui.view.cross.SlotSource;
-import com.facundolinlaud.supergame.model.EquipSlot;
+import com.facundolinlaud.supergame.model.equip.EquipSlot;
 import com.facundolinlaud.supergame.utils.events.EquipItemEvent;
 import com.facundolinlaud.supergame.utils.events.InventoryAndEquipmentItemSwapEvent;
 import com.facundolinlaud.supergame.utils.mediator.Mediator;

@@ -10,6 +10,7 @@ import java.util.List;
  * Created by facundo on 3/26/16.
  */
 public class BagComponent implements Component {
+    public boolean gathering;
     public List<Entity> items;
 
     public BagComponent() {

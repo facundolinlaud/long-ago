@@ -1,0 +1,32 @@
+{
+	"x": 25,
+	"y": 48,
+	"velocity": 1.9,
+	"body": {
+		"BODY": "sprites/living/body/skeleton.png",
+		"HAIR_BASE": "sprites/living/hair/mohawk.png",
+		"HAIR_COLOR": "sprites/living/hair/mohawk/mohawk.png"
+	},
+	"equipment": {
+			"CHEST": {
+			"name": "Chestplate",
+			"texture": "sprites/items/armor/chestplate.png",
+			"picture": "pictures/items/armor/chestplate.png",
+			"equipable": true,
+			"equipSlot": "CHEST"
+		}, "SHOES": {
+			"name": "Metal shoes",
+			"texture": "sprites/items/boots/metal_boots.png",
+			"picture": "pictures/items/boots/metal_boots.png",
+			"equipable": true,
+			"equipSlot": "SHOES"
+		}, "GLOVES" : {
+			"name": "Metal Gloves",
+			"texture": "sprites/items/gloves/metal_gloves.png",
+			"picture": "pictures/items/gloves/metal_gloves.png",
+			"equipable": true,
+			"equipSlot": "GLOVES"
+		}
+	},
+	"inventory": []
+}

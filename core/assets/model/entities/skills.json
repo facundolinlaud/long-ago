@@ -1,0 +1,67 @@
+{
+	"skills" : {
+		"0": {
+			"name": "Basic dash",
+			"picturePath": "",
+			"skillType": "NORMAL",
+			"skillDamageType": "DIRECT",
+			"skillTrigger": "KEY_PRESS",
+
+			"cooldown": 1.5,
+			"castTime": 0.5,
+			"lockdownTime": 0.8,
+			"interruptible": false,
+			"equipmentRequired": "SPEAR",
+
+			"castingAction": "MELEE_DASH_CASTING",
+			"executingAction": "DASHING",
+			"animationFlow": "TRAVERSE",
+
+			"areaOfEffect": "CIRCLE",
+			"areaOfEffectSize": 2.0,
+			"baseDamage": 40.0,
+			"baseHeal": 0.0,
+			"projectileInformation": {
+				"maxTravelDistance": 0.0,
+				"particlePath": "",
+				"onlyParticle": false,
+				"effectOnEnemy": "KNOCK_BACK",
+				"projectileSpeed": 0.0
+			},
+			"particleType": "NONE"
+		},
+		"1": {
+			"name": "Basic zone spell",
+			"picturePath": "",
+			"skillType": "SPELL",
+			"skillDamageType": "DIRECT",
+			"skillTrigger": "KEY_PRESS_THEN_CLICK",
+
+			"cooldown": 1.5,
+			"castTime": 1.5,
+			"lockdownTime": 0.8,
+			"interruptible": false,
+			"equipmentRequired": "SPEAR",
+
+			"castingAction": "SPELL_CASTING",
+			"executingAction": "SHOOTING",
+			"animationFlow": "STOP_AT_LAST_PHOTOGRAM",
+
+			"areaOfEffect": "CIRCLE",
+			"areaOfEffectSize": 2.0,
+			"baseDamage": 80.0,
+			"baseHeal": 0.0,
+			"projectileInformation": {
+				"maxTravelDistance": 0.0,
+				"particlePath": "",
+				"onlyParticle": false,
+				"effectOnEnemy": "KNOCK_BACK",
+				"projectileSpeed": 0.0
+			},
+			"particleType": "EXPLOSION",
+			"twoClickInformation" : {
+				"waitingForClickAction": "SPELL_PRECASTING"
+			}
+		}
+	}
+}

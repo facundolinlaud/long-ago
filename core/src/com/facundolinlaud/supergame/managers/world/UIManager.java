@@ -6,33 +6,21 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.facundolinlaud.supergame.managers.Manager;
-import com.facundolinlaud.supergame.systems.ui.AttributesUISystem;
-import com.facundolinlaud.supergame.systems.ui.EquipmentUISystem;
-import com.facundolinlaud.supergame.ui.controller.AttributesUIController;
-import com.facundolinlaud.supergame.ui.controller.EquipmentUIController;
-import com.facundolinlaud.supergame.ui.controller.InventoryUIController;
-import com.facundolinlaud.supergame.ui.controller.ProfileUIController;
-import com.facundolinlaud.supergame.ui.controller.impl.AttributesUIControllerImpl;
-import com.facundolinlaud.supergame.ui.controller.impl.EquipmentUIControllerImpl;
-import com.facundolinlaud.supergame.ui.controller.impl.InventoryUIControllerImpl;
-import com.facundolinlaud.supergame.ui.controller.impl.ProfileUIControllerImpl;
-import com.facundolinlaud.supergame.systems.ui.InventoryUISystem;
-import com.facundolinlaud.supergame.systems.ui.ProfileUISystem;
-import com.facundolinlaud.supergame.ui.view.AttributesUI;
-import com.facundolinlaud.supergame.ui.view.EquipmentUI;
-import com.facundolinlaud.supergame.ui.view.InventoryUI;
-import com.facundolinlaud.supergame.ui.view.OverlayUI;
+import com.facundolinlaud.supergame.managers.Renderable;
+import com.facundolinlaud.supergame.systems.ui.*;
+import com.facundolinlaud.supergame.ui.controller.*;
+import com.facundolinlaud.supergame.ui.controller.impl.*;
+import com.facundolinlaud.supergame.ui.view.*;
+import com.facundolinlaud.supergame.ui.view.SkillCastingUI;
 import com.facundolinlaud.supergame.utils.events.*;
 import com.facundolinlaud.supergame.utils.mediator.Mediator;
 
 /**
  * Created by facundo on 3/25/16.
  */
-public class UIManager implements Manager {
-    private static final String SKIN_JSON_PATH = "ui/second_iteration/uiskin.json";
-    private static final String TEXTURE_ATLAS_PATH = "ui/second_iteration/uiskin.atlas";
+public class UIManager implements Renderable {
+    private static final String SKIN_JSON_PATH = "ui/skin/uiskin.json";
+    private static final String TEXTURE_ATLAS_PATH = "ui/skin/uiskin.atlas";
     private static final int MIN_DRAG_TIME_IN_MILLISECONDS = 10;
 
     private Skin skin;
@@ -44,11 +32,13 @@ public class UIManager implements Manager {
     private InventoryUI inventoryUI;
     private AttributesUI attributesUI;
     private EquipmentUI equipmentUI;
+    private SkillCastingUI skillCastingUI;
 
     private InventoryUIController inventoryUIController;
     private ProfileUIController profileUIController;
     private AttributesUIController attributesUIController;
     private EquipmentUIController equipmentUIController;
+    private SkillCastingUIController skillCastingUIController;
 
     public UIManager(Stage stage) {
         this.skin = new Skin(Gdx.files.internal(SKIN_JSON_PATH));
@@ -73,6 +63,7 @@ public class UIManager implements Manager {
         this.inventoryUI = new InventoryUI(uiMediator, stage, skin, dragAndDrop, hud.getItemDropZone());
         this.attributesUI = new AttributesUI(uiMediator, stage, skin);
         this.equipmentUI = new EquipmentUI(uiMediator, stage, skin, dragAndDrop);
+        this.skillCastingUI = new SkillCastingUI();
     }
 
     private void initializeServices() {
@@ -80,10 +71,12 @@ public class UIManager implements Manager {
         this.inventoryUIController = new InventoryUIControllerImpl(this.inventoryUI);
         this.attributesUIController = new AttributesUIControllerImpl(this.attributesUI);
         this.equipmentUIController = new EquipmentUIControllerImpl(this.equipmentUI);
+        this.skillCastingUIController = new SkillCastingUIControllerImpl(this.skillCastingUI);
     }
 
     private void addUIToStage() {
         this.stage.addActor(this.hud.get());
+        this.stage.addActor(this.skillCastingUI);
     }
 
     private void subscribeReceivers(){
@@ -99,6 +92,7 @@ public class UIManager implements Manager {
         engine.addSystem(new InventoryUISystem(this.inventoryUIController));
         engine.addSystem(new AttributesUISystem(this.attributesUIController));
         engine.addSystem(new EquipmentUISystem(this.equipmentUIController));
+        engine.addSystem(new SkillCastingUISystem(this.skillCastingUIController));
     }
 
     @Override

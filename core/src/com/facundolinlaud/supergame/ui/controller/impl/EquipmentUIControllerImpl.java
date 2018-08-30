@@ -12,7 +12,7 @@ import com.facundolinlaud.supergame.ui.model.Item;
 import com.facundolinlaud.supergame.ui.model.equipment.Equipable;
 import com.facundolinlaud.supergame.ui.view.EquipmentUI;
 import com.facundolinlaud.supergame.utils.Mappers;
-import com.facundolinlaud.supergame.model.EquipSlot;
+import com.facundolinlaud.supergame.model.equip.EquipSlot;
 import com.facundolinlaud.supergame.utils.events.EquipItemEvent;
 import com.facundolinlaud.supergame.utils.events.Event;
 import com.facundolinlaud.supergame.utils.events.UnequipItemEvent;

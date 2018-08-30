@@ -14,10 +14,10 @@ import com.facundolinlaud.supergame.components.sprite.RefreshSpriteRequirementCo
 import com.facundolinlaud.supergame.components.sprite.StackableSpriteComponent;
 import com.facundolinlaud.supergame.components.sprite.StackedSpritesComponent;
 import com.facundolinlaud.supergame.model.RenderPriority;
-import com.facundolinlaud.supergame.model.EquipSlot;
+import com.facundolinlaud.supergame.model.equip.EquipSlot;
 import com.facundolinlaud.supergame.model.entity.ItemModel;
 import com.facundolinlaud.supergame.model.entity.PlayerModel;
-import com.facundolinlaud.supergame.utils.strategy.impl.SpriteRenderPositionStrategyImpl;
+import com.facundolinlaud.supergame.strategies.renderposition.SpriteRenderPositionStrategyImpl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -96,5 +96,22 @@ public class PlayerFactory {
         }
 
         return e;
+    }
+
+    public static void createEnemy(Engine engine) {
+        PlayerModel enemyModel = ModelFactory.getEnemyModel();
+
+        Entity e = new Entity()
+                .add(new RenderComponent(new SpriteRenderPositionStrategyImpl()))
+                .add(new PositionComponent(enemyModel.getX(), enemyModel.getY()))
+                .add(new HealthComponent(100, 99))
+                .add(new BodyComponent(PhysicsFactory.get().createItemBody()))
+                .add(new StatusComponent())
+                .add(new AnimableSpriteComponent())
+                .add(new StackedSpritesComponent(ModelFactory.getDefaultAnimationModel()))
+                .add(new RefreshSpriteRequirementComponent())
+                .add(new WearComponent(createWearablesEntities(engine, enemyModel)));
+
+        engine.addEntity(e);
     }
 }

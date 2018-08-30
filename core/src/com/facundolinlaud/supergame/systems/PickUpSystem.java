@@ -16,7 +16,6 @@ import com.facundolinlaud.supergame.utils.Mappers;
 public class PickUpSystem extends EntitySystem {
     private ComponentMapper<PositionComponent> pm = Mappers.position;
     private ComponentMapper<BagComponent> bm = Mappers.bag;
-    private ComponentMapper<StatusComponent> sm = Mappers.status;
 
     private ImmutableArray<Entity> items;
     private ImmutableArray<Entity> takers;
@@ -32,7 +31,7 @@ public class PickUpSystem extends EntitySystem {
     @Override
     public void update(float deltaTime) {
         for (Entity taker : takers) {
-            boolean isGathering = sm.get(taker).gathering;
+            boolean isGathering = bm.get(taker).gathering;
 
             if(isGathering) {
                 PositionComponent takerPosition = pm.get(taker);

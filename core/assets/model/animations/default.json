@@ -1,5 +1,4 @@
 {
-	"imagePath": "skeleton.png",
 	"width": 64,
 	"height": 64,
 	"frameDuration": 0.1,
@@ -7,67 +6,203 @@
 		"STANDING_UP": {
 			"x": 0,
 			"y": 8,
-			"length": 1
-		}, "WALKING_UP": {
-			"x": 1,
-			"y": 8,
-			"length": 8
-		}, "SWINGING_UP": {
-			"x": 1,
-			"y": 12,
-			"length": 5
-		}, "DASHING_UP": {
-			"x": 1,
-			"y": 4,
-			"length": 7
+			"length": 1,
+			"playMode": "LOOP"
 		}, "STANDING_LEFT": {
 			"x": 0,
 			"y": 9,
-			"length": 1
-		}, "WALKING_LEFT": {
-			"x": 1,
-			"y": 9,
-			"length": 8
-		}, "SWINGING_LEFT": {
-			"x": 1,
-			"y": 13,
-			"length": 5
-		}, "DASHING_LEFT": {
-			"x": 1,
-			"y": 5,
-			"length": 7
-		}, "STANDING_RIGHT": {
-			"x": 0,
-			"y": 11,
-			"length": 1
-		}, "WALKING_RIGHT": {
-			"x": 1,
-			"y": 11,
-			"length": 8
-		}, "SWINGING_RIGHT": {
-			"x": 1,
-			"y": 15,
-			"length": 5
-		}, "DASHING_RIGHT": {
-			"x": 1,
-			"y": 7,
-			"length": 7
+			"length": 1,
+			"playMode": "LOOP"
 		}, "STANDING_DOWN": {
 			"x": 0,
 			"y": 10,
-			"length": 1
+			"length": 1,
+			"playMode": "LOOP"
+		}, "STANDING_RIGHT": {
+			"x": 0,
+			"y": 11,
+			"length": 1,
+			"playMode": "LOOP"
+
+
+
+		}, "WALKING_UP": {
+			"x": 0,
+			"y": 8,
+			"length": 9,
+			"playMode": "LOOP"
+		}, "WALKING_LEFT": {
+			"x": 0,
+			"y": 9,
+			"length": 9,
+			"playMode": "LOOP"
 		}, "WALKING_DOWN": {
-			"x": 1,
+			"x": 0,
 			"y": 10,
-			"length": 8
+			"length": 9,
+			"playMode": "LOOP"
+		}, "WALKING_RIGHT": {
+			"x": 0,
+			"y": 11,
+			"length": 9,
+			"playMode": "LOOP"
+
+
+
+		}, "SWINGING_UP": {
+			"x": 1,
+			"y": 12,
+			"length": 5,
+			"playMode": "NORMAL"
+		}, "SWINGING_LEFT": {
+			"x": 1,
+			"y": 13,
+			"length": 5,
+			"playMode": "NORMAL"
 		}, "SWINGING_DOWN": {
 			"x": 1,
 			"y": 14,
-			"length": 5
+			"length": 5,
+			"playMode": "NORMAL"
+		}, "SWINGING_RIGHT": {
+			"x": 1,
+			"y": 15,
+			"length": 5,
+			"playMode": "NORMAL"
+
+
+
+		}, "DASHING_UP": {
+			"x": 1,
+			"y": 4,
+			"length": 7,
+			"playMode": "NORMAL"
+		}, "DASHING_LEFT": {
+			"x": 1,
+			"y": 5,
+			"length": 7,
+			"playMode": "NORMAL"
 		}, "DASHING_DOWN": {
 			"x": 1,
 			"y": 6,
-			"length": 7
+			"length": 7,
+			"playMode": "NORMAL"
+		}, "DASHING_RIGHT": {
+			"x": 1,
+			"y": 7,
+			"length": 7,
+			"playMode": "NORMAL"
+
+		}, "SPELL_PRECASTING_UP": {
+			"x": 1,
+			"y": 0,
+			"length": 3,
+			"playMode": "NORMAL"
+		}, "SPELL_PRECASTING_LEFT": {
+			"x": 1,
+			"y": 1,
+			"length": 3,
+			"playMode": "NORMAL"
+		}, "SPELL_PRECASTING_DOWN": {
+			"x": 1,
+			"y": 2,
+			"length": 3,
+			"playMode": "NORMAL"
+		}, "SPELL_PRECASTING_RIGHT": {
+			"x": 1,
+			"y": 3,
+			"length": 3,
+			"playMode": "NORMAL"
+
+		}, "SPELL_CASTING_UP": {
+			"x": 1,
+			"y": 0,
+			"length": 6,
+			"playMode": "LOOP"
+		}, "SPELL_CASTING_LEFT": {
+			"x": 1,
+			"y": 1,
+			"length": 6,
+			"playMode": "LOOP"
+		}, "SPELL_CASTING_DOWN": {
+			"x": 1,
+			"y": 2,
+			"length": 6,
+			"playMode": "LOOP"
+		}, "SPELL_CASTING_RIGHT": {
+			"x": 1,
+			"y": 3,
+			"length": 6,
+			"playMode": "LOOP"
+
+
+
+		}, "SHOOTING_UP": {
+			"x": 1,
+			"y": 16,
+			"length": 12,
+			"playMode": "NORMAL"
+		}, "SHOOTING_LEFT": {
+			"x": 1,
+			"y": 17,
+			"length": 12,
+			"playMode": "NORMAL"
+		}, "SHOOTING_DOWN": {
+			"x": 1,
+			"y": 18,
+			"length": 12,
+			"playMode": "NORMAL"
+		}, "SHOOTING_RIGHT": {
+			"x": 1,
+			"y": 19,
+			"length": 12,
+			"playMode": "NORMAL"
+
+
+
+		}, "FALLING_UP": {
+			"x": 1,
+			"y": 20,
+			"length": 5,
+			"playMode": "NORMAL"
+		}, "FALLING_LEFT": {
+			"x": 1,
+			"y": 20,
+			"length": 5,
+			"playMode": "NORMAL"
+		}, "FALLING_DOWN": {
+			"x": 1,
+			"y": 20,
+			"length": 5,
+			"playMode": "NORMAL"
+		}, "FALLING_RIGHT": {
+			"x": 1,
+			"y": 20,
+			"length": 5,
+			"playMode": "NORMAL"
+
+
+
+		}, "MELEE_DASH_CASTING_UP": {
+			"x": 4,
+			"y": 4,
+			"length": 4,
+			"playMode": "NORMAL"
+		}, "MELEE_DASH_CASTING_LEFT": {
+			"x": 4,
+			"y": 5,
+			"length": 4,
+			"playMode": "NORMAL"
+		}, "MELEE_DASH_CASTING_DOWN": {
+			"x": 4,
+			"y": 6,
+			"length": 4,
+			"playMode": "NORMAL"
+		}, "MELEE_DASH_CASTING_RIGHT": {
+			"x": 4,
+			"y": 7,
+			"length": 4,
+			"playMode": "NORMAL"
 		}
 	}
 }

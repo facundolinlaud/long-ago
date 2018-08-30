@@ -8,7 +8,7 @@ import com.facundolinlaud.supergame.screens.WorldScreen;
 /**
  * Created by facundo on 3/19/16.
  */
-public class ScreenManager implements Manager {
+public class ScreenManager implements Renderable {
     private GameResources gameResources;
     private Screen currentScreen;
 

@@ -12,8 +12,8 @@ import com.facundolinlaud.supergame.components.RenderComponent;
 import com.facundolinlaud.supergame.components.sprite.AnimableSpriteComponent;
 import com.facundolinlaud.supergame.components.sprite.RefreshSpriteRequirementComponent;
 import com.facundolinlaud.supergame.components.sprite.StackedSpritesComponent;
-import com.facundolinlaud.supergame.model.Status;
-import com.facundolinlaud.supergame.model.sprite.AnimationModel;
+import com.facundolinlaud.supergame.model.sprite.RawAnimationModel;
+import com.facundolinlaud.supergame.model.status.Status;
 import com.facundolinlaud.supergame.model.sprite.SubAnimationModel;
 import com.facundolinlaud.supergame.utils.Mappers;
 
@@ -33,12 +33,12 @@ public class StackedSpritesSystem extends IteratingSystem {
 
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
-        // consigo el cropping strategy de la entity
+        // consigo el cropping strategies de la entity
         // construyo las animations y las pongo en el AnimableSpriteComponent
 
         StackedSpritesComponent stackedSpritesComponent = stacked.get(entity);
         Texture sprites = stackedSpritesComponent.stackedSprites;
-        AnimationModel model = stackedSpritesComponent.animationModel;
+        RawAnimationModel model = stackedSpritesComponent.rawAnimationModel;
 
         Map<Status, Animation> animations = createAnimations(sprites, model);
 
@@ -48,7 +48,7 @@ public class StackedSpritesSystem extends IteratingSystem {
         entity.remove(RefreshSpriteRequirementComponent.class);
     }
 
-    private HashMap<Status, Animation> createAnimations(Texture sprites, AnimationModel model) {
+    private HashMap<Status, Animation> createAnimations(Texture sprites, RawAnimationModel model) {
         Map<Status, SubAnimationModel> animationsModels = model.getSubanimations();
         HashMap<Status, Animation> animations = new HashMap<>();
 
@@ -67,7 +67,7 @@ public class StackedSpritesSystem extends IteratingSystem {
                 segments.add(new TextureRegion(sprites, x + i * width, y, width, height));
             }
 
-            animations.put(status, new Animation(frameDuration, segments, Animation.PlayMode.LOOP));
+            animations.put(status, new Animation(frameDuration, segments, subAnimation.getPlayMode()));
         }
 
         return animations;

@@ -5,7 +5,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.facundolinlaud.supergame.components.BodyComponent;
-import com.facundolinlaud.supergame.model.Action;
+import com.facundolinlaud.supergame.model.status.Action;
 import com.facundolinlaud.supergame.components.StatusComponent;
 import com.facundolinlaud.supergame.components.PositionComponent;
 import com.facundolinlaud.supergame.components.VelocityComponent;
@@ -33,8 +33,8 @@ public class MovementSystem extends IteratingSystem  {
         int toggleX = 0;
         int toggleY = 0;
 
-        if(Action.WALKING.equals(status.action)) {
-            switch (status.direction) {
+        if(Action.WALKING.equals(status.getAction())) {
+            switch (status.getDirection()) {
                 case UP:
                     toggleY = 1;
                     break;
