@@ -3,7 +3,6 @@ package com.facundolinlaud.supergame.factory;
 import com.badlogic.gdx.Gdx;
 import com.facundolinlaud.supergame.model.entity.PlayerModel;
 import com.facundolinlaud.supergame.model.particle.ParticleType;
-import com.facundolinlaud.supergame.model.particle.ParticlesModel;
 import com.facundolinlaud.supergame.model.skill.SkillsModel;
 import com.facundolinlaud.supergame.model.sprite.RawAnimationModel;
 import com.fasterxml.jackson.databind.ObjectMapper;
