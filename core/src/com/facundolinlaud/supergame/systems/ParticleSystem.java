@@ -11,13 +11,14 @@ import com.facundolinlaud.supergame.components.PositionComponent;
 import com.facundolinlaud.supergame.utils.Mappers;
 
 public class ParticleSystem extends IteratingSystem {
+    private static final int LESS_PRIORITY_THAN_RENDER_SYSTEM = 2;
     private ComponentMapper<PositionComponent> pom = Mappers.position;
     private ComponentMapper<ParticleComponent> pam = Mappers.particle;
 
     private SpriteBatch batch;
 
     public ParticleSystem(SpriteBatch batch) {
-        super(Family.all(PositionComponent.class, ParticleComponent.class).get());
+        super(Family.all(PositionComponent.class, ParticleComponent.class).get(), LESS_PRIORITY_THAN_RENDER_SYSTEM);
         this.batch = batch;
     }
 

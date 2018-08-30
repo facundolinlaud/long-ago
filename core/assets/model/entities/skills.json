@@ -38,7 +38,7 @@
 			"skillTrigger": "KEY_PRESS_THEN_CLICK",
 
 			"cooldown": 1.5,
-			"castTime": 2.5,
+			"castTime": 1.5,
 			"lockdownTime": 0.8,
 			"interruptible": false,
 			"equipmentRequired": "SPEAR",
@@ -58,7 +58,10 @@
 				"effectOnEnemy": "KNOCK_BACK",
 				"projectileSpeed": 0.0
 			},
-			"particleType": "EXPLOSION"
+			"particleType": "EXPLOSION",
+			"twoClickInformation" : {
+				"waitingForClickAction": "SPELL_PRECASTING"
+			}
 		}
 	}
 }

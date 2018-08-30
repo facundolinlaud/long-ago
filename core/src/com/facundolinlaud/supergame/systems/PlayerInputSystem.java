@@ -24,7 +24,6 @@ import com.facundolinlaud.supergame.utils.Mappers;
 public class PlayerInputSystem extends IteratingSystem {
     private ComponentMapper<StatusComponent> sm = Mappers.status;
     private ComponentMapper<BagComponent> bm = Mappers.bag;
-    private ComponentMapper<AnimableSpriteComponent> asm = Mappers.animableSprite;
 
     private PlayerInputObserver playerInputObserver;
     private AvailableSkillsFactory skillsFactory;

@@ -11,6 +11,7 @@ import com.facundolinlaud.supergame.components.skills.SkillCastingRequestCompone
 import com.facundolinlaud.supergame.components.skills.SkillClickComponent;
 import com.facundolinlaud.supergame.managers.world.PlayerInputObserver;
 import com.facundolinlaud.supergame.model.skill.Skill;
+import com.facundolinlaud.supergame.model.skill.TwoClickInformation;
 import com.facundolinlaud.supergame.model.status.Action;
 import com.facundolinlaud.supergame.strategies.skills.castingrequest.KeyPressThenClickCastingRequestStrategy;
 import com.facundolinlaud.supergame.utils.Mappers;
@@ -42,10 +43,9 @@ public class KeyPressThenClickCastingRequestSystem extends IteratingSystem {
             Vector2 clickedPosition = calculateClickedPositionInMeters(caster);
             clickComponent.registerClick(clickedPosition);
             this.requestStrategy.attemptToCast(caster, skill);
-        }else{
-            // TODO: jugar con esto
-            StatusComponent statusComponent = sm.get(caster);
-            statusComponent.setAction(Action.SPELL_PRECASTING);
+        } else if(clickComponent.isJustCreated()){
+            applyWaitingForClickAction(caster, skill);
+            clickComponent.setJustCreated(false);
         }
     }
 
@@ -55,5 +55,13 @@ public class KeyPressThenClickCastingRequestSystem extends IteratingSystem {
         clickedPosition.add(positionComponent.x, positionComponent.y);
 
         return clickedPosition;
+    }
+
+    private void applyWaitingForClickAction(Entity caster, Skill skill) {
+        TwoClickInformation twoClickInformation = skill.getTwoClickInformation();
+        Action action = twoClickInformation.getWaitingForClickAction();
+
+        StatusComponent statusComponent = sm.get(caster);
+        statusComponent.setAction(action);
     }
 }

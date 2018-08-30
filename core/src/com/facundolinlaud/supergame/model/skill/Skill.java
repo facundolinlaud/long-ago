@@ -32,11 +32,16 @@ public class Skill {
     private float baseDamage;
     private float baseHeal;
 
-    /* Is it a projectile? */
+    /* Projectile or two-click-skill based information */
     @Nullable private ProjectileInformation projectileInformation;
+    @Nullable private TwoClickInformation twoClickInformation;
 
     /* Particles */
     private ParticleType particleType;
+
+    public void setTwoClickInformation(TwoClickInformation twoClickInformation) {
+        this.twoClickInformation = twoClickInformation;
+    }
 
     public Skill() {}
 
@@ -198,5 +203,9 @@ public class Skill {
 
     public void setParticleType(ParticleType particleType) {
         this.particleType = particleType;
+    }
+
+    public TwoClickInformation getTwoClickInformation() {
+        return twoClickInformation;
     }
 }
