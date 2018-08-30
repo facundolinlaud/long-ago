@@ -16,7 +16,7 @@ public class ParticleManager {
     private static final int DEFAULT_MAX_CAPACITY = 20;
 
     public static final String PARTICLES_PATH = "particles/png";
-    public static final String FIRE_PARTICLE_PATH = "particles/particle.p";
+    public static final String FIRE_PARTICLE_PATH = "particles/explosion.p";
 
     private Map<ParticleType, ParticleEffect> particleEffects;
     private Map<ParticleType, ParticleEffectPool> particleEffectPool;
