@@ -4,18 +4,18 @@ package com.facundolinlaud.supergame.model.equip;
  * Created by facundo on 3/31/16.
  */
 public enum EquipSlot {
-    BODY(0, false, false),
-    HAIR_BASE(1, false, false),
-    HAIR_COLOR(2, false, false),
-    EYES(3, false, false),
-    HELMET(4, false, true),
-    PANTS(5, false, true),
-    BELT(6, false, true),
-    CHEST(7, false, true),
-    GLOVES(8, false, true),
-    SHOES(9, false, true),
-    WEAPON(10, true, false),
-    SHIELD(11, false, true);
+    BODY(5, false, false),
+    HAIR_BASE(6, false, false),
+    HAIR_COLOR(7, false, false),
+    EYES(8, false, false),
+    HELMET(9, false, true),
+    PANTS(10, false, true),
+    BELT(11, false, true),
+    CHEST(12, false, true),
+    GLOVES(13, false, true),
+    SHOES(14, false, true),
+    WEAPON(15, true, false),
+    SHIELD(16, false, true);
 
     private int renderPriority;
     private boolean hasAttackComponent;

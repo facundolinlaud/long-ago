@@ -7,13 +7,13 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.facundolinlaud.supergame.managers.Manager;
+import com.facundolinlaud.supergame.managers.Renderable;
 import com.facundolinlaud.supergame.utils.Dimensions;
 
 /**
  * Created by facundo on 3/23/16.
  */
-public class MapManager implements Manager {
+public class MapManager implements Renderable {
     public static final String PATH_TO_TILE_MAP = "map/test5.tmx";
     public static final int VIEWPORT_WIDTH_IN_METERS = 32;
     public static final int[] BASE_LAYERS = new int[]{0, 1};

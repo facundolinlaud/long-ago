@@ -7,6 +7,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.facundolinlaud.supergame.factory.AvailableSkillsFactory;
+import com.facundolinlaud.supergame.factory.ParticleFactory;
 import com.facundolinlaud.supergame.factory.PlayerFactory;
 import com.facundolinlaud.supergame.factory.ItemFactory;
 import com.facundolinlaud.supergame.components.BodyComponent;
@@ -28,6 +29,7 @@ public class WorldScreen implements Screen {
     private MapManager mapManager;
     private PhysicsManager physicsManager;
     private UIManager uiManager;
+    private ParticleManager particleManager;
 
     private Stage stage;
 
@@ -51,6 +53,7 @@ public class WorldScreen implements Screen {
         this.mapManager = new MapManager(res.batch);
         this.physicsManager = new PhysicsManager(mapManager.getCamera(), mapManager.getMap());
         this.uiManager = new UIManager(stage);
+        this.particleManager = new ParticleManager();
     }
 
     private void initializeListeners() {
@@ -79,6 +82,7 @@ public class WorldScreen implements Screen {
         stage.addListener(playerInputObserver);
         Engine engine = res.engine;
 
+        engine.addSystem(new ParticleSystem(res.batch));
         engine.addSystem(new StackableSpriteSystem());
         engine.addSystem(new StackedSpritesSystem());
         engine.addSystem(new AnimableSpriteSystem());
@@ -90,9 +94,10 @@ public class WorldScreen implements Screen {
         engine.addSystem(new HealthSystem(res.batch));
         engine.addSystem(new KeyPressSkillCastingRequestSystem());
         engine.addSystem(new KeyPressThenClickCastingRequestSystem(playerInputObserver));
-        engine.addSystem(new SkillCastingSystem(engine));
+        engine.addSystem(new SkillCastingSystem(engine, new ParticleFactory(particleManager)));
         engine.addSystem(new SkillTargetedSystem());
         engine.addSystem(new SkillLockdownSystem());
+
 
         uiManager.initializeSystems(engine);
     }
@@ -103,6 +108,7 @@ public class WorldScreen implements Screen {
 
         res.batch.begin();
         res.engine.update(delta);
+
         res.batch.end();
 
         mapManager.renderUpperLayer();

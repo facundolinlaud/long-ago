@@ -3,8 +3,8 @@ package com.facundolinlaud.supergame.components;
 import com.badlogic.ashley.core.Component;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.facundolinlaud.supergame.model.RenderPriority;
-import com.facundolinlaud.supergame.strategies.RenderPositionStrategy;
-import com.facundolinlaud.supergame.strategies.impl.DefaultRenderPositionStrategyImpl;
+import com.facundolinlaud.supergame.strategies.renderposition.RenderPositionStrategy;
+import com.facundolinlaud.supergame.strategies.renderposition.DefaultRenderPositionStrategyImpl;
 
 /**
  * Created by facundo on 3/18/16.

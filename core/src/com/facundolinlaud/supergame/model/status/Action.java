@@ -13,6 +13,7 @@ public enum Action {
     SWINGING("SWINGING"),
     DASHING("DASHING"),
     SHOOTING("SHOOTING"),
+    SPELL_PRECASTING("SPELL_PRECASTING"),
     FALLING("FALLING");
     private String name;
 

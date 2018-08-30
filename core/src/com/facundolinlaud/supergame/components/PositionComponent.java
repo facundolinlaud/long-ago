@@ -1,6 +1,7 @@
 package com.facundolinlaud.supergame.components;
 
 import com.badlogic.ashley.core.Component;
+import com.badlogic.gdx.math.Vector2;
 
 /**
  * Created by facundo on 3/17/16.
@@ -22,6 +23,11 @@ public class PositionComponent implements Component {
         overridePhysicsSystem = true;
         this.x = positionComponent.x;
         this.y = positionComponent.y;
+    }
+
+    public PositionComponent(Vector2 v) {
+        this.x = v.x;
+        this.y = v.y;
     }
 
     public void set(float x, float y){

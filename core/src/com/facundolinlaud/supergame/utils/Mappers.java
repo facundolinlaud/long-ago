@@ -38,4 +38,5 @@ public class Mappers {
     public static final ComponentMapper<SkillCastingComponent> skillCasting = ComponentMapper.getFor(SkillCastingComponent.class);
     public static final ComponentMapper<SkillLockdownComponent> skillLockdown = ComponentMapper.getFor(SkillLockdownComponent.class);
     public static final ComponentMapper<SkillClickComponent> skillClick = ComponentMapper.getFor(SkillClickComponent.class);
+    public static final ComponentMapper<ParticleComponent> particle = ComponentMapper.getFor(ParticleComponent.class);
 }

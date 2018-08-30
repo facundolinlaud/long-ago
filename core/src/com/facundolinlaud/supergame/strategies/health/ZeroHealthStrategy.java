@@ -1,4 +1,4 @@
-package com.facundolinlaud.supergame.strategies;
+package com.facundolinlaud.supergame.strategies.health;
 
 import com.badlogic.ashley.core.Entity;
 

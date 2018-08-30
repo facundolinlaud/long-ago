@@ -1,4 +1,4 @@
-package com.facundolinlaud.supergame.strategies;
+package com.facundolinlaud.supergame.strategies.renderposition;
 
 import com.badlogic.gdx.math.Vector2;
 

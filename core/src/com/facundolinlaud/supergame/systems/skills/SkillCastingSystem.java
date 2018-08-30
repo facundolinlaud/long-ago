@@ -9,6 +9,7 @@ import com.facundolinlaud.supergame.components.PositionComponent;
 import com.facundolinlaud.supergame.components.StatusComponent;
 import com.facundolinlaud.supergame.components.skills.SkillCastingComponent;
 import com.facundolinlaud.supergame.components.skills.SkillLockdownComponent;
+import com.facundolinlaud.supergame.factory.ParticleFactory;
 import com.facundolinlaud.supergame.model.skill.Skill;
 import com.facundolinlaud.supergame.model.skill.SkillType;
 import com.facundolinlaud.supergame.model.status.Action;
@@ -27,12 +28,12 @@ public class SkillCastingSystem extends IteratingSystem {
 
     private Map<SkillType, SkillCastingStrategy> castingStrategies;
 
-    public SkillCastingSystem(Engine engine) {
+    public SkillCastingSystem(Engine engine, ParticleFactory particleFactory) {
         super(Family.all(PositionComponent.class, StatusComponent.class, SkillCastingComponent.class).get());
 
         this.castingStrategies = new HashMap<>();
-        this.castingStrategies.put(SkillType.NORMAL, new NormalSkillCastingStrategy(engine));
-        this.castingStrategies.put(SkillType.SPELL, new SpellSkillCastingStrategy(engine));
+        this.castingStrategies.put(SkillType.NORMAL, new NormalSkillCastingStrategy(engine, particleFactory));
+        this.castingStrategies.put(SkillType.SPELL, new SpellSkillCastingStrategy(engine, particleFactory));
         this.castingStrategies.put(SkillType.PROJECTILE, new ProjectileSkillCastingStrategy());
     }
 

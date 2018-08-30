@@ -5,10 +5,14 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
+import com.badlogic.gdx.graphics.g2d.ParticleEffectPool.PooledEffect;
 import com.badlogic.gdx.math.Vector2;
 import com.facundolinlaud.supergame.components.HealthComponent;
+import com.facundolinlaud.supergame.components.ParticleComponent;
 import com.facundolinlaud.supergame.components.PositionComponent;
 import com.facundolinlaud.supergame.components.skills.SkillTargetedComponent;
+import com.facundolinlaud.supergame.factory.ParticleFactory;
+import com.facundolinlaud.supergame.model.particle.ParticleType;
 import com.facundolinlaud.supergame.model.skill.AreaOfEffect;
 import com.facundolinlaud.supergame.model.skill.Skill;
 import com.facundolinlaud.supergame.strategies.skills.areaofeffectcheck.AreaOfEffectCheckStrategy;
@@ -22,15 +26,18 @@ public class SkillCastedProsecutor {
 
     private Engine engine;
     private SkillEpicenterStrategy epicenterStrategy;
+    private ParticleFactory particleFactory;
 
-    public SkillCastedProsecutor(Engine engine, SkillEpicenterStrategy epicenterStrategy) {
+    public SkillCastedProsecutor(Engine engine, SkillEpicenterStrategy epicenterStrategy, ParticleFactory particleFactory) {
         this.epicenterStrategy = epicenterStrategy;
         this.engine = engine;
+        this.particleFactory = particleFactory;
     }
 
     public void execute(Entity caster, Skill skill) {
         Vector2 epicenter = this.epicenterStrategy.calculate(caster);
         affectSurroundingEntities(caster, skill, epicenter);
+        createParticleEffect(caster, skill, epicenter);
     }
 
     private void affectSurroundingEntities(Entity caster, Skill skill, Vector2 epicenter) {
@@ -66,5 +73,15 @@ public class SkillCastedProsecutor {
 
     private void applyEffectsToVictim(Entity caster, Entity victim, Skill skill) {
         victim.add(new SkillTargetedComponent(caster, skill));
+    }
+
+    private void createParticleEffect(Entity caster, Skill skill, Vector2 epicenter) {
+        PooledEffect pooledEffect = particleFactory.create(ParticleType.FIRE);
+
+        Entity particle = new Entity();
+        particle.add(new PositionComponent(epicenter));
+        particle.add(new ParticleComponent(pooledEffect));
+
+        engine.addEntity(particle);
     }
 }

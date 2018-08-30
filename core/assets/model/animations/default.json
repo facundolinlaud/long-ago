@@ -93,7 +93,26 @@
 			"length": 7,
 			"playMode": "NORMAL"
 
-
+		}, "SPELL_PRECASTING_UP": {
+			"x": 1,
+			"y": 0,
+			"length": 3,
+			"playMode": "NORMAL"
+		}, "SPELL_PRECASTING_LEFT": {
+			"x": 1,
+			"y": 1,
+			"length": 3,
+			"playMode": "NORMAL"
+		}, "SPELL_PRECASTING_DOWN": {
+			"x": 1,
+			"y": 2,
+			"length": 3,
+			"playMode": "NORMAL"
+		}, "SPELL_PRECASTING_RIGHT": {
+			"x": 1,
+			"y": 3,
+			"length": 3,
+			"playMode": "NORMAL"
 
 		}, "SPELL_CASTING_UP": {
 			"x": 1,

@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
-import com.facundolinlaud.supergame.managers.Manager;
+import com.facundolinlaud.supergame.managers.Renderable;
 import com.facundolinlaud.supergame.systems.ui.*;
 import com.facundolinlaud.supergame.ui.controller.*;
 import com.facundolinlaud.supergame.ui.controller.impl.*;
@@ -18,7 +18,7 @@ import com.facundolinlaud.supergame.utils.mediator.Mediator;
 /**
  * Created by facundo on 3/25/16.
  */
-public class UIManager implements Manager {
+public class UIManager implements Renderable {
     private static final String SKIN_JSON_PATH = "ui/skin/uiskin.json";
     private static final String TEXTURE_ATLAS_PATH = "ui/skin/uiskin.atlas";
     private static final int MIN_DRAG_TIME_IN_MILLISECONDS = 10;

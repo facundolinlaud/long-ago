@@ -1,4 +1,4 @@
-package com.facundolinlaud.supergame.strategies.impl;
+package com.facundolinlaud.supergame.strategies.health;
 
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
@@ -6,7 +6,6 @@ import com.facundolinlaud.supergame.components.BodyComponent;
 import com.facundolinlaud.supergame.components.HealthComponent;
 import com.facundolinlaud.supergame.components.StatusComponent;
 import com.facundolinlaud.supergame.model.status.Action;
-import com.facundolinlaud.supergame.strategies.ZeroHealthStrategy;
 import com.facundolinlaud.supergame.utils.Mappers;
 
 public class NPCZeroHealthStrategyImpl implements ZeroHealthStrategy {

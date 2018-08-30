@@ -1,8 +1,8 @@
 package com.facundolinlaud.supergame.components;
 
 import com.badlogic.ashley.core.Component;
-import com.facundolinlaud.supergame.strategies.ZeroHealthStrategy;
-import com.facundolinlaud.supergame.strategies.impl.NPCZeroHealthStrategyImpl;
+import com.facundolinlaud.supergame.strategies.health.ZeroHealthStrategy;
+import com.facundolinlaud.supergame.strategies.health.NPCZeroHealthStrategyImpl;
 
 /**
  * Created by facundo on 3/23/16.

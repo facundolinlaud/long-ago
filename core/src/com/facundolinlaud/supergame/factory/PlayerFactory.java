@@ -17,7 +17,7 @@ import com.facundolinlaud.supergame.model.RenderPriority;
 import com.facundolinlaud.supergame.model.equip.EquipSlot;
 import com.facundolinlaud.supergame.model.entity.ItemModel;
 import com.facundolinlaud.supergame.model.entity.PlayerModel;
-import com.facundolinlaud.supergame.strategies.impl.SpriteRenderPositionStrategyImpl;
+import com.facundolinlaud.supergame.strategies.renderposition.SpriteRenderPositionStrategyImpl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
