@@ -12,6 +12,7 @@ import com.facundolinlaud.supergame.components.ParticleComponent;
 import com.facundolinlaud.supergame.components.PositionComponent;
 import com.facundolinlaud.supergame.components.skills.SkillTargetedComponent;
 import com.facundolinlaud.supergame.factory.ParticleFactory;
+import com.facundolinlaud.supergame.model.particle.Particle;
 import com.facundolinlaud.supergame.model.particle.ParticleType;
 import com.facundolinlaud.supergame.model.skill.AreaOfEffect;
 import com.facundolinlaud.supergame.model.skill.Skill;
@@ -37,7 +38,9 @@ public class SkillCastedProsecutor {
     public void execute(Entity caster, Skill skill) {
         Vector2 epicenter = this.epicenterStrategy.calculate(caster);
         affectSurroundingEntities(caster, skill, epicenter);
-        createParticleEffect(caster, skill, epicenter);
+
+        if(skill.hasParticleEffect())
+            createParticleEffect(skill.getParticleType(), epicenter);
     }
 
     private void affectSurroundingEntities(Entity caster, Skill skill, Vector2 epicenter) {
@@ -75,12 +78,12 @@ public class SkillCastedProsecutor {
         victim.add(new SkillTargetedComponent(caster, skill));
     }
 
-    private void createParticleEffect(Entity caster, Skill skill, Vector2 epicenter) {
-        PooledEffect pooledEffect = particleFactory.create(ParticleType.FIRE);
+    private void createParticleEffect(ParticleType particleType, Vector2 epicenter) {
+        PooledEffect pooledEffect = particleFactory.create(particleType);
 
         Entity particle = new Entity();
         particle.add(new PositionComponent(epicenter));
-        particle.add(new ParticleComponent(pooledEffect));
+        particle.add(new ParticleComponent(pooledEffect, true));
 
         engine.addEntity(particle);
     }

@@ -27,7 +27,8 @@
 				"onlyParticle": false,
 				"effectOnEnemy": "KNOCK_BACK",
 				"projectileSpeed": 0.0
-			}
+			},
+			"particleType": "NONE"
 		},
 		"1": {
 			"name": "Basic zone spell",
@@ -56,7 +57,8 @@
 				"onlyParticle": false,
 				"effectOnEnemy": "KNOCK_BACK",
 				"projectileSpeed": 0.0
-			}
+			},
+			"particleType": "EXPLOSION"
 		}
 	}
 }

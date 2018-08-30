@@ -2,6 +2,8 @@ package com.facundolinlaud.supergame.factory;
 
 import com.badlogic.gdx.Gdx;
 import com.facundolinlaud.supergame.model.entity.PlayerModel;
+import com.facundolinlaud.supergame.model.particle.ParticleType;
+import com.facundolinlaud.supergame.model.particle.ParticlesModel;
 import com.facundolinlaud.supergame.model.skill.SkillsModel;
 import com.facundolinlaud.supergame.model.sprite.RawAnimationModel;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -18,6 +20,7 @@ public class ModelFactory implements Disposable {
     private static final String ENEMY_MODEL_PATH = "model/entities/enemy.json";
     private static final String SKILLS_MODEL_PATH = "model/entities/skills.json";
     private static final String DEFAULT_ANIMATION_MODEL_PATH = "model/animations/default.json";
+    private static final String PARTICLES_MODEL_PATH = "model/particles/particles.json";
 
     private static Map<String, Object> cache = new HashMap<>();
 
@@ -35,6 +38,10 @@ public class ModelFactory implements Disposable {
 
     public static SkillsModel getAvailableSkillsModel(){
         return (SkillsModel) readModel(SKILLS_MODEL_PATH, SkillsModel.class);
+    }
+
+    public static Map<ParticleType, String> getParticlesModel(){
+        return (Map<ParticleType, String>) readModel(PARTICLES_MODEL_PATH, Map.class);
     }
 
     private static Object readModel(String modelPath, Class clazz){

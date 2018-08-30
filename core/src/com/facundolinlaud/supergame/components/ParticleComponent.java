@@ -2,33 +2,28 @@ package com.facundolinlaud.supergame.components;
 
 import com.badlogic.ashley.core.Component;
 import com.badlogic.gdx.graphics.g2d.ParticleEffectPool.PooledEffect;
+import com.badlogic.gdx.utils.Pool.Poolable;
 
-public class ParticleComponent implements Component {
+public class ParticleComponent implements Component, Poolable {
     private PooledEffect effect;
-    private boolean loop;
-    private float duration;
+    private boolean isEntityJustParticle;
 
-    public ParticleComponent(PooledEffect effect) {
+    public ParticleComponent(PooledEffect effect, boolean isEntityJustParticle) {
         this.effect = effect;
-        this.loop = true;
-        this.duration = -1;
-    }
-
-    public ParticleComponent(PooledEffect effect, boolean loop, float duration) {
-        this.effect = effect;
-        this.loop = loop;
-        this.duration = duration;
+        this.isEntityJustParticle = isEntityJustParticle;
     }
 
     public PooledEffect getEffect() {
         return this.effect;
     }
 
-    public boolean isLoop() {
-        return this.loop;
+    public boolean isEntityJustParticle() {
+        return isEntityJustParticle;
     }
 
-    public float getDuration() {
-        return this.duration;
+    @Override
+    public void reset() {
+        effect.free();
+        effect = null;
     }
 }

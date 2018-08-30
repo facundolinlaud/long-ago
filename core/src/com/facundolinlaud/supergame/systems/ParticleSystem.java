@@ -27,7 +27,20 @@ public class ParticleSystem extends IteratingSystem {
         PositionComponent positionComponent = pom.get(entity);
 
         PooledEffect effect = particleComponent.getEffect();
-        effect.setPosition(positionComponent.x, positionComponent.y);
-        effect.draw(batch, deltaTime);
+
+        if(effect.isComplete()){
+            particleComponent.reset();
+
+            if(particleComponent.isEntityJustParticle()) {
+                getEngine().removeEntity(entity);
+            } else {
+                entity.remove(ParticleComponent.class);
+            }
+
+            System.out.println("one particle died");
+        } else {
+            effect.setPosition(positionComponent.x, positionComponent.y);
+            effect.draw(batch, deltaTime);
+        }
     }
 }

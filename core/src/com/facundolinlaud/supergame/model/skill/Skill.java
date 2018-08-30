@@ -1,7 +1,10 @@
 package com.facundolinlaud.supergame.model.skill;
 
 import com.facundolinlaud.supergame.model.equip.EquipType;
+import com.facundolinlaud.supergame.model.particle.Particle;
+import com.facundolinlaud.supergame.model.particle.ParticleType;
 import com.facundolinlaud.supergame.model.status.Action;
+import com.fasterxml.jackson.annotation.JsonSetter;
 import com.sun.istack.internal.Nullable;
 
 public class Skill {
@@ -31,6 +34,9 @@ public class Skill {
 
     /* Is it a projectile? */
     @Nullable private ProjectileInformation projectileInformation;
+
+    /* Particles */
+    private ParticleType particleType;
 
     public Skill() {}
 
@@ -180,5 +186,17 @@ public class Skill {
 
     public boolean isProjectile() {
         return this.skillType == SkillType.PROJECTILE;
+    }
+
+    public boolean hasParticleEffect(){
+        return this.particleType != ParticleType.NONE;
+    }
+
+    public ParticleType getParticleType() {
+        return particleType;
+    }
+
+    public void setParticleType(ParticleType particleType) {
+        this.particleType = particleType;
     }
 }
