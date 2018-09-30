@@ -3,6 +3,7 @@ package com.facundolinlaud.supergame.factory;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.physics.box2d.Body;
 import com.facundolinlaud.supergame.components.*;
 import com.facundolinlaud.supergame.components.items.EquipableComponent;
 import com.facundolinlaud.supergame.components.items.ItemComponent;
@@ -28,14 +29,17 @@ import java.util.Map;
  * Created by facundo on 27/7/16.
  */
 public class PlayerFactory {
+    private static Body playerBody;
+
     public static void createPlayer(Engine engine){
+        playerBody = PhysicsFactory.get().createItemBody();
         PlayerModel playerModel = ModelFactory.getPlayerModel();
 
         Entity player = new Entity()
                 .add(new PositionComponent(playerModel.getX(), playerModel.getY()))
                 .add(new KeyboardComponent())
                 .add(new VelocityComponent(playerModel.getVelocity()))
-                .add(new BodyComponent(PhysicsFactory.get().createItemBody()))
+                .add(new BodyComponent(playerBody))
                 .add(new WearComponent(createWearablesEntities(engine, playerModel)))
                 .add(new RenderComponent(new SpriteRenderPositionStrategyImpl()))
                 .add(new StatusComponent())
@@ -113,5 +117,9 @@ public class PlayerFactory {
                 .add(new WearComponent(createWearablesEntities(engine, enemyModel)));
 
         engine.addEntity(e);
+    }
+
+    public static Body getPlayerBody() {
+        return playerBody;
     }
 }

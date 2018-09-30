@@ -65,7 +65,7 @@ public class MapManager implements Renderable {
         mapRenderer.dispose();
     }
 
-    public Camera getCamera(){
+    public OrthographicCamera getCamera(){
         return this.camera;
     }
 

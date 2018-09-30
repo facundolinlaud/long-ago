@@ -1,10 +1,14 @@
 package com.facundolinlaud.supergame.screens;
 
+import box2dLight.DirectionalLight;
+import box2dLight.PointLight;
+import box2dLight.RayHandler;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.ai.msg.MessageManager;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.facundolinlaud.supergame.factory.AvailableSkillsFactory;
@@ -31,6 +35,7 @@ public class WorldScreen implements Screen {
     private PhysicsManager physicsManager;
     private UIManager uiManager;
     private ParticleManager particleManager;
+    private LightsManager lightsManager;
 
     private Stage stage;
 
@@ -55,6 +60,7 @@ public class WorldScreen implements Screen {
         this.physicsManager = new PhysicsManager(mapManager.getCamera(), mapManager.getMap());
         this.uiManager = new UIManager(stage);
         this.particleManager = new ParticleManager();
+        this.lightsManager = new LightsManager(physicsManager.getWorld(), mapManager.getCamera());
     }
 
     private void initializeListeners() {
@@ -68,6 +74,7 @@ public class WorldScreen implements Screen {
         }
 
         PlayerFactory.createPlayer(res.engine);
+        lightsManager.setPlayerLightBody(PlayerFactory.getPlayerBody());
 
         for(int i = 0; i < 14; i++){
             res.engine.addEntity(ItemFactory.createCoins());
@@ -112,6 +119,8 @@ public class WorldScreen implements Screen {
 
         mapManager.renderUpperLayer();
         physicsManager.render();
+        lightsManager.render();
+
         uiManager.render();
     }
 
@@ -128,6 +137,7 @@ public class WorldScreen implements Screen {
     @Override
     public void dispose() {
         mapManager.dispose();
+        lightsManager.dispose();
     }
 
     @Override
