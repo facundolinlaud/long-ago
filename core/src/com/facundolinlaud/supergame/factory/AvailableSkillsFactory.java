@@ -15,4 +15,8 @@ public class AvailableSkillsFactory {
     public Skill getSkillById(int id) {
         return skills.get(id);
     }
+
+    public Map<Integer, Skill> getSkills() {
+        return skills;
+    }
 }

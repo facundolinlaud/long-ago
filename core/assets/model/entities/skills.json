@@ -2,7 +2,7 @@
 	"skills" : {
 		"0": {
 			"name": "Basic dash",
-			"picturePath": "",
+			"picturePath": "pictures/skills/dash.png",
 			"skillType": "NORMAL",
 			"skillDamageType": "DIRECT",
 			"skillTrigger": "KEY_PRESS",
@@ -32,7 +32,7 @@
 		},
 		"1": {
 			"name": "Basic zone spell",
-			"picturePath": "",
+			"picturePath": "pictures/skills/fireball.png",
 			"skillType": "SPELL",
 			"skillDamageType": "DIRECT",
 			"skillTrigger": "KEY_PRESS_THEN_CLICK",

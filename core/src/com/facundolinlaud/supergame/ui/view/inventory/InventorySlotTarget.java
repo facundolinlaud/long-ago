@@ -16,7 +16,7 @@ import com.facundolinlaud.supergame.utils.mediator.Messenger;
  */
 public class InventorySlotTarget extends Target implements Messenger {
 
-    private Slot slot;
+    private Slot<Item> slot;
     private Mediator uiMediator;
 
     public InventorySlotTarget(InventorySlot slot, Mediator uiMediator) {
@@ -46,7 +46,7 @@ public class InventorySlotTarget extends Target implements Messenger {
     }
 
     private void handleInventorySourceDrop(Payload payload) {
-        Item a = slot.getItem();
+        Item a = slot.getContent();
         Item b = (Item) payload.getObject();
 
         uiMediator.raise(this, ItemsPositionSwapEvent.class, new ItemsPositionSwapEvent(a, b));

@@ -39,11 +39,11 @@ public class Grid extends Table {
     }
 
     public void update(List<Item> items){
-        slots.stream().forEach(InventorySlot::clearItem);
+        slots.stream().forEach(InventorySlot::clearContent);
 
         for(int i = 0; i < items.size(); i++){
             if(i < slots.size()){
-                slots.get(i).setItem(items.get(i));
+                slots.get(i).setContent(items.get(i));
             }else{
                 System.out.println("No space in inventory UI");
             }

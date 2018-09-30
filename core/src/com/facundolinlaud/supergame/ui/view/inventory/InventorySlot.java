@@ -8,7 +8,7 @@ import com.facundolinlaud.supergame.ui.view.cross.Slot;
 /**
  * Created by facundo on 3/29/16.
  */
-public class InventorySlot extends Slot {
+public class InventorySlot extends Slot<Item> {
     private static final int HEIGHT = 32;
     private static final int WIDTH = 32;
 
@@ -24,19 +24,19 @@ public class InventorySlot extends Slot {
     }
 
     @Override
-    public void setItem(Item item){
+    public void setContent(Item item){
         this.item = item;
         this.itemImage = new Image(item.getPicture());
         add(this.itemImage);
     }
 
     @Override
-    public Item getItem() {
+    public Item getContent() {
         return item;
     }
 
     @Override
-    public void clearItem(){
+    public void clearContent(){
         if(this.item != null){
             removeActor(this.itemImage);
             this.item = null;

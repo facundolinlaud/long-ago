@@ -1,6 +1,8 @@
 package com.facundolinlaud.supergame.ui.controller.impl;
 
+import com.facundolinlaud.supergame.model.skill.Skill;
 import com.facundolinlaud.supergame.ui.controller.SkillCastingUIController;
+import com.facundolinlaud.supergame.ui.view.OverlayUI;
 import com.facundolinlaud.supergame.ui.view.SkillCastingUI;
 
 /*
@@ -12,7 +14,7 @@ public class SkillCastingUIControllerImpl implements SkillCastingUIController {
 
     private SkillCastingUI skillCastingUI;
 
-    public SkillCastingUIControllerImpl(SkillCastingUI skillCastingUI) {
+    public SkillCastingUIControllerImpl(SkillCastingUI skillCastingUI, OverlayUI overlayUI) {
         this.skillCastingUI = skillCastingUI;
     }
 

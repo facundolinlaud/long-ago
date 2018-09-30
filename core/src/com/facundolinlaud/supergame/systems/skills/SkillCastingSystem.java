@@ -5,6 +5,8 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
+import com.badlogic.gdx.ai.msg.MessageDispatcher;
+import com.badlogic.gdx.ai.msg.MessageManager;
 import com.facundolinlaud.supergame.components.PositionComponent;
 import com.facundolinlaud.supergame.components.StatusComponent;
 import com.facundolinlaud.supergame.components.skills.SkillCastingComponent;
@@ -18,6 +20,7 @@ import com.facundolinlaud.supergame.strategies.skills.casting.ProjectileSkillCas
 import com.facundolinlaud.supergame.strategies.skills.casting.SkillCastingStrategy;
 import com.facundolinlaud.supergame.strategies.skills.casting.SpellSkillCastingStrategy;
 import com.facundolinlaud.supergame.utils.Mappers;
+import com.facundolinlaud.supergame.utils.Messages;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,6 +30,7 @@ public class SkillCastingSystem extends IteratingSystem {
     private ComponentMapper<StatusComponent> sm = Mappers.status;
 
     private Map<SkillType, SkillCastingStrategy> castingStrategies;
+    private MessageDispatcher messageDispatcher;
 
     public SkillCastingSystem(Engine engine, ParticleFactory particleFactory) {
         super(Family.all(PositionComponent.class, StatusComponent.class, SkillCastingComponent.class).get());
@@ -35,6 +39,8 @@ public class SkillCastingSystem extends IteratingSystem {
         this.castingStrategies.put(SkillType.NORMAL, new NormalSkillCastingStrategy(engine, particleFactory));
         this.castingStrategies.put(SkillType.SPELL, new SpellSkillCastingStrategy(engine, particleFactory));
         this.castingStrategies.put(SkillType.PROJECTILE, new ProjectileSkillCastingStrategy());
+
+        this.messageDispatcher = MessageManager.getInstance();
     }
 
     @Override
@@ -76,6 +82,7 @@ public class SkillCastingSystem extends IteratingSystem {
         SkillType skillType = skill.getSkillType();
 
         this.castingStrategies.get(skillType).executeSkillEffects(caster, skill);
+        this.messageDispatcher.dispatchMessage(Messages.SKILL_CASTED, skill);
     }
 
     private void putCasterOnSkillLockdown(Entity caster, float lockdownTime){

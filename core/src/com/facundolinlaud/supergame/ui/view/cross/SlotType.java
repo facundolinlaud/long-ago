@@ -5,5 +5,6 @@ package com.facundolinlaud.supergame.ui.view.cross;
  */
 public enum SlotType {
     INVENTORY_SLOT,
-    EQUIPMENT_SLOT
+    EQUIPMENT_SLOT,
+    SKILLBAR_SLOT
 }

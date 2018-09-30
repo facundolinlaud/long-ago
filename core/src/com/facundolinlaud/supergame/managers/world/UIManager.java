@@ -2,6 +2,8 @@ package com.facundolinlaud.supergame.managers.world;
 
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.ai.msg.MessageDispatcher;
+import com.badlogic.gdx.ai.msg.MessageManager;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -12,6 +14,7 @@ import com.facundolinlaud.supergame.ui.controller.*;
 import com.facundolinlaud.supergame.ui.controller.impl.*;
 import com.facundolinlaud.supergame.ui.view.*;
 import com.facundolinlaud.supergame.ui.view.SkillCastingUI;
+import com.facundolinlaud.supergame.utils.Messages;
 import com.facundolinlaud.supergame.utils.events.*;
 import com.facundolinlaud.supergame.utils.mediator.Mediator;
 
@@ -28,7 +31,7 @@ public class UIManager implements Renderable {
     private Mediator uiMediator;
     private DragAndDrop dragAndDrop;
 
-    private OverlayUI hud;
+    private OverlayUI overlayUI;
     private InventoryUI inventoryUI;
     private AttributesUI attributesUI;
     private EquipmentUI equipmentUI;
@@ -40,10 +43,12 @@ public class UIManager implements Renderable {
     private EquipmentUIController equipmentUIController;
     private SkillCastingUIController skillCastingUIController;
 
+    private MessageDispatcher messageDispatcher;
     public UIManager(Stage stage) {
         this.skin = new Skin(Gdx.files.internal(SKIN_JSON_PATH));
         this.skin.addRegions(new TextureAtlas(Gdx.files.internal(TEXTURE_ATLAS_PATH)));
         this.stage = stage;
+        this.messageDispatcher = MessageManager.getInstance();
 
         initializeUIResources();
         initializeUI();
@@ -59,23 +64,23 @@ public class UIManager implements Renderable {
     }
 
     private void initializeUI() {
-        this.hud = new OverlayUI(skin);
-        this.inventoryUI = new InventoryUI(uiMediator, stage, skin, dragAndDrop, hud.getItemDropZone());
+        this.overlayUI = new OverlayUI(skin);
+        this.inventoryUI = new InventoryUI(uiMediator, stage, skin, dragAndDrop, overlayUI.getItemDropZone());
         this.attributesUI = new AttributesUI(uiMediator, stage, skin);
         this.equipmentUI = new EquipmentUI(uiMediator, stage, skin, dragAndDrop);
         this.skillCastingUI = new SkillCastingUI();
     }
 
     private void initializeServices() {
-        this.profileUIController = new ProfileUIControllerImpl(this.hud);
+        this.profileUIController = new ProfileUIControllerImpl(this.overlayUI);
         this.inventoryUIController = new InventoryUIControllerImpl(this.inventoryUI);
         this.attributesUIController = new AttributesUIControllerImpl(this.attributesUI);
         this.equipmentUIController = new EquipmentUIControllerImpl(this.equipmentUI);
-        this.skillCastingUIController = new SkillCastingUIControllerImpl(this.skillCastingUI);
+        this.skillCastingUIController = new SkillCastingUIControllerImpl(this.skillCastingUI, this.overlayUI);
     }
 
     private void addUIToStage() {
-        this.stage.addActor(this.hud.get());
+        this.stage.addActor(this.overlayUI.get());
         this.stage.addActor(this.skillCastingUI);
     }
 
@@ -85,10 +90,12 @@ public class UIManager implements Renderable {
         this.uiMediator.subscribe(AttributeUpgradeEvent.class, this.attributesUIController);
         this.uiMediator.subscribe(UnequipItemEvent.class, this.equipmentUIController);
         this.uiMediator.subscribe(EquipItemEvent.class, this.equipmentUIController);
+
+        this.messageDispatcher.addListener(overlayUI, Messages.SKILL_CASTED);
     }
 
     public void initializeSystems(Engine engine){
-        engine.addSystem(new ProfileUISystem(this.hud));
+        engine.addSystem(new ProfileUISystem(this.overlayUI));
         engine.addSystem(new InventoryUISystem(this.inventoryUIController));
         engine.addSystem(new AttributesUISystem(this.attributesUIController));
         engine.addSystem(new EquipmentUISystem(this.equipmentUIController));

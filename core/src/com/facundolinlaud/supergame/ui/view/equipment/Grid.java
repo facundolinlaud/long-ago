@@ -62,10 +62,10 @@ public class Grid extends Table {
             Item item = items.get(wt);
 
             EquipmentSlot slot = slots.get(wt);
-            slot.clearItem();
+            slot.clearContent();
 
             if(item != null){
-                slot.setItem(item);
+                slot.setContent(item);
             }
         }
     }

@@ -9,7 +9,7 @@ import com.facundolinlaud.supergame.model.equip.EquipSlot;
 /**
  * Created by facundo on 4/2/16.
  */
-public class EquipmentSlot extends Slot {
+public class EquipmentSlot extends Slot<Item> {
     private static final int HEIGHT = 32;
     private static final int WIDTH = 32;
 
@@ -28,7 +28,7 @@ public class EquipmentSlot extends Slot {
     }
 
     @Override
-    public void setItem(Item item){
+    public void setContent(Item item){
         this.item = item;
         this.itemImage = new Image(item.getPicture());
 
@@ -36,12 +36,12 @@ public class EquipmentSlot extends Slot {
     }
 
     @Override
-    public Item getItem() {
+    public Item getContent() {
         return item;
     }
 
     @Override
-    public void clearItem(){
+    public void clearContent(){
         if(this.item != null){
             removeActor(this.itemImage);
             this.item = null;

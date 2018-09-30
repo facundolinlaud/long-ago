@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.ai.msg.MessageManager;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.facundolinlaud.supergame.factory.AvailableSkillsFactory;
@@ -45,7 +46,7 @@ public class WorldScreen implements Screen {
 
     private void initializeStage() {
         this.stage = new Stage(new ScreenViewport());
-        this.stage.setDebugAll(true);
+        this.stage.setDebugAll(false);
         Gdx.input.setInputProcessor(stage);
     }
 
@@ -98,7 +99,6 @@ public class WorldScreen implements Screen {
         engine.addSystem(new SkillTargetedSystem());
         engine.addSystem(new SkillLockdownSystem());
 
-
         uiManager.initializeSystems(engine);
     }
 
@@ -108,7 +108,6 @@ public class WorldScreen implements Screen {
 
         res.batch.begin();
         res.engine.update(delta);
-
         res.batch.end();
 
         mapManager.renderUpperLayer();

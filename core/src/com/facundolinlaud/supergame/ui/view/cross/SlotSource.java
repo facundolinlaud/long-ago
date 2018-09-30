@@ -13,7 +13,7 @@ import com.facundolinlaud.supergame.ui.model.Item;
 public class SlotSource extends Source {
 
     private Skin skin;
-    private Slot slot;
+    private Slot<Item> slot;
     private SlotType slotType;
 
     public SlotSource(Slot slot, Skin skin, SlotType slotType) {
@@ -26,7 +26,7 @@ public class SlotSource extends Source {
 
     @Override
     public Payload dragStart(InputEvent event, float x, float y, int pointer) {
-        Item item = slot.getItem();
+        Item item = slot.getContent();
         Payload payload = new Payload();
         payload.setDragActor(new Image(item.getPicture()));
         payload.setObject(item);

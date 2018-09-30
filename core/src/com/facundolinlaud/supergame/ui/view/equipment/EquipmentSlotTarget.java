@@ -17,7 +17,7 @@ import com.facundolinlaud.supergame.utils.mediator.Messenger;
  */
 public class EquipmentSlotTarget extends Target implements Messenger {
 
-    private Slot slot;
+    private Slot<Item> slot;
     private Mediator uiMediator;
     private EquipSlot equipSlot;
 
@@ -51,7 +51,7 @@ public class EquipmentSlotTarget extends Target implements Messenger {
     private void handleInventorySourceDrop(Payload payload){
         Item newItem = (Item) payload.getObject();
 
-        Item alreadyEquippedItem = slot.getItem();
+        Item alreadyEquippedItem = slot.getContent();
 
         if(isNewItemCompatibleWithSlot(newItem)){
             if(alreadyEquippedItem == null){
