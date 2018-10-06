@@ -12,6 +12,8 @@ import com.facundolinlaud.supergame.components.ParticleComponent;
 import com.facundolinlaud.supergame.components.PositionComponent;
 import com.facundolinlaud.supergame.components.skills.SkillTargetedComponent;
 import com.facundolinlaud.supergame.factory.ParticleFactory;
+import com.facundolinlaud.supergame.managers.world.LightsManager;
+import com.facundolinlaud.supergame.model.light.LightModel;
 import com.facundolinlaud.supergame.model.particle.Particle;
 import com.facundolinlaud.supergame.model.particle.ParticleType;
 import com.facundolinlaud.supergame.model.skill.AreaOfEffect;
@@ -28,11 +30,13 @@ public class SkillCastedProsecutor {
     private Engine engine;
     private SkillEpicenterStrategy epicenterStrategy;
     private ParticleFactory particleFactory;
+    private LightsManager lightsManager;
 
-    public SkillCastedProsecutor(Engine engine, SkillEpicenterStrategy epicenterStrategy, ParticleFactory particleFactory) {
+    public SkillCastedProsecutor(Engine engine, SkillEpicenterStrategy epicenterStrategy, ParticleFactory particleFactory, LightsManager lightsManager) {
         this.epicenterStrategy = epicenterStrategy;
-        this.engine = engine;
         this.particleFactory = particleFactory;
+        this.lightsManager = lightsManager;
+        this.engine = engine;
     }
 
     public void execute(Entity caster, Skill skill) {
@@ -41,6 +45,14 @@ public class SkillCastedProsecutor {
 
         if(skill.hasParticleEffect())
             createParticleEffect(skill.getParticleType(), epicenter);
+
+        if(skill.hasLightEffect())
+            createLightEffect(skill.getLightModel(), epicenter);
+
+    }
+
+    private void createLightEffect(LightModel model, Vector2 epicenter) {
+        lightsManager.create(model, epicenter.x, epicenter.y);
     }
 
     private void affectSurroundingEntities(Entity caster, Skill skill, Vector2 epicenter) {

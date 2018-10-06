@@ -61,6 +61,12 @@
 			"particleType": "EXPLOSION",
 			"twoClickInformation" : {
 				"waitingForClickAction": "SPELL_PRECASTING"
+			},
+			"hasLightEffect": true,
+			"lightModel": {
+				"type" : "DIMMING",
+				"distance": 6.0,
+				"duration": 1.0
 			}
 		}
 	}

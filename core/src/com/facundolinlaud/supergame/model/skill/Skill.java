@@ -1,6 +1,7 @@
 package com.facundolinlaud.supergame.model.skill;
 
 import com.facundolinlaud.supergame.model.equip.EquipType;
+import com.facundolinlaud.supergame.model.light.LightModel;
 import com.facundolinlaud.supergame.model.particle.Particle;
 import com.facundolinlaud.supergame.model.particle.ParticleType;
 import com.facundolinlaud.supergame.model.status.Action;
@@ -38,6 +39,26 @@ public class Skill {
 
     /* Particles */
     private ParticleType particleType;
+
+    /* Lights */
+    private boolean hasLightEffect;
+    @Nullable private LightModel lightModel;
+
+    public void setHasLightEffect(boolean hasLightEffect) {
+        this.hasLightEffect = hasLightEffect;
+    }
+
+    public boolean hasLightEffect() {
+        return hasLightEffect;
+    }
+
+    public LightModel getLightModel() {
+        return lightModel;
+    }
+
+    public void setLightModel(LightModel lightModel) {
+        this.lightModel = lightModel;
+    }
 
     public void setTwoClickInformation(TwoClickInformation twoClickInformation) {
         this.twoClickInformation = twoClickInformation;

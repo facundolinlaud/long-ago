@@ -7,9 +7,13 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 import com.facundolinlaud.supergame.managers.Renderable;
+import com.facundolinlaud.supergame.model.light.LightModel;
+import com.facundolinlaud.supergame.utils.lights.DimmingLight;
 
 public class LightsManager implements Renderable {
-    public static final Color AMBIENT_LIGHT_COLOR = new Color(722711);
+    private static final int RAYS_COUNT = 32;
+    private static final Color AMBIENT_LIGHT_COLOR = new Color(722711);
+    private static final Color LIGHTS_COLOR = new Color(0f, 0f, 0f, 1f);
 
     private RayHandler rayHandler;
     private PointLight playerLight;
@@ -24,11 +28,7 @@ public class LightsManager implements Renderable {
     }
 
     private void initializePlayerLight(){
-        float c = 0f;
-        float a = 1f;
-        Color lightColor = new Color(c, c, c, a);
-
-        this.playerLight = new PointLight(rayHandler, 32, lightColor, 16, 20, 42);
+        this.playerLight = new PointLight(rayHandler, RAYS_COUNT, LIGHTS_COLOR, 16, 20, 42);
         this.playerLight.setSoft(true);
         this.playerLight.setIgnoreAttachedBody(false);
         this.playerLight.setXray(true);
@@ -36,6 +36,18 @@ public class LightsManager implements Renderable {
 
     public void setPlayerLightBody(Body player){
         this.playerLight.attachToBody(player);
+    }
+
+    public void create(LightModel model, float x, float y){
+        switch (model.getType()){
+            case POINT:
+                break;
+            case FLICKERING:
+                break;
+            case DIMMING:
+                new DimmingLight(rayHandler, RAYS_COUNT, LIGHTS_COLOR, model.getDistance(), x, y, model.getDuration());
+                break;
+        }
     }
 
     @Override

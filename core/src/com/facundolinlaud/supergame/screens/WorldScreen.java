@@ -1,22 +1,17 @@
 package com.facundolinlaud.supergame.screens;
 
-import box2dLight.DirectionalLight;
-import box2dLight.PointLight;
-import box2dLight.RayHandler;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.ai.msg.MessageManager;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.facundolinlaud.supergame.factory.AvailableSkillsFactory;
-import com.facundolinlaud.supergame.factory.ParticleFactory;
-import com.facundolinlaud.supergame.factory.PlayerFactory;
-import com.facundolinlaud.supergame.factory.ItemFactory;
 import com.facundolinlaud.supergame.components.BodyComponent;
 import com.facundolinlaud.supergame.engine.GameResources;
+import com.facundolinlaud.supergame.factory.AvailableSkillsFactory;
+import com.facundolinlaud.supergame.factory.ItemFactory;
+import com.facundolinlaud.supergame.factory.ParticleFactory;
+import com.facundolinlaud.supergame.factory.PlayerFactory;
 import com.facundolinlaud.supergame.listeners.PhysicsEntitiesListener;
 import com.facundolinlaud.supergame.managers.world.*;
 import com.facundolinlaud.supergame.systems.*;
@@ -52,6 +47,7 @@ public class WorldScreen implements Screen {
     private void initializeStage() {
         this.stage = new Stage(new ScreenViewport());
         this.stage.setDebugAll(false);
+
         Gdx.input.setInputProcessor(stage);
     }
 
@@ -102,7 +98,7 @@ public class WorldScreen implements Screen {
         engine.addSystem(new HealthSystem(res.batch));
         engine.addSystem(new KeyPressSkillCastingRequestSystem());
         engine.addSystem(new KeyPressThenClickCastingRequestSystem(playerInputObserver));
-        engine.addSystem(new SkillCastingSystem(engine, new ParticleFactory(particleManager)));
+        engine.addSystem(new SkillCastingSystem(engine, new ParticleFactory(particleManager), lightsManager));
         engine.addSystem(new SkillTargetedSystem());
         engine.addSystem(new SkillLockdownSystem());
 
