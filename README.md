@@ -1,6 +1,6 @@
 # Long Ago
 
-## A less than 1 min video demo (no sound)
+## A 1 min video demo (no sound)
 https://streamable.com/sd950
 
 ## About
