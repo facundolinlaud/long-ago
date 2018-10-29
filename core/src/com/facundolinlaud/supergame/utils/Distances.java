@@ -4,6 +4,9 @@ import com.badlogic.gdx.math.Vector2;
 
 public class Distances {
     public static float calculateEuclideanDistanceBetween(Vector2 a, Vector2 b){
-        return (float) Math.abs(Math.sqrt(Math.pow(a.x, 2) + Math.pow(a.y, 2)) - Math.sqrt(Math.pow(b.x, 2) + Math.pow(b.y, 2)));
+        float x = Math.abs(a.x - b.x);
+        float y = Math.abs(a.y - b.y);
+
+        return (float) Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
     }
 }
