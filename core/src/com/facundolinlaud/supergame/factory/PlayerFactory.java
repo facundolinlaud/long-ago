@@ -5,6 +5,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.facundolinlaud.supergame.components.*;
+import com.facundolinlaud.supergame.components.ai.AIComponent;
 import com.facundolinlaud.supergame.components.items.EquipableComponent;
 import com.facundolinlaud.supergame.components.items.ItemComponent;
 import com.facundolinlaud.supergame.components.player.BagComponent;
@@ -15,6 +16,7 @@ import com.facundolinlaud.supergame.components.sprite.RefreshSpriteRequirementCo
 import com.facundolinlaud.supergame.components.sprite.StackableSpriteComponent;
 import com.facundolinlaud.supergame.components.sprite.StackedSpritesComponent;
 import com.facundolinlaud.supergame.model.RenderPriority;
+import com.facundolinlaud.supergame.model.ai.BehaviourType;
 import com.facundolinlaud.supergame.model.equip.EquipSlot;
 import com.facundolinlaud.supergame.model.entity.ItemModel;
 import com.facundolinlaud.supergame.model.entity.PlayerModel;
@@ -114,7 +116,8 @@ public class PlayerFactory {
                 .add(new AnimableSpriteComponent())
                 .add(new StackedSpritesComponent(ModelFactory.getDefaultAnimationModel()))
                 .add(new RefreshSpriteRequirementComponent())
-                .add(new WearComponent(createWearablesEntities(engine, enemyModel)));
+                .add(new WearComponent(createWearablesEntities(engine, enemyModel)))
+                .add(new AIComponent(BehaviourType.AGGRESSIVE));
 
         engine.addEntity(e);
     }

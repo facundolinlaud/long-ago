@@ -40,4 +40,8 @@ public enum Action {
     public boolean isBusy(){
         return !(this == STANDING || this == WALKING);
     }
+
+    public boolean isCasting() {
+        return this == SPELL_CASTING || this == RANGE_CASTING || this == MELEE_DASH_CASTING || this == SPELL_PRECASTING;
+    }
 }

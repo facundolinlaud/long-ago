@@ -11,6 +11,11 @@ public class SkillClickComponent implements Component {
         this.justCreated = true;
     }
 
+    public SkillClickComponent(Vector2 epicenter){
+        this.clickedPosition = epicenter;
+        this.justCreated = false;
+    }
+
     public void registerClick(Vector2 worldPosition){
         clickedPosition = worldPosition;
     }
