@@ -7,6 +7,7 @@ import com.badlogic.gdx.ai.btree.BehaviorTree;
 import com.badlogic.gdx.ai.btree.branch.Sequence;
 import com.facundolinlaud.supergame.ai.AttackTask;
 import com.facundolinlaud.supergame.ai.Blackboard;
+import com.facundolinlaud.supergame.ai.FaceTowardsPlayerTask;
 import com.facundolinlaud.supergame.ai.PlayerSeenTask;
 import com.facundolinlaud.supergame.components.ai.AIComponent;
 import com.facundolinlaud.supergame.factory.AvailableSkillsFactory;
@@ -55,9 +56,11 @@ public class AIManager implements EntityListener {
 
         Sequence<Blackboard> sequence = new Sequence<>();
         PlayerSeenTask playerSeenTask = new PlayerSeenTask();
+        FaceTowardsPlayerTask faceTowardsPlayerTask = new FaceTowardsPlayerTask();
         AttackTask attackTask = new AttackTask(this.availableSkillsFactory);
 
         sequence.addChild(playerSeenTask);
+        sequence.addChild(faceTowardsPlayerTask);
         sequence.addChild(attackTask);
 
         behaviorTree.addChild(sequence);

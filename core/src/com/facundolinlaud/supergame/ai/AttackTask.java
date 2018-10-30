@@ -13,6 +13,7 @@ import com.facundolinlaud.supergame.utils.Mappers;
 
 public class AttackTask extends LeafTask<Blackboard> {
     public static final int BASIC_SPELL = 1;
+
     private ComponentMapper<StatusComponent> sm = Mappers.status;
 
     private AvailableSkillsFactory availableSkillsFactory;
@@ -34,7 +35,8 @@ public class AttackTask extends LeafTask<Blackboard> {
         }
 
         return Status.SUCCEEDED;
-//        super.getObject().attack(); // WAT WAT WAT WAT WAT WAT ok me olvide de esto
+        // super.getObject().attack(); // WAT WAT WAT WAT WAT WAT ok me olvide de esto
+        // donde va la logica? en el blackboard o en el task? suena mas correcto en el task
     }
 
     void attackPlayer(Entity agent, Vector2 playerPosition){

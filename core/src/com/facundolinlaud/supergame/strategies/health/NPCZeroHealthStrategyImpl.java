@@ -35,6 +35,7 @@ public class NPCZeroHealthStrategyImpl implements ZeroHealthStrategy {
     }
 
     private void removeSkillCastingComponents(Entity npc){
+        // TODO: check which of these are mandatory
         npc.remove(SkillCastingComponent.class);
         npc.remove(SkillCastedComponent.class);
         npc.remove(SkillLockdownComponent.class);
