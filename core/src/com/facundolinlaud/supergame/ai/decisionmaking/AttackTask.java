@@ -9,17 +9,17 @@ import com.facundolinlaud.supergame.components.StatusComponent;
 import com.facundolinlaud.supergame.components.skills.SkillCastingComponent;
 import com.facundolinlaud.supergame.components.skills.SkillClickComponent;
 import com.facundolinlaud.supergame.factory.AvailableSkillsFactory;
+import com.facundolinlaud.supergame.model.skill.Skill;
+import com.facundolinlaud.supergame.model.status.Action;
 import com.facundolinlaud.supergame.utils.Mappers;
 
 public class AttackTask extends LeafTask<Blackboard> {
-    public static final int BASIC_SPELL = 1;
-
     private ComponentMapper<StatusComponent> sm = Mappers.status;
 
-    private AvailableSkillsFactory availableSkillsFactory;
+    private Skill skill;
 
-    public AttackTask(AvailableSkillsFactory availableSkillsFactory) {
-        this.availableSkillsFactory = availableSkillsFactory;
+    public AttackTask(Skill skill) {
+        this.skill = skill;
     }
 
     @Override
@@ -29,23 +29,23 @@ public class AttackTask extends LeafTask<Blackboard> {
         Entity agent = blackboard.getAgent();
         StatusComponent agentStatus = sm.get(agent);
 
-        if(!agentStatus.getAction().isBusy()){
-            Vector2 playerPosition = blackboard.getPlayerPosition();
-            attackPlayer(agent, playerPosition);
+        if(agentStatus.getAction().isCasting()) {
+            return Status.RUNNING;
         }
 
+        Vector2 playerPosition = blackboard.getPlayerPosition();
+        attackPlayer(agent, playerPosition);
+
         return Status.SUCCEEDED;
-        // super.getObject().attack(); // WAT WAT WAT WAT WAT WAT ok me olvide de esto
-        // donde va la logica? en el blackboard o en el task? suena mas correcto en el task
     }
 
     void attackPlayer(Entity agent, Vector2 playerPosition){
         agent.add(new SkillClickComponent(playerPosition));
-        agent.add(new SkillCastingComponent(availableSkillsFactory.getSkillById(BASIC_SPELL)));
+        agent.add(new SkillCastingComponent(skill));
     }
 
     @Override
     protected Task<Blackboard> copyTo(Task<Blackboard> task) {
-        return new AttackTask(this.availableSkillsFactory);
+        return new AttackTask(this.skill);
     }
 }

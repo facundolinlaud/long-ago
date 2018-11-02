@@ -26,6 +26,13 @@
 			"picture": "pictures/items/gloves/metal_gloves.png",
 			"equipable": true,
 			"equipSlot": "GLOVES"
+		}, "WEAPON": {
+			"name": "Wood spear",
+			"texture": "sprites/items/weapon/spear.png",
+			"picture": "pictures/items/weapon/spear.png",
+			"equipable": true,
+			"equipSlot": "WEAPON",
+			"equipType": "SPEAR"
 		}
 	},
 	"inventory": []

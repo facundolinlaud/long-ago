@@ -44,7 +44,7 @@
 			"equipmentRequired": "SPEAR",
 
 			"castingAction": "SPELL_CASTING",
-			"executingAction": "SHOOTING",
+			"executingAction": "SPELL_CASTING",
 			"animationFlow": "STOP_AT_LAST_PHOTOGRAM",
 
 			"areaOfEffect": "CIRCLE",

@@ -16,6 +16,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AIManager implements EntityListener {
+    public static final int MELEE_SPELL = 0;
+    public static final int MAGIC_SPELL = 1;
+
     private ComponentMapper<AIComponent> aim = Mappers.ai;
 
     private Map<Entity, BehaviorTree<?>> entitiesBehaviours;
@@ -56,14 +59,19 @@ public class AIManager implements EntityListener {
 
         Sequence<Blackboard> sequence = new Sequence<>();
         PlayerSeenTask playerSeenTask = new PlayerSeenTask();
-        FaceTowardsPlayerTask faceTowardsPlayerTask = new FaceTowardsPlayerTask();
+        FaceTowardsPlayerTask faceTowardsPlayerTask1 = new FaceTowardsPlayerTask();
+        AttackTask magicAttackTask = new AttackTask(this.availableSkillsFactory.getSkillById(MAGIC_SPELL));
         ApproachPlayer approachPlayer = new ApproachPlayer(pathFinderAuthority);
-        AttackTask attackTask = new AttackTask(this.availableSkillsFactory);
+        FaceTowardsPlayerTask faceTowardsPlayerTask2 = new FaceTowardsPlayerTask();
+        AttackTask meleeAttackTask = new AttackTask(this.availableSkillsFactory.getSkillById(MELEE_SPELL));
 
         sequence.addChild(playerSeenTask);
-        sequence.addChild(faceTowardsPlayerTask);
+        sequence.addChild(faceTowardsPlayerTask1);
+        sequence.addChild(magicAttackTask);
+        sequence.addChild(playerSeenTask);
         sequence.addChild(approachPlayer);
-        sequence.addChild(attackTask);
+        sequence.addChild(faceTowardsPlayerTask2);
+        sequence.addChild(meleeAttackTask);
 
         behaviorTree.addChild(sequence);
 
