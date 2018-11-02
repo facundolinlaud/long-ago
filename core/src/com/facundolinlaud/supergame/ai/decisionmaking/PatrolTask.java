@@ -1,4 +1,4 @@
-package com.facundolinlaud.supergame.ai;
+package com.facundolinlaud.supergame.ai.decisionmaking;
 
 import com.badlogic.gdx.ai.btree.LeafTask;
 import com.badlogic.gdx.ai.btree.Task;
@@ -6,7 +6,6 @@ import com.badlogic.gdx.ai.btree.Task;
 public class PatrolTask extends LeafTask<Blackboard> {
     @Override
     public Status execute() {
-        super.getObject().patrol();
         return Status.SUCCEEDED;
     }
 

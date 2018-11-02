@@ -10,14 +10,16 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.facundolinlaud.supergame.managers.Renderable;
 import com.facundolinlaud.supergame.utils.Dimensions;
 
+import java.util.ArrayList;
+
 /**
  * Created by facundo on 3/23/16.
  */
 public class MapManager implements Renderable {
     public static final String PATH_TO_TILE_MAP = "map/test_green.tmx";
     public static final int VIEWPORT_WIDTH_IN_METERS = 32;
-    public static final int[] BASE_LAYERS = new int[]{0, 1};
-    public static final int[] UPPER_LAYERS = new int[]{2};
+    public static final int[] BASE_LAYERS = new int[]{0, 1, 2};
+    public static final int[] UPPER_LAYERS = new int[]{3};
 
     private SpriteBatch batch;
 

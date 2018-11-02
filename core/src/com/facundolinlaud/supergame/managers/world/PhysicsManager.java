@@ -14,7 +14,9 @@ import com.facundolinlaud.supergame.factory.PhysicsFactory;
 import com.facundolinlaud.supergame.managers.Renderable;
 import com.facundolinlaud.supergame.utils.Dimensions;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * Created by facundo on 3/22/16.
@@ -29,9 +31,12 @@ public class PhysicsManager implements Renderable {
     private PhysicsFactory physicsFactory;
     private Box2DDebugRenderer physicsDebugRenderer;
 
+    private List<Rectangle> obstacles;
+
     public PhysicsManager(Camera camera, TiledMap map) {
         this.camera = camera;
         this.map = map;
+        this.obstacles = new ArrayList<>();
 
         initialize();
         populateObstacles();
@@ -60,6 +65,7 @@ public class PhysicsManager implements Renderable {
             float x = (rectangle.getX() / Dimensions.PX_PER_METER) + width / 2;
             float y = (rectangle.getY() / Dimensions.PX_PER_METER) + height / 2;
 
+            obstacles.add(new Rectangle(x, y, width, height));
             physicsFactory.createObstacleBody(x, y, width, height);
         }
     }
@@ -71,5 +77,9 @@ public class PhysicsManager implements Renderable {
 
     public World getWorld(){
         return this.world;
+    }
+
+    public List<Rectangle> getObstacles() {
+        return obstacles;
     }
 }

@@ -63,7 +63,7 @@ public class WorldScreen implements Screen {
         this.uiManager = new UIManager(stage);
         this.particleManager = new ParticleManager();
         this.lightsManager = new LightsManager(physicsManager.getWorld(), mapManager.getCamera());
-        this.aiManager = new AIManager(factories.getAvailableSkillsFactory());
+        this.aiManager = new AIManager(factories.getAvailableSkillsFactory(), mapManager, physicsManager);
     }
 
     private void initializeListeners() {

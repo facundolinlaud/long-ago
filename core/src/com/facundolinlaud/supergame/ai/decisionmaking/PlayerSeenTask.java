@@ -1,4 +1,4 @@
-package com.facundolinlaud.supergame.ai;
+package com.facundolinlaud.supergame.ai.decisionmaking;
 
 import com.badlogic.gdx.ai.btree.LeafTask;
 import com.badlogic.gdx.ai.btree.Task;

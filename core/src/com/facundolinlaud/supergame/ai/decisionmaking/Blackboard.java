@@ -1,11 +1,13 @@
-package com.facundolinlaud.supergame.ai;
+package com.facundolinlaud.supergame.ai.decisionmaking;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.math.Vector2;
+import com.facundolinlaud.supergame.ai.pathfinding.MapGraph;
 
 public class Blackboard {
     private Vector2 playerPosition;
     private Vector2 agentPosition;
+    private MapGraph mapGraph;
     private Entity agent;
 
     public Blackboard(){}
@@ -34,11 +36,11 @@ public class Blackboard {
         this.agentPosition = agentPosition;
     }
 
-    public void patrol(){
-        System.out.println("patrolling");
+    public MapGraph getMapGraph() {
+        return mapGraph;
     }
 
-    public void attack(){
-        System.out.println("attacking");
+    public void setMapGraph(MapGraph mapGraph) {
+        this.mapGraph = mapGraph;
     }
 }

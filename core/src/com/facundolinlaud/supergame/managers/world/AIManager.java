@@ -5,10 +5,12 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntityListener;
 import com.badlogic.gdx.ai.btree.BehaviorTree;
 import com.badlogic.gdx.ai.btree.branch.Sequence;
-import com.facundolinlaud.supergame.ai.AttackTask;
-import com.facundolinlaud.supergame.ai.Blackboard;
-import com.facundolinlaud.supergame.ai.FaceTowardsPlayerTask;
-import com.facundolinlaud.supergame.ai.PlayerSeenTask;
+import com.badlogic.gdx.ai.pfa.DefaultGraphPath;
+import com.badlogic.gdx.ai.pfa.GraphPath;
+import com.badlogic.gdx.ai.pfa.indexed.IndexedAStarPathFinder;
+import com.badlogic.gdx.math.Vector2;
+import com.facundolinlaud.supergame.ai.decisionmaking.*;
+import com.facundolinlaud.supergame.ai.pathfinding.*;
 import com.facundolinlaud.supergame.components.ai.AIComponent;
 import com.facundolinlaud.supergame.factory.AvailableSkillsFactory;
 import com.facundolinlaud.supergame.model.ai.BehaviourType;
@@ -23,9 +25,16 @@ public class AIManager implements EntityListener {
     private Map<Entity, BehaviorTree<?>> entitiesBehaviours;
     private AvailableSkillsFactory availableSkillsFactory;
 
-    public AIManager(AvailableSkillsFactory availableSkillsFactory) {
+    private IndexedAStarPathFinder<Node> pathfinder;
+    private MapGraph mapGraph;
+
+    public AIManager(AvailableSkillsFactory availableSkillsFactory, MapManager mapManager, PhysicsManager physicsManager) {
         this.entitiesBehaviours = new HashMap<>();
         this.availableSkillsFactory = availableSkillsFactory;
+
+        MapGraphCreator mapGraphCreator = new MapGraphCreator(mapManager.getMap(), physicsManager.getObstacles());
+        this.mapGraph = mapGraphCreator.createMapGraphFromTiledMap();
+        this.pathfinder = new IndexedAStarPathFinder<>(mapGraph);
     }
 
     @Override
@@ -57,14 +66,30 @@ public class AIManager implements EntityListener {
         Sequence<Blackboard> sequence = new Sequence<>();
         PlayerSeenTask playerSeenTask = new PlayerSeenTask();
         FaceTowardsPlayerTask faceTowardsPlayerTask = new FaceTowardsPlayerTask();
+        ApproachPlayer approachPlayer = new ApproachPlayer(this);
         AttackTask attackTask = new AttackTask(this.availableSkillsFactory);
 
         sequence.addChild(playerSeenTask);
         sequence.addChild(faceTowardsPlayerTask);
+        sequence.addChild(approachPlayer);
         sequence.addChild(attackTask);
 
         behaviorTree.addChild(sequence);
 
         return behaviorTree;
+    }
+
+    public PathFinderResult searchNodePath(Vector2 from, Vector2 to){
+        GraphPath<Node> outPath = new DefaultGraphPath<>();
+
+        int fromNodeIndex = ((int) from.x) * ((int) from.y);
+        int toNodeIndex = ((int) to.x) * ((int) to.y);
+
+        Node fromNode = mapGraph.getNode(fromNodeIndex);
+        Node toNode = mapGraph.getNode(toNodeIndex);
+
+        boolean pathFound = pathfinder.searchNodePath(fromNode, toNode, new ManhattanDistance(), outPath);
+
+        return new PathFinderResult(outPath, pathFound);
     }
 }

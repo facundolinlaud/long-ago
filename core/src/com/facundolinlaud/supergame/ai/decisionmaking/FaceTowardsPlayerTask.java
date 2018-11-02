@@ -1,15 +1,11 @@
-package com.facundolinlaud.supergame.ai;
+package com.facundolinlaud.supergame.ai.decisionmaking;
 
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.ai.btree.LeafTask;
 import com.badlogic.gdx.ai.btree.Task;
 import com.badlogic.gdx.math.Vector2;
-import com.facundolinlaud.supergame.components.PositionComponent;
 import com.facundolinlaud.supergame.components.StatusComponent;
-import com.facundolinlaud.supergame.components.skills.SkillCastingComponent;
-import com.facundolinlaud.supergame.components.skills.SkillClickComponent;
-import com.facundolinlaud.supergame.factory.AvailableSkillsFactory;
 import com.facundolinlaud.supergame.model.status.Direction;
 import com.facundolinlaud.supergame.utils.Mappers;
 

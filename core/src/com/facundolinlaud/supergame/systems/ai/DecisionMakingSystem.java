@@ -3,7 +3,7 @@ package com.facundolinlaud.supergame.systems.ai;
 import com.badlogic.ashley.core.*;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.math.Vector2;
-import com.facundolinlaud.supergame.ai.Blackboard;
+import com.facundolinlaud.supergame.ai.decisionmaking.Blackboard;
 import com.facundolinlaud.supergame.components.PositionComponent;
 import com.facundolinlaud.supergame.components.ai.AIComponent;
 import com.facundolinlaud.supergame.components.player.KeyboardComponent;
