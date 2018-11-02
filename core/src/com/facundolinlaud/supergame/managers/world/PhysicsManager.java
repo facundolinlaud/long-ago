@@ -62,11 +62,15 @@ public class PhysicsManager implements Renderable {
             float width = rectangle.getWidth() / Dimensions.PX_PER_METER;
             float height = rectangle.getHeight() / Dimensions.PX_PER_METER;
 
-            float x = (rectangle.getX() / Dimensions.PX_PER_METER) + width / 2;
-            float y = (rectangle.getY() / Dimensions.PX_PER_METER) + height / 2;
+            float x = (rectangle.getX() / Dimensions.PX_PER_METER);
+            float y = (rectangle.getY() / Dimensions.PX_PER_METER);
 
             obstacles.add(new Rectangle(x, y, width, height));
-            physicsFactory.createObstacleBody(x, y, width, height);
+
+            float x_offset = x + width / 2;
+            float y_offset = y + height / 2;
+
+            physicsFactory.createObstacleBody(x_offset, y_offset, width, height);
         }
     }
 

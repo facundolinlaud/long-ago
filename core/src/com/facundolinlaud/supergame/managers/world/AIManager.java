@@ -8,6 +8,7 @@ import com.badlogic.gdx.ai.btree.branch.Sequence;
 import com.badlogic.gdx.ai.pfa.DefaultGraphPath;
 import com.badlogic.gdx.ai.pfa.GraphPath;
 import com.badlogic.gdx.ai.pfa.indexed.IndexedAStarPathFinder;
+import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.math.Vector2;
 import com.facundolinlaud.supergame.ai.decisionmaking.*;
 import com.facundolinlaud.supergame.ai.pathfinding.*;
@@ -16,8 +17,10 @@ import com.facundolinlaud.supergame.factory.AvailableSkillsFactory;
 import com.facundolinlaud.supergame.model.ai.BehaviourType;
 import com.facundolinlaud.supergame.utils.Mappers;
 
+import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class AIManager implements EntityListener {
     private ComponentMapper<AIComponent> aim = Mappers.ai;
@@ -28,13 +31,22 @@ public class AIManager implements EntityListener {
     private IndexedAStarPathFinder<Node> pathfinder;
     private MapGraph mapGraph;
 
+    private MapGraphCreator mapGraphCreator;
+
+    private int columns;
+    private int rows;
+
     public AIManager(AvailableSkillsFactory availableSkillsFactory, MapManager mapManager, PhysicsManager physicsManager) {
         this.entitiesBehaviours = new HashMap<>();
         this.availableSkillsFactory = availableSkillsFactory;
 
-        MapGraphCreator mapGraphCreator = new MapGraphCreator(mapManager.getMap(), physicsManager.getObstacles());
+        this.mapGraphCreator = new MapGraphCreator(mapManager.getMap(), physicsManager.getObstacles());
         this.mapGraph = mapGraphCreator.createMapGraphFromTiledMap();
         this.pathfinder = new IndexedAStarPathFinder<>(mapGraph);
+
+        MapProperties prop = mapManager.getMap().getProperties();
+        this.columns = prop.get("width", Integer.class);
+        this.rows = prop.get("height", Integer.class);
     }
 
     @Override
@@ -82,8 +94,10 @@ public class AIManager implements EntityListener {
     public PathFinderResult searchNodePath(Vector2 from, Vector2 to){
         GraphPath<Node> outPath = new DefaultGraphPath<>();
 
-        int fromNodeIndex = ((int) from.x) * ((int) from.y);
-        int toNodeIndex = ((int) to.x) * ((int) to.y);
+        System.out.println(from + " a " + to);
+
+        int fromNodeIndex = ((int) from.x) + ((int) from.y) * rows;
+        int toNodeIndex = ((int) to.x) + ((int) to.y) * rows;
 
         Node fromNode = mapGraph.getNode(fromNodeIndex);
         Node toNode = mapGraph.getNode(toNodeIndex);
@@ -92,4 +106,6 @@ public class AIManager implements EntityListener {
 
         return new PathFinderResult(outPath, pathFound);
     }
+
+
 }

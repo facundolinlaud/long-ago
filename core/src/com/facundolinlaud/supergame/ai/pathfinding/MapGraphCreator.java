@@ -28,14 +28,15 @@ public class MapGraphCreator {
 
     private void calculateNodeObstacles(List<Rectangle> rectangleObstacles) {
         for(Rectangle rectangle : rectangleObstacles){
-            int columns = (int) Math.ceil(rectangle.height);
-            int rows = (int) Math.ceil(rectangle.width);
+            System.out.println("rectangulo: " + rectangle);
+            int columns = (int) Math.ceil(rectangle.width);
+            int rows = (int) Math.ceil(rectangle.height);
 
             int x = (int) rectangle.x;
             int y = (int) rectangle.y;
 
             for(int column = 0; column < columns; column++){
-                for(int row = 0; row< rows; row++){
+                for(int row = 0; row < rows; row++){
                     Point obstacle = new Point(x + column, y + row);
                     System.out.println(obstacle);
                     obstacles.add(obstacle);
@@ -68,7 +69,6 @@ public class MapGraphCreator {
                 if (!isTileWalkable(x, y)) {
                     continue;
                 }
-
 
                 if (x - 1 >= 0 && isTileWalkable(x - 1, y)) {
                     nodes[x][y].getConnections().add(new DefaultConnection<>(nodes[x][y], nodes[x - 1][y]));
