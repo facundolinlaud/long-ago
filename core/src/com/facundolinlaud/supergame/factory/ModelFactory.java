@@ -1,6 +1,7 @@
 package com.facundolinlaud.supergame.factory;
 
 import com.badlogic.gdx.Gdx;
+import com.facundolinlaud.supergame.model.ai.EnemyModel;
 import com.facundolinlaud.supergame.model.entity.PlayerModel;
 import com.facundolinlaud.supergame.model.particle.ParticleType;
 import com.facundolinlaud.supergame.model.skill.SkillsModel;
@@ -27,8 +28,8 @@ public class ModelFactory implements Disposable {
         return (PlayerModel) readModel(PLAYER_MODEL_PATH, PlayerModel.class);
     }
 
-    public static PlayerModel getEnemyModel(){
-        return (PlayerModel) readModel(ENEMY_MODEL_PATH, PlayerModel.class);
+    public static EnemyModel getEnemyModel(){
+        return (EnemyModel) readModel(ENEMY_MODEL_PATH, EnemyModel.class);
     }
 
     public static RawAnimationModel getDefaultAnimationModel(){

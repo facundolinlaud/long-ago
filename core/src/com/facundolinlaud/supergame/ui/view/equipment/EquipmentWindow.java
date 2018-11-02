@@ -14,7 +14,6 @@ import java.util.Map;
  * Created by facundo on 4/2/16.
  */
 public class EquipmentWindow extends Window {
-
     public static final String TITLE = "Equipment";
 
     private Grid grid;
@@ -22,7 +21,7 @@ public class EquipmentWindow extends Window {
     public EquipmentWindow(Skin skin, Mediator uiMediator, DragAndDrop dragAndDrop) {
         super(TITLE, skin, Themes.CLASSIC.toString());
 
-        setVisible(true);
+        setVisible(false);
         adjustTitlePosition();
         setSize(265, 265);
         initializeGrid(skin, uiMediator, dragAndDrop);

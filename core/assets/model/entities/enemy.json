@@ -2,6 +2,7 @@
 	"x": 25,
 	"y": 48,
 	"velocity": 1.9,
+	"viewDistance": 10.0,
 	"body": {
 		"BODY": "sprites/living/body/skeleton.png",
 		"HAIR_BASE": "sprites/living/hair/mohawk.png",

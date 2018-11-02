@@ -17,6 +17,7 @@ import com.facundolinlaud.supergame.components.sprite.StackableSpriteComponent;
 import com.facundolinlaud.supergame.components.sprite.StackedSpritesComponent;
 import com.facundolinlaud.supergame.model.RenderPriority;
 import com.facundolinlaud.supergame.model.ai.BehaviourType;
+import com.facundolinlaud.supergame.model.ai.EnemyModel;
 import com.facundolinlaud.supergame.model.equip.EquipSlot;
 import com.facundolinlaud.supergame.model.entity.ItemModel;
 import com.facundolinlaud.supergame.model.entity.PlayerModel;
@@ -105,7 +106,7 @@ public class PlayerFactory {
     }
 
     public static void createEnemy(Engine engine) {
-        PlayerModel enemyModel = ModelFactory.getEnemyModel();
+        EnemyModel enemyModel = ModelFactory.getEnemyModel();
 
         Entity e = new Entity()
                 .add(new RenderComponent(new SpriteRenderPositionStrategyImpl()))
@@ -118,7 +119,7 @@ public class PlayerFactory {
                 .add(new StackedSpritesComponent(ModelFactory.getDefaultAnimationModel()))
                 .add(new RefreshSpriteRequirementComponent())
                 .add(new WearComponent(createWearablesEntities(engine, enemyModel)))
-                .add(new AIComponent(BehaviourType.AGGRESSIVE));
+                .add(new AIComponent(enemyModel.getViewDistance()));
 
         engine.addEntity(e);
     }

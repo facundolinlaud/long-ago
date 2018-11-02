@@ -1,16 +1,12 @@
 package com.facundolinlaud.supergame.managers.world;
 
-import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntityListener;
 import com.badlogic.gdx.ai.btree.BehaviorTree;
 import com.badlogic.gdx.ai.btree.branch.Sequence;
 import com.facundolinlaud.supergame.ai.decisionmaking.*;
 import com.facundolinlaud.supergame.ai.pathfinding.PathFinderAuthority;
-import com.facundolinlaud.supergame.components.ai.AIComponent;
 import com.facundolinlaud.supergame.factory.AvailableSkillsFactory;
-import com.facundolinlaud.supergame.model.ai.BehaviourType;
-import com.facundolinlaud.supergame.utils.Mappers;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,8 +14,6 @@ import java.util.Map;
 public class AIManager implements EntityListener {
     public static final int MELEE_SPELL = 0;
     public static final int MAGIC_SPELL = 1;
-
-    private ComponentMapper<AIComponent> aim = Mappers.ai;
 
     private Map<Entity, BehaviorTree<?>> entitiesBehaviours;
     private AvailableSkillsFactory availableSkillsFactory;
@@ -33,10 +27,7 @@ public class AIManager implements EntityListener {
 
     @Override
     public void entityAdded(Entity entity) {
-        AIComponent aiComponent = aim.get(entity);
-
-        BehaviourType behaviourType = aiComponent.getBehaviourType();
-        this.entitiesBehaviours.put(entity, createBehaviourTree(behaviourType));
+        this.entitiesBehaviours.put(entity, createBehaviourTree());
     }
 
     @Override
@@ -50,7 +41,7 @@ public class AIManager implements EntityListener {
         behaviorTree.step();
     }
 
-    private BehaviorTree<?> createBehaviourTree(BehaviourType behaviourType){
+    private BehaviorTree<?> createBehaviourTree(){
         return createAggressiveBehavior();
     }
 
