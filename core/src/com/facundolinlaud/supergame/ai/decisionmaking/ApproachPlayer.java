@@ -6,16 +6,18 @@ import com.badlogic.gdx.ai.btree.Task;
 import com.badlogic.gdx.ai.pfa.GraphPath;
 import com.badlogic.gdx.math.Vector2;
 import com.facundolinlaud.supergame.ai.pathfinding.Node;
+import com.facundolinlaud.supergame.ai.pathfinding.PathFinderAuthority;
 import com.facundolinlaud.supergame.ai.pathfinding.PathFinderResult;
 import com.facundolinlaud.supergame.components.ai.AIMoveToComponent;
-import com.facundolinlaud.supergame.managers.world.AIManager;
 
 public class ApproachPlayer extends LeafTask<Blackboard> {
+    /* Counts starting and ending tile as well */
     public static final int MINIMUM_DISTANCE_FROM_PLAYER_DESIRED = 2;
-    private AIManager aiManager;
 
-    public ApproachPlayer(AIManager aiManager) {
-        this.aiManager = aiManager;
+    private PathFinderAuthority pathFinderAuthority;
+
+    public ApproachPlayer(PathFinderAuthority pathFinderAuthority) {
+        this.pathFinderAuthority = pathFinderAuthority;
     }
 
     @Override
@@ -24,15 +26,13 @@ public class ApproachPlayer extends LeafTask<Blackboard> {
         Vector2 agentPosition = blackboard.getAgentPosition();
         Vector2 playerPosition = blackboard.getPlayerPosition();
 
-        PathFinderResult result = aiManager.searchNodePath(agentPosition, playerPosition);
+        PathFinderResult result = pathFinderAuthority.searchNodePath(agentPosition, playerPosition);
 
         if(!result.isFound())
             return Status.FAILED;
 
-        if(result.getPath().getCount() <= MINIMUM_DISTANCE_FROM_PLAYER_DESIRED){
-            System.out.println("LISTOOO");
+        if(result.getPath().getCount() <= MINIMUM_DISTANCE_FROM_PLAYER_DESIRED)
             return Status.SUCCEEDED;
-        }
 
         GraphPath<Node> path = result.getPath();
         Entity agentEntity = blackboard.getAgent();
@@ -44,6 +44,6 @@ public class ApproachPlayer extends LeafTask<Blackboard> {
 
     @Override
     protected Task<Blackboard> copyTo(Task<Blackboard> task) {
-        return new ApproachPlayer(aiManager);
+        return new ApproachPlayer(pathFinderAuthority);
     }
 }
