@@ -14,6 +14,7 @@ import com.facundolinlaud.supergame.listeners.PhysicsEntitiesListener;
 import com.facundolinlaud.supergame.managers.world.*;
 import com.facundolinlaud.supergame.systems.*;
 import com.facundolinlaud.supergame.systems.ai.DecisionMakingSystem;
+import com.facundolinlaud.supergame.systems.ai.MoveToSystem;
 import com.facundolinlaud.supergame.systems.skills.*;
 import com.facundolinlaud.supergame.systems.sprite.AnimableSpriteSystem;
 import com.facundolinlaud.supergame.systems.sprite.StackableSpriteSystem;
@@ -111,6 +112,7 @@ public class WorldScreen implements Screen {
         engine.addSystem(new SkillTargetedSystem());
         engine.addSystem(new SkillLockdownSystem());
         engine.addSystem(new DecisionMakingSystem(this.aiManager));
+        engine.addSystem(new MoveToSystem());
 
         uiManager.initializeSystems(engine);
     }

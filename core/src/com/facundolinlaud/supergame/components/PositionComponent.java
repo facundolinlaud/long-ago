@@ -39,4 +39,5 @@ public class PositionComponent implements Component {
     public Vector2 getPosition() {
         return new Vector2(x, y);
     }
+
 }

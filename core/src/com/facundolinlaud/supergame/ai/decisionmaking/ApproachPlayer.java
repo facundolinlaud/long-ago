@@ -1,14 +1,17 @@
 package com.facundolinlaud.supergame.ai.decisionmaking;
 
+import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.ai.btree.LeafTask;
 import com.badlogic.gdx.ai.btree.Task;
 import com.badlogic.gdx.ai.pfa.GraphPath;
 import com.badlogic.gdx.math.Vector2;
 import com.facundolinlaud.supergame.ai.pathfinding.Node;
 import com.facundolinlaud.supergame.ai.pathfinding.PathFinderResult;
+import com.facundolinlaud.supergame.components.ai.AIMoveToComponent;
 import com.facundolinlaud.supergame.managers.world.AIManager;
 
 public class ApproachPlayer extends LeafTask<Blackboard> {
+    public static final int MINIMUM_DISTANCE_FROM_PLAYER_DESIRED = 2;
     private AIManager aiManager;
 
     public ApproachPlayer(AIManager aiManager) {
@@ -22,15 +25,21 @@ public class ApproachPlayer extends LeafTask<Blackboard> {
         Vector2 playerPosition = blackboard.getPlayerPosition();
 
         PathFinderResult result = aiManager.searchNodePath(agentPosition, playerPosition);
-        GraphPath<Node> path = result.getPath();
 
-        System.out.println("##########################################");
-        for(int i = 0; i < path.getCount(); i++) {
-            Node node = path.get(i);
-            System.out.println("[" + i + "] (" + node.getX() + ", " + node.getY() + ")");
+        if(!result.isFound())
+            return Status.FAILED;
+
+        if(result.getPath().getCount() <= MINIMUM_DISTANCE_FROM_PLAYER_DESIRED){
+            System.out.println("LISTOOO");
+            return Status.SUCCEEDED;
         }
 
-        return Status.SUCCEEDED;
+        GraphPath<Node> path = result.getPath();
+        Entity agentEntity = blackboard.getAgent();
+
+        agentEntity.add(new AIMoveToComponent(path.get(1)));
+
+        return Status.RUNNING;
     }
 
     @Override

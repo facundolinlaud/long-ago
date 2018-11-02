@@ -113,6 +113,7 @@ public class PlayerFactory {
                 .add(new HealthComponent(100, 99))
                 .add(new BodyComponent(PhysicsFactory.get().createItemBody()))
                 .add(new StatusComponent())
+                .add(new VelocityComponent(enemyModel.getVelocity()))
                 .add(new AnimableSpriteComponent())
                 .add(new StackedSpritesComponent(ModelFactory.getDefaultAnimationModel()))
                 .add(new RefreshSpriteRequirementComponent())

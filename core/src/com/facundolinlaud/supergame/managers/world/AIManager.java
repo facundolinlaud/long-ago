@@ -17,10 +17,8 @@ import com.facundolinlaud.supergame.factory.AvailableSkillsFactory;
 import com.facundolinlaud.supergame.model.ai.BehaviourType;
 import com.facundolinlaud.supergame.utils.Mappers;
 
-import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 public class AIManager implements EntityListener {
     private ComponentMapper<AIComponent> aim = Mappers.ai;
@@ -93,8 +91,6 @@ public class AIManager implements EntityListener {
 
     public PathFinderResult searchNodePath(Vector2 from, Vector2 to){
         GraphPath<Node> outPath = new DefaultGraphPath<>();
-
-        System.out.println(from + " a " + to);
 
         int fromNodeIndex = ((int) from.x) + ((int) from.y) * rows;
         int toNodeIndex = ((int) to.x) + ((int) to.y) * rows;
