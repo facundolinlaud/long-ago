@@ -105,12 +105,12 @@ public class PlayerFactory {
         return e;
     }
 
-    public static void createEnemy(Engine engine) {
+    public static void createEnemy(Engine engine, float x, float y) {
         EnemyModel enemyModel = ModelFactory.getEnemyModel();
 
         Entity e = new Entity()
                 .add(new RenderComponent(new SpriteRenderPositionStrategyImpl()))
-                .add(new PositionComponent(enemyModel.getX(), enemyModel.getY()))
+                .add(new PositionComponent(x, y))
                 .add(new HealthComponent(100, 99))
                 .add(new BodyComponent(PhysicsFactory.get().createItemBody()))
                 .add(new StatusComponent())
