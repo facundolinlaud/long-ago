@@ -10,13 +10,13 @@ import com.facundolinlaud.supergame.ai.pathfinding.PathFinderAuthority;
 import com.facundolinlaud.supergame.ai.pathfinding.PathFinderResult;
 import com.facundolinlaud.supergame.components.ai.AIMoveToComponent;
 
-public class ApproachPlayer extends LeafTask<Blackboard> {
+public class ApproachPlayerTask extends LeafTask<Blackboard> {
     /* Counts starting and ending tile as well */
     public static final int MINIMUM_DISTANCE_FROM_PLAYER_DESIRED = 2;
 
     private PathFinderAuthority pathFinderAuthority;
 
-    public ApproachPlayer(PathFinderAuthority pathFinderAuthority) {
+    public ApproachPlayerTask(PathFinderAuthority pathFinderAuthority) {
         this.pathFinderAuthority = pathFinderAuthority;
     }
 
@@ -27,6 +27,14 @@ public class ApproachPlayer extends LeafTask<Blackboard> {
         Vector2 playerPosition = blackboard.getPlayerPosition();
 
         PathFinderResult result = pathFinderAuthority.searchNodePath(agentPosition, playerPosition);
+
+        String out = result.isFound() + ", pos= " + agentPosition + ":";
+        if(result.isFound()){
+            for(int i = 0; i < result.getPath().getCount(); i++){
+                out += result.getPath().get(i).toString() + ", ";
+            }
+        }
+        System.out.println(out);
 
         if(!result.isFound())
             return Status.FAILED;
@@ -44,6 +52,6 @@ public class ApproachPlayer extends LeafTask<Blackboard> {
 
     @Override
     protected Task<Blackboard> copyTo(Task<Blackboard> task) {
-        return new ApproachPlayer(pathFinderAuthority);
+        return new ApproachPlayerTask(pathFinderAuthority);
     }
 }

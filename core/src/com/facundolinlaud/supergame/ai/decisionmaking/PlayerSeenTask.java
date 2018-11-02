@@ -12,11 +12,10 @@ public class PlayerSeenTask extends LeafTask<Blackboard> {
     public Status execute() {
         Blackboard blackboard = super.getObject();
 
-        if(isPlayerNear(blackboard.getPlayerPosition(), blackboard.getAgentPosition())){
+        if(isPlayerNear(blackboard.getPlayerPosition(), blackboard.getAgentPosition()))
             return Status.SUCCEEDED;
-        } else {
+        else
             return Status.RUNNING;
-        }
     }
 
     private boolean isPlayerNear(Vector2 playerPosition, Vector2 agentPosition){

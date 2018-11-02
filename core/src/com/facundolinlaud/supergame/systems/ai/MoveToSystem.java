@@ -15,7 +15,7 @@ import com.facundolinlaud.supergame.utils.Mappers;
 import java.awt.Point;
 
 public class MoveToSystem extends IteratingSystem {
-    private static final float EPSILON = 0.7f;
+    private static final float EPSILON = 0.5f;
 
     private ComponentMapper<AIMoveToComponent> mtm = Mappers.aiMoveTo;
     private ComponentMapper<PositionComponent> pm = Mappers.position;
@@ -35,7 +35,6 @@ public class MoveToSystem extends IteratingSystem {
         Vector2 agentPosition = position.getPosition();
 
         decideWeatherToKeepWalkingOrNot(status, moveToPoint, agentPosition);
-
         agent.remove(AIMoveToComponent.class);
     }
 
@@ -46,11 +45,14 @@ public class MoveToSystem extends IteratingSystem {
         float deltaX = Math.abs(differenceX);
         float deltaY = Math.abs(differenceY);
 
+        // aca hay un bug cuando este sistema piensa que ya llego a la tile y el pathfinder esta en desacuerdo
+        System.out.println(deltaX + " > " + EPSILON + " || " + deltaY + " > " + EPSILON);
         if(deltaX > EPSILON || deltaY > EPSILON){
             Direction newDirection = resolveDirection(differenceX, differenceY, deltaX, deltaY);
             status.setDirection(newDirection);
             status.setAction(Action.WALKING);
         }else{
+            System.out.println("ME QUEDO");
             status.setAction(Action.STANDING);
         }
     }

@@ -41,8 +41,8 @@ public class PathFinderAuthority {
     }
 
     private int resolveNodeIndex(Vector2 vector){
-        int x = (int) vector.x;
-        int y = (int) vector.y;
+        int x = Math.round(vector.x);
+        int y = Math.round(vector.y);
 
         return x + y * tiledMapRows;
     }

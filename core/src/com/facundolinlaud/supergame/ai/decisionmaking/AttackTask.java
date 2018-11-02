@@ -8,7 +8,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.facundolinlaud.supergame.components.StatusComponent;
 import com.facundolinlaud.supergame.components.skills.SkillCastingComponent;
 import com.facundolinlaud.supergame.components.skills.SkillClickComponent;
-import com.facundolinlaud.supergame.factory.AvailableSkillsFactory;
 import com.facundolinlaud.supergame.model.skill.Skill;
 import com.facundolinlaud.supergame.model.status.Action;
 import com.facundolinlaud.supergame.utils.Mappers;
@@ -17,6 +16,8 @@ public class AttackTask extends LeafTask<Blackboard> {
     private ComponentMapper<StatusComponent> sm = Mappers.status;
 
     private Skill skill;
+    private boolean waitingForSkillCasting = false;
+    private boolean castingHasBegun = false;
 
     public AttackTask(Skill skill) {
         this.skill = skill;
@@ -28,20 +29,36 @@ public class AttackTask extends LeafTask<Blackboard> {
 
         Entity agent = blackboard.getAgent();
         StatusComponent agentStatus = sm.get(agent);
+        Action action = agentStatus.getAction();
 
-        if(agentStatus.getAction().isCasting()) {
-            return Status.RUNNING;
+        /* Weird state machine logic because there are like 2 ticks from skill casting request to cast execution */
+        /* In order to wait for the player to end the attack and then succeed(), this logic is necessary */
+        if(waitingForSkillCasting) {
+            if (action.isCasting()) {
+                castingHasBegun = true;
+
+                return Status.RUNNING;
+            } else if (castingHasBegun) {
+                this.waitingForSkillCasting = false;
+                this.castingHasBegun = false;
+
+                return Status.SUCCEEDED;
+            } else {
+                return Status.RUNNING;
+            }
         }
 
         Vector2 playerPosition = blackboard.getPlayerPosition();
         attackPlayer(agent, playerPosition);
 
-        return Status.SUCCEEDED;
+        return Status.RUNNING;
     }
 
     void attackPlayer(Entity agent, Vector2 playerPosition){
         agent.add(new SkillClickComponent(playerPosition));
         agent.add(new SkillCastingComponent(skill));
+
+        this.waitingForSkillCasting = true;
     }
 
     @Override

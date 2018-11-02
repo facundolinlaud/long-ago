@@ -61,7 +61,7 @@ public class AIManager implements EntityListener {
         PlayerSeenTask playerSeenTask = new PlayerSeenTask();
         FaceTowardsPlayerTask faceTowardsPlayerTask1 = new FaceTowardsPlayerTask();
         AttackTask magicAttackTask = new AttackTask(this.availableSkillsFactory.getSkillById(MAGIC_SPELL));
-        ApproachPlayer approachPlayer = new ApproachPlayer(pathFinderAuthority);
+        ApproachPlayerTask approachPlayerTask = new ApproachPlayerTask(pathFinderAuthority);
         FaceTowardsPlayerTask faceTowardsPlayerTask2 = new FaceTowardsPlayerTask();
         AttackTask meleeAttackTask = new AttackTask(this.availableSkillsFactory.getSkillById(MELEE_SPELL));
 
@@ -69,7 +69,7 @@ public class AIManager implements EntityListener {
         sequence.addChild(faceTowardsPlayerTask1);
         sequence.addChild(magicAttackTask);
         sequence.addChild(playerSeenTask);
-        sequence.addChild(approachPlayer);
+        sequence.addChild(approachPlayerTask);
         sequence.addChild(faceTowardsPlayerTask2);
         sequence.addChild(meleeAttackTask);
 
