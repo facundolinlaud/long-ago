@@ -12,11 +12,10 @@ import com.facundolinlaud.supergame.components.ai.AIMoveToComponent;
 import com.facundolinlaud.supergame.model.status.Action;
 import com.facundolinlaud.supergame.model.status.Direction;
 import com.facundolinlaud.supergame.utils.Mappers;
-
 import java.awt.Point;
 
 public class MoveToSystem extends IteratingSystem {
-    private static final float EPSILON = 0.1f;
+    private static final float EPSILON = 0.7f;
 
     private ComponentMapper<AIMoveToComponent> mtm = Mappers.aiMoveTo;
     private ComponentMapper<PositionComponent> pm = Mappers.position;
@@ -35,19 +34,29 @@ public class MoveToSystem extends IteratingSystem {
         Point moveToPoint = moveTo.getPoint();
         Vector2 agentPosition = position.getPosition();
 
-        Direction newDirection = resolveDirection(moveToPoint, agentPosition);
-        status.setDirection(newDirection);
-        status.setAction(Action.WALKING);
+        decideWeatherToKeepWalkingOrNot(status, moveToPoint, agentPosition);
 
         agent.remove(AIMoveToComponent.class);
     }
 
-    private Direction resolveDirection(Point moveToPoint, Vector2 agentPosition) {
+    private void decideWeatherToKeepWalkingOrNot(StatusComponent status, Point moveToPoint, Vector2 agentPosition) {
         float differenceX = agentPosition.x - moveToPoint.x;
         float differenceY = agentPosition.y - moveToPoint.y;
 
         float deltaX = Math.abs(differenceX);
+        float deltaY = Math.abs(differenceY);
 
+        if(deltaX > EPSILON || deltaY > EPSILON){
+            Direction newDirection = resolveDirection(differenceX, differenceY, deltaX, deltaY);
+            status.setDirection(newDirection);
+            status.setAction(Action.WALKING);
+        }else{
+            status.setAction(Action.STANDING);
+        }
+    }
+
+
+    private Direction resolveDirection(float differenceX, float differenceY, float deltaX, float deltaY) {
         if(deltaX > EPSILON){
             if(differenceX > 0){
                 return Direction.LEFT;
