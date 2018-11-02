@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ai.msg.MessageDispatcher;
 import com.badlogic.gdx.ai.msg.MessageManager;
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -36,15 +37,18 @@ public class UIManager implements Renderable {
     private AttributesUI attributesUI;
     private EquipmentUI equipmentUI;
     private SkillCastingUI skillCastingUI;
+    private LabelDamagesUI labelDamagesUI;
 
     private InventoryUIController inventoryUIController;
     private ProfileUIController profileUIController;
     private AttributesUIController attributesUIController;
     private EquipmentUIController equipmentUIController;
     private SkillCastingUIController skillCastingUIController;
+    private LabelDamagesController labelDamagesController;
 
     private MessageDispatcher messageDispatcher;
-    public UIManager(Stage stage) {
+
+    public UIManager(Stage stage, Camera camera) {
         this.skin = new Skin(Gdx.files.internal(SKIN_JSON_PATH));
         this.skin.addRegions(new TextureAtlas(Gdx.files.internal(TEXTURE_ATLAS_PATH)));
         this.stage = stage;
@@ -52,7 +56,7 @@ public class UIManager implements Renderable {
 
         initializeUIResources();
         initializeUI();
-        initializeServices();
+        initializeServices(camera);
         addUIToStage();
         subscribeReceivers();
     }
@@ -69,14 +73,16 @@ public class UIManager implements Renderable {
         this.attributesUI = new AttributesUI(uiMediator, stage, skin);
         this.equipmentUI = new EquipmentUI(uiMediator, stage, skin, dragAndDrop);
         this.skillCastingUI = new SkillCastingUI();
+        this.labelDamagesUI = new LabelDamagesUI(stage, skin);
     }
 
-    private void initializeServices() {
+    private void initializeServices(Camera camera) {
         this.profileUIController = new ProfileUIControllerImpl(this.overlayUI);
         this.inventoryUIController = new InventoryUIControllerImpl(this.inventoryUI);
         this.attributesUIController = new AttributesUIControllerImpl(this.attributesUI);
         this.equipmentUIController = new EquipmentUIControllerImpl(this.equipmentUI);
         this.skillCastingUIController = new SkillCastingUIControllerImpl(this.skillCastingUI, this.overlayUI);
+        this.labelDamagesController = new LabelDamagesController(this.labelDamagesUI, camera);
     }
 
     private void addUIToStage() {
@@ -92,6 +98,7 @@ public class UIManager implements Renderable {
         this.uiMediator.subscribe(EquipItemEvent.class, this.equipmentUIController);
 
         this.messageDispatcher.addListener(overlayUI, Messages.SKILL_CASTED);
+        this.messageDispatcher.addListener(labelDamagesController, Messages.ENTITY_ATTACKED);
     }
 
     public void initializeSystems(Engine engine){

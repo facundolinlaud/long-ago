@@ -28,13 +28,7 @@ public class ApproachPlayerTask extends LeafTask<Blackboard> {
 
         PathFinderResult result = pathFinderAuthority.searchNodePath(agentPosition, playerPosition);
 
-        String out = result.isFound() + ", pos= " + agentPosition + ":";
-        if(result.isFound()){
-            for(int i = 0; i < result.getPath().getCount(); i++){
-                out += result.getPath().get(i).toString() + ", ";
-            }
-        }
-        System.out.println(out);
+//        traceDebug(agentPosition, result);
 
         if(!result.isFound())
             return Status.FAILED;
@@ -48,6 +42,17 @@ public class ApproachPlayerTask extends LeafTask<Blackboard> {
         agentEntity.add(new AIMoveToComponent(path.get(1)));
 
         return Status.RUNNING;
+    }
+
+    private void traceDebug(Vector2 agentPosition, PathFinderResult result) {
+        String out = result.isFound() + ", pos= " + agentPosition + ":";
+        if(result.isFound()){
+            for(int i = 0; i < result.getPath().getCount(); i++){
+                out += result.getPath().get(i).toString() + ", ";
+            }
+        }
+
+        System.out.println(out);
     }
 
     @Override

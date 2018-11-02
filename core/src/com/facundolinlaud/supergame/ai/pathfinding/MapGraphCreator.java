@@ -28,7 +28,6 @@ public class MapGraphCreator {
 
     private void calculateNodeObstacles(List<Rectangle> rectangleObstacles) {
         for(Rectangle rectangle : rectangleObstacles){
-            System.out.println("rectangulo: " + rectangle);
             int columns = (int) Math.ceil(rectangle.width);
             int rows = (int) Math.ceil(rectangle.height);
 
@@ -38,7 +37,6 @@ public class MapGraphCreator {
             for(int column = 0; column < columns; column++){
                 for(int row = 0; row < rows; row++){
                     Point obstacle = new Point(x + column, y + row);
-                    System.out.println(obstacle);
                     obstacles.add(obstacle);
                 }
             }

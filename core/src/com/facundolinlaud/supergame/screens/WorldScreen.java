@@ -61,7 +61,7 @@ public class WorldScreen implements Screen {
     private void initializeManagers() {
         this.mapManager = new MapManager(resources.batch);
         this.physicsManager = new PhysicsManager(mapManager.getCamera(), mapManager.getMap());
-        this.uiManager = new UIManager(stage);
+        this.uiManager = new UIManager(stage, mapManager.getCamera());
         this.particleManager = new ParticleManager();
         this.lightsManager = new LightsManager(physicsManager.getWorld(), mapManager.getCamera());
         this.aiManager = new AIManager(factories.getAvailableSkillsFactory(), mapManager, physicsManager);

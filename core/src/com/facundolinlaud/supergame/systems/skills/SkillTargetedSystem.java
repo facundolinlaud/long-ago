@@ -13,7 +13,6 @@ public class SkillTargetedSystem extends IteratingSystem {
     private ComponentMapper<SkillTargetedComponent> stm = Mappers.skillTargeted;
     private ComponentMapper<HealthComponent> hm = Mappers.health;
 
-
     public SkillTargetedSystem() {
         super(Family.all(SkillTargetedComponent.class, HealthComponent.class).get());
     }

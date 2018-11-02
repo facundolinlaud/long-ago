@@ -2,6 +2,7 @@ package com.facundolinlaud.supergame.components;
 
 import com.badlogic.ashley.core.Component;
 import com.badlogic.gdx.math.Vector2;
+import com.facundolinlaud.supergame.utils.Position;
 
 /**
  * Created by facundo on 3/17/16.
@@ -40,4 +41,7 @@ public class PositionComponent implements Component {
         return new Vector2(x, y);
     }
 
+    public Position getWorldPosition(){
+        return new Position(x, y);
+    }
 }

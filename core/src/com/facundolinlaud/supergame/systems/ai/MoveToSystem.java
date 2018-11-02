@@ -45,14 +45,11 @@ public class MoveToSystem extends IteratingSystem {
         float deltaX = Math.abs(differenceX);
         float deltaY = Math.abs(differenceY);
 
-        // aca hay un bug cuando este sistema piensa que ya llego a la tile y el pathfinder esta en desacuerdo
-        System.out.println(deltaX + " > " + EPSILON + " || " + deltaY + " > " + EPSILON);
         if(deltaX > EPSILON || deltaY > EPSILON){
             Direction newDirection = resolveDirection(differenceX, differenceY, deltaX, deltaY);
             status.setDirection(newDirection);
             status.setAction(Action.WALKING);
         }else{
-            System.out.println("ME QUEDO");
             status.setAction(Action.STANDING);
         }
     }
