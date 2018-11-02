@@ -14,10 +14,6 @@ public class Point {
         this.x = (int) y;
     }
 
-    public static Point createScreenPointFromWorldPosition(Position position){
-        return new Point(Dimensions.toPixels(position.getX()), Dimensions.toPixels(position.getY()));
-    }
-
     public int getX() {
         return x;
     }
@@ -32,13 +28,5 @@ public class Point {
 
     public void setY(int y) {
         this.y = y;
-    }
-
-    public float getXFloat() {
-        return (float) x;
-    }
-
-    public float getYFloat() {
-        return (float) y;
     }
 }

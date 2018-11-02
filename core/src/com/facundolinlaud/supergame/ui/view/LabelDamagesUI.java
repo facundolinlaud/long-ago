@@ -36,7 +36,7 @@ public class LabelDamagesUI {
 
         AlphaAction alphaAction = new AlphaAction();
         alphaAction.setAlpha(0f);
-        alphaAction.setInterpolation(Interpolation.sineOut);
+        alphaAction.setInterpolation(Interpolation.pow5In);
         alphaAction.setDuration(DURATION);
 
         RemoveActorAction removeActorAction = new RemoveActorAction();
