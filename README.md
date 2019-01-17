@@ -1,7 +1,7 @@
 # Long Ago
 
 ## A 1 min video demo (no sound)
-https://streamable.com/sd950
+https://streamable.com/zfluc
 
 ## About
 Long ago is a long time personal RPG game project. I still have a really long way ahead but it's getting there. Also, I'm trying to start documenting everything but the game got pretty big (however it still scales like a charm). The last time I counted I had over 190 classes implemented so it's going to take a while.
