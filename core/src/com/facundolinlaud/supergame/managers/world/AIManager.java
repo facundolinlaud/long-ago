@@ -3,7 +3,9 @@ package com.facundolinlaud.supergame.managers.world;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntityListener;
 import com.badlogic.gdx.ai.btree.BehaviorTree;
-import com.badlogic.gdx.ai.btree.branch.Sequence;
+import com.badlogic.gdx.ai.btree.Decorator;
+import com.badlogic.gdx.ai.btree.branch.*;
+import com.badlogic.gdx.ai.btree.decorator.Repeat;
 import com.facundolinlaud.supergame.ai.decisionmaking.*;
 import com.facundolinlaud.supergame.ai.pathfinding.PathFinderAuthority;
 import com.facundolinlaud.supergame.factory.AvailableSkillsFactory;
@@ -48,23 +50,38 @@ public class AIManager implements EntityListener {
     private BehaviorTree<Blackboard> createAggressiveBehavior() {
         BehaviorTree<Blackboard> behaviorTree = new BehaviorTree<>();
 
-        Sequence<Blackboard> sequence = new Sequence<>();
+        Selector<Blackboard> mainSelector = new Selector();
+        Sequence<Blackboard> offensiveSequence = new Sequence<>();
         PlayerSeenTask playerSeenTask = new PlayerSeenTask();
-        FaceTowardsPlayerTask faceTowardsPlayerTask1 = new FaceTowardsPlayerTask();
+        RandomSequence<Blackboard> attackSequence = new RandomSequence();
+        Sequence<Blackboard> magicSequence = new Sequence();
+        FaceTowardsPlayerTask faceTowardsPlayerTask = new FaceTowardsPlayerTask();
         AttackTask magicAttackTask = new AttackTask(this.availableSkillsFactory.getSkillById(MAGIC_SPELL));
+        Sequence<Blackboard> meleeSequence = new Sequence<>();
         ApproachPlayerTask approachPlayerTask = new ApproachPlayerTask(pathFinderAuthority);
-        FaceTowardsPlayerTask faceTowardsPlayerTask2 = new FaceTowardsPlayerTask();
         AttackTask meleeAttackTask = new AttackTask(this.availableSkillsFactory.getSkillById(MELEE_SPELL));
+        PatrolTask patrolTask = new PatrolTask(pathFinderAuthority);
 
-        sequence.addChild(playerSeenTask);
-        sequence.addChild(faceTowardsPlayerTask1);
-        sequence.addChild(magicAttackTask);
-        sequence.addChild(playerSeenTask);
-        sequence.addChild(approachPlayerTask);
-        sequence.addChild(faceTowardsPlayerTask2);
-        sequence.addChild(meleeAttackTask);
+        magicSequence.addChild(faceTowardsPlayerTask);
+        magicSequence.addChild(magicAttackTask);
 
-        behaviorTree.addChild(sequence);
+        meleeSequence.addChild(approachPlayerTask);
+        meleeSequence.addChild(faceTowardsPlayerTask);
+        meleeSequence.addChild(meleeAttackTask);
+
+        attackSequence.addChild(magicSequence);
+        attackSequence.addChild(meleeSequence);
+
+        offensiveSequence.addChild(playerSeenTask);
+        offensiveSequence.addChild(magicSequence);
+        offensiveSequence.addChild(meleeSequence);
+
+        // usar DynamicGuardSelector para interrumpir una patrulla!!
+
+        mainSelector.addChild(offensiveSequence);
+        mainSelector.addChild(patrolTask);
+
+        behaviorTree.addChild(mainSelector);
 
         return behaviorTree;
     }

@@ -25,6 +25,11 @@ public class AttackTask extends LeafTask<Blackboard> {
 
     @Override
     public Status execute() {
+        if(status.equals(Status.FRESH)){
+            this.waitingForSkillCasting = false;
+            this.castingHasBegun = false;
+        }
+
         Blackboard blackboard = getObject();
 
         Entity agent = blackboard.getAgent();

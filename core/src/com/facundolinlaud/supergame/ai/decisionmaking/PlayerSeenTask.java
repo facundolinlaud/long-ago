@@ -22,7 +22,7 @@ public class PlayerSeenTask extends LeafTask<Blackboard> {
         if(isPlayerNear(blackboard.getPlayerPosition(), blackboard.getAgentPosition(), viewDistance))
             return Status.SUCCEEDED;
         else
-            return Status.RUNNING;
+            return Status.FAILED;
     }
 
     private boolean isPlayerNear(Vector2 playerPosition, Vector2 agentPosition, float minimumDistance){

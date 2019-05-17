@@ -27,20 +27,19 @@ public class MoveToSystem extends IteratingSystem {
 
     @Override
     protected void processEntity(Entity agent, float deltaTime) {
+        decideWhetherToKeepWalkingOrNot(agent);
+    }
+
+    private void decideWhetherToKeepWalkingOrNot(Entity agent) {
         AIMoveToComponent moveTo = mtm.get(agent);
         PositionComponent position = pm.get(agent);
         StatusComponent status = sm.get(agent);
 
-        Point moveToPoint = moveTo.getPoint();
+        Point targetCell = moveTo.getNextCell();
         Vector2 agentPosition = position.getPosition();
 
-        decideWeatherToKeepWalkingOrNot(status, moveToPoint, agentPosition);
-        agent.remove(AIMoveToComponent.class);
-    }
-
-    private void decideWeatherToKeepWalkingOrNot(StatusComponent status, Point moveToPoint, Vector2 agentPosition) {
-        float differenceX = agentPosition.x - moveToPoint.x;
-        float differenceY = agentPosition.y - moveToPoint.y;
+        float differenceX = agentPosition.x - targetCell.x;
+        float differenceY = agentPosition.y - targetCell.y;
 
         float deltaX = Math.abs(differenceX);
         float deltaY = Math.abs(differenceY);
@@ -49,11 +48,13 @@ public class MoveToSystem extends IteratingSystem {
             Direction newDirection = resolveDirection(differenceX, differenceY, deltaX, deltaY);
             status.setDirection(newDirection);
             status.setAction(Action.WALKING);
+        }else if(moveTo.getPathLength() > 1) {
+            moveTo.popCell();
         }else{
             status.setAction(Action.STANDING);
+            agent.remove(AIMoveToComponent.class);
         }
     }
-
 
     private Direction resolveDirection(float differenceX, float differenceY, float deltaX, float deltaY) {
         if(deltaX > EPSILON){

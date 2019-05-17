@@ -1,7 +1,5 @@
 package com.facundolinlaud.supergame.ai.pathfinding;
 
-import com.badlogic.gdx.ai.pfa.DefaultGraphPath;
-import com.badlogic.gdx.ai.pfa.GraphPath;
 import com.badlogic.gdx.ai.pfa.indexed.IndexedAStarPathFinder;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.math.Vector2;
@@ -27,7 +25,7 @@ public class PathFinderAuthority {
     }
 
     public PathFinderResult searchNodePath(Vector2 from, Vector2 to){
-        GraphPath<Node> outPath = new DefaultGraphPath<>();
+        LinkedGraphPath<Node> outPath = new LinkedGraphPath();
 
         int fromNodeIndex = resolveNodeIndex(from);
         int toNodeIndex = resolveNodeIndex(to);
@@ -37,7 +35,14 @@ public class PathFinderAuthority {
 
         boolean pathFound = pathfinder.searchNodePath(fromNode, toNode, new ManhattanDistance(), outPath);
 
+        if(pathFound)
+            removeStandingCell(outPath);
+
         return new PathFinderResult(outPath, pathFound);
+    }
+
+    private void removeStandingCell(LinkedGraphPath outPath) {
+        outPath.pop();
     }
 
     private int resolveNodeIndex(Vector2 vector){

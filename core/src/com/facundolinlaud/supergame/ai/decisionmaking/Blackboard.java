@@ -4,6 +4,9 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.ai.btree.LeafTask;
 import com.badlogic.gdx.math.Vector2;
 import com.facundolinlaud.supergame.ai.pathfinding.MapGraph;
+import com.facundolinlaud.supergame.ai.pathfinding.Node;
+
+import java.util.Map;
 
 public class Blackboard {
     private Vector2 playerPosition;
