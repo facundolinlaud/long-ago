@@ -19,13 +19,10 @@ public class PlayerSeenTask extends LeafTask<Blackboard> {
         AIComponent aiComponent = aim.get(agent);
         float viewDistance = aiComponent.getViewDistance();
 
-        if(isPlayerNear(blackboard.getPlayerPosition(), blackboard.getAgentPosition(), viewDistance)) {
-            System.out.println("{PlayerSeenTask} SUCCEEDED");
+        if(isPlayerNear(blackboard.getPlayerPosition(), blackboard.getAgentPosition(), viewDistance))
             return Status.SUCCEEDED;
-        }else {
-            System.out.println("{PlayerSeenTask} FAILED");
+        else
             return Status.FAILED;
-        }
     }
 
     private boolean isPlayerNear(Vector2 playerPosition, Vector2 agentPosition, float minimumDistance){

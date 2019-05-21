@@ -41,9 +41,8 @@ public class KeyPressThenClickCastingRequestSystem extends IteratingSystem {
 
         /* I should take the ClickComponent away for the main player */
         if(clickComponent.isRegistered()) {
-            System.out.println("{KeyPressThenClickCastingRequestSystem} ATTEMPTING TO CAST");
             this.requestStrategy.attemptToCast(caster, skill);
-        } else if(playerInputObserver.isClicking()){
+        } else if(playerInputObserver.isClicking()) {
             Vector2 clickedPosition = calculateClickedPositionInMeters(caster);
             clickComponent.registerClick(clickedPosition);
             this.requestStrategy.attemptToCast(caster, skill);

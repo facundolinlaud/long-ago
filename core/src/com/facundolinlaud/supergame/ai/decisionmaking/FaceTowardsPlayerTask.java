@@ -27,7 +27,6 @@ public class FaceTowardsPlayerTask extends LeafTask<Blackboard> {
         StatusComponent agentStatus = sm.get(agent);
         agentStatus.setDirection(newAgentDirection);
 
-        System.out.println("{FaceTowardsPlayerTask} SUCCEEDED");
         return Status.SUCCEEDED;
     }
 

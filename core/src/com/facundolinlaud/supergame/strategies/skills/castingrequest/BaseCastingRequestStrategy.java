@@ -13,7 +13,6 @@ public abstract class BaseCastingRequestStrategy implements SkillCastingRequestS
     }
 
     protected void cast(Entity caster, Skill skill){
-        System.out.println("{KeyPressThenClickCastingRequestSystem} ATTEMPT CONCEDED");
         caster.add(new SkillCastingComponent(skill));
         caster.remove(SkillCastingRequestComponent.class);
     }
