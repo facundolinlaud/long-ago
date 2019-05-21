@@ -36,8 +36,10 @@ public class PatrolTask extends LeafTask<Blackboard> {
         if(status.equals(Status.RUNNING)){
             switch(agentStatus.getAction()){
                 case STANDING:
+                    System.out.println("{PatrolTask} SUCCEEDED");
                     return Status.SUCCEEDED;
                 default:
+                    System.out.println("{PatrolTask} RUNNING");
                     return Status.RUNNING;
             }
         }
@@ -45,11 +47,14 @@ public class PatrolTask extends LeafTask<Blackboard> {
         PathFinderResult result = getPathFinderResult(blackboard);
         LinkedGraphPath<Node> path = result.getPath();
 
-        if(!result.isFound() || isAgentsCell(path) || cellIsBehindTooManyObstacles(path))
+        if(!result.isFound() || isAgentsCell(path) || cellIsBehindTooManyObstacles(path)) {
+            System.out.println("{PatrolTask} FAILED");
             return Status.FAILED;
+        }
 
         agent.add(new AIMoveToComponent(path));
 
+        System.out.println("{PatrolTask} RUNNING");
         return Status.RUNNING;
     }
 
@@ -69,7 +74,7 @@ public class PatrolTask extends LeafTask<Blackboard> {
     }
 
     private boolean cellIsBehindTooManyObstacles(LinkedGraphPath<Node> path) {
-        return path.getCount() > 5;
+        return path.getCount() > MAXIMUM_WALKING_DISTANCE;
     }
 
     private PathFinderResult getPathFinderResult(Blackboard blackboard) {

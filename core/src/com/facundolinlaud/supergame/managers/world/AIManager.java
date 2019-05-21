@@ -3,9 +3,7 @@ package com.facundolinlaud.supergame.managers.world;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntityListener;
 import com.badlogic.gdx.ai.btree.BehaviorTree;
-import com.badlogic.gdx.ai.btree.Decorator;
 import com.badlogic.gdx.ai.btree.branch.*;
-import com.badlogic.gdx.ai.btree.decorator.Repeat;
 import com.facundolinlaud.supergame.ai.decisionmaking.*;
 import com.facundolinlaud.supergame.ai.pathfinding.PathFinderAuthority;
 import com.facundolinlaud.supergame.factory.AvailableSkillsFactory;
@@ -53,13 +51,14 @@ public class AIManager implements EntityListener {
         Selector<Blackboard> mainSelector = new Selector();
         Sequence<Blackboard> offensiveSequence = new Sequence<>();
         PlayerSeenTask playerSeenTask = new PlayerSeenTask();
-        RandomSequence<Blackboard> attackSequence = new RandomSequence();
+        RandomSelector<Blackboard> attackRandomSelector = new RandomSelector();
         Sequence<Blackboard> magicSequence = new Sequence();
         FaceTowardsPlayerTask faceTowardsPlayerTask = new FaceTowardsPlayerTask();
         AttackTask magicAttackTask = new AttackTask(this.availableSkillsFactory.getSkillById(MAGIC_SPELL));
         Sequence<Blackboard> meleeSequence = new Sequence<>();
         ApproachPlayerTask approachPlayerTask = new ApproachPlayerTask(pathFinderAuthority);
         AttackTask meleeAttackTask = new AttackTask(this.availableSkillsFactory.getSkillById(MELEE_SPELL));
+
         PatrolTask patrolTask = new PatrolTask(pathFinderAuthority);
 
         magicSequence.addChild(faceTowardsPlayerTask);
@@ -69,14 +68,11 @@ public class AIManager implements EntityListener {
         meleeSequence.addChild(faceTowardsPlayerTask);
         meleeSequence.addChild(meleeAttackTask);
 
-        attackSequence.addChild(magicSequence);
-        attackSequence.addChild(meleeSequence);
+        attackRandomSelector.addChild(magicSequence);
+        attackRandomSelector.addChild(meleeSequence);
 
         offensiveSequence.addChild(playerSeenTask);
-        offensiveSequence.addChild(magicSequence);
-        offensiveSequence.addChild(meleeSequence);
-
-        // usar DynamicGuardSelector para interrumpir una patrulla!!
+        offensiveSequence.addChild(attackRandomSelector);
 
         mainSelector.addChild(offensiveSequence);
         mainSelector.addChild(patrolTask);

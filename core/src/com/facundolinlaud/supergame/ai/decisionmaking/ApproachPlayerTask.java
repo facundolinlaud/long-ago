@@ -34,16 +34,21 @@ public class ApproachPlayerTask extends LeafTask<Blackboard> {
 
 //        traceDebug(agentPosition, result);
 
-        if(!result.isFound())
+        if(!result.isFound()) {
+            System.out.println("{ApproachPlayerTask} FAILED");
             return Status.FAILED;
+        }
 
-        if(result.getPath().getCount() <= MINIMUM_DISTANCE_FROM_PLAYER_DESIRED)
+        if(result.getPath().getCount() <= MINIMUM_DISTANCE_FROM_PLAYER_DESIRED) {
+            System.out.println("{ApproachPlayerTask} SUCCEEDED");
             return Status.SUCCEEDED;
+        }
 
         LinkedGraphPath<Node> path = result.getPath();
         Entity agent = blackboard.getAgent();
         updateAgentPath(agent, path);
 
+        System.out.println("{ApproachPlayerTask} RUNNING");
         return Status.RUNNING;
     }
 

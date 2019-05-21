@@ -2,10 +2,10 @@ package com.facundolinlaud.supergame.components.skills;
 
 import com.badlogic.ashley.core.Component;
 
-public class SkillLockdownComponent implements Component {
+public class SkillLockDownComponent implements Component {
     public float timeLeft;
 
-    public SkillLockdownComponent(float timeLeft) {
+    public SkillLockDownComponent(float timeLeft) {
         this.timeLeft = timeLeft;
     }
 

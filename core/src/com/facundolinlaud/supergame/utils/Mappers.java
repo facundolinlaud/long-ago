@@ -35,10 +35,9 @@ public class Mappers {
     public static final ComponentMapper<StackedSpritesComponent> stackedSprites = ComponentMapper.getFor(StackedSpritesComponent.class);
     public static final ComponentMapper<AnimableSpriteComponent> animableSprite = ComponentMapper.getFor(AnimableSpriteComponent.class);
     public static final ComponentMapper<SkillCastingRequestComponent> skillCastingRequest = ComponentMapper.getFor(SkillCastingRequestComponent.class);
-    public static final ComponentMapper<SkillCastingComponent> meleeSkillCasting = ComponentMapper.getFor(SkillCastingComponent.class);
     public static final ComponentMapper<SkillTargetedComponent> skillTargeted = ComponentMapper.getFor(SkillTargetedComponent.class);
     public static final ComponentMapper<SkillCastingComponent> skillCasting = ComponentMapper.getFor(SkillCastingComponent.class);
-    public static final ComponentMapper<SkillLockdownComponent> skillLockdown = ComponentMapper.getFor(SkillLockdownComponent.class);
+    public static final ComponentMapper<SkillLockDownComponent> skillLockDown = ComponentMapper.getFor(SkillLockDownComponent.class);
     public static final ComponentMapper<SkillClickComponent> skillClick = ComponentMapper.getFor(SkillClickComponent.class);
     public static final ComponentMapper<ParticleComponent> particle = ComponentMapper.getFor(ParticleComponent.class);
     public static final ComponentMapper<AIComponent> ai = ComponentMapper.getFor(AIComponent.class);

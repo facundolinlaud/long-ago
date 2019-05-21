@@ -78,7 +78,7 @@ public class WorldScreen implements Screen {
         final int X_OFFSET = 24;
         final int Y_OFFSET = 48;
 
-        for(int i = 0; i < 1; i++){
+        for(int i = 0; i < 4; i++){
             PlayerFactory.createEnemy(resources.engine, X_OFFSET + i % 2, Y_OFFSET + i % 3);
         }
 
@@ -113,7 +113,7 @@ public class WorldScreen implements Screen {
         engine.addSystem(new KeyPressThenClickCastingRequestSystem(playerInputObserver));
         engine.addSystem(new SkillCastingSystem(engine, new ParticleFactory(particleManager), lightsManager));
         engine.addSystem(new SkillTargetedSystem());
-        engine.addSystem(new SkillLockdownSystem());
+        engine.addSystem(new SkillLockDownSystem());
         engine.addSystem(new DecisionMakingSystem(this.aiManager));
         engine.addSystem(new MoveToSystem());
 

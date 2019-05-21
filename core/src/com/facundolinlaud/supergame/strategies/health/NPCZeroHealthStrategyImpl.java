@@ -8,7 +8,7 @@ import com.facundolinlaud.supergame.components.StatusComponent;
 import com.facundolinlaud.supergame.components.ai.AIComponent;
 import com.facundolinlaud.supergame.components.skills.SkillCastedComponent;
 import com.facundolinlaud.supergame.components.skills.SkillCastingComponent;
-import com.facundolinlaud.supergame.components.skills.SkillLockdownComponent;
+import com.facundolinlaud.supergame.components.skills.SkillLockDownComponent;
 import com.facundolinlaud.supergame.model.status.Action;
 import com.facundolinlaud.supergame.utils.Mappers;
 
@@ -38,6 +38,6 @@ public class NPCZeroHealthStrategyImpl implements ZeroHealthStrategy {
         // TODO: check which of these are mandatory
         npc.remove(SkillCastingComponent.class);
         npc.remove(SkillCastedComponent.class);
-        npc.remove(SkillLockdownComponent.class);
+        npc.remove(SkillLockDownComponent.class);
     }
 }

@@ -10,7 +10,7 @@ import com.badlogic.gdx.ai.msg.MessageManager;
 import com.facundolinlaud.supergame.components.PositionComponent;
 import com.facundolinlaud.supergame.components.StatusComponent;
 import com.facundolinlaud.supergame.components.skills.SkillCastingComponent;
-import com.facundolinlaud.supergame.components.skills.SkillLockdownComponent;
+import com.facundolinlaud.supergame.components.skills.SkillLockDownComponent;
 import com.facundolinlaud.supergame.factory.ParticleFactory;
 import com.facundolinlaud.supergame.managers.world.LightsManager;
 import com.facundolinlaud.supergame.model.skill.Skill;
@@ -27,7 +27,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SkillCastingSystem extends IteratingSystem {
-    private ComponentMapper<SkillCastingComponent> msccm = Mappers.meleeSkillCasting;
+    private ComponentMapper<SkillCastingComponent> scm = Mappers.skillCasting;
     private ComponentMapper<StatusComponent> sm = Mappers.status;
 
     private Map<SkillType, SkillCastingStrategy> castingStrategies;
@@ -50,15 +50,15 @@ public class SkillCastingSystem extends IteratingSystem {
 
     @Override
     protected void processEntity(Entity caster, float deltaTime) {
-        SkillCastingComponent skillCastingComponent = msccm.get(caster);
+        SkillCastingComponent skillCastingComponent = scm.get(caster);
 
         if(skillCastingComponent.hasCastingTimeEnded()){
             setExecutingActionToCaster(caster, skillCastingComponent);
             executeSkill(caster, skillCastingComponent);
             caster.remove(SkillCastingComponent.class);
 
-            float lockdownTime = skillCastingComponent.skill.getLockdownTime();
-            putCasterOnSkillLockdown(caster, lockdownTime);
+            float lockDownTime = skillCastingComponent.skill.getLockdownTime();
+            putCasterOnSkillLockDown(caster, lockDownTime);
         }else if(skillCastingComponent.hasJustStarted())
             setCastingActionToCaster(caster, skillCastingComponent);
 
@@ -90,7 +90,7 @@ public class SkillCastingSystem extends IteratingSystem {
         this.messageDispatcher.dispatchMessage(Messages.SKILL_CASTED, skill);
     }
 
-    private void putCasterOnSkillLockdown(Entity caster, float lockdownTime){
-        caster.add(new SkillLockdownComponent(lockdownTime));
+    private void putCasterOnSkillLockDown(Entity caster, float lockDownTime){
+        caster.add(new SkillLockDownComponent(lockDownTime));
     }
 }
