@@ -2,10 +2,8 @@ package com.facundolinlaud.supergame.model.skill;
 
 import com.facundolinlaud.supergame.model.equip.EquipType;
 import com.facundolinlaud.supergame.model.light.LightModel;
-import com.facundolinlaud.supergame.model.particle.Particle;
 import com.facundolinlaud.supergame.model.particle.ParticleType;
 import com.facundolinlaud.supergame.model.status.Action;
-import com.fasterxml.jackson.annotation.JsonSetter;
 import com.sun.istack.internal.Nullable;
 
 public class Skill {

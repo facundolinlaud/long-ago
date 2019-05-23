@@ -16,11 +16,10 @@ import com.facundolinlaud.supergame.components.sprite.RefreshSpriteRequirementCo
 import com.facundolinlaud.supergame.components.sprite.StackableSpriteComponent;
 import com.facundolinlaud.supergame.components.sprite.StackedSpritesComponent;
 import com.facundolinlaud.supergame.model.RenderPriority;
-import com.facundolinlaud.supergame.model.ai.BehaviourType;
 import com.facundolinlaud.supergame.model.ai.EnemyModel;
-import com.facundolinlaud.supergame.model.equip.EquipSlot;
 import com.facundolinlaud.supergame.model.entity.ItemModel;
 import com.facundolinlaud.supergame.model.entity.PlayerModel;
+import com.facundolinlaud.supergame.model.equip.EquipSlot;
 import com.facundolinlaud.supergame.strategies.renderposition.SpriteRenderPositionStrategyImpl;
 
 import java.util.ArrayList;
@@ -80,7 +79,7 @@ public class PlayerFactory {
     }
 
     private static List<Entity> createItems(Engine engine, List<ItemModel> itemsModels){
-        List<Entity> itemsList = new ArrayList<Entity>();
+        List<Entity> itemsList = new ArrayList();
 
         for(ItemModel m : itemsModels){
             Entity item = createItemEntity(m);

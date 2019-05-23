@@ -10,13 +10,13 @@
 	},
 	"equipment": {
 			"CHEST": {
-			"name": "Chestplate",
-			"texture": "sprites/items/armor/chestplate.png",
-			"picture": "pictures/items/armor/chestplate.png",
+			"name": "Chest Plate",
+			"texture": "sprites/items/armor/plate.png",
+			"picture": "pictures/items/armor/plate.png",
 			"equipable": true,
 			"equipSlot": "CHEST"
 		}, "SHOES": {
-			"name": "Metal shoes",
+			"name": "Metal Shoes",
 			"texture": "sprites/items/boots/metal_boots.png",
 			"picture": "pictures/items/boots/metal_boots.png",
 			"equipable": true,

@@ -1,6 +1,7 @@
 package com.facundolinlaud.supergame.screens;
 
 import com.badlogic.ashley.core.Engine;
+import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -46,6 +47,8 @@ public class WorldScreen implements Screen {
         initializeListeners();
         initializeEntities();
         initializeSystems();
+
+        System.out.println(ModelFactory.getItemsModel());
     }
 
     private void initializeStage() {
@@ -89,8 +92,12 @@ public class WorldScreen implements Screen {
         PlayerFactory.createPlayer(resources.getEngine());
         lightsManager.setPlayerLightBody(PlayerFactory.getPlayerBody());
 
+        ItemFactory itemFactory = new ItemFactory();
+
         for(int i = 0; i < 14; i++){
-            resources.getEngine().addEntity(ItemFactory.createCoins());
+            Entity coin = itemFactory.getItem(13).dropped(21, 48).build();
+//            resources.getEngine().addEntity(ItemFactory.createCoins());
+            resources.getEngine().addEntity(coin);
         }
 
         for(int i = 0; i < 4; i++){
