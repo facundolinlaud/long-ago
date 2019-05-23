@@ -2,6 +2,8 @@ package com.facundolinlaud.supergame.strategies.health;
 
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.gdx.ai.msg.MessageDispatcher;
+import com.badlogic.gdx.ai.msg.MessageManager;
 import com.facundolinlaud.supergame.components.BodyComponent;
 import com.facundolinlaud.supergame.components.HealthComponent;
 import com.facundolinlaud.supergame.components.StatusComponent;
@@ -11,6 +13,8 @@ import com.facundolinlaud.supergame.components.skills.SkillCastingComponent;
 import com.facundolinlaud.supergame.components.skills.SkillLockDownComponent;
 import com.facundolinlaud.supergame.model.status.Action;
 import com.facundolinlaud.supergame.utils.Mappers;
+import com.facundolinlaud.supergame.utils.Messages;
+import com.facundolinlaud.supergame.utils.events.AgentDiedEvent;
 
 public class NPCZeroHealthStrategyImpl implements ZeroHealthStrategy {
     private ComponentMapper<StatusComponent> sm = Mappers.status;
@@ -18,12 +22,14 @@ public class NPCZeroHealthStrategyImpl implements ZeroHealthStrategy {
     public NPCZeroHealthStrategyImpl() { }
 
     @Override
-    public void onZeroHealth(Entity npc) {
-        StatusComponent statusComponent = sm.get(npc);
+    public void onZeroHealth(Entity agent) {
+        StatusComponent statusComponent = sm.get(agent);
         statusComponent.setAction(Action.FALLING);
 
-        removeGeneralComponents(npc);
-        removeSkillCastingComponents(npc);
+        removeGeneralComponents(agent);
+        removeSkillCastingComponents(agent);
+
+        broadcastAgentDead(agent);
 
         System.out.println("NPC died");
     }
@@ -39,5 +45,10 @@ public class NPCZeroHealthStrategyImpl implements ZeroHealthStrategy {
         npc.remove(SkillCastingComponent.class);
         npc.remove(SkillCastedComponent.class);
         npc.remove(SkillLockDownComponent.class);
+    }
+
+    private void broadcastAgentDead(Entity agent) {
+        AgentDiedEvent event = new AgentDiedEvent(agent);
+        MessageManager.getInstance().dispatchMessage(Messages.AGENT_DIED, event);
     }
 }

@@ -33,6 +33,7 @@ public class WorldScreen implements Screen {
     private ParticleManager particleManager;
     private LightsManager lightsManager;
     private AIManager aiManager;
+    private SpawnManager spawnManager;
 
     private Stage stage;
 
@@ -59,18 +60,21 @@ public class WorldScreen implements Screen {
     }
 
     private void initializeManagers() {
-        this.mapManager = new MapManager(resources.batch);
+        this.mapManager = new MapManager(resources.getBatch());
         this.physicsManager = new PhysicsManager(mapManager.getCamera(), mapManager.getMap());
         this.uiManager = new UIManager(stage, mapManager.getCamera());
         this.particleManager = new ParticleManager();
         this.lightsManager = new LightsManager(physicsManager.getWorld(), mapManager.getCamera());
         this.aiManager = new AIManager(factories.getAvailableSkillsFactory(), mapManager, physicsManager);
+        this.spawnManager = new SpawnManager(resources.getEngine(), mapManager.getSpawnLocations());
     }
 
     private void initializeListeners() {
-        resources.engine.addEntityListener(Family.all(BodyComponent.class).get(),
+        Engine engine = resources.getEngine();
+
+        engine.addEntityListener(Family.all(BodyComponent.class).get(),
                 new PhysicsEntitiesListener(physicsManager.getWorld()));
-        resources.engine.addEntityListener(Family.all(AIComponent.class).get(),
+        engine.addEntityListener(Family.all(AIComponent.class).get(),
                 this.aiManager);
     }
 
@@ -78,28 +82,28 @@ public class WorldScreen implements Screen {
         final int X_OFFSET = 24;
         final int Y_OFFSET = 48;
 
-        for(int i = 0; i < 4; i++){
-            PlayerFactory.createEnemy(resources.engine, X_OFFSET + i % 2, Y_OFFSET + i % 3);
+        for(int i = 0; i < 0; i++){
+            PlayerFactory.createEnemy(resources.getEngine(), X_OFFSET + i % 2, Y_OFFSET + i % 3);
         }
 
-        PlayerFactory.createPlayer(resources.engine);
+        PlayerFactory.createPlayer(resources.getEngine());
         lightsManager.setPlayerLightBody(PlayerFactory.getPlayerBody());
 
         for(int i = 0; i < 14; i++){
-            resources.engine.addEntity(ItemFactory.createCoins());
+            resources.getEngine().addEntity(ItemFactory.createCoins());
         }
 
         for(int i = 0; i < 4; i++){
-            resources.engine.addEntity(ItemFactory.createSword());
+            resources.getEngine().addEntity(ItemFactory.createSword());
         }
     }
 
     private void initializeSystems() {
         PlayerInputObserver playerInputObserver = new PlayerInputObserver();
         stage.addListener(playerInputObserver);
-        Engine engine = resources.engine;
+        Engine engine = resources.getEngine();
 
-        engine.addSystem(new ParticleSystem(resources.batch));
+        engine.addSystem(new ParticleSystem(resources.getBatch()));
         engine.addSystem(new StackableSpriteSystem());
         engine.addSystem(new StackedSpritesSystem());
         engine.addSystem(new AnimableSpriteSystem());
@@ -108,7 +112,7 @@ public class WorldScreen implements Screen {
         engine.addSystem(new CameraFocusSystem(mapManager.getCamera()));
         engine.addSystem(new PhysicsSystem(physicsManager.getWorld()));
         engine.addSystem(new PickUpSystem());
-        engine.addSystem(new HealthSystem(resources.batch));
+        engine.addSystem(new HealthSystem(resources.getBatch()));
         engine.addSystem(new KeyPressSkillCastingRequestSystem());
         engine.addSystem(new KeyPressThenClickCastingRequestSystem(playerInputObserver));
         engine.addSystem(new SkillCastingSystem(engine, new ParticleFactory(particleManager), lightsManager));
@@ -116,6 +120,7 @@ public class WorldScreen implements Screen {
         engine.addSystem(new SkillLockDownSystem());
         engine.addSystem(new DecisionMakingSystem(this.aiManager));
         engine.addSystem(new MoveToSystem());
+        engine.addSystem(new SpawnLocationSystem(resources.getEngine()));
 
         uiManager.initializeSystems(engine);
     }
@@ -124,9 +129,9 @@ public class WorldScreen implements Screen {
     public void render(float delta) {
         mapManager.render();
 
-        resources.batch.begin();
-        resources.engine.update(delta);
-        resources.batch.end();
+        resources.getBatch().begin();
+        resources.getEngine().update(delta);
+        resources.getBatch().end();
 
         mapManager.renderUpperLayer();
         physicsManager.render();

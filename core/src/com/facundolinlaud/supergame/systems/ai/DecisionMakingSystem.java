@@ -65,6 +65,4 @@ public class DecisionMakingSystem extends EntitySystem {
     private boolean isAgentActive(Vector2 agentPosition, Vector2 playerPosition) {
         return Distances.calculateEuclideanDistanceBetween(playerPosition, agentPosition) < MINIMUM_DISTANCE_FOR_ACTIVE_IA;
     }
-
-
 }

@@ -70,8 +70,8 @@
 		"equipType": "DAGGER"
 	},{
 		"name": "Chestplate",
-		"texture": "sprites/items/armor/chestplate.png",
-		"picture": "pictures/items/armor/chestplate.png",
+		"texture": "sprites/items/armor/plate.png",
+		"picture": "pictures/items/armor/plate.png",
 		"equipable": true,
 		"equipSlot": "CHEST"
 	},{

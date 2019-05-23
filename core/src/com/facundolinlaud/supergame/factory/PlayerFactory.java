@@ -105,7 +105,7 @@ public class PlayerFactory {
         return e;
     }
 
-    public static void createEnemy(Engine engine, float x, float y) {
+    public static Entity createEnemy(Engine engine, float x, float y) {
         EnemyModel enemyModel = ModelFactory.getEnemyModel();
 
         Entity e = new Entity()
@@ -122,6 +122,8 @@ public class PlayerFactory {
                 .add(new AIComponent(enemyModel.getViewDistance()));
 
         engine.addEntity(e);
+
+        return e;
     }
 
     public static Body getPlayerBody() {

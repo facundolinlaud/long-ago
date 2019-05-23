@@ -38,7 +38,7 @@ active: false
 - Y Offset - 
 active: false
 - Spawn Shape - 
-shape: point
+rectangle: point
 - Spawn Width - 
 lowMin: 0.0
 lowMax: 0.0
