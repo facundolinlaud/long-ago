@@ -124,13 +124,13 @@
 		},
 		"11": {
 			"name": "Saber",
-		    "texture": "sprites/items/weapon/saber.png",
+		    "texture": "sprites/items/weapon/dagger.png",
 		    "picture": "pictures/items/weapon/saber.png",
 		    "weight": 3.0,
 		    "marketValue": 5.0,
 		    "equipmentInformation": {
 				"equipSlot": "WEAPON",
-			    "equipType": "SWORD",
+			    "equipType": "DAGGER",
 			    "attack": 5
 		    }
 		},

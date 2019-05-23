@@ -47,8 +47,9 @@ public class ModelFactory implements Disposable {
         return (Map<ParticleType, String>) readModel(PARTICLES_MODEL_PATH, Map.class);
     }
 
-    public static Items getItemsModel(){
-        return (Items) readModel(ITEMS_MODEL_PATH, Items.class);
+    public static Map<Integer, Item> getItemsModel(){
+        Items items = (Items) readModel(ITEMS_MODEL_PATH, Items.class);
+        return items.getItems();
     }
 
     private static Object readModel(String modelPath, Class clazz){

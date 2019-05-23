@@ -96,12 +96,12 @@ public class WorldScreen implements Screen {
 
         for(int i = 0; i < 14; i++){
             Entity coin = itemFactory.getItem(13).dropped(21, 48).build();
-//            resources.getEngine().addEntity(ItemFactory.createCoins());
             resources.getEngine().addEntity(coin);
         }
 
         for(int i = 0; i < 4; i++){
-            resources.getEngine().addEntity(ItemFactory.createSword());
+            Entity saber = itemFactory.getItem(ItemFactory.SABER).dropped(20, 48).build();
+            resources.getEngine().addEntity(saber);
         }
     }
 
