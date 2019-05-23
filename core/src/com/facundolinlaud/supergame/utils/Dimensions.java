@@ -26,8 +26,8 @@ public class Dimensions {
         return px / PX_PER_METER;
     }
 
-    public static final int toPixels(int meters){
-        return (int) (meters * METERS_PER_PX);
+    public static final int toPixels(float meters){
+        return (int) (meters * PX_PER_METER);
     }
 
     public static final Vector2 toMeters(Vector2 px){

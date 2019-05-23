@@ -37,8 +37,6 @@ public class ParticleSystem extends IteratingSystem {
             } else {
                 entity.remove(ParticleComponent.class);
             }
-
-            System.out.println("one particle died");
         } else {
             effect.setPosition(positionComponent.x, positionComponent.y);
             effect.draw(batch, deltaTime);

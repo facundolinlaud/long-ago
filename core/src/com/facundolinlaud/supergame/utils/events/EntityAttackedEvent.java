@@ -5,9 +5,9 @@ import com.badlogic.ashley.core.Entity;
 public class EntityAttackedEvent extends Event {
     private Entity victim;
     private Entity attacker;
-    private int damage;
+    private float damage;
 
-    public EntityAttackedEvent(Entity victim, Entity attacker, int damage) {
+    public EntityAttackedEvent(Entity victim, Entity attacker, float damage) {
         this.victim = victim;
         this.attacker = attacker;
         this.damage = damage;
@@ -21,7 +21,7 @@ public class EntityAttackedEvent extends Event {
         return attacker;
     }
 
-    public int getDamage() {
+    public float getDamage() {
         return damage;
     }
 }

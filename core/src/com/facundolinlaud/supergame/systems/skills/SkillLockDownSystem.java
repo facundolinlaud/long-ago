@@ -5,26 +5,26 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.facundolinlaud.supergame.components.StatusComponent;
-import com.facundolinlaud.supergame.components.skills.SkillLockdownComponent;
+import com.facundolinlaud.supergame.components.skills.SkillLockDownComponent;
 import com.facundolinlaud.supergame.model.status.Action;
 import com.facundolinlaud.supergame.utils.Mappers;
 
-public class SkillLockdownSystem extends IteratingSystem {
-    private ComponentMapper<SkillLockdownComponent> slm = Mappers.skillLockdown;
+public class SkillLockDownSystem extends IteratingSystem {
+    private ComponentMapper<SkillLockDownComponent> slm = Mappers.skillLockDown;
     private ComponentMapper<StatusComponent> sm = Mappers.status;
 
-    public SkillLockdownSystem() {
-        super(Family.all(SkillLockdownComponent.class).get());
+    public SkillLockDownSystem() {
+        super(Family.all(SkillLockDownComponent.class).get());
     }
 
     @Override
     protected void processEntity(Entity caster, float deltaTime) {
-        SkillLockdownComponent lockdown = slm.get(caster);
+        SkillLockDownComponent lockDown = slm.get(caster);
 
-        if(lockdown.isOver()){
+        if(lockDown.isOver()){
             StatusComponent statusComponent = sm.get(caster);
             statusComponent.setAction(Action.STANDING);
-            caster.remove(SkillLockdownComponent.class);
-        } else lockdown.tick(deltaTime);
+            caster.remove(SkillLockDownComponent.class);
+        } else lockDown.tick(deltaTime);
     }
 }

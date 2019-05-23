@@ -16,8 +16,6 @@ public class PlayerModel {
     private Map<EquipSlot, ItemModel> equipment;
     private List<ItemModel> inventory;
 
-    public PlayerModel() {}
-
     public int getX() {
         return x;
     }

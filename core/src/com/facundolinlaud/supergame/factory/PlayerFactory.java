@@ -5,6 +5,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.facundolinlaud.supergame.components.*;
+import com.facundolinlaud.supergame.components.ai.AIComponent;
 import com.facundolinlaud.supergame.components.items.EquipableComponent;
 import com.facundolinlaud.supergame.components.items.ItemComponent;
 import com.facundolinlaud.supergame.components.player.BagComponent;
@@ -15,6 +16,8 @@ import com.facundolinlaud.supergame.components.sprite.RefreshSpriteRequirementCo
 import com.facundolinlaud.supergame.components.sprite.StackableSpriteComponent;
 import com.facundolinlaud.supergame.components.sprite.StackedSpritesComponent;
 import com.facundolinlaud.supergame.model.RenderPriority;
+import com.facundolinlaud.supergame.model.ai.BehaviourType;
+import com.facundolinlaud.supergame.model.ai.EnemyModel;
 import com.facundolinlaud.supergame.model.equip.EquipSlot;
 import com.facundolinlaud.supergame.model.entity.ItemModel;
 import com.facundolinlaud.supergame.model.entity.PlayerModel;
@@ -102,19 +105,21 @@ public class PlayerFactory {
         return e;
     }
 
-    public static void createEnemy(Engine engine) {
-        PlayerModel enemyModel = ModelFactory.getEnemyModel();
+    public static void createEnemy(Engine engine, float x, float y) {
+        EnemyModel enemyModel = ModelFactory.getEnemyModel();
 
         Entity e = new Entity()
                 .add(new RenderComponent(new SpriteRenderPositionStrategyImpl()))
-                .add(new PositionComponent(enemyModel.getX(), enemyModel.getY()))
+                .add(new PositionComponent(x, y))
                 .add(new HealthComponent(100, 99))
                 .add(new BodyComponent(PhysicsFactory.get().createItemBody()))
                 .add(new StatusComponent())
+                .add(new VelocityComponent(enemyModel.getVelocity()))
                 .add(new AnimableSpriteComponent())
                 .add(new StackedSpritesComponent(ModelFactory.getDefaultAnimationModel()))
                 .add(new RefreshSpriteRequirementComponent())
-                .add(new WearComponent(createWearablesEntities(engine, enemyModel)));
+                .add(new WearComponent(createWearablesEntities(engine, enemyModel)))
+                .add(new AIComponent(enemyModel.getViewDistance()));
 
         engine.addEntity(e);
     }
