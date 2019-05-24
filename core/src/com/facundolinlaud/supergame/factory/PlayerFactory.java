@@ -62,7 +62,7 @@ public class PlayerFactory {
 
         for(EquipSlot equipSlot : bodyModels.keySet()){
             String texture = bodyModels.get(equipSlot);
-            Entity e = new Entity().add(new StackableSpriteComponent(TextureFactory.getTexture(texture)));
+            Entity e = new Entity().add(new StackableSpriteComponent(TextureFactory.get(texture)));
 
             wearables.put(equipSlot, e);
             engine.addEntity(e);
@@ -94,11 +94,11 @@ public class PlayerFactory {
     private static Entity createItemEntity(ItemModel itemModel){
         Entity e = new Entity()
            .add(new ItemComponent(itemModel.getName(), itemModel.getPicture()))
-           .add(new RenderComponent(new TextureRegion(TextureFactory.getTexture(itemModel.getPicture())), new RenderPriority(1)));
+           .add(new RenderComponent(new TextureRegion(TextureFactory.get(itemModel.getPicture())), new RenderPriority(1)));
 
         if(itemModel.isEquipable()) {
             e.add(new EquipableComponent(itemModel.getEquipSlot(), itemModel.getEquipType(), itemModel.getAttack(), itemModel.getDefense()))
-             .add(new StackableSpriteComponent(TextureFactory.getTexture(itemModel.getTexture())));
+             .add(new StackableSpriteComponent(TextureFactory.get(itemModel.getTexture())));
         }
 
         return e;

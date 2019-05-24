@@ -47,8 +47,6 @@ public class WorldScreen implements Screen {
         initializeListeners();
         initializeEntities();
         initializeSystems();
-
-        System.out.println(ModelFactory.getItemsModel());
     }
 
     private void initializeStage() {
@@ -82,27 +80,16 @@ public class WorldScreen implements Screen {
     }
 
     private void initializeEntities(){
-        final int X_OFFSET = 24;
-        final int Y_OFFSET = 48;
-
-        for(int i = 0; i < 0; i++){
-            PlayerFactory.createEnemy(resources.getEngine(), X_OFFSET + i % 2, Y_OFFSET + i % 3);
-        }
-
         PlayerFactory.createPlayer(resources.getEngine());
         lightsManager.setPlayerLightBody(PlayerFactory.getPlayerBody());
 
         ItemFactory itemFactory = new ItemFactory();
 
-        for(int i = 0; i < 14; i++){
-            Entity coin = itemFactory.getItem(13).dropped(21, 48).build();
-            resources.getEngine().addEntity(coin);
-        }
+        Entity coin = itemFactory.getItem(13).dropped(21, 48).build();
+        resources.getEngine().addEntity(coin);
 
-        for(int i = 0; i < 4; i++){
-            Entity saber = itemFactory.getItem(ItemFactory.SABER).dropped(20, 48).build();
-            resources.getEngine().addEntity(saber);
-        }
+        Entity saber = itemFactory.getItem(ItemFactory.SABER).dropped(20, 48).build();
+        resources.getEngine().addEntity(saber);
     }
 
     private void initializeSystems() {

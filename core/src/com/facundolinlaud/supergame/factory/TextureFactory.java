@@ -4,15 +4,21 @@ import com.badlogic.gdx.graphics.Texture;
 
 import java.lang.ref.SoftReference;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by facundo on 7/26/16.
  */
 public class TextureFactory implements Disposable {
     /** image cache */
-    private static HashMap<String, SoftReference<Texture>> textures = new HashMap<>();
+    private static Map<String, SoftReference<Texture>> textures = new HashMap();
 
-    public static Texture getTexture(String imageName) {
+    static {
+        for(String texture : ModelFactory.getTexturesPaths())
+            get(texture);
+    }
+
+    public static Texture get(String imageName) {
         if(!textures.containsKey(imageName)){
             // we've never stored this image
             Texture img = new Texture(imageName);
@@ -30,7 +36,7 @@ public class TextureFactory implements Disposable {
                 // cache and call this method again. It will attempt to load the image
                 // when there is no entry for the image in the imageMap
                 textures.remove(imageName);
-                return getTexture(imageName);
+                return get(imageName);
             }
         }
     }
