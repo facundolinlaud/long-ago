@@ -45,6 +45,7 @@ public class AIManager implements EntityListener {
         return createAggressiveBehavior();
     }
 
+    /* TODO: Move to text format */
     private BehaviorTree<Blackboard> createAggressiveBehavior() {
         BehaviorTree<Blackboard> behaviorTree = new BehaviorTree<>();
 

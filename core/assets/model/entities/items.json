@@ -1,0 +1,156 @@
+{
+	"items": {
+		"0": {
+			"name": "Leather Armor",
+		    "texture": "sprites/items/armor/leather.png",
+		    "picture": "pictures/items/armor/leather.png",
+		    "weight": 3.0,
+		    "marketValue": 2.0,
+		    "equipmentInformation": {
+				"equipSlot": "BODY",
+			    "defense": 3
+		    }
+		},
+		"1": {
+			"name": "Mail Armor",
+		    "texture": "sprites/items/armor/mail.png",
+		    "picture": "pictures/items/armor/mail.png",
+		    "weight": 5.0,
+		    "marketValue": 5.0,
+		    "equipmentInformation": {
+				"equipSlot": "BODY",
+			    "defense": 4
+		    }
+		},
+		"2": {
+			"name": "Leather Plate",
+		    "texture": "sprites/items/armor/plate.png",
+		    "picture": "pictures/items/armor/plate.png",
+		    "weight": 8.0,
+		    "marketValue": 7.0,
+		    "equipmentInformation": {
+				"equipSlot": "BODY",
+			    "defense": 6
+		    }
+		},
+		"3": {
+			"name": "Plate Gloves",
+		    "texture": "sprites/items/arms/plate.png",
+		    "picture": "pictures/items/arms/plate.png",
+		    "weight": 2.0,
+		    "marketValue": 2.0,
+		    "equipmentInformation": {
+				"equipSlot": "GLOVES",
+			    "defense": 2
+		    }
+		},
+		"4": {
+			"name": "Leather Belt",
+		    "texture": "sprites/items/belts/belt.png",
+		    "picture": "pictures/items/belts/belt.png",
+		    "weight": 1.0,
+		    "marketValue": 1.0,
+		    "equipmentInformation": {
+				"equipSlot": "BELT",
+			    "defense": 1
+		    }
+		},
+		"5": {
+			"name": "Leather Boots",
+		    "texture": "sprites/items/boots/leather_boots.png",
+		    "picture": "pictures/items/boots/leather_boots.png",
+		    "weight": 3.0,
+		    "marketValue": 2.0,
+		    "equipmentInformation": {
+				"equipSlot": "SHOES",
+			    "defense": 1
+		    }
+		},
+		"6": {
+			"name": "Metal Boots",
+		    "texture": "sprites/items/boots/metal_boots.png",
+		    "picture": "pictures/items/boots/metal_boots.png",
+		    "weight": 5.0,
+		    "marketValue": 4.0,
+		    "equipmentInformation": {
+				"equipSlot": "SHOES",
+			    "defense": 2
+		    }
+		},
+		"7": {
+			"name": "Plate Gloves",
+		    "texture": "sprites/items/gloves/metal_gloves.png",
+		    "picture": "pictures/items/gloves/metal_gloves.png",
+		    "weight": 3.0,
+		    "marketValue": 3.0,
+		    "equipmentInformation": {
+				"equipSlot": "GLOVES",
+			    "defense": 2
+		    }
+		},
+		"8": {
+			"name": "Hood",
+		    "texture": "sprites/items/helmets/cloth_hood.png",
+		    "picture": "pictures/items/helmets/cloth_hood.png",
+		    "weight": 0.0,
+		    "marketValue": 0.0,
+		    "equipmentInformation": {
+				"equipSlot": "HELMET",
+			    "defense": 0
+		    }
+		},
+		"9": {
+			"name": "Plate Pants",
+		    "texture": "sprites/items/pants/plate.png",
+		    "picture": "pictures/items/pants/plate.png",
+		    "weight": 6.0,
+		    "marketValue": 8.0,
+		    "equipmentInformation": {
+				"equipSlot": "PANTS",
+			    "defense": 5
+		    }
+		},
+		"10": {
+			"name": "Dagger",
+		    "texture": "sprites/items/weapon/dagger.png",
+		    "picture": "pictures/items/weapon/dagger.png",
+		    "weight": 1.0,
+		    "marketValue": 2.0,
+		    "equipmentInformation": {
+				"equipSlot": "WEAPON",
+			    "equipType": "DAGGER",
+			    "attack": 3
+		    }
+		},
+		"11": {
+			"name": "Saber",
+		    "texture": "sprites/items/weapon/dagger.png",
+		    "picture": "pictures/items/weapon/saber.png",
+		    "weight": 3.0,
+		    "marketValue": 5.0,
+		    "equipmentInformation": {
+				"equipSlot": "WEAPON",
+			    "equipType": "DAGGER",
+			    "attack": 5
+		    }
+		},
+		"12": {
+			"name": "Spear",
+		    "texture": "sprites/items/weapon/spear.png",
+		    "picture": "pictures/items/weapon/spear.png",
+		    "weight": 2.0,
+		    "marketValue": 2.0,
+		    "equipmentInformation": {
+				"equipSlot": "WEAPON",
+			    "equipType": "SPEAR",
+			    "attack": 4
+		    }
+		},
+		"13": {
+			"name": "Coins",
+		    "picture": "pictures/items/others/coins.png",
+		    "weight": 1.0,
+		    "marketValue": 10.0
+		}
+	}
+}

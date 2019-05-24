@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.2" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="32" tileheight="32" infinite="0" nextobjectid="134">
+<map version="1.0" tiledversion="1.1.2" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="32" tileheight="32" infinite="0" nextobjectid="137">
  <tileset firstgid="1" name="world1" tilewidth="32" tileheight="32" tilecount="192" columns="16">
   <image source="tilesets/world1.png" width="512" height="384"/>
  </tileset>
@@ -408,12 +408,20 @@
   <object id="132" x="544" y="1504" width="32" height="128"/>
   <object id="133" x="544" y="1248" width="32" height="160"/>
  </objectgroup>
- <objectgroup name="spawn" locked="1">
-  <object id="63" x="896" y="1312" width="256" height="256">
+ <objectgroup name="spawn">
+  <object id="134" x="761.589" y="435.982" width="275.938" height="223.51">
    <properties>
+    <property name="agentID" type="int" value="1"/>
+    <property name="agentsCount" type="int" value="4"/>
     <property name="spawn" value="true"/>
    </properties>
-   <ellipse/>
+  </object>
+  <object id="136" x="303.532" y="757.45" width="275.938" height="223.51">
+   <properties>
+    <property name="agentID" type="int" value="2"/>
+    <property name="agentsCount" type="int" value="5"/>
+    <property name="spawn" value="true"/>
+   </properties>
   </object>
  </objectgroup>
 </map>

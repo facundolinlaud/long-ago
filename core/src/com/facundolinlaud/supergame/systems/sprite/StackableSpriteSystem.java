@@ -31,17 +31,9 @@ public class StackableSpriteSystem extends IteratingSystem {
 
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
-        // get a todos los StackableSpriteComponent en el bag de la entity
-        // los mergeo en el StackedSpriteComponent de la entity
-
-        long start = System.currentTimeMillis();
         List<Texture> wearablesTextures = getTexturesToMerge(entity);
-        Texture mixedTextures = mixTextures(wearablesTextures);
-
         StackedSpritesComponent stackedSpritesComponent = stacked.get(entity);
-        stackedSpritesComponent.stackedSprites = mixedTextures;
-
-        System.out.println("Sprite saved to stacked in " + (System.currentTimeMillis() - start) + " ms");
+        stackedSpritesComponent.setStackedSprites(wearablesTextures);
     }
 
     private List<Texture> getTexturesToMerge(Entity entity){
@@ -52,30 +44,5 @@ public class StackableSpriteSystem extends IteratingSystem {
                 .stream()
                 .map(e -> stackable.get(e).texture)
                 .collect(Collectors.toList());
-    }
-
-    private static Texture mixTextures(List<Texture> textures){
-        ArrayList<Pixmap> pixmaps = new ArrayList<>();
-
-        for(Texture texture : textures){
-            if (!texture.getTextureData().isPrepared()) {
-                texture.getTextureData().prepare();
-            }
-
-            pixmaps.add(texture.getTextureData().consumePixmap());
-        }
-
-        Pixmap accumulator = pixmaps.get(0);
-
-        for(int i = 1; i < pixmaps.size(); i++){
-            Pixmap other = pixmaps.get(i);
-            accumulator.drawPixmap(other, 0, 0);
-            other.dispose();
-        }
-
-        Texture texture = new Texture(accumulator, Pixmap.Format.RGBA8888, false);
-        accumulator.dispose();
-
-        return texture;
     }
 }

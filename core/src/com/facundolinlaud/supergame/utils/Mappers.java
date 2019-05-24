@@ -10,6 +10,8 @@ import com.facundolinlaud.supergame.components.player.BagComponent;
 import com.facundolinlaud.supergame.components.player.KeyboardComponent;
 import com.facundolinlaud.supergame.components.player.WearComponent;
 import com.facundolinlaud.supergame.components.skills.*;
+import com.facundolinlaud.supergame.components.spawn.SpawnLocationComponent;
+import com.facundolinlaud.supergame.components.spawn.SpawnedAgentComponent;
 import com.facundolinlaud.supergame.components.sprite.AnimableSpriteComponent;
 import com.facundolinlaud.supergame.components.sprite.StackableSpriteComponent;
 import com.facundolinlaud.supergame.components.sprite.StackedSpritesComponent;
@@ -42,4 +44,6 @@ public class Mappers {
     public static final ComponentMapper<ParticleComponent> particle = ComponentMapper.getFor(ParticleComponent.class);
     public static final ComponentMapper<AIComponent> ai = ComponentMapper.getFor(AIComponent.class);
     public static final ComponentMapper<AIMoveToComponent> aiMoveTo = ComponentMapper.getFor(AIMoveToComponent.class);
+    public static final ComponentMapper<SpawnLocationComponent> spawnLocation = ComponentMapper.getFor(SpawnLocationComponent.class);
+    public static final ComponentMapper<SpawnedAgentComponent> spawnedAgent = ComponentMapper.getFor(SpawnedAgentComponent.class);
 }

@@ -1,0 +1,66 @@
+{
+	"agents": {
+		"0": {
+			"velocity": 1.9,
+			"bag": [13, 9, 9, 0],
+			"attributes": {
+				"strength": 1,
+				"agility": 1,
+				"stamina": 10,
+				"intelligence": 1
+			},
+			"body": {
+				"BODY": "sprites/living/body/light.png",
+				"HAIR_BASE": "sprites/living/hair/long.png",
+				"HAIR_COLOR": "sprites/living/hair/long/blonde.png"
+			},
+			"equipment": {
+				"CHEST": 1,
+				"SHOES": 6,
+				"WEAPON": 12,
+				"HELMET": 8,
+				"SHIELD": 4,
+				"GLOVES": 7
+			}
+		},
+		"1": {
+			"velocity": 1.9,
+			"viewDistance": 5.0,
+			"attributes": {
+				"strength": 1,
+				"agility": 1,
+				"stamina": 5,
+				"intelligence": 1
+			},
+			"body": {
+				"BODY": "sprites/living/body/skeleton.png",
+				"HAIR_BASE": "sprites/living/hair/mohawk.png",
+				"HAIR_COLOR": "sprites/living/hair/mohawk/mohawk.png"
+			},
+			"equipment": {
+				"CHEST": 0,
+				"SHOES": 5,
+				"WEAPON": 10,
+				"HELMET" : 8
+			}
+		},
+		"2": {
+			"velocity": 1.9,
+			"viewDistance": 5.0,
+			"attributes": {
+				"strength": 1,
+				"agility": 1,
+				"stamina": 15,
+				"intelligence": 1
+			},
+			"body": {
+				"BODY": "sprites/living/body/orc.png"
+			},
+			"equipment": {
+				"CHEST": 2,
+				"SHOES": 5,
+				"WEAPON": 10
+			}
+		}
+	}
+}
