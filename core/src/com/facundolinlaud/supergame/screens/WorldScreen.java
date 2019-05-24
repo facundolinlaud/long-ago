@@ -10,7 +10,9 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.facundolinlaud.supergame.components.BodyComponent;
 import com.facundolinlaud.supergame.components.ai.AIComponent;
 import com.facundolinlaud.supergame.engine.GameResources;
-import com.facundolinlaud.supergame.factory.*;
+import com.facundolinlaud.supergame.factory.Factories;
+import com.facundolinlaud.supergame.factory.ItemFactory;
+import com.facundolinlaud.supergame.factory.ParticleFactory;
 import com.facundolinlaud.supergame.listeners.PhysicsEntitiesListener;
 import com.facundolinlaud.supergame.managers.world.*;
 import com.facundolinlaud.supergame.systems.*;
@@ -80,16 +82,25 @@ public class WorldScreen implements Screen {
     }
 
     private void initializeEntities(){
-        PlayerFactory.createPlayer(resources.getEngine());
-        lightsManager.setPlayerLightBody(PlayerFactory.getPlayerBody());
+        ItemFactory itemFactory = factories.getItemFactory();
 
-        ItemFactory itemFactory = new ItemFactory();
+        Entity player = factories.getAgentFactory().getPlayer()
+                .at(20, 48)
+                .build();
 
-        Entity coin = itemFactory.getItem(13).dropped(21, 48).build();
+        Entity coin = itemFactory.getItem(ItemFactory.COINS)
+                .dropped(21, 48)
+                .build();
+
+        Entity saber = itemFactory.getItem(ItemFactory.SABER)
+                .dropped(20, 48)
+                .build();
+
+        resources.getEngine().addEntity(player);
         resources.getEngine().addEntity(coin);
-
-        Entity saber = itemFactory.getItem(ItemFactory.SABER).dropped(20, 48).build();
         resources.getEngine().addEntity(saber);
+
+        lightsManager.setPlayerLightBody(player);
     }
 
     private void initializeSystems() {
@@ -114,7 +125,7 @@ public class WorldScreen implements Screen {
         engine.addSystem(new SkillLockDownSystem());
         engine.addSystem(new DecisionMakingSystem(aiManager));
         engine.addSystem(new MoveToSystem());
-        engine.addSystem(new SpawnLocationSystem(new AgentFactory(new ItemFactory())));
+        engine.addSystem(new SpawnLocationSystem(factories.getAgentFactory()));
 
         uiManager.initializeSystems(engine);
     }

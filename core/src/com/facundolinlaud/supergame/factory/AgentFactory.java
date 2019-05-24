@@ -6,10 +6,11 @@ import com.facundolinlaud.supergame.components.sprite.StackableSpriteComponent;
 import com.facundolinlaud.supergame.model.agent.Agent;
 import com.facundolinlaud.supergame.model.equip.EquipSlot;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class AgentFactory {
+    private static final Integer MAIN_PLAYER_ID = 0;
+
     private Map<Integer, Agent> agents;
     private ItemFactory itemFactory;
 
@@ -18,17 +19,27 @@ public class AgentFactory {
         this.itemFactory = itemFactory;
     }
 
-    public AgentBuilder get(int id){
-        Agent agent = agents.get(id);
-
+    private AgentBuilder getDummyAgent(Agent agent){
         Map<EquipSlot, Entity> equipment = buildEquipment(agent.getBody(), agent.getEquipment());
 
         AgentBuilder builder = new AgentBuilder(agent.getVelocity())
-                .withAI(agent.getViewDistance())
-                .withHealth(agent.getHealth(), agent.getHealth())
+                .withAttributes(agent.getAttributes())
                 .withEquipment(equipment);
 
         return builder;
+    }
+
+    public AgentBuilder getAI(int id){
+        Agent agent = agents.get(id);
+        return getDummyAgent(agent).withAI(agent.getViewDistance());
+    }
+
+    public AgentBuilder getPlayer(){
+        Agent agent = agents.get(MAIN_PLAYER_ID);
+
+        return getDummyAgent(agent)
+                .withBag(buildBag(agent.getBag()))
+                .withKeyboardControl();
     }
 
     private Map<EquipSlot, Entity> buildEquipment(Map<EquipSlot, String> body, Map<EquipSlot, Integer> model) {
@@ -47,5 +58,14 @@ public class AgentFactory {
         }
 
         return equipment;
+    }
+
+    private List<Entity> buildBag(List<Integer> model) {
+        List<Entity> bag = new LinkedList();
+
+        for(Integer id : model)
+            bag.add(itemFactory.getItem(id).build());
+
+        return bag;
     }
 }

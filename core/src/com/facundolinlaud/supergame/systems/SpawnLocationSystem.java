@@ -1,7 +1,6 @@
 package com.facundolinlaud.supergame.systems;
 
 import com.badlogic.ashley.core.ComponentMapper;
-import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IntervalIteratingSystem;
@@ -13,7 +12,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.facundolinlaud.supergame.components.spawn.SpawnLocationComponent;
 import com.facundolinlaud.supergame.components.spawn.SpawnedAgentComponent;
 import com.facundolinlaud.supergame.factory.AgentFactory;
-import com.facundolinlaud.supergame.factory.PlayerFactory;
 import com.facundolinlaud.supergame.utils.Dimensions;
 import com.facundolinlaud.supergame.utils.Mappers;
 import com.facundolinlaud.supergame.utils.Messages;
@@ -58,7 +56,7 @@ public class SpawnLocationSystem extends IntervalIteratingSystem implements Tele
             System.out.println(spawnPosition);
             spawns.put(spawnEntity, spawns.get(spawnEntity) + 1);
 
-            Entity agent = agentFactory.get(spawnLocation.getAgentID())
+            Entity agent = agentFactory.getAI(spawnLocation.getAgentID())
                     .at(spawnPosition.x, spawnPosition.y)
                     .build();
 

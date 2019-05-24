@@ -101,8 +101,8 @@
 		},
 		"9": {
 			"name": "Plate Pants",
-		    "texture": "sprites/items/pants/metal_pants.png",
-		    "picture": "pictures/items/pants/metal_pants.png",
+		    "texture": "sprites/items/pants/plate.png",
+		    "picture": "pictures/items/pants/plate.png",
 		    "weight": 6.0,
 		    "marketValue": 8.0,
 		    "equipmentInformation": {

@@ -2,6 +2,7 @@ package com.facundolinlaud.supergame.model.agent;
 
 import com.facundolinlaud.supergame.model.equip.EquipSlot;
 
+import java.util.List;
 import java.util.Map;
 
 public class Agent {
@@ -10,8 +11,10 @@ public class Agent {
     private int health;
     private float velocity;
     private float viewDistance;
+    private Attributes attributes;
     private Map<EquipSlot, String> body;
     private Map<EquipSlot, Integer> equipment;
+    private List<Integer> bag;
 
     public Agent() {
     }
@@ -72,6 +75,22 @@ public class Agent {
         this.equipment = equipment;
     }
 
+    public List<Integer> getBag() {
+        return bag;
+    }
+
+    public void setBag(List<Integer> bag) {
+        this.bag = bag;
+    }
+
+    public Attributes getAttributes() {
+        return attributes;
+    }
+
+    public void setAttributes(Attributes attributes) {
+        this.attributes = attributes;
+    }
+
     @Override
     public String toString() {
         return "Agent{" +
@@ -79,8 +98,11 @@ public class Agent {
                 ", defense=" + defense +
                 ", health=" + health +
                 ", velocity=" + velocity +
+                ", viewDistance=" + viewDistance +
+                ", attributes=" + attributes +
                 ", body=" + body +
                 ", equipment=" + equipment +
+                ", bag=" + bag +
                 '}';
     }
 }

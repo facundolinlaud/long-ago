@@ -3,8 +3,6 @@ package com.facundolinlaud.supergame.factory;
 import com.badlogic.gdx.Gdx;
 import com.facundolinlaud.supergame.model.agent.Agent;
 import com.facundolinlaud.supergame.model.agent.Agents;
-import com.facundolinlaud.supergame.model.ai.EnemyModel;
-import com.facundolinlaud.supergame.model.entity.PlayerModel;
 import com.facundolinlaud.supergame.model.item.Item;
 import com.facundolinlaud.supergame.model.item.Items;
 import com.facundolinlaud.supergame.model.particle.ParticleType;
@@ -21,7 +19,6 @@ import java.util.Map;
  * Created by facundo on 27/7/16.
  */
 public class ModelFactory implements Disposable {
-    private static final String PLAYER_MODEL_PATH = "model/entities/player.json";
     private static final String SKILLS_MODEL_PATH = "model/entities/skills.json";
     private static final String DEFAULT_ANIMATION_MODEL_PATH = "model/animations/default.json";
     private static final String PARTICLES_MODEL_PATH = "model/particles/particles.json";
@@ -30,11 +27,6 @@ public class ModelFactory implements Disposable {
     private static final String AGENTS_MODEL_PATH = "model/entities/agents.json";
 
     private static Map<String, Object> cache = new HashMap<>();
-
-    public static PlayerModel getPlayerModel(){
-        return (PlayerModel) readModel(PLAYER_MODEL_PATH, PlayerModel.class);
-    }
-
 
     public static RawAnimationModel getDefaultAnimationModel(){
         return (RawAnimationModel) readModel(DEFAULT_ANIMATION_MODEL_PATH, RawAnimationModel.class);
