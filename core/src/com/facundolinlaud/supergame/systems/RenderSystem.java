@@ -17,6 +17,7 @@ import com.facundolinlaud.supergame.utils.Dimensions;
 import com.facundolinlaud.supergame.utils.Mappers;
 
 import java.util.Comparator;
+import java.util.List;
 
 /**
  * Created by facundo on 3/18/16.
@@ -37,23 +38,26 @@ public class RenderSystem extends SortedIteratingSystem {
         PositionComponent positionComponent = pm.get(entity);
         RenderComponent renderComponent = rm.get(entity);
 
-        TextureRegion texture = renderComponent.texture;
+        List<TextureRegion> regions = renderComponent.getRegions();
 
-        if(texture != null) {
-            float width = Dimensions.toMeters(texture.getRegionWidth());
-            float height = Dimensions.toMeters(texture.getRegionHeight());
+        if(regions.isEmpty()) return;
 
-            Vector2 pos = renderComponent.renderPositionStrategy.process(positionComponent.x, positionComponent.y);
+        for(TextureRegion region : regions){
+            float width = Dimensions.toMeters(region.getRegionWidth());
+            float height = Dimensions.toMeters(region.getRegionHeight());
+
+            Vector2 pos = renderComponent.getRenderPositionStrategy().process(positionComponent.x, positionComponent.y);
 
             // TODO: generalize this. RenderSystem can only render textures, not particles
-            spriteBatch.draw(texture, pos.x, pos.y, width, height);
+            spriteBatch.draw(region, pos.x, pos.y, width, height);
         }
     }
 
     private static class ZComparator implements Comparator<Entity> {
         @Override
         public int compare(Entity e1, Entity e2) {
-            return (int) Math.signum(Mappers.render.get(e1).priority.getPriority() - Mappers.render.get(e2).priority.getPriority());
+            return (int) Math.signum(Mappers.render.get(e1).getPriority().getPriority() -
+                    Mappers.render.get(e2).getPriority().getPriority());
         }
     }
 }

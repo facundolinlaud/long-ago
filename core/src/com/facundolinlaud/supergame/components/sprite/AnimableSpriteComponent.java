@@ -4,21 +4,24 @@ import com.badlogic.ashley.core.Component;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.facundolinlaud.supergame.model.status.Status;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by facundo on 26/7/16.
  */
 public class AnimableSpriteComponent implements Component {
-    public Map<Status, Animation> animations;
+    private List<Map<Status, Animation>> texturesToAnimations;
     public float stateTime = 0f;
 
     public AnimableSpriteComponent() {
-        this.animations = new HashMap<>();
+        this.texturesToAnimations = new ArrayList();
     }
 
-    public void resetStateTime(){
-        this.stateTime = 0f;
+    public List<Map<Status, Animation>> getTexturesToAnimations() {
+        return texturesToAnimations;
+    }
+
+    public void setTexturesToAnimations(List<Map<Status, Animation>> texturesToAnimations) {
+        this.texturesToAnimations = texturesToAnimations;
     }
 }

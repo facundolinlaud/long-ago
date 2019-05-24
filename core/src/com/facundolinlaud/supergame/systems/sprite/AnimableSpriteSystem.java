@@ -14,7 +14,9 @@ import com.facundolinlaud.supergame.model.status.Direction;
 import com.facundolinlaud.supergame.model.status.Status;
 import com.facundolinlaud.supergame.utils.Mappers;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -25,11 +27,9 @@ public class AnimableSpriteSystem extends IteratingSystem {
     private ComponentMapper<StatusComponent> sm = Mappers.status;
     private ComponentMapper<RenderComponent> rm = Mappers.render;
 
-    private Map<Entity, Status> lastEntitiesStatus;
 
     public AnimableSpriteSystem() {
         super(Family.all(StatusComponent.class, AnimableSpriteComponent.class, RenderComponent.class).get());
-        this.lastEntitiesStatus = new HashMap<>();
     }
 
     @Override
@@ -47,8 +47,15 @@ public class AnimableSpriteSystem extends IteratingSystem {
     private void putNextFrameOnRenderComponent(Entity e, Action a, Direction d, AnimableSpriteComponent animableSpriteComponent) {
         Status status = new Status(a, d);
         RenderComponent renderComponent = rm.get(e);
-        Animation animation = animableSpriteComponent.animations.get(status);
-        renderComponent.texture = (TextureRegion) animation.getKeyFrame(animableSpriteComponent.stateTime);
+
+        renderComponent.clear();
+
+        List<Map<Status, Animation>> texturesToAnimations = animableSpriteComponent.getTexturesToAnimations();
+        for(Map<Status, Animation> animations : texturesToAnimations){
+            Animation animation = animations.get(status);
+            TextureRegion region = (TextureRegion) animation.getKeyFrame(animableSpriteComponent.stateTime);
+            renderComponent.add(region);
+        }
     }
 
     /* TODO: see if I can make this prettier */

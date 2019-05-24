@@ -17,8 +17,7 @@ import com.facundolinlaud.supergame.model.status.Status;
 import com.facundolinlaud.supergame.model.sprite.SubAnimationModel;
 import com.facundolinlaud.supergame.utils.Mappers;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by facundo on 26/7/16.
@@ -37,13 +36,18 @@ public class StackedSpritesSystem extends IteratingSystem {
         // construyo las animations y las pongo en el AnimableSpriteComponent
 
         StackedSpritesComponent stackedSpritesComponent = stacked.get(entity);
-        Texture sprites = stackedSpritesComponent.stackedSprites;
-        RawAnimationModel model = stackedSpritesComponent.rawAnimationModel;
+        List<Texture> textures = stackedSpritesComponent.getStackedSprites();
+        RawAnimationModel model = stackedSpritesComponent.getRawAnimationModel();
 
-        Map<Status, Animation> animations = createAnimations(sprites, model);
+        List<Map<Status, Animation>> texturesToAnimations = new ArrayList();
+
+        for(Texture texture : textures){
+            Map<Status, Animation> animations = createAnimations(texture, model);
+            texturesToAnimations.add(animations);
+        }
 
         AnimableSpriteComponent animableSpriteComponent = animable.get(entity);
-        animableSpriteComponent.animations = animations;
+        animableSpriteComponent.setTexturesToAnimations(texturesToAnimations);
 
         entity.remove(RefreshSpriteRequirementComponent.class);
     }
