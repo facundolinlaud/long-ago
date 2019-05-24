@@ -1,7 +1,8 @@
 package com.facundolinlaud.supergame.factory;
 
 import com.badlogic.gdx.Gdx;
-import com.facundolinlaud.supergame.model.Textures;
+import com.facundolinlaud.supergame.model.agent.Agent;
+import com.facundolinlaud.supergame.model.agent.Agents;
 import com.facundolinlaud.supergame.model.ai.EnemyModel;
 import com.facundolinlaud.supergame.model.entity.PlayerModel;
 import com.facundolinlaud.supergame.model.item.Item;
@@ -12,7 +13,6 @@ import com.facundolinlaud.supergame.model.sprite.RawAnimationModel;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,12 +22,12 @@ import java.util.Map;
  */
 public class ModelFactory implements Disposable {
     private static final String PLAYER_MODEL_PATH = "model/entities/player.json";
-    private static final String ENEMY_MODEL_PATH = "model/entities/enemy.json";
     private static final String SKILLS_MODEL_PATH = "model/entities/skills.json";
     private static final String DEFAULT_ANIMATION_MODEL_PATH = "model/animations/default.json";
     private static final String PARTICLES_MODEL_PATH = "model/particles/particles.json";
     private static final String ITEMS_MODEL_PATH = "model/entities/items.json";
     private static final String TEXTURES_PATH = "model/textures/textures.json";
+    private static final String AGENTS_MODEL_PATH = "model/entities/agents.json";
 
     private static Map<String, Object> cache = new HashMap<>();
 
@@ -35,9 +35,6 @@ public class ModelFactory implements Disposable {
         return (PlayerModel) readModel(PLAYER_MODEL_PATH, PlayerModel.class);
     }
 
-    public static EnemyModel getEnemyModel(){
-        return (EnemyModel) readModel(ENEMY_MODEL_PATH, EnemyModel.class);
-    }
 
     public static RawAnimationModel getDefaultAnimationModel(){
         return (RawAnimationModel) readModel(DEFAULT_ANIMATION_MODEL_PATH, RawAnimationModel.class);
@@ -58,6 +55,11 @@ public class ModelFactory implements Disposable {
     public static Map<Integer, Item> getItemsModel(){
         Items items = (Items) readModel(ITEMS_MODEL_PATH, Items.class);
         return items.getItems();
+    }
+
+    public static Map<Integer, Agent> getAgentsModel(){
+        Agents agents = (Agents) readModel(AGENTS_MODEL_PATH, Agents.class);
+        return agents.getAgents();
     }
 
     private static Object readModel(String modelPath, Class clazz){

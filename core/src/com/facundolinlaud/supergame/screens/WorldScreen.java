@@ -112,9 +112,9 @@ public class WorldScreen implements Screen {
         engine.addSystem(new SkillCastingSystem(engine, new ParticleFactory(particleManager), lightsManager));
         engine.addSystem(new SkillTargetedSystem());
         engine.addSystem(new SkillLockDownSystem());
-        engine.addSystem(new DecisionMakingSystem(this.aiManager));
+        engine.addSystem(new DecisionMakingSystem(aiManager));
         engine.addSystem(new MoveToSystem());
-        engine.addSystem(new SpawnLocationSystem(resources.getEngine()));
+        engine.addSystem(new SpawnLocationSystem(new AgentFactory(new ItemFactory())));
 
         uiManager.initializeSystems(engine);
     }

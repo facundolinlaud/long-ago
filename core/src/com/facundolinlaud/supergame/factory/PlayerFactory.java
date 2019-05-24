@@ -104,27 +104,6 @@ public class PlayerFactory {
         return e;
     }
 
-    public static Entity createEnemy(Engine engine, float x, float y) {
-        EnemyModel enemyModel = ModelFactory.getEnemyModel();
-
-        Entity e = new Entity()
-                .add(new RenderComponent(new SpriteRenderPositionStrategyImpl()))
-                .add(new PositionComponent(x, y))
-                .add(new HealthComponent(100, 99))
-                .add(new BodyComponent(PhysicsFactory.get().createItemBody()))
-                .add(new StatusComponent())
-                .add(new VelocityComponent(enemyModel.getVelocity()))
-                .add(new AnimableSpriteComponent())
-                .add(new StackedSpritesComponent(ModelFactory.getDefaultAnimationModel()))
-                .add(new RefreshSpriteRequirementComponent())
-                .add(new WearComponent(createWearablesEntities(engine, enemyModel)))
-                .add(new AIComponent(enemyModel.getViewDistance()));
-
-        engine.addEntity(e);
-
-        return e;
-    }
-
     public static Body getPlayerBody() {
         return playerBody;
     }

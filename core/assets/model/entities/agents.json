@@ -1,0 +1,38 @@
+{
+	"agents": {
+		"1": {
+			"attack": 2,
+			"defense": 4,
+			"health": 100,
+			"velocity": 1.9,
+			"viewDistance": 5,
+			"body": {
+				"BODY": "sprites/living/body/skeleton.png",
+				"HAIR_BASE": "sprites/living/hair/mohawk.png",
+				"HAIR_COLOR": "sprites/living/hair/mohawk/mohawk.png"
+			},
+			"equipment": {
+				"CHEST": 0,
+				"SHOES": 5,
+				"WEAPON": 10,
+				"HELMET" : 8
+			}
+		},
+		"2": {
+			"attack": 2,
+			"defense": 4,
+			"health": 100,
+			"velocity": 1.9,
+			"viewDistance": 5,
+			"body": {
+				"BODY": "sprites/living/body/orc.png"
+			},
+			"equipment": {
+				"CHEST": 0,
+				"SHOES": 5,
+				"WEAPON": 10,
+				"HELMET" : 8
+			}
+		}
+	}
+}

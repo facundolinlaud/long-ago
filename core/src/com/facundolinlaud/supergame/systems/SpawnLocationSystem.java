@@ -12,6 +12,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.facundolinlaud.supergame.components.spawn.SpawnLocationComponent;
 import com.facundolinlaud.supergame.components.spawn.SpawnedAgentComponent;
+import com.facundolinlaud.supergame.factory.AgentFactory;
 import com.facundolinlaud.supergame.factory.PlayerFactory;
 import com.facundolinlaud.supergame.utils.Dimensions;
 import com.facundolinlaud.supergame.utils.Mappers;
@@ -30,16 +31,16 @@ public class SpawnLocationSystem extends IntervalIteratingSystem implements Tele
     private ComponentMapper<SpawnedAgentComponent> sa = Mappers.spawnedAgent;
 
     private Map<Entity, Integer> spawns;
+    private AgentFactory agentFactory;
     private Random random;
-    private Engine engine;
 
 
-    public SpawnLocationSystem(Engine engine) {
+    public SpawnLocationSystem(AgentFactory agentFactory) {
         super(Family.all(SpawnLocationComponent.class).get(), INTERVAL);
 
+        this.agentFactory = agentFactory;
         this.spawns = new HashMap();
         this.random = new Random();
-        this.engine = engine;
 
         MessageManager.getInstance().addListener(this, Messages.AGENT_DIED);
     }
@@ -57,8 +58,13 @@ public class SpawnLocationSystem extends IntervalIteratingSystem implements Tele
             System.out.println(spawnPosition);
             spawns.put(spawnEntity, spawns.get(spawnEntity) + 1);
 
-            Entity agent = PlayerFactory.createEnemy(engine, spawnPosition.x, spawnPosition.y);
+            Entity agent = agentFactory.get(spawnLocation.getAgentID())
+                    .at(spawnPosition.x, spawnPosition.y)
+                    .build();
+
             agent.add(new SpawnedAgentComponent(spawnEntity));
+
+            getEngine().addEntity(agent);
         }
     }
 
