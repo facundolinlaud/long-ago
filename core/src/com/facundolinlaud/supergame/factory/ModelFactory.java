@@ -6,9 +6,12 @@ import com.facundolinlaud.supergame.model.agent.Agents;
 import com.facundolinlaud.supergame.model.item.Item;
 import com.facundolinlaud.supergame.model.item.Items;
 import com.facundolinlaud.supergame.model.particle.ParticleType;
+import com.facundolinlaud.supergame.model.particle.Particles;
 import com.facundolinlaud.supergame.model.skill.SkillsModel;
 import com.facundolinlaud.supergame.model.sprite.RawAnimationModel;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.type.MapType;
+import com.fasterxml.jackson.databind.type.TypeFactory;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -37,7 +40,8 @@ public class ModelFactory implements Disposable {
     }
 
     public static Map<ParticleType, String> getParticlesModel(){
-        return (Map<ParticleType, String>) readModel(PARTICLES_MODEL_PATH, Map.class);
+        Particles particles = (Particles) readModel(PARTICLES_MODEL_PATH, Particles.class);
+        return particles.getParticles();
     }
 
     public static List<String> getTexturesPaths(){

@@ -35,7 +35,7 @@ public class ParticleManager {
         for(Entry<ParticleType, String> e : particlesModel.entrySet()){
             ParticleEffect p = new ParticleEffect();
             p.load(Gdx.files.internal(e.getValue()), particlesPath);
-            addParticleEffect(ParticleType.EXPLOSION, p);
+            addParticleEffect(e.getKey(), p);
         }
     }
 

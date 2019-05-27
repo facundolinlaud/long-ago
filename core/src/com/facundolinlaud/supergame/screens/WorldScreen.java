@@ -33,7 +33,6 @@ public class WorldScreen implements Screen {
     private MapManager mapManager;
     private PhysicsManager physicsManager;
     private UIManager uiManager;
-    private ParticleManager particleManager;
     private LightsManager lightsManager;
     private AIManager aiManager;
     private SpawnManager spawnManager;
@@ -66,7 +65,6 @@ public class WorldScreen implements Screen {
         this.mapManager = new MapManager(resources.getBatch());
         this.physicsManager = new PhysicsManager(mapManager.getCamera(), mapManager.getMap());
         this.uiManager = new UIManager(stage, mapManager.getCamera());
-        this.particleManager = new ParticleManager();
         this.lightsManager = new LightsManager(physicsManager.getWorld(), mapManager.getCamera());
         this.aiManager = new AIManager(factories.getAvailableSkillsFactory(), mapManager, physicsManager);
         this.spawnManager = new SpawnManager(resources.getEngine(), mapManager.getSpawnLocations());
@@ -120,7 +118,7 @@ public class WorldScreen implements Screen {
         engine.addSystem(new HealthSystem(resources.getBatch()));
         engine.addSystem(new KeyPressSkillCastingRequestSystem());
         engine.addSystem(new KeyPressThenClickCastingRequestSystem(playerInputObserver));
-        engine.addSystem(new SkillCastingSystem(engine, new ParticleFactory(particleManager), lightsManager));
+        engine.addSystem(new SkillCastingSystem(engine, factories.getParticleFactory(), lightsManager));
         engine.addSystem(new SkillTargetedSystem());
         engine.addSystem(new SkillLockDownSystem());
         engine.addSystem(new DecisionMakingSystem(aiManager));

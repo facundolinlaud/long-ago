@@ -35,8 +35,8 @@ public class Dimensions {
     }
 
     public static final Vector2 calculateGlobalPositionInPixelsToMetersRelativeToCenter(Vector2 px){
-        float x = px.x - SCREEN_WIDTH / 2;
-        float y = px.y - SCREEN_HEIGHT / 2;
+        float x = px.x - SCREEN_WIDTH / 2f;
+        float y = px.y - SCREEN_HEIGHT / 2f;
 
         return new Vector2(toMeters(x), toMeters(y));
     }

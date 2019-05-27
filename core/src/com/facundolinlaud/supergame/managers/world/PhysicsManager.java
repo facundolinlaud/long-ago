@@ -23,6 +23,7 @@ import java.util.List;
  */
 public class PhysicsManager implements Renderable {
     public static final String COLLISION_LAYER = "collision";
+    public static final boolean DEBUG = false;
 
     private Camera camera;
     private TiledMap map;
@@ -76,7 +77,8 @@ public class PhysicsManager implements Renderable {
 
     @Override
     public void render(){
-        physicsDebugRenderer.render(world, camera.combined);
+        if(DEBUG)
+            physicsDebugRenderer.render(world, camera.combined);
     }
 
     public World getWorld(){

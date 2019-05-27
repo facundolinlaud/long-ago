@@ -5,18 +5,21 @@ import com.facundolinlaud.supergame.builder.AgentBuilder;
 import com.facundolinlaud.supergame.components.sprite.StackableSpriteComponent;
 import com.facundolinlaud.supergame.model.agent.Agent;
 import com.facundolinlaud.supergame.model.equip.EquipSlot;
+import com.facundolinlaud.supergame.model.particle.ParticleType;
 
 import java.util.*;
 
 public class AgentFactory {
     private static final Integer MAIN_PLAYER_ID = 0;
 
-    private Map<Integer, Agent> agents;
     private ItemFactory itemFactory;
+    private ParticleFactory particleFactory;
+    private Map<Integer, Agent> agents;
 
-    public AgentFactory(ItemFactory itemFactory) {
+    public AgentFactory(ItemFactory itemFactory, ParticleFactory particleFactory) {
         this.agents = ModelFactory.getAgentsModel();
         this.itemFactory = itemFactory;
+        this.particleFactory = particleFactory;
     }
 
     private AgentBuilder getDummyAgent(Agent agent){
@@ -31,7 +34,9 @@ public class AgentFactory {
 
     public AgentBuilder getAI(int id){
         Agent agent = agents.get(id);
-        return getDummyAgent(agent).withAI(agent.getViewDistance());
+        return getDummyAgent(agent)
+                .withAI(agent.getViewDistance())
+                .withParticles(particleFactory.create(ParticleType.SPAWN));
     }
 
     public AgentBuilder getPlayer(){

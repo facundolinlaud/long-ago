@@ -1,6 +1,7 @@
 package com.facundolinlaud.supergame.builder;
 
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.gdx.graphics.g2d.ParticleEffectPool;
 import com.facundolinlaud.supergame.components.*;
 import com.facundolinlaud.supergame.components.ai.AIComponent;
 import com.facundolinlaud.supergame.components.player.BagComponent;
@@ -13,6 +14,7 @@ import com.facundolinlaud.supergame.factory.ModelFactory;
 import com.facundolinlaud.supergame.factory.PhysicsFactory;
 import com.facundolinlaud.supergame.model.agent.Attributes;
 import com.facundolinlaud.supergame.model.equip.EquipSlot;
+import com.facundolinlaud.supergame.model.particle.ParticleType;
 import com.facundolinlaud.supergame.strategies.renderposition.SpriteRenderPositionStrategyImpl;
 
 import java.util.List;
@@ -74,6 +76,11 @@ public class AgentBuilder {
 
     public AgentBuilder at(float x, float y){
         this.entity.add(new PositionComponent(x, y));
+        return this;
+    }
+
+    public AgentBuilder withParticles(ParticleEffectPool.PooledEffect pooledEffect){
+        this.entity.add(new ParticleComponent(pooledEffect, false));
         return this;
     }
 

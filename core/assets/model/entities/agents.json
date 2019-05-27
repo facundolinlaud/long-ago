@@ -1,7 +1,7 @@
 {
 	"agents": {
 		"0": {
-			"velocity": 1.9,
+			"velocity": 4,
 			"bag": [13, 9, 9, 0],
 			"attributes": {
 				"strength": 1,
@@ -59,7 +59,7 @@
 			"equipment": {
 				"CHEST": 2,
 				"SHOES": 5,
-				"WEAPON": 10
+				"WEAPON": 12
 			}
 		}
 	}

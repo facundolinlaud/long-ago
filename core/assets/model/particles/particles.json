@@ -1,3 +1,6 @@
 {
-	"EXPLOSION": "particles/explosion.p"
+	"particles": {
+		"EXPLOSION": "particles/explosion.p",
+		"SPAWN": "particles/spawn.p"
+	}
 }

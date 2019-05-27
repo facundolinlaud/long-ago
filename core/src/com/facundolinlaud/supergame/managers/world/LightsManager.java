@@ -35,7 +35,7 @@ public class LightsManager implements Renderable {
     private void initializePlayerLight(){
         this.playerLight = new PointLight(rayHandler, RAYS_COUNT, LIGHTS_COLOR, 16, 20, 42);
         this.playerLight.setSoft(true);
-        this.playerLight.setIgnoreAttachedBody(false);
+        this.playerLight.setIgnoreAttachedBody(true);
         this.playerLight.setXray(true);
     }
 
