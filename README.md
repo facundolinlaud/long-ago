@@ -1,10 +1,10 @@
 # Long Ago
 
-## A 1 min video demo (no sound)
+## A 1 min video demo (no sound) (old)
 https://streamable.com/zfluc
 
 ## About
-Long ago is a long time personal RPG game project. I still have a really long way ahead but it's getting there. Also, I'm trying to start documenting everything but the game got pretty big (however, it still scales like a charm). The last time I counted I had over 190 classes implemented so it's going to take a while.
+Long ago is a long time personal RPG game project. I still have a really long way ahead but it's getting there. I'm trying to start documenting everything but the game got pretty big (however, it still scales like a charm).
 
 ## Tech stack
 * Libgdx as graphic engine
@@ -14,12 +14,32 @@ Long ago is a long time personal RPG game project. I still have a really long wa
 * Jackson
 
 ## The game
-Currently, you can move through the map with **WASD** keys. You can attack with a weapon of your choice by pressing **2** or you can press **1** and then **click somewhere in the map** to cast an explosion. Also, you can pick up whatever is on the floor with the **E** key. Furthermore, you can bring up your inventory and your equipment window by pressing the **I** and **C** keys respectively. The equipping system works so you can put on and off whatever you want and the sprite will be rendered accordingly. That took some time. You can also open the attributes window by pressing **P** but any changes you make on that window won't affect the game because the attributes system is yet to be implemented.
+Currently, you can move through the map with **WASD** keys. You can attack with a weapon of your choice by pressing **2** or you can press **1** and then **click somewhere in the map** to cast an explosion. Also, you can pick up whatever is on the floor with the **E** key. Furthermore, you can bring up your inventory and your equipment window by pressing the **I** and **C** keys respectively. The equipping system works so you can put on and off whatever you want and the sprite will be rendered accordingly. That took some time. You can also open the attributes window by pressing **P**.
 
 Thanks!
 
+# Asset Managing
+## Factories
+* Model Factory
+* Item Factory (with ItemBuilder)
+* Texture Factory
+* Agent Factory
+* Particle Factory
+* Physics Factory
+* AvailableSkillsFactory
+
+## Managers
+* Screen Manager (aka Scene Manager)
+* AI Manager
+* Lights Manager
+* Map Manager
+* Particle Manager
+* Physics Manager
+* Spawn Manager
+* UI Manager
+
 # Systems
-## Status Component
+## Important detail: Status Component
 Each agent in the game will have a **Status Component**. An agent will be an NPC spawned by the game or the player itself. The Status Component is conformed by two important states:
 * The Action state
 * The Direction state
@@ -27,6 +47,21 @@ The Action state will hold the state of it's respective agent. In other words: w
 
 On the other side, the Direction state will hold the direction the agent is facing. If he is walking to the right, then the action of the agent will be *WALKING* and it's direction will be *RIGHT*. As the game is a 2-dimensional world, each agent will always posses a valid direction.
 
+## Artificial Intelligence System
+### Decision Making Module (Behaviour Trees)
+### Path Finding Module (A\*)
+## Player Input System
+## Skills, stats and Skill Casting Systems
+### Calculating Damage with agent stats
+## Inventory System
+### Communication with UI
+### Item Dropping and Picking Up
+## Movement System
+## Particles System
+## Physics System
+## Agent Spawn System
+## UI System
+## Camera Focus System
 
 ## Rendering systems
 This game has many requeriments when it comes to rendering things. These are:
