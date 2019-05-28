@@ -27,7 +27,9 @@ public class AttributesUIControllerImpl implements AttributesUIController {
     @Override
     public void update(Entity player, AttributesComponent attrsComponent) {
         this.player = player;
-        Attributes attributes = new Attributes(attrsComponent.agility, attrsComponent.strength, attrsComponent.intelligence, attrsComponent.stamina);
+        Attributes attributes = new Attributes(attrsComponent.getAgility(),
+                attrsComponent.getStrength(), attrsComponent.getIntelligence(), attrsComponent.getStamina());
+
         attributesUI.update(attributes);
     }
 

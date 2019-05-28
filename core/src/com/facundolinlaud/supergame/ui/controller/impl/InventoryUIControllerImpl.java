@@ -59,7 +59,8 @@ public class InventoryUIControllerImpl implements InventoryUIController {
             Equipable equipable = null;
 
             if(equipableComponent != null){
-                equipable = new Equipable(equipableComponent.equipSlot, equipableComponent.attack, equipableComponent.defense);
+                equipable = new Equipable(equipableComponent.getEquipSlot(),
+                        equipableComponent.getAttack(), equipableComponent.getDefense());
             }
 
             items.add(new Item(itemComponent.name, itemComponent.picture, equipable, new Invented(i)));

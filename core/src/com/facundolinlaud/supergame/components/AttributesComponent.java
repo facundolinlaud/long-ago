@@ -10,19 +10,11 @@ public class AttributesComponent implements Component {
     public static final String STRENGTH = "Strength";
     public static final String INTELLIGENCE = "Intelligence";
     public static final String STAMINA = "Stamina";
-    private static final int INITIAL_VALUE = 1;
 
-    public int agility;
-    public int strength;
-    public int intelligence;
-    public int stamina;
-
-    public AttributesComponent() {
-        this.agility = INITIAL_VALUE;
-        this.strength = INITIAL_VALUE;
-        this.intelligence = INITIAL_VALUE;
-        this.stamina = INITIAL_VALUE;
-    }
+    private int agility;
+    private int strength;
+    private int intelligence;
+    private int stamina;
 
     public AttributesComponent(int agility, int strength, int intelligence, int stamina) {
         this.agility = agility;
@@ -46,5 +38,37 @@ public class AttributesComponent implements Component {
                 stamina += value;
                 break;
         }
+    }
+
+    public int getAgility() {
+        return agility;
+    }
+
+    public void setAgility(int agility) {
+        this.agility = agility;
+    }
+
+    public int getStrength() {
+        return strength;
+    }
+
+    public void setStrength(int strength) {
+        this.strength = strength;
+    }
+
+    public int getIntelligence() {
+        return intelligence;
+    }
+
+    public void setIntelligence(int intelligence) {
+        this.intelligence = intelligence;
+    }
+
+    public int getStamina() {
+        return stamina;
+    }
+
+    public void setStamina(int stamina) {
+        this.stamina = stamina;
     }
 }

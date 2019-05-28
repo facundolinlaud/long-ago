@@ -8,17 +8,9 @@ import com.facundolinlaud.supergame.strategies.health.NPCZeroHealthStrategyImpl;
  * Created by facundo on 3/23/16.
  */
 public class HealthComponent implements Component {
-    public static final int DEFAULT_HEALTH = 100;
-
-    public float totalHealth;
-    public float currentHealth;
-    public ZeroHealthStrategy zeroHealthStrategy;
-
-    public HealthComponent() {
-        this.totalHealth = DEFAULT_HEALTH;
-        this.currentHealth = DEFAULT_HEALTH;
-        this.zeroHealthStrategy = new NPCZeroHealthStrategyImpl();
-    }
+    private float totalHealth;
+    private float currentHealth;
+    private ZeroHealthStrategy zeroHealthStrategy;
 
     public HealthComponent(float totalHealth, float currentHealth) {
         this.totalHealth = totalHealth;
@@ -28,5 +20,33 @@ public class HealthComponent implements Component {
 
     public boolean isFull(){
         return totalHealth <= currentHealth;
+    }
+
+    public void decrease(float damageDealt) {
+        this.currentHealth -= damageDealt;
+    }
+
+    public float getTotalHealth() {
+        return totalHealth;
+    }
+
+    public void setTotalHealth(float totalHealth) {
+        this.totalHealth = totalHealth;
+    }
+
+    public float getCurrentHealth() {
+        return currentHealth;
+    }
+
+    public void setCurrentHealth(float currentHealth) {
+        this.currentHealth = currentHealth;
+    }
+
+    public ZeroHealthStrategy getZeroHealthStrategy() {
+        return zeroHealthStrategy;
+    }
+
+    public void setZeroHealthStrategy(ZeroHealthStrategy zeroHealthStrategy) {
+        this.zeroHealthStrategy = zeroHealthStrategy;
     }
 }

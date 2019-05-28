@@ -56,8 +56,8 @@ public class HealthSystem extends IteratingSystem {
         if(healthComponent.isFull())
             return;
 
-        if(healthComponent.currentHealth <= 0)
-            healthComponent.zeroHealthStrategy.onZeroHealth(entity);
+        if(healthComponent.getCurrentHealth() <= 0)
+            healthComponent.getZeroHealthStrategy().onZeroHealth(entity);
         else
             updateHealthBar(entity, healthComponent);
     }
@@ -65,8 +65,8 @@ public class HealthSystem extends IteratingSystem {
     private void updateHealthBar(Entity entity, HealthComponent healthComponent) {
         PositionComponent positionComponent = pm.get(entity);
 
-        float entityMaxHealth = healthComponent.totalHealth;
-        float currentHealth = healthComponent.currentHealth;
+        float entityMaxHealth = healthComponent.getTotalHealth();
+        float currentHealth = healthComponent.getCurrentHealth();
         float sizeOfHealthBar = currentHealth * sizeOfFullHealthBar / entityMaxHealth;
 
         float x = positionComponent.x + xHealthBarsOffset;

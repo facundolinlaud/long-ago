@@ -58,7 +58,7 @@ public class EquipmentUIControllerImpl implements EquipmentUIController {
             /* fijate que por ahi el wear type deberia estar dentro de equipable component y no en wear component */
             items.put(equipSlot,
                     new Item(item.name, item.picture,
-                    new Equipable(equipSlot, equipable.attack, equipable.defense)));
+                    new Equipable(equipSlot, equipable.getAttack(), equipable.getDefense())));
         }
 
         ui.update(items);

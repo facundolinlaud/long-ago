@@ -36,7 +36,7 @@ public class ItemBuilder {
     }
 
     public ItemBuilder equipable(String spritesheet, EquipmentInformation eq){
-        item.add(new EquipableComponent(eq.getEquipSlot(), eq.getEquipType(), eq.getAttack(), eq.getDefense()))
+        item.add(new EquipableComponent(eq))
             .add(new StackableSpriteComponent(TextureFactory.get(spritesheet)));
         return this;
     }

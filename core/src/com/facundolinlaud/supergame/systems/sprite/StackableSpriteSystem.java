@@ -4,7 +4,6 @@ import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
-import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.facundolinlaud.supergame.components.RenderComponent;
 import com.facundolinlaud.supergame.components.player.WearComponent;
@@ -13,7 +12,6 @@ import com.facundolinlaud.supergame.components.sprite.StackableSpriteComponent;
 import com.facundolinlaud.supergame.components.sprite.StackedSpritesComponent;
 import com.facundolinlaud.supergame.utils.Mappers;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 

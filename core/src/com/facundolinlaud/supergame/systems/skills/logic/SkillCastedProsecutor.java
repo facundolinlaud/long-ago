@@ -31,14 +31,12 @@ public class SkillCastedProsecutor {
     private ComponentMapper<PositionComponent> pm = Mappers.position;
 
     private SkillEpicenterStrategy epicenterStrategy;
-    private MessageDispatcher messageDispatcher;
     private ParticleFactory particleFactory;
     private LightsManager lightsManager;
     private Engine engine;
 
 
     public SkillCastedProsecutor(Engine engine, SkillEpicenterStrategy epicenterStrategy, ParticleFactory particleFactory, LightsManager lightsManager) {
-        this.messageDispatcher = MessageManager.getInstance();
         this.epicenterStrategy = epicenterStrategy;
         this.particleFactory = particleFactory;
         this.lightsManager = lightsManager;
@@ -95,8 +93,7 @@ public class SkillCastedProsecutor {
     private void applyEffectsToVictim(Entity caster, Entity victim, Skill skill) {
         victim.add(new SkillTargetedComponent(caster, skill));
 
-        EntityAttackedEvent event = new EntityAttackedEvent(victim, caster, skill.getBaseDamage());
-        messageDispatcher.dispatchMessage(Messages.ENTITY_ATTACKED, event);
+
     }
 
     private void createParticleEffect(ParticleType particleType, Vector2 epicenter) {

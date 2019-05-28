@@ -4,6 +4,7 @@ package com.facundolinlaud.supergame.model.equip;
  * Created by facundo on 3/31/16.
  */
 public enum EquipSlot {
+    SHADOW(4, false, false),
     BODY(5, false, false),
     HAIR_BASE(6, false, false),
     HAIR_COLOR(7, false, false),

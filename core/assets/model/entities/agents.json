@@ -1,15 +1,16 @@
 {
 	"agents": {
 		"0": {
-			"velocity": 4,
+			"velocity": 1.9,
 			"bag": [13, 9, 9, 0],
 			"attributes": {
-				"strength": 1,
-				"agility": 1,
+				"strength": 10,
+				"agility": 5,
 				"stamina": 10,
-				"intelligence": 1
+				"intelligence": 10
 			},
 			"body": {
+				"SHADOW": "sprites/living/body/shadow.png",
 				"BODY": "sprites/living/body/light.png",
 				"HAIR_BASE": "sprites/living/hair/long.png",
 				"HAIR_COLOR": "sprites/living/hair/long/blonde.png"
@@ -27,12 +28,13 @@
 			"velocity": 1.9,
 			"viewDistance": 5.0,
 			"attributes": {
-				"strength": 1,
-				"agility": 1,
+				"strength": 5,
+				"agility": 5,
 				"stamina": 5,
-				"intelligence": 1
+				"intelligence": 10
 			},
 			"body": {
+				"SHADOW": "sprites/living/body/shadow.png",
 				"BODY": "sprites/living/body/skeleton.png",
 				"HAIR_BASE": "sprites/living/hair/mohawk.png",
 				"HAIR_COLOR": "sprites/living/hair/mohawk/mohawk.png"
@@ -45,15 +47,16 @@
 			}
 		},
 		"2": {
-			"velocity": 1.9,
+			"velocity": 1.4,
 			"viewDistance": 5.0,
 			"attributes": {
-				"strength": 1,
-				"agility": 1,
+				"strength": 10,
+				"agility": 10,
 				"stamina": 15,
 				"intelligence": 1
 			},
 			"body": {
+				"SHADOW": "sprites/living/body/shadow.png",
 				"BODY": "sprites/living/body/orc.png"
 			},
 			"equipment": {

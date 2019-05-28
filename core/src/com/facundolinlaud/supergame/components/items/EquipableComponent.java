@@ -3,35 +3,53 @@ package com.facundolinlaud.supergame.components.items;
 import com.badlogic.ashley.core.Component;
 import com.facundolinlaud.supergame.model.equip.EquipType;
 import com.facundolinlaud.supergame.model.equip.EquipSlot;
+import com.facundolinlaud.supergame.model.item.EquipmentInformation;
 
 /**
  * Created by facundo on 3/31/16.
  */
 public class EquipableComponent implements Component {
-    private static final int DEFAULT_ATTACK = 1;
-    private static final int DEFAULT_DEFENSE = 1;
+    private EquipType equipType;
+    private EquipSlot equipSlot;
+    private int attack;
+    private int defense;
 
-    public EquipType equipType;
-    public EquipSlot equipSlot;
-    public int attack;
-    public int defense;
-
-    public EquipableComponent(EquipSlot equipSlot) {
-        this.equipSlot = equipSlot;
-        this.attack = DEFAULT_ATTACK;
-        this.defense = DEFAULT_DEFENSE;
+    public EquipableComponent(EquipmentInformation eq) {
+        this.equipSlot = eq.getEquipSlot();
+        this.equipType = eq.getEquipType();
+        this.attack = eq.getAttack();
+        this.defense = eq.getDefense();
     }
 
-    public EquipableComponent(EquipSlot equipSlot, int attack, int defense) {
-        this.equipSlot = equipSlot;
-        this.attack = attack;
-        this.defense = defense;
+    public EquipType getEquipType() {
+        return equipType;
     }
 
-    public EquipableComponent(EquipSlot equipSlot, EquipType equipType, int attack, int defense) {
-        this.equipSlot = equipSlot;
+    public void setEquipType(EquipType equipType) {
         this.equipType = equipType;
+    }
+
+    public EquipSlot getEquipSlot() {
+        return equipSlot;
+    }
+
+    public void setEquipSlot(EquipSlot equipSlot) {
+        this.equipSlot = equipSlot;
+    }
+
+    public int getAttack() {
+        return attack;
+    }
+
+    public void setAttack(int attack) {
         this.attack = attack;
+    }
+
+    public int getDefense() {
+        return defense;
+    }
+
+    public void setDefense(int defense) {
         this.defense = defense;
     }
 }

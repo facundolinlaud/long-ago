@@ -35,6 +35,6 @@ public class ProfileUISystem extends IteratingSystem {
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
         HealthComponent health = hm.get(entity);
-        overlayUI.setHealth(health.currentHealth);
+        overlayUI.setHealth(health.getCurrentHealth());
     }
 }
