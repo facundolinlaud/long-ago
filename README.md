@@ -19,20 +19,20 @@ Currently, you can move through the map with **WASD** keys. You can attack with 
 Thanks!
 
 ## Progress
-[x] Inventory
-[x] Weapons and Gear (that also draw on top of the player and NPC's)
-[x] Skills
-[x] AI
-[x] Spawn Zones
-[x] Particles
-[x] Player and NPC attributes
-[x] Factories and domain information as Data Driven as posible
-[x] Lights
-[ ] Game experience (story line, quests, cities, well-designed npc's)
-[ ] Scalable UI
-[ ] Levels and player experience
-[ ] NPC Drop Tables
-[ ] A lot of polishing
+- [x] Inventory
+- [x] Weapons and Gear (that also draw on top of the player and NPC's)
+- [x] Skills
+- [x] AI
+- [x] Spawn Zones
+- [x] Particles
+- [x] Player and NPC attributes
+- [x] Factories and domain information as Data Driven as posible
+- [x] Lights
+- [ ] Game experience (story line, quests, cities, well-designed npc's)
+- [ ] Scalable UI
+- [ ] Levels and player experience
+- [ ] NPC Drop Tables
+- [ ] A lot of polishing
 
 # Assets Managing
 ## Factories
