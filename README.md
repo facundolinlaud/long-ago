@@ -18,7 +18,23 @@ Currently, you can move through the map with **WASD** keys. You can attack with 
 
 Thanks!
 
-# Asset Managing
+## Progress
+[x] Inventory
+[x] Weapons and Gear (that also draw on top of the player and NPC's)
+[x] Skills
+[x] AI
+[x] Spawn Zones
+[x] Particles
+[x] Player and NPC attributes
+[x] Factories and domain information as Data Driven as posible
+[x] Lights
+[ ] Game experience (story line, quests, cities, well-designed npc's)
+[ ] Scalable UI
+[ ] Levels and player experience
+[ ] NPC Drop Tables
+[ ] A lot of polishing
+
+# Assets Managing
 ## Factories
 * Model Factory
 * Item Factory (with ItemBuilder)
@@ -62,8 +78,7 @@ On the other side, the Direction state will hold the direction the agent is faci
 ## Agent Spawn System
 ## UI System
 ## Camera Focus System
-
-## Rendering systems
+## Rendering Systems
 This game has many requeriments when it comes to rendering things. These are:
 - Rendering static textures. For example a plant
 - Drawing a sprite (that is, a group of subtextures within a parent texture)
