@@ -27,6 +27,7 @@ public class PositionComponent implements Component {
     }
 
     public PositionComponent(Vector2 v) {
+        this.overridePhysicsSystem = true;
         this.x = v.x;
         this.y = v.y;
     }

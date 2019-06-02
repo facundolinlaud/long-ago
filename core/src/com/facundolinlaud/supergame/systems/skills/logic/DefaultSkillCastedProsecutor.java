@@ -27,36 +27,21 @@ import com.facundolinlaud.supergame.utils.Mappers;
 import com.facundolinlaud.supergame.utils.Messages;
 import com.facundolinlaud.supergame.utils.events.EntityAttackedEvent;
 
-public class SkillCastedProsecutor {
+public class DefaultSkillCastedProsecutor extends BaseSkillCastedProsecutor {
     private ComponentMapper<PositionComponent> pm = Mappers.position;
 
     private SkillEpicenterStrategy epicenterStrategy;
-    private ParticleFactory particleFactory;
-    private LightsManager lightsManager;
-    private Engine engine;
 
-
-    public SkillCastedProsecutor(Engine engine, SkillEpicenterStrategy epicenterStrategy, ParticleFactory particleFactory, LightsManager lightsManager) {
+    public DefaultSkillCastedProsecutor(Engine engine, SkillEpicenterStrategy epicenterStrategy, ParticleFactory particleFactory, LightsManager lightsManager) {
+        super(engine, lightsManager, particleFactory);
         this.epicenterStrategy = epicenterStrategy;
-        this.particleFactory = particleFactory;
-        this.lightsManager = lightsManager;
-        this.engine = engine;
     }
 
     public void execute(Entity caster, Skill skill) {
-        Vector2 epicenter = this.epicenterStrategy.calculate(caster);
+        Vector2 epicenter = epicenterStrategy.calculate(caster);
         affectSurroundingEntities(caster, skill, epicenter);
-
-        if(skill.hasParticleEffect())
-            createParticleEffect(skill.getParticleType(), epicenter);
-
-        if(skill.hasLightEffect())
-            createLightEffect(skill.getLightModel(), epicenter);
-
-    }
-
-    private void createLightEffect(LightModel model, Vector2 epicenter) {
-        lightsManager.create(model, epicenter.x, epicenter.y);
+        createParticleEffect(skill, epicenter);
+        createLightEffect(skill, epicenter);
     }
 
     private void affectSurroundingEntities(Entity caster, Skill skill, Vector2 epicenter) {
@@ -92,17 +77,5 @@ public class SkillCastedProsecutor {
 
     private void applyEffectsToVictim(Entity caster, Entity victim, Skill skill) {
         victim.add(new SkillTargetedComponent(caster, skill));
-
-
-    }
-
-    private void createParticleEffect(ParticleType particleType, Vector2 epicenter) {
-        PooledEffect pooledEffect = particleFactory.create(particleType);
-
-        Entity particle = new Entity();
-        particle.add(new PositionComponent(epicenter));
-        particle.add(new ParticleComponent(pooledEffect, true));
-
-        engine.addEntity(particle);
     }
 }

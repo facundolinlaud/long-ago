@@ -22,8 +22,6 @@ public class KeyPressSkillCastingRequestSystem extends IteratingSystem {
 
     @Override
     protected void processEntity(Entity caster, float deltaTime) {
-        System.out.println("KeyPressSkillCastingRequestSystem");
-
         SkillCastingRequestComponent requestComponent = scrm.get(caster);
         Skill skill = requestComponent.getRequestedSkill();
 

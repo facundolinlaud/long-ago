@@ -52,7 +52,7 @@ public class AgentFactory {
 
         for(Map.Entry<EquipSlot, String> entry : body.entrySet()){
             Entity overlay = new Entity()
-                    .add(new StackableSpriteComponent(TextureFactory.get(entry.getValue())));
+                    .add(new StackableSpriteComponent(TextureFactory.getTexture(entry.getValue())));
 
             equipment.put(entry.getKey(), overlay);
         }

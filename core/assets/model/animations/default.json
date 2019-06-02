@@ -136,26 +136,71 @@
 			"playMode": "LOOP"
 
 
-
-		}, "SHOOTING_UP": {
+		}, "AIMING_UP": {
 			"x": 1,
 			"y": 16,
-			"length": 12,
+			"length": 6,
 			"playMode": "NORMAL"
-		}, "SHOOTING_LEFT": {
+		}, "AIMING_LEFT": {
 			"x": 1,
 			"y": 17,
-			"length": 12,
+			"length": 6,
 			"playMode": "NORMAL"
-		}, "SHOOTING_DOWN": {
+		}, "AIMING_DOWN": {
 			"x": 1,
 			"y": 18,
-			"length": 12,
+			"length": 6,
 			"playMode": "NORMAL"
-		}, "SHOOTING_RIGHT": {
+		}, "AIMING_RIGHT": {
 			"x": 1,
 			"y": 19,
-			"length": 12,
+			"length": 6,
+			"playMode": "NORMAL"
+
+
+
+		}, "PRESHOOTING_UP": {
+			"x": 7,
+			"y": 16,
+			"length": 3,
+			"playMode": "NORMAL"
+		}, "PRESHOOTING_LEFT": {
+			"x": 7,
+			"y": 17,
+			"length": 3,
+			"playMode": "NORMAL"
+		}, "PRESHOOTING_DOWN": {
+			"x": 7,
+			"y": 18,
+			"length": 3,
+			"playMode": "NORMAL"
+		}, "PRESHOOTING_RIGHT": {
+			"x": 7,
+			"y": 19,
+			"length": 3,
+			"playMode": "NORMAL"
+
+
+
+		}, "SHOOTING_UP": {
+			"x": 10,
+			"y": 16,
+			"length": 3,
+			"playMode": "NORMAL"
+		}, "SHOOTING_LEFT": {
+			"x": 10,
+			"y": 17,
+			"length": 3,
+			"playMode": "NORMAL"
+		}, "SHOOTING_DOWN": {
+			"x": 10,
+			"y": 18,
+			"length": 3,
+			"playMode": "NORMAL"
+		}, "SHOOTING_RIGHT": {
+			"x": 10,
+			"y": 19,
+			"length": 3,
 			"playMode": "NORMAL"
 
 

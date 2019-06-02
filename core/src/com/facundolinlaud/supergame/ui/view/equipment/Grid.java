@@ -51,7 +51,7 @@ public class Grid extends Table {
 
     private EquipSlot[][] getDistribution(){
         return new EquipSlot[][]{
-                {null, EquipSlot.HELMET, null},
+                {EquipSlot.BOW, EquipSlot.HELMET, null},
                 {EquipSlot.WEAPON, EquipSlot.CHEST, EquipSlot.SHIELD},
                 {EquipSlot.GLOVES, EquipSlot.PANTS, EquipSlot.SHOES}
         };

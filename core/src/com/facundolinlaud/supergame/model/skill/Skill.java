@@ -11,7 +11,6 @@ public class Skill {
     private String picturePath;
     private SkillType skillType;
     private DamageType skillDamageType;
-    private SkillTrigger skillTrigger;
 
     /* Restrictions */
     private float cooldown;
@@ -94,14 +93,6 @@ public class Skill {
 
     public void setSkillDamageType(DamageType skillDamageType) {
         this.skillDamageType = skillDamageType;
-    }
-
-    public SkillTrigger getSkillTrigger() {
-        return skillTrigger;
-    }
-
-    public void setSkillTrigger(SkillTrigger skillTrigger) {
-        this.skillTrigger = skillTrigger;
     }
 
     public float getCooldown() {

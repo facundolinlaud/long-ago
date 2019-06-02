@@ -12,9 +12,12 @@ public enum Action {
     WALKING("WALKING"),
     SWINGING("SWINGING"),
     DASHING("DASHING"),
-    SHOOTING("SHOOTING"),
     SPELL_PRECASTING("SPELL_PRECASTING"),
-    FALLING("FALLING");
+    FALLING("FALLING"),
+    AIMING("AIMING"),
+    PRESHOOTING("PRESHOOTING"),
+    SHOOTING("SHOOTING");
+
     private String name;
 
     Action(String name) {

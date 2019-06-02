@@ -13,13 +13,17 @@ import java.util.List;
  * Created by facundo on 3/18/16.
  */
 public class RenderComponent implements Component {
+    private static final float DEFAULT_ROTATION = 0f;
+
     private List<TextureRegion> regions;
     private RenderPriority priority;
     private RenderPositionStrategy renderPositionStrategy;
+    private float rotation;
 
     {
         this.priority = RenderPriority.createNormalRenderPriority();
         this.renderPositionStrategy = new DefaultRenderPositionStrategyImpl();
+        this.rotation = DEFAULT_ROTATION;
     }
 
     public RenderComponent(TextureRegion region, RenderPriority priority) {
@@ -36,6 +40,14 @@ public class RenderComponent implements Component {
     public RenderComponent(RenderPositionStrategy renderPositionStrategy) {
         this.renderPositionStrategy = renderPositionStrategy;
         this.regions = new ArrayList();
+    }
+
+    public void setRotation(float rotation){
+        this.rotation = rotation;
+    }
+
+    public float getRotation() {
+        return rotation;
     }
 
     public List<TextureRegion> getRegions() {

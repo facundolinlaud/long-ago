@@ -6,13 +6,13 @@ import com.facundolinlaud.supergame.factory.ParticleFactory;
 import com.facundolinlaud.supergame.managers.world.LightsManager;
 import com.facundolinlaud.supergame.model.skill.Skill;
 import com.facundolinlaud.supergame.strategies.skills.epicenter.NormalSkillEpicenterStrategy;
-import com.facundolinlaud.supergame.systems.skills.logic.SkillCastedProsecutor;
+import com.facundolinlaud.supergame.systems.skills.logic.DefaultSkillCastedProsecutor;
 
 public class NormalSkillCastingStrategy implements SkillCastingStrategy {
-    private SkillCastedProsecutor skillCastedProsecutor;
+    private DefaultSkillCastedProsecutor skillCastedProsecutor;
 
     public NormalSkillCastingStrategy(Engine engine, ParticleFactory particleFactory, LightsManager lightsManager) {
-        this.skillCastedProsecutor = new SkillCastedProsecutor(engine,
+        this.skillCastedProsecutor = new DefaultSkillCastedProsecutor(engine,
                 new NormalSkillEpicenterStrategy(), particleFactory, lightsManager);
     }
 

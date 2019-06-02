@@ -64,10 +64,6 @@ public class DefaultDamageLogic implements DamageLogic {
         float mitigatedDamage = damageDone * (equipmentMultiplicator / MAXIMUM_DEFENSE) *
                 (attributesMultiplicator / MAXIMUM_AGILITY);
 
-        System.out.println("Damage Done: " + damageDone + " * " + (equipmentMultiplicator / MAXIMUM_DEFENSE) +
-                " * " + (attributesMultiplicator / MAXIMUM_AGILITY));
-        System.out.println("result = " + mitigatedDamage);
-
         return mitigatedDamage;
     }
 }
