@@ -8,7 +8,9 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.facundolinlaud.supergame.components.BodyComponent;
+import com.facundolinlaud.supergame.components.ParticleComponent;
 import com.facundolinlaud.supergame.components.PositionComponent;
+import com.facundolinlaud.supergame.components.RenderComponent;
 import com.facundolinlaud.supergame.components.skills.ProjectileComponent;
 import com.facundolinlaud.supergame.factory.ParticleFactory;
 import com.facundolinlaud.supergame.managers.world.LightsManager;
@@ -20,6 +22,7 @@ public class ProjectileSystem extends IteratingSystem implements ContactListener
     private static final Vector2 PROJECTILE_GRAVITY = new Vector2(0f, 0.015f);
 
     private ComponentMapper<ProjectileComponent> prm = Mappers.projectile;
+    private ComponentMapper<ParticleComponent> pam = Mappers.particle;
     private ComponentMapper<PositionComponent> pom = Mappers.position;
     private ComponentMapper<BodyComponent> bom = Mappers.body;
 
@@ -86,7 +89,16 @@ public class ProjectileSystem extends IteratingSystem implements ContactListener
     }
 
     private void destroyProjectile(Entity projectile){
-        getEngine().removeEntity(projectile);
+        if(pam.has(projectile)){
+            ParticleComponent particleComponent = pam.get(projectile);
+            particleComponent.setEntityJustParticle(true);
+
+            projectile.remove(ProjectileComponent.class);
+            projectile.remove(BodyComponent.class);
+            projectile.remove(RenderComponent.class);
+        }else{
+            getEngine().removeEntity(projectile);
+        }
     }
 
     @Override

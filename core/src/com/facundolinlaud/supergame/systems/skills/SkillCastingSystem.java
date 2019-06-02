@@ -44,7 +44,7 @@ public class SkillCastingSystem extends IteratingSystem {
                 new SpellSkillCastingStrategy(engine, particleFactory, lightsManager));
 
         this.castingStrategies.put(SkillType.PROJECTILE,
-                new ProjectileSkillCastingStrategy(engine));
+                new ProjectileSkillCastingStrategy(engine, particleFactory));
 
         this.messageDispatcher = MessageManager.getInstance();
     }

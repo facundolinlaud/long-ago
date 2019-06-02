@@ -17,6 +17,10 @@ public class ParticleComponent implements Component, Poolable {
         return this.effect;
     }
 
+    public void setEntityJustParticle(boolean isEntityJustParticle){
+        this.isEntityJustParticle = isEntityJustParticle;
+    }
+
     public boolean isEntityJustParticle() {
         return isEntityJustParticle;
     }

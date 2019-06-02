@@ -1,7 +1,7 @@
 {
 	"skills" : {
 		"0": {
-			"name": "Basic dash",
+			"name": "Spear Dash",
 			"picturePath": "pictures/skills/dash.png",
 			"skillType": "NORMAL",
 			"skillDamageType": "DIRECT",
@@ -23,8 +23,8 @@
 			"particleType": "NONE"
 		},
 		"1": {
-			"name": "Basic zone spell",
-			"picturePath": "pictures/skills/fireball.png",
+			"name": "Fire Rain",
+			"picturePath": "pictures/skills/fire_ball.png",
 			"skillType": "SPELL",
 			"skillDamageType": "DIRECT",
 
@@ -54,8 +54,8 @@
 			}
 		},
 		"2": {
-			"name": "Shoot Arrow",
-			"picturePath": "pictures/skills/arrow.png",
+			"name": "Fire Arrow",
+			"picturePath": "pictures/skills/fire_arrow.png",
 			"skillType": "PROJECTILE",
 			"skillDamageType": "DIRECT",
 
@@ -76,7 +76,7 @@
 			"projectileInformation": {
 				"projectileTexture": "pictures/projectiles/arrow2.png",
 				"maxTravelDistance": 15.0,
-				"particleType": "NONE",
+				"particleType": "FIRE_PROJECTILE",
 				"onlyParticle": false,
 				"effectOnEnemy": "KNOCK_BACK",
 				"projectileSpeed": 0.0

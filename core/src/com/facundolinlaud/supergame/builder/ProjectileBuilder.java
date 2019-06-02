@@ -1,9 +1,11 @@
 package com.facundolinlaud.supergame.builder;
 
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.gdx.graphics.g2d.ParticleEffectPool;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.facundolinlaud.supergame.components.BodyComponent;
+import com.facundolinlaud.supergame.components.ParticleComponent;
 import com.facundolinlaud.supergame.components.PositionComponent;
 import com.facundolinlaud.supergame.components.RenderComponent;
 import com.facundolinlaud.supergame.components.skills.ProjectileComponent;
@@ -41,6 +43,11 @@ public class ProjectileBuilder {
         BodyComponent bodyComponent = new BodyComponent(body, this.entity);
         this.entity.add(bodyComponent);
 
+        return this;
+    }
+
+    public ProjectileBuilder withParticles(ParticleEffectPool.PooledEffect effect){
+        this.entity.add(new ParticleComponent(effect, false));
         return this;
     }
 

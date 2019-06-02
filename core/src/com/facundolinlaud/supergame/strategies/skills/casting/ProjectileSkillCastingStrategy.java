@@ -6,6 +6,8 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.math.Vector2;
 import com.facundolinlaud.supergame.builder.ProjectileBuilder;
 import com.facundolinlaud.supergame.components.PositionComponent;
+import com.facundolinlaud.supergame.factory.ParticleFactory;
+import com.facundolinlaud.supergame.model.particle.ParticleType;
 import com.facundolinlaud.supergame.model.skill.Skill;
 import com.facundolinlaud.supergame.strategies.skills.epicenter.RangedSkillEpicenterStrategy;
 import com.facundolinlaud.supergame.strategies.skills.epicenter.SkillEpicenterStrategy;
@@ -16,9 +18,11 @@ public class ProjectileSkillCastingStrategy implements SkillCastingStrategy {
 
     private Engine engine;
     private SkillEpicenterStrategy epicenterStrategy;
+    private ParticleFactory particleFactory;
 
-    public ProjectileSkillCastingStrategy(Engine engine) {
+    public ProjectileSkillCastingStrategy(Engine engine, ParticleFactory particleFactory) {
         this.engine = engine;
+        this.particleFactory = particleFactory;
         this.epicenterStrategy = new RangedSkillEpicenterStrategy();
     }
 
@@ -35,6 +39,7 @@ public class ProjectileSkillCastingStrategy implements SkillCastingStrategy {
                 .withOrigin(origin, direction)
                 .withDirection(direction)
                 .withPicture(texture, calculateRotation(direction))
+                .withParticles(particleFactory.create(skill.getProjectileInformation().getParticleType()))
                 .build();
 
         engine.addEntity(projectile);
