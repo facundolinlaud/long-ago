@@ -3,6 +3,7 @@ package com.facundolinlaud.supergame.ui.controller.impl;
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.facundolinlaud.supergame.builder.ItemBuilder;
 import com.facundolinlaud.supergame.components.RenderComponent;
 import com.facundolinlaud.supergame.factory.PhysicsFactory;
 import com.facundolinlaud.supergame.components.BodyComponent;
@@ -11,6 +12,7 @@ import com.facundolinlaud.supergame.components.items.EquipableComponent;
 import com.facundolinlaud.supergame.components.items.ItemComponent;
 import com.facundolinlaud.supergame.components.items.PickupableComponent;
 import com.facundolinlaud.supergame.components.player.BagComponent;
+import com.facundolinlaud.supergame.factory.TextureFactory;
 import com.facundolinlaud.supergame.ui.controller.InventoryUIController;
 import com.facundolinlaud.supergame.ui.model.Item;
 import com.facundolinlaud.supergame.ui.model.equipment.Equipable;
@@ -81,13 +83,19 @@ public class InventoryUIControllerImpl implements InventoryUIController {
     private void itemDropped(ItemDroppedEvent event){
         PositionComponent gathererPosition = pm.get(gatherer);
 
+        Item itemModel = event.getItem();
         int positionInBag = event.getItem().getInvented().getPositionInBag();
+
         Entity item = bm.get(gatherer).items.remove(positionInBag);
 
-        item.add(new PositionComponent(gathererPosition));
-        item.add(new RenderComponent(new TextureRegion(event.getItem().getPicture())));
-        item.add(new PickupableComponent());
-        item.add(new BodyComponent(PhysicsFactory.get().createItemBody()));
+        new ItemBuilder(item)
+                .dropped(gathererPosition.x, gathererPosition.y)
+                .withRender(new TextureRegion(itemModel.getPicture()));
+
+//        item.add(new PositionComponent(gathererPosition));
+//        item.add(new RenderComponent(new TextureRegion(event.getItem().getPicture())));
+//        item.add(new PickupableComponent());
+//        item.add(new BodyComponent(PhysicsFactory.get().createItemBody()));
 
         System.out.println(event.getItem().getName() + " dropped");
     }

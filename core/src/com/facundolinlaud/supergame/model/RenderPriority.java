@@ -3,30 +3,19 @@ package com.facundolinlaud.supergame.model;
 /**
  * Created by facundo on 3/19/16.
  */
-public class RenderPriority {
-    private static final int MAX = 10;
-    private static final int MIN = 0;
+public enum RenderPriority {
+    PARTICLE(1),
+    AGENT(2),
+    ITEM(3),
+    DEAD_AGENT(4);
 
-    private int priority;
+    private int value;
 
-    public RenderPriority(int priority) {
-        this.priority = priority;
+    RenderPriority(int value) {
+        this.value = value;
     }
 
-    public int getPriority() {
-        return priority;
-    }
-
-    public void setPriority(int priority) {
-        if(priority < MIN)
-            priority = MIN;
-        else if(priority > MAX)
-            priority = MAX;
-
-        this.priority = priority;
-    }
-
-    public static RenderPriority createNormalRenderPriority(){
-        return new RenderPriority(5);
+    public int getValue() {
+        return value;
     }
 }

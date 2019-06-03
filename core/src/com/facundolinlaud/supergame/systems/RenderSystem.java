@@ -4,15 +4,10 @@ import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.SortedIteratingSystem;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.*;
-import com.badlogic.gdx.graphics.g3d.particles.influencers.ScaleInfluencer;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.Array;
 import com.facundolinlaud.supergame.components.PositionComponent;
 import com.facundolinlaud.supergame.components.RenderComponent;
-import com.facundolinlaud.supergame.components.player.KeyboardComponent;
 import com.facundolinlaud.supergame.utils.Dimensions;
 import com.facundolinlaud.supergame.utils.Mappers;
 
@@ -35,12 +30,15 @@ public class RenderSystem extends SortedIteratingSystem {
 
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
+        super.forceSort();
+
         PositionComponent positionComponent = pm.get(entity);
         RenderComponent renderComponent = rm.get(entity);
 
         List<TextureRegion> regions = renderComponent.getRegions();
 
-        if(regions.isEmpty()) return;
+        if(regions.isEmpty())
+            return;
 
         for(TextureRegion region : regions){
             float width = Dimensions.toMeters(region.getRegionWidth());
@@ -54,11 +52,35 @@ public class RenderSystem extends SortedIteratingSystem {
         }
     }
 
+    /** This ZComparator can be really expensive if there are too many render entities **/
     private static class ZComparator implements Comparator<Entity> {
+        private static final int DIFF_MULTIPLIER = 10;
+
+        private ComponentMapper<PositionComponent> pm = Mappers.position;
+        private ComponentMapper<RenderComponent> rm = Mappers.render;
+
         @Override
         public int compare(Entity e1, Entity e2) {
-            return (int) Math.signum(Mappers.render.get(e1).getPriority().getPriority() -
-                    Mappers.render.get(e2).getPriority().getPriority());
+            int priorityDiff = getPriorityDifference(e1, e2);
+
+            if(priorityDiff == 0)
+                return getVerticalPositionDifferente(e1, e2);
+
+            return priorityDiff;
+        }
+
+        private int getVerticalPositionDifferente(Entity e1, Entity e2){
+            PositionComponent p1 = pm.get(e1);
+            PositionComponent p2 = pm.get(e2);
+
+            return (int) ((p2.y - p1.y) * DIFF_MULTIPLIER);
+        }
+
+        private int getPriorityDifference(Entity e1, Entity e2){
+            RenderComponent r1 = rm.get(e1);
+            RenderComponent r2 = rm.get(e2);
+
+            return r2.getPriority().getValue() - r1.getPriority().getValue();
         }
     }
 }

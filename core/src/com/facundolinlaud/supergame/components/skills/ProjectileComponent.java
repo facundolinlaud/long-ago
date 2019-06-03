@@ -8,12 +8,14 @@ import com.facundolinlaud.supergame.model.skill.Skill;
 public class ProjectileComponent implements Component {
     private Entity caster;
     private Skill skill;
-    private Vector2 origin;
+    private Vector2 lastPosition;
+    private float distanceToTravel;
 
     public ProjectileComponent(Entity caster, Skill skill, Vector2 origin) {
         this.caster = caster;
         this.skill = skill;
-        this.origin = origin;
+        this.lastPosition = origin;
+        this.distanceToTravel = skill.getProjectileInformation().getMaxTravelDistance();
     }
 
     public Entity getCaster() {
@@ -24,7 +26,13 @@ public class ProjectileComponent implements Component {
         return skill;
     }
 
-    public Vector2 getOrigin() {
-        return origin;
+    public void travel(Vector2 newPosition){
+        float distanceTravelled = lastPosition.dst(newPosition);
+        this.distanceToTravel -= distanceTravelled;
+        this.lastPosition = newPosition;
+    }
+
+    public boolean hasTravelDistanceMaxedOut(){
+        return this.distanceToTravel <= 0;
     }
 }

@@ -12,6 +12,7 @@ import com.facundolinlaud.supergame.components.sprite.RefreshSpriteRequirementCo
 import com.facundolinlaud.supergame.components.sprite.StackedSpritesComponent;
 import com.facundolinlaud.supergame.factory.ModelFactory;
 import com.facundolinlaud.supergame.factory.PhysicsFactory;
+import com.facundolinlaud.supergame.model.RenderPriority;
 import com.facundolinlaud.supergame.model.agent.Attributes;
 import com.facundolinlaud.supergame.model.equip.EquipSlot;
 import com.facundolinlaud.supergame.model.particle.ParticleType;
@@ -28,7 +29,7 @@ public class AgentBuilder {
     public AgentBuilder(float velocity) {
         this.entity = new Entity();
 
-        this.entity.add(new RenderComponent(new SpriteRenderPositionStrategyImpl()))
+        this.entity.add(new RenderComponent(new SpriteRenderPositionStrategyImpl(), RenderPriority.AGENT))
             .add(new BodyComponent(PhysicsFactory.get().createItemBody(), this.entity))
             .add(new StatusComponent())
             .add(new AnimableSpriteComponent())

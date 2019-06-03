@@ -6,6 +6,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
 import com.facundolinlaud.supergame.components.BodyComponent;
 import com.facundolinlaud.supergame.components.PositionComponent;
 import com.facundolinlaud.supergame.components.skills.ProjectileComponent;
@@ -37,10 +38,10 @@ public class ProjectileSystem extends IteratingSystem {
         ProjectileComponent projectileComponent = prm.get(projectile);
         PositionComponent positionComponent = pom.get(projectile);
 
-        float distanceTravelled = projectileComponent.getOrigin().dst(positionComponent.getPosition());
-        Skill skill = projectileComponent.getSkill();
+        Vector2 currentPosition = positionComponent.getPosition();
+        projectileComponent.travel(currentPosition);
 
-        if(distanceTravelled >= skill.getProjectileInformation().getMaxTravelDistance())
+        if(projectileComponent.hasTravelDistanceMaxedOut())
             destructionStrategy.destroy(projectile);
     }
 

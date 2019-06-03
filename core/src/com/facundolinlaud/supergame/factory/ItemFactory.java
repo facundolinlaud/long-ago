@@ -25,7 +25,7 @@ public class ItemFactory {
 
         ItemBuilder itemBuilder = new ItemBuilder(model.getName(), model.getPicture())
                 .pickupable()
-                .withRender(model.getPicture(), new RenderPriority(1));
+                .withRender(model.getPicture());
 
         if(model.isEquipable()){
             EquipmentInformation eq = model.getEquipmentInformation();

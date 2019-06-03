@@ -1,8 +1,6 @@
 package com.facundolinlaud.supergame.ui.model;
 
-import com.badlogic.gdx.graphics.Texture;
-import com.facundolinlaud.supergame.components.items.EquipableComponent;
-import com.facundolinlaud.supergame.components.items.ItemComponent;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.facundolinlaud.supergame.ui.model.equipment.Equipable;
 import com.facundolinlaud.supergame.ui.model.inventory.Invented;
 
@@ -11,25 +9,25 @@ import com.facundolinlaud.supergame.ui.model.inventory.Invented;
  */
 public class Item {
     private String name;
-    private Texture picture;
+    private TextureRegion picture;
     private Equipable equipable;
     private Invented invented;
 
-    public Item(String name, Texture picture, Invented invented) {
+    public Item(String name, TextureRegion picture, Invented invented) {
         this.name = name;
         this.picture = picture;
         this.equipable = null;
         this.invented = invented;
     }
 
-    public Item(String name, Texture picture, Equipable equipable) {
+    public Item(String name, TextureRegion picture, Equipable equipable) {
         this.name = name;
         this.picture = picture;
         this.equipable = equipable;
         this.invented = null;
     }
 
-    public Item(String name, Texture picture, Equipable equipable, Invented invented) {
+    public Item(String name, TextureRegion picture, Equipable equipable, Invented invented) {
         this.name = name;
         this.picture = picture;
         this.equipable = equipable;
@@ -44,11 +42,11 @@ public class Item {
         this.name = name;
     }
 
-    public Texture getPicture() {
+    public TextureRegion getPicture() {
         return picture;
     }
 
-    public void setPicture(Texture picture) {
+    public void setPicture(TextureRegion picture) {
         this.picture = picture;
     }
 
