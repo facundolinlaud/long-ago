@@ -160,22 +160,22 @@
 
 
 		}, "PRESHOOTING_UP": {
-			"x": 7,
+			"x": 6,
 			"y": 16,
 			"length": 3,
 			"playMode": "NORMAL"
 		}, "PRESHOOTING_LEFT": {
-			"x": 7,
+			"x": 6,
 			"y": 17,
 			"length": 3,
 			"playMode": "NORMAL"
 		}, "PRESHOOTING_DOWN": {
-			"x": 7,
+			"x": 6,
 			"y": 18,
 			"length": 3,
 			"playMode": "NORMAL"
 		}, "PRESHOOTING_RIGHT": {
-			"x": 7,
+			"x": 6,
 			"y": 19,
 			"length": 3,
 			"playMode": "NORMAL"
