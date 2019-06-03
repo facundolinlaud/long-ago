@@ -4,23 +4,33 @@ import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.math.Vector2;
+import com.facundolinlaud.supergame.components.BodyComponent;
+import com.facundolinlaud.supergame.components.ParticleComponent;
 import com.facundolinlaud.supergame.components.PositionComponent;
+import com.facundolinlaud.supergame.components.RenderComponent;
 import com.facundolinlaud.supergame.components.skills.ProjectileComponent;
 import com.facundolinlaud.supergame.components.skills.SkillTargetedComponent;
 import com.facundolinlaud.supergame.factory.ParticleFactory;
 import com.facundolinlaud.supergame.managers.world.LightsManager;
 import com.facundolinlaud.supergame.model.skill.Skill;
+import com.facundolinlaud.supergame.strategies.skills.projectile.ProjectileDestructionStrategy;
 import com.facundolinlaud.supergame.utils.Mappers;
 
 public class ProjectileSkillCastedProsecutor extends BaseSkillCastedProsecutor {
     private ComponentMapper<ProjectileComponent> prm = Mappers.projectile;
     private ComponentMapper<PositionComponent> pm = Mappers.position;
 
+    private ProjectileDestructionStrategy destructionStrategy;
+
     public ProjectileSkillCastedProsecutor(Engine engine, ParticleFactory particleFactory, LightsManager lightsManager) {
         super(engine, lightsManager, particleFactory);
+        this.destructionStrategy = new ProjectileDestructionStrategy(engine);
     }
 
     public void hit(Entity victim, Entity projectile) {
+        if(!prm.has(projectile))
+            return;
+
         ProjectileComponent projectileComponent = prm.get(projectile);
         PositionComponent projectilePosition = pm.get(projectile);
 
@@ -34,7 +44,7 @@ public class ProjectileSkillCastedProsecutor extends BaseSkillCastedProsecutor {
         applyEffects(victim, caster, skill);
         createParticleEffect(skill, position);
         createLightEffect(skill, position);
-//        destroyProjectile(projectile);
+        this.destructionStrategy.destroy(projectile);
     }
 
     private void applyEffects(Entity victim, Entity caster, Skill skill) {

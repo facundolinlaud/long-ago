@@ -14,6 +14,7 @@ import com.facundolinlaud.supergame.factory.Factories;
 import com.facundolinlaud.supergame.factory.ItemFactory;
 import com.facundolinlaud.supergame.factory.ParticleFactory;
 import com.facundolinlaud.supergame.listeners.PhysicsEntitiesListener;
+import com.facundolinlaud.supergame.listeners.ProjectilesCollisionListener;
 import com.facundolinlaud.supergame.managers.world.*;
 import com.facundolinlaud.supergame.systems.*;
 import com.facundolinlaud.supergame.systems.ai.DecisionMakingSystem;
@@ -77,6 +78,9 @@ public class WorldScreen implements Screen {
                 new PhysicsEntitiesListener(physicsManager.getWorld()));
         engine.addEntityListener(Family.all(AIComponent.class).get(),
                 this.aiManager);
+
+        this.physicsManager.getWorld().setContactListener(new ProjectilesCollisionListener(engine,
+                factories.getParticleFactory(), lightsManager));
     }
 
     private void initializeEntities(){
@@ -124,8 +128,7 @@ public class WorldScreen implements Screen {
         engine.addSystem(new DecisionMakingSystem(aiManager));
         engine.addSystem(new MoveToSystem());
         engine.addSystem(new SpawnLocationSystem(factories.getAgentFactory()));
-        engine.addSystem(new ProjectileSystem(engine, factories.getParticleFactory(), lightsManager,
-                physicsManager.getWorld()));
+        engine.addSystem(new ProjectileSystem(engine));
 
         uiManager.initializeSystems(engine);
     }
