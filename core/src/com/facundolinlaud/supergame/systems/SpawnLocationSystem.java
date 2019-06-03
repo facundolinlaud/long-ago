@@ -53,7 +53,6 @@ public class SpawnLocationSystem extends IntervalIteratingSystem implements Tele
         if(shouldSpawnAgent(spawnEntity, spawnLocation)){
             Vector2 spawnPosition = getPointInside(spawnLocation);
 
-            System.out.println(spawnPosition);
             spawns.put(spawnEntity, spawns.get(spawnEntity) + 1);
 
             Entity agent = agentFactory.getAI(spawnLocation.getAgentID())

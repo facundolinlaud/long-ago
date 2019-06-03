@@ -49,7 +49,8 @@ public class RenderSystem extends SortedIteratingSystem {
             Vector2 pos = renderComponent.getRenderPositionStrategy().process(positionComponent.x, positionComponent.y);
 
             // TODO: generalize this. RenderSystem can only render textures, not particles
-            spriteBatch.draw(region, pos.x, pos.y, width, height);
+            spriteBatch.draw(region, pos.x, pos.y, width / 2, height / 2, width, height,
+                    1f, 1f, renderComponent.getRotation());
         }
     }
 

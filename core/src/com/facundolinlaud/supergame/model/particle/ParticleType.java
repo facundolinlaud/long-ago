@@ -3,7 +3,8 @@ package com.facundolinlaud.supergame.model.particle;
 public enum ParticleType {
     NONE("NONE"),
     EXPLOSION("EXPLOSION"),
-    SPAWN("SPAWN");
+    SPAWN("SPAWN"),
+    FIRE_PROJECTILE("FIRE_PROJECTILE");
 
     private String name;
 

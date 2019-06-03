@@ -51,7 +51,7 @@ public class PhysicsFactory {
 
         fixtureDef.shape = circle;
 
-        Fixture fixture = body.createFixture(fixtureDef);
+        body.createFixture(fixtureDef);
         circle.dispose();
 
         body.setLinearDamping(3f);
@@ -77,5 +77,30 @@ public class PhysicsFactory {
         }
 
         return instance;
+    }
+
+    public Body createProjectileBody() {
+        BodyDef bodyDef = new BodyDef();
+        bodyDef.type = BodyDef.BodyType.DynamicBody;
+        bodyDef.fixedRotation = true;
+
+        Body body = world.createBody(bodyDef);
+
+        CircleShape circle = new CircleShape();
+        circle.setRadius(0.1f);
+
+        FixtureDef fixtureDef = new FixtureDef();
+        fixtureDef.density = 0.1f;
+        fixtureDef.friction = 0f;
+        fixtureDef.restitution = 1f;
+
+        fixtureDef.shape = circle;
+
+        body.createFixture(fixtureDef);
+        circle.dispose();
+
+        body.setLinearDamping(3f);
+        body.setBullet(true);
+        return body;
     }
 }

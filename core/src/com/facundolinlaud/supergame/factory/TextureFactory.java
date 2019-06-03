@@ -1,6 +1,7 @@
 package com.facundolinlaud.supergame.factory;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import java.lang.ref.SoftReference;
 import java.util.HashMap;
@@ -15,10 +16,10 @@ public class TextureFactory implements Disposable {
 
     static {
         for(String texture : ModelFactory.getTexturesPaths())
-            get(texture);
+            getTexture(texture);
     }
 
-    public static Texture get(String imageName) {
+    public static Texture getTexture(String imageName) {
         if(!textures.containsKey(imageName)){
             // we've never stored this image
             Texture img = new Texture(imageName);
@@ -36,9 +37,13 @@ public class TextureFactory implements Disposable {
                 // cache and call this method again. It will attempt to load the image
                 // when there is no entry for the image in the imageMap
                 textures.remove(imageName);
-                return get(imageName);
+                return getTexture(imageName);
             }
         }
+    }
+
+    public static TextureRegion getRegion(String imageName){
+        return new TextureRegion(getTexture(imageName));
     }
 
     @Override

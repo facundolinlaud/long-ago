@@ -21,7 +21,7 @@ public class ItemBuilder {
     }
 
     public ItemBuilder withRender(String picture, RenderPriority priority){
-        this.item.add(new RenderComponent(new TextureRegion(TextureFactory.get(picture)), priority));
+        this.item.add(new RenderComponent(TextureFactory.getRegion(picture), priority));
         return this;
     }
 
@@ -37,7 +37,7 @@ public class ItemBuilder {
 
     public ItemBuilder equipable(String spritesheet, EquipmentInformation eq){
         item.add(new EquipableComponent(eq))
-            .add(new StackableSpriteComponent(TextureFactory.get(spritesheet)));
+            .add(new StackableSpriteComponent(TextureFactory.getTexture(spritesheet)));
         return this;
     }
 

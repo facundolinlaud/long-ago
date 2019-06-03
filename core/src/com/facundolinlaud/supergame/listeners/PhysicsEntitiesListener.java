@@ -8,6 +8,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.facundolinlaud.supergame.components.BodyComponent;
 import com.facundolinlaud.supergame.utils.Mappers;
 
+import java.awt.event.ComponentListener;
 import java.util.HashMap;
 import java.util.Map;
 

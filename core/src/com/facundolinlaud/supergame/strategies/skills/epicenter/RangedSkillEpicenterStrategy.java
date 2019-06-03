@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.facundolinlaud.supergame.components.skills.SkillClickComponent;
 import com.facundolinlaud.supergame.utils.Mappers;
 
-public class SpellSkillEpicenterStrategy implements SkillEpicenterStrategy {
+public class RangedSkillEpicenterStrategy implements SkillEpicenterStrategy {
     private ComponentMapper<SkillClickComponent> scm = Mappers.skillClick;
 
     @Override

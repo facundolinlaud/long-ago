@@ -5,15 +5,15 @@ import com.badlogic.ashley.core.Entity;
 import com.facundolinlaud.supergame.factory.ParticleFactory;
 import com.facundolinlaud.supergame.managers.world.LightsManager;
 import com.facundolinlaud.supergame.model.skill.Skill;
-import com.facundolinlaud.supergame.strategies.skills.epicenter.SpellSkillEpicenterStrategy;
-import com.facundolinlaud.supergame.systems.skills.logic.SkillCastedProsecutor;
+import com.facundolinlaud.supergame.strategies.skills.epicenter.RangedSkillEpicenterStrategy;
+import com.facundolinlaud.supergame.systems.skills.logic.DefaultSkillCastedProsecutor;
 
 public class SpellSkillCastingStrategy implements SkillCastingStrategy {
-    private SkillCastedProsecutor skillCastedProsecutor;
+    private DefaultSkillCastedProsecutor skillCastedProsecutor;
 
     public SpellSkillCastingStrategy(Engine engine, ParticleFactory particleFactory, LightsManager lightsManager) {
-        this.skillCastedProsecutor = new SkillCastedProsecutor(engine,
-                new SpellSkillEpicenterStrategy(), particleFactory, lightsManager);
+        this.skillCastedProsecutor = new DefaultSkillCastedProsecutor(engine,
+                new RangedSkillEpicenterStrategy(), particleFactory, lightsManager);
     }
 
     @Override

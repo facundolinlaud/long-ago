@@ -1,6 +1,7 @@
 {
 	"particles": {
 		"EXPLOSION": "particles/explosion.p",
-		"SPAWN": "particles/spawn.p"
+		"SPAWN": "particles/spawn.p",
+		"FIRE_PROJECTILE": "particles/fire_projectile.p"
 	}
 }

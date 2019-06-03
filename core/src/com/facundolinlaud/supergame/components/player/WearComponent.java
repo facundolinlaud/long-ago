@@ -26,8 +26,9 @@ public class WearComponent implements Component {
 
     public List<Entity> getEquipmentAsList(){
         List<Entity> equipment = new ArrayList();
+
         for(EquipSlot slot : EquipSlot.values()){
-            if(slot.hasAttackComponent() || slot.hasDefenseComponent() && wearables.containsKey(slot))
+            if((slot.hasAttackComponent() || slot.hasDefenseComponent()) && wearables.containsKey(slot))
                 equipment.add(wearables.get(slot));
         }
 

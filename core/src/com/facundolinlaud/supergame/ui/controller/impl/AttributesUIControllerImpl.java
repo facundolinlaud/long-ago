@@ -14,7 +14,7 @@ import com.facundolinlaud.supergame.utils.events.Event;
  * Created by facundo on 3/30/16.
  */
 public class AttributesUIControllerImpl implements AttributesUIController {
-    public static final int ATTRIBUTE_ADDING_STEP = 1;
+    private static final int ATTRIBUTE_ADDING_STEP = 1;
     private ComponentMapper<AttributesComponent> am = Mappers.attributes;
 
     private AttributesUI attributesUI;

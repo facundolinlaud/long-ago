@@ -26,9 +26,10 @@ public class AgentBuilder {
     private Entity entity;
 
     public AgentBuilder(float velocity) {
-        this.entity = new Entity()
-            .add(new RenderComponent(new SpriteRenderPositionStrategyImpl()))
-            .add(new BodyComponent(PhysicsFactory.get().createItemBody()))
+        this.entity = new Entity();
+
+        this.entity.add(new RenderComponent(new SpriteRenderPositionStrategyImpl()))
+            .add(new BodyComponent(PhysicsFactory.get().createItemBody(), this.entity))
             .add(new StatusComponent())
             .add(new AnimableSpriteComponent())
             .add(new StackedSpritesComponent(ModelFactory.getDefaultAnimationModel()))

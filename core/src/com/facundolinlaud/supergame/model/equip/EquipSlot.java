@@ -16,7 +16,8 @@ public enum EquipSlot {
     GLOVES(13, false, true),
     SHOES(14, false, true),
     WEAPON(15, true, false),
-    SHIELD(16, false, true);
+    SHIELD(16, false, true),
+    BOW(17, true, false);
 
     private int renderPriority;
     private boolean hasAttackComponent;

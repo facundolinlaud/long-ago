@@ -151,6 +151,18 @@
 		    "picture": "pictures/items/others/coins.png",
 		    "weight": 1.0,
 		    "marketValue": 10.0
+		},
+		"14": {
+			"name": "Great Bow",
+		    "texture": "sprites/items/weapon/greatbow.png",
+		    "picture": "pictures/items/weapon/greatbow.png",
+		    "weight": 2.0,
+		    "marketValue": 9.0,
+		    "equipmentInformation": {
+				"equipSlot": "WEAPON",
+			    "equipType": "BOW",
+			    "attack": 4
+		    }
 		}
 	}
 }
