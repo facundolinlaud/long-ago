@@ -6,11 +6,13 @@ import com.badlogic.gdx.ai.msg.MessageDispatcher;
 import com.badlogic.gdx.ai.msg.MessageManager;
 import com.facundolinlaud.supergame.components.BodyComponent;
 import com.facundolinlaud.supergame.components.HealthComponent;
+import com.facundolinlaud.supergame.components.RenderComponent;
 import com.facundolinlaud.supergame.components.StatusComponent;
 import com.facundolinlaud.supergame.components.ai.AIComponent;
 import com.facundolinlaud.supergame.components.skills.SkillCastedComponent;
 import com.facundolinlaud.supergame.components.skills.SkillCastingComponent;
 import com.facundolinlaud.supergame.components.skills.SkillLockDownComponent;
+import com.facundolinlaud.supergame.model.RenderPriority;
 import com.facundolinlaud.supergame.model.status.Action;
 import com.facundolinlaud.supergame.utils.Mappers;
 import com.facundolinlaud.supergame.utils.Messages;
@@ -18,6 +20,7 @@ import com.facundolinlaud.supergame.utils.events.AgentDiedEvent;
 
 public class NPCZeroHealthStrategyImpl implements ZeroHealthStrategy {
     private ComponentMapper<StatusComponent> sm = Mappers.status;
+    private ComponentMapper<RenderComponent> rm = Mappers.render;
 
     public NPCZeroHealthStrategyImpl() { }
 
@@ -28,10 +31,9 @@ public class NPCZeroHealthStrategyImpl implements ZeroHealthStrategy {
 
         removeGeneralComponents(agent);
         removeSkillCastingComponents(agent);
+        adjustRenderPriority(agent);
 
         broadcastAgentDead(agent);
-
-        System.out.println("NPC died");
     }
 
     private void removeGeneralComponents(Entity npc) {
@@ -45,6 +47,11 @@ public class NPCZeroHealthStrategyImpl implements ZeroHealthStrategy {
         npc.remove(SkillCastingComponent.class);
         npc.remove(SkillCastedComponent.class);
         npc.remove(SkillLockDownComponent.class);
+    }
+
+    private void adjustRenderPriority(Entity agent) {
+        RenderComponent renderComponent = rm.get(agent);
+        renderComponent.setPriority(RenderPriority.DEAD_AGENT);
     }
 
     private void broadcastAgentDead(Entity agent) {

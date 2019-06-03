@@ -59,7 +59,7 @@ public class WorldScreen implements Screen {
     }
 
     private void initializeFactories(){
-        this.factories = new Factories();
+        this.factories = new Factories(resources.getEngine());
     }
 
     private void initializeManagers() {
@@ -119,7 +119,6 @@ public class WorldScreen implements Screen {
         engine.addSystem(new CameraFocusSystem(mapManager.getCamera()));
         engine.addSystem(new PhysicsSystem(physicsManager.getWorld()));
         engine.addSystem(new PickUpSystem());
-        engine.addSystem(new HealthSystem(resources.getBatch()));
         engine.addSystem(new KeyPressSkillCastingRequestSystem());
         engine.addSystem(new KeyPressThenClickCastingRequestSystem(playerInputObserver));
         engine.addSystem(new SkillCastingSystem(engine, factories.getParticleFactory(), lightsManager));
@@ -129,6 +128,7 @@ public class WorldScreen implements Screen {
         engine.addSystem(new MoveToSystem());
         engine.addSystem(new SpawnLocationSystem(factories.getAgentFactory()));
         engine.addSystem(new ProjectileSystem(engine));
+        engine.addSystem(new HealthSystem(resources.getBatch()));
 
         uiManager.initializeSystems(engine);
     }

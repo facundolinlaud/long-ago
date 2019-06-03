@@ -21,7 +21,6 @@ public class RenderComponent implements Component {
     private float rotation;
 
     {
-        this.priority = RenderPriority.createNormalRenderPriority();
         this.renderPositionStrategy = new DefaultRenderPositionStrategyImpl();
         this.rotation = DEFAULT_ROTATION;
     }
@@ -32,14 +31,10 @@ public class RenderComponent implements Component {
         this.priority = priority;
     }
 
-    public RenderComponent(TextureRegion region) {
-        this.regions = new ArrayList();
-        this.regions.add(region);
-    }
-
-    public RenderComponent(RenderPositionStrategy renderPositionStrategy) {
+    public RenderComponent(RenderPositionStrategy renderPositionStrategy, RenderPriority priority) {
         this.renderPositionStrategy = renderPositionStrategy;
         this.regions = new ArrayList();
+        this.priority = priority;
     }
 
     public void setRotation(float rotation){
@@ -56,6 +51,10 @@ public class RenderComponent implements Component {
 
     public RenderPriority getPriority() {
         return priority;
+    }
+
+    public void setPriority(RenderPriority priority) {
+        this.priority = priority;
     }
 
     public RenderPositionStrategy getRenderPositionStrategy() {

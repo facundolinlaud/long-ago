@@ -1,5 +1,6 @@
 package com.facundolinlaud.supergame.factory;
 
+import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.facundolinlaud.supergame.builder.AgentBuilder;
 import com.facundolinlaud.supergame.components.sprite.StackableSpriteComponent;
@@ -12,11 +13,13 @@ import java.util.*;
 public class AgentFactory {
     private static final Integer MAIN_PLAYER_ID = 0;
 
+    private Engine engine;
     private ItemFactory itemFactory;
     private ParticleFactory particleFactory;
     private Map<Integer, Agent> agents;
 
-    public AgentFactory(ItemFactory itemFactory, ParticleFactory particleFactory) {
+    public AgentFactory(Engine engine, ItemFactory itemFactory, ParticleFactory particleFactory) {
+        this.engine = engine;
         this.agents = ModelFactory.getAgentsModel();
         this.itemFactory = itemFactory;
         this.particleFactory = particleFactory;
@@ -60,6 +63,7 @@ public class AgentFactory {
         for(Map.Entry<EquipSlot, Integer> entry : model.entrySet()){
             Entity item = itemFactory.getItem(entry.getValue()).build();
             equipment.put(entry.getKey(), item);
+            engine.addEntity(item);
         }
 
         return equipment;
@@ -68,8 +72,11 @@ public class AgentFactory {
     private List<Entity> buildBag(List<Integer> model) {
         List<Entity> bag = new LinkedList();
 
-        for(Integer id : model)
-            bag.add(itemFactory.getItem(id).build());
+        for(Integer id : model) {
+            Entity item = itemFactory.getItem(id).build();
+            engine.addEntity(item);
+            bag.add(item);
+        }
 
         return bag;
     }

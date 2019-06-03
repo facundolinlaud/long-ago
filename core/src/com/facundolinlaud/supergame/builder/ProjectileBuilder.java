@@ -11,6 +11,7 @@ import com.facundolinlaud.supergame.components.RenderComponent;
 import com.facundolinlaud.supergame.components.skills.ProjectileComponent;
 import com.facundolinlaud.supergame.factory.PhysicsFactory;
 import com.facundolinlaud.supergame.factory.TextureFactory;
+import com.facundolinlaud.supergame.model.RenderPriority;
 import com.facundolinlaud.supergame.model.skill.Skill;
 
 public class ProjectileBuilder {
@@ -23,7 +24,8 @@ public class ProjectileBuilder {
     }
 
     public ProjectileBuilder withPicture(String imageName, float rotation){
-        RenderComponent renderComponent = new RenderComponent(TextureFactory.getRegion(imageName));
+        RenderComponent renderComponent = new RenderComponent(TextureFactory.getRegion(imageName),
+                RenderPriority.PARTICLE);
         renderComponent.setRotation(rotation);
         this.entity.add(renderComponent);
 
