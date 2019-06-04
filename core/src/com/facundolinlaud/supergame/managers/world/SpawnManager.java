@@ -9,7 +9,7 @@ import java.util.List;
 
 public class SpawnManager {
     public SpawnManager(Engine engine, List<SpawnLocation> locations) {
-        /* Cada spawn es una entity */
+        /* Each spawn point is an entity */
         for(SpawnLocation spawnLocation: locations){
             Entity e = new Entity().add(new SpawnLocationComponent(spawnLocation));
             engine.addEntity(e);

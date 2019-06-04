@@ -12,7 +12,6 @@ import com.facundolinlaud.supergame.components.ai.AIComponent;
 import com.facundolinlaud.supergame.engine.GameResources;
 import com.facundolinlaud.supergame.factory.Factories;
 import com.facundolinlaud.supergame.factory.ItemFactory;
-import com.facundolinlaud.supergame.factory.ParticleFactory;
 import com.facundolinlaud.supergame.listeners.PhysicsEntitiesListener;
 import com.facundolinlaud.supergame.listeners.ProjectilesCollisionListener;
 import com.facundolinlaud.supergame.managers.world.*;

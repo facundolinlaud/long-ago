@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AIManager implements EntityListener {
-    public static final int MELEE_SPELL = 0;
+    public static final int MELEE_SPELL = 3;
     public static final int MAGIC_SPELL = 1;
 
     private Map<Entity, BehaviorTree<?>> entitiesBehaviours;

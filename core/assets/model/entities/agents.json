@@ -1,6 +1,7 @@
 {
 	"agents": {
 		"0": {
+			"name": "Player",
 			"velocity": 1.9,
 			"bag": [13, 9, 9, 0],
 			"attributes": {
@@ -26,6 +27,7 @@
 			}
 		},
 		"1": {
+			"name": "Skeleton",
 			"velocity": 1.9,
 			"viewDistance": 5.0,
 			"attributes": {
@@ -48,6 +50,7 @@
 			}
 		},
 		"2": {
+			"name": "Orc",
 			"velocity": 1.4,
 			"viewDistance": 5.0,
 			"attributes": {

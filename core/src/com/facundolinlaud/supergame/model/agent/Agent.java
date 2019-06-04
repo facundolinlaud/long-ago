@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Agent {
+    private String name;
     private int attack;
     private int defense;
     private int health;
@@ -17,6 +18,14 @@ public class Agent {
     private List<Integer> bag;
 
     public Agent() {
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getAttack() {

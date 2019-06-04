@@ -91,6 +91,28 @@
 				"distance": 6.0,
 				"duration": 1.0
 			}
+		},
+		"3": {
+			"name": "Dagger Stab",
+			"picturePath": "pictures/skills/dash.png",
+			"skillType": "NORMAL",
+			"skillDamageType": "DIRECT",
+
+			"cooldown": 1.5,
+			"castTime": 0.5,
+			"lockdownTime": 0.8,
+			"interruptible": false,
+			"equipmentRequired": "DAGGER",
+
+			"castingAction": "STANDING",
+			"executingAction": "SWINGING",
+			"animationFlow": "TRAVERSE",
+
+			"areaOfEffect": "CIRCLE",
+			"areaOfEffectSize": 1.0,
+			"baseDamage": 40.0,
+			"baseHeal": 0.0,
+			"particleType": "NONE"
 		}
 	}
 }
