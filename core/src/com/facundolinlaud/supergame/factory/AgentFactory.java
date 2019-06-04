@@ -38,7 +38,7 @@ public class AgentFactory {
     public AgentBuilder getAI(int id){
         Agent agent = agents.get(id);
         return getDummyAgent(agent)
-                .withAI(agent.getViewDistance())
+                .withAI(agent.getNpcInformation())
                 .withParticles(particleFactory.create(ParticleType.SPAWN));
     }
 

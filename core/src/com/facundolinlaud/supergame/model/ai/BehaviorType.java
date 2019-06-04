@@ -1,12 +1,12 @@
 package com.facundolinlaud.supergame.model.ai;
 
-public enum BehaviourType {
+public enum BehaviorType {
     PASSIVE("passive.tree"),
     AGGRESSIVE("aggressive.tree");
 
     private String treePath;
 
-    BehaviourType(String treePath) {
+    BehaviorType(String treePath) {
         this.treePath = treePath;
     }
 

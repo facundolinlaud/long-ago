@@ -29,7 +29,6 @@
 		"1": {
 			"name": "Skeleton",
 			"velocity": 1.9,
-			"viewDistance": 5.0,
 			"attributes": {
 				"strength": 5,
 				"agility": 5,
@@ -46,13 +45,19 @@
 				"CHEST": 0,
 				"SHOES": 5,
 				"WEAPON": 10,
-				"HELMET" : 8
+				"HELMET" : 8,
+				"BOW": 14
+			},
+			"npcInformation": {
+				"viewDistance": 5.0,
+				"meleeSkills": [3],
+				"rangedSkills": [1, 2],
+				"behaviorType": "AGGRESSIVE"
 			}
 		},
 		"2": {
 			"name": "Orc",
 			"velocity": 1.4,
-			"viewDistance": 5.0,
 			"attributes": {
 				"strength": 10,
 				"agility": 10,
@@ -67,6 +72,12 @@
 				"CHEST": 2,
 				"SHOES": 5,
 				"WEAPON": 12
+			},
+			"npcInformation": {
+				"viewDistance": 5.0,
+				"meleeSkills": [0],
+				"rangedSkills": [],
+				"behaviorType": "AGGRESSIVE"
 			}
 		}
 	}
