@@ -10,16 +10,9 @@ import java.util.Map;
 public class RawAnimationModel {
     private int width, height;
     private float frameDuration;
-    private Map<Status, SubAnimationModel> subanimations;
+    private Map<Status, SubAnimationModel> subAnimations;
 
     public RawAnimationModel() {}
-
-    public RawAnimationModel(int width, int height, float frameDuration, Map<Status, SubAnimationModel> subanimations) {
-        this.width = width;
-        this.height = height;
-        this.frameDuration = frameDuration;
-        this.subanimations = subanimations;
-    }
 
     public void setWidth(int width) {
         this.width = width;
@@ -29,8 +22,8 @@ public class RawAnimationModel {
         this.height = height;
     }
 
-    public void setSubanimations(Map<Status, SubAnimationModel> subanimations) {
-        this.subanimations = subanimations;
+    public void setSubAnimations(Map<Status, SubAnimationModel> subAnimations) {
+        this.subAnimations = subAnimations;
     }
 
     public void setFrameDuration(float frameDuration) {
@@ -45,8 +38,8 @@ public class RawAnimationModel {
         return height;
     }
 
-    public Map<Status, SubAnimationModel> getSubanimations() {
-        return subanimations;
+    public Map<Status, SubAnimationModel> getSubAnimations() {
+        return subAnimations;
     }
 
     public float getFrameDuration() {
@@ -59,7 +52,7 @@ public class RawAnimationModel {
                 "width=" + width +
                 ", height=" + height +
                 ", frameDuration=" + frameDuration +
-                ", subanimations=" + subanimations +
+                ", subAnimations=" + subAnimations +
                 '}';
     }
 }

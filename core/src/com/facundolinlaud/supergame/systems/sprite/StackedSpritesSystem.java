@@ -52,16 +52,16 @@ public class StackedSpritesSystem extends IteratingSystem {
         entity.remove(RefreshSpriteRequirementComponent.class);
     }
 
-    private HashMap<Status, Animation> createAnimations(Texture sprites, RawAnimationModel model) {
-        Map<Status, SubAnimationModel> animationsModels = model.getSubanimations();
-        HashMap<Status, Animation> animations = new HashMap<>();
+    private Map<Status, Animation> createAnimations(Texture sprites, RawAnimationModel model) {
+        Map<Status, SubAnimationModel> animationsModels = model.getSubAnimations();
+        Map<Status, Animation> animations = new HashMap<>();
 
         int width = model.getWidth();
         int height = model.getHeight();
         float frameDuration = model.getFrameDuration();
 
         for(Status status : animationsModels.keySet()){
-            Array<TextureRegion> segments = new Array<>();
+            Array<TextureRegion> segments = new Array();
             SubAnimationModel subAnimation = animationsModels.get(status);
             int x = subAnimation.getX() * width;
             int y = subAnimation.getY() * height;

@@ -9,8 +9,7 @@ public class EquipmentInformation {
     private int attack;
     private int defense;
 
-    public EquipmentInformation() {
-    }
+    public EquipmentInformation() { }
 
     public EquipSlot getEquipSlot() {
         return equipSlot;
