@@ -9,8 +9,7 @@ import com.facundolinlaud.supergame.components.player.BagComponent;
 import com.facundolinlaud.supergame.components.player.KeyboardComponent;
 import com.facundolinlaud.supergame.components.skills.SkillCastingRequestComponent;
 import com.facundolinlaud.supergame.components.skills.SkillClickComponent;
-import com.facundolinlaud.supergame.components.sprite.AnimableSpriteComponent;
-import com.facundolinlaud.supergame.factory.AvailableSkillsFactory;
+import com.facundolinlaud.supergame.factory.SkillsFactory;
 import com.facundolinlaud.supergame.managers.world.PlayerInputObserver;
 import com.facundolinlaud.supergame.model.skill.Skill;
 import com.facundolinlaud.supergame.model.skill.SkillType;
@@ -26,9 +25,9 @@ public class PlayerInputSystem extends IteratingSystem {
     private ComponentMapper<BagComponent> bm = Mappers.bag;
 
     private PlayerInputObserver playerInputObserver;
-    private AvailableSkillsFactory skillsFactory;
+    private SkillsFactory skillsFactory;
 
-    public PlayerInputSystem(PlayerInputObserver playerInputObserver, AvailableSkillsFactory skillsFactory) {
+    public PlayerInputSystem(PlayerInputObserver playerInputObserver, SkillsFactory skillsFactory) {
         super(Family.all(StatusComponent.class, KeyboardComponent.class).get());
         this.playerInputObserver = playerInputObserver;
         this.skillsFactory = skillsFactory;
@@ -65,7 +64,7 @@ public class PlayerInputSystem extends IteratingSystem {
 
     private void handleSkillCastingCase(Entity caster, StatusComponent status) {
         Integer requestedSkillId = playerInputObserver.getPlayersSkillId();
-        Skill requestedSkill = skillsFactory.getSkillById(requestedSkillId);
+        Skill requestedSkill = skillsFactory.get(requestedSkillId);
         SkillType skillType = requestedSkill.getSkillType();
 
         if(skillType == SkillType.SPELL || skillType == SkillType.PROJECTILE)

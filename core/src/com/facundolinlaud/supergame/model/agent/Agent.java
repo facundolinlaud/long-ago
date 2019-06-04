@@ -1,6 +1,7 @@
 package com.facundolinlaud.supergame.model.agent;
 
 import com.facundolinlaud.supergame.model.equip.EquipSlot;
+import com.sun.istack.internal.Nullable;
 
 import java.util.List;
 import java.util.Map;
@@ -11,14 +12,14 @@ public class Agent {
     private int defense;
     private int health;
     private float velocity;
-    private float viewDistance;
     private Attributes attributes;
     private Map<EquipSlot, String> body;
     private Map<EquipSlot, Integer> equipment;
     private List<Integer> bag;
 
-    public Agent() {
-    }
+    @Nullable private NPCInformation npcInformation;
+
+    public Agent() { }
 
     public String getName() {
         return name;
@@ -60,14 +61,6 @@ public class Agent {
         this.velocity = velocity;
     }
 
-    public float getViewDistance() {
-        return viewDistance;
-    }
-
-    public void setViewDistance(float viewDistance) {
-        this.viewDistance = viewDistance;
-    }
-
     public Map<EquipSlot, String> getBody() {
         return body;
     }
@@ -100,18 +93,31 @@ public class Agent {
         this.attributes = attributes;
     }
 
+    public NPCInformation getNpcInformation() {
+        return npcInformation;
+    }
+
+    public void setNpcInformation(NPCInformation npcInformation) {
+        this.npcInformation = npcInformation;
+    }
+
+    public boolean isNPC(){
+        return this.npcInformation != null;
+    }
+
     @Override
     public String toString() {
         return "Agent{" +
-                "attack=" + attack +
+                "name='" + name + '\'' +
+                ", attack=" + attack +
                 ", defense=" + defense +
                 ", health=" + health +
                 ", velocity=" + velocity +
-                ", viewDistance=" + viewDistance +
                 ", attributes=" + attributes +
                 ", body=" + body +
                 ", equipment=" + equipment +
                 ", bag=" + bag +
+                ", npcInformation=" + npcInformation +
                 '}';
     }
 }

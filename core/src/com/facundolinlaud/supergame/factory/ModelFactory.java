@@ -7,6 +7,7 @@ import com.facundolinlaud.supergame.model.item.Item;
 import com.facundolinlaud.supergame.model.item.Items;
 import com.facundolinlaud.supergame.model.particle.ParticleType;
 import com.facundolinlaud.supergame.model.particle.Particles;
+import com.facundolinlaud.supergame.model.skill.Skill;
 import com.facundolinlaud.supergame.model.skill.SkillsModel;
 import com.facundolinlaud.supergame.model.sprite.RawAnimationModel;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -35,8 +36,9 @@ public class ModelFactory implements Disposable {
         return (RawAnimationModel) readModel(DEFAULT_ANIMATION_MODEL_PATH, RawAnimationModel.class);
     }
 
-    public static SkillsModel getAvailableSkillsModel(){
-        return (SkillsModel) readModel(SKILLS_MODEL_PATH, SkillsModel.class);
+    public static Map<Integer, Skill> getSkillsModel(){
+        SkillsModel skillsModel = (SkillsModel) readModel(SKILLS_MODEL_PATH, SkillsModel.class);
+        return skillsModel.getSkills();
     }
 
     public static Map<ParticleType, String> getParticlesModel(){

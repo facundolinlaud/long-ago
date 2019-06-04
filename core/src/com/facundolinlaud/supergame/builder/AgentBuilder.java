@@ -14,6 +14,7 @@ import com.facundolinlaud.supergame.factory.ModelFactory;
 import com.facundolinlaud.supergame.factory.PhysicsFactory;
 import com.facundolinlaud.supergame.model.RenderPriority;
 import com.facundolinlaud.supergame.model.agent.Attributes;
+import com.facundolinlaud.supergame.model.agent.NPCInformation;
 import com.facundolinlaud.supergame.model.equip.EquipSlot;
 import com.facundolinlaud.supergame.model.particle.ParticleType;
 import com.facundolinlaud.supergame.strategies.renderposition.SpriteRenderPositionStrategyImpl;
@@ -38,8 +39,8 @@ public class AgentBuilder {
             .add(new VelocityComponent(velocity));
     }
 
-    public AgentBuilder withAI(float viewDistance){
-        this.entity.add(new AIComponent(viewDistance));
+    public AgentBuilder withAI(NPCInformation npcInformation){
+        this.entity.add(new AIComponent(npcInformation));
         return this;
     }
 

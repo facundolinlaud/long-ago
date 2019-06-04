@@ -1,23 +1,14 @@
-package com.facundolinlaud.supergame.components.ai;
+package com.facundolinlaud.supergame.model.agent;
 
-import com.badlogic.ashley.core.Component;
-import com.facundolinlaud.supergame.model.agent.NPCInformation;
 import com.facundolinlaud.supergame.model.ai.BehaviorType;
 
 import java.util.List;
 
-public class AIComponent implements Component {
+public class NPCInformation {
     private float viewDistance;
     private List<Integer> meleeSkills;
     private List<Integer> rangedSkills;
     private BehaviorType behaviorType;
-
-    public AIComponent(NPCInformation model) {
-        this.viewDistance = model.getViewDistance();
-        this.meleeSkills = model.getMeleeSkills();
-        this.rangedSkills = model.getRangedSkills();
-        this.behaviorType = model.getBehaviorType();
-    }
 
     public float getViewDistance() {
         return viewDistance;

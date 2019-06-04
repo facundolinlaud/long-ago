@@ -4,20 +4,20 @@ import com.badlogic.ashley.core.Engine;
 import com.facundolinlaud.supergame.managers.world.ParticleManager;
 
 public class Factories {
-    private AvailableSkillsFactory availableSkillsFactory;
+    private SkillsFactory skillsFactory;
     private ParticleFactory particleFactory;
     private ItemFactory itemFactory;
     private AgentFactory agentFactory;
 
     public Factories(Engine engine) {
-        this.availableSkillsFactory = new AvailableSkillsFactory();
+        this.skillsFactory = new SkillsFactory();
         this.particleFactory = new ParticleFactory(new ParticleManager());
         this.itemFactory = new ItemFactory();
         this.agentFactory = new AgentFactory(engine, itemFactory, particleFactory);
     }
 
-    public AvailableSkillsFactory getAvailableSkillsFactory() {
-        return availableSkillsFactory;
+    public SkillsFactory getSkillsFactory() {
+        return skillsFactory;
     }
 
     public ParticleFactory getParticleFactory() {

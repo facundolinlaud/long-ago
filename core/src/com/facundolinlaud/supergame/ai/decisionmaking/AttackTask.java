@@ -14,13 +14,18 @@ import com.facundolinlaud.supergame.model.skill.SkillType;
 import com.facundolinlaud.supergame.model.status.Action;
 import com.facundolinlaud.supergame.utils.Mappers;
 
+import java.util.List;
+import java.util.Random;
+
 public class AttackTask extends LeafTask<Blackboard> {
     private ComponentMapper<StatusComponent> sm = Mappers.status;
 
-    private Skill skill;
+    private List<Skill> skills;
+    private Random rand;
 
-    public AttackTask(Skill skill) {
-        this.skill = skill;
+    public AttackTask(List<Skill> skills) {
+        this.skills = skills;
+        this.rand = new Random();
     }
 
     @Override
@@ -30,7 +35,6 @@ public class AttackTask extends LeafTask<Blackboard> {
 
         StatusComponent agentStatus = sm.get(agent);
         Action action = agentStatus.getAction();
-
 
         /* TODO: Fix this. For some reason Return SUCCEEDED keeps tasks returning as SUCCEEDED instead of FRESH */
         if(firstTimeExecutingTask()){
@@ -57,6 +61,7 @@ public class AttackTask extends LeafTask<Blackboard> {
     }
 
     void attackPlayer(Entity agent, Vector2 playerPosition){
+        Skill skill = chooseSkill();
         SkillType skillType = skill.getSkillType();
 
         if(skillType == SkillType.SPELL || skillType == SkillType.PROJECTILE)
@@ -65,8 +70,12 @@ public class AttackTask extends LeafTask<Blackboard> {
         agent.add(new SkillCastingRequestComponent(skill));
     }
 
+    private Skill chooseSkill() {
+        return skills.get(rand.nextInt(skills.size()));
+    }
+
     @Override
     protected Task<Blackboard> copyTo(Task<Blackboard> task) {
-        return new AttackTask(this.skill);
+        return new AttackTask(this.skills);
     }
 }

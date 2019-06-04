@@ -5,7 +5,7 @@ import com.badlogic.gdx.ai.msg.Telegraph;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Align;
-import com.facundolinlaud.supergame.factory.AvailableSkillsFactory;
+import com.facundolinlaud.supergame.factory.SkillsFactory;
 import com.facundolinlaud.supergame.model.skill.Skill;
 import com.facundolinlaud.supergame.ui.view.itemdropzone.ItemDropTable;
 import com.facundolinlaud.supergame.ui.view.profile.ProfileTable;
@@ -28,7 +28,7 @@ public class OverlayUI implements UI, Telegraph {
 
         this.itemDropZone = new ItemDropTable(skin);
         this.profile = new ProfileTable(skin);
-        this.skillbar = new Skillbar(skin, new AvailableSkillsFactory().getSkills());
+        this.skillbar = new Skillbar(skin, new SkillsFactory().getSkills());
 
         this.table.add(this.profile).expandX().fillX().top().left();
         this.table.row();

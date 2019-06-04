@@ -66,7 +66,7 @@ public class WorldScreen implements Screen {
         this.physicsManager = new PhysicsManager(mapManager.getCamera(), mapManager.getMap());
         this.uiManager = new UIManager(stage, mapManager.getCamera());
         this.lightsManager = new LightsManager(physicsManager.getWorld(), mapManager.getCamera());
-        this.aiManager = new AIManager(factories.getAvailableSkillsFactory(), mapManager, physicsManager);
+        this.aiManager = new AIManager(factories.getSkillsFactory(), mapManager, physicsManager);
         this.spawnManager = new SpawnManager(resources.getEngine(), mapManager.getSpawnLocations());
     }
 
@@ -113,7 +113,7 @@ public class WorldScreen implements Screen {
         engine.addSystem(new StackableSpriteSystem());
         engine.addSystem(new StackedSpritesSystem());
         engine.addSystem(new AnimableSpriteSystem());
-        engine.addSystem(new PlayerInputSystem(playerInputObserver, factories.getAvailableSkillsFactory()));
+        engine.addSystem(new PlayerInputSystem(playerInputObserver, factories.getSkillsFactory()));
         engine.addSystem(new MovementSystem());
         engine.addSystem(new CameraFocusSystem(mapManager.getCamera()));
         engine.addSystem(new PhysicsSystem(physicsManager.getWorld()));
