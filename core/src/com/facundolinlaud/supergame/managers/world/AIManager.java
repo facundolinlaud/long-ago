@@ -61,7 +61,7 @@ public class AIManager implements EntityListener {
         Sequence<Blackboard> offensiveSequence = new Sequence<>();
         PlayerSeenTask playerSeenTask = new PlayerSeenTask();
         RandomSelector<Blackboard> attackRandomSelector = new RandomSelector();
-        Sequence<Blackboard> magicSequence = new Sequence();
+        Sequence<Blackboard> rangedSequence = new Sequence();
         FaceTowardsPlayerTask faceTowardsPlayerTask = new FaceTowardsPlayerTask();
         AttackTask rangedAttackTask = new AttackTask(skillsFactory.get(rangedSkills));
         Sequence<Blackboard> meleeSequence = new Sequence<>();
@@ -70,15 +70,18 @@ public class AIManager implements EntityListener {
 
         PatrolTask patrolTask = new PatrolTask(pathFinderAuthority);
 
-        magicSequence.addChild(faceTowardsPlayerTask);
-        magicSequence.addChild(rangedAttackTask);
+        rangedSequence.addChild(faceTowardsPlayerTask);
+        rangedSequence.addChild(rangedAttackTask);
 
         meleeSequence.addChild(approachPlayerTask);
         meleeSequence.addChild(faceTowardsPlayerTask);
         meleeSequence.addChild(meleeAttackTask);
 
-        attackRandomSelector.addChild(magicSequence);
-        attackRandomSelector.addChild(meleeSequence);
+        if(!rangedSkills.isEmpty())
+            attackRandomSelector.addChild(rangedSequence);
+
+        if(!meleeSkills.isEmpty())
+            attackRandomSelector.addChild(meleeSequence);
 
         offensiveSequence.addChild(playerSeenTask);
         offensiveSequence.addChild(attackRandomSelector);
