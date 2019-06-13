@@ -13,7 +13,7 @@ public class Factories {
         this.skillsFactory = new SkillsFactory();
         this.particleFactory = new ParticleFactory(new ParticleManager());
         this.itemFactory = new ItemFactory();
-        this.agentFactory = new AgentFactory(engine, itemFactory, particleFactory);
+        this.agentFactory = new AgentFactory(engine, this.itemFactory, this.particleFactory);
     }
 
     public SkillsFactory getSkillsFactory() {
@@ -31,4 +31,5 @@ public class Factories {
     public AgentFactory getAgentFactory() {
         return agentFactory;
     }
+
 }

@@ -10,9 +10,9 @@ import com.facundolinlaud.supergame.model.particle.Particles;
 import com.facundolinlaud.supergame.model.skill.Skill;
 import com.facundolinlaud.supergame.model.skill.SkillsModel;
 import com.facundolinlaud.supergame.model.sprite.RawAnimationModel;
+import com.facundolinlaud.supergame.model.sprite.SpriteModel;
+import com.facundolinlaud.supergame.model.sprite.SpritesModels;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.type.MapType;
-import com.fasterxml.jackson.databind.type.TypeFactory;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -27,8 +27,8 @@ public class ModelFactory implements Disposable {
     private static final String DEFAULT_ANIMATION_MODEL_PATH = "model/animations/default.json";
     private static final String PARTICLES_MODEL_PATH = "model/particles/particles.json";
     private static final String ITEMS_MODEL_PATH = "model/entities/items.json";
-    private static final String TEXTURES_PATH = "model/textures/textures.json";
     private static final String AGENTS_MODEL_PATH = "model/entities/agents.json";
+    private static final String SPRITES_MODELS_PATH = "model/textures/sprites.json";
 
     private static Map<String, Object> cache = new HashMap<>();
 
@@ -46,8 +46,9 @@ public class ModelFactory implements Disposable {
         return particles.getParticles();
     }
 
-    public static List<String> getTexturesPaths(){
-        return (List<String>) readModel(TEXTURES_PATH, List.class);
+    public static Map<String, SpriteModel> getSpriteModels(){
+        SpritesModels models = (SpritesModels) readModel(SPRITES_MODELS_PATH, SpritesModels.class);
+        return models.getSprites();
     }
 
     public static Map<Integer, Item> getItemsModel(){

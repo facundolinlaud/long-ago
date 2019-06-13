@@ -11,6 +11,7 @@ import com.facundolinlaud.supergame.components.items.EquipableComponent;
 import com.facundolinlaud.supergame.components.items.ItemComponent;
 import com.facundolinlaud.supergame.components.items.PickupableComponent;
 import com.facundolinlaud.supergame.components.sprite.StackableSpriteComponent;
+import com.facundolinlaud.supergame.factory.SpriteFactory;
 import com.facundolinlaud.supergame.factory.TextureFactory;
 import com.facundolinlaud.supergame.model.RenderPriority;
 import com.facundolinlaud.supergame.model.item.EquipmentInformation;
@@ -49,7 +50,7 @@ public class ItemBuilder {
 
     public ItemBuilder equipable(String spritesheet, EquipmentInformation eq){
         item.add(new EquipableComponent(eq))
-            .add(new StackableSpriteComponent(TextureFactory.getTexture(spritesheet)));
+            .add(new StackableSpriteComponent(SpriteFactory.get(spritesheet)));
         return this;
     }
 

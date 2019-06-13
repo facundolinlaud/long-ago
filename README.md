@@ -99,7 +99,7 @@ If you want to go further and add some movement to the zombie, you will need to 
 	"width": 64,
 	"height": 64,
 	"frameDuration": 0.1,
-	"subanimations": {
+	"subAnimations": {
 		"WALKING_UP": {
 			"x": 0,
 			"y": 8,

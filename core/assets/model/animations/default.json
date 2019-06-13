@@ -1,8 +1,6 @@
 {
-	"width": 64,
-	"height": 64,
 	"frameDuration": 0.1,
-	"subanimations": {
+	"subAnimations": {
 		"STANDING_UP": {
 			"x": 0,
 			"y": 8,

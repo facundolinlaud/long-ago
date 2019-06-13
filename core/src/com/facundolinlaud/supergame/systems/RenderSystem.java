@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.SortedIteratingSystem;
+import com.badlogic.gdx.graphics.TextureArray;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.Vector2;
 import com.facundolinlaud.supergame.components.PositionComponent;
@@ -46,8 +47,12 @@ public class RenderSystem extends SortedIteratingSystem {
 
             Vector2 pos = renderComponent.getRenderPositionStrategy().process(positionComponent.x, positionComponent.y);
 
-            // TODO: generalize this. RenderSystem can only render textures, not particles
-            spriteBatch.draw(region, pos.x, pos.y, width / 2, height / 2, width, height,
+            float x = pos.x - width / 2;
+            float y = pos.y - height / 2;
+
+            spriteBatch.draw(region, x, y,
+                    width / 2, height / 2,
+                    width, height,
                     1f, 1f, renderComponent.getRotation());
         }
     }

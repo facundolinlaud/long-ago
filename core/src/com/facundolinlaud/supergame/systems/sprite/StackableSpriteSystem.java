@@ -10,6 +10,7 @@ import com.facundolinlaud.supergame.components.player.WearComponent;
 import com.facundolinlaud.supergame.components.sprite.RefreshSpriteRequirementComponent;
 import com.facundolinlaud.supergame.components.sprite.StackableSpriteComponent;
 import com.facundolinlaud.supergame.components.sprite.StackedSpritesComponent;
+import com.facundolinlaud.supergame.domain.Sprite;
 import com.facundolinlaud.supergame.utils.Mappers;
 
 import java.util.List;
@@ -29,18 +30,18 @@ public class StackableSpriteSystem extends IteratingSystem {
 
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
-        List<Texture> wearablesTextures = getTexturesToMerge(entity);
+        List<Sprite> wearablesSprites = getTexturesToMerge(entity);
         StackedSpritesComponent stackedSpritesComponent = stacked.get(entity);
-        stackedSpritesComponent.setStackedSprites(wearablesTextures);
+        stackedSpritesComponent.setStackedSprites(wearablesSprites);
     }
 
-    private List<Texture> getTexturesToMerge(Entity entity){
+    private List<Sprite> getTexturesToMerge(Entity entity){
         WearComponent wearComponent = wm.get(entity);
 
         return wearComponent
                 .asList()
                 .stream()
-                .map(e -> stackable.get(e).texture)
+                .map(e -> stackable.get(e).getSprite())
                 .collect(Collectors.toList());
     }
 }

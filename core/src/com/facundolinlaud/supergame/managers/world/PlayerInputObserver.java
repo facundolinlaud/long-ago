@@ -64,7 +64,7 @@ public class PlayerInputObserver extends ClickListener {
     }
 
     private Integer keycodeToSkillId(int keycode){
-        if(keycode >= 8 && keycode <= 10){
+        if(keycode >= 8 && keycode <= 11){
             return new Integer(keycode - 8);
         }
 

@@ -1,0 +1,32 @@
+{
+	"sprites": {
+		"sprites/items/armor/leather.png": {
+			"regionSize": 64
+		}, "sprites/items/armor/mail.png": {
+			"regionSize": 64
+		}, "sprites/items/armor/plate.png": {
+			"regionSize": 64
+		}, "sprites/items/arms/plate.png": {
+			"regionSize": 64
+		}, "sprites/items/belts/belt.png": {
+			"regionSize": 64
+		}, "sprites/items/boots/leather_boots.png": {
+			"regionSize": 64
+		}, "sprites/items/boots/metal_boots.png": {
+			"regionSize": 64
+		}, "sprites/items/gloves/metal_gloves.png": {
+			"regionSize": 64
+		}, "sprites/items/helmets/cloth_hood.png": {
+			"regionSize": 64
+		}, "sprites/items/pants/plate.png": {
+			"regionSize": 64
+		}, "sprites/items/weapon/dagger.png": {
+			"regionSize": 64
+		}, "sprites/items/weapon/spear.png": {
+			"regionSize": 64
+		}, "sprites/items/weapon/saber.png": {
+			"regionSize": 192,
+			"startingIndexAtSpriteSheet": 12
+		}
+	}
+}

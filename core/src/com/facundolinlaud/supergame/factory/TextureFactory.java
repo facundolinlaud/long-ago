@@ -14,11 +14,6 @@ public class TextureFactory implements Disposable {
     /** image cache */
     private static Map<String, SoftReference<Texture>> textures = new HashMap();
 
-    static {
-        for(String texture : ModelFactory.getTexturesPaths())
-            getTexture(texture);
-    }
-
     public static Texture getTexture(String imageName) {
         if(!textures.containsKey(imageName)){
             // we've never stored this image

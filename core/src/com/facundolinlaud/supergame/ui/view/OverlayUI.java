@@ -2,6 +2,7 @@ package com.facundolinlaud.supergame.ui.view;
 
 import com.badlogic.gdx.ai.msg.Telegram;
 import com.badlogic.gdx.ai.msg.Telegraph;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Align;
@@ -43,6 +44,14 @@ public class OverlayUI implements UI, Telegraph {
 
     public void setFPS(int fps) {
         this.profile.setFPS(fps);
+    }
+
+    public void setPosition(Vector2 position) {
+        this.profile.setPosition(position);
+    }
+
+    public void setBodyPosition(Vector2 bodyPosition) {
+        this.profile.setBodyPosition(bodyPosition);
     }
 
     public Table getItemDropZone(){
