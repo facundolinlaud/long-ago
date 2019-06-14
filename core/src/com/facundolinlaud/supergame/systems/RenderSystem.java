@@ -4,13 +4,13 @@ import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.SortedIteratingSystem;
-import com.badlogic.gdx.graphics.TextureArray;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.Vector2;
 import com.facundolinlaud.supergame.components.PositionComponent;
 import com.facundolinlaud.supergame.components.RenderComponent;
 import com.facundolinlaud.supergame.utils.Dimensions;
 import com.facundolinlaud.supergame.utils.Mappers;
+import sun.nio.ch.SelectorProviderImpl;
 
 import java.util.Comparator;
 import java.util.List;
@@ -36,24 +36,24 @@ public class RenderSystem extends SortedIteratingSystem {
         PositionComponent positionComponent = pm.get(entity);
         RenderComponent renderComponent = rm.get(entity);
 
-        List<TextureRegion> regions = renderComponent.getRegions();
+        List<Sprite> sprites = renderComponent.getSprites();
 
-        if(regions.isEmpty())
+        if(sprites.isEmpty())
             return;
 
-        for(TextureRegion region : regions){
-            float width = Dimensions.toMeters(region.getRegionWidth());
-            float height = Dimensions.toMeters(region.getRegionHeight());
-
+        for(Sprite sprite : sprites){
             Vector2 pos = renderComponent.getRenderPositionStrategy().process(positionComponent.x, positionComponent.y);
 
-            float x = pos.x - width / 2;
-            float y = pos.y - height / 2;
+            float x = pos.x - Dimensions.toMeters(sprite.getOriginX());
+            float y = pos.y - Dimensions.toMeters(sprite.getOriginY());
 
-            spriteBatch.draw(region, x, y,
-                    width / 2, height / 2,
+            float width = Dimensions.toMeters(sprite.getRegionWidth());
+            float height = Dimensions.toMeters(sprite.getRegionHeight());
+
+            spriteBatch.draw(sprite, x, y,
+                    sprite.getOriginX(), sprite.getOriginY(),
                     width, height,
-                    1f, 1f, renderComponent.getRotation());
+                    sprite.getScaleX(), sprite.getScaleY(), sprite.getRotation());
         }
     }
 

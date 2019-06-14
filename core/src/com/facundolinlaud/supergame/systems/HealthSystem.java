@@ -5,8 +5,8 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.facundolinlaud.supergame.components.HealthComponent;
 import com.facundolinlaud.supergame.components.PositionComponent;
 import com.facundolinlaud.supergame.components.RenderComponent;
@@ -24,8 +24,8 @@ public class HealthSystem extends IteratingSystem {
     private ComponentMapper<PositionComponent> pm = Mappers.position;
 
     private SpriteBatch spriteBatch;
-    private TextureRegion healthBarBackground;
-    private TextureRegion healthBarFill;
+    private Sprite healthBarBackground;
+    private Sprite healthBarFill;
     private float sizeOfFullHealthBar;
 
     private float xHealthBarFillOffset;
@@ -38,8 +38,8 @@ public class HealthSystem extends IteratingSystem {
                 .exclude(KeyboardComponent.class).get());
 
         this.spriteBatch = spriteBatch;
-        this.healthBarBackground = new TextureRegion(new Texture(HEALTH_BAR_BACKGROUND_PATH));
-        this.healthBarFill = new TextureRegion(new Texture(HEALTH_BAR_FILL_PATH));
+        this.healthBarBackground = new Sprite(new Texture(HEALTH_BAR_BACKGROUND_PATH));
+        this.healthBarFill = new Sprite(new Texture(HEALTH_BAR_FILL_PATH));
 
         this.xHealthBarFillOffset = 1 / PX_PER_METER;
         this.yHealthBarFillOffset = 1 / PX_PER_METER;

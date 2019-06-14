@@ -2,31 +2,31 @@ package com.facundolinlaud.supergame.components.sprite;
 
 import com.badlogic.ashley.core.Component;
 import com.badlogic.gdx.graphics.Texture;
-import com.facundolinlaud.supergame.domain.Sprite;
+import com.facundolinlaud.supergame.domain.ComplexSprite;
 
 /**
  * Created by facundo on 26/7/16.
  */
 public class StackableSpriteComponent implements Component {
-    private Sprite sprite;
+    private ComplexSprite complexSprite;
 
-    public StackableSpriteComponent(Sprite sprite) {
-        this.sprite = sprite;
+    public StackableSpriteComponent(ComplexSprite complexSprite) {
+        this.complexSprite = complexSprite;
     }
 
-    public Sprite getSprite() {
-        return sprite;
+    public ComplexSprite getComplexSprite() {
+        return complexSprite;
     }
 
     public Texture getTexture() {
-        return sprite.getTexture();
+        return complexSprite.getTexture();
     }
 
     public int getSize() {
-        return sprite.getSize();
+        return complexSprite.getSize();
     }
 
     public int getStartingIndexAtSpriteSheet() {
-        return sprite.getStartingIndexAtSpriteSheet();
+        return complexSprite.getStartingIndexAtSpriteSheet();
     }
 }

@@ -2,9 +2,7 @@ package com.facundolinlaud.supergame.builder;
 
 import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.Entity;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.facundolinlaud.supergame.components.PositionComponent;
 import com.facundolinlaud.supergame.components.RenderComponent;
 import com.facundolinlaud.supergame.components.items.EquipableComponent;
@@ -24,16 +22,16 @@ public class ItemBuilder {
     }
 
     public ItemBuilder(String name, String picture) {
-        TextureRegion region = TextureFactory.getRegion(picture);
+        Sprite region = TextureFactory.getSprite(picture);
         this.item = new Entity().add(new ItemComponent(name, region));
     }
 
     public ItemBuilder withRender(String picture){
-        this.item.add(new RenderComponent(TextureFactory.getRegion(picture), RenderPriority.ITEM));
+        this.item.add(new RenderComponent(TextureFactory.getSprite(picture), RenderPriority.ITEM));
         return this;
     }
 
-    public ItemBuilder withRender(TextureRegion picture){
+    public ItemBuilder withRender(Sprite picture){
         this.item.add(new RenderComponent(picture, RenderPriority.ITEM));
         return this;
     }

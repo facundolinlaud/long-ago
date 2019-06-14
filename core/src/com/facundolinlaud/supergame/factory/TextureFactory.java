@@ -1,7 +1,8 @@
 package com.facundolinlaud.supergame.factory;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.facundolinlaud.supergame.utils.Dimensions;
 
 import java.lang.ref.SoftReference;
 import java.util.HashMap;
@@ -37,8 +38,16 @@ public class TextureFactory implements Disposable {
         }
     }
 
-    public static TextureRegion getRegion(String imageName){
-        return new TextureRegion(getTexture(imageName));
+    public static Sprite getSprite(String imageName){
+        Texture texture = getTexture(imageName);
+        float width = Dimensions.toMeters(texture.getWidth());
+        float height = Dimensions.toMeters(texture.getHeight());
+
+        Sprite sprite = new Sprite(texture);
+        sprite.setSize(width, height);
+        sprite.setOriginCenter();
+
+        return sprite;
     }
 
     @Override

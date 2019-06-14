@@ -5,7 +5,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.facundolinlaud.supergame.components.RenderComponent;
 import com.facundolinlaud.supergame.components.StatusComponent;
 import com.facundolinlaud.supergame.components.sprite.AnimableSpriteComponent;
@@ -14,8 +14,6 @@ import com.facundolinlaud.supergame.model.status.Direction;
 import com.facundolinlaud.supergame.model.status.Status;
 import com.facundolinlaud.supergame.utils.Mappers;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -53,8 +51,8 @@ public class AnimableSpriteSystem extends IteratingSystem {
         List<Map<Status, Animation>> texturesToAnimations = animableSpriteComponent.getTexturesToAnimations();
         for(Map<Status, Animation> animations : texturesToAnimations){
             Animation animation = animations.get(status);
-            TextureRegion region = (TextureRegion) animation.getKeyFrame(animableSpriteComponent.stateTime);
-            renderComponent.add(region);
+            Sprite sprite = (Sprite) animation.getKeyFrame(animableSpriteComponent.stateTime);
+            renderComponent.add(sprite);
         }
     }
 

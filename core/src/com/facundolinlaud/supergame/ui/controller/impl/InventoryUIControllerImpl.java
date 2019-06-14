@@ -2,7 +2,7 @@ package com.facundolinlaud.supergame.ui.controller.impl;
 
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.facundolinlaud.supergame.builder.ItemBuilder;
 import com.facundolinlaud.supergame.components.PositionComponent;
 import com.facundolinlaud.supergame.components.items.EquipableComponent;
@@ -85,12 +85,7 @@ public class InventoryUIControllerImpl implements InventoryUIController {
 
         new ItemBuilder(item)
                 .dropped(gathererPosition.x, gathererPosition.y)
-                .withRender(new TextureRegion(itemModel.getPicture()));
-
-//        item.add(new PositionComponent(gathererPosition));
-//        item.add(new RenderComponent(new TextureRegion(event.getItem().getPicture())));
-//        item.add(new PickupableComponent());
-//        item.add(new BodyComponent(PhysicsFactory.get().createItemBody()));
+                .withRender(new Sprite(itemModel.getPicture()));
 
         System.out.println(event.getItem().getName() + " dropped");
     }
