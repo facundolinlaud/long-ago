@@ -163,6 +163,78 @@
 			    "equipType": "BOW",
 			    "attack": 4
 		    }
+		},
+		"15": {
+			"name": "Big Spear",
+		    "texture": "sprites/items/weapon/big_spear.png",
+		    "picture": "pictures/items/weapon/spear.png",
+		    "weight": 3.0,
+		    "marketValue": 5.0,
+		    "equipmentInformation": {
+				"equipSlot": "WEAPON",
+			    "equipType": "SPEAR",
+			    "attack": 5
+		    }
+		},
+		"16": {
+			"name": "Great Spear",
+		    "texture": "sprites/items/weapon/great_spear.png",
+		    "picture": "pictures/items/weapon/spear.png",
+		    "weight": 3.0,
+		    "marketValue": 5.0,
+		    "equipmentInformation": {
+				"equipSlot": "WEAPON",
+			    "equipType": "SPEAR",
+			    "attack": 5
+		    }
+		},
+		"17": {
+			"name": "Long Sword",
+		    "texture": "sprites/items/weapon/long_sword.png",
+		    "picture": "pictures/items/weapon/saber.png",
+		    "weight": 3.0,
+		    "marketValue": 5.0,
+		    "equipmentInformation": {
+				"equipSlot": "WEAPON",
+			    "equipType": "SWORD",
+			    "attack": 5
+		    }
+		},
+		"18": {
+			"name": "Mace",
+		    "texture": "sprites/items/weapon/mace.png",
+		    "picture": "pictures/items/weapon/saber.png",
+		    "weight": 3.0,
+		    "marketValue": 5.0,
+		    "equipmentInformation": {
+				"equipSlot": "WEAPON",
+			    "equipType": "SWORD",
+			    "attack": 5
+		    }
+		},
+		"19": {
+			"name": "Rapier",
+		    "texture": "sprites/items/weapon/rapier.png",
+		    "picture": "pictures/items/weapon/saber.png",
+		    "weight": 3.0,
+		    "marketValue": 5.0,
+		    "equipmentInformation": {
+				"equipSlot": "WEAPON",
+			    "equipType": "SWORD",
+			    "attack": 5
+		    }
+		},
+		"20": {
+			"name": "Trident",
+		    "texture": "sprites/items/weapon/trident.png",
+		    "picture": "pictures/items/weapon/spear.png",
+		    "weight": 3.0,
+		    "marketValue": 5.0,
+		    "equipmentInformation": {
+				"equipSlot": "WEAPON",
+			    "equipType": "SPEAR",
+			    "attack": 5
+		    }
 		}
 	}
 }

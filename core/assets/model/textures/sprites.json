@@ -27,6 +27,24 @@
 		}, "sprites/items/weapon/saber.png": {
 			"regionSize": 192,
 			"startingIndexAtSpriteSheet": 12
+		}, "sprites/items/weapon/big_spear.png": {
+			"regionSize": 192,
+			"startingIndexAtSpriteSheet": 4
+		}, "sprites/items/weapon/great_spear.png": {
+			"regionSize": 192,
+			"startingIndexAtSpriteSheet": 4
+		}, "sprites/items/weapon/long_sword.png": {
+			"regionSize": 192,
+			"startingIndexAtSpriteSheet": 12
+		}, "sprites/items/weapon/mace.png": {
+			"regionSize": 192,
+			"startingIndexAtSpriteSheet": 12
+		}, "sprites/items/weapon/rapier.png": {
+			"regionSize": 192,
+			"startingIndexAtSpriteSheet": 12
+		}, "sprites/items/weapon/trident.png": {
+			"regionSize": 192,
+			"startingIndexAtSpriteSheet": 4
 		}
 	}
 }
