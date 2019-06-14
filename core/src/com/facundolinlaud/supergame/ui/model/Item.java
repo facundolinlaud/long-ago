@@ -15,21 +15,21 @@ public class Item {
 
     public Item(String name, Sprite sprite, Invented invented) {
         this.name = name;
-        this.picture = picture;
+        this.picture = sprite;
         this.equipable = null;
         this.invented = invented;
     }
 
     public Item(String name, Sprite sprite, Equipable equipable) {
         this.name = name;
-        this.picture = picture;
+        this.picture = sprite;
         this.equipable = equipable;
         this.invented = null;
     }
 
     public Item(String name, Sprite sprite, Equipable equipable, Invented invented) {
         this.name = name;
-        this.picture = picture;
+        this.picture = sprite;
         this.equipable = equipable;
         this.invented = invented;
     }

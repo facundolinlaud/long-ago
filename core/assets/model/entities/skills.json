@@ -93,7 +93,7 @@
 			}
 		},
 		"3": {
-			"name": "Dagger Stab",
+			"name": "Sword Swing",
 			"picturePath": "pictures/skills/dash.png",
 			"skillType": "NORMAL",
 			"skillDamageType": "DIRECT",
@@ -102,9 +102,9 @@
 			"castTime": 0.5,
 			"lockdownTime": 0.8,
 			"interruptible": false,
-			"equipmentRequired": "DAGGER",
+			"equipmentRequired": "SWORD",
 
-			"castingAction": "STANDING",
+			"castingAction": "MELEE_DASH_CASTING",
 			"executingAction": "SWINGING",
 			"animationFlow": "TRAVERSE",
 

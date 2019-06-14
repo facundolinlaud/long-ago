@@ -13,10 +13,6 @@ public class BagComponent implements Component {
     public boolean gathering;
     public List<Entity> items;
 
-    public BagComponent() {
-        items = new ArrayList<>();
-    }
-
     public BagComponent(List<Entity> items) {
         this.items = items;
     }

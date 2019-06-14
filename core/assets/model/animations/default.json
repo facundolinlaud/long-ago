@@ -46,24 +46,24 @@
 
 
 		}, "SWINGING_UP": {
-			"x": 1,
+			"x": 0,
 			"y": 12,
-			"length": 5,
+			"length": 6,
 			"playMode": "NORMAL"
 		}, "SWINGING_LEFT": {
-			"x": 1,
+			"x": 0,
 			"y": 13,
-			"length": 5,
+			"length": 6,
 			"playMode": "NORMAL"
 		}, "SWINGING_DOWN": {
-			"x": 1,
+			"x": 0,
 			"y": 14,
-			"length": 5,
+			"length": 6,
 			"playMode": "NORMAL"
 		}, "SWINGING_RIGHT": {
-			"x": 1,
+			"x": 0,
 			"y": 15,
-			"length": 5,
+			"length": 6,
 			"playMode": "NORMAL"
 
 

@@ -21,7 +21,7 @@ import java.util.List;
  * Created by facundo on 3/23/16.
  */
 public class MapManager implements Renderable {
-    public static final String PATH_TO_TILE_MAP = "map/test_green_debug.tmx";
+    public static final String PATH_TO_TILE_MAP = "map/test_green.tmx";
     public static final int VIEWPORT_WIDTH_IN_METERS = 32;
 
     public static final int[] BASE_LAYERS = new int[]{0, 1, 2};

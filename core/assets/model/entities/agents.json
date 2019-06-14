@@ -3,7 +3,7 @@
 		"0": {
 			"name": "Player",
 			"velocity": 1.9,
-			"bag": [13, 9, 9, 0],
+			"bag": [13, 9, 9, 0, 10],
 			"attributes": {
 				"strength": 10,
 				"agility": 5,
