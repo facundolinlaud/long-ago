@@ -104,7 +104,7 @@
 			"interruptible": false,
 			"equipmentRequired": "SWORD",
 
-			"castingAction": "MELEE_DASH_CASTING",
+			"castingAction": "STANDING",
 			"executingAction": "SWINGING",
 			"animationFlow": "TRAVERSE",
 

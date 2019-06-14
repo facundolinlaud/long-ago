@@ -154,8 +154,8 @@
 		},
 		"14": {
 			"name": "Great Bow",
-		    "texture": "sprites/items/weapon/greatbow.png",
-		    "picture": "pictures/items/weapon/greatbow.png",
+		    "texture": "sprites/items/weapon/great_bow.png",
+		    "picture": "pictures/items/weapon/great_bow.png",
 		    "weight": 2.0,
 		    "marketValue": 9.0,
 		    "equipmentInformation": {
@@ -167,7 +167,7 @@
 		"15": {
 			"name": "Big Spear",
 		    "texture": "sprites/items/weapon/big_spear.png",
-		    "picture": "pictures/items/weapon/spear.png",
+		    "picture": "pictures/items/weapon/big_spear.png",
 		    "weight": 3.0,
 		    "marketValue": 5.0,
 		    "equipmentInformation": {
@@ -179,7 +179,7 @@
 		"16": {
 			"name": "Great Spear",
 		    "texture": "sprites/items/weapon/great_spear.png",
-		    "picture": "pictures/items/weapon/spear.png",
+		    "picture": "pictures/items/weapon/great_spear.png",
 		    "weight": 3.0,
 		    "marketValue": 5.0,
 		    "equipmentInformation": {
@@ -191,7 +191,7 @@
 		"17": {
 			"name": "Long Sword",
 		    "texture": "sprites/items/weapon/long_sword.png",
-		    "picture": "pictures/items/weapon/saber.png",
+		    "picture": "pictures/items/weapon/long_sword.png",
 		    "weight": 3.0,
 		    "marketValue": 5.0,
 		    "equipmentInformation": {
@@ -203,7 +203,7 @@
 		"18": {
 			"name": "Mace",
 		    "texture": "sprites/items/weapon/mace.png",
-		    "picture": "pictures/items/weapon/saber.png",
+		    "picture": "pictures/items/weapon/mace.png",
 		    "weight": 3.0,
 		    "marketValue": 5.0,
 		    "equipmentInformation": {
@@ -215,7 +215,7 @@
 		"19": {
 			"name": "Rapier",
 		    "texture": "sprites/items/weapon/rapier.png",
-		    "picture": "pictures/items/weapon/saber.png",
+		    "picture": "pictures/items/weapon/rapier.png",
 		    "weight": 3.0,
 		    "marketValue": 5.0,
 		    "equipmentInformation": {
@@ -227,7 +227,7 @@
 		"20": {
 			"name": "Trident",
 		    "texture": "sprites/items/weapon/trident.png",
-		    "picture": "pictures/items/weapon/spear.png",
+		    "picture": "pictures/items/weapon/trident.png",
 		    "weight": 3.0,
 		    "marketValue": 5.0,
 		    "equipmentInformation": {
