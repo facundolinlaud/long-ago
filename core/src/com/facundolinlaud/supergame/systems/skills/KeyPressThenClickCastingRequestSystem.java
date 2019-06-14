@@ -13,6 +13,7 @@ import com.facundolinlaud.supergame.managers.world.PlayerInputObserver;
 import com.facundolinlaud.supergame.model.skill.Skill;
 import com.facundolinlaud.supergame.model.skill.TwoClickInformation;
 import com.facundolinlaud.supergame.model.status.Action;
+import com.facundolinlaud.supergame.model.status.Direction;
 import com.facundolinlaud.supergame.strategies.skills.castingrequest.KeyPressThenClickCastingRequestStrategy;
 import com.facundolinlaud.supergame.utils.Mappers;
 
@@ -49,6 +50,8 @@ public class KeyPressThenClickCastingRequestSystem extends IteratingSystem {
         } else if(clickComponent.isJustCreated()){
             applyWaitingForClickAction(caster, skill);
             clickComponent.setJustCreated(false);
+        } else {
+            faceTowardsCursorPosition(caster);
         }
     }
 
@@ -66,5 +69,27 @@ public class KeyPressThenClickCastingRequestSystem extends IteratingSystem {
 
         StatusComponent statusComponent = sm.get(caster);
         statusComponent.setAction(action);
+    }
+
+    private void faceTowardsCursorPosition(Entity caster){
+        Vector2 cursorPosition = playerInputObserver.getCursorPositionInMetersRelativeToScreenCenter();
+        Direction newDirection = resolveFacingDirection(cursorPosition);
+
+        StatusComponent statusComponent = sm.get(caster);
+        statusComponent.setDirection(newDirection);
+    }
+
+    private Direction resolveFacingDirection(Vector2 cursor){
+        if(Math.abs(cursor.x) > Math.abs(cursor.y)){
+            if(cursor.x > 0)
+                return Direction.RIGHT;
+            else
+                return Direction.LEFT;
+        }else{
+            if(cursor.y > 0)
+                return Direction.DOWN;
+            else
+                return Direction.UP;
+        }
     }
 }

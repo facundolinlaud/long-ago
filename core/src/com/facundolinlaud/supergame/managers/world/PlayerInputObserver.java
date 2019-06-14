@@ -75,6 +75,11 @@ public class PlayerInputObserver extends ClickListener {
         return Dimensions.calculateGlobalPositionInPixelsToMetersRelativeToCenter(latestClickedPosition);
     }
 
+    public Vector2 getCursorPositionInMetersRelativeToScreenCenter(){
+        Vector2 mousePosition = new Vector2(Gdx.input.getX(), Gdx.input.getY());
+        return Dimensions.calculateGlobalPositionInPixelsToMetersRelativeToCenter(mousePosition);
+    }
+
     public boolean isClicking() {
         return this.isClicking;
     }
