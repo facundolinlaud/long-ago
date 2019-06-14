@@ -12,7 +12,7 @@ public class SpawnManager {
         /* Each spawn point is an entity */
         for(SpawnLocation spawnLocation: locations){
             Entity e = new Entity().add(new SpawnLocationComponent(spawnLocation));
-            engine.addEntity(e);
+//            engine.addEntity(e);
         }
     }
 }

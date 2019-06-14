@@ -86,7 +86,7 @@ public class WorldScreen implements Screen {
         ItemFactory itemFactory = factories.getItemFactory();
 
         Entity player = factories.getAgentFactory().getPlayer()
-                .at(20, 48)
+                .at(17, 40)
                 .build();
 
         Entity coin = itemFactory.getItem(ItemFactory.COINS)

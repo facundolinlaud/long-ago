@@ -6,18 +6,22 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.utils.Array;
 import com.facundolinlaud.supergame.components.RenderComponent;
 import com.facundolinlaud.supergame.components.sprite.AnimableSpriteComponent;
 import com.facundolinlaud.supergame.components.sprite.RefreshSpriteRequirementComponent;
 import com.facundolinlaud.supergame.components.sprite.StackedSpritesComponent;
+import com.facundolinlaud.supergame.domain.ComplexSprite;
 import com.facundolinlaud.supergame.model.sprite.RawAnimationModel;
-import com.facundolinlaud.supergame.model.status.Status;
 import com.facundolinlaud.supergame.model.sprite.SubAnimationModel;
+import com.facundolinlaud.supergame.model.status.Status;
 import com.facundolinlaud.supergame.utils.Mappers;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by facundo on 26/7/16.
@@ -36,13 +40,13 @@ public class StackedSpritesSystem extends IteratingSystem {
         // construyo las animations y las pongo en el AnimableSpriteComponent
 
         StackedSpritesComponent stackedSpritesComponent = stacked.get(entity);
-        List<Texture> textures = stackedSpritesComponent.getStackedSprites();
+        List<ComplexSprite> complexSprites = stackedSpritesComponent.getStackedComplexSprites();
         RawAnimationModel model = stackedSpritesComponent.getRawAnimationModel();
 
         List<Map<Status, Animation>> texturesToAnimations = new ArrayList();
 
-        for(Texture texture : textures){
-            Map<Status, Animation> animations = createAnimations(texture, model);
+        for(ComplexSprite complexSprite : complexSprites){
+            Map<Status, Animation> animations = createAnimations(complexSprite, model);
             texturesToAnimations.add(animations);
         }
 
@@ -52,24 +56,24 @@ public class StackedSpritesSystem extends IteratingSystem {
         entity.remove(RefreshSpriteRequirementComponent.class);
     }
 
-    private HashMap<Status, Animation> createAnimations(Texture sprites, RawAnimationModel model) {
-        Map<Status, SubAnimationModel> animationsModels = model.getSubanimations();
-        HashMap<Status, Animation> animations = new HashMap<>();
+    private Map<Status, Animation> createAnimations(ComplexSprite complexSprite, RawAnimationModel model) {
+        Map<Status, SubAnimationModel> animationsModels = model.getSubAnimations();
+        Map<Status, Animation> animations = new HashMap<>();
 
-        int width = model.getWidth();
-        int height = model.getHeight();
+        Texture texture = complexSprite.getTexture();
+        int width = complexSprite.getSize();
+        int height = complexSprite.getSize();
         float frameDuration = model.getFrameDuration();
 
         for(Status status : animationsModels.keySet()){
-            Array<TextureRegion> segments = new Array<>();
+            Array<Sprite> segments = new Array();
             SubAnimationModel subAnimation = animationsModels.get(status);
             int x = subAnimation.getX() * width;
-            int y = subAnimation.getY() * height;
+            int y = (subAnimation.getY() - complexSprite.getStartingIndexAtSpriteSheet()) * height;
             int length = subAnimation.getLength();
 
-            for(int i = 0; i < length; i++){
-                segments.add(new TextureRegion(sprites, x + i * width, y, width, height));
-            }
+            for(int i = 0; i < length; i++)
+                segments.add(new Sprite(texture, x + i * width, y, width, height));
 
             animations.put(status, new Animation(frameDuration, segments, subAnimation.getPlayMode()));
         }

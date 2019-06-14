@@ -5,7 +5,9 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
+import com.facundolinlaud.supergame.components.BodyComponent;
 import com.facundolinlaud.supergame.components.HealthComponent;
+import com.facundolinlaud.supergame.components.PositionComponent;
 import com.facundolinlaud.supergame.components.player.KeyboardComponent;
 import com.facundolinlaud.supergame.ui.controller.ProfileUIController;
 import com.facundolinlaud.supergame.ui.view.OverlayUI;
@@ -16,6 +18,8 @@ import com.facundolinlaud.supergame.utils.Mappers;
  */
 public class ProfileUISystem extends IteratingSystem {
     private ComponentMapper<HealthComponent> hm = Mappers.health;
+    private ComponentMapper<PositionComponent> pm = Mappers.position;
+    private ComponentMapper<BodyComponent> bm = Mappers.body;
 
     private ProfileUIController profileUIController;
 
@@ -36,5 +40,11 @@ public class ProfileUISystem extends IteratingSystem {
     protected void processEntity(Entity entity, float deltaTime) {
         HealthComponent health = hm.get(entity);
         overlayUI.setHealth(health.getCurrentHealth());
+
+        PositionComponent position = pm.get(entity);
+        overlayUI.setPosition(position.getPosition());
+
+        BodyComponent body = bm.get(entity);
+        overlayUI.setBodyPosition(body.body.getPosition());
     }
 }

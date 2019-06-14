@@ -23,7 +23,7 @@ import java.util.List;
  */
 public class PhysicsManager implements Renderable {
     public static final String COLLISION_LAYER = "collision";
-    public static final boolean DEBUG = false;
+    public static final boolean DEBUG = true;
 
     private Camera camera;
     private TiledMap map;

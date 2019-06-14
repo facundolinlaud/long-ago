@@ -83,7 +83,7 @@ public class EquipmentUIControllerImpl implements EquipmentUIController {
 
         refreshEquipperSprite();
 
-        System.out.println(item.getEquipable() + " unequipped");
+        System.out.println(item.getName() + " unequipped");
     }
 
     private void onEquipItemEvent(EquipItemEvent event) {
@@ -96,7 +96,7 @@ public class EquipmentUIControllerImpl implements EquipmentUIController {
 
         refreshEquipperSprite();
 
-        System.out.println(item.getEquipable() + " equipped");
+        System.out.println(item.getName() + " equipped");
     }
 
     private void refreshEquipperSprite() {

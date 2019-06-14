@@ -10,6 +10,7 @@ import com.facundolinlaud.supergame.components.PositionComponent;
 import com.facundolinlaud.supergame.components.RenderComponent;
 import com.facundolinlaud.supergame.utils.Dimensions;
 import com.facundolinlaud.supergame.utils.Mappers;
+import sun.nio.ch.SelectorProviderImpl;
 
 import java.util.Comparator;
 import java.util.List;
@@ -35,20 +36,24 @@ public class RenderSystem extends SortedIteratingSystem {
         PositionComponent positionComponent = pm.get(entity);
         RenderComponent renderComponent = rm.get(entity);
 
-        List<TextureRegion> regions = renderComponent.getRegions();
+        List<Sprite> sprites = renderComponent.getSprites();
 
-        if(regions.isEmpty())
+        if(sprites.isEmpty())
             return;
 
-        for(TextureRegion region : regions){
-            float width = Dimensions.toMeters(region.getRegionWidth());
-            float height = Dimensions.toMeters(region.getRegionHeight());
-
+        for(Sprite sprite : sprites){
             Vector2 pos = renderComponent.getRenderPositionStrategy().process(positionComponent.x, positionComponent.y);
 
-            // TODO: generalize this. RenderSystem can only render textures, not particles
-            spriteBatch.draw(region, pos.x, pos.y, width / 2, height / 2, width, height,
-                    1f, 1f, renderComponent.getRotation());
+            float x = pos.x - Dimensions.toMeters(sprite.getOriginX());
+            float y = pos.y - Dimensions.toMeters(sprite.getOriginY());
+
+            float width = Dimensions.toMeters(sprite.getRegionWidth());
+            float height = Dimensions.toMeters(sprite.getRegionHeight());
+
+            spriteBatch.draw(sprite, x, y,
+                    sprite.getOriginX(), sprite.getOriginY(),
+                    width, height,
+                    sprite.getScaleX(), sprite.getScaleY(), sprite.getRotation());
         }
     }
 

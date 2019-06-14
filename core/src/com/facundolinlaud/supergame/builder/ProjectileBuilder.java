@@ -2,6 +2,7 @@ package com.facundolinlaud.supergame.builder;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.graphics.g2d.ParticleEffectPool;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.facundolinlaud.supergame.components.BodyComponent;
@@ -24,10 +25,10 @@ public class ProjectileBuilder {
     }
 
     public ProjectileBuilder withPicture(String imageName, float rotation){
-        RenderComponent renderComponent = new RenderComponent(TextureFactory.getRegion(imageName),
-                RenderPriority.PARTICLE);
-        renderComponent.setRotation(rotation);
-        this.entity.add(renderComponent);
+        Sprite sprite = TextureFactory.getSprite(imageName);
+        sprite.setRotation(rotation);
+
+        this.entity.add(new RenderComponent(sprite, RenderPriority.PARTICLE));
 
         return this;
     }

@@ -8,7 +8,10 @@ import com.facundolinlaud.supergame.model.agent.Agent;
 import com.facundolinlaud.supergame.model.equip.EquipSlot;
 import com.facundolinlaud.supergame.model.particle.ParticleType;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 public class AgentFactory {
     private static final Integer MAIN_PLAYER_ID = 0;
@@ -55,7 +58,7 @@ public class AgentFactory {
 
         for(Map.Entry<EquipSlot, String> entry : body.entrySet()){
             Entity overlay = new Entity()
-                    .add(new StackableSpriteComponent(TextureFactory.getTexture(entry.getValue())));
+                    .add(new StackableSpriteComponent(SpriteFactory.get(entry.getValue())));
 
             equipment.put(entry.getKey(), overlay);
         }
