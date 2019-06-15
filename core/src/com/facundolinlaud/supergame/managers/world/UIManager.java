@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ai.msg.MessageDispatcher;
 import com.badlogic.gdx.ai.msg.MessageManager;
 import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -26,6 +27,10 @@ public class UIManager implements Renderable {
     private static final String SKIN_JSON_PATH = "ui/skin/uiskin.json";
     private static final String TEXTURE_ATLAS_PATH = "ui/skin/uiskin.atlas";
     private static final int MIN_DRAG_TIME_IN_MILLISECONDS = 10;
+
+    private static final String CUSTOM_CURSOR_PATH = "ui/cursor.png";
+    private static final int CURSOR_X_HOTSPOT = 0;
+    private static final int CURSOR_Y_HOTSPOT = 0;
 
     private Skin skin;
     private Stage stage;
@@ -59,6 +64,13 @@ public class UIManager implements Renderable {
         initializeServices(camera);
         addUIToStage();
         subscribeReceivers();
+        setCustomCursor();
+    }
+
+    private void setCustomCursor() {
+        Pixmap pm = new Pixmap(Gdx.files.internal(CUSTOM_CURSOR_PATH));
+        Gdx.graphics.setCursor(Gdx.graphics.newCursor(pm, CURSOR_X_HOTSPOT, CURSOR_Y_HOTSPOT));
+        pm.dispose();
     }
 
     private void initializeUIResources(){
