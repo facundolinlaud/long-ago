@@ -24,13 +24,13 @@ import com.facundolinlaud.supergame.utils.mediator.Mediator;
  * Created by facundo on 3/25/16.
  */
 public class UIManager implements Renderable {
-    private static final String SKIN_JSON_PATH = "ui/skin/uiskin.json";
-    private static final String TEXTURE_ATLAS_PATH = "ui/skin/uiskin.atlas";
+    private static final String SKIN_JSON_PATH = "ui/redesign/uiskin.json";
+    private static final String TEXTURE_ATLAS_PATH = "ui/redesign/uiskin.atlas";
     private static final int MIN_DRAG_TIME_IN_MILLISECONDS = 10;
 
     private static final String CUSTOM_CURSOR_PATH = "ui/cursor.png";
-    private static final int CURSOR_X_HOTSPOT = 0;
-    private static final int CURSOR_Y_HOTSPOT = 0;
+    private static final int CURSOR_X_HOTSPOT = 9;
+    private static final int CURSOR_Y_HOTSPOT = 9;
 
     private Skin skin;
     private Stage stage;
@@ -83,7 +83,7 @@ public class UIManager implements Renderable {
         this.overlayUI = new OverlayUI(skin);
         this.inventoryUI = new InventoryUI(uiMediator, stage, skin, dragAndDrop, overlayUI.getItemDropZone());
         this.attributesUI = new AttributesUI(uiMediator, stage, skin);
-        this.equipmentUI = new EquipmentUI(uiMediator, stage, skin, dragAndDrop);
+        this.equipmentUI = new EquipmentUI(uiMediator, stage, skin, dragAndDrop, overlayUI.getItemDropZone());
         this.skillCastingUI = new SkillCastingUI();
         this.labelDamagesUI = new LabelDamagesUI(stage, skin);
     }
@@ -103,7 +103,7 @@ public class UIManager implements Renderable {
     }
 
     private void subscribeReceivers(){
-        this.uiMediator.subscribe(ItemDroppedEvent.class, this.inventoryUIController);
+        this.uiMediator.subscribe(ItemFromInventoryDropped.class, this.inventoryUIController);
         this.uiMediator.subscribe(ItemsPositionSwapEvent.class, this.inventoryUIController);
         this.uiMediator.subscribe(AttributeUpgradeEvent.class, this.attributesUIController);
         this.uiMediator.subscribe(UnequipItemEvent.class, this.equipmentUIController);

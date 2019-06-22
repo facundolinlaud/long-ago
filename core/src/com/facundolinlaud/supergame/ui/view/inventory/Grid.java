@@ -16,13 +16,10 @@ import java.util.List;
  * Created by facundo on 3/29/16.
  */
 public class Grid extends Table {
-    public final static int ITEMS_PER_ROW = 5;
-
     private List<InventorySlot> slots;
 
-    public Grid(Skin skin, int itemsAmount, Mediator uiMediator, DragAndDrop dragAndDrop) {
+    public Grid(Skin skin, int itemsPerRow, int itemsAmount, Mediator uiMediator, DragAndDrop dragAndDrop) {
         super(skin);
-        align(Align.topLeft);
 
         this.slots = new ArrayList<>();
 
@@ -34,7 +31,8 @@ public class Grid extends Table {
             dragAndDrop.addSource(new SlotSource(slot, skin, SlotType.INVENTORY_SLOT));
             dragAndDrop.addTarget(new InventorySlotTarget(slot, uiMediator));
 
-            if(i > 0 && i % 5 == 0) row();
+            if(i % itemsPerRow == 0)
+                row();
         }
     }
 

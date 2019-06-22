@@ -5,7 +5,7 @@ package com.facundolinlaud.supergame.ui.view.utils;
  */
 public enum Themes {
     DEFAULT("default"),
-    CLASSIC("rpg"),
+    GOTHIC("gothic"),
     SLOT("slot");
 
     private final String theme;

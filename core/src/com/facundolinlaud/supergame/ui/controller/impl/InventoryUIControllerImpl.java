@@ -15,7 +15,7 @@ import com.facundolinlaud.supergame.ui.model.inventory.Invented;
 import com.facundolinlaud.supergame.ui.view.InventoryUI;
 import com.facundolinlaud.supergame.utils.Mappers;
 import com.facundolinlaud.supergame.utils.events.Event;
-import com.facundolinlaud.supergame.utils.events.ItemDroppedEvent;
+import com.facundolinlaud.supergame.utils.events.ItemFromInventoryDropped;
 import com.facundolinlaud.supergame.utils.events.ItemsPositionSwapEvent;
 
 import java.util.ArrayList;
@@ -68,14 +68,14 @@ public class InventoryUIControllerImpl implements InventoryUIController {
 
     @Override
     public void handle(Event event) {
-        if(event instanceof ItemDroppedEvent){
-            itemDropped((ItemDroppedEvent) event);
+        if(event instanceof ItemFromInventoryDropped){
+            itemDropped((ItemFromInventoryDropped) event);
         }else if(event instanceof ItemsPositionSwapEvent){
             itemsPositionSwapped((ItemsPositionSwapEvent) event);
         }
     }
 
-    private void itemDropped(ItemDroppedEvent event){
+    private void itemDropped(ItemFromInventoryDropped event){
         PositionComponent gathererPosition = pm.get(gatherer);
 
         Item itemModel = event.getItem();

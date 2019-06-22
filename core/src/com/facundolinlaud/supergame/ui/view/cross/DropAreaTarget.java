@@ -1,12 +1,12 @@
-package com.facundolinlaud.supergame.ui.view.inventory;
+package com.facundolinlaud.supergame.ui.view.cross;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Payload;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Source;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Target;
 import com.facundolinlaud.supergame.ui.model.Item;
-import com.facundolinlaud.supergame.ui.view.cross.SlotSource;
-import com.facundolinlaud.supergame.utils.events.ItemDroppedEvent;
+import com.facundolinlaud.supergame.utils.events.ItemFromEquipmentDropped;
+import com.facundolinlaud.supergame.utils.events.ItemFromInventoryDropped;
 import com.facundolinlaud.supergame.utils.mediator.Mediator;
 import com.facundolinlaud.supergame.utils.mediator.Messenger;
 
@@ -34,7 +34,10 @@ public class DropAreaTarget extends Target implements Messenger {
 
         switch(slotSource.getSlotType()){
             case INVENTORY_SLOT:
-                uiMediator.raise(this, ItemDroppedEvent.class, new ItemDroppedEvent(item));
+                uiMediator.raise(this, ItemFromInventoryDropped.class, new ItemFromInventoryDropped(item));
+                break;
+            case EQUIPMENT_SLOT:
+                uiMediator.raise(this, ItemFromEquipmentDropped.class, new ItemFromEquipmentDropped(item));
                 break;
         }
     }
