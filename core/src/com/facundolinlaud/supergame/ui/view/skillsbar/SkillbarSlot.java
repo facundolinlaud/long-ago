@@ -5,10 +5,11 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.facundolinlaud.supergame.model.skill.Skill;
 import com.facundolinlaud.supergame.ui.view.cross.Slot;
-import com.facundolinlaud.supergame.ui.view.inventory.NullItemSlot;
+import com.facundolinlaud.supergame.ui.view.utils.Themes;
 
 public class SkillbarSlot extends Slot<Skill> {
     private static final int HEIGHT = 32;
@@ -16,18 +17,18 @@ public class SkillbarSlot extends Slot<Skill> {
 
     private Skill skill;
     private Image skillImage;
-    private NullItemSlot nullSkillSlot;
+    private ImageButton slotButton;
     private Image cooldownImage;
 
     public SkillbarSlot(Skin skin) {
-        this.nullSkillSlot = new NullItemSlot(skin);
+        this.slotButton = new ImageButton(skin, Themes.IMAGE_BUTTON_SLOT);
         this.cooldownImage = new Image();
         this.cooldownImage.setColor(Color.BLACK);
         this.cooldownImage.setSize(WIDTH, HEIGHT);
-        this.cooldownImage.setPosition(nullSkillSlot.getX(), nullSkillSlot.getY());
+        this.cooldownImage.setPosition(slotButton.getX(), slotButton.getY());
 
         setSize(WIDTH, HEIGHT);
-        add(nullSkillSlot);
+        add(slotButton);
         add(cooldownImage);
     }
 

@@ -2,7 +2,6 @@ package com.facundolinlaud.supergame.strategies.health;
 
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
-import com.badlogic.gdx.ai.msg.MessageDispatcher;
 import com.badlogic.gdx.ai.msg.MessageManager;
 import com.facundolinlaud.supergame.components.BodyComponent;
 import com.facundolinlaud.supergame.components.HealthComponent;
@@ -15,7 +14,7 @@ import com.facundolinlaud.supergame.components.skills.SkillLockDownComponent;
 import com.facundolinlaud.supergame.model.RenderPriority;
 import com.facundolinlaud.supergame.model.status.Action;
 import com.facundolinlaud.supergame.utils.Mappers;
-import com.facundolinlaud.supergame.utils.Messages;
+import com.facundolinlaud.supergame.utils.events.Messages;
 import com.facundolinlaud.supergame.utils.events.AgentDiedEvent;
 
 public class NPCZeroHealthStrategyImpl implements ZeroHealthStrategy {

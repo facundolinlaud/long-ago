@@ -2,6 +2,7 @@ package com.facundolinlaud.supergame.ui.view.profile;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Align;
@@ -11,44 +12,56 @@ import com.badlogic.gdx.utils.Align;
  */
 public class ProfileTable extends Table {
 
-    private HealthLabel health;
-    private FpsLabel fps;
-    private Label position;
-    private Label bodyPosition;
+    public static final String LABEL_STYLE = "gothic-white";
+    private ProgressBar healthBar;
+    private ProgressBar manaBar;
+
+    private Label fpsLabel;
+    private Label positionLabel;
+    private Label bodyPositionLabel;
 
     public ProfileTable(Skin skin) {
         super(skin);
 
-        this.health = new HealthLabel(skin);
-        this.fps = new FpsLabel(skin);
-        this.position = new Label("Texture Position: unknown", skin);
-        this.bodyPosition = new Label("Body Position: unknown", skin);
+        this.healthBar = new ProgressBar(0, 100, 1, false, skin, "gothic-health");
+        this.healthBar.setSize(300, 80);
+
+        this.manaBar = new ProgressBar(0, 100, 1, false, skin, "gothic-mana");
+        this.manaBar.setSize(300, 80);
+        this.manaBar.setValue(50);
+
+        this.fpsLabel = new Label("FPS: unknown", skin, LABEL_STYLE);
+        this.positionLabel = new Label("Texture Position: unknown", skin, LABEL_STYLE);
+        this.bodyPositionLabel = new Label("Body Position: unknown", skin, LABEL_STYLE);
 
         pad(5);
         align(Align.topLeft);
 
-        add(position).left();
+        add(healthBar).top().left().width(300).height(20);
         row();
-        add(bodyPosition).left();
+        add(manaBar).top().left().width(300).height(20);
         row();
-        add(health).left();
+        add(positionLabel).left();
         row();
-        add(fps).left();
+        add(bodyPositionLabel).left();
+        row();
+        add(fpsLabel).left();
     }
 
     public void setHealth(float health) {
-        this.health.setHealth(health);
+        if(health >= 0 || health <= 100)
+            this.healthBar.setValue(health);
     }
 
     public void setFPS(int fps) {
-        this.fps.setFPS(fps);
+        this.fpsLabel.setText("FPS: " + fps);
     }
 
     public void setPosition(Vector2 position){
-        this.position.setText("Texture Position: (" + position.x + ", " + position.y + ")");
+        this.positionLabel.setText("Texture Position: (" + position.x + ", " + position.y + ")");
     }
 
     public void setBodyPosition(Vector2 bodyPosition) {
-        this.bodyPosition.setText("Body Position: (" + bodyPosition.x + ", " + bodyPosition.y + ")");
+        this.bodyPositionLabel.setText("Body Position: (" + bodyPosition.x + ", " + bodyPosition.y + ")");
     }
 }

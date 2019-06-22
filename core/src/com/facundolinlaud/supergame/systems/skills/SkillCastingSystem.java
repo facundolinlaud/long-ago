@@ -21,7 +21,7 @@ import com.facundolinlaud.supergame.strategies.skills.casting.ProjectileSkillCas
 import com.facundolinlaud.supergame.strategies.skills.casting.SkillCastingStrategy;
 import com.facundolinlaud.supergame.strategies.skills.casting.SpellSkillCastingStrategy;
 import com.facundolinlaud.supergame.utils.Mappers;
-import com.facundolinlaud.supergame.utils.Messages;
+import com.facundolinlaud.supergame.utils.events.Messages;
 
 import java.util.HashMap;
 import java.util.Map;

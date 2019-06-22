@@ -400,7 +400,7 @@
 		"fontColor": "black"
 	},
 	"gothic-white": {
-		"font": "Fontin-Regular-12-white",
+		"font": "Fontin-Regular-14-white",
 		"fontColor": "color"
 	}
 },
@@ -525,9 +525,9 @@
 		"up": "default-button",
 		"down": "default-button-mousedown",
 		"over": "default-button-mouseover",
-		"pressedOffsetX": 12,
-		"unpressedOffsetX": 10,
-		"checkedOffsetX": 10
+		"pressedOffsetX": 1,
+		"unpressedOffsetX": 0,
+		"checkedOffsetX": 0
 	},
 	"toggle-gothic": {
 		"font": "Fontin-Regular-16-white",

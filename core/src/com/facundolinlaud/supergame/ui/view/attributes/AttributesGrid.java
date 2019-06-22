@@ -10,12 +10,12 @@ import java.util.List;
 /**
  * Created by facundo on 3/31/16.
  */
-public class Grid extends Table {
+public class AttributesGrid extends Table {
     private static final int DEFAULT_VALUE = 1;
 
     private List<Row> attributesRows;
 
-    public Grid(Skin skin) {
+    public AttributesGrid(Skin skin) {
         super(skin);
 
         this.attributesRows = new ArrayList<>();

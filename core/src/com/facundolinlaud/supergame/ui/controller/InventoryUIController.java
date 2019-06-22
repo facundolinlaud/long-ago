@@ -15,7 +15,7 @@ import com.facundolinlaud.supergame.ui.model.equipment.Equipable;
 import com.facundolinlaud.supergame.ui.model.inventory.Invented;
 import com.facundolinlaud.supergame.ui.view.InventoryUI;
 import com.facundolinlaud.supergame.utils.Mappers;
-import com.facundolinlaud.supergame.utils.Messages;
+import com.facundolinlaud.supergame.utils.events.Messages;
 import com.facundolinlaud.supergame.utils.events.ItemDroppedEvent;
 import com.facundolinlaud.supergame.utils.events.ItemsPositionSwapEvent;
 

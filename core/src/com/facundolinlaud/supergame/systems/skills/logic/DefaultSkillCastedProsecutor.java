@@ -5,18 +5,12 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
-import com.badlogic.gdx.ai.msg.MessageDispatcher;
-import com.badlogic.gdx.ai.msg.MessageManager;
-import com.badlogic.gdx.graphics.g2d.ParticleEffectPool.PooledEffect;
 import com.badlogic.gdx.math.Vector2;
 import com.facundolinlaud.supergame.components.HealthComponent;
-import com.facundolinlaud.supergame.components.ParticleComponent;
 import com.facundolinlaud.supergame.components.PositionComponent;
 import com.facundolinlaud.supergame.components.skills.SkillTargetedComponent;
 import com.facundolinlaud.supergame.factory.ParticleFactory;
 import com.facundolinlaud.supergame.managers.world.LightsManager;
-import com.facundolinlaud.supergame.model.light.LightModel;
-import com.facundolinlaud.supergame.model.particle.ParticleType;
 import com.facundolinlaud.supergame.model.skill.AreaOfEffect;
 import com.facundolinlaud.supergame.model.skill.Skill;
 import com.facundolinlaud.supergame.strategies.skills.areaofeffectcheck.AreaOfEffectCheckStrategy;
@@ -24,8 +18,6 @@ import com.facundolinlaud.supergame.strategies.skills.areaofeffectcheck.CircleAr
 import com.facundolinlaud.supergame.strategies.skills.areaofeffectcheck.SquareAreaOfEffectCheckStrategyStrategyImpl;
 import com.facundolinlaud.supergame.strategies.skills.epicenter.SkillEpicenterStrategy;
 import com.facundolinlaud.supergame.utils.Mappers;
-import com.facundolinlaud.supergame.utils.Messages;
-import com.facundolinlaud.supergame.utils.events.EntityAttackedEvent;
 
 public class DefaultSkillCastedProsecutor extends BaseSkillCastedProsecutor {
     private ComponentMapper<PositionComponent> pm = Mappers.position;

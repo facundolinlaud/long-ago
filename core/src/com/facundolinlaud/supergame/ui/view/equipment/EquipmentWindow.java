@@ -14,7 +14,7 @@ import java.util.Map;
 public class EquipmentWindow extends GothicWindow {
     public static final String TITLE = "Equipment";
 
-    private Grid grid;
+    private EquipmentGrid grid;
 
     public EquipmentWindow(Skin skin, DragAndDrop dragAndDrop) {
         super(TITLE, skin);
@@ -25,7 +25,7 @@ public class EquipmentWindow extends GothicWindow {
     }
 
     private void initializeGrid(Skin skin, DragAndDrop dragAndDrop) {
-        this.grid = new Grid(skin, dragAndDrop);
+        this.grid = new EquipmentGrid(skin, dragAndDrop);
         add(this.grid).fill().expand();
     }
 

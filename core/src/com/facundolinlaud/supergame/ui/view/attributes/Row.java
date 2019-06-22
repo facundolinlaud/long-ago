@@ -1,7 +1,9 @@
 package com.facundolinlaud.supergame.ui.view.attributes;
 
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.facundolinlaud.supergame.ui.view.utils.Themes;
 
 /**
  * Created by facundo on 3/31/16.
@@ -15,7 +17,7 @@ public class Row extends Table {
 
         this.valueStack = new ValueStack(skin, value);
 
-        add(new Name(skin, name)).width(90).left();
+        add(new Label(name, skin, Themes.LABEL_14PTS)).width(90).left();
         add(valueStack).expandX().right();
         add(new AddValue(name, skin)).expandX().fill().right().pad(8);
     }

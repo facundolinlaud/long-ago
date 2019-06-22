@@ -8,7 +8,7 @@ import com.facundolinlaud.supergame.components.AttributesComponent;
 import com.facundolinlaud.supergame.ui.model.Attributes;
 import com.facundolinlaud.supergame.ui.view.AttributesUI;
 import com.facundolinlaud.supergame.utils.Mappers;
-import com.facundolinlaud.supergame.utils.Messages;
+import com.facundolinlaud.supergame.utils.events.Messages;
 import com.facundolinlaud.supergame.utils.events.AttributeUpgradeEvent;
 
 /**

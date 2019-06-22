@@ -1,33 +1,30 @@
 package com.facundolinlaud.supergame.ui.view.attributes;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.facundolinlaud.supergame.ui.model.Attributes;
-import com.facundolinlaud.supergame.ui.view.utils.Themes;
+import com.facundolinlaud.supergame.ui.view.cross.GothicWindow;
 
 /**
  * Created by facundo on 3/31/16.
  */
-public class AttributesWindow extends Window {
+public class AttributesWindow extends GothicWindow {
     private static final String TITLE = "Attributes";
 
-    private Grid grid;
+    private AttributesGrid attributesGrid;
 
     public AttributesWindow(Skin skin) {
-        super(TITLE, skin, Themes.GOTHIC.toString());
+        super(TITLE, skin);
+        this.setVisible(false);
+        this.attributesGrid = new AttributesGrid(skin);
 
-        setVisible(false);
-        this.grid = new Grid(skin);
-        add(this.grid).expandX().fillX();
-        setSize(270, 300);
-        adjustTitlePosition();
-    }
+        setSize(250, 270);
+        padLeft(20);
+        padRight(20);
 
-    private void adjustTitlePosition() {
-        getTitleTable().center().top().padLeft(30);
+        add(this.attributesGrid).expandX().fillX();
     }
 
     public void update(Attributes attributes){
-        if(isVisible()) grid.update(attributes);
+        if(isVisible()) attributesGrid.update(attributes);
     }
 }

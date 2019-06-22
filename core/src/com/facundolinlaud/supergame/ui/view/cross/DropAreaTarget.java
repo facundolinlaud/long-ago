@@ -7,7 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Payload;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Source;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Target;
 import com.facundolinlaud.supergame.ui.model.Item;
-import com.facundolinlaud.supergame.utils.Messages;
+import com.facundolinlaud.supergame.utils.events.Messages;
 import com.facundolinlaud.supergame.utils.events.ItemDroppedEvent;
 
 /**

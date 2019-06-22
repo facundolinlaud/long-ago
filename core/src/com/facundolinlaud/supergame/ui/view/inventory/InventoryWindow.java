@@ -14,7 +14,7 @@ public class InventoryWindow extends GothicWindow {
     private static final String TITLE = "Inventory";
     private static final int ITEMS_PER_ROW = 8;
 
-    private Grid grid;
+    private InventoryGrid grid;
 
     public InventoryWindow(Skin skin, int maxItemsAmount, DragAndDrop dragAndDrop) {
         super(TITLE, skin);
@@ -32,7 +32,7 @@ public class InventoryWindow extends GothicWindow {
     }
 
     private void initializeGrid(Skin skin, int maxItemsAmount, DragAndDrop dragAndDrop) {
-        this.grid = new Grid(skin, ITEMS_PER_ROW, maxItemsAmount, dragAndDrop);
+        this.grid = new InventoryGrid(skin, ITEMS_PER_ROW, maxItemsAmount, dragAndDrop);
         this.add(grid);
     }
 

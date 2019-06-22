@@ -14,7 +14,7 @@ import com.facundolinlaud.supergame.components.spawn.SpawnedAgentComponent;
 import com.facundolinlaud.supergame.factory.AgentFactory;
 import com.facundolinlaud.supergame.utils.Dimensions;
 import com.facundolinlaud.supergame.utils.Mappers;
-import com.facundolinlaud.supergame.utils.Messages;
+import com.facundolinlaud.supergame.utils.events.Messages;
 import com.facundolinlaud.supergame.utils.events.AgentDiedEvent;
 
 import java.util.HashMap;

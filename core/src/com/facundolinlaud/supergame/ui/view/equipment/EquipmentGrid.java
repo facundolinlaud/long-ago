@@ -16,11 +16,11 @@ import java.util.Map;
 /**
  * Created by facundo on 4/2/16.
  */
-public class Grid extends Table {
+public class EquipmentGrid extends Table {
 
     private Map<EquipSlot, EquipmentSlot> slots;
 
-    public Grid(Skin skin, DragAndDrop dragAndDrop) {
+    public EquipmentGrid(Skin skin, DragAndDrop dragAndDrop) {
         super(skin);
 
         this.slots = new HashMap<>();

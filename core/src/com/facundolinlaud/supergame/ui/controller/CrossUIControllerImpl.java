@@ -2,7 +2,7 @@ package com.facundolinlaud.supergame.ui.controller;
 
 import com.badlogic.gdx.ai.msg.Telegram;
 import com.badlogic.gdx.ai.msg.Telegraph;
-import com.facundolinlaud.supergame.utils.Messages;
+import com.facundolinlaud.supergame.utils.events.Messages;
 import com.facundolinlaud.supergame.utils.events.InventoryAndEquipmentItemsSwapEvent;
 
 /**

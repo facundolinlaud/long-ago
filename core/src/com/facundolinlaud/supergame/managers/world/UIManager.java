@@ -14,7 +14,7 @@ import com.facundolinlaud.supergame.managers.Renderable;
 import com.facundolinlaud.supergame.systems.ui.*;
 import com.facundolinlaud.supergame.ui.controller.*;
 import com.facundolinlaud.supergame.ui.view.*;
-import com.facundolinlaud.supergame.utils.Messages;
+import com.facundolinlaud.supergame.utils.events.Messages;
 
 /**
  * Created by facundo on 3/25/16.

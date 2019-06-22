@@ -13,10 +13,10 @@ import java.util.List;
 /**
  * Created by facundo on 3/29/16.
  */
-public class Grid extends Table {
+public class InventoryGrid extends Table {
     private List<InventorySlot> slots;
 
-    public Grid(Skin skin, int itemsPerRow, int itemsAmount, DragAndDrop dragAndDrop) {
+    public InventoryGrid(Skin skin, int itemsPerRow, int itemsAmount, DragAndDrop dragAndDrop) {
         super(skin);
 
         this.slots = new ArrayList<>();

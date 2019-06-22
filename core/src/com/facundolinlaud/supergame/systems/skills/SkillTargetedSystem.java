@@ -12,7 +12,7 @@ import com.facundolinlaud.supergame.model.skill.Skill;
 import com.facundolinlaud.supergame.strategies.stats.DamageLogic;
 import com.facundolinlaud.supergame.strategies.stats.DefaultDamageLogic;
 import com.facundolinlaud.supergame.utils.Mappers;
-import com.facundolinlaud.supergame.utils.Messages;
+import com.facundolinlaud.supergame.utils.events.Messages;
 import com.facundolinlaud.supergame.utils.events.EntityAttackedEvent;
 
 public class SkillTargetedSystem extends IteratingSystem {

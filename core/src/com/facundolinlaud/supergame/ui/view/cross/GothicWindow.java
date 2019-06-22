@@ -8,7 +8,7 @@ import com.facundolinlaud.supergame.ui.view.utils.Themes;
 public class GothicWindow extends Window {
 
     public GothicWindow(String title, Skin skin) {
-        super(title, skin, Themes.GOTHIC.toString());
+        super(title, skin, Themes.WINDOW_GOTHIC);
         setup();
         adjustTitlePosition();
     }
@@ -18,7 +18,8 @@ public class GothicWindow extends Window {
         align(Align.topLeft);
     }
     private void adjustTitlePosition() {
-        getTitleTable().align(Align.top);
+        getTitleTable().align(Align.top).padTop(13);
         getTitleLabel().setAlignment(Align.center);
+
     }
 }

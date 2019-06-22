@@ -1,9 +1,11 @@
 package com.facundolinlaud.supergame.ui.view.inventory;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.facundolinlaud.supergame.ui.model.Item;
 import com.facundolinlaud.supergame.ui.view.cross.Slot;
+import com.facundolinlaud.supergame.ui.view.utils.Themes;
 
 /**
  * Created by facundo on 3/29/16.
@@ -13,11 +15,11 @@ public class InventorySlot extends Slot<Item> {
 
     private Item item;
     private Image itemImage;
-    private NullItemSlot nullItemSlot;
+    private ImageButton slotButton;
 
     public InventorySlot(Skin skin) {
-        this.nullItemSlot = new NullItemSlot(skin);
-        add(nullItemSlot);
+        this.slotButton = new ImageButton(skin, Themes.IMAGE_BUTTON_SLOT);
+        add(slotButton);
     }
 
     @Override

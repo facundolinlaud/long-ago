@@ -1,4 +1,4 @@
-package com.facundolinlaud.supergame.utils;
+package com.facundolinlaud.supergame.utils.events;
 
 public class Messages {
     public static final int SKILL_CASTED = 0;
