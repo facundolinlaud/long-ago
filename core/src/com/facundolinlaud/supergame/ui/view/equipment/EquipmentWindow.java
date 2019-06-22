@@ -1,13 +1,10 @@
 package com.facundolinlaud.supergame.ui.view.equipment;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
+import com.facundolinlaud.supergame.model.equip.EquipSlot;
 import com.facundolinlaud.supergame.ui.model.Item;
 import com.facundolinlaud.supergame.ui.view.cross.GothicWindow;
-import com.facundolinlaud.supergame.ui.view.utils.Themes;
-import com.facundolinlaud.supergame.model.equip.EquipSlot;
-import com.facundolinlaud.supergame.utils.mediator.Mediator;
 
 import java.util.Map;
 
@@ -19,16 +16,16 @@ public class EquipmentWindow extends GothicWindow {
 
     private Grid grid;
 
-    public EquipmentWindow(Skin skin, Mediator uiMediator, DragAndDrop dragAndDrop) {
+    public EquipmentWindow(Skin skin, DragAndDrop dragAndDrop) {
         super(TITLE, skin);
         setVisible(false);
         setSize(265, 320);
-        initializeGrid(skin, uiMediator, dragAndDrop);
+        initializeGrid(skin, dragAndDrop);
         setDebug(true);
     }
 
-    private void initializeGrid(Skin skin, Mediator uiMediator, DragAndDrop dragAndDrop) {
-        this.grid = new Grid(skin, uiMediator, dragAndDrop);
+    private void initializeGrid(Skin skin, DragAndDrop dragAndDrop) {
+        this.grid = new Grid(skin, dragAndDrop);
         add(this.grid).fill().expand();
     }
 

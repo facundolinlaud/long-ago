@@ -1,13 +1,9 @@
 package com.facundolinlaud.supergame.ui.view.inventory;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
-import com.badlogic.gdx.utils.Align;
 import com.facundolinlaud.supergame.ui.model.Item;
 import com.facundolinlaud.supergame.ui.view.cross.GothicWindow;
-import com.facundolinlaud.supergame.ui.view.utils.Themes;
-import com.facundolinlaud.supergame.utils.mediator.Mediator;
 
 import java.util.List;
 
@@ -20,11 +16,11 @@ public class InventoryWindow extends GothicWindow {
 
     private Grid grid;
 
-    public InventoryWindow(Skin skin, int maxItemsAmount, Mediator uiMediator, DragAndDrop dragAndDrop) {
+    public InventoryWindow(Skin skin, int maxItemsAmount, DragAndDrop dragAndDrop) {
         super(TITLE, skin);
         setVisible(false);
         adjustSize(maxItemsAmount);
-        initializeGrid(skin, maxItemsAmount, uiMediator, dragAndDrop);
+        initializeGrid(skin, maxItemsAmount, dragAndDrop);
     }
 
     private void adjustSize(int itemCount){
@@ -35,8 +31,8 @@ public class InventoryWindow extends GothicWindow {
         setSize(width, height);
     }
 
-    private void initializeGrid(Skin skin, int maxItemsAmount, Mediator uiMediator, DragAndDrop dragAndDrop) {
-        this.grid = new Grid(skin, ITEMS_PER_ROW, maxItemsAmount, uiMediator, dragAndDrop);
+    private void initializeGrid(Skin skin, int maxItemsAmount, DragAndDrop dragAndDrop) {
+        this.grid = new Grid(skin, ITEMS_PER_ROW, maxItemsAmount, dragAndDrop);
         this.add(grid);
     }
 

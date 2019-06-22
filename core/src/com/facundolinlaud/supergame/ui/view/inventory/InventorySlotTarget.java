@@ -1,29 +1,30 @@
 package com.facundolinlaud.supergame.ui.view.inventory;
 
+import com.badlogic.gdx.ai.msg.MessageDispatcher;
+import com.badlogic.gdx.ai.msg.MessageManager;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Payload;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Source;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Target;
 import com.facundolinlaud.supergame.ui.model.Item;
 import com.facundolinlaud.supergame.ui.view.cross.Slot;
 import com.facundolinlaud.supergame.ui.view.cross.SlotSource;
+import com.facundolinlaud.supergame.utils.Messages;
 import com.facundolinlaud.supergame.utils.events.ItemsPositionSwapEvent;
 import com.facundolinlaud.supergame.utils.events.UnequipItemEvent;
-import com.facundolinlaud.supergame.utils.mediator.Mediator;
-import com.facundolinlaud.supergame.utils.mediator.Messenger;
 
 /**
  * Created by facundo on 3/30/16.
  */
-public class InventorySlotTarget extends Target implements Messenger {
+public class InventorySlotTarget extends Target {
 
+    private MessageDispatcher messageDispatcher;
     private Slot<Item> slot;
-    private Mediator uiMediator;
 
-    public InventorySlotTarget(InventorySlot slot, Mediator uiMediator) {
+    public InventorySlotTarget(InventorySlot slot) {
         super(slot);
 
         this.slot = slot;
-        this.uiMediator = uiMediator;
+        this.messageDispatcher = MessageManager.getInstance();
     }
 
     @Override
@@ -37,24 +38,22 @@ public class InventorySlotTarget extends Target implements Messenger {
 
         switch(slotSource.getSlotType()){
             case INVENTORY_SLOT:
-                handleInventorySourceDrop(payload);
+                broadcastInventorySourceDrop(payload);
                 break;
             case EQUIPMENT_SLOT:
-                handleEquipmentSourceDrop(payload);
+                broadcastEquipmentSourceDrop(payload);
                 break;
         }
     }
 
-    private void handleInventorySourceDrop(Payload payload) {
+    private void broadcastInventorySourceDrop(Payload payload) {
         Item a = slot.getContent();
         Item b = (Item) payload.getObject();
-
-        uiMediator.raise(this, ItemsPositionSwapEvent.class, new ItemsPositionSwapEvent(a, b));
+        messageDispatcher.dispatchMessage(Messages.ITEMS_IN_INVENTORY_SWAPPED, new ItemsPositionSwapEvent(a, b));
     }
 
-    private void handleEquipmentSourceDrop(Payload payload){
+    private void broadcastEquipmentSourceDrop(Payload payload){
         Item equippedItem = (Item) payload.getObject();
-
-        uiMediator.raise(this, UnequipItemEvent.class, new UnequipItemEvent(equippedItem));
+        messageDispatcher.dispatchMessage(Messages.ITEM_UNEQUIPPED, new UnequipItemEvent(equippedItem));
     }
 }

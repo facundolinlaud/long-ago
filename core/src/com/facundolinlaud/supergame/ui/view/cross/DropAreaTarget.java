@@ -1,25 +1,24 @@
 package com.facundolinlaud.supergame.ui.view.cross;
 
+import com.badlogic.gdx.ai.msg.MessageDispatcher;
+import com.badlogic.gdx.ai.msg.MessageManager;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Payload;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Source;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Target;
 import com.facundolinlaud.supergame.ui.model.Item;
-import com.facundolinlaud.supergame.utils.events.ItemFromEquipmentDropped;
-import com.facundolinlaud.supergame.utils.events.ItemFromInventoryDropped;
-import com.facundolinlaud.supergame.utils.mediator.Mediator;
-import com.facundolinlaud.supergame.utils.mediator.Messenger;
+import com.facundolinlaud.supergame.utils.Messages;
+import com.facundolinlaud.supergame.utils.events.ItemDroppedEvent;
 
 /**
  * Created by facundo on 3/30/16.
  */
-public class DropAreaTarget extends Target implements Messenger {
-    private Mediator uiMediator;
+public class DropAreaTarget extends Target {
+    private MessageDispatcher messageDispatcher;
 
-    public DropAreaTarget(Actor actor, Mediator uiMediator) {
+    public DropAreaTarget(Actor actor) {
         super(actor);
-
-        this.uiMediator = uiMediator;
+        this.messageDispatcher = MessageManager.getInstance();
     }
 
     @Override
@@ -34,10 +33,10 @@ public class DropAreaTarget extends Target implements Messenger {
 
         switch(slotSource.getSlotType()){
             case INVENTORY_SLOT:
-                uiMediator.raise(this, ItemFromInventoryDropped.class, new ItemFromInventoryDropped(item));
+                this.messageDispatcher.dispatchMessage(Messages.ITEM_FROM_INVENTORY_DROPPED, new ItemDroppedEvent(item));
                 break;
             case EQUIPMENT_SLOT:
-                uiMediator.raise(this, ItemFromEquipmentDropped.class, new ItemFromEquipmentDropped(item));
+                this.messageDispatcher.dispatchMessage(Messages.ITEM_FROM_EQUIPMENT_DROPPED, new ItemDroppedEvent(item));
                 break;
         }
     }

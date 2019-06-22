@@ -3,7 +3,6 @@ package com.facundolinlaud.supergame.ui.view.attributes;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.facundolinlaud.supergame.ui.model.Attributes;
-import com.facundolinlaud.supergame.utils.mediator.Mediator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,13 +15,13 @@ public class Grid extends Table {
 
     private List<Row> attributesRows;
 
-    public Grid(Mediator uiMediator, Skin skin) {
+    public Grid(Skin skin) {
         super(skin);
 
         this.attributesRows = new ArrayList<>();
 
         for(String attr : Attributes.availableAttributes){
-            Row row = new Row(uiMediator, skin, attr, DEFAULT_VALUE);
+            Row row = new Row(skin, attr, DEFAULT_VALUE);
 
             attributesRows.add(row);
             add(row).expandX().fillX();

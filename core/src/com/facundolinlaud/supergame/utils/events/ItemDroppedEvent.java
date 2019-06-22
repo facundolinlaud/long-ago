@@ -2,10 +2,13 @@ package com.facundolinlaud.supergame.utils.events;
 
 import com.facundolinlaud.supergame.ui.model.Item;
 
-public class ItemFromEquipmentDropped extends Event {
+/**
+ * Created by facundo on 3/27/16.
+ */
+public class ItemDroppedEvent extends Event {
     private Item item;
 
-    public ItemFromEquipmentDropped(Item item) {
+    public ItemDroppedEvent(Item item) {
         this.item = item;
     }
 

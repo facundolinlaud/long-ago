@@ -1,4 +1,4 @@
-package com.facundolinlaud.supergame.ui.controller.impl;
+package com.facundolinlaud.supergame.ui.controller;
 
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.gdx.ai.msg.Telegram;

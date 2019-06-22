@@ -7,9 +7,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import com.facundolinlaud.supergame.ui.model.Item;
 import com.facundolinlaud.supergame.ui.view.cross.DropAreaTarget;
-import com.facundolinlaud.supergame.ui.view.utils.ToggleWindowListener;
 import com.facundolinlaud.supergame.ui.view.inventory.InventoryWindow;
-import com.facundolinlaud.supergame.utils.mediator.Mediator;
+import com.facundolinlaud.supergame.ui.view.utils.ToggleWindowListener;
 
 import java.util.List;
 
@@ -21,12 +20,12 @@ public class InventoryUI implements UI {
 
     private InventoryWindow window;
 
-    public InventoryUI(Mediator uiMediator, Stage stage, Skin skin, DragAndDrop dragAndDrop, Table itemDropZone) {
-        this.window = new InventoryWindow(skin, ITEM_COUNT, uiMediator, dragAndDrop);
+    public InventoryUI(Stage stage, Skin skin, DragAndDrop dragAndDrop, Table itemDropZone) {
+        this.window = new InventoryWindow(skin, ITEM_COUNT, dragAndDrop);
 
         stage.addActor(window);
         stage.addListener(new ToggleWindowListener(window, Input.Keys.I));
-        dragAndDrop.addTarget(new DropAreaTarget(itemDropZone, uiMediator));
+        dragAndDrop.addTarget(new DropAreaTarget(itemDropZone));
     }
 
     public void updateItems(List<Item> items){

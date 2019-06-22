@@ -13,12 +13,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import com.facundolinlaud.supergame.managers.Renderable;
 import com.facundolinlaud.supergame.systems.ui.*;
 import com.facundolinlaud.supergame.ui.controller.*;
-import com.facundolinlaud.supergame.ui.controller.impl.*;
 import com.facundolinlaud.supergame.ui.view.*;
-import com.facundolinlaud.supergame.ui.view.SkillCastingUI;
 import com.facundolinlaud.supergame.utils.Messages;
-import com.facundolinlaud.supergame.utils.events.*;
-import com.facundolinlaud.supergame.utils.mediator.Mediator;
 
 /**
  * Created by facundo on 3/25/16.
@@ -34,7 +30,6 @@ public class UIManager implements Renderable {
 
     private Skin skin;
     private Stage stage;
-    private Mediator uiMediator;
     private DragAndDrop dragAndDrop;
 
     private OverlayUI overlayUI;
@@ -74,26 +69,25 @@ public class UIManager implements Renderable {
     }
 
     private void initializeUIResources(){
-        this.uiMediator = new Mediator();
         this.dragAndDrop = new DragAndDrop();
         this.dragAndDrop.setDragTime(MIN_DRAG_TIME_IN_MILLISECONDS);
     }
 
     private void initializeUI() {
         this.overlayUI = new OverlayUI(skin);
-        this.inventoryUI = new InventoryUI(uiMediator, stage, skin, dragAndDrop, overlayUI.getItemDropZone());
-        this.attributesUI = new AttributesUI(uiMediator, stage, skin);
-        this.equipmentUI = new EquipmentUI(uiMediator, stage, skin, dragAndDrop, overlayUI.getItemDropZone());
+        this.inventoryUI = new InventoryUI(stage, skin, dragAndDrop, overlayUI.getItemDropZone());
+        this.attributesUI = new AttributesUI(stage, skin);
+        this.equipmentUI = new EquipmentUI(stage, skin, dragAndDrop, overlayUI.getItemDropZone());
         this.skillCastingUI = new SkillCastingUI();
         this.labelDamagesUI = new LabelDamagesUI(stage, skin);
     }
 
     private void initializeServices(Camera camera) {
-        this.profileUIController = new ProfileUIControllerImpl(this.overlayUI);
-        this.inventoryUIController = new InventoryUIControllerImpl(this.inventoryUI);
-        this.attributesUIController = new AttributesUIControllerImpl(this.attributesUI);
-        this.equipmentUIController = new EquipmentUIControllerImpl(this.equipmentUI);
-        this.skillCastingUIController = new SkillCastingUIControllerImpl(this.skillCastingUI, this.overlayUI);
+        this.profileUIController = new ProfileUIController(this.overlayUI);
+        this.inventoryUIController = new InventoryUIController(this.inventoryUI);
+        this.attributesUIController = new AttributesUIController(this.attributesUI);
+        this.equipmentUIController = new EquipmentUIController(this.equipmentUI);
+        this.skillCastingUIController = new SkillCastingUIController(this.skillCastingUI, this.overlayUI);
         this.labelDamagesController = new LabelDamagesController(this.labelDamagesUI, camera);
     }
 
@@ -103,14 +97,13 @@ public class UIManager implements Renderable {
     }
 
     private void subscribeReceivers(){
-        this.uiMediator.subscribe(ItemFromInventoryDropped.class, this.inventoryUIController);
-        this.uiMediator.subscribe(ItemsPositionSwapEvent.class, this.inventoryUIController);
-        this.uiMediator.subscribe(AttributeUpgradeEvent.class, this.attributesUIController);
-        this.uiMediator.subscribe(UnequipItemEvent.class, this.equipmentUIController);
-        this.uiMediator.subscribe(EquipItemEvent.class, this.equipmentUIController);
-
-        this.messageDispatcher.addListener(overlayUI, Messages.SKILL_CASTED);
-        this.messageDispatcher.addListener(labelDamagesController, Messages.ENTITY_ATTACKED);
+        this.messageDispatcher.addListener(this.inventoryUIController, Messages.ITEM_FROM_INVENTORY_DROPPED);
+        this.messageDispatcher.addListener(this.inventoryUIController, Messages.ITEMS_IN_INVENTORY_SWAPPED);
+        this.messageDispatcher.addListener(this.attributesUIController, Messages.ATTRIBUTE_UPGRADED);
+        this.messageDispatcher.addListener(this.equipmentUIController, Messages.ITEM_UNEQUIPPED);
+        this.messageDispatcher.addListener(this.equipmentUIController, Messages.ITEM_EQUIPPED);
+        this.messageDispatcher.addListener(this.overlayUI, Messages.SKILL_CASTED);
+        this.messageDispatcher.addListener(this.labelDamagesController, Messages.ENTITY_ATTACKED);
     }
 
     public void initializeSystems(Engine engine){
