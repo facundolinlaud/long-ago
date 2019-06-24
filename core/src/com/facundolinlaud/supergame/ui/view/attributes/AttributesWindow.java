@@ -17,9 +17,9 @@ public class AttributesWindow extends GothicWindow {
         this.setVisible(false);
         this.attributesGrid = new AttributesGrid(skin);
 
-        setSize(250, 270);
+        setSize(240, 270);
         padLeft(20);
-        padRight(20);
+        padRight(10);
 
         add(this.attributesGrid).expandX().fillX();
     }

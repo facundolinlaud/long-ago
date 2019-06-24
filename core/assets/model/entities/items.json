@@ -7,7 +7,7 @@
 		    "weight": 3.0,
 		    "marketValue": 2.0,
 		    "equipmentInformation": {
-				"equipSlot": "BODY",
+				"equipSlot": "CHEST",
 			    "defense": 3
 		    }
 		},
@@ -18,7 +18,7 @@
 		    "weight": 5.0,
 		    "marketValue": 5.0,
 		    "equipmentInformation": {
-				"equipSlot": "BODY",
+				"equipSlot": "CHEST",
 			    "defense": 4
 		    }
 		},
@@ -29,7 +29,7 @@
 		    "weight": 8.0,
 		    "marketValue": 7.0,
 		    "equipmentInformation": {
-				"equipSlot": "BODY",
+				"equipSlot": "CHEST",
 			    "defense": 6
 		    }
 		},
@@ -159,7 +159,7 @@
 		    "weight": 2.0,
 		    "marketValue": 9.0,
 		    "equipmentInformation": {
-				"equipSlot": "WEAPON",
+				"equipSlot": "BOW",
 			    "equipType": "BOW",
 			    "attack": 4
 		    }

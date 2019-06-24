@@ -352,10 +352,45 @@
 		"imageUp": "old-slot"
 	},
 	"skill-slot": {
-		"imageUp": "skill-frame-back"
+		"up": "gothic-slot-skill"
 	},
 	"slot": {
 		"up": "gothic-slot"
+	},
+	"control-inventory": {
+		"up": "control-inventory",
+		"over": "control-inventory-over",
+		"checked": "control-inventory-over"
+	},
+	"control-equipment": {
+		"up": "control-equipment",
+		"over": "control-equipment-over",
+		"checked": "control-equipment-over"
+	},
+	"control-menu": {
+		"up": "control-menu",
+		"over": "control-menu-over",
+		"checked": "control-menu-over"
+	},
+	"control-quest": {
+		"up": "control-quest",
+		"over": "control-quest-over",
+		"checked": "control-quest-over"
+	},
+	"control-skills": {
+		"up": "control-skills",
+		"over": "control-skills-over",
+		"checked": "control-skills-over"
+	},
+	"control-stats": {
+		"up": "control-stats",
+		"over": "control-stats-over",
+		"checked": "control-stats-over"
+	},
+	"control-tool": {
+		"up": "control-tool",
+		"over": "control-tool-over",
+		"checked": "control-tool-over"
 	}
 },
 "com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton$ImageTextButtonStyle": {
@@ -400,7 +435,7 @@
 		"fontColor": "black"
 	},
 	"gothic-white": {
-		"font": "Fontin-Regular-14-white",
+		"font": "Fontin-Regular-12-white",
 		"fontColor": "color"
 	}
 },
@@ -437,6 +472,10 @@
 	"gothic-mana": {
 		"background": "health-slider-horizontal",
 		"knobBefore": "mana-progressbar-knob-horizontal"
+	},
+	"gothic-skillcast": {
+		"background": "health-slider-horizontal",
+		"knobBefore": "skillcast-progressbar-knob-horizontal"
 	}
 },
 "com.badlogic.gdx.scenes.scene2d.ui.ScrollPane$ScrollPaneStyle": {
@@ -525,9 +564,9 @@
 		"up": "default-button",
 		"down": "default-button-mousedown",
 		"over": "default-button-mouseover",
-		"pressedOffsetX": 1,
-		"unpressedOffsetX": 0,
-		"checkedOffsetX": 0
+		"pressedOffsetX": 12,
+		"unpressedOffsetX": 10,
+		"checkedOffsetX": 10
 	},
 	"toggle-gothic": {
 		"font": "Fontin-Regular-16-white",

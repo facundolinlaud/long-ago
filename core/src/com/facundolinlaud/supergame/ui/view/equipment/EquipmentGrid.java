@@ -41,7 +41,7 @@ public class EquipmentGrid extends Table {
 
                 if(shouldAddSlotHere) {
                     slot.allowPlaceHolder();
-                    dragAndDrop.addSource(new SlotSource(slot, skin, SlotType.EQUIPMENT_SLOT));
+                    dragAndDrop.addSource(new SlotSource(slot, SlotType.EQUIPMENT_SLOT));
                     dragAndDrop.addTarget(new EquipmentSlotTarget(slot, wt));
 
                     slots.put(wt, slot);

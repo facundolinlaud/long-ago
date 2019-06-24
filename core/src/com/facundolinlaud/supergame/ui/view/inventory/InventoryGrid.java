@@ -26,7 +26,7 @@ public class InventoryGrid extends Table {
 
             add(slot);
             slots.add(slot);
-            dragAndDrop.addSource(new SlotSource(slot, skin, SlotType.INVENTORY_SLOT));
+            dragAndDrop.addSource(new SlotSource(slot, SlotType.INVENTORY_SLOT));
             dragAndDrop.addTarget(new InventorySlotTarget(slot));
 
             if(i % itemsPerRow == 0)
