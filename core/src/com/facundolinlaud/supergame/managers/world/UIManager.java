@@ -40,7 +40,7 @@ public class UIManager implements Renderable {
     private LabelDamagesUI labelDamagesUI;
 
     private InventoryUIController inventoryUIController;
-    private ProfileUIController profileUIController;
+    private OverlayUIController overlayUIController;
     private AttributesUIController attributesUIController;
     private EquipmentUIController equipmentUIController;
     private SkillCastingUIController skillCastingUIController;
@@ -78,12 +78,14 @@ public class UIManager implements Renderable {
         this.inventoryUI = new InventoryUI(stage, skin, dragAndDrop, overlayUI.getItemDropZone());
         this.attributesUI = new AttributesUI(stage, skin);
         this.equipmentUI = new EquipmentUI(stage, skin, dragAndDrop, overlayUI.getItemDropZone());
-        this.skillCastingUI = new SkillCastingUI();
+        this.skillCastingUI = new SkillCastingUI(skin);
         this.labelDamagesUI = new LabelDamagesUI(stage, skin);
+
+        this.overlayUI.get().setDebug(false);
     }
 
     private void initializeServices(Camera camera) {
-        this.profileUIController = new ProfileUIController(this.overlayUI);
+        this.overlayUIController = new OverlayUIController(this.overlayUI);
         this.inventoryUIController = new InventoryUIController(this.inventoryUI);
         this.attributesUIController = new AttributesUIController(this.attributesUI);
         this.equipmentUIController = new EquipmentUIController(this.equipmentUI);
@@ -102,12 +104,12 @@ public class UIManager implements Renderable {
         this.messageDispatcher.addListener(this.attributesUIController, Messages.ATTRIBUTE_UPGRADED);
         this.messageDispatcher.addListener(this.equipmentUIController, Messages.ITEM_UNEQUIPPED);
         this.messageDispatcher.addListener(this.equipmentUIController, Messages.ITEM_EQUIPPED);
-        this.messageDispatcher.addListener(this.overlayUI, Messages.SKILL_CASTED);
+        this.messageDispatcher.addListener(this.overlayUIController, Messages.SKILL_CASTED);
         this.messageDispatcher.addListener(this.labelDamagesController, Messages.ENTITY_ATTACKED);
     }
 
     public void initializeSystems(Engine engine){
-        engine.addSystem(new ProfileUISystem(this.overlayUI));
+        engine.addSystem(new ProfileUISystem(this.overlayUIController));
         engine.addSystem(new InventoryUISystem(this.inventoryUIController));
         engine.addSystem(new AttributesUISystem(this.attributesUIController));
         engine.addSystem(new EquipmentUISystem(this.equipmentUIController));

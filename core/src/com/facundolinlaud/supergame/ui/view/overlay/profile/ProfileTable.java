@@ -1,4 +1,4 @@
-package com.facundolinlaud.supergame.ui.view.profile;
+package com.facundolinlaud.supergame.ui.view.overlay.profile;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;

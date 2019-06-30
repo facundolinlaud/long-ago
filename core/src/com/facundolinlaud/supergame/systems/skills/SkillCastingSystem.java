@@ -22,6 +22,7 @@ import com.facundolinlaud.supergame.strategies.skills.casting.SkillCastingStrate
 import com.facundolinlaud.supergame.strategies.skills.casting.SpellSkillCastingStrategy;
 import com.facundolinlaud.supergame.utils.Mappers;
 import com.facundolinlaud.supergame.utils.events.Messages;
+import com.facundolinlaud.supergame.utils.events.SkillCastedEvent;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -88,7 +89,7 @@ public class SkillCastingSystem extends IteratingSystem {
         SkillType skillType = skill.getSkillType();
 
         this.castingStrategies.get(skillType).executeSkillEffects(caster, skill);
-        this.messageDispatcher.dispatchMessage(Messages.SKILL_CASTED, skill);
+        this.messageDispatcher.dispatchMessage(Messages.SKILL_CASTED, new SkillCastedEvent(caster, skill));
     }
 
     private void putCasterOnSkillLockDown(Entity caster, float lockDownTime){

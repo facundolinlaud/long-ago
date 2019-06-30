@@ -12,15 +12,12 @@ import static com.facundolinlaud.supergame.utils.Dimensions.PX_PER_METER;
 /* TODO: refactor this. it's awful */
 
 public class SkillCastingUI extends Group implements UI {
-    private static final String SKIN_JSON_PATH = "ui/progress_bar_skin/clean-crispy-ui.json";
-
     private ProgressBar progressBar;
     private Label skillTitle;
 
-    public SkillCastingUI() {
-        Skin skin = new Skin(Gdx.files.internal(SKIN_JSON_PATH));
-
-        progressBar = new ProgressBar(0f, 100f, 1f, false, skin);
+    public SkillCastingUI(Skin skin) {
+        progressBar = new ProgressBar(0f, 100f, 1f, false,
+                skin, "gothic-skillcast");
         progressBar.setPosition(PX_PER_METER, 0);
         progressBar.setHeight(0.25f * PX_PER_METER);
         progressBar.setWidth(2 * PX_PER_METER);

@@ -21,7 +21,6 @@ public class EquipmentWindow extends GothicWindow {
         setVisible(false);
         setSize(265, 320);
         initializeGrid(skin, dragAndDrop);
-        setDebug(true);
     }
 
     private void initializeGrid(Skin skin, DragAndDrop dragAndDrop) {
