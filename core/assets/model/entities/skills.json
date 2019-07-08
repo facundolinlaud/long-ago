@@ -53,8 +53,8 @@
 				"duration": 1.0
 			},
 			"screenShake": {
-				"power": 5,
-				"duration": 1
+				"power": 0.1,
+				"duration": 0.8
 			}
 		},
 		"2": {
@@ -96,7 +96,7 @@
 				"duration": 1.0
 			},
 			"screenShake": {
-				"power": 1,
+				"power": 0.08,
 				"duration": 0.2
 			}
 		},

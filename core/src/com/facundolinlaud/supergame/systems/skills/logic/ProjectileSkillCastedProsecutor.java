@@ -4,14 +4,13 @@ import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.math.Vector2;
-import com.facundolinlaud.supergame.components.BodyComponent;
-import com.facundolinlaud.supergame.components.ParticleComponent;
 import com.facundolinlaud.supergame.components.PositionComponent;
-import com.facundolinlaud.supergame.components.RenderComponent;
 import com.facundolinlaud.supergame.components.skills.ProjectileComponent;
 import com.facundolinlaud.supergame.components.skills.SkillTargetedComponent;
 import com.facundolinlaud.supergame.factory.ParticleFactory;
+import com.facundolinlaud.supergame.managers.world.CameraManager;
 import com.facundolinlaud.supergame.managers.world.LightsManager;
+import com.facundolinlaud.supergame.managers.world.ScreenShakeManager;
 import com.facundolinlaud.supergame.model.skill.Skill;
 import com.facundolinlaud.supergame.strategies.skills.projectile.ProjectileDestructionStrategy;
 import com.facundolinlaud.supergame.utils.Mappers;
@@ -22,8 +21,9 @@ public class ProjectileSkillCastedProsecutor extends BaseSkillCastedProsecutor {
 
     private ProjectileDestructionStrategy destructionStrategy;
 
-    public ProjectileSkillCastedProsecutor(Engine engine, ParticleFactory particleFactory, LightsManager lightsManager) {
-        super(engine, lightsManager, particleFactory);
+    public ProjectileSkillCastedProsecutor(Engine engine, ParticleFactory particleFactory,
+                                           LightsManager lightsManager, CameraManager cameraManager) {
+        super(engine, lightsManager, particleFactory, cameraManager);
         this.destructionStrategy = new ProjectileDestructionStrategy(engine);
     }
 
@@ -44,6 +44,8 @@ public class ProjectileSkillCastedProsecutor extends BaseSkillCastedProsecutor {
         applyEffects(victim, caster, skill);
         createParticleEffect(skill, position);
         createLightEffect(skill, position);
+        shakeScreen(skill, position);
+
         this.destructionStrategy.destroy(projectile);
     }
 

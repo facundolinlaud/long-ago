@@ -1,7 +1,6 @@
 package com.facundolinlaud.supergame.screens;
 
 import com.badlogic.ashley.core.Engine;
-import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -11,7 +10,6 @@ import com.facundolinlaud.supergame.components.BodyComponent;
 import com.facundolinlaud.supergame.components.ai.AIComponent;
 import com.facundolinlaud.supergame.engine.GameResources;
 import com.facundolinlaud.supergame.factory.Factories;
-import com.facundolinlaud.supergame.factory.ItemFactory;
 import com.facundolinlaud.supergame.listeners.PhysicsEntitiesListener;
 import com.facundolinlaud.supergame.listeners.ProjectilesCollisionListener;
 import com.facundolinlaud.supergame.managers.world.*;
@@ -30,6 +28,7 @@ public class WorldScreen implements Screen {
     private GameResources resources;
     private Factories factories;
 
+    private CameraManager cameraManager;
     private MapManager mapManager;
     private PhysicsManager physicsManager;
     private AIManager aiManager;
@@ -37,7 +36,6 @@ public class WorldScreen implements Screen {
     private WorldEntitiesManager weManager;
     private UIManager uiManager;
     private LightsManager lightsManager;
-    private ScreenShakeManager screenShakeManager;
 
     private Stage stage;
 
@@ -63,14 +61,14 @@ public class WorldScreen implements Screen {
     }
 
     private void initializeManagers() {
-        this.mapManager = new MapManager(resources.getBatch());
+        this.cameraManager = new CameraManager();
+        this.mapManager = new MapManager(resources.getBatch(), cameraManager.getCamera());
         this.physicsManager = new PhysicsManager(mapManager.getCamera(), mapManager.getMap());
         this.aiManager = new AIManager(factories.getSkillsFactory(), mapManager, physicsManager);
         this.spawnManager = new SpawnManager(resources.getEngine(), mapManager.getSpawnLocations());
         this.weManager = new WorldEntitiesManager(resources.getEngine(), factories);
         this.uiManager = new UIManager(stage, mapManager.getCamera(), weManager.getPlayer());
         this.lightsManager = new LightsManager(physicsManager.getWorld(), mapManager.getCamera(), weManager.getPlayer());
-        this.screenShakeManager = new ScreenShakeManager(mapManager, weManager.getPlayer());
         // por ahi deberia ser un sistema donde se attachea el screenshake component a la entidad a la cual volver?
     }
 
@@ -83,7 +81,7 @@ public class WorldScreen implements Screen {
                 this.aiManager);
 
         this.physicsManager.getWorld().setContactListener(new ProjectilesCollisionListener(engine,
-                factories.getParticleFactory(), lightsManager));
+                factories.getParticleFactory(), lightsManager, cameraManager));
     }
 
     private void initializeSystems() {
@@ -97,12 +95,13 @@ public class WorldScreen implements Screen {
         engine.addSystem(new AnimableSpriteSystem());
         engine.addSystem(new PlayerInputSystem(playerInputObserver, factories.getSkillsFactory()));
         engine.addSystem(new MovementSystem());
-        engine.addSystem(new CameraFocusSystem(mapManager.getCamera()));
+        engine.addSystem(new CameraFocusSystem(cameraManager));
         engine.addSystem(new PhysicsSystem(physicsManager.getWorld()));
         engine.addSystem(new PickUpSystem());
         engine.addSystem(new KeyPressSkillCastingRequestSystem());
         engine.addSystem(new KeyPressThenClickCastingRequestSystem(playerInputObserver));
-        engine.addSystem(new SkillCastingSystem(engine, factories.getParticleFactory(), lightsManager));
+        engine.addSystem(new SkillCastingSystem(engine, factories.getParticleFactory(),
+                lightsManager, cameraManager));
         engine.addSystem(new SkillTargetedSystem());
         engine.addSystem(new SkillLockDownSystem());
         engine.addSystem(new DecisionMakingSystem(aiManager));
@@ -116,6 +115,7 @@ public class WorldScreen implements Screen {
 
     @Override
     public void render(float delta) {
+        cameraManager.render(delta);
         mapManager.render();
 
         resources.getBatch().begin();
@@ -131,7 +131,7 @@ public class WorldScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-        mapManager.resize(width, height);
+        cameraManager.resize(width, height);
     }
 
     @Override

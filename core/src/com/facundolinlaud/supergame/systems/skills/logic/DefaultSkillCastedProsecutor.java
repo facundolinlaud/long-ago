@@ -10,7 +10,9 @@ import com.facundolinlaud.supergame.components.HealthComponent;
 import com.facundolinlaud.supergame.components.PositionComponent;
 import com.facundolinlaud.supergame.components.skills.SkillTargetedComponent;
 import com.facundolinlaud.supergame.factory.ParticleFactory;
+import com.facundolinlaud.supergame.managers.world.CameraManager;
 import com.facundolinlaud.supergame.managers.world.LightsManager;
+import com.facundolinlaud.supergame.managers.world.ScreenShakeManager;
 import com.facundolinlaud.supergame.model.skill.AreaOfEffect;
 import com.facundolinlaud.supergame.model.skill.Skill;
 import com.facundolinlaud.supergame.strategies.skills.areaofeffectcheck.AreaOfEffectCheckStrategy;
@@ -24,8 +26,10 @@ public class DefaultSkillCastedProsecutor extends BaseSkillCastedProsecutor {
 
     private SkillEpicenterStrategy epicenterStrategy;
 
-    public DefaultSkillCastedProsecutor(Engine engine, SkillEpicenterStrategy epicenterStrategy, ParticleFactory particleFactory, LightsManager lightsManager) {
-        super(engine, lightsManager, particleFactory);
+    public DefaultSkillCastedProsecutor(Engine engine, SkillEpicenterStrategy epicenterStrategy,
+                                        ParticleFactory particleFactory,
+                                        LightsManager lightsManager, CameraManager cameraManager) {
+        super(engine, lightsManager, particleFactory, cameraManager);
         this.epicenterStrategy = epicenterStrategy;
     }
 
@@ -34,6 +38,7 @@ public class DefaultSkillCastedProsecutor extends BaseSkillCastedProsecutor {
         affectSurroundingEntities(caster, skill, epicenter);
         createParticleEffect(skill, epicenter);
         createLightEffect(skill, epicenter);
+        shakeScreen(skill, epicenter);
     }
 
     private void affectSurroundingEntities(Entity caster, Skill skill, Vector2 epicenter) {

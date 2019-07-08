@@ -7,7 +7,9 @@ import com.badlogic.gdx.math.Vector2;
 import com.facundolinlaud.supergame.components.ParticleComponent;
 import com.facundolinlaud.supergame.components.PositionComponent;
 import com.facundolinlaud.supergame.factory.ParticleFactory;
+import com.facundolinlaud.supergame.managers.world.CameraManager;
 import com.facundolinlaud.supergame.managers.world.LightsManager;
+import com.facundolinlaud.supergame.managers.world.ScreenShakeManager;
 import com.facundolinlaud.supergame.model.particle.ParticleType;
 import com.facundolinlaud.supergame.model.skill.Skill;
 
@@ -15,11 +17,14 @@ public abstract class BaseSkillCastedProsecutor {
     protected Engine engine;
     protected LightsManager lightsManager;
     protected ParticleFactory particleFactory;
+    protected CameraManager cameraManager;
 
-    public BaseSkillCastedProsecutor(Engine engine, LightsManager lightsManager, ParticleFactory particleFactory) {
+    public BaseSkillCastedProsecutor(Engine engine, LightsManager lightsManager,
+                                     ParticleFactory particleFactory, CameraManager cameraManager) {
         this.engine = engine;
         this.lightsManager = lightsManager;
         this.particleFactory = particleFactory;
+        this.cameraManager = cameraManager;
     }
 
     protected void createLightEffect(Skill skill, Vector2 epicenter) {
@@ -41,5 +46,10 @@ public abstract class BaseSkillCastedProsecutor {
         particle.add(new ParticleComponent(pooledEffect, true));
 
         engine.addEntity(particle);
+    }
+
+    protected void shakeScreen(Skill skill, Vector2 epicenter) {
+        if(skill.hasScreenShake())
+            this.cameraManager.shake(skill.getScreenShake(), epicenter);
     }
 }

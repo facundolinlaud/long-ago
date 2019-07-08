@@ -1,31 +1,20 @@
 package com.facundolinlaud.supergame.managers.world;
 
-import com.badlogic.ashley.core.ComponentMapper;
-import com.badlogic.ashley.core.Entity;
-import com.badlogic.gdx.graphics.Camera;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
-import com.facundolinlaud.supergame.components.PositionComponent;
 import com.facundolinlaud.supergame.model.skill.ScreenShake;
 
 import java.util.Random;
 
 public class ScreenShakeManager {
-    public static final ComponentMapper<PositionComponent> pm = ComponentMapper.getFor(PositionComponent.class);
-
-    private Camera camera;
-    private Entity player;
-
     private float timeLeft = 0;
     private float currentTime = 0;
     private float power = 0;
     private float currentPower = 0;
     private Random random;
-    private Vector3 position = new Vector3();
+    private Vector3 position;
 
-    public ScreenShakeManager(MapManager mapManager, Entity player) {
-        this.camera = mapManager.getCamera();
-        this.player = player;
+    public ScreenShakeManager() {
+        this.position = new Vector3();
     }
 
     public void shake(ScreenShake screenShake) {
@@ -35,7 +24,7 @@ public class ScreenShakeManager {
         currentTime = 0;
     }
 
-    private Vector3 tick(float delta) {
+    public Vector3 tick(float delta) {
         if(currentTime <= timeLeft) {
             currentPower = power * ((timeLeft - currentTime) / timeLeft);
 
@@ -50,14 +39,12 @@ public class ScreenShakeManager {
         return position;
     }
 
-    public void update(float delta){
-        if(timeLeft > 0){
-            tick(delta);
-            camera.translate(position);
-        } else {
-            Vector2 playerPosition = pm.get(player).getPosition();
-            // ver lo del z = 0
-            camera.position.lerp(new Vector3(playerPosition, 0), .2f);
-        }
+
+    public float getShakingTimeLeft() {
+        return timeLeft;
+    }
+
+    public Vector3 getPosition() {
+        return position;
     }
 }
