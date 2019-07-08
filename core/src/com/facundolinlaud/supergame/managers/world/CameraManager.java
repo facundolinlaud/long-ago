@@ -8,7 +8,7 @@ import com.facundolinlaud.supergame.model.skill.ScreenShake;
 
 public class CameraManager {
     private static final float MAXIMUM_DISTANCE_FROM_SHAKE = 12;
-    private static final int VIEWPORT_WIDTH_IN_METERS = 32;
+    private static final int VIEWPORT_WIDTH_IN_METERS = 38;
     private static final int Z = 0;
 
     private ScreenShakeManager shakeManager;

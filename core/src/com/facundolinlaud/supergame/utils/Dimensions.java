@@ -6,6 +6,10 @@ import com.badlogic.gdx.math.Vector2;
  * Created by facundo on 3/20/16.
  */
 public class Dimensions {
+    public static int SCREEN_WIDTH = 1024;
+
+    public static int SCREEN_HEIGHT = 768;
+
     /* One meter in pixels */
     public static final float PX_PER_METER = 32f;
 
@@ -13,10 +17,6 @@ public class Dimensions {
     public static final float METERS_PER_PX = 1/32f;
 
     public static final float BOX_2D_OFFSET = 1/2f;
-
-    public static final int SCREEN_WIDTH = 1024;
-
-    public static final int SCREEN_HEIGHT = 768;
 
     public static final float toMeters(int px){
         return (float) px / PX_PER_METER;
