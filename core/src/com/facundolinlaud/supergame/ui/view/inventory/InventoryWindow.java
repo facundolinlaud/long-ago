@@ -37,7 +37,6 @@ public class InventoryWindow extends GothicWindow {
     }
 
     public void update(List<Item> items){
-        if(isVisible())
-            this.grid.update(items);
+        this.grid.update(items);
     }
 }

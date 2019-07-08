@@ -2,11 +2,15 @@ package com.facundolinlaud.supergame.factory;
 
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.gdx.ai.msg.MessageDispatcher;
+import com.badlogic.gdx.ai.msg.MessageManager;
 import com.facundolinlaud.supergame.builder.AgentBuilder;
 import com.facundolinlaud.supergame.components.sprite.StackableSpriteComponent;
 import com.facundolinlaud.supergame.model.agent.Agent;
 import com.facundolinlaud.supergame.model.equip.EquipSlot;
 import com.facundolinlaud.supergame.model.particle.ParticleType;
+import com.facundolinlaud.supergame.utils.events.Messages;
+import javafx.collections.MapChangeListener;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -29,27 +33,31 @@ public class AgentFactory {
     }
 
     private AgentBuilder getDummyAgent(Agent agent){
-        Map<EquipSlot, Entity> equipment = buildEquipment(agent.getBody(), agent.getEquipment());
-
         AgentBuilder builder = new AgentBuilder(agent.getVelocity())
-                .withAttributes(agent.getAttributes())
-                .withEquipment(equipment);
+                .withAttributes(agent.getAttributes());
 
         return builder;
     }
 
     public AgentBuilder getAI(int id){
         Agent agent = agents.get(id);
+        Map<EquipSlot, Entity> equipment = buildEquipment(agent.getBody(), agent.getEquipment());
+
         return getDummyAgent(agent)
                 .withAI(agent.getNpcInformation())
+                .withEquipment(equipment)
                 .withParticles(particleFactory.create(ParticleType.SPAWN));
     }
 
     public AgentBuilder getPlayer(){
         Agent agent = agents.get(MAIN_PLAYER_ID);
+        Map<EquipSlot, Entity> equipment = buildEquipment(agent.getBody(), agent.getEquipment());
 
         return getDummyAgent(agent)
-                .withBag(buildBag(agent.getBag()))
+                .withBag(buildBag(agent.getBag()), c -> MessageManager.getInstance()
+                        .dispatchMessage(Messages.INVENTORY_CHANGED))
+                .withEquipment(equipment, change -> MessageManager.getInstance()
+                        .dispatchMessage(Messages.EQUIPMENT_CHANGED))
                 .withKeyboardControl();
     }
 

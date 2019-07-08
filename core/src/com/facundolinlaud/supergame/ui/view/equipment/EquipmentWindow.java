@@ -29,7 +29,6 @@ public class EquipmentWindow extends GothicWindow {
     }
 
     public void update(Map<EquipSlot, Item> items){
-        if(isVisible())
-            equipmentGrid.update(items);
+        equipmentGrid.update(items);
     }
 }

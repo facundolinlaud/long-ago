@@ -8,8 +8,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Target;
 import com.facundolinlaud.supergame.ui.model.Item;
 import com.facundolinlaud.supergame.ui.view.cross.Slot;
 import com.facundolinlaud.supergame.ui.view.cross.SlotSource;
-import com.facundolinlaud.supergame.utils.events.Messages;
 import com.facundolinlaud.supergame.utils.events.ItemsPositionSwapEvent;
+import com.facundolinlaud.supergame.utils.events.Messages;
 import com.facundolinlaud.supergame.utils.events.UnequipItemEvent;
 
 /**
@@ -49,6 +49,13 @@ public class InventorySlotTarget extends Target {
     private void broadcastInventorySourceDrop(Payload payload) {
         Item a = slot.getContent();
         Item b = (Item) payload.getObject();
+
+        if(a == null)
+            return;
+
+        if(a.getInvented().getPositionInBag() == b.getInvented().getPositionInBag())
+            return;
+
         messageDispatcher.dispatchMessage(Messages.ITEMS_IN_INVENTORY_SWAPPED, new ItemsPositionSwapEvent(a, b));
     }
 

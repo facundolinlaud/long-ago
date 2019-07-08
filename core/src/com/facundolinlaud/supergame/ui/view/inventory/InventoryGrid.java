@@ -35,6 +35,9 @@ public class InventoryGrid extends Table {
     }
 
     public void update(List<Item> items){
+        /* If building MAX_ITEMS tooltips on each refresh gets too heavy, I can use the ObservableList change event
+           to delete the specific removed item */
+
         slots.stream().forEach(InventorySlot::clearContent);
 
         for(int i = 0; i < items.size(); i++){

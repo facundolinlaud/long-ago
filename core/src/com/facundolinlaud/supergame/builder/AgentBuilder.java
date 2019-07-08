@@ -18,6 +18,8 @@ import com.facundolinlaud.supergame.model.agent.NPCInformation;
 import com.facundolinlaud.supergame.model.equip.EquipSlot;
 import com.facundolinlaud.supergame.model.particle.ParticleType;
 import com.facundolinlaud.supergame.strategies.renderposition.SpriteRenderPositionStrategyImpl;
+import javafx.collections.ListChangeListener;
+import javafx.collections.MapChangeListener;
 
 import java.util.List;
 import java.util.Map;
@@ -54,6 +56,12 @@ public class AgentBuilder {
         return this;
     }
 
+    public AgentBuilder withEquipment(Map<EquipSlot, Entity> equipment,
+                                      MapChangeListener<? super EquipSlot, ? super Entity> listener){
+        this.entity.add(new WearComponent(equipment, listener));
+        return this;
+    }
+
     public AgentBuilder withAttributes(Attributes attr){
         int stamina = attr.getStamina();
         float health = stamina * HEALTH_PER_STAMINA_POINT;
@@ -69,6 +77,11 @@ public class AgentBuilder {
 
     public AgentBuilder withBag(List<Entity> bag){
         this.entity.add(new BagComponent(bag));
+        return this;
+    }
+
+    public AgentBuilder withBag(List<Entity> bag, ListChangeListener<? super Entity> listener){
+        this.entity.add(new BagComponent(bag, listener));
         return this;
     }
 

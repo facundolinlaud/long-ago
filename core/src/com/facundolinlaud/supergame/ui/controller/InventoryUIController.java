@@ -15,9 +15,9 @@ import com.facundolinlaud.supergame.ui.model.equipment.Equipable;
 import com.facundolinlaud.supergame.ui.model.inventory.Invented;
 import com.facundolinlaud.supergame.ui.view.InventoryUI;
 import com.facundolinlaud.supergame.utils.Mappers;
-import com.facundolinlaud.supergame.utils.events.Messages;
 import com.facundolinlaud.supergame.utils.events.ItemDroppedEvent;
 import com.facundolinlaud.supergame.utils.events.ItemsPositionSwapEvent;
+import com.facundolinlaud.supergame.utils.events.Messages;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,23 +32,38 @@ public class InventoryUIController implements Telegraph {
     private ComponentMapper<PositionComponent> pm = Mappers.position;
 
     private InventoryUI ui;
-    private Entity gatherer;
+    private Entity player;
 
-    public InventoryUIController(InventoryUI ui) {
+    public InventoryUIController(InventoryUI ui, Entity player) {
         this.ui = ui;
+        this.player = player;
+
+        refreshInventory();
     }
 
-    public void setGatherer(Entity gatherer) {
-        this.gatherer = gatherer;
+    @Override
+    public boolean handleMessage(Telegram msg) {
+        switch(msg.message){
+            case Messages.ITEM_FROM_INVENTORY_DROPPED:
+                itemDropped((ItemDroppedEvent) msg.extraInfo);
+                break;
+            case Messages.ITEMS_IN_INVENTORY_SWAPPED:
+                itemsPositionSwapped((ItemsPositionSwapEvent) msg.extraInfo);
+                break;
+            case Messages.INVENTORY_CHANGED:
+                refreshInventory();
+                break;
+        }
+
+        return false;
     }
 
-    public void update(Entity entity, BagComponent bag) {
-        setGatherer(entity);
-
+    public void refreshInventory() {
+        BagComponent bag = bm.get(player);
         List<Item> items = new ArrayList<>();
 
-        for(int i = 0; i < bag.items.size(); i++){
-            Entity e = bag.items.get(i);
+        for(int i = 0; i < bag.size(); i++){
+            Entity e = bag.get(i);
 
             ItemComponent itemComponent = im.get(e);
             EquipableComponent equipableComponent = em.get(e);
@@ -65,27 +80,13 @@ public class InventoryUIController implements Telegraph {
         ui.updateItems(items);
     }
 
-    @Override
-    public boolean handleMessage(Telegram msg) {
-        switch(msg.message){
-            case Messages.ITEM_FROM_INVENTORY_DROPPED:
-                itemDropped((ItemDroppedEvent) msg.extraInfo);
-                break;
-            case Messages.ITEMS_IN_INVENTORY_SWAPPED:
-                itemsPositionSwapped((ItemsPositionSwapEvent) msg.extraInfo);
-                break;
-        }
-
-        return false;
-    }
-
     private void itemDropped(ItemDroppedEvent event){
-        PositionComponent gathererPosition = pm.get(gatherer);
+        PositionComponent gathererPosition = pm.get(player);
 
         Item itemModel = event.getItem();
         int positionInBag = event.getItem().getInvented().getPositionInBag();
 
-        Entity item = bm.get(gatherer).items.remove(positionInBag);
+        Entity item = bm.get(player).remove(positionInBag);
 
         new ItemBuilder(item)
                 .dropped(gathererPosition.x, gathererPosition.y)
@@ -95,13 +96,13 @@ public class InventoryUIController implements Telegraph {
     }
 
     private void itemsPositionSwapped(ItemsPositionSwapEvent event) {
-        BagComponent bag = bm.get(gatherer);
+        BagComponent bag = bm.get(player);
 
-        Entity a = bag.items.get(event.getFirstItem().getInvented().getPositionInBag());
-        Entity b = bag.items.get(event.getSecondItem().getInvented().getPositionInBag());
+        Entity a = bag.get(event.getFirstItem().getInvented().getPositionInBag());
+        Entity b = bag.get(event.getSecondItem().getInvented().getPositionInBag());
 
-        bag.items.set(event.getSecondItem().getInvented().getPositionInBag(), a);
-        bag.items.set(event.getFirstItem().getInvented().getPositionInBag(), b);
+        bag.set(event.getSecondItem().getInvented().getPositionInBag(), a);
+        bag.set(event.getFirstItem().getInvented().getPositionInBag(), b);
 
         System.out.println(event.getFirstItem().getName() + " and " + event.getSecondItem().getName() + " swapped");
     }

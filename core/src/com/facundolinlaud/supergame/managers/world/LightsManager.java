@@ -17,29 +17,35 @@ public class LightsManager implements Renderable {
     public static final ComponentMapper<BodyComponent> bm = ComponentMapper.getFor(BodyComponent.class);
 
     private static final int RAYS_COUNT = 32;
-    private static final Color AMBIENT_LIGHT_COLOR = new Color(722711);
     private static final Color LIGHTS_COLOR = new Color(0f, 0f, 0f, 1f);
+    private static final Color NIGHT_LIGHT_COLOR = new Color(0.1f, 0.1f, 0.85f, 0.07f);
+
+    private static final Color NIGHT_LIGHT_COLOR_FOR_DIFFUSED = new Color(0.1f, 0.1f, 0.5f, 0.6f);
+    private static final Color AMBIENT_LIGHT_COLOR = new Color(722711);
 
     private RayHandler rayHandler;
     private PointLight playerLight;
     private OrthographicCamera camera;
 
-    public LightsManager(World world, OrthographicCamera camera) {
+    public LightsManager(World world, OrthographicCamera camera, Entity player) {
         this.rayHandler = new RayHandler(world);
-        this.rayHandler.setAmbientLight(AMBIENT_LIGHT_COLOR);
+        this.rayHandler.setAmbientLight(NIGHT_LIGHT_COLOR);
+        this.rayHandler.setBlur(true);
+        this.rayHandler.setBlurNum(2);
         this.camera = camera;
 
         initializePlayerLight();
+        setPlayerLightBody(player);
     }
 
     private void initializePlayerLight(){
-        this.playerLight = new PointLight(rayHandler, RAYS_COUNT, LIGHTS_COLOR, 16, 20, 42);
+        this.playerLight = new PointLight(rayHandler, RAYS_COUNT, LIGHTS_COLOR, 10, 20, 42);
         this.playerLight.setSoft(true);
         this.playerLight.setIgnoreAttachedBody(true);
         this.playerLight.setXray(true);
     }
 
-    public void setPlayerLightBody(Entity player){
+    private void setPlayerLightBody(Entity player){
         Body body = bm.get(player).body;
         this.playerLight.attachToBody(body);
     }

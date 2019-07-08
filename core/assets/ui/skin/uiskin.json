@@ -1,154 +1,643 @@
 {
-com.badlogic.gdx.graphics.Color: {
-	green: { g: 1, a: 1 },
-	light_grey: { r: 0.8, g: 0.8, b: 0.8, a: 1 },
-	white: { r: 1, g: 1, b: 1, a: 1 },
-	red: { r: 1, a: 1 },
-	grey: { r: 0.7, g: 0.7, b: 0.7, a: 1 },
-	black: { a: 1 }
-},
-com.badlogic.gdx.graphics.g2d.BitmapFont: {
-	default-font: { file: default.fnt }
-},
-com.badlogic.gdx.scenes.scene2d.ui.Skin$TintedDrawable: {
-	dialogDim: {
-		name: white,
-		color: { a: 1, b: 0.2, g: 0.2, r: 0.2 }
+"com.badlogic.gdx.graphics.g2d.BitmapFont": {
+	"font": {
+		"file": "font-export.fnt"
+	},
+	"Fontin-Bold-15": {
+		"file": "Fontin-Bold-15.fnt"
+	},
+	"Fontin-Regular-12-white": {
+		"file": "Fontin-Regular-12-white.fnt"
+	},
+	"Fontin-Regular-14-white": {
+		"file": "Fontin-Regular-14.fnt"
+	},
+	"Fontin-Regular-16-white": {
+		"file": "fontin.fnt"
 	}
 },
-com.badlogic.gdx.scenes.scene2d.ui.ProgressBar$ProgressBarStyle: {
-	default: { background: default-scroll, knobBefore: default-round-large }
-},
-com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
-	default: {
-		font: default-font,
-		fontColor: { a: 1, b: 1, g: 1, r: 1 },
-		disabledFontColor: { a: 1, b: 0.8, g: 0.8, r: 0.8 },
-		up: default-round,
-		down: default-round-down
+"com.badlogic.gdx.graphics.Color": {
+	"black": {
+		"r": 0,
+		"g": 0,
+		"b": 0,
+		"a": 1
 	},
-	toggle: {
-		font: default-font,
-		fontColor: { a: 1, b: 1, g: 1, r: 1 },
-		downFontColor: { a: 1, r: 1 },
-		up: default-round,
-		down: default-round-down,
-		checked: default-round-down
+	"color": {
+		"r": 1,
+		"g": 1,
+		"b": 1,
+		"a": 1
+	},
+	"selection": {
+		"r": 0.70333326,
+		"g": 0.70333326,
+		"b": 0.70333326,
+		"a": 1
 	}
 },
-com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle: {
-	default: { imageUp: paint_brush, up: default-round, down: default-round-down },
-	slot: { imageUp: slot2 }
-},
-com.badlogic.gdx.scenes.scene2d.ui.SplitPane$SplitPaneStyle: {
-	default-vertical: { handle: default-splitpane-vertical },
-	default-horizontal: { handle: default-splitpane }
-},
-com.badlogic.gdx.scenes.scene2d.ui.Touchpad$TouchpadStyle: {
-	default: { background: default-pane, knob: default-round-large }
-},
-com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle: {
-	default: { up: default-round, down: default-round-down },
-	toggle: { up: default-round, down: default-round-down, checked: default-round-down }
-},
-com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle: {
-	default: {
-		background: default-window,
-		titleFont: default-font,
-		titleFontColor: { a: 1, b: 1, g: 1, r: 1 }
+"com.badlogic.gdx.scenes.scene2d.ui.Skin$TintedDrawable": {
+	"button-c": {
+		"name": "button",
+		"color": "color"
 	},
-	dialog: {
-		background: default-window,
-		titleFont: default-font,
-		titleFontColor: { a: 1, b: 1, g: 1, r: 1 },
-		stageBackground: dialogDim
+	"button-arcade-c": {
+		"name": "button-arcade",
+		"color": "color"
 	},
-	rpg: {
-		background: window1,
-		titleFont: default-font,
-		titleFontColor: { a: 1, b: 1, g: 1, r: 1 }
+	"button-arcade-pressed-c": {
+		"name": "button-arcade-pressed",
+		"color": "color"
+	},
+	"button-close-c": {
+		"name": "button-close",
+		"color": "color"
+	},
+	"button-close-over-c": {
+		"name": "button-close-over",
+		"color": "color"
+	},
+	"button-close-pressed-c": {
+		"name": "button-close-pressed",
+		"color": "color"
+	},
+	"button-maximize-c": {
+		"name": "button-maximize",
+		"color": "color"
+	},
+	"button-maximize-over-c": {
+		"name": "button-maximize-over",
+		"color": "color"
+	},
+	"button-maximize-pressed-c": {
+		"name": "button-maximize-pressed",
+		"color": "color"
+	},
+	"button-minimize-c": {
+		"name": "button-minimize",
+		"color": "color"
+	},
+	"button-minimize-over-c": {
+		"name": "button-minimize-over",
+		"color": "color"
+	},
+	"button-minimize-pressed-c": {
+		"name": "button-minimize-pressed",
+		"color": "color"
+	},
+	"button-over-c": {
+		"name": "button-over",
+		"color": "color"
+	},
+	"button-pressed-c": {
+		"name": "button-pressed",
+		"color": "color"
+	},
+	"button-pressed-over-c": {
+		"name": "button-pressed-over",
+		"color": "color"
+	},
+	"checkbox-c": {
+		"name": "checkbox",
+		"color": "color"
+	},
+	"checkbox-over-c": {
+		"name": "checkbox-over",
+		"color": "color"
+	},
+	"checkbox-pressed-c": {
+		"name": "checkbox-pressed",
+		"color": "color"
+	},
+	"checkbox-pressed-over-c": {
+		"name": "checkbox-pressed-over",
+		"color": "color"
+	},
+	"cursor-c": {
+		"name": "cursor",
+		"color": "color"
+	},
+	"list-c": {
+		"name": "list",
+		"color": "color"
+	},
+	"progressbar-big-c": {
+		"name": "progressbar-big",
+		"color": "color"
+	},
+	"progressbar-horizontal-c": {
+		"name": "progressbar-horizontal",
+		"color": "color"
+	},
+	"progressbar-knob-horizontal-c": {
+		"name": "progressbar-knob-horizontal",
+		"color": "color"
+	},
+	"progressbar-knob-vertical-c": {
+		"name": "progressbar-knob-vertical",
+		"color": "color"
+	},
+	"progressbar-vertical-c": {
+		"name": "progressbar-vertical",
+		"color": "color"
+	},
+	"radio-c": {
+		"name": "radio",
+		"color": "color"
+	},
+	"radio-over-c": {
+		"name": "radio-over",
+		"color": "color"
+	},
+	"radio-pressed-c": {
+		"name": "radio-pressed",
+		"color": "color"
+	},
+	"radio-pressed-over-c": {
+		"name": "radio-pressed-over",
+		"color": "color"
+	},
+	"selectbox-c": {
+		"name": "selectbox",
+		"color": "color"
+	},
+	"selectbox-over-c": {
+		"name": "selectbox-over",
+		"color": "color"
+	},
+	"selectbox-pressed-c": {
+		"name": "selectbox-pressed",
+		"color": "color"
+	},
+	"selectbox-pressed-over-c": {
+		"name": "selectbox-pressed-over",
+		"color": "color"
+	},
+	"slider-horizontal-c": {
+		"name": "slider-horizontal",
+		"color": "color"
+	},
+	"slider-knob-horizontal-c": {
+		"name": "slider-knob-horizontal",
+		"color": "color"
+	},
+	"slider-knob-over-horizontal-c": {
+		"name": "slider-knob-over-horizontal",
+		"color": "color"
+	},
+	"slider-knob-over-vertical-c": {
+		"name": "slider-knob-over-vertical",
+		"color": "color"
+	},
+	"slider-knob-pressed-horizontal-c": {
+		"name": "slider-knob-pressed-horizontal",
+		"color": "color"
+	},
+	"slider-knob-pressed-vertical-c": {
+		"name": "slider-knob-pressed-vertical",
+		"color": "color"
+	},
+	"slider-knob-vertical-c": {
+		"name": "slider-knob-vertical",
+		"color": "color"
+	},
+	"slider-vertical-c": {
+		"name": "slider-vertical",
+		"color": "color"
+	},
+	"splitpane-horizontal-c": {
+		"name": "splitpane-horizontal",
+		"color": "color"
+	},
+	"splitpane-vertical-c": {
+		"name": "splitpane-vertical",
+		"color": "color"
+	},
+	"textfield-c": {
+		"name": "textfield",
+		"color": "color"
+	},
+	"tooltip-c": {
+		"name": "tooltip",
+		"color": "color"
+	},
+	"touchpad-c": {
+		"name": "touchpad",
+		"color": "color"
+	},
+	"touchpad-knob-c": {
+		"name": "touchpad-knob",
+		"color": "color"
+	},
+	"tree-minus-c": {
+		"name": "tree-minus",
+		"color": "color"
+	},
+	"tree-plus-c": {
+		"name": "tree-plus",
+		"color": "color"
+	},
+	"window-c": {
+		"name": "window",
+		"color": "color"
+	},
+	"window-main-c": {
+		"name": "window-main",
+		"color": "color"
+	},
+	"color": {
+		"name": "white",
+		"color": "color"
+	},
+	"scrollpane-horizontal-c": {
+		"name": "scrollpane-horizontal",
+		"color": "color"
+	},
+	"scrollpane-knob-horizontal-c": {
+		"name": "scrollpane-knob-horizontal",
+		"color": "color"
+	},
+	"scrollpane-knob-vertical-c": {
+		"name": "scrollpane-knob-vertical",
+		"color": "color"
+	},
+	"scrollpane-vertical-c": {
+		"name": "scrollpane-vertical",
+		"color": "color"
+	},
+	"slider-bar-horizontal-c": {
+		"name": "slider-bar-horizontal",
+		"color": "color"
+	},
+	"slider-bar-vertical-c": {
+		"name": "slider-bar-vertical",
+		"color": "color"
+	},
+	"selection": {
+		"name": "white",
+		"color": "selection"
 	}
 },
-com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle: {
-	default: {
-		font: default-font,
-		fontColor: { a: 1, b: 1, g: 1, r: 1 },
-		background: textfield,
-		cursor: cursor,
-		selection: selection
+"com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle": {
+	"default": {
+		"up": "button-c",
+		"down": "button-pressed-over-c",
+		"over": "button-over-c"
+	},
+	"toggle": {
+		"up": "button-c",
+		"down": "button-pressed-c",
+		"over": "button-over-c",
+		"checked": "button-pressed-c",
+		"checkedOver": "button-pressed-over-c"
+	},
+	"minimize": {
+		"up": "button-minimize-c",
+		"down": "button-minimize-pressed-c",
+		"over": "button-minimize-over-c"
+	},
+	"maximize": {
+		"up": "button-maximize-c",
+		"down": "button-maximize-pressed-c",
+		"over": "button-maximize-over-c"
+	},
+	"close": {
+		"up": "button-close-c",
+		"down": "button-close-pressed-c",
+		"over": "button-close-over-c"
+	},
+	"default-gothic": {
+		"up": "default-button",
+		"down": "default-button-mousedown",
+		"over": "default-button-mouseover"
+	},
+	"toggle-gothic": {
+		"up": "default-button",
+		"down": "default-button-mousedown",
+		"over": "default-button-mouseover",
+		"checked": "default-button-mousedown",
+		"checkedOver": "default-button-mousedown"
 	}
 },
-com.badlogic.gdx.scenes.scene2d.ui.ScrollPane$ScrollPaneStyle: {
-	default: {
-		background: default-rect,
-		hScroll: default-scroll,
-		hScrollKnob: default-round-large,
-		vScroll: default-scroll,
-		vScrollKnob: default-round-large
+"com.badlogic.gdx.scenes.scene2d.ui.CheckBox$CheckBoxStyle": {
+	"default": {
+		"checkboxOn": "checkbox-pressed-c",
+		"checkboxOff": "checkbox-c",
+		"checkboxOver": "checkbox-over-c",
+		"font": "font",
+		"fontColor": "color"
+	},
+	"radio": {
+		"checkboxOn": "radio-pressed-c",
+		"checkboxOff": "radio-c",
+		"checkboxOver": "radio-over-c",
+		"font": "font",
+		"fontColor": "color"
 	}
 },
-com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
-	optional: {
-		font: default-font,
-		fontColor: { a: 1, b: 0.7, g: 0.7, r: 0.7 }
+"com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle": {
+	"default": {
+		"up": "button-c",
+		"down": "button-pressed-over-c",
+		"over": "button-over-c"
 	},
-	default: {
-		font: default-font,
-		fontColor: { a: 1, b: 1, g: 1, r: 1 }
+	"toggle": {
+		"up": "button-c",
+		"down": "button-pressed-c",
+		"over": "button-over-c",
+		"checked": "button-pressed-c",
+		"checkedOver": "button-pressed-over-c"
 	},
-	error: {
-		font: default-font,
-		fontColor: { a: 1, r: 1 }
+	"old-slot": {
+		"imageUp": "old-slot"
 	},
-	title: {
-		font: default-font,
-		fontColor: { a: 1, b: 0.8, g: 0.8, r: 0.8 }
+	"skill-slot": {
+		"up": "gothic-slot-skill"
+	},
+	"slot": {
+		"up": "gothic-slot"
+	},
+	"control-inventory": {
+		"up": "control-inventory",
+		"over": "control-inventory-over",
+		"checked": "control-inventory-over"
+	},
+	"control-equipment": {
+		"up": "control-equipment",
+		"over": "control-equipment-over",
+		"checked": "control-equipment-over"
+	},
+	"control-menu": {
+		"up": "control-menu",
+		"over": "control-menu-over",
+		"checked": "control-menu-over"
+	},
+	"control-quest": {
+		"up": "control-quest",
+		"over": "control-quest-over",
+		"checked": "control-quest-over"
+	},
+	"control-skills": {
+		"up": "control-skills",
+		"over": "control-skills-over",
+		"checked": "control-skills-over"
+	},
+	"control-stats": {
+		"up": "control-stats",
+		"over": "control-stats-over",
+		"checked": "control-stats-over"
+	},
+	"control-tool": {
+		"up": "control-tool",
+		"over": "control-tool-over",
+		"checked": "control-tool-over"
 	}
 },
-com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle: {
-	default: {
-		font: default-font,
-		fontColorSelected: { a: 1, b: 1, g: 1, r: 1 },
-		fontColorUnselected: { a: 1, b: 1, g: 1, r: 1 },
-		selection: selection
+"com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton$ImageTextButtonStyle": {
+	"default": {
+		"font": "font",
+		"up": "button-c",
+		"down": "button-pressed-over-c",
+		"over": "button-over-c"
 	},
-	dimmed: {
-		font: default-font,
-		fontColorSelected: { a: 1, b: 1, g: 1, r: 1 },
-		fontColorUnselected: { a: 1, b: 1, g: 1, r: 1 },
-		selection: selection,
-		background: dialogDim
+	"toggle": {
+		"font": "font",
+		"up": "button-c",
+		"down": "button-pressed-c",
+		"over": "button-over-c",
+		"checked": "button-pressed-c",
+		"checkedOver": "button-pressed-over-c"
 	},
-	rpg: {
-		font: default-font,
-		fontColorSelected: { a: 1, b: 1, g: 1, r: 1 },
-		fontColorUnselected: { a: 1, b: 1, g: 1, r: 1 },
-		selection: plain_dark_gray_background,
-		background: paper_background
+	"radio": {
+		"imageUp": "radio-c",
+		"imageDown": "radio-pressed-c",
+		"imageOver": "radio-over-c",
+		"imageChecked": "radio-pressed-c",
+		"imageCheckedOver": "radio-pressed-over-c",
+		"font": "font"
+	},
+	"checkbox": {
+		"imageUp": "checkbox-c",
+		"imageDown": "checkbox-pressed-c",
+		"imageOver": "checkbox-over-c",
+		"imageChecked": "checkbox-pressed-c",
+		"imageCheckedOver": "checkbox-pressed-over-c",
+		"font": "font"
 	}
 },
-com.badlogic.gdx.scenes.scene2d.ui.CheckBox$CheckBoxStyle: {
-	default: {
-		checkboxOn: check-on,
-		checkboxOff: check-off,
-		font: default-font,
-		fontColor: { a: 1, b: 1, g: 1, r: 1 }
+"com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle": {
+	"default": {
+		"font": "font",
+		"fontColor": "color"
+	},
+	"gothic-black": {
+		"font": "Fontin-Regular-12-white",
+		"fontColor": "black"
+	},
+	"gothic-white": {
+		"font": "Fontin-Regular-12-white",
+		"fontColor": "color"
 	}
 },
-com.badlogic.gdx.scenes.scene2d.ui.Tree$TreeStyle: {
-	default: { plus: tree-plus, minus: tree-minus, selection: default-select-selection }
+"com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle": {
+	"default": {
+		"font": "font",
+		"fontColorSelected": "color",
+		"fontColorUnselected": "color",
+		"selection": "color",
+		"background": "list-c"
+	}
 },
-com.badlogic.gdx.scenes.scene2d.ui.Slider$SliderStyle: {
-	default-vertical: { background: default-slider, knob: default-slider-knob },
-	default-horizontal: { background: default-slider, knob: default-slider-knob }
+"com.badlogic.gdx.scenes.scene2d.ui.ProgressBar$ProgressBarStyle": {
+	"default-horizontal": {
+		"background": "progressbar-horizontal-c",
+		"knobBefore": "progressbar-knob-horizontal-c"
+	},
+	"default-vertical": {
+		"background": "progressbar-vertical-c",
+		"knobBefore": "progressbar-knob-vertical-c"
+	},
+	"tiled": {
+		"background": "progressbar-horizontal-c",
+		"knobBefore": "progressbar-tiled"
+	},
+	"tiled-big": {
+		"background": "progressbar-big-c",
+		"knobBefore": "progressbar-knob-big"
+	},
+	"gothic-health": {
+		"background": "health-slider-horizontal",
+		"knobBefore": "health-progressbar-knob-horizontal"
+	},
+	"gothic-mana": {
+		"background": "health-slider-horizontal",
+		"knobBefore": "mana-progressbar-knob-horizontal"
+	},
+	"gothic-skillcast": {
+		"background": "health-slider-horizontal",
+		"knobBefore": "skillcast-progressbar-knob-horizontal"
+	}
 },
-com.badlogic.gdx.scenes.scene2d.ui.SelectBox$SelectBoxStyle: {
-	default: {
-		font: default-font,
-		fontColor: { a: 1, b: 1, g: 1, r: 1 },
-		background: default-select,
-		scrollStyle: default,
-		listStyle: default
+"com.badlogic.gdx.scenes.scene2d.ui.ScrollPane$ScrollPaneStyle": {
+	"default": {
+		"hScroll": "scrollpane-horizontal-c",
+		"hScrollKnob": "scrollpane-knob-horizontal-c",
+		"vScroll": "scrollpane-vertical-c",
+		"vScrollKnob": "scrollpane-knob-vertical-c"
+	}
+},
+"com.badlogic.gdx.scenes.scene2d.ui.SelectBox$SelectBoxStyle": {
+	"default": {
+		"font": "font",
+		"fontColor": "color",
+		"background": "selectbox-c",
+		"scrollStyle": "default",
+		"listStyle": "default",
+		"backgroundOver": "selectbox-over-c",
+		"backgroundOpen": "selectbox-pressed-c"
+	},
+	"gothic": {
+		"font": "Fontin-Regular-16-white",
+		"fontColor": "black",
+		"background": "selectbox-c",
+		"scrollStyle": "default",
+		"listStyle": "default",
+		"backgroundOver": "selectbox-over-c",
+		"backgroundOpen": "selectbox-pressed-c"
+	}
+},
+"com.badlogic.gdx.scenes.scene2d.ui.Slider$SliderStyle": {
+	"default-horizontal": {
+		"knobOver": "slider-knob-over-horizontal-c",
+		"knobDown": "slider-knob-pressed-horizontal-c",
+		"background": "slider-horizontal",
+		"knob": "slider-knob-horizontal-c",
+		"knobBefore": "slider-bar-horizontal-c"
+	},
+	"default-vertical": {
+		"knobOver": "slider-knob-over-vertical-c",
+		"knobDown": "slider-knob-pressed-vertical-c",
+		"background": "slider-vertical-c",
+		"knob": "slider-knob-vertical-c",
+		"knobBefore": "slider-bar-vertical-c"
+	},
+	"tick": {
+		"knobOver": "slider-knob-over-horizontal-c",
+		"knobDown": "slider-knob-pressed-horizontal-c",
+		"background": "slider-tick",
+		"knob": "slider-knob-horizontal-c"
+	}
+},
+"com.badlogic.gdx.scenes.scene2d.ui.SplitPane$SplitPaneStyle": {
+	"default-horizontal": {
+		"handle": "splitpane-horizontal-c"
+	},
+	"default-vertical": {
+		"handle": "splitpane-vertical-c"
+	}
+},
+"com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle": {
+	"default": {
+		"font": "font",
+		"fontColor": "color",
+		"up": "button-c",
+		"down": "button-pressed-over-c",
+		"over": "button-over-c"
+	},
+	"toggle": {
+		"font": "font",
+		"fontColor": "color",
+		"up": "button-c",
+		"down": "button-pressed-c",
+		"over": "button-over-c",
+		"checked": "button-pressed-c",
+		"checkedOver": "button-pressed-over-c"
+	},
+	"arcade": {
+		"font": "font",
+		"up": "button-arcade-c",
+		"down": "button-arcade-pressed-c"
+	},
+	"default-gothic": {
+		"font": "Fontin-Regular-16-white",
+		"fontColor": "color",
+		"up": "default-button",
+		"down": "default-button-mousedown",
+		"over": "default-button-mouseover",
+		"pressedOffsetX": 12,
+		"unpressedOffsetX": 10,
+		"checkedOffsetX": 10
+	},
+	"toggle-gothic": {
+		"font": "Fontin-Regular-16-white",
+		"fontColor": "color",
+		"up": "default-button",
+		"down": "default-button-mousedown",
+		"over": "default-button-mouseover",
+		"checked": "default-button-mousedown",
+		"checkedOver": "default-button-mousedown",
+		"pressedOffsetX": 12,
+		"unpressedOffsetX": 10,
+		"checkedOffsetX": 12
+	}
+},
+"com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle": {
+	"default": {
+		"font": "font",
+		"fontColor": "color",
+		"background": "textfield-c",
+		"cursor": "cursor-c",
+		"selection": "selection"
+	},
+	"gothic": {
+		"font": "Fontin-Regular-16-white",
+		"fontColor": "black",
+		"background": "textfield-c",
+		"cursor": "cursor-c",
+		"selection": "selection"
+	}
+},
+"com.badlogic.gdx.scenes.scene2d.ui.TextTooltip$TextTooltipStyle": {
+	"default": {
+		"label": "default",
+		"background": "tooltip-c"
+	},
+	"gothic": {
+		"label": "gothic-white",
+		"background": "gothic-tooltip"
+	}
+},
+"com.badlogic.gdx.scenes.scene2d.ui.Touchpad$TouchpadStyle": {
+	"default": {
+		"background": "touchpad-c",
+		"knob": "touchpad-knob-c"
+	}
+},
+"com.badlogic.gdx.scenes.scene2d.ui.Tree$TreeStyle": {
+	"default": {
+		"plus": "tree-plus-c",
+		"minus": "tree-minus-c"
+	}
+},
+"com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle": {
+	"default": {
+		"background": "window-c",
+		"titleFont": "font",
+		"titleFontColor": "color"
+	},
+	"main": {
+		"background": "window-main-c",
+		"titleFont": "font",
+		"titleFontColor": "color"
+	},
+	"gothic": {
+		"background": "form-small",
+		"titleFont": "Fontin-Bold-15",
+		"titleFontColor": "color"
+	},
+	"old-rpg": {
+		"background": "old-window",
+		"titleFont": "Fontin-Regular-16-white"
 	}
 }
 }

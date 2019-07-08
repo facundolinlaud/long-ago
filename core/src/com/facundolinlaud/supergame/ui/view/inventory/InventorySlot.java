@@ -1,9 +1,11 @@
 package com.facundolinlaud.supergame.ui.view.inventory;
 
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.facundolinlaud.supergame.ui.model.Item;
+import com.facundolinlaud.supergame.ui.view.cross.ItemToolTipContent;
 import com.facundolinlaud.supergame.ui.view.cross.Slot;
 import com.facundolinlaud.supergame.ui.view.utils.Themes;
 
@@ -14,19 +16,44 @@ public class InventorySlot extends Slot<Item> {
     public static final float SIZE = 42;
 
     private Item item;
+    private Skin skin;
     private Image itemImage;
     private ImageButton slotButton;
+    private Tooltip<ItemToolTipContent> tooltip;
 
     public InventorySlot(Skin skin) {
         this.slotButton = new ImageButton(skin, Themes.IMAGE_BUTTON_SLOT);
-        add(slotButton);
+        this.itemImage = new Image();
+        this.skin = skin;
+
+        add(this.slotButton);
+        add(this.itemImage);
     }
 
     @Override
     public void setContent(Item item){
+        if(this.item == item)
+            return;
+
+        updatePicture(item);
+        buildToolTip(item);
         this.item = item;
-        this.itemImage = new Image(item.getPicture());
-        add(this.itemImage);
+    }
+
+    private void updatePicture(Item item) {
+        Sprite sprite = item.getPicture();
+        Drawable drawable = new TextureRegionDrawable(sprite);
+        this.itemImage.setDrawable(drawable);
+    }
+
+    private void buildToolTip(Item item) {
+        if(this.tooltip != null)
+            removeListener(this.tooltip);
+
+        ItemToolTipContent itemToolTipContent = new ItemToolTipContent(skin, item);
+        this.tooltip = new Tooltip(itemToolTipContent);
+//        this.tooltip.setInstant(true);
+        addListener(this.tooltip);
     }
 
     @Override
@@ -37,7 +64,7 @@ public class InventorySlot extends Slot<Item> {
     @Override
     public void clearContent(){
         if(this.item != null){
-            removeActor(this.itemImage);
+            this.itemImage.setDrawable(null);
             this.item = null;
         }
     }

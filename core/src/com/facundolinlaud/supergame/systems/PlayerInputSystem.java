@@ -54,7 +54,7 @@ public class PlayerInputSystem extends IteratingSystem {
             }
         }
 
-        bag.gathering = playerInputObserver.isGatheringRequested();
+        bag.setGathering(playerInputObserver.isGatheringRequested());
     }
 
     private void handleMovementCase(StatusComponent status, Direction newDirection) {

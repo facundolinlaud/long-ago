@@ -51,6 +51,10 @@
 				"type" : "DIMMING",
 				"distance": 6.0,
 				"duration": 1.0
+			},
+			"screenShake": {
+				"power": 5,
+				"duration": 1
 			}
 		},
 		"2": {
@@ -90,6 +94,10 @@
 				"type" : "DIMMING",
 				"distance": 6.0,
 				"duration": 1.0
+			},
+			"screenShake": {
+				"power": 1,
+				"duration": 0.2
 			}
 		},
 		"3": {

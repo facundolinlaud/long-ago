@@ -10,7 +10,7 @@ import com.facundolinlaud.supergame.model.skill.Skill;
 import com.facundolinlaud.supergame.ui.view.cross.Slot;
 import com.facundolinlaud.supergame.ui.view.utils.Themes;
 
-public class SkillbarSlot extends Slot<Skill> {
+public class SkillBarSlot extends Slot<Skill> {
     private Skill skill;
     private Image skillImage;
     private ImageButton slotButton;
@@ -20,7 +20,7 @@ public class SkillbarSlot extends Slot<Skill> {
     private Container cooldownContainer;
     private Image frameOver;
 
-    public SkillbarSlot(Skin skin, String key) {
+    public SkillBarSlot(Skin skin, String key) {
         this.slotButton = new ImageButton(skin, Themes.IMAGE_BUTTON_SLOT);
         this.skillImage = new Image();
 
@@ -71,9 +71,5 @@ public class SkillbarSlot extends Slot<Skill> {
                         Actions.sequence(Actions.alpha(0.3f),
                         Actions.delay(delay),
                         Actions.alpha(1f, 0.1f)));
-    }
-
-    public boolean isEmpty() {
-        return this.skill == null;
     }
 }

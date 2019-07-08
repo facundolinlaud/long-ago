@@ -43,9 +43,9 @@ public class EquipmentSlot extends Slot<Item> {
     @Override
     public void setContent(Item item){
         Sprite sprite = item.getPicture();
-        Drawable spriteDrawable  = new TextureRegionDrawable(sprite);
+        Drawable drawable = new TextureRegionDrawable(sprite);
 
-        this.style.imageChecked = spriteDrawable;
+        this.style.imageChecked = drawable;
         this.imageButton.setChecked(true);
         this.item = item;
     }

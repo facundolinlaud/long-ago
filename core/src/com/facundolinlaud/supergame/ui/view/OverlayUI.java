@@ -9,17 +9,16 @@ import com.facundolinlaud.supergame.model.skill.Skill;
 import com.facundolinlaud.supergame.ui.view.overlay.controlbar.ControlBar;
 import com.facundolinlaud.supergame.ui.view.overlay.itemdropzone.ItemDropTable;
 import com.facundolinlaud.supergame.ui.view.overlay.profile.ProfileTable;
-import com.facundolinlaud.supergame.ui.view.overlay.skillsbar.Skillbar;
+import com.facundolinlaud.supergame.ui.view.overlay.skillsbar.SkillBar;
 
 /**
  * Created by facundo on 3/27/16.
  */
 public class OverlayUI implements UI {
-
     private Table table;
     private ItemDropTable itemDropZone;
     private ProfileTable profile;
-    private Skillbar skillbar;
+    private SkillBar skillbar;
     private ControlBar controlBar;
 
     public OverlayUI(Skin skin) {
@@ -36,7 +35,7 @@ public class OverlayUI implements UI {
         this.table.row();
 
         this.controlBar = new ControlBar(skin);
-        this.skillbar = new Skillbar(skin, new SkillsFactory().getSkills());
+        this.skillbar = new SkillBar(skin, new SkillsFactory().getSkills());
         this.table.add(controlBar.getLeftControlBar()).expandX().right().bottom();
         this.table.add(this.skillbar).center();
         this.table.add(controlBar.getRightControlBar()).expandX().left().bottom();

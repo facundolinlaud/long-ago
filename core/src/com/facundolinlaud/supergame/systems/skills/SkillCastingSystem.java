@@ -13,6 +13,7 @@ import com.facundolinlaud.supergame.components.skills.SkillCastingComponent;
 import com.facundolinlaud.supergame.components.skills.SkillLockDownComponent;
 import com.facundolinlaud.supergame.factory.ParticleFactory;
 import com.facundolinlaud.supergame.managers.world.LightsManager;
+import com.facundolinlaud.supergame.managers.world.ScreenShakeManager;
 import com.facundolinlaud.supergame.model.skill.Skill;
 import com.facundolinlaud.supergame.model.skill.SkillType;
 import com.facundolinlaud.supergame.model.status.Action;
@@ -34,18 +35,19 @@ public class SkillCastingSystem extends IteratingSystem {
     private Map<SkillType, SkillCastingStrategy> castingStrategies;
     private MessageDispatcher messageDispatcher;
 
-    public SkillCastingSystem(Engine engine, ParticleFactory particleFactory, LightsManager lightsManager) {
+    public SkillCastingSystem(Engine engine, ParticleFactory particleFactory,
+                              LightsManager lightsManager, ScreenShakeManager shakeManager) {
         super(Family.all(PositionComponent.class, StatusComponent.class, SkillCastingComponent.class).get());
 
         this.castingStrategies = new HashMap<>();
         this.castingStrategies.put(SkillType.NORMAL,
-                new NormalSkillCastingStrategy(engine, particleFactory, lightsManager));
+                new NormalSkillCastingStrategy(engine, particleFactory, lightsManager, shakeManager));
 
         this.castingStrategies.put(SkillType.SPELL,
-                new SpellSkillCastingStrategy(engine, particleFactory, lightsManager));
+                new SpellSkillCastingStrategy(engine, particleFactory, lightsManager, shakeManager));
 
         this.castingStrategies.put(SkillType.PROJECTILE,
-                new ProjectileSkillCastingStrategy(engine, particleFactory));
+                new ProjectileSkillCastingStrategy(engine, particleFactory, shakeManager));
 
         this.messageDispatcher = MessageManager.getInstance();
     }

@@ -31,18 +31,34 @@ public class EquipmentUIController implements Telegraph {
     private ComponentMapper<EquipableComponent> em = Mappers.equipable;
 
     private EquipmentUI ui;
-    private Entity equipper;
+    private Entity player;
 
-    public EquipmentUIController(EquipmentUI ui) {
+    public EquipmentUIController(EquipmentUI ui, Entity player) {
         this.ui = ui;
+        this.player = player;
+
+        refreshEquipment();
     }
 
-    public void setEquipper(Entity player) {
-        this.equipper = player;
+    @Override
+    public boolean handleMessage(Telegram msg) {
+        switch(msg.message){
+            case Messages.ITEM_UNEQUIPPED:
+                onUnequipItemEvent((UnequipItemEvent) msg.extraInfo);
+                break;
+            case Messages.ITEM_EQUIPPED:
+                onEquipItemEvent((EquipItemEvent) msg.extraInfo);
+                break;
+            case Messages.EQUIPMENT_CHANGED:
+                refreshEquipment();
+                break;
+        }
+
+        return false;
     }
 
-    public void update(Entity entity, WearComponent wear) {
-        setEquipper(entity);
+    public void refreshEquipment() {
+        WearComponent wear = wm.get(player);
         Map<EquipSlot, Entity> wearables = wear.wearables;
         Map<EquipSlot, Item> items = new HashMap<>();
 
@@ -63,27 +79,13 @@ public class EquipmentUIController implements Telegraph {
         ui.update(items);
     }
 
-    @Override
-    public boolean handleMessage(Telegram msg) {
-        switch(msg.message){
-            case Messages.ITEM_UNEQUIPPED:
-                onUnequipItemEvent((UnequipItemEvent) msg.extraInfo);
-                break;
-            case Messages.ITEM_EQUIPPED:
-                onEquipItemEvent((EquipItemEvent) msg.extraInfo);
-                break;
-        }
-
-        return false;
-    }
-
     private void onUnequipItemEvent(UnequipItemEvent event){
         Item item = event.getItem();
 
-        WearComponent wearComponent = wm.get(equipper);
+        WearComponent wearComponent = wm.get(player);
         Entity itemEntity = wearComponent.wearables.remove(item.getEquipable().getEquipSlot());
-        BagComponent bagComponent = bm.get(equipper);
-        bagComponent.addItem(itemEntity);
+        BagComponent bagComponent = bm.get(player);
+        bagComponent.add(itemEntity);
 
         refreshEquipperSprite();
 
@@ -93,9 +95,9 @@ public class EquipmentUIController implements Telegraph {
     private void onEquipItemEvent(EquipItemEvent event) {
         Item item = event.getItem();
 
-        BagComponent bagComponent = bm.get(equipper);
-        Entity itemEntity = bagComponent.items.remove(item.getInvented().getPositionInBag());
-        WearComponent wearComponent = wm.get(equipper);
+        BagComponent bagComponent = bm.get(player);
+        Entity itemEntity = bagComponent.remove(item.getInvented().getPositionInBag());
+        WearComponent wearComponent = wm.get(player);
         wearComponent.wearables.put(item.getEquipable().getEquipSlot(), itemEntity);
 
         refreshEquipperSprite();
@@ -104,6 +106,6 @@ public class EquipmentUIController implements Telegraph {
     }
 
     private void refreshEquipperSprite() {
-        equipper.add(new RefreshSpriteRequirementComponent());
+        player.add(new RefreshSpriteRequirementComponent());
     }
 }

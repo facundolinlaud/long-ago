@@ -41,6 +41,9 @@ public class Skill {
     private boolean hasLightEffect;
     @Nullable private LightModel lightModel;
 
+    /* Screen Shake */
+    @Nullable private ScreenShake screenShake;
+
     public void setHasLightEffect(boolean hasLightEffect) {
         this.hasLightEffect = hasLightEffect;
     }
@@ -217,5 +220,17 @@ public class Skill {
 
     public TwoClickInformation getTwoClickInformation() {
         return twoClickInformation;
+    }
+
+    public ScreenShake getScreenShake() {
+        return screenShake;
+    }
+
+    public void setScreenShake(ScreenShake screenShake) {
+        this.screenShake = screenShake;
+    }
+
+    public boolean hasScreenShake(){
+        return this.screenShake != null;
     }
 }

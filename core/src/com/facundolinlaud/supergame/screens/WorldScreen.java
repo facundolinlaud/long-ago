@@ -32,10 +32,12 @@ public class WorldScreen implements Screen {
 
     private MapManager mapManager;
     private PhysicsManager physicsManager;
-    private UIManager uiManager;
-    private LightsManager lightsManager;
     private AIManager aiManager;
     private SpawnManager spawnManager;
+    private WorldEntitiesManager weManager;
+    private UIManager uiManager;
+    private LightsManager lightsManager;
+    private ScreenShakeManager screenShakeManager;
 
     private Stage stage;
 
@@ -46,7 +48,6 @@ public class WorldScreen implements Screen {
         initializeFactories();
         initializeManagers();
         initializeListeners();
-        initializeEntities();
         initializeSystems();
     }
 
@@ -64,10 +65,13 @@ public class WorldScreen implements Screen {
     private void initializeManagers() {
         this.mapManager = new MapManager(resources.getBatch());
         this.physicsManager = new PhysicsManager(mapManager.getCamera(), mapManager.getMap());
-        this.uiManager = new UIManager(stage, mapManager.getCamera());
-        this.lightsManager = new LightsManager(physicsManager.getWorld(), mapManager.getCamera());
         this.aiManager = new AIManager(factories.getSkillsFactory(), mapManager, physicsManager);
         this.spawnManager = new SpawnManager(resources.getEngine(), mapManager.getSpawnLocations());
+        this.weManager = new WorldEntitiesManager(resources.getEngine(), factories);
+        this.uiManager = new UIManager(stage, mapManager.getCamera(), weManager.getPlayer());
+        this.lightsManager = new LightsManager(physicsManager.getWorld(), mapManager.getCamera(), weManager.getPlayer());
+        this.screenShakeManager = new ScreenShakeManager(mapManager, weManager.getPlayer());
+        // por ahi deberia ser un sistema donde se attachea el screenshake component a la entidad a la cual volver?
     }
 
     private void initializeListeners() {
@@ -80,28 +84,6 @@ public class WorldScreen implements Screen {
 
         this.physicsManager.getWorld().setContactListener(new ProjectilesCollisionListener(engine,
                 factories.getParticleFactory(), lightsManager));
-    }
-
-    private void initializeEntities(){
-        ItemFactory itemFactory = factories.getItemFactory();
-
-        Entity player = factories.getAgentFactory().getPlayer()
-                .at(17, 40)
-                .build();
-
-        Entity coin = itemFactory.getItem(ItemFactory.COINS)
-                .dropped(21, 48)
-                .build();
-
-        Entity saber = itemFactory.getItem(ItemFactory.SABER)
-                .dropped(20, 48)
-                .build();
-
-        resources.getEngine().addEntity(player);
-        resources.getEngine().addEntity(coin);
-        resources.getEngine().addEntity(saber);
-
-        lightsManager.setPlayerLightBody(player);
     }
 
     private void initializeSystems() {

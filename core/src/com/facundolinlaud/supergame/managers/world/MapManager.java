@@ -46,7 +46,8 @@ public class MapManager implements Renderable {
 
     private void initializeCamera(float width, float height) {
         this.camera = new OrthographicCamera();
-        this.camera.setToOrtho(false, VIEWPORT_WIDTH_IN_METERS, VIEWPORT_WIDTH_IN_METERS * (height / width));
+        this.camera.setToOrtho(false, VIEWPORT_WIDTH_IN_METERS,
+                VIEWPORT_WIDTH_IN_METERS * (height / width));
     }
 
     private void initializeMap() {

@@ -31,7 +31,7 @@ public class PickUpSystem extends EntitySystem {
     @Override
     public void update(float deltaTime) {
         for (Entity taker : takers) {
-            boolean isGathering = bm.get(taker).gathering;
+            boolean isGathering = bm.get(taker).isGathering();
 
             if(isGathering) {
                 PositionComponent takerPosition = pm.get(taker);
@@ -42,7 +42,7 @@ public class PickUpSystem extends EntitySystem {
 
                     if(rectangle.contains(itemPosition.x, itemPosition.y)){
                         BagComponent bag = bm.get(taker);
-                        bag.addItem(item);
+                        bag.add(item);
                         deleteItemFromWorld(item);
                     }
                 }

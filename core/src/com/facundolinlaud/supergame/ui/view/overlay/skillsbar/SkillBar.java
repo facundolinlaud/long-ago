@@ -8,12 +8,12 @@ import com.facundolinlaud.supergame.model.skill.Skill;
 
 import java.util.Map;
 
-public class Skillbar extends Table {
+public class SkillBar extends Table {
     private static final int SIZE = 10;
 
-    private Array<SkillbarSlot> slots;
+    private Array<SkillBarSlot> slots;
 
-    public Skillbar(Skin skin, Map<Integer, Skill> skills) {
+    public SkillBar(Skin skin, Map<Integer, Skill> skills) {
         super(skin);
         this.setBackground("spellbar");
         this.slots = new Array<>(false, SIZE);
@@ -21,7 +21,7 @@ public class Skillbar extends Table {
         this.padLeft(3);
 
         for(int i = 0; i < SIZE; i++){
-            SkillbarSlot slot = new SkillbarSlot(skin, String.valueOf(i + 1));
+            SkillBarSlot slot = new SkillBarSlot(skin, String.valueOf(i + 1));
             this.slots.add(slot);
             this.add(slot).width(32).height(32).padRight(4).left();
 
@@ -33,7 +33,7 @@ public class Skillbar extends Table {
 
     public void beginCooldown(Skill skill){
         float cooldown = skill.getCooldown();
-        for(SkillbarSlot s : slots){
+        for(SkillBarSlot s : slots){
             if(skill == s.getContent()){
                 s.beginCooldown(cooldown);
             }
