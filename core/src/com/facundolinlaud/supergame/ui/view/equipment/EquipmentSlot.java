@@ -1,21 +1,19 @@
 package com.facundolinlaud.supergame.ui.view.equipment;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
-import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.facundolinlaud.supergame.ui.model.Item;
-import com.facundolinlaud.supergame.ui.view.cross.Slot;
 import com.facundolinlaud.supergame.model.equip.EquipSlot;
+import com.facundolinlaud.supergame.ui.model.Item;
+import com.facundolinlaud.supergame.ui.view.cross.ItemSlot;
 import com.facundolinlaud.supergame.ui.view.utils.Themes;
 
 /**
  * Created by facundo on 4/2/16.
  */
-public class EquipmentSlot extends Slot<Item> {
+public class EquipmentSlot extends ItemSlot {
     public static final int SIZE = 42;
 
     private Item item;
@@ -27,7 +25,7 @@ public class EquipmentSlot extends Slot<Item> {
     public EquipmentSlot(Skin skin, EquipSlot equipSlot) {
         this.skin = skin;
         this.equipSlot = equipSlot;
-        this.imageButton = new ImageButton(skin, Themes.IMAGE_BUTTON_SLOT);
+        this.imageButton = new ImageButton(skin, Themes.ImageButton.SLOT);
 
         this.style = new ImageButton.ImageButtonStyle();
         this.style.up = imageButton.getStyle().up;
@@ -42,12 +40,20 @@ public class EquipmentSlot extends Slot<Item> {
 
     @Override
     public void setContent(Item item){
+        if(this.item == item)
+            return;
+
+        updatePicture(item);
+        buildToolTip(item, skin);
+        this.item = item;
+    }
+
+    private void updatePicture(Item item) {
         Sprite sprite = item.getPicture();
         Drawable drawable = new TextureRegionDrawable(sprite);
 
         this.style.imageChecked = drawable;
         this.imageButton.setChecked(true);
-        this.item = item;
     }
 
     @Override

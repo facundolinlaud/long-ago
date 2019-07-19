@@ -1,19 +1,61 @@
 {
 "com.badlogic.gdx.graphics.g2d.BitmapFont": {
-	"font": {
-		"file": "font-export.fnt"
+	"bold-12": {
+		"file": "bold-12.fnt"
 	},
-	"Fontin-Bold-15": {
-		"file": "Fontin-Bold-15.fnt"
+	"bold-13": {
+		"file": "bold-13.fnt"
 	},
-	"Fontin-Regular-12-white": {
-		"file": "Fontin-Regular-12-white.fnt"
+	"bold-14": {
+		"file": "bold-14.fnt"
 	},
-	"Fontin-Regular-14-white": {
-		"file": "Fontin-Regular-14.fnt"
+	"bold-15": {
+		"file": "bold-15.fnt"
 	},
-	"Fontin-Regular-16-white": {
-		"file": "fontin.fnt"
+	"bold-16": {
+		"file": "bold-16.fnt"
+	},
+	"bold-20": {
+		"file": "bold-20.fnt"
+	},
+	"italic-15": {
+		"file": "italic-15.fnt"
+	},
+	"regular-12": {
+		"file": "regular-12.fnt"
+	},
+	"regular-13": {
+		"file": "regular-13.fnt"
+	},
+	"regular-14": {
+		"file": "regular-14.fnt"
+	},
+	"regular-15": {
+		"file": "regular-15.fnt"
+	},
+	"regular-16": {
+		"file": "regular-16.fnt"
+	},
+	"regular-20": {
+		"file": "regular-20.fnt"
+	},
+	"smallcaps-12": {
+		"file": "smallcaps-12.fnt"
+	},
+	"smallcaps-13": {
+		"file": "smallcaps-13.fnt"
+	},
+	"smallcaps-14": {
+		"file": "smallcaps-14.fnt"
+	},
+	"smallcaps-15": {
+		"file": "smallcaps-15.fnt"
+	},
+	"smallcaps-16": {
+		"file": "smallcaps-16.fnt"
+	},
+	"smallcaps-20": {
+		"file": "smallcaps-20.fnt"
 	}
 },
 "com.badlogic.gdx.graphics.Color": {
@@ -23,7 +65,7 @@
 		"b": 0,
 		"a": 1
 	},
-	"color": {
+	"white": {
 		"r": 1,
 		"g": 1,
 		"b": 1,
@@ -39,239 +81,239 @@
 "com.badlogic.gdx.scenes.scene2d.ui.Skin$TintedDrawable": {
 	"button-c": {
 		"name": "button",
-		"color": "color"
+		"color": "white"
 	},
 	"button-arcade-c": {
 		"name": "button-arcade",
-		"color": "color"
+		"color": "white"
 	},
 	"button-arcade-pressed-c": {
 		"name": "button-arcade-pressed",
-		"color": "color"
+		"color": "white"
 	},
 	"button-close-c": {
 		"name": "button-close",
-		"color": "color"
+		"color": "white"
 	},
 	"button-close-over-c": {
 		"name": "button-close-over",
-		"color": "color"
+		"color": "white"
 	},
 	"button-close-pressed-c": {
 		"name": "button-close-pressed",
-		"color": "color"
+		"color": "white"
 	},
 	"button-maximize-c": {
 		"name": "button-maximize",
-		"color": "color"
+		"color": "white"
 	},
 	"button-maximize-over-c": {
 		"name": "button-maximize-over",
-		"color": "color"
+		"color": "white"
 	},
 	"button-maximize-pressed-c": {
 		"name": "button-maximize-pressed",
-		"color": "color"
+		"color": "white"
 	},
 	"button-minimize-c": {
 		"name": "button-minimize",
-		"color": "color"
+		"color": "white"
 	},
 	"button-minimize-over-c": {
 		"name": "button-minimize-over",
-		"color": "color"
+		"color": "white"
 	},
 	"button-minimize-pressed-c": {
 		"name": "button-minimize-pressed",
-		"color": "color"
+		"color": "white"
 	},
 	"button-over-c": {
 		"name": "button-over",
-		"color": "color"
+		"color": "white"
 	},
 	"button-pressed-c": {
 		"name": "button-pressed",
-		"color": "color"
+		"color": "white"
 	},
 	"button-pressed-over-c": {
 		"name": "button-pressed-over",
-		"color": "color"
+		"color": "white"
 	},
 	"checkbox-c": {
 		"name": "checkbox",
-		"color": "color"
+		"color": "white"
 	},
 	"checkbox-over-c": {
 		"name": "checkbox-over",
-		"color": "color"
+		"color": "white"
 	},
 	"checkbox-pressed-c": {
 		"name": "checkbox-pressed",
-		"color": "color"
+		"color": "white"
 	},
 	"checkbox-pressed-over-c": {
 		"name": "checkbox-pressed-over",
-		"color": "color"
+		"color": "white"
 	},
 	"cursor-c": {
 		"name": "cursor",
-		"color": "color"
+		"color": "white"
 	},
 	"list-c": {
 		"name": "list",
-		"color": "color"
+		"color": "white"
 	},
 	"progressbar-big-c": {
 		"name": "progressbar-big",
-		"color": "color"
+		"color": "white"
 	},
 	"progressbar-horizontal-c": {
 		"name": "progressbar-horizontal",
-		"color": "color"
+		"color": "white"
 	},
 	"progressbar-knob-horizontal-c": {
 		"name": "progressbar-knob-horizontal",
-		"color": "color"
+		"color": "white"
 	},
 	"progressbar-knob-vertical-c": {
 		"name": "progressbar-knob-vertical",
-		"color": "color"
+		"color": "white"
 	},
 	"progressbar-vertical-c": {
 		"name": "progressbar-vertical",
-		"color": "color"
+		"color": "white"
 	},
 	"radio-c": {
 		"name": "radio",
-		"color": "color"
+		"color": "white"
 	},
 	"radio-over-c": {
 		"name": "radio-over",
-		"color": "color"
+		"color": "white"
 	},
 	"radio-pressed-c": {
 		"name": "radio-pressed",
-		"color": "color"
+		"color": "white"
 	},
 	"radio-pressed-over-c": {
 		"name": "radio-pressed-over",
-		"color": "color"
+		"color": "white"
 	},
 	"selectbox-c": {
 		"name": "selectbox",
-		"color": "color"
+		"color": "white"
 	},
 	"selectbox-over-c": {
 		"name": "selectbox-over",
-		"color": "color"
+		"color": "white"
 	},
 	"selectbox-pressed-c": {
 		"name": "selectbox-pressed",
-		"color": "color"
+		"color": "white"
 	},
 	"selectbox-pressed-over-c": {
 		"name": "selectbox-pressed-over",
-		"color": "color"
+		"color": "white"
 	},
 	"slider-horizontal-c": {
 		"name": "slider-horizontal",
-		"color": "color"
+		"color": "white"
 	},
 	"slider-knob-horizontal-c": {
 		"name": "slider-knob-horizontal",
-		"color": "color"
+		"color": "white"
 	},
 	"slider-knob-over-horizontal-c": {
 		"name": "slider-knob-over-horizontal",
-		"color": "color"
+		"color": "white"
 	},
 	"slider-knob-over-vertical-c": {
 		"name": "slider-knob-over-vertical",
-		"color": "color"
+		"color": "white"
 	},
 	"slider-knob-pressed-horizontal-c": {
 		"name": "slider-knob-pressed-horizontal",
-		"color": "color"
+		"color": "white"
 	},
 	"slider-knob-pressed-vertical-c": {
 		"name": "slider-knob-pressed-vertical",
-		"color": "color"
+		"color": "white"
 	},
 	"slider-knob-vertical-c": {
 		"name": "slider-knob-vertical",
-		"color": "color"
+		"color": "white"
 	},
 	"slider-vertical-c": {
 		"name": "slider-vertical",
-		"color": "color"
+		"color": "white"
 	},
 	"splitpane-horizontal-c": {
 		"name": "splitpane-horizontal",
-		"color": "color"
+		"color": "white"
 	},
 	"splitpane-vertical-c": {
 		"name": "splitpane-vertical",
-		"color": "color"
+		"color": "white"
 	},
 	"textfield-c": {
 		"name": "textfield",
-		"color": "color"
+		"color": "white"
 	},
 	"tooltip-c": {
 		"name": "tooltip",
-		"color": "color"
+		"color": "white"
 	},
 	"touchpad-c": {
 		"name": "touchpad",
-		"color": "color"
+		"color": "white"
 	},
 	"touchpad-knob-c": {
 		"name": "touchpad-knob",
-		"color": "color"
+		"color": "white"
 	},
 	"tree-minus-c": {
 		"name": "tree-minus",
-		"color": "color"
+		"color": "white"
 	},
 	"tree-plus-c": {
 		"name": "tree-plus",
-		"color": "color"
+		"color": "white"
 	},
 	"window-c": {
 		"name": "window",
-		"color": "color"
+		"color": "white"
 	},
 	"window-main-c": {
 		"name": "window-main",
-		"color": "color"
+		"color": "white"
 	},
 	"color": {
 		"name": "white",
-		"color": "color"
+		"color": "white"
 	},
 	"scrollpane-horizontal-c": {
 		"name": "scrollpane-horizontal",
-		"color": "color"
+		"color": "white"
 	},
 	"scrollpane-knob-horizontal-c": {
 		"name": "scrollpane-knob-horizontal",
-		"color": "color"
+		"color": "white"
 	},
 	"scrollpane-knob-vertical-c": {
 		"name": "scrollpane-knob-vertical",
-		"color": "color"
+		"color": "white"
 	},
 	"scrollpane-vertical-c": {
 		"name": "scrollpane-vertical",
-		"color": "color"
+		"color": "white"
 	},
 	"slider-bar-horizontal-c": {
 		"name": "slider-bar-horizontal",
-		"color": "color"
+		"color": "white"
 	},
 	"slider-bar-vertical-c": {
 		"name": "slider-bar-vertical",
-		"color": "color"
+		"color": "white"
 	},
 	"selection": {
 		"name": "white",
@@ -324,15 +366,15 @@
 		"checkboxOn": "checkbox-pressed-c",
 		"checkboxOff": "checkbox-c",
 		"checkboxOver": "checkbox-over-c",
-		"font": "font",
-		"fontColor": "color"
+		"font": "regular-16",
+		"fontColor": "black"
 	},
 	"radio": {
 		"checkboxOn": "radio-pressed-c",
 		"checkboxOff": "radio-c",
 		"checkboxOver": "radio-over-c",
-		"font": "font",
-		"fontColor": "color"
+		"font": "regular-16",
+		"fontColor": "black"
 	}
 },
 "com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle": {
@@ -395,13 +437,13 @@
 },
 "com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton$ImageTextButtonStyle": {
 	"default": {
-		"font": "font",
+		"font": "regular-16",
 		"up": "button-c",
 		"down": "button-pressed-over-c",
 		"over": "button-over-c"
 	},
 	"toggle": {
-		"font": "font",
+		"font": "regular-16",
 		"up": "button-c",
 		"down": "button-pressed-c",
 		"over": "button-over-c",
@@ -414,7 +456,8 @@
 		"imageOver": "radio-over-c",
 		"imageChecked": "radio-pressed-c",
 		"imageCheckedOver": "radio-pressed-over-c",
-		"font": "font"
+		"font": "regular-16",
+		"fontColor": "black"
 	},
 	"checkbox": {
 		"imageUp": "checkbox-c",
@@ -422,28 +465,97 @@
 		"imageOver": "checkbox-over-c",
 		"imageChecked": "checkbox-pressed-c",
 		"imageCheckedOver": "checkbox-pressed-over-c",
-		"font": "font"
+		"font": "regular-16",
+		"fontColor": "black"
 	}
 },
 "com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle": {
 	"default": {
-		"font": "font",
-		"fontColor": "color"
+		"font": "regular-16",
+		"fontColor": "white"
 	},
-	"gothic-black": {
-		"font": "Fontin-Regular-12-white",
-		"fontColor": "black"
+	"regular-16": {
+		"font": "regular-16",
+		"fontColor": "white"
 	},
-	"gothic-white": {
-		"font": "Fontin-Regular-12-white",
-		"fontColor": "color"
+	"regular-15": {
+		"font": "regular-15",
+		"fontColor": "white"
+	},
+	"regular-12": {
+		"font": "regular-12",
+		"fontColor": "white"
+	},
+	"regular-13": {
+		"font": "regular-13",
+		"fontColor": "white"
+	},
+	"regular-14": {
+		"font": "regular-14",
+		"fontColor": "white"
+	},
+	"regular-20": {
+		"font": "regular-20",
+		"fontColor": "white"
+	},
+	"bold-12": {
+		"font": "bold-12",
+		"fontColor": "white"
+	},
+	"bold-13": {
+		"font": "bold-13",
+		"fontColor": "white"
+	},
+	"bold-14": {
+		"font": "bold-14",
+		"fontColor": "white"
+	},
+	"bold-15": {
+		"font": "bold-15",
+		"fontColor": "white"
+	},
+	"bold-16": {
+		"font": "bold-16",
+		"fontColor": "white"
+	},
+	"bold-20": {
+		"font": "bold-20",
+		"fontColor": "white"
+	},
+	"smallcaps-14": {
+		"font": "smallcaps-14",
+		"fontColor": "white"
+	},
+	"smallcaps-16": {
+		"font": "smallcaps-16",
+		"fontColor": "white"
+	},
+	"smallcaps-20": {
+		"font": "smallcaps-20",
+		"fontColor": "white"
+	},
+	"smallcaps-12": {
+		"font": "smallcaps-12",
+		"fontColor": "white"
+	},
+	"smallcaps-13": {
+		"font": "smallcaps-13",
+		"fontColor": "white"
+	},
+	"smallcaps-15": {
+		"font": "smallcaps-15",
+		"fontColor": "white"
+	},
+	"italic-15": {
+		"font": "italic-15",
+		"fontColor": "white"
 	}
 },
 "com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle": {
 	"default": {
-		"font": "font",
-		"fontColorSelected": "color",
-		"fontColorUnselected": "color",
+		"font": "regular-16",
+		"fontColorSelected": "black",
+		"fontColorUnselected": "white",
 		"selection": "color",
 		"background": "list-c"
 	}
@@ -488,16 +600,7 @@
 },
 "com.badlogic.gdx.scenes.scene2d.ui.SelectBox$SelectBoxStyle": {
 	"default": {
-		"font": "font",
-		"fontColor": "color",
-		"background": "selectbox-c",
-		"scrollStyle": "default",
-		"listStyle": "default",
-		"backgroundOver": "selectbox-over-c",
-		"backgroundOpen": "selectbox-pressed-c"
-	},
-	"gothic": {
-		"font": "Fontin-Regular-16-white",
+		"font": "regular-16",
 		"fontColor": "black",
 		"background": "selectbox-c",
 		"scrollStyle": "default",
@@ -538,15 +641,15 @@
 },
 "com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle": {
 	"default": {
-		"font": "font",
-		"fontColor": "color",
+		"font": "regular-16",
+		"fontColor": "white",
 		"up": "button-c",
 		"down": "button-pressed-over-c",
 		"over": "button-over-c"
 	},
 	"toggle": {
-		"font": "font",
-		"fontColor": "color",
+		"font": "regular-16",
+		"fontColor": "white",
 		"up": "button-c",
 		"down": "button-pressed-c",
 		"over": "button-over-c",
@@ -554,43 +657,33 @@
 		"checkedOver": "button-pressed-over-c"
 	},
 	"arcade": {
-		"font": "font",
+		"font": "regular-16",
 		"up": "button-arcade-c",
 		"down": "button-arcade-pressed-c"
 	},
 	"default-gothic": {
-		"font": "Fontin-Regular-16-white",
-		"fontColor": "color",
+		"font": "regular-16",
+		"fontColor": "white",
 		"up": "default-button",
 		"down": "default-button-mousedown",
 		"over": "default-button-mouseover",
-		"pressedOffsetX": 12,
-		"unpressedOffsetX": 10,
-		"checkedOffsetX": 10
+		"pressedOffsetX": 1
 	},
 	"toggle-gothic": {
-		"font": "Fontin-Regular-16-white",
-		"fontColor": "color",
+		"font": "regular-16",
+		"fontColor": "white",
 		"up": "default-button",
 		"down": "default-button-mousedown",
 		"over": "default-button-mouseover",
 		"checked": "default-button-mousedown",
 		"checkedOver": "default-button-mousedown",
-		"pressedOffsetX": 12,
-		"unpressedOffsetX": 10,
-		"checkedOffsetX": 12
+		"pressedOffsetX": 1,
+		"checkedOffsetX": 1
 	}
 },
 "com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle": {
 	"default": {
-		"font": "font",
-		"fontColor": "color",
-		"background": "textfield-c",
-		"cursor": "cursor-c",
-		"selection": "selection"
-	},
-	"gothic": {
-		"font": "Fontin-Regular-16-white",
+		"font": "regular-16",
 		"fontColor": "black",
 		"background": "textfield-c",
 		"cursor": "cursor-c",
@@ -603,7 +696,7 @@
 		"background": "tooltip-c"
 	},
 	"gothic": {
-		"label": "gothic-white",
+		"label": "regular-15",
 		"background": "gothic-tooltip"
 	}
 },
@@ -622,22 +715,22 @@
 "com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle": {
 	"default": {
 		"background": "window-c",
-		"titleFont": "font",
-		"titleFontColor": "color"
+		"titleFont": "bold-16",
+		"titleFontColor": "white"
 	},
 	"main": {
 		"background": "window-main-c",
-		"titleFont": "font",
-		"titleFontColor": "color"
+		"titleFont": "bold-16",
+		"titleFontColor": "white"
 	},
 	"gothic": {
 		"background": "form-small",
-		"titleFont": "Fontin-Bold-15",
-		"titleFontColor": "color"
+		"titleFont": "bold-16",
+		"titleFontColor": "white"
 	},
 	"old-rpg": {
 		"background": "old-window",
-		"titleFont": "Fontin-Regular-16-white"
+		"titleFont": "bold-16"
 	}
 }
 }

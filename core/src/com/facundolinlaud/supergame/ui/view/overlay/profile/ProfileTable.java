@@ -7,12 +7,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Align;
 
+import static com.facundolinlaud.supergame.ui.view.utils.Themes.Label.REGULAR_14;
 /**
  * Created by facundo on 3/30/16.
  */
 public class ProfileTable extends Table {
 
-    public static final String LABEL_STYLE = "gothic-white";
     private ProgressBar healthBar;
     private ProgressBar manaBar;
 
@@ -30,9 +30,9 @@ public class ProfileTable extends Table {
         this.manaBar.setSize(300, 80);
         this.manaBar.setValue(50);
 
-        this.fpsLabel = new Label("FPS: unknown", skin, LABEL_STYLE);
-        this.positionLabel = new Label("Texture Position: unknown", skin, LABEL_STYLE);
-        this.bodyPositionLabel = new Label("Body Position: unknown", skin, LABEL_STYLE);
+        this.fpsLabel = new Label("FPS: unknown", skin, REGULAR_14);
+        this.positionLabel = new Label("Texture Position: unknown", skin, REGULAR_14);
+        this.bodyPositionLabel = new Label("Body Position: unknown", skin, REGULAR_14);
 
         pad(5);
         align(Align.topLeft);

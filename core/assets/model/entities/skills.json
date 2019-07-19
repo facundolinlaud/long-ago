@@ -16,7 +16,6 @@
 			"executingAction": "DASHING",
 			"animationFlow": "TRAVERSE",
 
-			"areaOfEffect": "CIRCLE",
 			"areaOfEffectSize": 2.0,
 			"baseDamage": 40.0,
 			"baseHeal": 0.0,
@@ -38,7 +37,6 @@
 			"executingAction": "SPELL_CASTING",
 			"animationFlow": "STOP_AT_LAST_PHOTOGRAM",
 
-			"areaOfEffect": "CIRCLE",
 			"areaOfEffectSize": 2.0,
 			"baseDamage": 80.0,
 			"baseHeal": 0.0,
@@ -73,7 +71,6 @@
 			"executingAction": "SHOOTING",
 			"animationFlow": "STOP_AT_LAST_PHOTOGRAM",
 
-			"areaOfEffect": "CIRCLE",
 			"areaOfEffectSize": 2.0,
 			"baseDamage": 80.0,
 			"baseHeal": 0.0,
@@ -116,7 +113,6 @@
 			"executingAction": "SWINGING",
 			"animationFlow": "TRAVERSE",
 
-			"areaOfEffect": "CIRCLE",
 			"areaOfEffectSize": 1.0,
 			"baseDamage": 40.0,
 			"baseHeal": 0.0,

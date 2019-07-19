@@ -69,7 +69,6 @@ public class WorldScreen implements Screen {
         this.weManager = new WorldEntitiesManager(resources.getEngine(), factories);
         this.uiManager = new UIManager(stage, mapManager.getCamera(), weManager.getPlayer());
         this.lightsManager = new LightsManager(physicsManager.getWorld(), mapManager.getCamera(), weManager.getPlayer());
-        // por ahi deberia ser un sistema donde se attachea el screenshake component a la entidad a la cual volver?
     }
 
     private void initializeListeners() {

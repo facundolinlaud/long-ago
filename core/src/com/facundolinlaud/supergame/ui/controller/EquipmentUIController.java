@@ -71,9 +71,7 @@ public class EquipmentUIController implements Telegraph {
             EquipableComponent equipable = em.get(e);
 
             /* fijate que por ahi el wear type deberia estar dentro de equipable component y no en wear component */
-            items.put(equipSlot,
-                    new Item(item.name, item.picture,
-                    new Equipable(equipSlot, equipable.getAttack(), equipable.getDefense())));
+            items.put(equipSlot, new Item(item, new Equipable(equipable)));
         }
 
         ui.update(items);

@@ -17,7 +17,7 @@ public class Row extends Table {
 
         this.valueStack = new ValueStack(skin, value);
 
-        add(new Label(name, skin, Themes.LABEL_14PTS)).width(90).left();
+        add(new Label(name, skin, Themes.Label.BOLD_14)).width(90).left();
         add(valueStack).expandX().right();
         add(new AddValue(name, skin)).expandX().fill().right().pad(8);
     }

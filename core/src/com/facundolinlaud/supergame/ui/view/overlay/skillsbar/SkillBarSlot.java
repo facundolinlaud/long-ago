@@ -10,6 +10,8 @@ import com.facundolinlaud.supergame.model.skill.Skill;
 import com.facundolinlaud.supergame.ui.view.cross.Slot;
 import com.facundolinlaud.supergame.ui.view.utils.Themes;
 
+import static com.facundolinlaud.supergame.ui.view.utils.Themes.Label.REGULAR_14;
+
 public class SkillBarSlot extends Slot<Skill> {
     private Skill skill;
     private Image skillImage;
@@ -21,14 +23,14 @@ public class SkillBarSlot extends Slot<Skill> {
     private Image frameOver;
 
     public SkillBarSlot(Skin skin, String key) {
-        this.slotButton = new ImageButton(skin, Themes.IMAGE_BUTTON_SLOT);
+        this.slotButton = new ImageButton(skin, Themes.ImageButton.SLOT);
         this.skillImage = new Image();
 
-        this.key = new Label(key, skin, "gothic-white");
+        this.key = new Label(key, skin, REGULAR_14);
         this.keyContainer = new Container(this.key);
         this.keyContainer.align(Align.bottomRight).pad(3);
 
-        this.cooldownLabel = new Label("", skin, "gothic-white");
+        this.cooldownLabel = new Label("", skin,  REGULAR_14);
         this.cooldownContainer = new Container(this.cooldownLabel);
         this.cooldownContainer.align(Align.center);
 

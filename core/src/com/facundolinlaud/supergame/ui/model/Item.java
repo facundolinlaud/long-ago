@@ -1,6 +1,8 @@
 package com.facundolinlaud.supergame.ui.model;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.facundolinlaud.supergame.components.items.ItemComponent;
+import com.facundolinlaud.supergame.model.item.Rarity;
 import com.facundolinlaud.supergame.ui.model.equipment.Equipable;
 import com.facundolinlaud.supergame.ui.model.inventory.Invented;
 
@@ -10,28 +12,26 @@ import com.facundolinlaud.supergame.ui.model.inventory.Invented;
 public class Item {
     private String name;
     private Sprite picture;
+    private int marketValue;
     private Equipable equipable;
     private Invented invented;
+    private Rarity rarity;
 
-    public Item(String name, Sprite sprite, Invented invented) {
-        this.name = name;
-        this.picture = sprite;
-        this.equipable = null;
-        this.invented = invented;
-    }
-
-    public Item(String name, Sprite sprite, Equipable equipable) {
-        this.name = name;
-        this.picture = sprite;
-        this.equipable = equipable;
-        this.invented = null;
-    }
-
-    public Item(String name, Sprite sprite, Equipable equipable, Invented invented) {
-        this.name = name;
-        this.picture = sprite;
+    public Item(ItemComponent component, Equipable equipable, Invented invented) {
+        this.name = component.getName();
+        this.picture = component.getPicture();
+        this.marketValue = component.getMarketValue();
         this.equipable = equipable;
         this.invented = invented;
+        this.rarity = component.getRarity();
+    }
+
+    public Item(ItemComponent component, Invented invented) {
+        this(component, null, invented);
+    }
+
+    public Item(ItemComponent component, Equipable equipable) {
+        this(component, equipable, null);
     }
 
     public String getName() {
@@ -44,6 +44,14 @@ public class Item {
 
     public Sprite getPicture() {
         return picture;
+    }
+
+    public int getMarketValue() {
+        return marketValue;
+    }
+
+    public void setMarketValue(int marketValue) {
+        this.marketValue = marketValue;
     }
 
     public void setPicture(Sprite picture) {
@@ -72,5 +80,13 @@ public class Item {
 
     public boolean isInvented(){
         return !(invented == null);
+    }
+
+    public Rarity getRarity() {
+        return rarity;
+    }
+
+    public void setRarity(Rarity rarity) {
+        this.rarity = rarity;
     }
 }

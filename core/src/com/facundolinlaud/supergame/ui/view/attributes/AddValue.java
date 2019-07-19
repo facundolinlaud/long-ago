@@ -17,7 +17,7 @@ public class AddValue extends TextButton {
     public static final String ADD_VALUE_TEXT = "+";
 
     public AddValue(String attributeName, Skin skin) {
-        super(ADD_VALUE_TEXT, skin, Themes.TEXT_BUTTON_GOTHIC);
+        super(ADD_VALUE_TEXT, skin, Themes.TextButton.DEFAULT);
 
         addListener(new ClickListener(Input.Buttons.LEFT){
             @Override

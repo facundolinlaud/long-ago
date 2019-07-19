@@ -69,12 +69,10 @@ public class InventoryUIController implements Telegraph {
             EquipableComponent equipableComponent = em.get(e);
             Equipable equipable = null;
 
-            if(equipableComponent != null){
-                equipable = new Equipable(equipableComponent.getEquipSlot(),
-                        equipableComponent.getAttack(), equipableComponent.getDefense());
-            }
+            if(equipableComponent != null)
+                equipable = new Equipable(equipableComponent);
 
-            items.add(new Item(itemComponent.name, itemComponent.picture, equipable, new Invented(i)));
+            items.add(new Item(itemComponent, equipable, new Invented(i)));
         }
 
         ui.updateItems(items);

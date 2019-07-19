@@ -8,7 +8,7 @@ import com.facundolinlaud.supergame.ui.view.utils.Themes;
 public class GothicWindow extends Window {
 
     public GothicWindow(String title, Skin skin) {
-        super(title, skin, Themes.WINDOW_GOTHIC);
+        super(title, skin, Themes.Window.GOTHIC);
         setup();
         adjustTitlePosition();
     }

@@ -4,14 +4,12 @@ public class Item {
     private String name;
     private String texture;
     private String picture;
+    private Rarity rarity;
 
     private float weight;
-    private float marketValue;
+    private int marketValue;
 
     private EquipmentInformation equipmentInformation;
-
-    public Item() {
-    }
 
     public String getName() {
         return name;
@@ -45,11 +43,11 @@ public class Item {
         this.weight = weight;
     }
 
-    public float getMarketValue() {
+    public int getMarketValue() {
         return marketValue;
     }
 
-    public void setMarketValue(float marketValue) {
+    public void setMarketValue(int marketValue) {
         this.marketValue = marketValue;
     }
 
@@ -63,6 +61,14 @@ public class Item {
 
     public boolean isEquipable(){
         return this.equipmentInformation != null;
+    }
+
+    public Rarity getRarity() {
+        return rarity;
+    }
+
+    public void setRarity(Rarity rarity) {
+        this.rarity = rarity;
     }
 
     @Override

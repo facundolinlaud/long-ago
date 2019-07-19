@@ -69,6 +69,7 @@ public class UIManager implements Renderable {
 
     private void configureToolTips() {
         TooltipManager tm = TooltipManager.getInstance();
+        tm.animations = false;
         tm.initialTime = 0.1f;
         tm.offsetX = 2;
         tm.offsetY = 2;
