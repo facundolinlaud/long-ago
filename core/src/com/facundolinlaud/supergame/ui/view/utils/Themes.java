@@ -41,4 +41,10 @@ public class Themes {
         public static final String DEFAULT = "default-gothic";
         public static final String TOGGLE = "toggle-gothic";
     }
+
+    public class ProgressBar {
+        public static final String HEALTH_BAR = "gothic-health";
+        public static final String MANA_BAR = "gothic-mana";
+        public static final String CASTING_BAR = "gothic-skillcast";
+    }
 }
