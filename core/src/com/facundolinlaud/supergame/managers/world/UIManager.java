@@ -40,14 +40,12 @@ public class UIManager implements Renderable {
     private InventoryUI inventoryUI;
     private AttributesUI attributesUI;
     private EquipmentUI equipmentUI;
-    private SkillCastingUI skillCastingUI;
     private LabelDamagesUI labelDamagesUI;
 
     private InventoryUIController inventoryUIController;
     private OverlayUIController overlayUIController;
     private AttributesUIController attributesUIController;
     private EquipmentUIController equipmentUIController;
-    private SkillCastingUIController skillCastingUIController;
     private LabelDamagesController labelDamagesController;
 
     private MessageDispatcher messageDispatcher;
@@ -86,7 +84,6 @@ public class UIManager implements Renderable {
         this.inventoryUI = new InventoryUI(stage, skin, dragAndDrop, overlayUI.getItemDropZone());
         this.attributesUI = new AttributesUI(stage, skin);
         this.equipmentUI = new EquipmentUI(stage, skin, dragAndDrop, overlayUI.getItemDropZone());
-        this.skillCastingUI = new SkillCastingUI(skin);
         this.labelDamagesUI = new LabelDamagesUI(stage, skin);
     }
 
@@ -95,13 +92,11 @@ public class UIManager implements Renderable {
         this.inventoryUIController = new InventoryUIController(this.inventoryUI, player);
         this.attributesUIController = new AttributesUIController(this.attributesUI);
         this.equipmentUIController = new EquipmentUIController(this.equipmentUI, player);
-        this.skillCastingUIController = new SkillCastingUIController(this.skillCastingUI, this.overlayUI);
         this.labelDamagesController = new LabelDamagesController(this.labelDamagesUI, camera);
     }
 
     private void addUIToStage() {
         this.stage.addActor(this.overlayUI.get());
-        this.stage.addActor(this.skillCastingUI);
     }
 
     private void subscribeListeners(){
@@ -125,7 +120,7 @@ public class UIManager implements Renderable {
     public void initializeSystems(Engine engine){
         engine.addSystem(new ProfileUISystem(this.overlayUIController));
         engine.addSystem(new AttributesUISystem(this.attributesUIController));
-        engine.addSystem(new SkillCastingUISystem(this.skillCastingUIController));
+        engine.addSystem(new SkillCastingUISystem(this.overlayUIController));
     }
 
     @Override

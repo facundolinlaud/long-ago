@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Align;
+import com.facundolinlaud.supergame.ui.view.utils.Themes;
 
 import static com.facundolinlaud.supergame.ui.view.utils.Themes.Label.REGULAR_14;
 /**
@@ -23,10 +24,12 @@ public class ProfileTable extends Table {
     public ProfileTable(Skin skin) {
         super(skin);
 
-        this.healthBar = new ProgressBar(0, 100, 1, false, skin, "gothic-health");
+        this.healthBar = new ProgressBar(0, 100, 1,
+                false, skin, Themes.ProgressBar.HEALTH_BAR);
         this.healthBar.setSize(300, 80);
 
-        this.manaBar = new ProgressBar(0, 100, 1, false, skin, "gothic-mana");
+        this.manaBar = new ProgressBar(0, 100, 1,
+                false, skin, Themes.ProgressBar.MANA_BAR);
         this.manaBar.setSize(300, 80);
         this.manaBar.setValue(50);
 

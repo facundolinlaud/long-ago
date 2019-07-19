@@ -60,4 +60,9 @@ public class OverlayUIController implements Telegraph {
     private boolean isMainPlayer(Entity entity){
         return km.has(entity);
     }
+
+    public void updateCastingBar(String skillName, float timeToCast, float castTime) {
+        float castingBarValue = timeToCast * 100 / castTime;
+        this.overlayUI.updateCastingBar(skillName, castingBarValue);
+    }
 }

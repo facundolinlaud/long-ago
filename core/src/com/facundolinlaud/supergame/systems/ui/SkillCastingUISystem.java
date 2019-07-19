@@ -6,17 +6,17 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.facundolinlaud.supergame.components.player.KeyboardComponent;
 import com.facundolinlaud.supergame.components.skills.SkillCastingComponent;
-import com.facundolinlaud.supergame.ui.controller.SkillCastingUIController;
+import com.facundolinlaud.supergame.ui.controller.OverlayUIController;
 import com.facundolinlaud.supergame.utils.Mappers;
 
 public class SkillCastingUISystem extends IteratingSystem {
     private ComponentMapper<SkillCastingComponent> scm = Mappers.skillCasting;
 
-    private SkillCastingUIController castingBarController;
+    private OverlayUIController overlayUIController;
 
-    public SkillCastingUISystem(SkillCastingUIController castingBarController){
+    public SkillCastingUISystem(OverlayUIController overlayUIController){
         super(Family.all(KeyboardComponent.class, SkillCastingComponent.class).get());
-        this.castingBarController = castingBarController;
+        this.overlayUIController = overlayUIController;
     }
 
     @Override
@@ -27,6 +27,6 @@ public class SkillCastingUISystem extends IteratingSystem {
         float timeToCast = skill.timeToCast;
         float castTime = skill.skill.getCastTime();
 
-        castingBarController.updateCastingBar(skillName, timeToCast, castTime);
+        overlayUIController.updateCastingBar(skillName, timeToCast, castTime);
     }
 }
