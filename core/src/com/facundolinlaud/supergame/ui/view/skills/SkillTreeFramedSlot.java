@@ -6,12 +6,11 @@ import com.badlogic.gdx.utils.Align;
 import com.facundolinlaud.supergame.model.skill.Skill;
 import com.facundolinlaud.supergame.ui.view.cross.SkillSlot;
 
-public class ResearchableSkillSlot extends ImageButton {
+public class SkillTreeFramedSlot extends ImageButton {
     private SkillSlot skillSlot;
 
-    public ResearchableSkillSlot(Skin skin) {
+    public SkillTreeFramedSlot(Skin skin) {
         super(skin, "skill-slot");
-        this.setSize(42, 42);
         this.setBackground("gothic-slot-skill");
         this.skillSlot = new SkillSlot(skin);
         add(skillSlot).align(Align.center).size(32, 32);
@@ -27,5 +26,9 @@ public class ResearchableSkillSlot extends ImageButton {
 
     public void clearContent() {
         skillSlot.clearContent();
+    }
+
+    public SkillSlot getSlot(){
+        return this.skillSlot;
     }
 }

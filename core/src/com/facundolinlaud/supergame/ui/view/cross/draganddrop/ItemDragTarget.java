@@ -1,4 +1,4 @@
-package com.facundolinlaud.supergame.ui.view.cross;
+package com.facundolinlaud.supergame.ui.view.cross.draganddrop;
 
 import com.badlogic.gdx.ai.msg.MessageDispatcher;
 import com.badlogic.gdx.ai.msg.MessageManager;
@@ -13,10 +13,10 @@ import com.facundolinlaud.supergame.utils.events.ItemDroppedEvent;
 /**
  * Created by facundo on 3/30/16.
  */
-public class DropAreaTarget extends Target {
+public class ItemDragTarget extends Target {
     private MessageDispatcher messageDispatcher;
 
-    public DropAreaTarget(Actor actor) {
+    public ItemDragTarget(Actor actor) {
         super(actor);
         this.messageDispatcher = MessageManager.getInstance();
     }
@@ -28,7 +28,7 @@ public class DropAreaTarget extends Target {
 
     @Override
     public void drop(Source source, Payload payload, float x, float y, int pointer) {
-        SlotSource slotSource = (SlotSource) source;
+        ItemSlotSource slotSource = (ItemSlotSource) source;
         Item item = (Item) payload.getObject();
 
         switch(slotSource.getSlotType()){

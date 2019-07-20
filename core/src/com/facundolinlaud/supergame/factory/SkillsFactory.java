@@ -12,6 +12,7 @@ public class SkillsFactory {
 
     public SkillsFactory() {
         this.skills = ModelFactory.getSkillsModel();
+        this.skills.put(-1, null);
     }
 
     public Skill get(int id) {

@@ -1,21 +1,21 @@
-package com.facundolinlaud.supergame.ui.view.cross;
+package com.facundolinlaud.supergame.ui.view.cross.draganddrop;
 
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Payload;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Source;
 import com.facundolinlaud.supergame.ui.model.Item;
+import com.facundolinlaud.supergame.ui.view.cross.Slot;
 
 /**
  * Created by facundo on 3/30/16.
  */
-public class SlotSource extends Source {
+public class ItemSlotSource extends Source {
 
     private Slot<Item> slot;
     private SlotType slotType;
 
-    public SlotSource(Slot slot, SlotType slotType) {
+    public ItemSlotSource(Slot slot, SlotType slotType) {
         super(slot);
 
         this.slot = slot;

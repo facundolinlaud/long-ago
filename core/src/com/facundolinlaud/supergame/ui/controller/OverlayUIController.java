@@ -12,6 +12,7 @@ import com.facundolinlaud.supergame.utils.Mappers;
 import com.facundolinlaud.supergame.utils.events.Messages;
 import com.facundolinlaud.supergame.utils.events.SkillBarChangedEvent;
 import com.facundolinlaud.supergame.utils.events.SkillCastedEvent;
+import com.facundolinlaud.supergame.utils.events.SkillEquippedEvent;
 
 /**
  * Created by facundo on 3/29/16.
@@ -49,6 +50,7 @@ public class OverlayUIController implements Telegraph {
                 break;
             case Messages.SKILL_BAR_CHANGED:
                 onSkillBarChanged((SkillBarChangedEvent) msg.extraInfo);
+                break;
         }
 
         return true;

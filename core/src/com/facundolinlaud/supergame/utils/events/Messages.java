@@ -14,4 +14,5 @@ public class Messages {
     public static final int INVENTORY_CHANGED = 10;
     public static final int EQUIPMENT_CHANGED = 11;
     public static final int SKILL_BAR_CHANGED = 12;
+    public static final int SKILL_EQUIPPED = 13;
 }

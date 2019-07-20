@@ -23,6 +23,7 @@ import com.facundolinlaud.supergame.model.status.Direction;
 import com.facundolinlaud.supergame.utils.Mappers;
 import com.facundolinlaud.supergame.utils.events.Messages;
 import com.facundolinlaud.supergame.utils.events.SkillBarChangedEvent;
+import com.facundolinlaud.supergame.utils.events.SkillEquippedEvent;
 
 import java.util.List;
 
@@ -46,6 +47,7 @@ public class PlayerInputSystem extends IteratingSystem implements Telegraph {
         this.playerInputObserver = playerInputObserver;
 
         this.messageDispatcher.addListener(this, Messages.SKILL_BAR_CHANGED);
+        this.messageDispatcher.addListener(this, Messages.SKILL_EQUIPPED);
         this.messageDispatcher.dispatchMessage(this, Messages.SKILL_BAR_CHANGED,
                 new SkillBarChangedEvent(buttonsToSkills));
     }
@@ -103,13 +105,21 @@ public class PlayerInputSystem extends IteratingSystem implements Telegraph {
     public boolean handleMessage(Telegram msg) {
         switch(msg.message){
             case Messages.SKILL_BAR_CHANGED:
-                handleSkillBarChanged((SkillBarChangedEvent) msg.extraInfo);
+                onSkillBarChanged((SkillBarChangedEvent) msg.extraInfo);
+                break;
+            case Messages.SKILL_EQUIPPED:
+                onSkillEquipped((SkillEquippedEvent) msg.extraInfo);
         }
 
         return false;
     }
 
-    private void handleSkillBarChanged(SkillBarChangedEvent event) {
+    private void onSkillEquipped(SkillEquippedEvent e) {
+        this.buttonsToSkills.set(e.getIndex(), e.getSkill());
+    }
+
+    private void onSkillBarChanged(SkillBarChangedEvent event) {
+        System.out.println("asdasdasd");
         this.buttonsToSkills = event.getSkills();
     }
 }

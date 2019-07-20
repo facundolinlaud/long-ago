@@ -7,7 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Source;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Target;
 import com.facundolinlaud.supergame.ui.model.Item;
 import com.facundolinlaud.supergame.ui.view.cross.Slot;
-import com.facundolinlaud.supergame.ui.view.cross.SlotSource;
+import com.facundolinlaud.supergame.ui.view.cross.draganddrop.ItemSlotSource;
 import com.facundolinlaud.supergame.utils.events.ItemsPositionSwapEvent;
 import com.facundolinlaud.supergame.utils.events.Messages;
 import com.facundolinlaud.supergame.utils.events.UnequipItemEvent;
@@ -34,7 +34,7 @@ public class InventorySlotTarget extends Target {
 
     @Override
     public void drop(Source source, Payload payload, float x, float y, int pointer) {
-        SlotSource slotSource = (SlotSource) source;
+        ItemSlotSource slotSource = (ItemSlotSource) source;
 
         switch(slotSource.getSlotType()){
             case INVENTORY_SLOT:

@@ -7,8 +7,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import com.badlogic.gdx.utils.Align;
 import com.facundolinlaud.supergame.model.equip.EquipSlot;
 import com.facundolinlaud.supergame.ui.model.Item;
-import com.facundolinlaud.supergame.ui.view.cross.SlotSource;
-import com.facundolinlaud.supergame.ui.view.cross.SlotType;
+import com.facundolinlaud.supergame.ui.view.cross.draganddrop.ItemSlotSource;
+import com.facundolinlaud.supergame.ui.view.cross.draganddrop.SlotType;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -41,7 +41,7 @@ public class EquipmentGrid extends Table {
 
                 if(shouldAddSlotHere) {
                     slot.allowPlaceHolder();
-                    dragAndDrop.addSource(new SlotSource(slot, SlotType.EQUIPMENT_SLOT));
+                    dragAndDrop.addSource(new ItemSlotSource(slot, SlotType.EQUIPMENT_SLOT));
                     dragAndDrop.addTarget(new EquipmentSlotTarget(slot, wt));
 
                     slots.put(wt, slot);

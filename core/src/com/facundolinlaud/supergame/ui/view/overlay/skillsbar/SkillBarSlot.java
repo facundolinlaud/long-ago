@@ -16,9 +16,11 @@ public class SkillBarSlot extends SkillSlot {
     private Label cooldownLabel;
     private Container cooldownContainer;
     private Image frameOver;
+    private int index;
 
-    public SkillBarSlot(Skin skin, String key) {
+    public SkillBarSlot(Skin skin, String key, int index) {
         super(skin);
+        this.index = index;
         this.key = new Label(key, skin, REGULAR_14);
         this.keyContainer = new Container(this.key);
         this.keyContainer.align(Align.bottomRight).pad(3);
@@ -42,5 +44,9 @@ public class SkillBarSlot extends SkillSlot {
                 Actions.sequence(Actions.alpha(0.3f),
                         Actions.delay(delay),
                         Actions.alpha(1f, 0.1f)));
+    }
+
+    public int getIndex() {
+        return index;
     }
 }

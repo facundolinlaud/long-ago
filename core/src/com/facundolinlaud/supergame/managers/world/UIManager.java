@@ -35,7 +35,8 @@ public class UIManager implements Renderable {
 
     private Skin skin;
     private Stage stage;
-    private DragAndDrop dragAndDrop;
+    private DragAndDrop itemsDAD;
+    private DragAndDrop skillsDAD;
 
     private OverlayUI overlayUI;
     private InventoryUI inventoryUI;
@@ -77,17 +78,20 @@ public class UIManager implements Renderable {
     }
 
     private void initializeDragAndDrop(){
-        this.dragAndDrop = new DragAndDrop();
-        this.dragAndDrop.setDragTime(MIN_DRAG_TIME_IN_MILLISECONDS);
+        this.itemsDAD = new DragAndDrop();
+        this.itemsDAD.setDragTime(MIN_DRAG_TIME_IN_MILLISECONDS);
+
+        this.skillsDAD = new DragAndDrop();
+        this.skillsDAD.setDragTime(MIN_DRAG_TIME_IN_MILLISECONDS);
     }
 
     private void initializeViews(SkillsFactory skillsFactory) {
-        this.overlayUI = new OverlayUI(skin, dragAndDrop);
-        this.inventoryUI = new InventoryUI(stage, skin, dragAndDrop, overlayUI.getItemDropZone());
+        this.overlayUI = new OverlayUI(skin, itemsDAD);
+        this.inventoryUI = new InventoryUI(stage, skin, itemsDAD, overlayUI.getItemDropZone());
         this.attributesUI = new AttributesUI(stage, skin);
-        this.equipmentUI = new EquipmentUI(stage, skin, dragAndDrop, overlayUI.getItemDropZone());
+        this.equipmentUI = new EquipmentUI(stage, skin, skillsDAD, overlayUI.getItemDropZone());
         this.labelDamagesUI = new LabelDamagesUI(stage, skin);
-        this.skillsUI = new SkillsUI(stage, skin, skillsFactory);
+        this.skillsUI = new SkillsUI(stage, skin, itemsDAD, skillsFactory);
     }
 
     private void initializeControllers(Camera camera, Entity player) {

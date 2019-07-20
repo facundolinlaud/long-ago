@@ -4,8 +4,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import com.facundolinlaud.supergame.ui.model.Item;
-import com.facundolinlaud.supergame.ui.view.cross.SlotSource;
-import com.facundolinlaud.supergame.ui.view.cross.SlotType;
+import com.facundolinlaud.supergame.ui.view.cross.draganddrop.ItemSlotSource;
+import com.facundolinlaud.supergame.ui.view.cross.draganddrop.SlotType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +26,7 @@ public class InventoryGrid extends Table {
 
             add(slot);
             slots.add(slot);
-            dragAndDrop.addSource(new SlotSource(slot, SlotType.INVENTORY_SLOT));
+            dragAndDrop.addSource(new ItemSlotSource(slot, SlotType.INVENTORY_SLOT));
             dragAndDrop.addTarget(new InventorySlotTarget(slot));
 
             if(i % itemsPerRow == 0)

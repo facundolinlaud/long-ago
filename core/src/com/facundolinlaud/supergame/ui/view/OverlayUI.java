@@ -26,7 +26,7 @@ public class OverlayUI implements UI {
     private SkillBar skillbar;
     private ControlBar controlBar;
 
-    public OverlayUI(Skin skin, DragAndDrop dragAndDrop) {
+    public OverlayUI(Skin skin, DragAndDrop skillsDAD) {
         this.table = new Table(skin);
         this.table.setFillParent(true);
         this.table.align(Align.topLeft);
@@ -45,7 +45,7 @@ public class OverlayUI implements UI {
         this.table.row();
 
         this.controlBar = new ControlBar(skin);
-        this.skillbar = new SkillBar(skin, new SkillsFactory().getSkills());
+        this.skillbar = new SkillBar(skin, new SkillsFactory().getSkills(), skillsDAD);
         this.table.add(controlBar.getLeftControlBar()).expandX().right().bottom();
         this.table.add(skillbar).center();
         this.table.add(controlBar.getRightControlBar()).expandX().left().bottom();
