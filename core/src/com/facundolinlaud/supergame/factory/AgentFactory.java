@@ -2,7 +2,6 @@ package com.facundolinlaud.supergame.factory;
 
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
-import com.badlogic.gdx.ai.msg.MessageDispatcher;
 import com.badlogic.gdx.ai.msg.MessageManager;
 import com.facundolinlaud.supergame.builder.AgentBuilder;
 import com.facundolinlaud.supergame.components.sprite.StackableSpriteComponent;
@@ -10,7 +9,6 @@ import com.facundolinlaud.supergame.model.agent.Agent;
 import com.facundolinlaud.supergame.model.equip.EquipSlot;
 import com.facundolinlaud.supergame.model.particle.ParticleType;
 import com.facundolinlaud.supergame.utils.events.Messages;
-import javafx.collections.MapChangeListener;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -23,18 +21,21 @@ public class AgentFactory {
     private Engine engine;
     private ItemFactory itemFactory;
     private ParticleFactory particleFactory;
+    private SkillsFactory skillsFactory;
     private Map<Integer, Agent> agents;
 
-    public AgentFactory(Engine engine, ItemFactory itemFactory, ParticleFactory particleFactory) {
+    public AgentFactory(Engine engine, ItemFactory itemFactory, ParticleFactory particleFactory, SkillsFactory skillsFactory) {
         this.engine = engine;
         this.agents = ModelFactory.getAgentsModel();
         this.itemFactory = itemFactory;
         this.particleFactory = particleFactory;
+        this.skillsFactory = skillsFactory;
     }
 
     private AgentBuilder getDummyAgent(Agent agent){
         AgentBuilder builder = new AgentBuilder(agent.getVelocity())
-                .withAttributes(agent.getAttributes());
+                .withAttributes(agent.getAttributes())
+                .withSkills(skillsFactory.get(agent.getSkills()));
 
         return builder;
     }

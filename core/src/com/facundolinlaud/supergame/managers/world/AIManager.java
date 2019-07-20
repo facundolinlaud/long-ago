@@ -4,11 +4,14 @@ import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntityListener;
 import com.badlogic.gdx.ai.btree.BehaviorTree;
-import com.badlogic.gdx.ai.btree.branch.*;
+import com.badlogic.gdx.ai.btree.branch.RandomSelector;
+import com.badlogic.gdx.ai.btree.branch.Selector;
+import com.badlogic.gdx.ai.btree.branch.Sequence;
 import com.facundolinlaud.supergame.ai.decisionmaking.*;
 import com.facundolinlaud.supergame.ai.pathfinding.PathFinderAuthority;
+import com.facundolinlaud.supergame.components.SkillsComponent;
 import com.facundolinlaud.supergame.components.ai.AIComponent;
-import com.facundolinlaud.supergame.factory.SkillsFactory;
+import com.facundolinlaud.supergame.model.skill.Skill;
 import com.facundolinlaud.supergame.utils.Mappers;
 
 import java.util.HashMap;
@@ -17,14 +20,13 @@ import java.util.Map;
 
 public class AIManager implements EntityListener {
     private ComponentMapper<AIComponent> aim = Mappers.ai;
+    private ComponentMapper<SkillsComponent> sm = Mappers.skills;
 
     private Map<Entity, BehaviorTree<?>> entitiesBehaviours;
-    private SkillsFactory skillsFactory;
     private PathFinderAuthority pathFinderAuthority;
 
-    public AIManager(SkillsFactory skillsFactory, MapManager mapManager, PhysicsManager physicsManager) {
+    public AIManager(MapManager mapManager, PhysicsManager physicsManager) {
         this.entitiesBehaviours = new HashMap<>();
-        this.skillsFactory = skillsFactory;
         this.pathFinderAuthority = new PathFinderAuthority(mapManager, physicsManager);
     }
 
@@ -35,8 +37,7 @@ public class AIManager implements EntityListener {
 
         switch(aiComponent.getBehaviorType()) {
             default:
-                behaviorTree = buildAggressiveBehavior(aiComponent.getMeleeSkills(),
-                        aiComponent.getRangedSkills());
+                behaviorTree = buildAggressiveBehavior(agent);
         }
 
         this.entitiesBehaviours.put(agent, behaviorTree);
@@ -54,19 +55,22 @@ public class AIManager implements EntityListener {
     }
 
     /* TODO: Move to text format */
-    private BehaviorTree<Blackboard> buildAggressiveBehavior(List<Integer> meleeSkills, List<Integer> rangedSkills) {
-        BehaviorTree<Blackboard> behaviorTree = new BehaviorTree<>();
+    private BehaviorTree<Blackboard> buildAggressiveBehavior(Entity agent) {
+        SkillsComponent skillsComponent = sm.get(agent);
+        List<Skill> meleeSkills = skillsComponent.getMeleeSkills();
+        List<Skill> rangedSkills = skillsComponent.getRangedSkills();
 
+        BehaviorTree<Blackboard> behaviorTree = new BehaviorTree<>();
         Selector<Blackboard> mainSelector = new Selector();
         Sequence<Blackboard> offensiveSequence = new Sequence<>();
         PlayerSeenTask playerSeenTask = new PlayerSeenTask();
         RandomSelector<Blackboard> attackRandomSelector = new RandomSelector();
         Sequence<Blackboard> rangedSequence = new Sequence();
         FaceTowardsPlayerTask faceTowardsPlayerTask = new FaceTowardsPlayerTask();
-        AttackTask rangedAttackTask = new AttackTask(skillsFactory.get(rangedSkills));
+        AttackTask rangedAttackTask = new AttackTask(rangedSkills);
         Sequence<Blackboard> meleeSequence = new Sequence<>();
         ApproachPlayerTask approachPlayerTask = new ApproachPlayerTask(pathFinderAuthority);
-        AttackTask meleeAttackTask = new AttackTask(skillsFactory.get(meleeSkills));
+        AttackTask meleeAttackTask = new AttackTask(meleeSkills);
 
         PatrolTask patrolTask = new PatrolTask(pathFinderAuthority);
 

@@ -12,4 +12,5 @@ public abstract class Slot<T> extends Stack {
     public abstract void setContent(T content);
 
     public abstract void clearContent();
+
 }

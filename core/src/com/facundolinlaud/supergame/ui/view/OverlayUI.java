@@ -3,6 +3,7 @@ package com.facundolinlaud.supergame.ui.view;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import com.badlogic.gdx.utils.Align;
 import com.facundolinlaud.supergame.factory.SkillsFactory;
 import com.facundolinlaud.supergame.model.skill.Skill;
@@ -11,6 +12,8 @@ import com.facundolinlaud.supergame.ui.view.overlay.itemdropzone.ItemDropTable;
 import com.facundolinlaud.supergame.ui.view.overlay.profile.ProfileTable;
 import com.facundolinlaud.supergame.ui.view.overlay.skillcasting.SkillCastingBar;
 import com.facundolinlaud.supergame.ui.view.overlay.skillsbar.SkillBar;
+
+import java.util.List;
 
 /**
  * Created by facundo on 3/27/16.
@@ -23,7 +26,7 @@ public class OverlayUI implements UI {
     private SkillBar skillbar;
     private ControlBar controlBar;
 
-    public OverlayUI(Skin skin) {
+    public OverlayUI(Skin skin, DragAndDrop dragAndDrop) {
         this.table = new Table(skin);
         this.table.setFillParent(true);
         this.table.align(Align.topLeft);
@@ -70,6 +73,10 @@ public class OverlayUI implements UI {
 
     public void beginCooldown(Skill skill) {
         this.skillbar.beginCooldown(skill);
+    }
+
+    public void updateSkillBar(List<Skill> skills) {
+        skillbar.update(skills);
     }
 
     public Table getItemDropZone(){

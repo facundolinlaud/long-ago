@@ -4,29 +4,28 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.facundolinlaud.supergame.model.status.Direction;
 import com.facundolinlaud.supergame.utils.Dimensions;
 
 import java.util.Stack;
 
-public class PlayerInputObserver extends ClickListener {
+public class PlayerInputManager extends ClickListener {
     private Stack<Direction> movementKeysPressed;
     private Stack<Integer> skillKeysPressed;
     private Vector2 latestClickedPosition;
     private boolean isClicking;
 
-    public PlayerInputObserver() {
-        movementKeysPressed = new Stack<>();
-        skillKeysPressed = new Stack<>();
+    public PlayerInputManager() {
+        this.movementKeysPressed = new Stack<>();
+        this.skillKeysPressed = new Stack<>();
     }
 
     public boolean isGatheringRequested(){
         return Gdx.input.isKeyJustPressed(Input.Keys.E);
     }
 
-    public boolean isAttackingRequested(){
+    public boolean isPressingSkillButton(){
         return skillKeysPressed.size() > 0;
     }
 
@@ -39,7 +38,7 @@ public class PlayerInputObserver extends ClickListener {
             return movementKeysPressed.peek();
     }
 
-    public Integer getPlayersSkillId(){
+    public Integer getPressedSkillButton(){
         int keysPressed = skillKeysPressed.size();
 
         if(keysPressed == 0)
@@ -63,12 +62,12 @@ public class PlayerInputObserver extends ClickListener {
         return null;
     }
 
-    private Integer keycodeToSkillId(int keycode){
-        if(keycode >= 8 && keycode <= 11){
-            return new Integer(keycode - 8);
-        }
+    private boolean isSkillKey(int keycode){
+        return keycode >= Input.Keys.NUM_1 && keycode <= Input.Keys.NUM_9;
+    }
 
-        return null;
+    private int keycodeToSkillId(int keycode){
+        return keycode - Input.Keys.NUM_1;
     }
 
     public Vector2 getLatestClickedPositionInMetersRelativeToScreenCenter() {
@@ -92,10 +91,11 @@ public class PlayerInputObserver extends ClickListener {
             movementKeysPressed.push(direction);
         }
 
-        Integer skillId = keycodeToSkillId(keycode);
+        if(isSkillKey(keycode)){
+            int skillId = keycodeToSkillId(keycode);
 
-        if(skillId != null && !skillKeysPressed.contains(skillId)){
-            skillKeysPressed.push(skillId);
+            if(!skillKeysPressed.contains(skillId))
+                skillKeysPressed.push(skillId);
         }
 
         return super.keyDown(event, keycode);

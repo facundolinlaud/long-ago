@@ -16,7 +16,7 @@ import com.facundolinlaud.supergame.model.RenderPriority;
 import com.facundolinlaud.supergame.model.agent.Attributes;
 import com.facundolinlaud.supergame.model.agent.NPCInformation;
 import com.facundolinlaud.supergame.model.equip.EquipSlot;
-import com.facundolinlaud.supergame.model.particle.ParticleType;
+import com.facundolinlaud.supergame.model.skill.Skill;
 import com.facundolinlaud.supergame.strategies.renderposition.SpriteRenderPositionStrategyImpl;
 import javafx.collections.ListChangeListener;
 import javafx.collections.MapChangeListener;
@@ -97,6 +97,11 @@ public class AgentBuilder {
 
     public AgentBuilder withParticles(ParticleEffectPool.PooledEffect pooledEffect){
         this.entity.add(new ParticleComponent(pooledEffect, false));
+        return this;
+    }
+
+    public AgentBuilder withSkills(List<Skill> skills){
+        this.entity.add(new SkillsComponent(skills));
         return this;
     }
 

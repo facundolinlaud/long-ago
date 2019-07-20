@@ -2,7 +2,7 @@
 	"skills" : {
 		"0": {
 			"name": "Spear Dash",
-			"picturePath": "pictures/skills/dash.png",
+			"picturePath": "pictures/skills/spear_dash.png",
 			"skillType": "NORMAL",
 			"skillDamageType": "DIRECT",
 
@@ -22,6 +22,27 @@
 			"particleType": "NONE"
 		},
 		"1": {
+			"name": "Spear Charge",
+			"picturePath": "pictures/skills/spear_charge.png",
+			"skillType": "NORMAL",
+			"skillDamageType": "DIRECT",
+
+			"cooldown": 3.5,
+			"castTime": 1.5,
+			"lockdownTime": 0.8,
+			"interruptible": false,
+			"equipmentRequired": "SPEAR",
+
+			"castingAction": "MELEE_DASH_CASTING",
+			"executingAction": "DASHING",
+			"animationFlow": "TRAVERSE",
+
+			"areaOfEffectSize": 2.0,
+			"baseDamage": 40.0,
+			"baseHeal": 0.0,
+			"particleType": "NONE"
+		},
+		"2": {
 			"name": "Fire Rain",
 			"picturePath": "pictures/skills/fire_ball.png",
 			"skillType": "SPELL",
@@ -55,7 +76,7 @@
 				"duration": 0.8
 			}
 		},
-		"2": {
+		"3": {
 			"name": "Fire Arrow",
 			"picturePath": "pictures/skills/fire_arrow.png",
 			"skillType": "PROJECTILE",
@@ -97,14 +118,35 @@
 				"duration": 0.3
 			}
 		},
-		"3": {
+		"4": {
 			"name": "Sword Swing",
-			"picturePath": "pictures/skills/dash.png",
+			"picturePath": "pictures/skills/sword_swing.png",
 			"skillType": "NORMAL",
 			"skillDamageType": "DIRECT",
 
 			"cooldown": 1.5,
 			"castTime": 0.5,
+			"lockdownTime": 0.8,
+			"interruptible": false,
+			"equipmentRequired": "SWORD",
+
+			"castingAction": "STANDING",
+			"executingAction": "SWINGING",
+			"animationFlow": "TRAVERSE",
+
+			"areaOfEffectSize": 1.0,
+			"baseDamage": 40.0,
+			"baseHeal": 0.0,
+			"particleType": "NONE"
+		},
+		"5": {
+			"name": "Sword Dash",
+			"picturePath": "pictures/skills/sword_dash.png",
+			"skillType": "NORMAL",
+			"skillDamageType": "DIRECT",
+
+			"cooldown": 2.5,
+			"castTime": 1.0,
 			"lockdownTime": 0.8,
 			"interruptible": false,
 			"equipmentRequired": "SWORD",

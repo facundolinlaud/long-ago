@@ -6,6 +6,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.facundolinlaud.supergame.model.skill.Skill;
 
+import java.util.List;
 import java.util.Map;
 
 public class SkillBar extends Table {
@@ -31,11 +32,20 @@ public class SkillBar extends Table {
         }
     }
 
-    public void beginCooldown(Skill skill){
+    public void beginCooldown(Skill skill) {
         float cooldown = skill.getCooldown();
-        for(SkillBarSlot s : slots){
-            if(skill == s.getContent()){
+        for (SkillBarSlot s : slots) {
+            if (skill == s.getContent()) {
                 s.beginCooldown(cooldown);
+            }
+        }
+    }
+
+    public void update(List<Skill> skills) {
+        for(int i = 0; i < skills.size(); i++){
+            if(i < SIZE){
+                Skill s = skills.get(i);
+                slots.get(i).setContent(s);
             }
         }
     }

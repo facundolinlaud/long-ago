@@ -6,9 +6,11 @@ import com.badlogic.gdx.ai.msg.Telegram;
 import com.badlogic.gdx.ai.msg.Telegraph;
 import com.badlogic.gdx.math.Vector2;
 import com.facundolinlaud.supergame.components.player.KeyboardComponent;
+import com.facundolinlaud.supergame.model.skill.Skill;
 import com.facundolinlaud.supergame.ui.view.OverlayUI;
 import com.facundolinlaud.supergame.utils.Mappers;
 import com.facundolinlaud.supergame.utils.events.Messages;
+import com.facundolinlaud.supergame.utils.events.SkillBarChangedEvent;
 import com.facundolinlaud.supergame.utils.events.SkillCastedEvent;
 
 /**
@@ -45,6 +47,8 @@ public class OverlayUIController implements Telegraph {
             case Messages.SKILL_CASTED:
                 onSkillCasted((SkillCastedEvent) msg.extraInfo);
                 break;
+            case Messages.SKILL_BAR_CHANGED:
+                onSkillBarChanged((SkillBarChangedEvent) msg.extraInfo);
         }
 
         return true;
@@ -55,6 +59,10 @@ public class OverlayUIController implements Telegraph {
 
         if(isMainPlayer(caster))
             overlayUI.beginCooldown(event.getSkill());
+    }
+
+    private void onSkillBarChanged(SkillBarChangedEvent event) {
+        overlayUI.updateSkillBar(event.getSkills());
     }
 
     private boolean isMainPlayer(Entity entity){

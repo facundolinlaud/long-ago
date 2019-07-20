@@ -13,7 +13,7 @@ public class Factories {
         this.skillsFactory = new SkillsFactory();
         this.particleFactory = new ParticleFactory(new ParticleManager());
         this.itemFactory = new ItemFactory();
-        this.agentFactory = new AgentFactory(engine, this.itemFactory, this.particleFactory);
+        this.agentFactory = new AgentFactory(engine, this.itemFactory, this.particleFactory, this.skillsFactory);
     }
 
     public SkillsFactory getSkillsFactory() {

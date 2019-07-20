@@ -9,7 +9,7 @@ import com.facundolinlaud.supergame.components.PositionComponent;
 import com.facundolinlaud.supergame.components.StatusComponent;
 import com.facundolinlaud.supergame.components.skills.SkillCastingRequestComponent;
 import com.facundolinlaud.supergame.components.skills.SkillClickComponent;
-import com.facundolinlaud.supergame.managers.world.PlayerInputObserver;
+import com.facundolinlaud.supergame.managers.world.PlayerInputManager;
 import com.facundolinlaud.supergame.model.skill.Skill;
 import com.facundolinlaud.supergame.model.skill.TwoClickInformation;
 import com.facundolinlaud.supergame.model.status.Action;
@@ -24,9 +24,9 @@ public class KeyPressThenClickCastingRequestSystem extends IteratingSystem {
     private ComponentMapper<StatusComponent> sm = Mappers.status;
 
     private KeyPressThenClickCastingRequestStrategy requestStrategy;
-    private PlayerInputObserver playerInputObserver;
+    private PlayerInputManager playerInputObserver;
 
-    public KeyPressThenClickCastingRequestSystem(PlayerInputObserver playerInputObserver) {
+    public KeyPressThenClickCastingRequestSystem(PlayerInputManager playerInputObserver) {
         super(Family.all(SkillCastingRequestComponent.class, SkillClickComponent.class).get());
 
         this.requestStrategy = new KeyPressThenClickCastingRequestStrategy();

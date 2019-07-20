@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TooltipManager;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
+import com.facundolinlaud.supergame.factory.SkillsFactory;
 import com.facundolinlaud.supergame.managers.Renderable;
 import com.facundolinlaud.supergame.systems.ui.AttributesUISystem;
 import com.facundolinlaud.supergame.systems.ui.ProfileUISystem;
@@ -41,6 +42,7 @@ public class UIManager implements Renderable {
     private AttributesUI attributesUI;
     private EquipmentUI equipmentUI;
     private LabelDamagesUI labelDamagesUI;
+    private SkillsUI skillsUI;
 
     private InventoryUIController inventoryUIController;
     private OverlayUIController overlayUIController;
@@ -50,7 +52,7 @@ public class UIManager implements Renderable {
 
     private MessageDispatcher messageDispatcher;
 
-    public UIManager(Stage stage, Camera camera, Entity player) {
+    public UIManager(Stage stage, Camera camera, Entity player, SkillsFactory skillsFactory) {
         this.skin = new Skin(Gdx.files.internal(SKIN_JSON_PATH));
         this.skin.addRegions(new TextureAtlas(Gdx.files.internal(TEXTURE_ATLAS_PATH)));
         this.stage = stage;
@@ -58,7 +60,7 @@ public class UIManager implements Renderable {
 
         configureToolTips();
         initializeDragAndDrop();
-        initializeViews();
+        initializeViews(skillsFactory);
         initializeControllers(camera, player);
         addUIToStage();
         subscribeListeners();
@@ -79,12 +81,13 @@ public class UIManager implements Renderable {
         this.dragAndDrop.setDragTime(MIN_DRAG_TIME_IN_MILLISECONDS);
     }
 
-    private void initializeViews() {
-        this.overlayUI = new OverlayUI(skin);
+    private void initializeViews(SkillsFactory skillsFactory) {
+        this.overlayUI = new OverlayUI(skin, dragAndDrop);
         this.inventoryUI = new InventoryUI(stage, skin, dragAndDrop, overlayUI.getItemDropZone());
         this.attributesUI = new AttributesUI(stage, skin);
         this.equipmentUI = new EquipmentUI(stage, skin, dragAndDrop, overlayUI.getItemDropZone());
         this.labelDamagesUI = new LabelDamagesUI(stage, skin);
+        this.skillsUI = new SkillsUI(stage, skin, skillsFactory);
     }
 
     private void initializeControllers(Camera camera, Entity player) {
@@ -108,6 +111,7 @@ public class UIManager implements Renderable {
         this.messageDispatcher.addListener(this.equipmentUIController, Messages.ITEM_EQUIPPED);
         this.messageDispatcher.addListener(this.equipmentUIController, Messages.EQUIPMENT_CHANGED);
         this.messageDispatcher.addListener(this.overlayUIController, Messages.SKILL_CASTED);
+        this.messageDispatcher.addListener(this.overlayUIController, Messages.SKILL_BAR_CHANGED);
         this.messageDispatcher.addListener(this.labelDamagesController, Messages.ENTITY_ATTACKED);
     }
 

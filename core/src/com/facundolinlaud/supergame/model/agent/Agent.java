@@ -1,6 +1,7 @@
 package com.facundolinlaud.supergame.model.agent;
 
 import com.facundolinlaud.supergame.model.equip.EquipSlot;
+import com.facundolinlaud.supergame.model.skill.Skill;
 import com.sun.istack.internal.Nullable;
 
 import java.util.List;
@@ -16,6 +17,7 @@ public class Agent {
     private Map<EquipSlot, String> body;
     private Map<EquipSlot, Integer> equipment;
     private List<Integer> bag;
+    private List<Integer> skills;
 
     @Nullable private NPCInformation npcInformation;
 
@@ -105,6 +107,14 @@ public class Agent {
         return this.npcInformation != null;
     }
 
+    public List<Integer> getSkills() {
+        return skills;
+    }
+
+    public void setSkills(List<Integer> skills) {
+        this.skills = skills;
+    }
+
     @Override
     public String toString() {
         return "Agent{" +
@@ -117,6 +127,7 @@ public class Agent {
                 ", body=" + body +
                 ", equipment=" + equipment +
                 ", bag=" + bag +
+                ", skills=" + skills +
                 ", npcInformation=" + npcInformation +
                 '}';
     }

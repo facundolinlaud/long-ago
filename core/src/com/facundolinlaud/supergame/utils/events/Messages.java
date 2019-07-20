@@ -13,4 +13,5 @@ public class Messages {
     public static final int INVENTORY_AND_EQUIMENT_ITEMS_SWAPPED = 9;
     public static final int INVENTORY_CHANGED = 10;
     public static final int EQUIPMENT_CHANGED = 11;
+    public static final int SKILL_BAR_CHANGED = 12;
 }
