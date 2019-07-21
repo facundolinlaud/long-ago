@@ -29,8 +29,6 @@ public class SkillBarSlotTarget extends DragAndDrop.Target {
         Skill skill = (Skill) payload.getObject();
         int slotIndex = slot.getIndex();
 
-        slot.setContent(skill);
-
         switch(slotSource.getSlotType()){
             case SKILL_TREE_SLOT:
                 messageDispatcher.dispatchMessage(Messages.SKILL_EQUIPPED, new SkillEquippedEvent(skill, slotIndex));

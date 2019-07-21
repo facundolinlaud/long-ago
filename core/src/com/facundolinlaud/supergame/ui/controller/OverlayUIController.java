@@ -10,9 +10,9 @@ import com.facundolinlaud.supergame.model.skill.Skill;
 import com.facundolinlaud.supergame.ui.view.OverlayUI;
 import com.facundolinlaud.supergame.utils.Mappers;
 import com.facundolinlaud.supergame.utils.events.Messages;
-import com.facundolinlaud.supergame.utils.events.SkillBarChangedEvent;
 import com.facundolinlaud.supergame.utils.events.SkillCastedEvent;
-import com.facundolinlaud.supergame.utils.events.SkillEquippedEvent;
+
+import java.util.Map;
 
 /**
  * Created by facundo on 3/29/16.
@@ -48,9 +48,6 @@ public class OverlayUIController implements Telegraph {
             case Messages.SKILL_CASTED:
                 onSkillCasted((SkillCastedEvent) msg.extraInfo);
                 break;
-            case Messages.SKILL_BAR_CHANGED:
-                onSkillBarChanged((SkillBarChangedEvent) msg.extraInfo);
-                break;
         }
 
         return true;
@@ -63,10 +60,6 @@ public class OverlayUIController implements Telegraph {
             overlayUI.beginCooldown(event.getSkill());
     }
 
-    private void onSkillBarChanged(SkillBarChangedEvent event) {
-        overlayUI.updateSkillBar(event.getSkills());
-    }
-
     private boolean isMainPlayer(Entity entity){
         return km.has(entity);
     }
@@ -74,5 +67,9 @@ public class OverlayUIController implements Telegraph {
     public void updateCastingBar(String skillName, float timeToCast, float castTime) {
         float castingBarValue = timeToCast * 100 / castTime;
         this.overlayUI.updateCastingBar(skillName, castingBarValue);
+    }
+
+    public void updateSkillBar(Map<Integer, Skill> buttonsToSkills){
+        overlayUI.updateSkillBar(buttonsToSkills);
     }
 }

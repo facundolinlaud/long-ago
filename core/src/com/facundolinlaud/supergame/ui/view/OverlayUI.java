@@ -14,6 +14,7 @@ import com.facundolinlaud.supergame.ui.view.overlay.skillcasting.SkillCastingBar
 import com.facundolinlaud.supergame.ui.view.overlay.skillsbar.SkillBar;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by facundo on 3/27/16.
@@ -75,8 +76,8 @@ public class OverlayUI implements UI {
         this.skillbar.beginCooldown(skill);
     }
 
-    public void updateSkillBar(List<Skill> skills) {
-        skillbar.update(skills);
+    public void updateSkillBar(Map<Integer, Skill> buttonsToSkills) {
+        skillbar.update(buttonsToSkills);
     }
 
     public Table getItemDropZone(){

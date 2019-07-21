@@ -27,7 +27,7 @@
 			"skillType": "NORMAL",
 			"skillDamageType": "DIRECT",
 
-			"cooldown": 3.5,
+			"cooldown": 30.5,
 			"castTime": 1.5,
 			"lockdownTime": 0.8,
 			"interruptible": false,

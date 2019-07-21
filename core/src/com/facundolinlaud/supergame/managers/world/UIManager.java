@@ -115,7 +115,6 @@ public class UIManager implements Renderable {
         this.messageDispatcher.addListener(this.equipmentUIController, Messages.ITEM_EQUIPPED);
         this.messageDispatcher.addListener(this.equipmentUIController, Messages.EQUIPMENT_CHANGED);
         this.messageDispatcher.addListener(this.overlayUIController, Messages.SKILL_CASTED);
-        this.messageDispatcher.addListener(this.overlayUIController, Messages.SKILL_BAR_CHANGED);
         this.messageDispatcher.addListener(this.labelDamagesController, Messages.ENTITY_ATTACKED);
     }
 
@@ -129,6 +128,10 @@ public class UIManager implements Renderable {
         engine.addSystem(new ProfileUISystem(this.overlayUIController));
         engine.addSystem(new AttributesUISystem(this.attributesUIController));
         engine.addSystem(new SkillCastingUISystem(this.overlayUIController));
+    }
+
+    public OverlayUIController getOverlayUIController(){
+        return this.overlayUIController;
     }
 
     @Override

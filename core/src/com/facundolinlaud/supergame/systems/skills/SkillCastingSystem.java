@@ -14,7 +14,6 @@ import com.facundolinlaud.supergame.components.skills.SkillLockDownComponent;
 import com.facundolinlaud.supergame.factory.ParticleFactory;
 import com.facundolinlaud.supergame.managers.world.CameraManager;
 import com.facundolinlaud.supergame.managers.world.LightsManager;
-import com.facundolinlaud.supergame.managers.world.ScreenShakeManager;
 import com.facundolinlaud.supergame.model.skill.Skill;
 import com.facundolinlaud.supergame.model.skill.SkillType;
 import com.facundolinlaud.supergame.model.status.Action;

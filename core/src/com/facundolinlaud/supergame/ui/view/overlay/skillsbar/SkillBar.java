@@ -43,11 +43,13 @@ public class SkillBar extends Table {
         }
     }
 
-    public void update(List<Skill> skills) {
-        for(int i = 0; i < skills.size(); i++){
-            if(i < SIZE && skills.get(i) != null){
-                Skill s = skills.get(i);
-                slots.get(i).setContent(s);
+    public void update(Map<Integer, Skill> buttonsToSkills) {
+        for(int i = 0; i < slots.size; i++){
+            if(buttonsToSkills.containsKey(i)){
+                Skill skill = buttonsToSkills.get(i);
+                slots.get(i).setContent(skill);
+            }else{
+                slots.get(i).clearContent();
             }
         }
     }

@@ -20,12 +20,16 @@ import com.facundolinlaud.supergame.model.skill.Skill;
 import com.facundolinlaud.supergame.model.skill.SkillType;
 import com.facundolinlaud.supergame.model.status.Action;
 import com.facundolinlaud.supergame.model.status.Direction;
+import com.facundolinlaud.supergame.ui.controller.OverlayUIController;
 import com.facundolinlaud.supergame.utils.Mappers;
 import com.facundolinlaud.supergame.utils.events.Messages;
-import com.facundolinlaud.supergame.utils.events.SkillBarChangedEvent;
 import com.facundolinlaud.supergame.utils.events.SkillEquippedEvent;
+import com.sun.javafx.collections.ObservableMapWrapper;
+import javafx.collections.MapChangeListener;
+import javafx.collections.ObservableMap;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by facundo on 3/20/16.
@@ -36,20 +40,31 @@ public class PlayerInputSystem extends IteratingSystem implements Telegraph {
 
     private PlayerInputManager playerInputObserver;
     private MessageDispatcher messageDispatcher;
-    private List<Skill> buttonsToSkills;
+    private ObservableMap<Integer, Skill> buttonsToSkills;
 
-
-    public PlayerInputSystem(PlayerInputManager playerInputObserver, SkillsFactory skillsFactory) {
+    public PlayerInputSystem(PlayerInputManager playerInputObserver, SkillsFactory skillsFactory, OverlayUIController
+                             overlayUIController) {
         super(Family.all(StatusComponent.class, KeyboardComponent.class).get());
-
-        this.buttonsToSkills = skillsFactory.get(ModelFactory.getSkillBar());
         this.messageDispatcher = MessageManager.getInstance();
         this.playerInputObserver = playerInputObserver;
+        this.buttonsToSkills = new ObservableMapWrapper(new HashMap());
 
-        this.messageDispatcher.addListener(this, Messages.SKILL_BAR_CHANGED);
+        addListeners(overlayUIController);
+        loadButtonsToSkills(skillsFactory);
+    }
+
+    private void addListeners(OverlayUIController overlayUIController){
+        this.buttonsToSkills.addListener((MapChangeListener<Integer, Skill>)
+                change -> overlayUIController.updateSkillBar(buttonsToSkills));
         this.messageDispatcher.addListener(this, Messages.SKILL_EQUIPPED);
-        this.messageDispatcher.dispatchMessage(this, Messages.SKILL_BAR_CHANGED,
-                new SkillBarChangedEvent(buttonsToSkills));
+    }
+
+    private void loadButtonsToSkills(SkillsFactory skillsFactory){
+        Map<Integer, Integer> skillBar = ModelFactory.getSkillBar();
+        for(Map.Entry<Integer, Integer> entry : skillBar.entrySet()){
+            Skill skill = skillsFactory.get(entry.getValue());
+            buttonsToSkills.put(entry.getKey(), skill);
+        }
     }
 
     @Override
@@ -84,7 +99,6 @@ public class PlayerInputSystem extends IteratingSystem implements Telegraph {
     private void handleSkillCastingCase(Entity caster) {
         Integer pressedSkillButton = playerInputObserver.getPressedSkillButton();
 
-
         if(!existsSkillForButton(pressedSkillButton))
             return;
 
@@ -98,15 +112,12 @@ public class PlayerInputSystem extends IteratingSystem implements Telegraph {
     }
 
     private boolean existsSkillForButton(int pressedSkillButton){
-        return buttonsToSkills.size() > pressedSkillButton && buttonsToSkills.get(pressedSkillButton) != null;
+        return buttonsToSkills.containsKey(pressedSkillButton);
     }
 
     @Override
     public boolean handleMessage(Telegram msg) {
         switch(msg.message){
-            case Messages.SKILL_BAR_CHANGED:
-                onSkillBarChanged((SkillBarChangedEvent) msg.extraInfo);
-                break;
             case Messages.SKILL_EQUIPPED:
                 onSkillEquipped((SkillEquippedEvent) msg.extraInfo);
         }
@@ -115,11 +126,13 @@ public class PlayerInputSystem extends IteratingSystem implements Telegraph {
     }
 
     private void onSkillEquipped(SkillEquippedEvent e) {
-        this.buttonsToSkills.set(e.getIndex(), e.getSkill());
-    }
+//        Skill skill = e.getSkill();
 
-    private void onSkillBarChanged(SkillBarChangedEvent event) {
-        System.out.println("asdasdasd");
-        this.buttonsToSkills = event.getSkills();
+//        if(buttonsToSkills.containsValue(skill)){
+//            float cd = buttonsToSkills.values().stream().filter(s -> skill.equals(s)).findFirst().get().getCooldown();
+//            skill.setCooldown(cd);
+//        }
+
+        this.buttonsToSkills.put(e.getIndex(), e.getSkill());
     }
 }
