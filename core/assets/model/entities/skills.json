@@ -5,6 +5,7 @@
 			"picturePath": "pictures/skills/spear_dash.png",
 			"skillType": "NORMAL",
 			"skillDamageType": "DIRECT",
+			"manaConsumption": 3,
 
 			"cooldown": 1.5,
 			"castTime": 0.5,
@@ -26,6 +27,7 @@
 			"picturePath": "pictures/skills/spear_charge.png",
 			"skillType": "NORMAL",
 			"skillDamageType": "DIRECT",
+			"manaConsumption": 10,
 
 			"cooldown": 30.5,
 			"castTime": 1.5,
@@ -47,6 +49,7 @@
 			"picturePath": "pictures/skills/fire_ball.png",
 			"skillType": "SPELL",
 			"skillDamageType": "DIRECT",
+			"manaConsumption": 15,
 
 			"cooldown": 1.5,
 			"castTime": 1.5,
@@ -81,6 +84,7 @@
 			"picturePath": "pictures/skills/fire_arrow.png",
 			"skillType": "PROJECTILE",
 			"skillDamageType": "DIRECT",
+			"manaConsumption": 5,
 
 			"cooldown": 1.5,
 			"castTime": 0.5,
@@ -123,6 +127,7 @@
 			"picturePath": "pictures/skills/sword_swing.png",
 			"skillType": "NORMAL",
 			"skillDamageType": "DIRECT",
+			"manaConsumption": 0,
 
 			"cooldown": 1.5,
 			"castTime": 0.5,
@@ -144,6 +149,7 @@
 			"picturePath": "pictures/skills/sword_dash.png",
 			"skillType": "NORMAL",
 			"skillDamageType": "DIRECT",
+			"manaConsumption": 10,
 
 			"cooldown": 2.5,
 			"castTime": 1.0,

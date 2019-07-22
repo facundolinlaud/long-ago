@@ -19,4 +19,8 @@ public enum SkillType {
     public void setName(String name) {
         this.name = name;
     }
+
+    public boolean isTwoClick(){
+        return this == SPELL || this == PROJECTILE;
+    }
 }

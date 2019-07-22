@@ -14,4 +14,6 @@ public class Messages {
     public static final int INVENTORY_CHANGED = 10;
     public static final int EQUIPMENT_CHANGED = 11;
     public static final int SKILL_EQUIPPED = 12;
+    public static final int REJECTED_SKILL_DUE_TO_NO_MANA = 13;
+    public static final int REJECTED_SKILL_DUE_TO_NOT_READY = 14;
 }

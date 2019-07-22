@@ -9,11 +9,11 @@ import com.facundolinlaud.supergame.factory.SkillsFactory;
 import com.facundolinlaud.supergame.model.skill.Skill;
 import com.facundolinlaud.supergame.ui.view.overlay.controlbar.ControlBar;
 import com.facundolinlaud.supergame.ui.view.overlay.itemdropzone.ItemDropTable;
+import com.facundolinlaud.supergame.ui.view.overlay.notifications.Notifications;
 import com.facundolinlaud.supergame.ui.view.overlay.profile.ProfileTable;
 import com.facundolinlaud.supergame.ui.view.overlay.skillcasting.SkillCastingBar;
 import com.facundolinlaud.supergame.ui.view.overlay.skillsbar.SkillBar;
 
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -23,6 +23,7 @@ public class OverlayUI implements UI {
     private Table table;
     private ItemDropTable itemDropZone;
     private ProfileTable profile;
+    private Notifications notifications;
     private SkillCastingBar skillCastingBar;
     private SkillBar skillbar;
     private ControlBar controlBar;
@@ -37,12 +38,16 @@ public class OverlayUI implements UI {
 
         this.table.add(profile).colspan(3).expandX().fillX().top().left();
         this.table.row();
+
         this.table.add(itemDropZone).colspan(3).expand().fill();
+        this.table.row();
+
+        this.notifications = new Notifications(skin);
+        this.table.add(notifications).colspan(3);
         this.table.row();
 
         this.skillCastingBar = new SkillCastingBar(skin);
         this.table.add(skillCastingBar).colspan(3);
-
         this.table.row();
 
         this.controlBar = new ControlBar(skin);
@@ -52,8 +57,12 @@ public class OverlayUI implements UI {
         this.table.add(controlBar.getRightControlBar()).expandX().left().bottom();
     }
 
-    public void setHealth(float health) {
-        this.profile.setHealth(health);
+    public void setHealth(float health, float total) {
+        this.profile.setHealth(health, total);
+    }
+
+    public void setMana(float mana, float total) {
+        this.profile.setMana(mana, total);
     }
 
     public void setFPS(int fps) {
@@ -84,8 +93,16 @@ public class OverlayUI implements UI {
         return this.itemDropZone;
     }
 
+    public void popNoManaNotification() {
+        this.notifications.popNoManaNotification();
+    }
+
     @Override
     public Table get() {
         return this.table;
+    }
+
+    public void popSkillNotReadyNotification() {
+        this.notifications.popSkillNotReadyNotification();
     }
 }

@@ -115,6 +115,8 @@ public class UIManager implements Renderable {
         this.messageDispatcher.addListener(this.equipmentUIController, Messages.ITEM_EQUIPPED);
         this.messageDispatcher.addListener(this.equipmentUIController, Messages.EQUIPMENT_CHANGED);
         this.messageDispatcher.addListener(this.overlayUIController, Messages.SKILL_CASTED);
+        this.messageDispatcher.addListener(this.overlayUIController, Messages.REJECTED_SKILL_DUE_TO_NO_MANA);
+        this.messageDispatcher.addListener(this.overlayUIController, Messages.REJECTED_SKILL_DUE_TO_NOT_READY);
         this.messageDispatcher.addListener(this.labelDamagesController, Messages.ENTITY_ATTACKED);
     }
 

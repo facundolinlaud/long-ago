@@ -1,7 +1,6 @@
 package com.facundolinlaud.supergame.model.agent;
 
 import com.facundolinlaud.supergame.model.equip.EquipSlot;
-import com.facundolinlaud.supergame.model.skill.Skill;
 import com.sun.istack.internal.Nullable;
 
 import java.util.List;

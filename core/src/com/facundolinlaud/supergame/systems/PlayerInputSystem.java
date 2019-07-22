@@ -105,7 +105,7 @@ public class PlayerInputSystem extends IteratingSystem implements Telegraph {
         Skill requestedSkill = buttonsToSkills.get(pressedSkillButton);
         SkillType skillType = requestedSkill.getSkillType();
 
-        if(skillType == SkillType.SPELL || skillType == SkillType.PROJECTILE)
+        if(skillType.isTwoClick())
             caster.add(new SkillClickComponent());
 
         caster.add(new SkillCastingRequestComponent(requestedSkill));
@@ -126,13 +126,6 @@ public class PlayerInputSystem extends IteratingSystem implements Telegraph {
     }
 
     private void onSkillEquipped(SkillEquippedEvent e) {
-//        Skill skill = e.getSkill();
-
-//        if(buttonsToSkills.containsValue(skill)){
-//            float cd = buttonsToSkills.values().stream().filter(s -> skill.equals(s)).findFirst().get().getCooldown();
-//            skill.setCooldown(cd);
-//        }
-
         this.buttonsToSkills.put(e.getIndex(), e.getSkill());
     }
 }

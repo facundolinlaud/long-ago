@@ -111,6 +111,7 @@ public class WorldScreen implements Screen {
         engine.addSystem(new SpawnLocationSystem(factories.getAgentFactory()));
         engine.addSystem(new ProjectileSystem(engine));
         engine.addSystem(new HealthSystem(resources.getBatch()));
+        engine.addSystem(new SkillCoolDownSystem());
 
         uiManager.initializeSystems(engine);
     }

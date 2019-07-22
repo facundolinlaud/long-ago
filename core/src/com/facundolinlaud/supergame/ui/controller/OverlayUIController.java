@@ -9,10 +9,13 @@ import com.facundolinlaud.supergame.components.player.KeyboardComponent;
 import com.facundolinlaud.supergame.model.skill.Skill;
 import com.facundolinlaud.supergame.ui.view.OverlayUI;
 import com.facundolinlaud.supergame.utils.Mappers;
-import com.facundolinlaud.supergame.utils.events.Messages;
 import com.facundolinlaud.supergame.utils.events.SkillCastedEvent;
 
 import java.util.Map;
+
+import static com.facundolinlaud.supergame.utils.events.Messages.REJECTED_SKILL_DUE_TO_NOT_READY;
+import static com.facundolinlaud.supergame.utils.events.Messages.REJECTED_SKILL_DUE_TO_NO_MANA;
+import static com.facundolinlaud.supergame.utils.events.Messages.SKILL_CASTED;
 
 /**
  * Created by facundo on 3/29/16.
@@ -26,8 +29,12 @@ public class OverlayUIController implements Telegraph {
         this.overlayUI = overlayUI;
     }
 
-    public void setHealth(float health) {
-        overlayUI.setHealth(health);
+    public void setHealth(float health, float total) {
+        overlayUI.setHealth(health, total);
+    }
+
+    public void setMana(float mana, float total) {
+        overlayUI.setMana(mana, total);
     }
 
     public void setFPS(int fps) {
@@ -45,9 +52,16 @@ public class OverlayUIController implements Telegraph {
     @Override
     public boolean handleMessage(Telegram msg) {
         switch(msg.message){
-            case Messages.SKILL_CASTED:
+            case SKILL_CASTED:
                 onSkillCasted((SkillCastedEvent) msg.extraInfo);
                 break;
+            case REJECTED_SKILL_DUE_TO_NO_MANA:
+                this.overlayUI.popNoManaNotification();
+                break;
+            case REJECTED_SKILL_DUE_TO_NOT_READY:
+                this.overlayUI.popSkillNotReadyNotification();
+                break;
+
         }
 
         return true;
@@ -72,4 +86,5 @@ public class OverlayUIController implements Telegraph {
     public void updateSkillBar(Map<Integer, Skill> buttonsToSkills){
         overlayUI.updateSkillBar(buttonsToSkills);
     }
+
 }

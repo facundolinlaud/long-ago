@@ -11,6 +11,7 @@ public class Skill {
     private String picturePath;
     private SkillType skillType;
     private DamageType skillDamageType;
+    private float manaConsumption;
 
     /* Restrictions */
     private float cooldown;
@@ -232,5 +233,13 @@ public class Skill {
 
     public boolean hasScreenShake(){
         return this.screenShake != null;
+    }
+
+    public float getManaConsumption() {
+        return manaConsumption;
+    }
+
+    public void setManaConsumption(float manaConsumption) {
+        this.manaConsumption = manaConsumption;
     }
 }
