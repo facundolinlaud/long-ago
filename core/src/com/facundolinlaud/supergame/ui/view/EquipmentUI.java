@@ -7,7 +7,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import com.facundolinlaud.supergame.model.equip.EquipSlot;
 import com.facundolinlaud.supergame.ui.model.Item;
-import com.facundolinlaud.supergame.ui.view.cross.draganddrop.ItemDragTarget;
 import com.facundolinlaud.supergame.ui.view.equipment.EquipmentWindow;
 import com.facundolinlaud.supergame.ui.view.utils.ToggleWindowListener;
 
@@ -19,12 +18,11 @@ import java.util.Map;
 public class EquipmentUI implements UI {
     private EquipmentWindow window;
 
-    public EquipmentUI(Stage stage, Skin skin, DragAndDrop dragAndDrop, Table itemDropZone) {
+    public EquipmentUI(Stage stage, Skin skin, DragAndDrop dragAndDrop) {
         this.window = new EquipmentWindow(skin, dragAndDrop);
 
         stage.addActor(window);
         stage.addListener(new ToggleWindowListener(window, Input.Keys.C));
-        dragAndDrop.addTarget(new ItemDragTarget(itemDropZone));
     }
 
     @Override

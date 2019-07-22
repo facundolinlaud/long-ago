@@ -16,4 +16,5 @@ public class Messages {
     public static final int SKILL_EQUIPPED = 12;
     public static final int REJECTED_SKILL_DUE_TO_NO_MANA = 13;
     public static final int REJECTED_SKILL_DUE_TO_NOT_READY = 14;
+    public static final int SKILL_DROPPED = 15;
 }

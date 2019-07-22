@@ -1,4 +1,4 @@
-package com.facundolinlaud.supergame.ui.view.skills;
+package com.facundolinlaud.supergame.ui.view.skilltree;
 
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;

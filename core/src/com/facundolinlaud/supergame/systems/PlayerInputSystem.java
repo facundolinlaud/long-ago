@@ -31,6 +31,9 @@ import javafx.collections.ObservableMap;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.facundolinlaud.supergame.utils.events.Messages.SKILL_DROPPED;
+import static com.facundolinlaud.supergame.utils.events.Messages.SKILL_EQUIPPED;
+
 /**
  * Created by facundo on 3/20/16.
  */
@@ -56,7 +59,8 @@ public class PlayerInputSystem extends IteratingSystem implements Telegraph {
     private void addListeners(OverlayUIController overlayUIController){
         this.buttonsToSkills.addListener((MapChangeListener<Integer, Skill>)
                 change -> overlayUIController.updateSkillBar(buttonsToSkills));
-        this.messageDispatcher.addListener(this, Messages.SKILL_EQUIPPED);
+        this.messageDispatcher.addListener(this, SKILL_EQUIPPED);
+        this.messageDispatcher.addListener(this, SKILL_DROPPED);
     }
 
     private void loadButtonsToSkills(SkillsFactory skillsFactory){
@@ -118,8 +122,12 @@ public class PlayerInputSystem extends IteratingSystem implements Telegraph {
     @Override
     public boolean handleMessage(Telegram msg) {
         switch(msg.message){
-            case Messages.SKILL_EQUIPPED:
+            case SKILL_EQUIPPED:
                 onSkillEquipped((SkillEquippedEvent) msg.extraInfo);
+                break;
+            case SKILL_DROPPED:
+                onSkillDropped((Integer) msg.extraInfo);
+                break;
         }
 
         return false;
@@ -127,5 +135,9 @@ public class PlayerInputSystem extends IteratingSystem implements Telegraph {
 
     private void onSkillEquipped(SkillEquippedEvent e) {
         this.buttonsToSkills.put(e.getIndex(), e.getSkill());
+    }
+
+    private void onSkillDropped(Integer index) {
+        this.buttonsToSkills.remove(index);
     }
 }

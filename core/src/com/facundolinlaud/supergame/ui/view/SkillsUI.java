@@ -5,7 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import com.facundolinlaud.supergame.factory.SkillsFactory;
-import com.facundolinlaud.supergame.ui.view.skills.SkillsWindow;
+import com.facundolinlaud.supergame.ui.view.skilltree.SkillsWindow;
 import com.facundolinlaud.supergame.ui.view.utils.ToggleWindowListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 

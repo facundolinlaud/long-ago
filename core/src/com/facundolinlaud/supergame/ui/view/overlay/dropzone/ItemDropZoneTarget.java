@@ -1,4 +1,4 @@
-package com.facundolinlaud.supergame.ui.view.cross.draganddrop;
+package com.facundolinlaud.supergame.ui.view.overlay.dropzone;
 
 import com.badlogic.gdx.ai.msg.MessageDispatcher;
 import com.badlogic.gdx.ai.msg.MessageManager;
@@ -7,16 +7,17 @@ import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Payload;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Source;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Target;
 import com.facundolinlaud.supergame.ui.model.Item;
-import com.facundolinlaud.supergame.utils.events.Messages;
+import com.facundolinlaud.supergame.ui.view.cross.draganddrop.ItemSlotSource;
 import com.facundolinlaud.supergame.utils.events.ItemDroppedEvent;
+import com.facundolinlaud.supergame.utils.events.Messages;
 
 /**
  * Created by facundo on 3/30/16.
  */
-public class ItemDragTarget extends Target {
+public class ItemDropZoneTarget extends Target {
     private MessageDispatcher messageDispatcher;
 
-    public ItemDragTarget(Actor actor) {
+    public ItemDropZoneTarget(Actor actor) {
         super(actor);
         this.messageDispatcher = MessageManager.getInstance();
     }

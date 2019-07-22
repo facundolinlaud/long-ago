@@ -11,7 +11,6 @@ import com.facundolinlaud.supergame.ui.view.cross.Slot;
  * Created by facundo on 3/30/16.
  */
 public class ItemSlotSource extends Source {
-
     private Slot<Item> slot;
     private SlotType slotType;
 

@@ -8,7 +8,7 @@ import com.badlogic.gdx.utils.Align;
 import com.facundolinlaud.supergame.factory.SkillsFactory;
 import com.facundolinlaud.supergame.model.skill.Skill;
 import com.facundolinlaud.supergame.ui.view.overlay.controlbar.ControlBar;
-import com.facundolinlaud.supergame.ui.view.overlay.itemdropzone.ItemDropTable;
+import com.facundolinlaud.supergame.ui.view.overlay.dropzone.DropZone;
 import com.facundolinlaud.supergame.ui.view.overlay.notifications.Notifications;
 import com.facundolinlaud.supergame.ui.view.overlay.profile.ProfileTable;
 import com.facundolinlaud.supergame.ui.view.overlay.skillcasting.SkillCastingBar;
@@ -21,19 +21,19 @@ import java.util.Map;
  */
 public class OverlayUI implements UI {
     private Table table;
-    private ItemDropTable itemDropZone;
+    private DropZone itemDropZone;
     private ProfileTable profile;
     private Notifications notifications;
     private SkillCastingBar skillCastingBar;
     private SkillBar skillbar;
     private ControlBar controlBar;
 
-    public OverlayUI(Skin skin, DragAndDrop skillsDAD) {
+    public OverlayUI(Skin skin, DragAndDrop itemsDAD, DragAndDrop skillsDAD) {
         this.table = new Table(skin);
         this.table.setFillParent(true);
         this.table.align(Align.topLeft);
 
-        this.itemDropZone = new ItemDropTable(skin);
+        this.itemDropZone = new DropZone(skin, itemsDAD, skillsDAD);
         this.profile = new ProfileTable(skin);
 
         this.table.add(profile).colspan(3).expandX().fillX().top().left();

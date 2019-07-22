@@ -1,20 +1,18 @@
-package com.facundolinlaud.supergame.ui.view.overlay.skillsbar;
+package com.facundolinlaud.supergame.ui.view.overlay.dropzone;
 
 import com.badlogic.gdx.ai.msg.MessageDispatcher;
 import com.badlogic.gdx.ai.msg.MessageManager;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import com.facundolinlaud.supergame.ui.view.cross.draganddrop.SkillDragInformation;
 import com.facundolinlaud.supergame.ui.view.cross.draganddrop.SkillSlotSource;
 import com.facundolinlaud.supergame.utils.events.Messages;
-import com.facundolinlaud.supergame.utils.events.SkillEquippedEvent;
 
-public class SkillBarSlotTarget extends DragAndDrop.Target {
+public class SkillDropZoneTarget extends DragAndDrop.Target {
     private MessageDispatcher messageDispatcher;
-    private SkillBarSlot slot;
 
-    public SkillBarSlotTarget(SkillBarSlot slot) {
-        super(slot);
-        this.slot = slot;
+    public SkillDropZoneTarget(Actor actor) {
+        super(actor);
         this.messageDispatcher = MessageManager.getInstance();
     }
 
@@ -27,12 +25,10 @@ public class SkillBarSlotTarget extends DragAndDrop.Target {
     public void drop(DragAndDrop.Source source, DragAndDrop.Payload payload, float x, float y, int pointer) {
         SkillSlotSource slotSource = (SkillSlotSource) source;
         SkillDragInformation dragInformation = (SkillDragInformation) payload.getObject();
-        int slotIndex = slot.getIndex();
 
         switch(slotSource.getSlotType()){
-            case SKILL_TREE_SLOT:
-                messageDispatcher.dispatchMessage(Messages.SKILL_EQUIPPED,
-                        new SkillEquippedEvent(dragInformation.getSkill(), slotIndex));
+            case SKILL_BAR_SLOT:
+                this.messageDispatcher.dispatchMessage(Messages.SKILL_DROPPED, (Object) dragInformation.getIndex());
                 break;
         }
     }

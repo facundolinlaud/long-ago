@@ -86,12 +86,12 @@ public class UIManager implements Renderable {
     }
 
     private void initializeViews(SkillsFactory skillsFactory) {
-        this.overlayUI = new OverlayUI(skin, itemsDAD);
-        this.inventoryUI = new InventoryUI(stage, skin, itemsDAD, overlayUI.getItemDropZone());
+        this.overlayUI = new OverlayUI(skin, itemsDAD, skillsDAD);
+        this.inventoryUI = new InventoryUI(stage, skin, itemsDAD);
         this.attributesUI = new AttributesUI(stage, skin);
-        this.equipmentUI = new EquipmentUI(stage, skin, skillsDAD, overlayUI.getItemDropZone());
+        this.equipmentUI = new EquipmentUI(stage, skin, itemsDAD);
         this.labelDamagesUI = new LabelDamagesUI(stage, skin);
-        this.skillsUI = new SkillsUI(stage, skin, itemsDAD, skillsFactory);
+        this.skillsUI = new SkillsUI(stage, skin, skillsDAD, skillsFactory);
     }
 
     private void initializeControllers(Camera camera, Entity player) {

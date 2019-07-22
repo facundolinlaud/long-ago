@@ -6,6 +6,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.facundolinlaud.supergame.model.skill.Skill;
+import com.facundolinlaud.supergame.ui.view.cross.draganddrop.SkillSlotSource;
+import com.facundolinlaud.supergame.ui.view.cross.draganddrop.SlotType;
 
 import java.util.List;
 import java.util.Map;
@@ -27,6 +29,7 @@ public class SkillBar extends Table {
             this.slots.add(slot);
             this.add(slot).width(32).height(32).padRight(4).left();
             skillsDAD.addTarget(new SkillBarSlotTarget(slot));
+            skillsDAD.addSource(new SkillSlotSource(slot, SlotType.SKILL_BAR_SLOT, i));
 
             if(skills.containsKey(i)){
                 slot.setContent(skills.get(i));
