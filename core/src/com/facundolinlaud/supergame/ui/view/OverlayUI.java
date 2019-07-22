@@ -1,6 +1,7 @@
 package com.facundolinlaud.supergame.ui.view;
 
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
@@ -28,7 +29,7 @@ public class OverlayUI implements UI {
     private SkillBar skillbar;
     private ControlBar controlBar;
 
-    public OverlayUI(Skin skin, DragAndDrop itemsDAD, DragAndDrop skillsDAD) {
+    public OverlayUI(Stage stage, Skin skin, DragAndDrop itemsDAD, DragAndDrop skillsDAD) {
         this.table = new Table(skin);
         this.table.setFillParent(true);
         this.table.align(Align.topLeft);
@@ -42,9 +43,7 @@ public class OverlayUI implements UI {
         this.table.add(itemDropZone).colspan(3).expand().fill();
         this.table.row();
 
-        this.notifications = new Notifications(skin);
-        this.table.add(notifications).colspan(3);
-        this.table.row();
+        this.notifications = new Notifications(stage, skin);
 
         this.skillCastingBar = new SkillCastingBar(skin);
         this.table.add(skillCastingBar).colspan(3);

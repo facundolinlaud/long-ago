@@ -86,7 +86,7 @@ public class UIManager implements Renderable {
     }
 
     private void initializeViews(SkillsFactory skillsFactory) {
-        this.overlayUI = new OverlayUI(skin, itemsDAD, skillsDAD);
+        this.overlayUI = new OverlayUI(stage, skin, itemsDAD, skillsDAD);
         this.inventoryUI = new InventoryUI(stage, skin, itemsDAD);
         this.attributesUI = new AttributesUI(stage, skin);
         this.equipmentUI = new EquipmentUI(stage, skin, itemsDAD);
