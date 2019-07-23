@@ -106,6 +106,11 @@ public class AgentBuilder {
         return this;
     }
 
+    public AgentBuilder withSkills(List<Skill> skills, ListChangeListener<? super Skill> listener){
+        this.entity.add(new SkillsComponent(skills, listener));
+        return this;
+    }
+
     public AgentBuilder withMana(float totalMana){
         this.entity.add(new ManaComponent(totalMana));
         return this;

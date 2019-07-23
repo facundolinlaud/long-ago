@@ -43,7 +43,7 @@ public class UIManager implements Renderable {
     private AttributesUI attributesUI;
     private EquipmentUI equipmentUI;
     private LabelDamagesUI labelDamagesUI;
-    private SkillsUI skillsUI;
+    private SkillTreeUI skillsUI;
 
     private InventoryUIController inventoryUIController;
     private OverlayUIController overlayUIController;
@@ -91,7 +91,7 @@ public class UIManager implements Renderable {
         this.attributesUI = new AttributesUI(stage, skin);
         this.equipmentUI = new EquipmentUI(stage, skin, itemsDAD);
         this.labelDamagesUI = new LabelDamagesUI(stage, skin);
-        this.skillsUI = new SkillsUI(stage, skin, skillsDAD, skillsFactory);
+        this.skillsUI = new SkillTreeUI(stage, skin, skillsDAD, skillsFactory);
     }
 
     private void initializeControllers(Camera camera, Entity player) {
@@ -117,6 +117,7 @@ public class UIManager implements Renderable {
         this.messageDispatcher.addListener(this.overlayUIController, Messages.SKILL_CASTED);
         this.messageDispatcher.addListener(this.overlayUIController, Messages.REJECTED_SKILL_DUE_TO_NO_MANA);
         this.messageDispatcher.addListener(this.overlayUIController, Messages.REJECTED_SKILL_DUE_TO_NOT_READY);
+        this.messageDispatcher.addListener(this.overlayUIController, Messages.SKILLS_CHANGED);
         this.messageDispatcher.addListener(this.labelDamagesController, Messages.ENTITY_ATTACKED);
     }
 

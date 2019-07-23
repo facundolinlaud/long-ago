@@ -22,7 +22,6 @@ import com.facundolinlaud.supergame.model.status.Action;
 import com.facundolinlaud.supergame.model.status.Direction;
 import com.facundolinlaud.supergame.ui.controller.OverlayUIController;
 import com.facundolinlaud.supergame.utils.Mappers;
-import com.facundolinlaud.supergame.utils.events.Messages;
 import com.facundolinlaud.supergame.utils.events.SkillEquippedEvent;
 import com.sun.javafx.collections.ObservableMapWrapper;
 import javafx.collections.MapChangeListener;

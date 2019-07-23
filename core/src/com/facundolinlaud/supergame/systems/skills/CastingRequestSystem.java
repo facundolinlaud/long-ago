@@ -41,7 +41,6 @@ public abstract class CastingRequestSystem extends IteratingSystem {
 
     protected void cast(Entity caster, Skill skill){
         ManaComponent manaComponent = mm.get(caster);
-        System.out.println("sacando " + skill.getManaConsumption() + " a mana: " + manaComponent.getCurrentMana());
         manaComponent.cast(skill);
 
         caster.add(new SkillCastingComponent(skill));

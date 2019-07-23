@@ -2,18 +2,20 @@ package com.facundolinlaud.supergame.factory;
 
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.gdx.ai.msg.MessageDispatcher;
 import com.badlogic.gdx.ai.msg.MessageManager;
 import com.facundolinlaud.supergame.builder.AgentBuilder;
 import com.facundolinlaud.supergame.components.sprite.StackableSpriteComponent;
 import com.facundolinlaud.supergame.model.agent.Agent;
 import com.facundolinlaud.supergame.model.equip.EquipSlot;
 import com.facundolinlaud.supergame.model.particle.ParticleType;
-import com.facundolinlaud.supergame.utils.events.Messages;
 
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+
+import static com.facundolinlaud.supergame.utils.events.Messages.*;
 
 public class AgentFactory {
     private static final Integer MAIN_PLAYER_ID = 0;
@@ -23,6 +25,7 @@ public class AgentFactory {
     private ParticleFactory particleFactory;
     private SkillsFactory skillsFactory;
     private Map<Integer, Agent> agents;
+    private MessageDispatcher messageDispatcher;
 
     public AgentFactory(Engine engine, ItemFactory itemFactory, ParticleFactory particleFactory, SkillsFactory skillsFactory) {
         this.engine = engine;
@@ -30,12 +33,12 @@ public class AgentFactory {
         this.itemFactory = itemFactory;
         this.particleFactory = particleFactory;
         this.skillsFactory = skillsFactory;
+        this.messageDispatcher = MessageManager.getInstance();
     }
 
     private AgentBuilder getDummyAgent(Agent agent){
         AgentBuilder builder = new AgentBuilder(agent.getVelocity())
-                .withAttributes(agent.getAttributes())
-                .withSkills(skillsFactory.get(agent.getSkills()));
+                .withAttributes(agent.getAttributes());
 
         return builder;
     }
@@ -47,7 +50,8 @@ public class AgentFactory {
         return getDummyAgent(agent)
                 .withAI(agent.getNpcInformation())
                 .withEquipment(equipment)
-                .withParticles(particleFactory.create(ParticleType.SPAWN));
+                .withParticles(particleFactory.create(ParticleType.SPAWN))
+                .withSkills(skillsFactory.get(agent.getSkills()));
     }
 
     public AgentBuilder getPlayer(){
@@ -55,11 +59,11 @@ public class AgentFactory {
         Map<EquipSlot, Entity> equipment = buildEquipment(agent.getBody(), agent.getEquipment());
 
         return getDummyAgent(agent)
-                .withBag(buildBag(agent.getBag()), c -> MessageManager.getInstance()
-                        .dispatchMessage(Messages.INVENTORY_CHANGED))
-                .withEquipment(equipment, change -> MessageManager.getInstance()
-                        .dispatchMessage(Messages.EQUIPMENT_CHANGED))
-                .withKeyboardControl();
+                .withBag(buildBag(agent.getBag()), c -> messageDispatcher.dispatchMessage(INVENTORY_CHANGED))
+                .withEquipment(equipment, c -> messageDispatcher.dispatchMessage(EQUIPMENT_CHANGED))
+                .withKeyboardControl()
+                .withSkills(skillsFactory.get(agent.getSkills()),
+                        c -> messageDispatcher.dispatchMessage(SKILLS_CHANGED, c.getList()));
     }
 
     private Map<EquipSlot, Entity> buildEquipment(Map<EquipSlot, String> body, Map<EquipSlot, Integer> model) {

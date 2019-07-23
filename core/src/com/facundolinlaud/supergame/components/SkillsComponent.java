@@ -3,6 +3,9 @@ package com.facundolinlaud.supergame.components;
 import com.badlogic.ashley.core.Component;
 import com.facundolinlaud.supergame.model.skill.Skill;
 import com.facundolinlaud.supergame.model.skill.SkillType;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 
 import java.util.HashMap;
 import java.util.List;
@@ -10,15 +13,20 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class SkillsComponent implements Component {
-    private List<Skill> skills;
+    private ObservableList<Skill> skills;
     private Map<Skill, Float> skillsInCooldown;
 
     public SkillsComponent(List<Skill> skills) {
-        this.skills = skills;
+        this.skills = FXCollections.observableArrayList(skills);
         this.skillsInCooldown = new HashMap();
     }
 
-    public List<Skill> getSkills() {
+    public SkillsComponent(List<Skill> skills, ListChangeListener<? super Skill> listener) {
+        this(skills);
+        this.skills.addListener(listener);
+    }
+
+    public ObservableList<Skill> getSkills() {
         return skills;
     }
 

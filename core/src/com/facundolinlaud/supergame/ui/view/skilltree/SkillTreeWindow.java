@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class SkillsWindow extends GothicWindow {
+public class SkillTreeWindow extends GothicWindow {
     private static final int EMPTY_SPACE = -1;
     private static final int DOWN_ARROW = -2;
     private static final int LEFT_ARROW = -3;
@@ -31,7 +31,10 @@ public class SkillsWindow extends GothicWindow {
     private SkillsFactory skillsFactory;
     private Map<Integer, Drawable> arrows;
 
-    public SkillsWindow(Skin skin, SkillsFactory skillsFactory, DragAndDrop dragAndDrop) {
+    private List<List<Integer>> visualRepresentation;
+    private List<List<Boolean>> dependencyGraph;
+
+    public SkillTreeWindow(Skin skin, SkillsFactory skillsFactory, DragAndDrop dragAndDrop) {
         super(TITLE, skin);
         this.skillsFactory = skillsFactory;
         this.skin = skin;
@@ -41,12 +44,19 @@ public class SkillsWindow extends GothicWindow {
         this.arrows.put(RIGHT_ARROW, skin.getDrawable( "right-arrow"));
         this.arrows.put(VERTICAL_LONG_ARROW, skin.getDrawable("vertical-long-arrow"));
 
+        setupWindow();
+
+        SkillTreeModel skillTree = ModelFactory.getSkillTree();
+        this.visualRepresentation = skillTree.getVisualRepresentation();
+
+        drawGrid(skillTree.getVisualRepresentation(), skillTree.getDependencyGraph(), dragAndDrop);
+        drawPointsLeft();
+    }
+
+    private void setupWindow() {
         setSize(300, 300);
         padBottom(20);
         padRight(20);
-        SkillTreeModel skillTree = ModelFactory.getSkillTree();
-        drawGrid(skillTree.getVisualRepresentation(), dragAndDrop);
-        drawPointsLeft();
     }
 
     private void drawPointsLeft() {
@@ -55,7 +65,8 @@ public class SkillsWindow extends GothicWindow {
         add(pointsLeft).right();
     }
 
-    private void drawGrid(List<List<Integer>> visualRepresentation, DragAndDrop dragAndDrop){
+    private void drawGrid(List<List<Integer>> visualRepresentation, List<List<Boolean>> dependencyGraph,
+                          DragAndDrop dragAndDrop){
         grid = new Table(skin);
 
         for(int x = 0; x < visualRepresentation.size(); x++){
@@ -66,6 +77,8 @@ public class SkillsWindow extends GothicWindow {
                     Skill skill = skillsFactory.get(cell);
                     SkillTreeFramedSlot frame = new SkillTreeFramedSlot(skin);
                     frame.setContent(skill);
+
+                    boolean isSkillUnlocked = isSkillUnlocked(cell);
 
                     grid.add(frame).size(42, 42);
                     registerAsDraggableSlot(dragAndDrop, frame);
@@ -86,6 +99,11 @@ public class SkillsWindow extends GothicWindow {
         }
 
         add(grid).grow();
+    }
+
+    private boolean isSkillUnlocked(int cell) {
+
+        return false;
     }
 
     private void registerAsDraggableSlot(DragAndDrop dragAndDrop, SkillTreeFramedSlot frame) {

@@ -11,11 +11,10 @@ import com.facundolinlaud.supergame.ui.view.OverlayUI;
 import com.facundolinlaud.supergame.utils.Mappers;
 import com.facundolinlaud.supergame.utils.events.SkillCastedEvent;
 
+import java.util.List;
 import java.util.Map;
 
-import static com.facundolinlaud.supergame.utils.events.Messages.REJECTED_SKILL_DUE_TO_NOT_READY;
-import static com.facundolinlaud.supergame.utils.events.Messages.REJECTED_SKILL_DUE_TO_NO_MANA;
-import static com.facundolinlaud.supergame.utils.events.Messages.SKILL_CASTED;
+import static com.facundolinlaud.supergame.utils.events.Messages.*;
 
 /**
  * Created by facundo on 3/29/16.
@@ -61,7 +60,9 @@ public class OverlayUIController implements Telegraph {
             case REJECTED_SKILL_DUE_TO_NOT_READY:
                 this.overlayUI.popSkillNotReadyNotification();
                 break;
-
+            case SKILLS_CHANGED:
+                this.overlayUI.onSkillsChange((List<Skill>) msg.extraInfo);
+                break;
         }
 
         return true;
