@@ -4,6 +4,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import com.facundolinlaud.supergame.ui.model.Item;
 import com.facundolinlaud.supergame.ui.view.cross.GothicWindow;
+import com.facundolinlaud.supergame.ui.view.utils.Themes;
 
 import java.util.List;
 
@@ -17,16 +18,18 @@ public class InventoryWindow extends GothicWindow {
     private InventoryGrid grid;
 
     public InventoryWindow(Skin skin, int maxItemsAmount, DragAndDrop dragAndDrop) {
-        super(TITLE, skin);
+        super(TITLE, skin, Themes.Background.DARK);
         setVisible(false);
         adjustSize(maxItemsAmount);
         initializeGrid(skin, maxItemsAmount, dragAndDrop);
     }
 
     private void adjustSize(int itemCount){
-        float width = ITEMS_PER_ROW * InventorySlot.SIZE + getPadLeft() + getPadRight();
-        float height = (float) (Math.ceil((double) itemCount / ITEMS_PER_ROW) * InventorySlot.SIZE)
-                + getPadTop() + getPadBottom();
+        float width = ITEMS_PER_ROW * (InventoryGrid.SLOT_SIZE + InventoryGrid.SLOT_PADDING * 2)
+                + getPadLeft() + getPadRight() + 2 * InventoryGrid.GRID_PADDING;
+        float height = (float) (Math.ceil((double) itemCount / ITEMS_PER_ROW) *
+                (InventoryGrid.SLOT_SIZE + InventoryGrid.SLOT_PADDING * 2)) + getPadTop() + getPadBottom()
+                + 2 * InventoryGrid.GRID_PADDING;
 
         setSize(width, height);
     }

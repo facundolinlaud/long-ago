@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import com.facundolinlaud.supergame.model.equip.EquipSlot;
 import com.facundolinlaud.supergame.ui.model.Item;
 import com.facundolinlaud.supergame.ui.view.cross.GothicWindow;
+import com.facundolinlaud.supergame.ui.view.utils.Themes;
 
 import java.util.Map;
 
@@ -17,7 +18,7 @@ public class EquipmentWindow extends GothicWindow {
     private EquipmentGrid equipmentGrid;
 
     public EquipmentWindow(Skin skin, DragAndDrop dragAndDrop) {
-        super(TITLE, skin);
+        super(TITLE, skin, Themes.Background.DARK);
         setVisible(false);
         setSize(265, 320);
         initializeGrid(skin, dragAndDrop);

@@ -15,7 +15,6 @@ import com.facundolinlaud.supergame.components.spawn.SpawnedAgentComponent;
 import com.facundolinlaud.supergame.components.sprite.AnimableSpriteComponent;
 import com.facundolinlaud.supergame.components.sprite.StackableSpriteComponent;
 import com.facundolinlaud.supergame.components.sprite.StackedSpritesComponent;
-import com.facundolinlaud.supergame.components.StatusComponent;
 
 /**
  * Created by facundo on 3/17/16.
@@ -47,4 +46,6 @@ public class Mappers {
     public static final ComponentMapper<SpawnLocationComponent> spawnLocation = ComponentMapper.getFor(SpawnLocationComponent.class);
     public static final ComponentMapper<SpawnedAgentComponent> spawnedAgent = ComponentMapper.getFor(SpawnedAgentComponent.class);
     public static final ComponentMapper<ProjectileComponent> projectile = ComponentMapper.getFor(ProjectileComponent.class);
+    public static final ComponentMapper<SkillsComponent> skills = ComponentMapper.getFor(SkillsComponent.class);
+    public static final ComponentMapper<ManaComponent> mana = ComponentMapper.getFor(ManaComponent.class);
 }

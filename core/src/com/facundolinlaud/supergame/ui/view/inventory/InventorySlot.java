@@ -14,15 +14,13 @@ import com.facundolinlaud.supergame.ui.view.utils.Themes;
  * Created by facundo on 3/29/16.
  */
 public class InventorySlot extends ItemSlot {
-    public static final float SIZE = 42;
-
     private Item item;
     private Skin skin;
     private Image itemImage;
     private ImageButton slotButton;
 
     public InventorySlot(Skin skin) {
-        this.slotButton = new ImageButton(skin, Themes.ImageButton.SLOT);
+        this.slotButton = new ImageButton(skin, Themes.ImageButton.THREE_D_SLOT);
         this.itemImage = new Image();
         this.skin = skin;
 

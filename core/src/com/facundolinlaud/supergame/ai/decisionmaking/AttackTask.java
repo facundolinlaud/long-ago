@@ -5,8 +5,10 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.ai.btree.LeafTask;
 import com.badlogic.gdx.ai.btree.Task;
 import com.badlogic.gdx.math.Vector2;
+import com.facundolinlaud.supergame.components.ManaComponent;
+import com.facundolinlaud.supergame.components.PositionComponent;
+import com.facundolinlaud.supergame.components.SkillsComponent;
 import com.facundolinlaud.supergame.components.StatusComponent;
-import com.facundolinlaud.supergame.components.skills.SkillCastingComponent;
 import com.facundolinlaud.supergame.components.skills.SkillCastingRequestComponent;
 import com.facundolinlaud.supergame.components.skills.SkillClickComponent;
 import com.facundolinlaud.supergame.model.skill.Skill;
@@ -16,36 +18,61 @@ import com.facundolinlaud.supergame.utils.Mappers;
 
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 public class AttackTask extends LeafTask<Blackboard> {
     private ComponentMapper<StatusComponent> sm = Mappers.status;
+    private ComponentMapper<ManaComponent> mm = Mappers.mana;
+    private ComponentMapper<SkillsComponent> ssm = Mappers.skills;
+    private ComponentMapper<PositionComponent> pm = Mappers.position;
 
-    private List<Skill> skills;
     private Random rand;
 
-    public AttackTask(List<Skill> skills) {
-        this.skills = skills;
+    public AttackTask() {
         this.rand = new Random();
     }
 
     @Override
     public Status execute() {
         Blackboard blackboard = getObject();
-        Entity agent = blackboard.getAgent();
+        Entity attacker = blackboard.getAgent();
 
-        StatusComponent agentStatus = sm.get(agent);
+        StatusComponent agentStatus = sm.get(attacker);
         Action action = agentStatus.getAction();
 
         /* TODO: Fix this. For some reason Return SUCCEEDED keeps tasks returning as SUCCEEDED instead of FRESH */
         if(firstTimeExecutingTask()){
-            if(canCast(action))
-                attackPlayer(agent, blackboard.getPlayerPosition());
+            if(canCast(action)) {
+                Skill skill = getBestFittingSkill(attacker);
+
+                if(skill == null)
+                    return Status.FAILED;
+
+                attackPlayer(attacker, blackboard.getPlayerPosition(), skill);
+            }
         }else{
             if(isCastingDone(action))
                 return Status.SUCCEEDED;
         }
 
         return Status.RUNNING;
+    }
+
+    private Skill getBestFittingSkill(Entity caster){
+        SkillsComponent skills = ssm.get(caster);
+        ManaComponent manaComponent = mm.get(caster);
+
+        List<Skill> options = skills.getAvailableSkills().stream()
+                .filter(skill -> manaComponent.canCast(skill)).collect(Collectors.toList());
+
+        if(options.isEmpty())
+            return null;
+
+        return random(options);
+    }
+
+    private Skill random(List<Skill> options) {
+        return options.get(rand.nextInt(options.size()));
     }
 
     private boolean firstTimeExecutingTask() {
@@ -60,22 +87,17 @@ public class AttackTask extends LeafTask<Blackboard> {
         return !action.isCasting();
     }
 
-    void attackPlayer(Entity agent, Vector2 playerPosition){
-        Skill skill = chooseSkill();
+    void attackPlayer(Entity attacker, Vector2 playerPosition, Skill skill){
         SkillType skillType = skill.getSkillType();
 
         if(skillType == SkillType.SPELL || skillType == SkillType.PROJECTILE)
-            agent.add(new SkillClickComponent(playerPosition));
+            attacker.add(new SkillClickComponent(playerPosition));
 
-        agent.add(new SkillCastingRequestComponent(skill));
-    }
-
-    private Skill chooseSkill() {
-        return skills.get(rand.nextInt(skills.size()));
+        attacker.add(new SkillCastingRequestComponent(skill));
     }
 
     @Override
     protected Task<Blackboard> copyTo(Task<Blackboard> task) {
-        return new AttackTask(this.skills);
+        return new AttackTask();
     }
 }

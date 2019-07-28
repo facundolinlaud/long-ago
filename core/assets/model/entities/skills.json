@@ -2,9 +2,12 @@
 	"skills" : {
 		"0": {
 			"name": "Spear Dash",
-			"picturePath": "pictures/skills/dash.png",
+			"picturePath": "pictures/skills/spear_dash.png",
+			"disabledPicturePath": "pictures/skills/disabled/spear_dash.png",
 			"skillType": "NORMAL",
 			"skillDamageType": "DIRECT",
+			"manaConsumption": 3,
+			"description": "A fast and reliable spear dash\nthat affects nearby units.",
 
 			"cooldown": 1.5,
 			"castTime": 0.5,
@@ -22,10 +25,37 @@
 			"particleType": "NONE"
 		},
 		"1": {
+			"name": "Spear Charge",
+			"picturePath": "pictures/skills/spear_charge.png",
+			"disabledPicturePath": "pictures/skills/disabled/spear_charge.png",
+			"skillType": "NORMAL",
+			"skillDamageType": "DIRECT",
+			"manaConsumption": 10,
+			"description": "A powerful spear charge that\naffects nearby units.",
+
+			"cooldown": 30.5,
+			"castTime": 1.5,
+			"lockdownTime": 0.8,
+			"interruptible": false,
+			"equipmentRequired": "SPEAR",
+
+			"castingAction": "MELEE_DASH_CASTING",
+			"executingAction": "DASHING",
+			"animationFlow": "TRAVERSE",
+
+			"areaOfEffectSize": 2.0,
+			"baseDamage": 40.0,
+			"baseHeal": 0.0,
+			"particleType": "NONE"
+		},
+		"2": {
 			"name": "Fire Rain",
 			"picturePath": "pictures/skills/fire_ball.png",
+			"disabledPicturePath": "pictures/skills/disabled/fire_ball.png",
 			"skillType": "SPELL",
 			"skillDamageType": "DIRECT",
+			"manaConsumption": 15,
+			"description": "A powerful spell that spawns a fire\nrain above the desired area.",
 
 			"cooldown": 1.5,
 			"castTime": 1.5,
@@ -55,11 +85,14 @@
 				"duration": 0.8
 			}
 		},
-		"2": {
+		"3": {
 			"name": "Fire Arrow",
 			"picturePath": "pictures/skills/fire_arrow.png",
+			"disabledPicturePath": "pictures/skills/disabled/fire_arrow.png",
 			"skillType": "PROJECTILE",
 			"skillDamageType": "DIRECT",
+			"manaConsumption": 5,
+			"description": "A fast traveling and fire-lit\narrow.",
 
 			"cooldown": 1.5,
 			"castTime": 0.5,
@@ -97,14 +130,41 @@
 				"duration": 0.3
 			}
 		},
-		"3": {
+		"4": {
 			"name": "Sword Swing",
-			"picturePath": "pictures/skills/dash.png",
+			"picturePath": "pictures/skills/sword_swing.png",
+			"disabledPicturePath": "pictures/skills/disabled/sword_swing.png",
 			"skillType": "NORMAL",
 			"skillDamageType": "DIRECT",
+			"manaConsumption": 0,
+			"description": "A fast and reliable sword swing\nthat affects nearby units.",
 
 			"cooldown": 1.5,
 			"castTime": 0.5,
+			"lockdownTime": 0.8,
+			"interruptible": false,
+			"equipmentRequired": "SWORD",
+
+			"castingAction": "STANDING",
+			"executingAction": "SWINGING",
+			"animationFlow": "TRAVERSE",
+
+			"areaOfEffectSize": 1.0,
+			"baseDamage": 40.0,
+			"baseHeal": 0.0,
+			"particleType": "NONE"
+		},
+		"5": {
+			"name": "Sword Dash",
+			"picturePath": "pictures/skills/sword_dash.png",
+			"disabledPicturePath": "pictures/skills/disabled/sword_dash.png",
+			"skillType": "NORMAL",
+			"skillDamageType": "DIRECT",
+			"manaConsumption": 10,
+			"description": "A powerfuk sword dash\nthat affects nearby units.",
+
+			"cooldown": 2.5,
+			"castTime": 1.0,
 			"lockdownTime": 0.8,
 			"interruptible": false,
 			"equipmentRequired": "SWORD",

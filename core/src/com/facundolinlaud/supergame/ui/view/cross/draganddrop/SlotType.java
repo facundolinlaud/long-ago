@@ -1,4 +1,4 @@
-package com.facundolinlaud.supergame.ui.view.cross;
+package com.facundolinlaud.supergame.ui.view.cross.draganddrop;
 
 /**
  * Created by facundo on 4/2/16.
@@ -6,5 +6,6 @@ package com.facundolinlaud.supergame.ui.view.cross;
 public enum SlotType {
     INVENTORY_SLOT,
     EQUIPMENT_SLOT,
-    SKILLBAR_SLOT
+    SKILL_BAR_SLOT,
+    SKILL_TREE_SLOT
 }

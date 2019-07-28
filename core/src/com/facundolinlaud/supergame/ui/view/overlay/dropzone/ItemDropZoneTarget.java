@@ -1,4 +1,4 @@
-package com.facundolinlaud.supergame.ui.view.cross;
+package com.facundolinlaud.supergame.ui.view.overlay.dropzone;
 
 import com.badlogic.gdx.ai.msg.MessageDispatcher;
 import com.badlogic.gdx.ai.msg.MessageManager;
@@ -7,16 +7,17 @@ import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Payload;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Source;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Target;
 import com.facundolinlaud.supergame.ui.model.Item;
-import com.facundolinlaud.supergame.utils.events.Messages;
+import com.facundolinlaud.supergame.ui.view.cross.draganddrop.ItemSlotSource;
 import com.facundolinlaud.supergame.utils.events.ItemDroppedEvent;
+import com.facundolinlaud.supergame.utils.events.Messages;
 
 /**
  * Created by facundo on 3/30/16.
  */
-public class DropAreaTarget extends Target {
+public class ItemDropZoneTarget extends Target {
     private MessageDispatcher messageDispatcher;
 
-    public DropAreaTarget(Actor actor) {
+    public ItemDropZoneTarget(Actor actor) {
         super(actor);
         this.messageDispatcher = MessageManager.getInstance();
     }
@@ -28,7 +29,7 @@ public class DropAreaTarget extends Target {
 
     @Override
     public void drop(Source source, Payload payload, float x, float y, int pointer) {
-        SlotSource slotSource = (SlotSource) source;
+        ItemSlotSource slotSource = (ItemSlotSource) source;
         Item item = (Item) payload.getObject();
 
         switch(slotSource.getSlotType()){

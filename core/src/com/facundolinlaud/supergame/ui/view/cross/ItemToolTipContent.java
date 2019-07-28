@@ -1,7 +1,10 @@
 package com.facundolinlaud.supergame.ui.view.cross;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Align;
 import com.facundolinlaud.supergame.factory.TextureFactory;
 import com.facundolinlaud.supergame.model.item.Rarity;
@@ -9,13 +12,12 @@ import com.facundolinlaud.supergame.ui.model.Item;
 import com.facundolinlaud.supergame.ui.model.equipment.Equipable;
 import com.sun.xml.internal.ws.util.StringUtils;
 
+import static com.facundolinlaud.supergame.ui.view.utils.Themes.Colors.BLUE;
+import static com.facundolinlaud.supergame.ui.view.utils.Themes.Colors.GRAY;
 import static com.facundolinlaud.supergame.ui.view.utils.Themes.Label.SMALL_CAPS_12;
 import static com.facundolinlaud.supergame.ui.view.utils.Themes.Label.SMALL_CAPS_14;
 
 public class ItemToolTipContent extends Table {
-    private static final Color BLUE = new Color(0.23f, 0.5f, 0.9f, 1f);
-    private static final Color GRAY = new Color(0.72f, 0.68f, 0.68f, 1f);
-
     private static final int EQUIPMENT_ICON_SIZE = 18;
 
     private Skin skin;

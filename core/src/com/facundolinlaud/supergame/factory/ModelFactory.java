@@ -8,6 +8,8 @@ import com.facundolinlaud.supergame.model.item.Items;
 import com.facundolinlaud.supergame.model.particle.ParticleType;
 import com.facundolinlaud.supergame.model.particle.Particles;
 import com.facundolinlaud.supergame.model.skill.Skill;
+import com.facundolinlaud.supergame.model.skill.SkillBarModel;
+import com.facundolinlaud.supergame.model.skill.SkillTreeModel;
 import com.facundolinlaud.supergame.model.skill.SkillsModel;
 import com.facundolinlaud.supergame.model.sprite.RawAnimationModel;
 import com.facundolinlaud.supergame.model.sprite.SpriteModel;
@@ -16,8 +18,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by facundo on 27/7/16.
@@ -29,6 +32,8 @@ public class ModelFactory implements Disposable {
     private static final String ITEMS_MODEL_PATH = "model/entities/items.json";
     private static final String AGENTS_MODEL_PATH = "model/entities/agents.json";
     private static final String SPRITES_MODELS_PATH = "model/textures/sprites.json";
+    private static final String SKILL_BAR_MODEL_PATH = "model/player/skill_bar.json";
+    private static final String SKILL_TREE_MODEL_PATH = "model/player/skill_tree.json";
 
     private static Map<String, Object> cache = new HashMap<>();
 
@@ -59,6 +64,16 @@ public class ModelFactory implements Disposable {
     public static Map<Integer, Agent> getAgentsModel(){
         Agents agents = (Agents) readModel(AGENTS_MODEL_PATH, Agents.class);
         return agents.getAgents();
+    }
+
+    public static Map<Integer, Integer> getSkillBar(){
+        SkillBarModel skillBarModel = (SkillBarModel) readModel(SKILL_BAR_MODEL_PATH, SkillBarModel.class);
+        return skillBarModel.getButtonsToSkillsIds();
+    }
+
+    public static SkillTreeModel getSkillTree(){
+        SkillTreeModel skillTree = (SkillTreeModel) readModel(SKILL_TREE_MODEL_PATH, SkillTreeModel.class);
+        return skillTree;
     }
 
     private static Object readModel(String modelPath, Class clazz){

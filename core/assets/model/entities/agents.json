@@ -4,6 +4,10 @@
 			"name": "Player",
 			"velocity": 1.9,
 			"bag": [13, 9, 9, 0, 10, 15, 16, 17, 18, 19, 20],
+			"skillsInformation": {
+				"skills": [1, 2, 3, 4],
+				"assignablePoints": 6 
+			},
 			"attributes": {
 				"strength": 10,
 				"agility": 5,
@@ -29,6 +33,9 @@
 		"1": {
 			"name": "Skeleton",
 			"velocity": 1.9,
+			"skillsInformation": {
+				"skills": [1, 2, 3] 
+			},
 			"attributes": {
 				"strength": 5,
 				"agility": 5,
@@ -50,14 +57,15 @@
 			},
 			"npcInformation": {
 				"viewDistance": 5.0,
-				"meleeSkills": [3],
-				"rangedSkills": [1, 2],
 				"behaviorType": "AGGRESSIVE"
 			}
 		},
 		"2": {
 			"name": "Orc",
 			"velocity": 1.4,
+			"skillsInformation": {
+				"skills": [0]
+			},
 			"attributes": {
 				"strength": 10,
 				"agility": 10,
@@ -75,8 +83,6 @@
 			},
 			"npcInformation": {
 				"viewDistance": 5.0,
-				"meleeSkills": [0],
-				"rangedSkills": [],
 				"behaviorType": "AGGRESSIVE"
 			}
 		}

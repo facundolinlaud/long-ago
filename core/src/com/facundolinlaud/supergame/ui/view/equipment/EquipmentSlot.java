@@ -25,7 +25,7 @@ public class EquipmentSlot extends ItemSlot {
     public EquipmentSlot(Skin skin, EquipSlot equipSlot) {
         this.skin = skin;
         this.equipSlot = equipSlot;
-        this.imageButton = new ImageButton(skin, Themes.ImageButton.SLOT);
+        this.imageButton = new ImageButton(skin, Themes.ImageButton.THREE_D_SLOT);
 
         this.style = new ImageButton.ImageButtonStyle();
         this.style.up = imageButton.getStyle().up;

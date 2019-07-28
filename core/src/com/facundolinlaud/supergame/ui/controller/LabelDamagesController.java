@@ -8,9 +8,9 @@ import com.badlogic.gdx.math.Vector3;
 import com.facundolinlaud.supergame.components.PositionComponent;
 import com.facundolinlaud.supergame.ui.view.LabelDamagesUI;
 import com.facundolinlaud.supergame.utils.Mappers;
-import com.facundolinlaud.supergame.utils.events.Messages;
 import com.facundolinlaud.supergame.utils.Position;
 import com.facundolinlaud.supergame.utils.events.EntityAttackedEvent;
+import com.facundolinlaud.supergame.utils.events.Messages;
 
 
 public class LabelDamagesController implements Telegraph {

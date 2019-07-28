@@ -16,6 +16,7 @@ public class Agent {
     private Map<EquipSlot, String> body;
     private Map<EquipSlot, Integer> equipment;
     private List<Integer> bag;
+    private SkillsInformation skillsInformation;
 
     @Nullable private NPCInformation npcInformation;
 
@@ -105,6 +106,14 @@ public class Agent {
         return this.npcInformation != null;
     }
 
+    public SkillsInformation getSkillsInformation() {
+        return skillsInformation;
+    }
+
+    public void setSkillsInformation(SkillsInformation skillsInformation) {
+        this.skillsInformation = skillsInformation;
+    }
+
     @Override
     public String toString() {
         return "Agent{" +
@@ -117,6 +126,7 @@ public class Agent {
                 ", body=" + body +
                 ", equipment=" + equipment +
                 ", bag=" + bag +
+                ", skillsInformation=" + skillsInformation +
                 ", npcInformation=" + npcInformation +
                 '}';
     }

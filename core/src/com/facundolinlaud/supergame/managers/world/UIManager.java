@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TooltipManager;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
+import com.facundolinlaud.supergame.factory.SkillsFactory;
 import com.facundolinlaud.supergame.managers.Renderable;
 import com.facundolinlaud.supergame.systems.ui.AttributesUISystem;
 import com.facundolinlaud.supergame.systems.ui.ProfileUISystem;
@@ -34,19 +35,22 @@ public class UIManager implements Renderable {
 
     private Skin skin;
     private Stage stage;
-    private DragAndDrop dragAndDrop;
+    private DragAndDrop itemsDAD;
+    private DragAndDrop skillsDAD;
 
     private OverlayUI overlayUI;
     private InventoryUI inventoryUI;
     private AttributesUI attributesUI;
     private EquipmentUI equipmentUI;
     private LabelDamagesUI labelDamagesUI;
+    private SkillTreeUI skillTreeUI;
 
     private InventoryUIController inventoryUIController;
     private OverlayUIController overlayUIController;
     private AttributesUIController attributesUIController;
     private EquipmentUIController equipmentUIController;
     private LabelDamagesController labelDamagesController;
+    private SkillTreeController skillTreeController;
 
     private MessageDispatcher messageDispatcher;
 
@@ -75,16 +79,20 @@ public class UIManager implements Renderable {
     }
 
     private void initializeDragAndDrop(){
-        this.dragAndDrop = new DragAndDrop();
-        this.dragAndDrop.setDragTime(MIN_DRAG_TIME_IN_MILLISECONDS);
+        this.itemsDAD = new DragAndDrop();
+        this.itemsDAD.setDragTime(MIN_DRAG_TIME_IN_MILLISECONDS);
+
+        this.skillsDAD = new DragAndDrop();
+        this.skillsDAD.setDragTime(MIN_DRAG_TIME_IN_MILLISECONDS);
     }
 
     private void initializeViews() {
-        this.overlayUI = new OverlayUI(skin);
-        this.inventoryUI = new InventoryUI(stage, skin, dragAndDrop, overlayUI.getItemDropZone());
+        this.overlayUI = new OverlayUI(stage, skin, itemsDAD, skillsDAD);
+        this.inventoryUI = new InventoryUI(stage, skin, itemsDAD);
         this.attributesUI = new AttributesUI(stage, skin);
-        this.equipmentUI = new EquipmentUI(stage, skin, dragAndDrop, overlayUI.getItemDropZone());
+        this.equipmentUI = new EquipmentUI(stage, skin, itemsDAD);
         this.labelDamagesUI = new LabelDamagesUI(stage, skin);
+        this.skillTreeUI = new SkillTreeUI(stage, skin, skillsDAD);
     }
 
     private void initializeControllers(Camera camera, Entity player) {
@@ -93,6 +101,7 @@ public class UIManager implements Renderable {
         this.attributesUIController = new AttributesUIController(this.attributesUI);
         this.equipmentUIController = new EquipmentUIController(this.equipmentUI, player);
         this.labelDamagesController = new LabelDamagesController(this.labelDamagesUI, camera);
+        this.skillTreeController = new SkillTreeController(this.skillTreeUI, player);
     }
 
     private void addUIToStage() {
@@ -108,7 +117,12 @@ public class UIManager implements Renderable {
         this.messageDispatcher.addListener(this.equipmentUIController, Messages.ITEM_EQUIPPED);
         this.messageDispatcher.addListener(this.equipmentUIController, Messages.EQUIPMENT_CHANGED);
         this.messageDispatcher.addListener(this.overlayUIController, Messages.SKILL_CASTED);
+        this.messageDispatcher.addListener(this.overlayUIController, Messages.REJECTED_SKILL_DUE_TO_NO_MANA);
+        this.messageDispatcher.addListener(this.overlayUIController, Messages.REJECTED_SKILL_DUE_TO_NOT_READY);
+        this.messageDispatcher.addListener(this.overlayUIController, Messages.SKILLS_CHANGED);
         this.messageDispatcher.addListener(this.labelDamagesController, Messages.ENTITY_ATTACKED);
+        this.messageDispatcher.addListener(this.skillTreeController, Messages.SKILL_UNLOCK_REQUEST);
+        this.messageDispatcher.addListener(this.skillTreeController, Messages.SKILLS_CHANGED);
     }
 
     private void setCustomCursor() {
@@ -121,6 +135,10 @@ public class UIManager implements Renderable {
         engine.addSystem(new ProfileUISystem(this.overlayUIController));
         engine.addSystem(new AttributesUISystem(this.attributesUIController));
         engine.addSystem(new SkillCastingUISystem(this.overlayUIController));
+    }
+
+    public OverlayUIController getOverlayUIController(){
+        return this.overlayUIController;
     }
 
     @Override

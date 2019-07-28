@@ -7,15 +7,16 @@ import com.badlogic.gdx.ai.msg.MessageManager;
 import com.facundolinlaud.supergame.builder.AgentBuilder;
 import com.facundolinlaud.supergame.components.sprite.StackableSpriteComponent;
 import com.facundolinlaud.supergame.model.agent.Agent;
+import com.facundolinlaud.supergame.model.agent.SkillsInformation;
 import com.facundolinlaud.supergame.model.equip.EquipSlot;
 import com.facundolinlaud.supergame.model.particle.ParticleType;
-import com.facundolinlaud.supergame.utils.events.Messages;
-import javafx.collections.MapChangeListener;
 
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+
+import static com.facundolinlaud.supergame.utils.events.Messages.*;
 
 public class AgentFactory {
     private static final Integer MAIN_PLAYER_ID = 0;
@@ -23,13 +24,17 @@ public class AgentFactory {
     private Engine engine;
     private ItemFactory itemFactory;
     private ParticleFactory particleFactory;
+    private SkillsFactory skillsFactory;
     private Map<Integer, Agent> agents;
+    private MessageDispatcher messageDispatcher;
 
-    public AgentFactory(Engine engine, ItemFactory itemFactory, ParticleFactory particleFactory) {
+    public AgentFactory(Engine engine, ItemFactory itemFactory, ParticleFactory particleFactory, SkillsFactory skillsFactory) {
         this.engine = engine;
         this.agents = ModelFactory.getAgentsModel();
         this.itemFactory = itemFactory;
         this.particleFactory = particleFactory;
+        this.skillsFactory = skillsFactory;
+        this.messageDispatcher = MessageManager.getInstance();
     }
 
     private AgentBuilder getDummyAgent(Agent agent){
@@ -42,23 +47,26 @@ public class AgentFactory {
     public AgentBuilder getAI(int id){
         Agent agent = agents.get(id);
         Map<EquipSlot, Entity> equipment = buildEquipment(agent.getBody(), agent.getEquipment());
+        SkillsInformation skillsInfo = agent.getSkillsInformation();
 
         return getDummyAgent(agent)
                 .withAI(agent.getNpcInformation())
                 .withEquipment(equipment)
-                .withParticles(particleFactory.create(ParticleType.SPAWN));
+                .withParticles(particleFactory.create(ParticleType.SPAWN))
+                .withSkills(skillsFactory.get(skillsInfo.getSkills()), skillsInfo.getAssignablePoints());
     }
 
     public AgentBuilder getPlayer(){
         Agent agent = agents.get(MAIN_PLAYER_ID);
         Map<EquipSlot, Entity> equipment = buildEquipment(agent.getBody(), agent.getEquipment());
+        SkillsInformation skillsInfo = agent.getSkillsInformation();
 
         return getDummyAgent(agent)
-                .withBag(buildBag(agent.getBag()), c -> MessageManager.getInstance()
-                        .dispatchMessage(Messages.INVENTORY_CHANGED))
-                .withEquipment(equipment, change -> MessageManager.getInstance()
-                        .dispatchMessage(Messages.EQUIPMENT_CHANGED))
-                .withKeyboardControl();
+                .withBag(buildBag(agent.getBag()), c -> messageDispatcher.dispatchMessage(INVENTORY_CHANGED))
+                .withEquipment(equipment, c -> messageDispatcher.dispatchMessage(EQUIPMENT_CHANGED))
+                .withKeyboardControl()
+                .withSkills(skillsFactory.get(skillsInfo.getSkills()), skillsInfo.getAssignablePoints(),
+                        c -> messageDispatcher.dispatchMessage(SKILLS_CHANGED, c.getList()));
     }
 
     private Map<EquipSlot, Entity> buildEquipment(Map<EquipSlot, String> body, Map<EquipSlot, Integer> model) {

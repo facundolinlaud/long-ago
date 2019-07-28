@@ -8,13 +8,13 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.ai.msg.MessageDispatcher;
 import com.badlogic.gdx.ai.msg.MessageManager;
 import com.facundolinlaud.supergame.components.PositionComponent;
+import com.facundolinlaud.supergame.components.SkillsComponent;
 import com.facundolinlaud.supergame.components.StatusComponent;
 import com.facundolinlaud.supergame.components.skills.SkillCastingComponent;
 import com.facundolinlaud.supergame.components.skills.SkillLockDownComponent;
 import com.facundolinlaud.supergame.factory.ParticleFactory;
 import com.facundolinlaud.supergame.managers.world.CameraManager;
 import com.facundolinlaud.supergame.managers.world.LightsManager;
-import com.facundolinlaud.supergame.managers.world.ScreenShakeManager;
 import com.facundolinlaud.supergame.model.skill.Skill;
 import com.facundolinlaud.supergame.model.skill.SkillType;
 import com.facundolinlaud.supergame.model.status.Action;
@@ -32,6 +32,7 @@ import java.util.Map;
 public class SkillCastingSystem extends IteratingSystem {
     private ComponentMapper<SkillCastingComponent> scm = Mappers.skillCasting;
     private ComponentMapper<StatusComponent> sm = Mappers.status;
+    private ComponentMapper<SkillsComponent> ssm = Mappers.skills;
 
     private Map<SkillType, SkillCastingStrategy> castingStrategies;
     private MessageDispatcher messageDispatcher;
@@ -56,39 +57,45 @@ public class SkillCastingSystem extends IteratingSystem {
     @Override
     protected void processEntity(Entity caster, float deltaTime) {
         SkillCastingComponent skillCastingComponent = scm.get(caster);
+        Skill skill = skillCastingComponent.skill;
 
         if(skillCastingComponent.hasCastingTimeEnded()){
-            setExecutingActionToCaster(caster, skillCastingComponent);
-            executeSkill(caster, skillCastingComponent);
+            setExecutingActionToCaster(caster, skill);
+            executeSkill(caster, skill);
             caster.remove(SkillCastingComponent.class);
+            startSkillCoolDown(caster, skill);
 
-            float lockDownTime = skillCastingComponent.skill.getLockdownTime();
+            float lockDownTime = skill.getLockdownTime();
             putCasterOnSkillLockDown(caster, lockDownTime);
         }else if(skillCastingComponent.hasJustStarted())
-            setCastingActionToCaster(caster, skillCastingComponent);
+            setCastingActionToCaster(caster, skill);
 
         skillCastingComponent.tick(deltaTime);
     }
 
-    private void setCastingActionToCaster(Entity caster, SkillCastingComponent skillCastingComponent) {
+    private void setCastingActionToCaster(Entity caster, Skill skill) {
         StatusComponent casterStatus = sm.get(caster);
-        Action castingAction = skillCastingComponent.skill.getCastingAction();
+        Action castingAction = skill.getCastingAction();
         casterStatus.setAction(castingAction);
     }
 
-    private void setExecutingActionToCaster(Entity caster, SkillCastingComponent skillCastingComponent){
+    private void setExecutingActionToCaster(Entity caster, Skill skill){
         StatusComponent casterStatus = sm.get(caster);
-        Action executingAction = skillCastingComponent.skill.getExecutingAction();
+        Action executingAction = skill.getExecutingAction();
         casterStatus.setAction(executingAction);
     }
 
-    private void executeSkill(Entity caster, SkillCastingComponent skillCastingComponent){
-        executeSkillEffects(caster, skillCastingComponent);
+    private void executeSkill(Entity caster, Skill skill){
+        executeSkillEffects(caster, skill);
         caster.remove(SkillCastingComponent.class);
     }
 
-    private void executeSkillEffects(Entity caster, SkillCastingComponent skillCastingComponent){
-        Skill skill = skillCastingComponent.skill;
+    private void startSkillCoolDown(Entity caster, Skill skill) {
+        SkillsComponent skillsComponent = ssm.get(caster);
+        skillsComponent.startCoolDown(skill);
+    }
+
+    private void executeSkillEffects(Entity caster, Skill skill){
         SkillType skillType = skill.getSkillType();
 
         this.castingStrategies.get(skillType).executeSkillEffects(caster, skill);

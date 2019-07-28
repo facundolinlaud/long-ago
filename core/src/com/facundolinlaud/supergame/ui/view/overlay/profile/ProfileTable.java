@@ -24,11 +24,11 @@ public class ProfileTable extends Table {
     public ProfileTable(Skin skin) {
         super(skin);
 
-        this.healthBar = new ProgressBar(0, 100, 1,
+        this.healthBar = new ProgressBar(0f, 1f, 0.01f,
                 false, skin, Themes.ProgressBar.HEALTH_BAR);
         this.healthBar.setSize(300, 80);
 
-        this.manaBar = new ProgressBar(0, 100, 1,
+        this.manaBar = new ProgressBar(0f, 1f, 0.01f,
                 false, skin, Themes.ProgressBar.MANA_BAR);
         this.manaBar.setSize(300, 80);
         this.manaBar.setValue(50);
@@ -51,9 +51,13 @@ public class ProfileTable extends Table {
         add(fpsLabel).left();
     }
 
-    public void setHealth(float health) {
-        if(health >= 0 || health <= 100)
-            this.healthBar.setValue(health);
+    public void setHealth(float health, float total) {
+        float value = health / total;
+        this.healthBar.setValue(value);
+    }
+
+    public void setMana(float mana, float total) {
+        this.manaBar.setValue(mana / total);
     }
 
     public void setFPS(int fps) {

@@ -16,7 +16,7 @@ import com.facundolinlaud.supergame.model.RenderPriority;
 import com.facundolinlaud.supergame.model.agent.Attributes;
 import com.facundolinlaud.supergame.model.agent.NPCInformation;
 import com.facundolinlaud.supergame.model.equip.EquipSlot;
-import com.facundolinlaud.supergame.model.particle.ParticleType;
+import com.facundolinlaud.supergame.model.skill.Skill;
 import com.facundolinlaud.supergame.strategies.renderposition.SpriteRenderPositionStrategyImpl;
 import javafx.collections.ListChangeListener;
 import javafx.collections.MapChangeListener;
@@ -26,6 +26,7 @@ import java.util.Map;
 
 public class AgentBuilder {
     public static final int HEALTH_PER_STAMINA_POINT = 10;
+    private static final int MANA_PER_INTELLIGENCE_POINT = 10;
 
     private Entity entity;
 
@@ -63,16 +64,16 @@ public class AgentBuilder {
     }
 
     public AgentBuilder withAttributes(Attributes attr){
-        int stamina = attr.getStamina();
-        float health = stamina * HEALTH_PER_STAMINA_POINT;
+        float health = attr.getStamina() * HEALTH_PER_STAMINA_POINT;
+        float mana = attr.getIntelligence() * MANA_PER_INTELLIGENCE_POINT;
 
         this.entity.add(new AttributesComponent(
                 attr.getAgility(),
                 attr.getStrength(),
                 attr.getIntelligence(),
-                stamina));
+                attr.getStamina()));
 
-        return this.withHealth(health, health);
+        return withHealth(health, health).withMana(mana);
     }
 
     public AgentBuilder withBag(List<Entity> bag){
@@ -97,6 +98,22 @@ public class AgentBuilder {
 
     public AgentBuilder withParticles(ParticleEffectPool.PooledEffect pooledEffect){
         this.entity.add(new ParticleComponent(pooledEffect, false));
+        return this;
+    }
+
+    public AgentBuilder withSkills(List<Skill> skills, int assignablePoints){
+        this.entity.add(new SkillsComponent(skills, assignablePoints));
+        return this;
+    }
+
+    public AgentBuilder withSkills(List<Skill> skills, int assignablePoints,
+                                   ListChangeListener<? super Skill> listener){
+        this.entity.add(new SkillsComponent(skills, assignablePoints, listener));
+        return this;
+    }
+
+    public AgentBuilder withMana(float totalMana){
+        this.entity.add(new ManaComponent(totalMana));
         return this;
     }
 

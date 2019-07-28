@@ -6,7 +6,6 @@ import com.badlogic.gdx.math.Vector2;
 public class SkillClickComponent implements Component {
     private Vector2 clickedPosition;
     private boolean justCreated;
-    private boolean hasClicked = false;
 
     public SkillClickComponent() {
         this.justCreated = true;
@@ -15,12 +14,10 @@ public class SkillClickComponent implements Component {
     public SkillClickComponent(Vector2 epicenter){
         this.clickedPosition = epicenter;
         this.justCreated = false;
-        this.hasClicked = true;
     }
 
     public void registerClick(Vector2 worldPosition){
         clickedPosition = worldPosition;
-        hasClicked = true;
     }
 
     public Vector2 getClickedPosition() {
