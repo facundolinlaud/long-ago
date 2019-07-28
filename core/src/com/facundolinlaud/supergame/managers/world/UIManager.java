@@ -12,13 +12,13 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TooltipManager;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
-import com.facundolinlaud.supergame.factory.SkillsFactory;
 import com.facundolinlaud.supergame.managers.Renderable;
 import com.facundolinlaud.supergame.systems.ui.AttributesUISystem;
 import com.facundolinlaud.supergame.systems.ui.ProfileUISystem;
 import com.facundolinlaud.supergame.systems.ui.SkillCastingUISystem;
 import com.facundolinlaud.supergame.ui.controller.*;
 import com.facundolinlaud.supergame.ui.view.*;
+import com.facundolinlaud.supergame.ui.view.utils.Window;
 import com.facundolinlaud.supergame.utils.events.Messages;
 
 /**
@@ -52,6 +52,7 @@ public class UIManager implements Renderable {
     private LabelDamagesController labelDamagesController;
     private SkillTreeController skillTreeController;
 
+    private WindowsOrchestrator windowsOrchestrator;
     private MessageDispatcher messageDispatcher;
 
     public UIManager(Stage stage, Camera camera, Entity player) {
@@ -63,6 +64,7 @@ public class UIManager implements Renderable {
         configureToolTips();
         initializeDragAndDrop();
         initializeViews();
+        registerWindows();
         initializeControllers(camera, player);
         addUIToStage();
         subscribeListeners();
@@ -87,12 +89,13 @@ public class UIManager implements Renderable {
     }
 
     private void initializeViews() {
-        this.overlayUI = new OverlayUI(stage, skin, itemsDAD, skillsDAD);
-        this.inventoryUI = new InventoryUI(stage, skin, itemsDAD);
-        this.attributesUI = new AttributesUI(stage, skin);
-        this.equipmentUI = new EquipmentUI(stage, skin, itemsDAD);
+        this.windowsOrchestrator = new WindowsOrchestrator();
+        this.overlayUI = new OverlayUI(stage, skin, itemsDAD, skillsDAD, windowsOrchestrator);
+        this.inventoryUI = new InventoryUI(skin, itemsDAD);
+        this.attributesUI = new AttributesUI(skin);
+        this.equipmentUI = new EquipmentUI(skin, itemsDAD);
         this.labelDamagesUI = new LabelDamagesUI(stage, skin);
-        this.skillTreeUI = new SkillTreeUI(stage, skin, skillsDAD);
+        this.skillTreeUI = new SkillTreeUI(skin, skillsDAD);
     }
 
     private void initializeControllers(Camera camera, Entity player) {
@@ -106,6 +109,10 @@ public class UIManager implements Renderable {
 
     private void addUIToStage() {
         this.stage.addActor(this.overlayUI.get());
+        this.stage.addActor(this.equipmentUI.get());
+        this.stage.addActor(this.inventoryUI.get());
+        this.stage.addActor(this.attributesUI.get());
+        this.stage.addActor(this.skillTreeUI.get());
     }
 
     private void subscribeListeners(){
@@ -135,6 +142,14 @@ public class UIManager implements Renderable {
         engine.addSystem(new ProfileUISystem(this.overlayUIController));
         engine.addSystem(new AttributesUISystem(this.attributesUIController));
         engine.addSystem(new SkillCastingUISystem(this.overlayUIController));
+    }
+
+    private void registerWindows() {
+        windowsOrchestrator.register(Window.EQUIPMENT, this.equipmentUI.get());
+        windowsOrchestrator.register(Window.INVENTORY, this.inventoryUI.get());
+        windowsOrchestrator.register(Window.ATTRIBUTES, this.attributesUI.get());
+        windowsOrchestrator.register(Window.SKILL_TREE, this.skillTreeUI.get());
+        stage.addListener(windowsOrchestrator);
     }
 
     public OverlayUIController getOverlayUIController(){

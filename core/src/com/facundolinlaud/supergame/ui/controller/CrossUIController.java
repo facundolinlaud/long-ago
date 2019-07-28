@@ -8,7 +8,7 @@ import com.facundolinlaud.supergame.utils.events.InventoryAndEquipmentItemsSwapE
 /**
  * Created by facundo on 4/2/16.
  */
-public class CrossUIControllerImpl implements Telegraph {
+public class CrossUIController implements Telegraph {
     @Override
     public boolean handleMessage(Telegram msg) {
         switch(msg.message){

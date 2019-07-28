@@ -1,8 +1,17 @@
 package com.facundolinlaud.supergame.ui.view.overlay.controlbar;
 
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.ai.msg.MessageManager;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.facundolinlaud.supergame.ui.view.WindowsOrchestrator;
+import com.facundolinlaud.supergame.ui.view.utils.Window;
+import com.facundolinlaud.supergame.utils.events.AttributeUpgradeEvent;
+import com.facundolinlaud.supergame.utils.events.Messages;
 
 public class ControlBar {
     private Table leftControlBar;
@@ -16,7 +25,7 @@ public class ControlBar {
     private ImageButton statsButton;
     private ImageButton menuButton;
 
-    public ControlBar(Skin skin) {
+    public ControlBar(Skin skin, WindowsOrchestrator wo) {
         leftControlBar = new Table(skin);
         rightControlBar = new Table(skin);
 
@@ -35,6 +44,25 @@ public class ControlBar {
         rightControlBar.add(equipmentButton);
         rightControlBar.add(statsButton);
         rightControlBar.add(menuButton);
+
+        registerButtons(wo);
+    }
+
+    private void registerButtons(WindowsOrchestrator wo){
+        registerButton(wo, Window.INVENTORY, inventoryButton);
+        registerButton(wo, Window.SKILL_TREE, skillsButton);
+        registerButton(wo, Window.EQUIPMENT, equipmentButton);
+        registerButton(wo, Window.ATTRIBUTES, statsButton);
+    }
+
+    private void registerButton(WindowsOrchestrator wo, Window window, ImageButton button){
+        wo.register(window, button);
+        button.addListener(new ClickListener(Input.Buttons.LEFT){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                wo.onControlButtonClicked(window, button);
+            }
+        });
     }
 
     public Table getLeftControlBar() {

@@ -6,10 +6,10 @@ import com.badlogic.gdx.utils.Align;
 import com.facundolinlaud.supergame.ui.view.utils.Themes;
 
 public class GothicWindow extends Window {
-    private static final float TOP_PADDING = 52;//50;
-    private static final float LEFT_PADDING = 8;//5;
-    private static final float BOTTOM_PADDING = 7;//14;
-    private static final float RIGHT_PADDING = 6;//5;
+    private static final float TOP_PADDING = 52;
+    private static final float LEFT_PADDING = 8;
+    private static final float BOTTOM_PADDING = 7;
+    private static final float RIGHT_PADDING = 6;
 
     private Table content;
 
@@ -136,11 +136,6 @@ public class GothicWindow extends Window {
     @Override
     public <T extends Actor> Cell<T> add(T actor) {
         return content.add(actor);
-    }
-
-    @Override
-    public Table add(Actor... actors) {
-        return content.add(actors);
     }
 
     @Override

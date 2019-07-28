@@ -29,7 +29,7 @@ public class OverlayUI implements UI {
     private SkillBar skillbar;
     private ControlBar controlBar;
 
-    public OverlayUI(Stage stage, Skin skin, DragAndDrop itemsDAD, DragAndDrop skillsDAD) {
+    public OverlayUI(Stage stage, Skin skin, DragAndDrop itemsDAD, DragAndDrop skillsDAD, WindowsOrchestrator wo) {
         this.table = new Table(skin);
         this.table.setFillParent(true);
         this.table.align(Align.topLeft);
@@ -49,7 +49,7 @@ public class OverlayUI implements UI {
         this.table.add(skillCastingBar).colspan(3);
         this.table.row();
 
-        this.controlBar = new ControlBar(skin);
+        this.controlBar = new ControlBar(skin, wo);
         this.skillbar = new SkillBar(skin, new SkillsFactory().getSkills(), skillsDAD);
         this.table.add(controlBar.getLeftControlBar()).expandX().right().bottom();
         this.table.add(skillbar).center();
