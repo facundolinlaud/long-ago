@@ -15,14 +15,16 @@ import java.util.stream.Collectors;
 public class SkillsComponent implements Component {
     private ObservableList<Skill> skills;
     private Map<Skill, Float> skillsInCooldown;
+    private int assignablePoints;
 
-    public SkillsComponent(List<Skill> skills) {
+    public SkillsComponent(List<Skill> skills, int assignablePoints) {
         this.skills = FXCollections.observableArrayList(skills);
         this.skillsInCooldown = new HashMap();
+        this.assignablePoints = assignablePoints;
     }
 
-    public SkillsComponent(List<Skill> skills, ListChangeListener<? super Skill> listener) {
-        this(skills);
+    public SkillsComponent(List<Skill> skills, int assignablePoints, ListChangeListener<? super Skill> listener) {
+        this(skills, assignablePoints);
         this.skills.addListener(listener);
     }
 
@@ -66,5 +68,13 @@ public class SkillsComponent implements Component {
 
     public boolean canCast(Skill skill) {
         return this.getAvailableSkills().contains(skill);
+    }
+
+    public int getAssignablePoints() {
+        return assignablePoints;
+    }
+
+    public void consumeAssignablePoint(){
+        this.assignablePoints --;
     }
 }

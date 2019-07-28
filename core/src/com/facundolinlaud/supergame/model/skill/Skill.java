@@ -9,9 +9,11 @@ import com.sun.istack.internal.Nullable;
 public class Skill {
     private String name;
     private String picturePath;
+    private String disabledPicturePath;
     private SkillType skillType;
     private DamageType skillDamageType;
     private float manaConsumption;
+    private String description;
 
     /* Restrictions */
     private float cooldown;
@@ -81,6 +83,14 @@ public class Skill {
 
     public void setPicturePath(String picturePath) {
         this.picturePath = picturePath;
+    }
+
+    public String getDisabledPicturePath() {
+        return disabledPicturePath;
+    }
+
+    public void setDisabledPicturePath(String disabledPicturePath) {
+        this.disabledPicturePath = disabledPicturePath;
     }
 
     public SkillType getSkillType() {
@@ -241,5 +251,13 @@ public class Skill {
 
     public void setManaConsumption(float manaConsumption) {
         this.manaConsumption = manaConsumption;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

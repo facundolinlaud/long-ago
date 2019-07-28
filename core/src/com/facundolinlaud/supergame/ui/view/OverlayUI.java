@@ -15,7 +15,6 @@ import com.facundolinlaud.supergame.ui.view.overlay.profile.ProfileTable;
 import com.facundolinlaud.supergame.ui.view.overlay.skillcasting.SkillCastingBar;
 import com.facundolinlaud.supergame.ui.view.overlay.skillsbar.SkillBar;
 
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -95,10 +94,6 @@ public class OverlayUI implements UI {
 
     public void popSkillNotReadyNotification() {
         this.notifications.popSkillNotReadyNotification();
-    }
-
-    public void onSkillsChange(List<Skill> skills) {
-        System.out.println(skills);
     }
 
     @Override

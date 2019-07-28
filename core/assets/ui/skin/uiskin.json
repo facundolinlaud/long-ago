@@ -433,6 +433,12 @@
 		"up": "control-tool",
 		"over": "control-tool-over",
 		"checked": "control-tool-over"
+	},
+	"three-d-slot": {
+		"up": "3d-slot"
+	},
+	"three-d-squared-slot": {
+		"up": "3d-slot-squared"
 	}
 },
 "com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton$ImageTextButtonStyle": {

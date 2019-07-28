@@ -101,13 +101,14 @@ public class AgentBuilder {
         return this;
     }
 
-    public AgentBuilder withSkills(List<Skill> skills){
-        this.entity.add(new SkillsComponent(skills));
+    public AgentBuilder withSkills(List<Skill> skills, int assignablePoints){
+        this.entity.add(new SkillsComponent(skills, assignablePoints));
         return this;
     }
 
-    public AgentBuilder withSkills(List<Skill> skills, ListChangeListener<? super Skill> listener){
-        this.entity.add(new SkillsComponent(skills, listener));
+    public AgentBuilder withSkills(List<Skill> skills, int assignablePoints,
+                                   ListChangeListener<? super Skill> listener){
+        this.entity.add(new SkillsComponent(skills, assignablePoints, listener));
         return this;
     }
 

@@ -68,7 +68,7 @@ public class WorldScreen implements Screen {
         this.aiManager = new AIManager(mapManager, physicsManager);
         this.spawnManager = new SpawnManager(resources.getEngine(), mapManager.getSpawnLocations());
         this.weManager = new WorldEntitiesManager(resources.getEngine(), factories);
-        this.uiManager = new UIManager(stage, mapManager.getCamera(), weManager.getPlayer(), factories.getSkillsFactory());
+        this.uiManager = new UIManager(stage, mapManager.getCamera(), weManager.getPlayer());
         this.lightsManager = new LightsManager(physicsManager.getWorld(), mapManager.getCamera(), weManager.getPlayer());
         this.playerInputManager = new PlayerInputManager();
     }

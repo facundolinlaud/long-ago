@@ -38,27 +38,27 @@ public class InventoryUIController implements Telegraph {
         this.ui = ui;
         this.player = player;
 
-        refreshInventory();
+        updateInventory();
     }
 
     @Override
     public boolean handleMessage(Telegram msg) {
         switch(msg.message){
             case Messages.ITEM_FROM_INVENTORY_DROPPED:
-                itemDropped((ItemDroppedEvent) msg.extraInfo);
+                onItemDropped((ItemDroppedEvent) msg.extraInfo);
                 break;
             case Messages.ITEMS_IN_INVENTORY_SWAPPED:
-                itemsPositionSwapped((ItemsPositionSwapEvent) msg.extraInfo);
+                onItemsPositionSwapped((ItemsPositionSwapEvent) msg.extraInfo);
                 break;
             case Messages.INVENTORY_CHANGED:
-                refreshInventory();
+                updateInventory();
                 break;
         }
 
         return false;
     }
 
-    public void refreshInventory() {
+    public void updateInventory() {
         BagComponent bag = bm.get(player);
         List<Item> items = new ArrayList<>();
 
@@ -78,7 +78,7 @@ public class InventoryUIController implements Telegraph {
         ui.updateItems(items);
     }
 
-    private void itemDropped(ItemDroppedEvent event){
+    private void onItemDropped(ItemDroppedEvent event){
         PositionComponent gathererPosition = pm.get(player);
 
         Item itemModel = event.getItem();
@@ -93,7 +93,7 @@ public class InventoryUIController implements Telegraph {
         System.out.println(event.getItem().getName() + " dropped");
     }
 
-    private void itemsPositionSwapped(ItemsPositionSwapEvent event) {
+    private void onItemsPositionSwapped(ItemsPositionSwapEvent event) {
         BagComponent bag = bm.get(player);
 
         Entity a = bag.get(event.getFirstItem().getInvented().getPositionInBag());

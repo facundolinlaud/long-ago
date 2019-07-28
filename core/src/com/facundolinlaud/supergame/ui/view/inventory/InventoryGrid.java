@@ -14,17 +14,22 @@ import java.util.List;
  * Created by facundo on 3/29/16.
  */
 public class InventoryGrid extends Table {
+    public static final float SLOT_SIZE = 42;
+    public static final int SLOT_PADDING = 2;
+    public static final float GRID_PADDING = 4;
+
     private List<InventorySlot> slots;
 
     public InventoryGrid(Skin skin, int itemsPerRow, int itemsAmount, DragAndDrop dragAndDrop) {
         super(skin);
 
         this.slots = new ArrayList<>();
+        this.pad(GRID_PADDING);
 
         for(int i = 1; i <= itemsAmount; i++){
             InventorySlot slot = new InventorySlot(skin);
 
-            add(slot);
+            add(slot).size(SLOT_SIZE, SLOT_SIZE).pad(SLOT_PADDING);
             slots.add(slot);
             dragAndDrop.addSource(new ItemSlotSource(slot, SlotType.INVENTORY_SLOT));
             dragAndDrop.addTarget(new InventorySlotTarget(slot));

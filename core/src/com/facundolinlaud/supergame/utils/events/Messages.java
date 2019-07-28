@@ -18,4 +18,5 @@ public class Messages {
     public static final int REJECTED_SKILL_DUE_TO_NOT_READY = 14;
     public static final int SKILL_DROPPED = 15;
     public static final int SKILLS_CHANGED = 16;
+    public static final int SKILL_UNLOCK_REQUEST = 17;
 }

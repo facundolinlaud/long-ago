@@ -3,6 +3,7 @@ package com.facundolinlaud.supergame.ui.view.attributes;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.facundolinlaud.supergame.ui.model.Attributes;
 import com.facundolinlaud.supergame.ui.view.cross.GothicWindow;
+import com.facundolinlaud.supergame.ui.view.utils.Themes;
 
 /**
  * Created by facundo on 3/31/16.
@@ -13,7 +14,7 @@ public class AttributesWindow extends GothicWindow {
     private AttributesGrid attributesGrid;
 
     public AttributesWindow(Skin skin) {
-        super(TITLE, skin);
+        super(TITLE, skin, Themes.Background.DARK);
         this.setVisible(false);
         this.attributesGrid = new AttributesGrid(skin);
 

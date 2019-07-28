@@ -43,17 +43,18 @@ public class UIManager implements Renderable {
     private AttributesUI attributesUI;
     private EquipmentUI equipmentUI;
     private LabelDamagesUI labelDamagesUI;
-    private SkillTreeUI skillsUI;
+    private SkillTreeUI skillTreeUI;
 
     private InventoryUIController inventoryUIController;
     private OverlayUIController overlayUIController;
     private AttributesUIController attributesUIController;
     private EquipmentUIController equipmentUIController;
     private LabelDamagesController labelDamagesController;
+    private SkillTreeController skillTreeController;
 
     private MessageDispatcher messageDispatcher;
 
-    public UIManager(Stage stage, Camera camera, Entity player, SkillsFactory skillsFactory) {
+    public UIManager(Stage stage, Camera camera, Entity player) {
         this.skin = new Skin(Gdx.files.internal(SKIN_JSON_PATH));
         this.skin.addRegions(new TextureAtlas(Gdx.files.internal(TEXTURE_ATLAS_PATH)));
         this.stage = stage;
@@ -61,7 +62,7 @@ public class UIManager implements Renderable {
 
         configureToolTips();
         initializeDragAndDrop();
-        initializeViews(skillsFactory);
+        initializeViews();
         initializeControllers(camera, player);
         addUIToStage();
         subscribeListeners();
@@ -85,13 +86,13 @@ public class UIManager implements Renderable {
         this.skillsDAD.setDragTime(MIN_DRAG_TIME_IN_MILLISECONDS);
     }
 
-    private void initializeViews(SkillsFactory skillsFactory) {
+    private void initializeViews() {
         this.overlayUI = new OverlayUI(stage, skin, itemsDAD, skillsDAD);
         this.inventoryUI = new InventoryUI(stage, skin, itemsDAD);
         this.attributesUI = new AttributesUI(stage, skin);
         this.equipmentUI = new EquipmentUI(stage, skin, itemsDAD);
         this.labelDamagesUI = new LabelDamagesUI(stage, skin);
-        this.skillsUI = new SkillTreeUI(stage, skin, skillsDAD, skillsFactory);
+        this.skillTreeUI = new SkillTreeUI(stage, skin, skillsDAD);
     }
 
     private void initializeControllers(Camera camera, Entity player) {
@@ -100,6 +101,7 @@ public class UIManager implements Renderable {
         this.attributesUIController = new AttributesUIController(this.attributesUI);
         this.equipmentUIController = new EquipmentUIController(this.equipmentUI, player);
         this.labelDamagesController = new LabelDamagesController(this.labelDamagesUI, camera);
+        this.skillTreeController = new SkillTreeController(this.skillTreeUI, player);
     }
 
     private void addUIToStage() {
@@ -119,6 +121,8 @@ public class UIManager implements Renderable {
         this.messageDispatcher.addListener(this.overlayUIController, Messages.REJECTED_SKILL_DUE_TO_NOT_READY);
         this.messageDispatcher.addListener(this.overlayUIController, Messages.SKILLS_CHANGED);
         this.messageDispatcher.addListener(this.labelDamagesController, Messages.ENTITY_ATTACKED);
+        this.messageDispatcher.addListener(this.skillTreeController, Messages.SKILL_UNLOCK_REQUEST);
+        this.messageDispatcher.addListener(this.skillTreeController, Messages.SKILLS_CHANGED);
     }
 
     private void setCustomCursor() {

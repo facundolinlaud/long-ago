@@ -7,6 +7,7 @@ import com.badlogic.gdx.ai.msg.MessageManager;
 import com.facundolinlaud.supergame.builder.AgentBuilder;
 import com.facundolinlaud.supergame.components.sprite.StackableSpriteComponent;
 import com.facundolinlaud.supergame.model.agent.Agent;
+import com.facundolinlaud.supergame.model.agent.SkillsInformation;
 import com.facundolinlaud.supergame.model.equip.EquipSlot;
 import com.facundolinlaud.supergame.model.particle.ParticleType;
 
@@ -46,23 +47,25 @@ public class AgentFactory {
     public AgentBuilder getAI(int id){
         Agent agent = agents.get(id);
         Map<EquipSlot, Entity> equipment = buildEquipment(agent.getBody(), agent.getEquipment());
+        SkillsInformation skillsInfo = agent.getSkillsInformation();
 
         return getDummyAgent(agent)
                 .withAI(agent.getNpcInformation())
                 .withEquipment(equipment)
                 .withParticles(particleFactory.create(ParticleType.SPAWN))
-                .withSkills(skillsFactory.get(agent.getSkills()));
+                .withSkills(skillsFactory.get(skillsInfo.getSkills()), skillsInfo.getAssignablePoints());
     }
 
     public AgentBuilder getPlayer(){
         Agent agent = agents.get(MAIN_PLAYER_ID);
         Map<EquipSlot, Entity> equipment = buildEquipment(agent.getBody(), agent.getEquipment());
+        SkillsInformation skillsInfo = agent.getSkillsInformation();
 
         return getDummyAgent(agent)
                 .withBag(buildBag(agent.getBag()), c -> messageDispatcher.dispatchMessage(INVENTORY_CHANGED))
                 .withEquipment(equipment, c -> messageDispatcher.dispatchMessage(EQUIPMENT_CHANGED))
                 .withKeyboardControl()
-                .withSkills(skillsFactory.get(agent.getSkills()),
+                .withSkills(skillsFactory.get(skillsInfo.getSkills()), skillsInfo.getAssignablePoints(),
                         c -> messageDispatcher.dispatchMessage(SKILLS_CHANGED, c.getList()));
     }
 

@@ -9,7 +9,6 @@ import com.facundolinlaud.supergame.model.skill.Skill;
 import com.facundolinlaud.supergame.ui.view.cross.draganddrop.SkillSlotSource;
 import com.facundolinlaud.supergame.ui.view.cross.draganddrop.SlotType;
 
-import java.util.List;
 import java.util.Map;
 
 public class SkillBar extends Table {

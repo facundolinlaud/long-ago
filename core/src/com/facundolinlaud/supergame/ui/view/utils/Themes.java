@@ -1,10 +1,12 @@
 package com.facundolinlaud.supergame.ui.view.utils;
 
+import com.badlogic.gdx.graphics.Color;
+
 /**
  * Created by facundo on 3/30/16.
  */
 public class Themes {
-    public class Label {
+    public static class Label {
         public static final String REGULAR_12 = "regular-12";
         public static final String REGULAR_13 = "regular-13";
         public static final String REGULAR_14 = "regular-14";
@@ -29,22 +31,33 @@ public class Themes {
         public static final String ITALIC_15 = "italic-15";
     }
 
-    public class Window {
+    public static class Window {
         public static final String GOTHIC = "gothic";
     }
 
-    public class ImageButton {
-        public static final String SLOT = "slot";
+    public static class Background {
+        public static final String DARK = "static-background";
     }
 
-    public class TextButton {
+    public static class ImageButton {
+        public static final String SLOT = "slot";
+        public static final String THREE_D_SLOT = "three-d-slot";
+        public static final String SQUARED_THREE_D_SLOT = "three-d-squared-slot";
+    }
+
+    public static class TextButton {
         public static final String DEFAULT = "default-gothic";
         public static final String TOGGLE = "toggle-gothic";
     }
 
-    public class ProgressBar {
+    public static class ProgressBar {
         public static final String HEALTH_BAR = "gothic-health";
         public static final String MANA_BAR = "gothic-mana";
         public static final String CASTING_BAR = "gothic-skillcast";
+    }
+
+    public static class Colors {
+        public static final Color BLUE = new Color(0.23f, 0.5f, 0.9f, 1f);
+        public static final Color GRAY = new Color(0.72f, 0.68f, 0.68f, 1f);
     }
 }

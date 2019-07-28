@@ -11,7 +11,6 @@ import com.facundolinlaud.supergame.ui.view.OverlayUI;
 import com.facundolinlaud.supergame.utils.Mappers;
 import com.facundolinlaud.supergame.utils.events.SkillCastedEvent;
 
-import java.util.List;
 import java.util.Map;
 
 import static com.facundolinlaud.supergame.utils.events.Messages.*;
@@ -59,9 +58,6 @@ public class OverlayUIController implements Telegraph {
                 break;
             case REJECTED_SKILL_DUE_TO_NOT_READY:
                 this.overlayUI.popSkillNotReadyNotification();
-                break;
-            case SKILLS_CHANGED:
-                this.overlayUI.onSkillsChange((List<Skill>) msg.extraInfo);
                 break;
         }
 

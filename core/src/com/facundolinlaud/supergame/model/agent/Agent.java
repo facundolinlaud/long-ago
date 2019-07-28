@@ -16,7 +16,7 @@ public class Agent {
     private Map<EquipSlot, String> body;
     private Map<EquipSlot, Integer> equipment;
     private List<Integer> bag;
-    private List<Integer> skills;
+    private SkillsInformation skillsInformation;
 
     @Nullable private NPCInformation npcInformation;
 
@@ -106,12 +106,12 @@ public class Agent {
         return this.npcInformation != null;
     }
 
-    public List<Integer> getSkills() {
-        return skills;
+    public SkillsInformation getSkillsInformation() {
+        return skillsInformation;
     }
 
-    public void setSkills(List<Integer> skills) {
-        this.skills = skills;
+    public void setSkillsInformation(SkillsInformation skillsInformation) {
+        this.skillsInformation = skillsInformation;
     }
 
     @Override
@@ -126,7 +126,7 @@ public class Agent {
                 ", body=" + body +
                 ", equipment=" + equipment +
                 ", bag=" + bag +
-                ", skills=" + skills +
+                ", skillsInformation=" + skillsInformation +
                 ", npcInformation=" + npcInformation +
                 '}';
     }
