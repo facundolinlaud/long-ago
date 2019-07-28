@@ -2,6 +2,7 @@ package com.facundolinlaud.supergame.factory;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.facundolinlaud.supergame.utils.Dimensions;
 
 import java.lang.ref.SoftReference;
@@ -48,6 +49,10 @@ public class TextureFactory implements Disposable {
         sprite.setOriginCenter();
 
         return sprite;
+    }
+
+    public static TextureRegion getRegion(String imageName){
+        return new TextureRegion(getTexture(imageName));
     }
 
     @Override

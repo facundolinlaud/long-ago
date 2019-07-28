@@ -12,14 +12,12 @@ import com.facundolinlaud.supergame.ui.model.Item;
  */
 public class SlotSource extends Source {
 
-    private Skin skin;
     private Slot<Item> slot;
     private SlotType slotType;
 
-    public SlotSource(Slot slot, Skin skin, SlotType slotType) {
+    public SlotSource(Slot slot, SlotType slotType) {
         super(slot);
 
-        this.skin = skin;
         this.slot = slot;
         this.slotType = slotType;
     }

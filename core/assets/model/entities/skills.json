@@ -16,7 +16,6 @@
 			"executingAction": "DASHING",
 			"animationFlow": "TRAVERSE",
 
-			"areaOfEffect": "CIRCLE",
 			"areaOfEffectSize": 2.0,
 			"baseDamage": 40.0,
 			"baseHeal": 0.0,
@@ -38,7 +37,6 @@
 			"executingAction": "SPELL_CASTING",
 			"animationFlow": "STOP_AT_LAST_PHOTOGRAM",
 
-			"areaOfEffect": "CIRCLE",
 			"areaOfEffectSize": 2.0,
 			"baseDamage": 80.0,
 			"baseHeal": 0.0,
@@ -51,6 +49,10 @@
 				"type" : "DIMMING",
 				"distance": 6.0,
 				"duration": 1.0
+			},
+			"screenShake": {
+				"power": 0.1,
+				"duration": 0.8
 			}
 		},
 		"2": {
@@ -69,7 +71,6 @@
 			"executingAction": "SHOOTING",
 			"animationFlow": "STOP_AT_LAST_PHOTOGRAM",
 
-			"areaOfEffect": "CIRCLE",
 			"areaOfEffectSize": 2.0,
 			"baseDamage": 80.0,
 			"baseHeal": 0.0,
@@ -90,6 +91,10 @@
 				"type" : "DIMMING",
 				"distance": 6.0,
 				"duration": 1.0
+			},
+			"screenShake": {
+				"power": 0.08,
+				"duration": 0.3
 			}
 		},
 		"3": {
@@ -108,7 +113,6 @@
 			"executingAction": "SWINGING",
 			"animationFlow": "TRAVERSE",
 
-			"areaOfEffect": "CIRCLE",
 			"areaOfEffectSize": 1.0,
 			"baseDamage": 40.0,
 			"baseHeal": 0.0,

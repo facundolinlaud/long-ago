@@ -13,6 +13,7 @@ import com.facundolinlaud.supergame.factory.SpriteFactory;
 import com.facundolinlaud.supergame.factory.TextureFactory;
 import com.facundolinlaud.supergame.model.RenderPriority;
 import com.facundolinlaud.supergame.model.item.EquipmentInformation;
+import com.facundolinlaud.supergame.model.item.Item;
 
 public class ItemBuilder {
     private Entity item;
@@ -21,9 +22,8 @@ public class ItemBuilder {
         this.item = item;
     }
 
-    public ItemBuilder(String name, String picture) {
-        Sprite region = TextureFactory.getSprite(picture);
-        this.item = new Entity().add(new ItemComponent(name, region));
+    public ItemBuilder(Item model) {
+        this.item = new Entity().add(new ItemComponent(model));
     }
 
     public ItemBuilder withRender(String picture){

@@ -1,28 +1,27 @@
 package com.facundolinlaud.supergame.ui.view.attributes;
 
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Stack;
+import com.badlogic.gdx.utils.Align;
+import com.facundolinlaud.supergame.ui.view.utils.Themes;
 
 /**
  * Created by facundo on 3/31/16.
  */
 public class ValueStack extends Stack {
-
-    public static final int HEIGHT = 32;
-    public static final int WIDTH = 32;
-
-    private ValueLabel valueLabel;
+    private Label valueLabel;
 
     public ValueStack(Skin skin, int value) {
-        setSize(WIDTH, HEIGHT);
+        this.valueLabel = new Label(String.valueOf(value), skin, Themes.Label.REGULAR_14);
+        this.valueLabel.setAlignment(Align.center);
 
-        this.valueLabel = new ValueLabel(value, skin);
-
-        add(new ValueSlot(skin));
+        add(new ImageButton(skin, Themes.ImageButton.SLOT));
         add(valueLabel);
     }
 
     public void setAttributeValue(int value){
-        this.valueLabel.setAttributeValue(value);
+        this.valueLabel.setText(String.valueOf(value));
     }
 }

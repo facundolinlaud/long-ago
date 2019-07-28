@@ -9,8 +9,7 @@ import com.facundolinlaud.supergame.components.BodyComponent;
 import com.facundolinlaud.supergame.components.HealthComponent;
 import com.facundolinlaud.supergame.components.PositionComponent;
 import com.facundolinlaud.supergame.components.player.KeyboardComponent;
-import com.facundolinlaud.supergame.ui.controller.ProfileUIController;
-import com.facundolinlaud.supergame.ui.view.OverlayUI;
+import com.facundolinlaud.supergame.ui.controller.OverlayUIController;
 import com.facundolinlaud.supergame.utils.Mappers;
 
 /**
@@ -21,30 +20,28 @@ public class ProfileUISystem extends IteratingSystem {
     private ComponentMapper<PositionComponent> pm = Mappers.position;
     private ComponentMapper<BodyComponent> bm = Mappers.body;
 
-    private ProfileUIController profileUIController;
+    private OverlayUIController overlayController;
 
-    private OverlayUI overlayUI;
-
-    public ProfileUISystem(OverlayUI overlayUI) {
+    public ProfileUISystem(OverlayUIController overlayUIController) {
         super(Family.all(HealthComponent.class, KeyboardComponent.class).get());
-        this.overlayUI = overlayUI;
+        this.overlayController = overlayUIController;
     }
 
     @Override
     public void update(float deltaTime) {
         super.update(deltaTime);
-        overlayUI.setFPS(Gdx.graphics.getFramesPerSecond());
+        overlayController.setFPS(Gdx.graphics.getFramesPerSecond());
     }
 
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
         HealthComponent health = hm.get(entity);
-        overlayUI.setHealth(health.getCurrentHealth());
+        overlayController.setHealth(health.getCurrentHealth());
 
         PositionComponent position = pm.get(entity);
-        overlayUI.setPosition(position.getPosition());
+        overlayController.setPosition(position.getPosition());
 
         BodyComponent body = bm.get(entity);
-        overlayUI.setBodyPosition(body.body.getPosition());
+        overlayController.setBodyPosition(body.body.getPosition());
     }
 }

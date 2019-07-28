@@ -23,7 +23,7 @@ public class ItemFactory {
     public ItemBuilder getItem(Integer id) {
         Item model = models.get(id);
 
-        ItemBuilder itemBuilder = new ItemBuilder(model.getName(), model.getPicture())
+        ItemBuilder itemBuilder = new ItemBuilder(model)
                 .pickupable()
                 .withRender(model.getPicture());
 

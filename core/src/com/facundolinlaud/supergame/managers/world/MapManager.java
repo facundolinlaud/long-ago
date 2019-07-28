@@ -1,6 +1,5 @@
 package com.facundolinlaud.supergame.managers.world;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.MapObject;
@@ -22,7 +21,6 @@ import java.util.List;
  */
 public class MapManager implements Renderable {
     public static final String PATH_TO_TILE_MAP = "map/test_green.tmx";
-    public static final int VIEWPORT_WIDTH_IN_METERS = 32;
 
     public static final int[] BASE_LAYERS = new int[]{0, 1, 2};
     public static final int[] UPPER_LAYERS = new int[]{3};
@@ -34,19 +32,14 @@ public class MapManager implements Renderable {
 
     /* Tile map */
     private TiledMap map;
-    private OrthographicCamera camera;
     private OrthogonalTiledMapRenderer mapRenderer;
+    private OrthographicCamera camera;
 
-    public MapManager(SpriteBatch batch) {
+    public MapManager(SpriteBatch batch, OrthographicCamera camera) {
         this.batch = batch;
+        this.camera = camera;
 
         initializeMap();
-        initializeCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-    }
-
-    private void initializeCamera(float width, float height) {
-        this.camera = new OrthographicCamera();
-        this.camera.setToOrtho(false, VIEWPORT_WIDTH_IN_METERS, VIEWPORT_WIDTH_IN_METERS * (height / width));
     }
 
     private void initializeMap() {
@@ -63,12 +56,6 @@ public class MapManager implements Renderable {
 
     public void renderUpperLayer(){
         mapRenderer.render(UPPER_LAYERS);
-    }
-
-    public void resize(int width, int height){
-        camera.viewportWidth = VIEWPORT_WIDTH_IN_METERS;
-        camera.viewportHeight = VIEWPORT_WIDTH_IN_METERS * height / width;
-        camera.update();
     }
 
     public void dispose(){

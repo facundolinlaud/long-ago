@@ -7,7 +7,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.facundolinlaud.supergame.builder.ProjectileBuilder;
 import com.facundolinlaud.supergame.components.PositionComponent;
 import com.facundolinlaud.supergame.factory.ParticleFactory;
-import com.facundolinlaud.supergame.model.particle.ParticleType;
 import com.facundolinlaud.supergame.model.skill.Skill;
 import com.facundolinlaud.supergame.strategies.skills.epicenter.RangedSkillEpicenterStrategy;
 import com.facundolinlaud.supergame.strategies.skills.epicenter.SkillEpicenterStrategy;

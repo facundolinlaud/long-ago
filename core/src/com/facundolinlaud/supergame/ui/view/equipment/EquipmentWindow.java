@@ -1,44 +1,34 @@
 package com.facundolinlaud.supergame.ui.view.equipment;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
-import com.facundolinlaud.supergame.ui.model.Item;
-import com.facundolinlaud.supergame.ui.view.utils.Themes;
 import com.facundolinlaud.supergame.model.equip.EquipSlot;
-import com.facundolinlaud.supergame.utils.mediator.Mediator;
+import com.facundolinlaud.supergame.ui.model.Item;
+import com.facundolinlaud.supergame.ui.view.cross.GothicWindow;
 
 import java.util.Map;
 
 /**
  * Created by facundo on 4/2/16.
  */
-public class EquipmentWindow extends Window {
+public class EquipmentWindow extends GothicWindow {
     public static final String TITLE = "Equipment";
 
-    private Grid grid;
+    private EquipmentGrid equipmentGrid;
 
-    public EquipmentWindow(Skin skin, Mediator uiMediator, DragAndDrop dragAndDrop) {
-        super(TITLE, skin, Themes.CLASSIC.toString());
-
+    public EquipmentWindow(Skin skin, DragAndDrop dragAndDrop) {
+        super(TITLE, skin);
         setVisible(false);
-        adjustTitlePosition();
-        setSize(265, 265);
-        initializeGrid(skin, uiMediator, dragAndDrop);
+        setSize(265, 320);
+        initializeGrid(skin, dragAndDrop);
     }
 
-    private void adjustTitlePosition() {
-        getTitleTable().center().top().padLeft(55);
-    }
-
-    private void initializeGrid(Skin skin, Mediator uiMediator, DragAndDrop dragAndDrop) {
-        this.grid = new Grid(skin, uiMediator, dragAndDrop);
-        add(this.grid);
+    private void initializeGrid(Skin skin, DragAndDrop dragAndDrop) {
+        this.equipmentGrid = new EquipmentGrid(skin, dragAndDrop);
+        add(this.equipmentGrid).fill().expand();
     }
 
     public void update(Map<EquipSlot, Item> items){
-        if(isVisible()){
-            grid.update(items);
-        }
+        equipmentGrid.update(items);
     }
 }

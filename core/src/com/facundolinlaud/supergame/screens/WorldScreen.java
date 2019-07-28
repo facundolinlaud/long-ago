@@ -1,7 +1,6 @@
 package com.facundolinlaud.supergame.screens;
 
 import com.badlogic.ashley.core.Engine;
-import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -11,7 +10,6 @@ import com.facundolinlaud.supergame.components.BodyComponent;
 import com.facundolinlaud.supergame.components.ai.AIComponent;
 import com.facundolinlaud.supergame.engine.GameResources;
 import com.facundolinlaud.supergame.factory.Factories;
-import com.facundolinlaud.supergame.factory.ItemFactory;
 import com.facundolinlaud.supergame.listeners.PhysicsEntitiesListener;
 import com.facundolinlaud.supergame.listeners.ProjectilesCollisionListener;
 import com.facundolinlaud.supergame.managers.world.*;
@@ -30,12 +28,14 @@ public class WorldScreen implements Screen {
     private GameResources resources;
     private Factories factories;
 
+    private CameraManager cameraManager;
     private MapManager mapManager;
     private PhysicsManager physicsManager;
-    private UIManager uiManager;
-    private LightsManager lightsManager;
     private AIManager aiManager;
     private SpawnManager spawnManager;
+    private WorldEntitiesManager weManager;
+    private UIManager uiManager;
+    private LightsManager lightsManager;
 
     private Stage stage;
 
@@ -46,7 +46,6 @@ public class WorldScreen implements Screen {
         initializeFactories();
         initializeManagers();
         initializeListeners();
-        initializeEntities();
         initializeSystems();
     }
 
@@ -62,12 +61,14 @@ public class WorldScreen implements Screen {
     }
 
     private void initializeManagers() {
-        this.mapManager = new MapManager(resources.getBatch());
+        this.cameraManager = new CameraManager();
+        this.mapManager = new MapManager(resources.getBatch(), cameraManager.getCamera());
         this.physicsManager = new PhysicsManager(mapManager.getCamera(), mapManager.getMap());
-        this.uiManager = new UIManager(stage, mapManager.getCamera());
-        this.lightsManager = new LightsManager(physicsManager.getWorld(), mapManager.getCamera());
         this.aiManager = new AIManager(factories.getSkillsFactory(), mapManager, physicsManager);
         this.spawnManager = new SpawnManager(resources.getEngine(), mapManager.getSpawnLocations());
+        this.weManager = new WorldEntitiesManager(resources.getEngine(), factories);
+        this.uiManager = new UIManager(stage, mapManager.getCamera(), weManager.getPlayer());
+        this.lightsManager = new LightsManager(physicsManager.getWorld(), mapManager.getCamera(), weManager.getPlayer());
     }
 
     private void initializeListeners() {
@@ -79,29 +80,7 @@ public class WorldScreen implements Screen {
                 this.aiManager);
 
         this.physicsManager.getWorld().setContactListener(new ProjectilesCollisionListener(engine,
-                factories.getParticleFactory(), lightsManager));
-    }
-
-    private void initializeEntities(){
-        ItemFactory itemFactory = factories.getItemFactory();
-
-        Entity player = factories.getAgentFactory().getPlayer()
-                .at(17, 40)
-                .build();
-
-        Entity coin = itemFactory.getItem(ItemFactory.COINS)
-                .dropped(21, 48)
-                .build();
-
-        Entity saber = itemFactory.getItem(ItemFactory.SABER)
-                .dropped(20, 48)
-                .build();
-
-        resources.getEngine().addEntity(player);
-        resources.getEngine().addEntity(coin);
-        resources.getEngine().addEntity(saber);
-
-        lightsManager.setPlayerLightBody(player);
+                factories.getParticleFactory(), lightsManager, cameraManager));
     }
 
     private void initializeSystems() {
@@ -115,12 +94,13 @@ public class WorldScreen implements Screen {
         engine.addSystem(new AnimableSpriteSystem());
         engine.addSystem(new PlayerInputSystem(playerInputObserver, factories.getSkillsFactory()));
         engine.addSystem(new MovementSystem());
-        engine.addSystem(new CameraFocusSystem(mapManager.getCamera()));
+        engine.addSystem(new CameraFocusSystem(cameraManager));
         engine.addSystem(new PhysicsSystem(physicsManager.getWorld()));
         engine.addSystem(new PickUpSystem());
         engine.addSystem(new KeyPressSkillCastingRequestSystem());
         engine.addSystem(new KeyPressThenClickCastingRequestSystem(playerInputObserver));
-        engine.addSystem(new SkillCastingSystem(engine, factories.getParticleFactory(), lightsManager));
+        engine.addSystem(new SkillCastingSystem(engine, factories.getParticleFactory(),
+                lightsManager, cameraManager));
         engine.addSystem(new SkillTargetedSystem());
         engine.addSystem(new SkillLockDownSystem());
         engine.addSystem(new DecisionMakingSystem(aiManager));
@@ -134,6 +114,7 @@ public class WorldScreen implements Screen {
 
     @Override
     public void render(float delta) {
+        cameraManager.render(delta);
         mapManager.render();
 
         resources.getBatch().begin();
@@ -149,7 +130,7 @@ public class WorldScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-        mapManager.resize(width, height);
+        cameraManager.resize(width, height);
     }
 
     @Override
