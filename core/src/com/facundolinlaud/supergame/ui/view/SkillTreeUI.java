@@ -14,6 +14,7 @@ public class SkillTreeUI implements UI {
 
     public SkillTreeUI(Skin skin, DragAndDrop dragAndDrop) {
         this.window = new SkillTreeWindow(skin, dragAndDrop);
+        this.window.setPosition(980, 0);
     }
 
     public void update(Map<Integer, Skill> allSkills, List<Skill> playerSkills, int assignablePoints){

@@ -17,6 +17,8 @@ public class DesktopLauncher {
 		config.width = Dimensions.SCREEN_WIDTH;
 		config.height = Dimensions.SCREEN_HEIGHT;
 		config.fullscreen = false;
+		config.title = "Long Ago";
+
 		new LwjglApplication(new Game(), config);
 	}
 }

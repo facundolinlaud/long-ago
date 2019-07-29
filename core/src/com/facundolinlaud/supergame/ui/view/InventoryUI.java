@@ -18,6 +18,7 @@ public class InventoryUI implements UI {
 
     public InventoryUI(Skin skin, DragAndDrop dragAndDrop) {
         this.window = new InventoryWindow(skin, ITEM_COUNT, dragAndDrop);
+        this.window.setPosition(0, 328);
     }
 
     public void updateItems(List<Item> items){

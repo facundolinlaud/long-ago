@@ -17,6 +17,7 @@ public class EquipmentUI implements UI {
 
     public EquipmentUI(Skin skin, DragAndDrop dragAndDrop) {
         this.window = new EquipmentWindow(skin, dragAndDrop);
+        this.window.setPosition(0, 0);
     }
 
     public void update(Map<EquipSlot, Item> items) {

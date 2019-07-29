@@ -96,6 +96,10 @@ public class OverlayUI implements UI {
         this.notifications.popSkillNotReadyNotification();
     }
 
+    public void popNoAdequateWeaponNotification() {
+        this.notifications.popNoAdequateWeaponNotification();
+    }
+
     @Override
     public Table get() {
         return this.table;

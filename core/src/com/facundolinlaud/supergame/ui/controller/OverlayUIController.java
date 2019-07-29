@@ -59,6 +59,9 @@ public class OverlayUIController implements Telegraph {
             case REJECTED_SKILL_DUE_TO_NOT_READY:
                 this.overlayUI.popSkillNotReadyNotification();
                 break;
+            case REJECTED_SKILL_DUE_TO_WEAPON:
+                this.overlayUI.popNoAdequateWeaponNotification();
+                break;
         }
 
         return true;

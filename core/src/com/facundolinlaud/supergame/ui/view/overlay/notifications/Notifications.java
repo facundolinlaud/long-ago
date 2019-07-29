@@ -28,6 +28,10 @@ public class Notifications {
         popNotification("Skill not ready!", Color.FIREBRICK);
     }
 
+    public void popNoAdequateWeaponNotification() {
+        popNotification("You don´t have the appropiate weapon for this skill!", Color.FIREBRICK);
+    }
+
     private void popNotification(String text, Color color) {
         Label label = new Label(text, skin, Themes.Label.BOLD_16);
         label.setColor(color);

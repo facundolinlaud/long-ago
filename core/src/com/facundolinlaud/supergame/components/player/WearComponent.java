@@ -42,4 +42,12 @@ public class WearComponent implements Component {
 
         return equipment;
     }
+
+    public boolean hasWearable(EquipSlot equipSlot){
+        return wearables.containsKey(equipSlot);
+    }
+
+    public Entity getWearable(EquipSlot equipSlot){
+        return wearables.getOrDefault(equipSlot, null);
+    }
 }

@@ -18,6 +18,7 @@ import com.facundolinlaud.supergame.systems.ui.ProfileUISystem;
 import com.facundolinlaud.supergame.systems.ui.SkillCastingUISystem;
 import com.facundolinlaud.supergame.ui.controller.*;
 import com.facundolinlaud.supergame.ui.view.*;
+import com.facundolinlaud.supergame.ui.view.cross.GothicWindow;
 import com.facundolinlaud.supergame.ui.view.utils.Window;
 import com.facundolinlaud.supergame.utils.events.Messages;
 
@@ -126,6 +127,7 @@ public class UIManager implements Renderable {
         this.messageDispatcher.addListener(this.overlayUIController, Messages.SKILL_CASTED);
         this.messageDispatcher.addListener(this.overlayUIController, Messages.REJECTED_SKILL_DUE_TO_NO_MANA);
         this.messageDispatcher.addListener(this.overlayUIController, Messages.REJECTED_SKILL_DUE_TO_NOT_READY);
+        this.messageDispatcher.addListener(this.overlayUIController, Messages.REJECTED_SKILL_DUE_TO_WEAPON);
         this.messageDispatcher.addListener(this.overlayUIController, Messages.SKILLS_CHANGED);
         this.messageDispatcher.addListener(this.labelDamagesController, Messages.ENTITY_ATTACKED);
         this.messageDispatcher.addListener(this.skillTreeController, Messages.SKILL_UNLOCK_REQUEST);

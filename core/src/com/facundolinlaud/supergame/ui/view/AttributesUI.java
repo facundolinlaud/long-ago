@@ -14,6 +14,7 @@ public class AttributesUI implements UI {
 
     public AttributesUI(Skin skin) {
         this.window = new AttributesWindow(skin);
+        this.window.setPosition(1040, 314);
     }
 
     public void update(Attributes attributes){
