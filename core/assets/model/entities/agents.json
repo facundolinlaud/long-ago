@@ -9,10 +9,10 @@
 				"assignablePoints": 6 
 			},
 			"attributes": {
-				"strength": 10,
-				"agility": 5,
-				"stamina": 10,
-				"intelligence": 10
+				"strength": 70,
+				"agility": 30,
+				"stamina": 20,
+				"intelligence": 90
 			},
 			"body": {
 				"SHADOW": "sprites/living/body/shadow.png",

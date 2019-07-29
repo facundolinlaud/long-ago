@@ -23,7 +23,7 @@ import java.util.Random;
 
 public class SpawnLocationSystem extends IntervalIteratingSystem implements Telegraph {
     public static final int ZERO_AGENTS_SPAWNED = 0;
-    private static float INTERVAL = 5f;
+    private static float INTERVAL = 8f;
 
     private ComponentMapper<SpawnLocationComponent> sl = Mappers.spawnLocation;
     private ComponentMapper<SpawnedAgentComponent> sa = Mappers.spawnedAgent;

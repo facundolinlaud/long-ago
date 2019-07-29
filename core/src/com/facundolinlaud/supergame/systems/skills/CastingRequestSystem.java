@@ -16,6 +16,7 @@ import com.facundolinlaud.supergame.components.skills.SkillClickComponent;
 import com.facundolinlaud.supergame.model.equip.EquipSlot;
 import com.facundolinlaud.supergame.model.equip.EquipType;
 import com.facundolinlaud.supergame.model.skill.Skill;
+import com.facundolinlaud.supergame.ui.model.equipment.Equipable;
 import com.facundolinlaud.supergame.utils.Mappers;
 import com.facundolinlaud.supergame.utils.events.Messages;
 
@@ -71,6 +72,9 @@ public abstract class CastingRequestSystem extends IteratingSystem {
 
     private boolean hasAdequateWeapon(Entity caster, Skill skill){
         EquipType required = skill.getEquipmentRequired();
+
+        if(EquipType.NOT_IMPORTANT.equals(required))
+            return true;
 
         WearComponent wearComponent = wm.get(caster);
 

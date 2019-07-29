@@ -1,7 +1,11 @@
 # Long Ago
 
-## A 1 min video demo (no sound) (old)
-https://streamable.com/zfluc
+## 1 min video demo (no sound) (most recent)
+https://streamable.com/l3e79 (july 2019)
+
+### Archive:
+https://streamable.com/zfluc (january 2019)
+https://streamable.com/sd950 (october 2018)
 
 ## About
 Long ago is a long time personal RPG game project. I still have a really long way ahead but it's getting there. I'm trying to start documenting everything but the game got pretty big (however, it still scales like a charm).

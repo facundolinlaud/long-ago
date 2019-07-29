@@ -61,14 +61,14 @@
 			"castTime": 1.5,
 			"lockdownTime": 0.8,
 			"interruptible": false,
-			"equipmentRequired": "SPEAR",
+			"equipmentRequired": "NOT_IMPORTANT",
 
 			"castingAction": "SPELL_CASTING",
 			"executingAction": "SPELL_CASTING",
 			"animationFlow": "STOP_AT_LAST_PHOTOGRAM",
 
 			"areaOfEffectSize": 2.0,
-			"baseDamage": 80.0,
+			"baseDamage": 120.0,
 			"baseHeal": 0.0,
 			"particleType": "EXPLOSION",
 			"twoClickInformation" : {
@@ -105,7 +105,7 @@
 			"animationFlow": "STOP_AT_LAST_PHOTOGRAM",
 
 			"areaOfEffectSize": 2.0,
-			"baseDamage": 80.0,
+			"baseDamage": 100.0,
 			"baseHeal": 0.0,
 			"projectileInformation": {
 				"projectileTexture": "pictures/projectiles/arrow2.png",
