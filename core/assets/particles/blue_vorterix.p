@@ -2,16 +2,16 @@ Untitled
 - Delay -
 active: false
 - Duration - 
-lowMin: 400.0
-lowMax: 400.0
+lowMin: 700.0
+lowMax: 1000.0
 - Count - 
 min: 0
-max: 300
+max: 700
 - Emission - 
-lowMin: 100.0
-lowMax: 100.0
+lowMin: 0.0
+lowMax: 0.0
 highMin: 500.0
-highMax: 500.0
+highMax: 700.0
 relative: false
 scalingCount: 1
 scaling0: 1.0
@@ -20,8 +20,8 @@ timeline0: 0.0
 - Life - 
 lowMin: 0.0
 lowMax: 0.0
-highMin: 200.0
-highMax: 200.0
+highMin: 2000.0
+highMax: 2000.0
 relative: false
 scalingCount: 3
 scaling0: 1.0
@@ -35,8 +35,8 @@ timeline2: 1.0
 active: false
 - X Offset - 
 active: true
-lowMin: 0.25
-lowMax: 0.75
+lowMin: 0.5
+lowMax: 0.5
 highMin: 0.0
 highMax: 0.0
 relative: false
@@ -46,8 +46,8 @@ timelineCount: 1
 timeline0: 0.0
 - Y Offset - 
 active: true
-lowMin: 0.25
-lowMax: 0.75
+lowMin: 0.5
+lowMax: 0.5
 highMin: 0.0
 highMax: 0.0
 relative: false
@@ -78,10 +78,10 @@ scaling0: 1.0
 timelineCount: 1
 timeline0: 0.0
 - X Scale - 
-lowMin: 0.0
-lowMax: 0.0
-highMin: 0.5
-highMax: 0.5
+lowMin: 4.0
+lowMax: 4.0
+highMin: 9.0
+highMax: 9.0
 relative: false
 scalingCount: 1
 scaling0: 1.0
@@ -90,9 +90,31 @@ timeline0: 0.0
 - Y Scale - 
 active: false
 - Velocity - 
-active: false
+active: true
+lowMin: -18.0
+lowMax: 21.0
+highMin: -18.0
+highMax: 21.0
+relative: false
+scalingCount: 1
+scaling0: 1.0
+timelineCount: 1
+timeline0: 0.0
 - Angle - 
-active: false
+active: true
+lowMin: 250.0
+lowMax: 250.0
+highMin: 0.0
+highMax: 0.0
+relative: false
+scalingCount: 3
+scaling0: 0.06122449
+scaling1: 0.67346936
+scaling2: 0.0
+timelineCount: 3
+timeline0: 0.0
+timeline1: 0.63013697
+timeline2: 1.0
 - Rotation - 
 active: false
 - Wind - 
@@ -101,9 +123,9 @@ active: false
 active: false
 - Tint - 
 colorsCount: 3
-colors0: 1.0
-colors1: 0.12156863
-colors2: 0.047058824
+colors0: 0.078431375
+colors1: 0.47058824
+colors2: 0.63529414
 timelineCount: 1
 timeline0: 0.0
 - Transparency - 
@@ -125,7 +147,7 @@ timeline3: 1.0
 - Options - 
 attached: false
 continuous: false
-aligned: true
+aligned: false
 additive: true
 behind: false
 premultipliedAlpha: false

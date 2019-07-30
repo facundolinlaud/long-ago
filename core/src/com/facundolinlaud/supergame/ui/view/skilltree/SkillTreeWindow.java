@@ -49,7 +49,7 @@ public class SkillTreeWindow extends GothicWindow {
         this.visualRepresentation = skillTree.getVisualRepresentation();
 
         initializeArrows(skin);
-        setSize(300, 300);
+        setSize(300, 400);
         padBottom(6);
         padRight(6);
         setVisible(false);

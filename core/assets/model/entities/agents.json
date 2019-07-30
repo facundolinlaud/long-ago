@@ -5,7 +5,7 @@
 			"velocity": 1.9,
 			"bag": [13, 9, 9, 0, 10, 15, 16, 17, 18, 19, 20],
 			"skillsInformation": {
-				"skills": [1, 2, 3, 4],
+				"skills": [1, 2, 3, 4, 6],
 				"assignablePoints": 6 
 			},
 			"attributes": {

@@ -5,7 +5,8 @@ public enum ParticleType {
     EXPLOSION("EXPLOSION"),
     BLACK_SMOKE("BLACK_SMOKE"),
     FIRE_PROJECTILE("FIRE_PROJECTILE"),
-    BLUE_HIT("BLUE_HIT");
+    BLUE_HIT("BLUE_HIT"),
+    BLUE_VORTERIX("BLUE_VORTERIX");
 
     private String name;
 

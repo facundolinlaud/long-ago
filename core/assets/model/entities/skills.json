@@ -183,6 +183,44 @@
 			"baseHeal": 0.0,
 			"areaParticle": "NONE",
 			"hitParticle": "BLUE_HIT"
+		},
+		"6": {
+			"name": "Electric Vorterix",
+			"picturePath": "pictures/skills/dash.png",
+			"disabledPicturePath": "pictures/skills/disabled/dash.png",
+			"skillType": "SPELL",
+			"skillDamageType": "DIRECT",
+			"manaConsumption": 50,
+			"description": "A powerful spell that spawns an electric\nvorterix above the desired area.",
+
+			"cooldown": 5.0,
+			"castTime": 1.0,
+			"lockdownTime": 3.5,
+			"interruptible": false,
+			"equipmentRequired": "NOT_IMPORTANT",
+
+			"castingAction": "SPELL_CASTING",
+			"executingAction": "SPELL_CASTING",
+			"animationFlow": "STOP_AT_LAST_PHOTOGRAM",
+
+			"areaOfEffectSize": 10.0,
+			"baseDamage": 8000.0,
+			"baseHeal": 0.0,
+			"areaParticle": "BLUE_VORTERIX",
+			"hitParticle": "BLUE_HIT",
+			"twoClickInformation" : {
+				"waitingForClickAction": "SPELL_PRECASTING"
+			},
+			"hasLightEffect": true,
+			"lightModel": {
+				"type" : "DIMMING",
+				"distance": 8.0,
+				"duration": 3.5
+			},
+			"screenShake": {
+				"power": 0.8,
+				"duration": 3.5
+			}
 		}
 	}
 }

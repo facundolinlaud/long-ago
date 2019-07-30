@@ -3,6 +3,7 @@
 		"EXPLOSION": "particles/explosion.p",
 		"BLACK_SMOKE": "particles/black_smoke.p",
 		"FIRE_PROJECTILE": "particles/fire_projectile.p",
-		"BLUE_HIT": "particles/blue_hit.p"
+		"BLUE_HIT": "particles/blue_hit.p",
+		"BLUE_VORTERIX": "particles/blue_vorterix.p"
 	}
 }
