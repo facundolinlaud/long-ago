@@ -4,11 +4,11 @@ import com.facundolinlaud.supergame.model.particle.ParticleType;
 
 public class ProjectileInformation {
     private float maxTravelDistance;
-    private ParticleType particleType;
+    private ParticleType particle;
     private boolean onlyParticle;
     private EffectOnEnemy effectOnEnemy;
-    private float projectileSpeed;
-    private String projectileTexture;
+    private float speed;
+    private String texture;
 
     public ProjectileInformation() {}
 
@@ -20,12 +20,12 @@ public class ProjectileInformation {
         this.maxTravelDistance = maxTravelDistance;
     }
 
-    public ParticleType getParticleType() {
-        return particleType;
+    public ParticleType getParticle() {
+        return particle;
     }
 
-    public void setParticleType(ParticleType particleType) {
-        this.particleType = particleType;
+    public void setParticle(ParticleType particle) {
+        this.particle = particle;
     }
 
     public boolean isOnlyParticle() {
@@ -44,19 +44,19 @@ public class ProjectileInformation {
         this.effectOnEnemy = effectOnEnemy;
     }
 
-    public float getProjectileSpeed() {
-        return projectileSpeed;
+    public float getSpeed() {
+        return speed;
     }
 
-    public void setProjectileSpeed(float projectileSpeed) {
-        this.projectileSpeed = projectileSpeed;
+    public void setSpeed(float projectileSpeed) {
+        this.speed = projectileSpeed;
     }
 
-    public String getProjectileTexture() {
-        return projectileTexture;
+    public String getTexture() {
+        return texture;
     }
 
-    public void setProjectileTexture(String projectileTexture) {
-        this.projectileTexture = projectileTexture;
+    public void setTexture(String texture) {
+        this.texture = texture;
     }
 }

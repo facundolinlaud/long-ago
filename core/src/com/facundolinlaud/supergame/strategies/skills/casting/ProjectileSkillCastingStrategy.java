@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.facundolinlaud.supergame.builder.ProjectileBuilder;
 import com.facundolinlaud.supergame.components.PositionComponent;
 import com.facundolinlaud.supergame.factory.ParticleFactory;
+import com.facundolinlaud.supergame.model.particle.ParticleType;
 import com.facundolinlaud.supergame.model.skill.Skill;
 import com.facundolinlaud.supergame.strategies.skills.epicenter.RangedSkillEpicenterStrategy;
 import com.facundolinlaud.supergame.strategies.skills.epicenter.SkillEpicenterStrategy;
@@ -32,13 +33,13 @@ public class ProjectileSkillCastingStrategy implements SkillCastingStrategy {
         Vector2 destination = epicenterStrategy.calculate(caster);
         Vector2 direction = resolveDirection(origin, destination);
 
-        String texture = skill.getProjectileInformation().getProjectileTexture();
+        String texture = skill.getProjectileInformation().getTexture();
 
         Entity projectile = new ProjectileBuilder(caster, skill, origin)
                 .withOrigin(origin, direction)
                 .withDirection(direction)
                 .withPicture(texture, calculateRotation(direction))
-                .withParticles(particleFactory.create(skill.getProjectileInformation().getParticleType()))
+                .withParticles(particleFactory.getEffect(skill.getProjectileInformation().getParticle()))
                 .build();
 
         engine.addEntity(projectile);

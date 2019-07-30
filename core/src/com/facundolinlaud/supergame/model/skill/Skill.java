@@ -38,7 +38,8 @@ public class Skill {
     @Nullable private TwoClickInformation twoClickInformation;
 
     /* Particles */
-    private ParticleType particleType;
+    private ParticleType areaParticle;
+    private ParticleType hitParticle;
 
     /* Lights */
     private boolean hasLightEffect;
@@ -217,16 +218,16 @@ public class Skill {
         return this.skillType == SkillType.PROJECTILE;
     }
 
-    public boolean hasParticleEffect(){
-        return this.particleType != ParticleType.NONE;
+    public boolean hasAreaParticleEffect(){
+        return this.areaParticle != ParticleType.NONE;
     }
 
-    public ParticleType getParticleType() {
-        return particleType;
+    public ParticleType getAreaParticle() {
+        return areaParticle;
     }
 
-    public void setParticleType(ParticleType particleType) {
-        this.particleType = particleType;
+    public void setAreaParticle(ParticleType areaParticle) {
+        this.areaParticle = areaParticle;
     }
 
     public TwoClickInformation getTwoClickInformation() {
@@ -259,5 +260,17 @@ public class Skill {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public ParticleType getHitParticle() {
+        return hitParticle;
+    }
+
+    public void setHitParticle(ParticleType hitParticle) {
+        this.hitParticle = hitParticle;
+    }
+
+    public boolean hasHitParticleEffect(){
+        return this.hitParticle != ParticleType.NONE;
     }
 }

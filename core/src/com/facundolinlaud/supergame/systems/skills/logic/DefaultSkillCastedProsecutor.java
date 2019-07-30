@@ -32,7 +32,7 @@ public class DefaultSkillCastedProsecutor extends BaseSkillCastedProsecutor {
     public void execute(Entity caster, Skill skill) {
         Vector2 epicenter = epicenterStrategy.calculate(caster);
         affectSurroundingEntities(caster, skill, epicenter);
-        createParticleEffect(skill, epicenter);
+        createAreaParticleEffect(skill, epicenter);
         createLightEffect(skill, epicenter);
         shakeScreen(skill, epicenter);
     }
@@ -47,6 +47,7 @@ public class DefaultSkillCastedProsecutor extends BaseSkillCastedProsecutor {
         for(Entity victim : victims){
             if(victim != caster){
                 PositionComponent victimPosition = pm.get(victim);
+                createHitParticleEffect(victim, skill);
 
                 if(area.contains(victimPosition.x, victimPosition.y)){
                     applyEffectsToVictim(caster, victim, skill);

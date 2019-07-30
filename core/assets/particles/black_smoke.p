@@ -30,9 +30,27 @@ timeline0: 0.0
 - Life Offset - 
 active: false
 - X Offset - 
-active: false
+active: true
+lowMin: 0.5
+lowMax: 0.5
+highMin: 0.0
+highMax: 0.0
+relative: false
+scalingCount: 1
+scaling0: 1.0
+timelineCount: 1
+timeline0: 0.0
 - Y Offset - 
-active: false
+active: true
+lowMin: 0.5
+lowMax: 0.5
+highMin: 0.0
+highMax: 0.0
+relative: false
+scalingCount: 1
+scaling0: 1.0
+timelineCount: 1
+timeline0: 0.0
 - Spawn Shape - 
 shape: point
 - Spawn Width - 

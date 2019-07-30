@@ -22,7 +22,8 @@
 			"areaOfEffectSize": 2.0,
 			"baseDamage": 40.0,
 			"baseHeal": 0.0,
-			"particleType": "NONE"
+			"areaParticle": "NONE",
+			"hitParticle": "BLUE_HIT"
 		},
 		"1": {
 			"name": "Spear Charge",
@@ -46,7 +47,8 @@
 			"areaOfEffectSize": 2.0,
 			"baseDamage": 40.0,
 			"baseHeal": 0.0,
-			"particleType": "NONE"
+			"areaParticle": "NONE",
+			"hitParticle": "BLUE_HIT"
 		},
 		"2": {
 			"name": "Fire Rain",
@@ -70,7 +72,8 @@
 			"areaOfEffectSize": 2.0,
 			"baseDamage": 120.0,
 			"baseHeal": 0.0,
-			"particleType": "EXPLOSION",
+			"areaParticle": "EXPLOSION",
+			"hitParticle": "BLUE_HIT",
 			"twoClickInformation" : {
 				"waitingForClickAction": "SPELL_PRECASTING"
 			},
@@ -107,15 +110,16 @@
 			"areaOfEffectSize": 2.0,
 			"baseDamage": 100.0,
 			"baseHeal": 0.0,
+			"areaParticle": "BLACK_SMOKE",
+			"hitParticle": "BLUE_HIT",
 			"projectileInformation": {
-				"projectileTexture": "pictures/projectiles/arrow2.png",
+				"texture": "pictures/projectiles/arrow2.png",
 				"maxTravelDistance": 15.0,
-				"particleType": "FIRE_PROJECTILE",
+				"particle": "FIRE_PROJECTILE",
 				"onlyParticle": false,
 				"effectOnEnemy": "KNOCK_BACK",
-				"projectileSpeed": 0.0
+				"speed": 0.0
 			},
-			"particleType": "SPAWN",
 			"twoClickInformation" : {
 				"waitingForClickAction": "AIMING"
 			},
@@ -152,7 +156,8 @@
 			"areaOfEffectSize": 1.0,
 			"baseDamage": 40.0,
 			"baseHeal": 0.0,
-			"particleType": "NONE"
+			"areaParticle": "NONE",
+			"hitParticle": "BLUE_HIT"
 		},
 		"5": {
 			"name": "Sword Dash",
@@ -176,7 +181,8 @@
 			"areaOfEffectSize": 1.0,
 			"baseDamage": 40.0,
 			"baseHeal": 0.0,
-			"particleType": "NONE"
+			"areaParticle": "NONE",
+			"hitParticle": "BLUE_HIT"
 		}
 	}
 }

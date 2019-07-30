@@ -52,7 +52,7 @@ public class AgentFactory {
         return getDummyAgent(agent)
                 .withAI(agent.getNpcInformation())
                 .withEquipment(equipment)
-                .withParticles(particleFactory.create(ParticleType.SPAWN))
+                .withParticles(particleFactory.getEffect(ParticleType.BLACK_SMOKE))
                 .withSkills(skillsFactory.get(skillsInfo.getSkills()), skillsInfo.getAssignablePoints());
     }
 

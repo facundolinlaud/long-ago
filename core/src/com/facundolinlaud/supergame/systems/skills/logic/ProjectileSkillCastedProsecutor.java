@@ -10,7 +10,6 @@ import com.facundolinlaud.supergame.components.skills.SkillTargetedComponent;
 import com.facundolinlaud.supergame.factory.ParticleFactory;
 import com.facundolinlaud.supergame.managers.world.CameraManager;
 import com.facundolinlaud.supergame.managers.world.LightsManager;
-import com.facundolinlaud.supergame.managers.world.ScreenShakeManager;
 import com.facundolinlaud.supergame.model.skill.Skill;
 import com.facundolinlaud.supergame.strategies.skills.projectile.ProjectileDestructionStrategy;
 import com.facundolinlaud.supergame.utils.Mappers;
@@ -42,7 +41,8 @@ public class ProjectileSkillCastedProsecutor extends BaseSkillCastedProsecutor {
             return;
 
         applyEffects(victim, caster, skill);
-        createParticleEffect(skill, position);
+        createAreaParticleEffect(skill, position);
+        createHitParticleEffect(victim, skill);
         createLightEffect(skill, position);
         shakeScreen(skill, position);
 

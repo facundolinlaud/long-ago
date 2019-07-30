@@ -1,7 +1,8 @@
 {
 	"particles": {
 		"EXPLOSION": "particles/explosion.p",
-		"SPAWN": "particles/spawn.p",
-		"FIRE_PROJECTILE": "particles/fire_projectile.p"
+		"BLACK_SMOKE": "particles/black_smoke.p",
+		"FIRE_PROJECTILE": "particles/fire_projectile.p",
+		"BLUE_HIT": "particles/blue_hit.p"
 	}
 }

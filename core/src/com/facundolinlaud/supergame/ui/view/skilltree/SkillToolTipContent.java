@@ -69,7 +69,7 @@ public class SkillToolTipContent extends Table {
                     skin, Themes.Label.REGULAR_14);
             maxTravelDistance.setColor(BLUE);
 
-            Label projectileSpeed = new Label("Projectile Speed: " + floatToString(pi.getProjectileSpeed()),
+            Label projectileSpeed = new Label("Projectile Speed: " + floatToString(pi.getSpeed()),
                     skin, Themes.Label.REGULAR_14);
             projectileSpeed.setColor(BLUE);
 
