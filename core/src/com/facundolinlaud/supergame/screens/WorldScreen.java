@@ -124,6 +124,7 @@ public class WorldScreen implements Screen {
 
     @Override
     public void render(float delta) {
+        messageDispatcher.update();
         cameraManager.render(delta);
         mapManager.render();
 
@@ -136,7 +137,6 @@ public class WorldScreen implements Screen {
         lightsManager.render();
 
         uiManager.render();
-        messageDispatcher.update();
     }
 
     @Override

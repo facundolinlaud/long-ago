@@ -2,6 +2,9 @@ package com.facundolinlaud.supergame.components.player;
 
 import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.gdx.ai.msg.MessageManager;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -13,15 +16,20 @@ import java.util.List;
  */
 public class BagComponent implements Component {
     private boolean gathering;
+    private IntegerProperty gold;
     private ObservableList<Entity> items;
 
-    public BagComponent(List<Entity> items) {
+    public BagComponent(List<Entity> items, int gold) {
         this.items = FXCollections.observableArrayList(items);
+        this.gold = new SimpleIntegerProperty(gold);
     }
 
-    public BagComponent(List<Entity> items, ListChangeListener<? super Entity> listener) {
-        this(items);
-        this.items.addListener(listener);
+    public BagComponent(List<Entity> items, int gold, int onChangeMessage) {
+        this(items, gold);
+        this.items.addListener((ListChangeListener<? super Entity>)
+                c -> MessageManager.getInstance().dispatchMessage(onChangeMessage));
+        this.gold.addListener((observable, oldValue, newValue) ->
+                MessageManager.getInstance().dispatchMessage(onChangeMessage));
     }
 
     public void add(Entity item){
@@ -58,5 +66,17 @@ public class BagComponent implements Component {
 
     public void setGathering(boolean gathering) {
         this.gathering = gathering;
+    }
+
+    public void addGold(int gold){
+        this.gold.set(getGold() + gold);
+    }
+
+    public void subtractGold(int gold){
+        this.gold.set(getGold() - gold);
+    }
+
+    public int getGold() {
+        return gold.get();
     }
 }

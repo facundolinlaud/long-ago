@@ -10,13 +10,12 @@ import com.facundolinlaud.supergame.model.agent.Agent;
 import com.facundolinlaud.supergame.model.agent.SkillsInformation;
 import com.facundolinlaud.supergame.model.equip.EquipSlot;
 import com.facundolinlaud.supergame.model.particle.ParticleType;
+import com.facundolinlaud.supergame.utils.events.Messages;
 
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-
-import static com.facundolinlaud.supergame.utils.events.Messages.*;
 
 public class AgentFactory {
     private static final Integer MAIN_PLAYER_ID = 0;
@@ -62,11 +61,11 @@ public class AgentFactory {
         SkillsInformation skillsInfo = agent.getSkillsInformation();
 
         return getDummyAgent(agent, MAIN_PLAYER_ID)
-                .withBag(buildBag(agent.getBag()), c -> messageDispatcher.dispatchMessage(INVENTORY_CHANGED))
-                .withEquipment(equipment, c -> messageDispatcher.dispatchMessage(EQUIPMENT_CHANGED))
+                .withBag(buildBag(agent.getBag()), agent.getGold(), Messages.INVENTORY_CHANGED)
+                .withEquipment(equipment, Messages.EQUIPMENT_CHANGED)
                 .withKeyboardControl()
                 .withSkills(skillsFactory.get(skillsInfo.getSkills()), skillsInfo.getAssignablePoints(),
-                        c -> messageDispatcher.dispatchMessage(SKILLS_CHANGED, c.getList()));
+                        Messages.SKILLS_CHANGED);
     }
 
     private Map<EquipSlot, Entity> buildEquipment(Map<EquipSlot, String> body, Map<EquipSlot, Integer> model) {

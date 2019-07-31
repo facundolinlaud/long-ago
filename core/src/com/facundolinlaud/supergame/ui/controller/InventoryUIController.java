@@ -61,6 +61,7 @@ public class InventoryUIController implements Telegraph {
     public void updateInventory() {
         BagComponent bag = bm.get(player);
         List<Item> items = new ArrayList<>();
+        int gold = bag.getGold();
 
         for(int i = 0; i < bag.size(); i++){
             Entity e = bag.get(i);
@@ -75,7 +76,7 @@ public class InventoryUIController implements Telegraph {
             items.add(new Item(itemComponent, equipable, new Invented(i)));
         }
 
-        ui.updateItems(items);
+        ui.updateItems(items, gold);
     }
 
     private void onItemDropped(ItemDroppedEvent event){

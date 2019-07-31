@@ -12,5 +12,6 @@ public class QuestAutoAcceptPresentation implements QuestPresentation {
     @Override
     public void present() {
         quest.start();
+        System.out.println("Auto accepting quest");
     }
 }

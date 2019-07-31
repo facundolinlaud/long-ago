@@ -11,6 +11,7 @@ public class Agent {
     private int attack;
     private int defense;
     private int health;
+    private int gold;
     private float velocity;
     private Attributes attributes;
     private Map<EquipSlot, String> body;
@@ -114,20 +115,11 @@ public class Agent {
         this.skillsInformation = skillsInformation;
     }
 
-    @Override
-    public String toString() {
-        return "Agent{" +
-                "name='" + name + '\'' +
-                ", attack=" + attack +
-                ", defense=" + defense +
-                ", health=" + health +
-                ", velocity=" + velocity +
-                ", attributes=" + attributes +
-                ", body=" + body +
-                ", equipment=" + equipment +
-                ", bag=" + bag +
-                ", skillsInformation=" + skillsInformation +
-                ", npcInformation=" + npcInformation +
-                '}';
+    public int getGold() {
+        return gold;
+    }
+
+    public void setGold(int gold) {
+        this.gold = gold;
     }
 }

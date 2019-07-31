@@ -8,6 +8,7 @@ import com.facundolinlaud.supergame.quests.listeners.QuestObjetive;
 import com.facundolinlaud.supergame.quests.listeners.QuestSlayObjective;
 import com.facundolinlaud.supergame.quests.presentation.QuestAutoAcceptPresentation;
 import com.facundolinlaud.supergame.quests.presentation.QuestPopUpPresentation;
+import com.facundolinlaud.supergame.quests.rewards.QuestGoldReward;
 import com.facundolinlaud.supergame.quests.rewards.QuestItemReward;
 import com.facundolinlaud.supergame.quests.start.QuestEmptyStart;
 import com.facundolinlaud.supergame.quests.wrapup.QuestEmptyEnd;
@@ -24,34 +25,48 @@ public class QuestsManager {
         this.player = player;
         this.factories = factories;
 
-        Quest b = getB();
+        Quest c = getC();
+        Quest b = getB(c);
         Quest a = getA(b);
 
         a.present();
         a.start();
     }
 
-    public Quest getB(){
+    public Quest getC(){
+        Quest c = new Quest();
+        c.setPresentation(new QuestAutoAcceptPresentation(c));
+        c.setStart(new QuestEmptyStart());
+        List<QuestObjetive> objectives = new LinkedList();
+        objectives.add(new QuestSlayObjective(c, "Slay two skeletons", 1, 2));
+        c.setObjectives(objectives);
+        c.setQuestRewards(Arrays.asList(new QuestGoldReward(player, 60)));
+        c.setEnd(new QuestEmptyEnd());
+        c.setNextQuests(Arrays.asList());
+
+        return c;
+    }
+
+    public Quest getB(Quest c){
         Quest b = new Quest();
         b.setPresentation(new QuestAutoAcceptPresentation(b));
         b.setStart(new QuestEmptyStart());
         List<QuestObjetive> objectives = new LinkedList();
-        objectives.add(new QuestSlayObjective(b, "Kill id 1 amount 1!!", 1, 3));
+        objectives.add(new QuestSlayObjective(b, "Slay three skeletons", 1, 3));
         b.setObjectives(objectives);
-        b.setQuestRewards(Arrays.asList(new QuestItemReward(player, getRewardsForB())));
+        b.setQuestRewards(Arrays.asList(new QuestGoldReward(player, 60)));
         b.setEnd(new QuestEmptyEnd());
-        b.setNextQuests(Arrays.asList());
+        b.setNextQuests(Arrays.asList(c));
 
         return b;
     }
 
     public Quest getA(Quest b){
         Quest a = new Quest();
-        a.setPresentation(new QuestPopUpPresentation("Presenting Quest A"));
+        a.setPresentation(new QuestPopUpPresentation("Skeleton Slayer"));
         a.setStart(new QuestEmptyStart());
         List<QuestObjetive> objectives = new LinkedList();
-        objectives.add(new QuestSlayObjective(a, "Kill id 1 amount 3!!", 1, 1));
-        objectives.add(new QuestSlayObjective(a, "Kill id 2 amount 2!!", 2, 1));
+        objectives.add(new QuestSlayObjective(a, "Slay one skeleton", 1, 1));
         a.setObjectives(objectives);
         a.setQuestRewards(Arrays.asList(new QuestItemReward(player, getRewardsForA())));
         a.setEnd(new QuestEmptyEnd());
@@ -64,17 +79,8 @@ public class QuestsManager {
         ItemFactory factory = factories.getItemFactory();
 
         return Arrays.asList(
-                factory.getItem(8).build(),
-                factory.getItem(8).build()
-        );
-    }
-
-    private List<Entity> getRewardsForB(){
-        ItemFactory factory = factories.getItemFactory();
-
-        return Arrays.asList(
-                factory.getItem(8).build(),
-                factory.getItem(5).build()
+            factory.getItem(8).build(),
+            factory.getItem(8).build()
         );
     }
 }

@@ -21,8 +21,8 @@ public class InventoryUI implements UI {
         this.window.setPosition(0, 328);
     }
 
-    public void updateItems(List<Item> items){
-        window.update(items);
+    public void updateItems(List<Item> items, int gold){
+        window.update(items, gold);
     }
 
     @Override

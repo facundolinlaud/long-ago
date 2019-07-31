@@ -5,22 +5,19 @@ import com.badlogic.ashley.core.Entity;
 import com.facundolinlaud.supergame.components.player.BagComponent;
 import com.facundolinlaud.supergame.utils.Mappers;
 
-import java.util.List;
-
-public class QuestItemReward implements QuestReward {
+public class QuestGoldReward implements QuestReward {
     private ComponentMapper<BagComponent> bm = Mappers.bag;
 
     private Entity player;
-    private List<Entity> items;
+    private int gold;
 
-    public QuestItemReward(Entity player, List<Entity> items) {
+    public QuestGoldReward(Entity player, int gold) {
         this.player = player;
-        this.items = items;
+        this.gold = gold;
     }
 
     @Override
     public void reward() {
-        BagComponent bagComponent = bm.get(player);
-        items.forEach(item -> bagComponent.add(item));
+        bm.get(this.player).addGold(this.gold);
     }
 }

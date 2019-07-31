@@ -18,8 +18,6 @@ import com.facundolinlaud.supergame.model.agent.NPCInformation;
 import com.facundolinlaud.supergame.model.equip.EquipSlot;
 import com.facundolinlaud.supergame.model.skill.Skill;
 import com.facundolinlaud.supergame.strategies.renderposition.SpriteRenderPositionStrategyImpl;
-import javafx.collections.ListChangeListener;
-import javafx.collections.MapChangeListener;
 
 import java.util.List;
 import java.util.Map;
@@ -58,9 +56,8 @@ public class AgentBuilder {
         return this;
     }
 
-    public AgentBuilder withEquipment(Map<EquipSlot, Entity> equipment,
-                                      MapChangeListener<? super EquipSlot, ? super Entity> listener){
-        this.entity.add(new WearComponent(equipment, listener));
+    public AgentBuilder withEquipment(Map<EquipSlot, Entity> equipment, int onChangeMessage){
+        this.entity.add(new WearComponent(equipment, onChangeMessage));
         return this;
     }
 
@@ -77,13 +74,13 @@ public class AgentBuilder {
         return withHealth(health, health).withMana(mana);
     }
 
-    public AgentBuilder withBag(List<Entity> bag){
-        this.entity.add(new BagComponent(bag));
+    public AgentBuilder withBag(List<Entity> bag, int gold){
+        this.entity.add(new BagComponent(bag, gold));
         return this;
     }
 
-    public AgentBuilder withBag(List<Entity> bag, ListChangeListener<? super Entity> listener){
-        this.entity.add(new BagComponent(bag, listener));
+    public AgentBuilder withBag(List<Entity> bag, int gold, int onChangeMessage){
+        this.entity.add(new BagComponent(bag, gold, onChangeMessage));
         return this;
     }
 
@@ -107,9 +104,8 @@ public class AgentBuilder {
         return this;
     }
 
-    public AgentBuilder withSkills(List<Skill> skills, int assignablePoints,
-                                   ListChangeListener<? super Skill> listener){
-        this.entity.add(new SkillsComponent(skills, assignablePoints, listener));
+    public AgentBuilder withSkills(List<Skill> skills, int assignablePoints, int onChangeMessage){
+        this.entity.add(new SkillsComponent(skills, assignablePoints, onChangeMessage));
         return this;
     }
 

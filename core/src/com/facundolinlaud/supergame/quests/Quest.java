@@ -32,7 +32,6 @@ public class Quest {
         objectives.remove(objective);
 
         if(objectives.isEmpty()){
-            System.out.println("Objectives depleted");
             end.end();
             questRewards.forEach(r -> r.reward());
             presentNextQuests();
@@ -44,7 +43,7 @@ public class Quest {
     }
 
     public void start(){
-        System.out.println("Starting quest");
+        System.out.println("Starting quest!");
         start.start();
         objectives.forEach(o -> o.activate());
     }

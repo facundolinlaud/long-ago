@@ -30,7 +30,6 @@ public class QuestSlayObjective extends QuestObjetive {
 
     @Override
     public void activate() {
-        System.out.println("activating listener: " + getMessage());
         this.messageDispatcher.addListener(this, AGENT_DIED);
     }
 
@@ -41,10 +40,13 @@ public class QuestSlayObjective extends QuestObjetive {
 
     @Override
     public boolean handleMessage(Telegram msg) {
-        if(msg.message == AGENT_DIED)
+        if(msg.message == AGENT_DIED) {
+            System.out.println(msg);
             onAgentDead((AgentDiedEvent) msg.extraInfo);
+            msg.reset(); // guarda con esto. desgraciadamente es la unica manera de uqe funcione. bug de libgdx??
+        }
 
-        return true;
+        return false;
     }
 
     private void onAgentDead(AgentDiedEvent event) {
