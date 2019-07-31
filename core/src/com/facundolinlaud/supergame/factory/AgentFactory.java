@@ -37,8 +37,8 @@ public class AgentFactory {
         this.messageDispatcher = MessageManager.getInstance();
     }
 
-    private AgentBuilder getDummyAgent(Agent agent){
-        AgentBuilder builder = new AgentBuilder(agent.getVelocity())
+    private AgentBuilder getDummyAgent(Agent agent, int id){
+        AgentBuilder builder = new AgentBuilder(agent.getVelocity(), id)
                 .withAttributes(agent.getAttributes());
 
         return builder;
@@ -49,7 +49,7 @@ public class AgentFactory {
         Map<EquipSlot, Entity> equipment = buildEquipment(agent.getBody(), agent.getEquipment());
         SkillsInformation skillsInfo = agent.getSkillsInformation();
 
-        return getDummyAgent(agent)
+        return getDummyAgent(agent, id)
                 .withAI(agent.getNpcInformation())
                 .withEquipment(equipment)
                 .withParticles(particleFactory.getEffect(ParticleType.BLACK_SMOKE))
@@ -61,7 +61,7 @@ public class AgentFactory {
         Map<EquipSlot, Entity> equipment = buildEquipment(agent.getBody(), agent.getEquipment());
         SkillsInformation skillsInfo = agent.getSkillsInformation();
 
-        return getDummyAgent(agent)
+        return getDummyAgent(agent, MAIN_PLAYER_ID)
                 .withBag(buildBag(agent.getBag()), c -> messageDispatcher.dispatchMessage(INVENTORY_CHANGED))
                 .withEquipment(equipment, c -> messageDispatcher.dispatchMessage(EQUIPMENT_CHANGED))
                 .withKeyboardControl()

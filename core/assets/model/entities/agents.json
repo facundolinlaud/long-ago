@@ -9,7 +9,7 @@
 				"assignablePoints": 6 
 			},
 			"attributes": {
-				"strength": 70,
+				"strength": 170,
 				"agility": 30,
 				"stamina": 20,
 				"intelligence": 90
@@ -51,7 +51,7 @@
 			"equipment": {
 				"CHEST": 0,
 				"SHOES": 5,
-				"WEAPON": 10,
+				"WEAPON": 12,
 				"HELMET" : 8,
 				"BOW": 14
 			},

@@ -4,6 +4,8 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.ai.msg.MessageDispatcher;
+import com.badlogic.gdx.ai.msg.MessageManager;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.facundolinlaud.supergame.components.BodyComponent;
@@ -27,6 +29,7 @@ import com.facundolinlaud.supergame.systems.sprite.StackedSpritesSystem;
 public class WorldScreen implements Screen {
     private GameResources resources;
     private Factories factories;
+    private MessageDispatcher messageDispatcher;
 
     private CameraManager cameraManager;
     private MapManager mapManager;
@@ -37,10 +40,12 @@ public class WorldScreen implements Screen {
     private UIManager uiManager;
     private LightsManager lightsManager;
     private PlayerInputManager playerInputManager;
+    private QuestsManager questsManager;
 
     private Stage stage;
 
     public WorldScreen(GameResources resources) {
+        this.messageDispatcher = MessageManager.getInstance();
         this.resources = resources;
 
         initializeStage();
@@ -71,6 +76,7 @@ public class WorldScreen implements Screen {
         this.uiManager = new UIManager(stage, mapManager.getCamera(), weManager.getPlayer());
         this.lightsManager = new LightsManager(physicsManager.getWorld(), mapManager.getCamera(), weManager.getPlayer());
         this.playerInputManager = new PlayerInputManager();
+        this.questsManager = new QuestsManager(weManager.getPlayer(), factories);
     }
 
     private void initializeListeners() {
@@ -130,6 +136,7 @@ public class WorldScreen implements Screen {
         lightsManager.render();
 
         uiManager.render();
+        messageDispatcher.update();
     }
 
     @Override
