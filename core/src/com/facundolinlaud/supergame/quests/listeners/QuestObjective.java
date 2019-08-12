@@ -3,11 +3,11 @@ package com.facundolinlaud.supergame.quests.listeners;
 import com.badlogic.gdx.ai.msg.Telegraph;
 import com.facundolinlaud.supergame.quests.Quest;
 
-public abstract class QuestObjetive implements Telegraph {
+public abstract class QuestObjective implements Telegraph {
     private String message;
     private Quest quest;
 
-    public QuestObjetive(Quest quest, String message) {
+    public QuestObjective(Quest quest, String message) {
         this.quest = quest;
         this.message = message;
     }

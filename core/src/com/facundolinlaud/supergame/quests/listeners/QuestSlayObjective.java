@@ -12,7 +12,7 @@ import com.facundolinlaud.supergame.utils.events.AgentDiedEvent;
 
 import static com.facundolinlaud.supergame.utils.events.Messages.AGENT_DIED;
 
-public class QuestSlayObjective extends QuestObjetive {
+public class QuestSlayObjective extends QuestObjective {
     private ComponentMapper<AgentComponent> am = Mappers.agent;
     private MessageDispatcher messageDispatcher;
 
@@ -41,9 +41,12 @@ public class QuestSlayObjective extends QuestObjetive {
     @Override
     public boolean handleMessage(Telegram msg) {
         if(msg.message == AGENT_DIED) {
-            System.out.println(msg);
-            onAgentDead((AgentDiedEvent) msg.extraInfo);
-            msg.reset(); // guarda con esto. desgraciadamente es la unica manera de uqe funcione. bug de libgdx??
+            AgentDiedEvent e = (AgentDiedEvent) msg.extraInfo;
+
+            if(!e.wasHandled()){
+                onAgentDead(e);
+                e.setHandled();
+            }
         }
 
         return false;

@@ -1,6 +1,6 @@
 package com.facundolinlaud.supergame.quests;
 
-import com.facundolinlaud.supergame.quests.listeners.QuestObjetive;
+import com.facundolinlaud.supergame.quests.listeners.QuestObjective;
 import com.facundolinlaud.supergame.quests.presentation.QuestPresentation;
 import com.facundolinlaud.supergame.quests.rewards.QuestReward;
 import com.facundolinlaud.supergame.quests.start.QuestStart;
@@ -9,26 +9,16 @@ import com.facundolinlaud.supergame.quests.wrapup.QuestEnd;
 import java.util.List;
 
 public class Quest {
-    private QuestPresentation presentation;
+    private List<QuestPresentation> presentation;
     private QuestStart start;
-    private List<QuestObjetive> objectives;
+    private List<QuestObjective> objectives;
     private QuestEnd end;
     private List<QuestReward> questRewards;
     private List<Quest> nextQuests;
 
     public Quest() {}
 
-    public Quest(QuestPresentation presentation, QuestStart start, List<QuestObjetive> objectives,
-                 QuestEnd end, List<QuestReward> questRewards, List<Quest> nextQuests) {
-        this.presentation = presentation;
-        this.start = start;
-        this.objectives = objectives;
-        this.end = end;
-        this.questRewards = questRewards;
-        this.nextQuests = nextQuests;
-    }
-
-    public void onObjectiveCompleted(QuestObjetive objective) {
+    public void onObjectiveCompleted(QuestObjective objective) {
         objectives.remove(objective);
 
         if(objectives.isEmpty()){
@@ -62,7 +52,7 @@ public class Quest {
         this.start = start;
     }
 
-    public void setObjectives(List<QuestObjetive> objectives) {
+    public void setObjectives(List<QuestObjective> objectives) {
         this.objectives = objectives;
     }
 

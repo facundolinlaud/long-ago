@@ -21,6 +21,8 @@ allprojects {
         box2DLightsVersion = '1.4'
         ashleyVersion = '1.7.3'
         aiVersion = '1.8.0'
+        typingLabelVersion = '1.1.0'
+        regExodusVersion = '0.1.10' // Only if you're using HTML / GWT
     }
 
     repositories {
@@ -59,6 +61,9 @@ project(":html") {
         compile "com.badlogicgames.box2dlights:box2dlights:$box2DLightsVersion:sources"
         compile "com.badlogicgames.ashley:ashley:$ashleyVersion:sources"
         compile "com.badlogicgames.gdx:gdx-ai:$aiVersion:sources"
+
+        compile "com.github.tommyettinger:regexodus:$regExodusVersion:sources"
+        compile "com.rafaskoberg.gdx:typing-label:$typingLabelVersion:sources"
     }
 }
 
@@ -77,6 +82,8 @@ project(":core") {
         compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.7.5'
         compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.7.5'
         compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.7.5'
+
+        compile "com.rafaskoberg.gdx:typing-label:$typingLabelVersion"
     }
 }
 

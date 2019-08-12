@@ -4,10 +4,10 @@ import com.badlogic.ashley.core.Entity;
 import com.facundolinlaud.supergame.factory.Factories;
 import com.facundolinlaud.supergame.factory.ItemFactory;
 import com.facundolinlaud.supergame.quests.Quest;
-import com.facundolinlaud.supergame.quests.listeners.QuestObjetive;
+import com.facundolinlaud.supergame.quests.listeners.QuestObjective;
 import com.facundolinlaud.supergame.quests.listeners.QuestSlayObjective;
 import com.facundolinlaud.supergame.quests.presentation.QuestAutoAcceptPresentation;
-import com.facundolinlaud.supergame.quests.presentation.QuestPopUpPresentation;
+import com.facundolinlaud.supergame.quests.presentation.QuestDialogPresentation;
 import com.facundolinlaud.supergame.quests.rewards.QuestGoldReward;
 import com.facundolinlaud.supergame.quests.rewards.QuestItemReward;
 import com.facundolinlaud.supergame.quests.start.QuestEmptyStart;
@@ -37,7 +37,7 @@ public class QuestsManager {
         Quest c = new Quest();
         c.setPresentation(new QuestAutoAcceptPresentation(c));
         c.setStart(new QuestEmptyStart());
-        List<QuestObjetive> objectives = new LinkedList();
+        List<QuestObjective> objectives = new LinkedList();
         objectives.add(new QuestSlayObjective(c, "Slay two skeletons", 1, 2));
         c.setObjectives(objectives);
         c.setQuestRewards(Arrays.asList(new QuestGoldReward(player, 60)));
@@ -51,7 +51,7 @@ public class QuestsManager {
         Quest b = new Quest();
         b.setPresentation(new QuestAutoAcceptPresentation(b));
         b.setStart(new QuestEmptyStart());
-        List<QuestObjetive> objectives = new LinkedList();
+        List<QuestObjective> objectives = new LinkedList();
         objectives.add(new QuestSlayObjective(b, "Slay three skeletons", 1, 3));
         b.setObjectives(objectives);
         b.setQuestRewards(Arrays.asList(new QuestGoldReward(player, 60)));
@@ -63,9 +63,9 @@ public class QuestsManager {
 
     public Quest getA(Quest b){
         Quest a = new Quest();
-        a.setPresentation(new QuestPopUpPresentation("Skeleton Slayer"));
+        a.setPresentation(new QuestDialogPresentation("Skeleton Slayer"));
         a.setStart(new QuestEmptyStart());
-        List<QuestObjetive> objectives = new LinkedList();
+        List<QuestObjective> objectives = new LinkedList();
         objectives.add(new QuestSlayObjective(a, "Slay one skeleton", 1, 1));
         a.setObjectives(objectives);
         a.setQuestRewards(Arrays.asList(new QuestItemReward(player, getRewardsForA())));

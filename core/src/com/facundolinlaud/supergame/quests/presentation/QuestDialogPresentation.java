@@ -1,9 +1,9 @@
 package com.facundolinlaud.supergame.quests.presentation;
 
-public class QuestPopUpPresentation implements QuestPresentation {
+public class QuestDialogPresentation implements QuestPresentation {
     private String message;
 
-    public QuestPopUpPresentation(String message) {
+    public QuestDialogPresentation(String message) {
         this.message = message;
     }
 

@@ -45,6 +45,7 @@ public class UIManager implements Renderable {
     private EquipmentUI equipmentUI;
     private LabelDamagesUI labelDamagesUI;
     private SkillTreeUI skillTreeUI;
+    private QuestUI questUI;
 
     private InventoryUIController inventoryUIController;
     private OverlayUIController overlayUIController;
@@ -52,6 +53,7 @@ public class UIManager implements Renderable {
     private EquipmentUIController equipmentUIController;
     private LabelDamagesController labelDamagesController;
     private SkillTreeController skillTreeController;
+    private QuestUIController questUIController;
 
     private WindowsOrchestrator windowsOrchestrator;
     private MessageDispatcher messageDispatcher;
@@ -97,6 +99,7 @@ public class UIManager implements Renderable {
         this.equipmentUI = new EquipmentUI(skin, itemsDAD);
         this.labelDamagesUI = new LabelDamagesUI(stage, skin);
         this.skillTreeUI = new SkillTreeUI(skin, skillsDAD);
+        this.questUI = new QuestUI(stage, skin);
     }
 
     private void initializeControllers(Camera camera, Entity player) {
@@ -106,6 +109,7 @@ public class UIManager implements Renderable {
         this.equipmentUIController = new EquipmentUIController(this.equipmentUI, player);
         this.labelDamagesController = new LabelDamagesController(this.labelDamagesUI, camera);
         this.skillTreeController = new SkillTreeController(this.skillTreeUI, player);
+        this.questUIController = new QuestUIController(this.questUI);
     }
 
     private void addUIToStage() {
@@ -156,6 +160,10 @@ public class UIManager implements Renderable {
 
     public OverlayUIController getOverlayUIController(){
         return this.overlayUIController;
+    }
+
+    public QuestUIController getQuestUIController() {
+        return questUIController;
     }
 
     @Override
