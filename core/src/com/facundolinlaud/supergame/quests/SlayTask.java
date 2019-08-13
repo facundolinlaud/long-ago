@@ -1,27 +1,26 @@
-package com.facundolinlaud.supergame.quests.listeners;
+package com.facundolinlaud.supergame.quests;
 
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.ai.msg.MessageDispatcher;
 import com.badlogic.gdx.ai.msg.MessageManager;
 import com.badlogic.gdx.ai.msg.Telegram;
+import com.badlogic.gdx.ai.msg.Telegraph;
 import com.facundolinlaud.supergame.components.AgentComponent;
-import com.facundolinlaud.supergame.quests.Quest;
+import com.facundolinlaud.supergame.utils.Debugger;
 import com.facundolinlaud.supergame.utils.Mappers;
 import com.facundolinlaud.supergame.utils.events.AgentDiedEvent;
 
 import static com.facundolinlaud.supergame.utils.events.Messages.AGENT_DIED;
 
-public class QuestSlayObjective extends QuestObjective {
+public class SlayTask extends Task implements Telegraph {
     private ComponentMapper<AgentComponent> am = Mappers.agent;
     private MessageDispatcher messageDispatcher;
-
     private int agentId;
     private int current;
     private int total;
 
-    public QuestSlayObjective(Quest quest, String message, int agentId, int total) {
-        super(quest, message);
+    public SlayTask(int agentId, int total) {
         this.messageDispatcher = MessageManager.getInstance();
         this.agentId = agentId;
         this.total = total;
@@ -30,26 +29,32 @@ public class QuestSlayObjective extends QuestObjective {
 
     @Override
     public void activate() {
-        this.messageDispatcher.addListener(this, AGENT_DIED);
+        messageDispatcher.addListener(this, AGENT_DIED);
+        Debugger.debug("[SLAY" + agentId + "] Activating to kill " + total + " of agent id " + agentId);
     }
 
     @Override
-    public void deactivate() {
-        this.messageDispatcher.removeListener(this, AGENT_DIED);
+    public void completed() {
+        messageDispatcher.removeListener(this, AGENT_DIED);
+        Debugger.debug("[SLAY" + agentId + "] Completed");
+        super.completed();
     }
 
     @Override
     public boolean handleMessage(Telegram msg) {
         if(msg.message == AGENT_DIED) {
             AgentDiedEvent e = (AgentDiedEvent) msg.extraInfo;
+            Debugger.debug("    [SLAY" + agentId + "] Received death");
 
             if(!e.wasHandled()){
+                Debugger.debug("    [SLAY" + agentId + "] Handling");
                 onAgentDead(e);
-                e.setHandled();
+            }else{
+                Debugger.debug("    [SLAY" + agentId + "] Not handling");
             }
         }
 
-        return false;
+        return true;
     }
 
     private void onAgentDead(AgentDiedEvent event) {
@@ -58,14 +63,14 @@ public class QuestSlayObjective extends QuestObjective {
             AgentComponent agentComponent = am.get(agent);
 
             if(agentComponent.getId() == agentId){
+                event.setHandled();
                 current++;
-                System.out.println("    Agent[" + agentId + "] killed  (" + current + "/" + total + ")");
+                Debugger.debug("    [SLAY" + agentId + "] Agent(" + agentId + ") killed  (" + current + "/" + total + ")");
             }
         }
 
         if(current >= total){
-            System.out.println("    Completed");
-            complete();
+            completed();
         }
     }
 }

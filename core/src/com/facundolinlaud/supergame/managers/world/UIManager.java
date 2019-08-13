@@ -133,7 +133,8 @@ public class UIManager implements Renderable {
                 Messages.REJECTED_SKILL_DUE_TO_NO_MANA,
                 Messages.REJECTED_SKILL_DUE_TO_NOT_READY,
                 Messages.REJECTED_SKILL_DUE_TO_WEAPON,
-                Messages.SKILLS_CHANGED);
+                Messages.SKILLS_CHANGED,
+                Messages.CUSTOM_MESSAGE);
         this.messageDispatcher.addListeners(this.skillTreeController,
                 Messages.SKILL_UNLOCK_REQUEST,
                 Messages.SKILLS_CHANGED);

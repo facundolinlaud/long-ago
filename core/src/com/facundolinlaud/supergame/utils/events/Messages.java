@@ -23,4 +23,5 @@ public class Messages {
     public static final int QUEST_DIALOG_CONTINUED = 19;
     public static final int QUEST_DIALOG_ACCEPTED = 20;
     public static final int QUEST_DIALOG_DECLINED = 21;
+    public static final int CUSTOM_MESSAGE = 99;
 }
