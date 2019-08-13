@@ -14,6 +14,7 @@ public class WindowsOrchestrator extends InputListener {
     private Map<Window, Group> groups;
     private Map<Integer, Window> keymap;
     private Map<Window, ImageButton> buttons;
+    private DialogUI dialogUI;
 
     public WindowsOrchestrator() {
         groups = new HashMap();
@@ -44,6 +45,8 @@ public class WindowsOrchestrator extends InputListener {
 
             group.setVisible(newVisibility);
             buttons.get(window).setChecked(newVisibility);
+        }else if(keycode == Input.Keys.F){
+            dialogUI.onContinueKeyPressed();
         }
 
         return super.keyDown(event, keycode);
@@ -55,5 +58,9 @@ public class WindowsOrchestrator extends InputListener {
 
         group.setVisible(newVisibility);
         button.setChecked(newVisibility);
+    }
+
+    public void register(DialogUI dialogUI) {
+        this.dialogUI = dialogUI;
     }
 }

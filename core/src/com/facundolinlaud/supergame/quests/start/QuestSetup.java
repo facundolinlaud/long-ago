@@ -1,5 +1,5 @@
 package com.facundolinlaud.supergame.quests.start;
 
-public interface QuestStart {
-    void start();
+public interface QuestSetup {
+    void setup();
 }

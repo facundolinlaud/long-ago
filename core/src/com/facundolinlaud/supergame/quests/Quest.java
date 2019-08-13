@@ -1,67 +1,99 @@
 package com.facundolinlaud.supergame.quests;
 
+import com.facundolinlaud.supergame.quests.conditions.QuestCondition;
+import com.facundolinlaud.supergame.quests.dismantle.QuestDismantle;
 import com.facundolinlaud.supergame.quests.listeners.QuestObjective;
 import com.facundolinlaud.supergame.quests.presentation.QuestPresentation;
 import com.facundolinlaud.supergame.quests.rewards.QuestReward;
-import com.facundolinlaud.supergame.quests.start.QuestStart;
-import com.facundolinlaud.supergame.quests.wrapup.QuestEnd;
+import com.facundolinlaud.supergame.quests.start.QuestSetup;
 
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Quest {
-    private List<QuestPresentation> presentation;
-    private QuestStart start;
+    private QuestCondition presentationsCondition;
+    private List<QuestPresentation> presentations;
+    private QuestSetup setup;
     private List<QuestObjective> objectives;
-    private QuestEnd end;
-    private List<QuestReward> questRewards;
+    private QuestCondition dismantleCondition;
+    private LinkedList<QuestDismantle> dismantles;
+    private List<QuestReward> rewards;
     private List<Quest> nextQuests;
 
-    public Quest() {}
+    private Iterator<QuestPresentation> presentationIt;
+
+    public void resetPresentations() {
+        this.presentationIt = presentations.iterator();
+    }
+
+    public void activate(){
+        presentationsCondition.activate();
+    }
+
+    public void nextPresentation(){
+        if(presentationIt.hasNext()){
+            presentationIt.next().present();
+        }else{
+            setup();
+        }
+    }
+
+    public void setup(){
+        System.out.println("Starting quest!");
+        setup.setup();
+        objectives.forEach(o -> o.activate());
+    }
 
     public void onObjectiveCompleted(QuestObjective objective) {
         objectives.remove(objective);
 
-        if(objectives.isEmpty()){
-            end.end();
-            questRewards.forEach(r -> r.reward());
-            presentNextQuests();
+        if(objectives.isEmpty())
+            dismantleCondition.activate();
+    }
+
+    public void nextDismantle(){
+        if(!dismantles.isEmpty()) {
+            dismantles.removeFirst().dismantle();
+        }else{
+            rewards.forEach(r -> r.reward());
+            activateNextQuests();
         }
     }
 
-    public void present(){
-        presentation.present();
-    }
-
-    public void start(){
-        System.out.println("Starting quest!");
-        start.start();
-        objectives.forEach(o -> o.activate());
-    }
-
-    private void presentNextQuests() {
+    private void activateNextQuests() {
         System.out.println("Presenting next quests");
-        nextQuests.forEach(q -> q.present());
+        nextQuests.forEach(q -> q.activate());
     }
 
     /* Setters so it's easier to instantiate */
-    public void setPresentation(QuestPresentation presentation) {
-        this.presentation = presentation;
+    public void setPresentationsCondition(QuestCondition presentationsCondition) {
+        this.presentationsCondition = presentationsCondition;
     }
 
-    public void setStart(QuestStart start) {
-        this.start = start;
+    public void setPresentations(List<QuestPresentation> presentations) {
+        this.presentations = presentations;
+        resetPresentations();
+    }
+
+    public void setSetup(QuestSetup setup) {
+        this.setup = setup;
     }
 
     public void setObjectives(List<QuestObjective> objectives) {
         this.objectives = objectives;
     }
 
-    public void setEnd(QuestEnd end) {
-        this.end = end;
+    public void setDismantleCondition(QuestCondition dismantleCondition) {
+        this.dismantleCondition = dismantleCondition;
     }
 
-    public void setQuestRewards(List<QuestReward> questRewards) {
-        this.questRewards = questRewards;
+    public void setDismantles(LinkedList<QuestDismantle> dismantles) {
+        this.dismantles = dismantles;
+    }
+
+    public void setRewards(List<QuestReward> rewards) {
+        this.rewards = rewards;
     }
 
     public void setNextQuests(List<Quest> nextQuests) {
