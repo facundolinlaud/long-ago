@@ -9,11 +9,11 @@ import com.facundolinlaud.supergame.utils.Debugger;
 
 import static com.facundolinlaud.supergame.utils.events.Messages.QUEST_DIALOG_CONTINUED;
 
-public class DialogTask extends Task implements Telegraph {
+public class TextDialogTask extends Task implements Telegraph {
     private DialogUIController dialogUIController;
     private MessageDispatcher messageDispatcher;
 
-    public DialogTask(Blackboard blackboard) {
+    public TextDialogTask(Blackboard blackboard) {
         this.dialogUIController = blackboard.getDialogUIController();
         this.messageDispatcher = MessageManager.getInstance();
     }
@@ -25,7 +25,7 @@ public class DialogTask extends Task implements Telegraph {
                 "but I need 4 skeleton bones in order to finish something I've been working on for quite some time. {WAIT}" +
                 "Would you help me?";
 
-        dialogUIController.showDialog(title, text);
+        dialogUIController.showTextDialog(title, text);
         subscribeToEvent();
         Debugger.debug("[DIALOG] Activating");
     }

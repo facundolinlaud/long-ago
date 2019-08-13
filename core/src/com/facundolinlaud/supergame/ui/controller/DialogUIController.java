@@ -11,8 +11,12 @@ public class DialogUIController implements Telegraph {
         this.questUI = questUI;
     }
 
-    public void showDialog(String title, String message) {
-        questUI.showDialog(title, message);
+    public void showTextDialog(String title, String message) {
+        questUI.showTextDialog(title, message);
+    }
+
+    public void showConfirmDeclineDialog(String title, String message) {
+        questUI.showConfirmDeclineDialog(title, message);
     }
 
     @Override

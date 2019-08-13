@@ -1,31 +1,23 @@
 package com.facundolinlaud.supergame.managers.world;
 
 import com.badlogic.ashley.core.Entity;
-import com.facundolinlaud.supergame.factory.Factories;
 import com.facundolinlaud.supergame.quests.*;
 import com.facundolinlaud.supergame.ui.controller.DialogUIController;
+import com.facundolinlaud.supergame.ui.view.quest.dialog.ConfirmDeclineDialog;
 
 import java.util.Arrays;
 import java.util.LinkedList;
 
 public class QuestsManager {
-    private Entity player;
-    private Factories factories;
-
-    public QuestsManager(Entity player, Factories factories,
-                         DialogUIController dialogUIController) {
-        this.player = player;
-        this.factories = factories;
-
+    public QuestsManager(Entity player, DialogUIController dialogUIController) {
         Blackboard blackboard = new Blackboard(player, dialogUIController);
         Quest quest = getNewQuest(blackboard);
         quest.activate();
-
     }
 
     public Quest getNewQuest(Blackboard blackboard){
-        DialogTask dialogTask1 = new DialogTask(blackboard);
-        DialogTask dialogTask2 = new DialogTask(blackboard);
+        TextDialogTask dialogTask1 = new TextDialogTask(blackboard);
+        InputDialogTask dialogTask2 = new InputDialogTask(blackboard);
         LinkedList<Task> dialogs = new LinkedList();
         dialogs.add(dialogTask1);
         dialogs.add(dialogTask2);
@@ -40,7 +32,7 @@ public class QuestsManager {
 
         ParallelTask parallelTask1 = new ParallelTask(slays);
 
-        DialogTask dialogTask3 = new DialogTask(blackboard);
+        TextDialogTask dialogTask3 = new TextDialogTask(blackboard);
         GoldRewardTask goldRewardTask = new GoldRewardTask(blackboard, 120);
         LinkedList<Task> composites = new LinkedList();
         composites.add(sequentialTask1);
