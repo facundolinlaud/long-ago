@@ -21,6 +21,9 @@ public class SequentialTask extends CompositeTask {
     @Override
     public void activate() {
         Debugger.debug("[SEQUENTIAL] Next...");
-        children.removeFirst().activate();
+        Task child = children.removeFirst();
+
+        completed.add(child);
+        child.activate();
     }
 }

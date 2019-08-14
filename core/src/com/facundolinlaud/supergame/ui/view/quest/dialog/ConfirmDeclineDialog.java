@@ -46,16 +46,16 @@ public class ConfirmDeclineDialog extends BaseDialog {
         acceptButton.addListener(new ClickListener(Input.Buttons.LEFT){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                onQuestDialogAccepted();
                 hideDialog();
+                onQuestDialogAccepted();
             }
         });
 
         declineButton.addListener(new ClickListener(Input.Buttons.LEFT){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                onQuestDialogDeclined();
                 hideDialog();
+                onQuestDialogDeclined();
             }
         });
     }

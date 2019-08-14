@@ -3,7 +3,6 @@ package com.facundolinlaud.supergame.managers.world;
 import com.badlogic.ashley.core.Entity;
 import com.facundolinlaud.supergame.quests.*;
 import com.facundolinlaud.supergame.ui.controller.DialogUIController;
-import com.facundolinlaud.supergame.ui.view.quest.dialog.ConfirmDeclineDialog;
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -16,8 +15,15 @@ public class QuestsManager {
     }
 
     public Quest getNewQuest(Blackboard blackboard){
-        TextDialogTask dialogTask1 = new TextDialogTask(blackboard);
-        InputDialogTask dialogTask2 = new InputDialogTask(blackboard);
+        String title = "Some dude";
+        String firstDialog = "Hey there...{WAIT} I'm looking for some help...{WAIT} Do you want to help me?{WAIT}" +
+                "I will pay you 5 coins for it.{WAIT} What do you say?";
+        String secondDialog = "I need you to slay one Orc and two Skeletons.{WAIT}" +
+                "They are harrasing my sheeeeeeepsssss!!{WAIT} Will you help me?";
+        String thirdDialog = "Thank you for your help!{WAIT} Here's what I promised!";
+
+        TextDialogTask dialogTask1 = new TextDialogTask(title, firstDialog, blackboard);
+        InputDialogTask dialogTask2 = new InputDialogTask(title, secondDialog, blackboard);
         LinkedList<Task> dialogs = new LinkedList();
         dialogs.add(dialogTask1);
         dialogs.add(dialogTask2);
@@ -32,8 +38,8 @@ public class QuestsManager {
 
         ParallelTask parallelTask1 = new ParallelTask(slays);
 
-        TextDialogTask dialogTask3 = new TextDialogTask(blackboard);
-        GoldRewardTask goldRewardTask = new GoldRewardTask(blackboard, 120);
+        TextDialogTask dialogTask3 = new TextDialogTask(title, thirdDialog, blackboard);
+        GoldRewardTask goldRewardTask = new GoldRewardTask(blackboard, 5);
         LinkedList<Task> composites = new LinkedList();
         composites.add(sequentialTask1);
         composites.add(parallelTask1);

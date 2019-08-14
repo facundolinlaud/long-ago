@@ -9,6 +9,7 @@ public class ParallelTask extends CompositeTask {
 
     @Override
     public void childCompleted(Task child) {
+        completed.add(child);
         children.remove(child);
 
         if(children.isEmpty())

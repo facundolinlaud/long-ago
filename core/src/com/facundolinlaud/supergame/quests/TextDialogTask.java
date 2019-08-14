@@ -10,22 +10,21 @@ import com.facundolinlaud.supergame.utils.Debugger;
 import static com.facundolinlaud.supergame.utils.events.Messages.QUEST_DIALOG_CONTINUED;
 
 public class TextDialogTask extends Task implements Telegraph {
+    private String title;
+    private String message;
     private DialogUIController dialogUIController;
     private MessageDispatcher messageDispatcher;
 
-    public TextDialogTask(Blackboard blackboard) {
+    public TextDialogTask(String title, String message, Blackboard blackboard) {
+        this.title = title;
+        this.message = message;
         this.dialogUIController = blackboard.getDialogUIController();
         this.messageDispatcher = MessageManager.getInstance();
     }
 
     @Override
     public void activate() {
-        String title = "Fisherman";
-        String text = "Hello friend! I would like to ask you for some help! {WAIT} I know this may sound strange, {WAIT}" +
-                "but I need 4 skeleton bones in order to finish something I've been working on for quite some time. {WAIT}" +
-                "Would you help me?";
-
-        dialogUIController.showTextDialog(title, text);
+        dialogUIController.showTextDialog(title, message);
         subscribeToEvent();
         Debugger.debug("[DIALOG] Activating");
     }
@@ -33,7 +32,7 @@ public class TextDialogTask extends Task implements Telegraph {
     @Override
     public void completed() {
         unsubscribeFromEvent();
-        Debugger.debug("[GOLD] Completed");
+        Debugger.debug("[DIALOG] Completed");
         super.completed();
     }
 

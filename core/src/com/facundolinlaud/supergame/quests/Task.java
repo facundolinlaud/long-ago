@@ -9,6 +9,10 @@ public abstract class Task {
         parent.childCompleted(this);
     }
 
+    public void failed(){
+        parent.childFailed(this);
+    }
+
     public void setParent(CompositeTask parent) {
         this.parent = parent;
     }

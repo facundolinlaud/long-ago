@@ -11,24 +11,22 @@ import static com.facundolinlaud.supergame.utils.events.Messages.QUEST_DIALOG_AC
 import static com.facundolinlaud.supergame.utils.events.Messages.QUEST_DIALOG_DECLINED;
 
 public class InputDialogTask extends Task implements Telegraph {
-    private final int[] DIALOG_EVENTS = {QUEST_DIALOG_ACCEPTED, QUEST_DIALOG_DECLINED};
-
+    private final int[] DIALOG_EVENTS = { QUEST_DIALOG_ACCEPTED, QUEST_DIALOG_DECLINED };
+    private String title;
+    private String message;
     private DialogUIController dialogUIController;
     private MessageDispatcher messageDispatcher;
 
-    public InputDialogTask(Blackboard blackboard) {
+    public InputDialogTask(String title, String message, Blackboard blackboard) {
+        this.title = title;
+        this.message = message;
         this.dialogUIController = blackboard.getDialogUIController();
         this.messageDispatcher = MessageManager.getInstance();
     }
 
     @Override
     public void activate() {
-        String title = "Fisherman";
-        String text = "Hello friend! I would like to ask you for some help! {WAIT} I know this may sound strange, {WAIT}" +
-                "but I need 4 skeleton bones in order to finish something I've been working on for quite some time. {WAIT}" +
-                "Would you help me?";
-
-        dialogUIController.showConfirmDeclineDialog(title, text);
+        dialogUIController.showConfirmDeclineDialog(title, message);
         subscribeToEvent();
         Debugger.debug("[DIALOG] Activating");
     }
@@ -47,11 +45,17 @@ public class InputDialogTask extends Task implements Telegraph {
                 completed();
                 break;
             case QUEST_DIALOG_DECLINED:
-                System.out.println("failed");
+                failed();
                 break;
         }
 
         return false;
+    }
+
+    @Override
+    public void failed(){
+        unsubscribeFromEvent();
+        super.failed();
     }
 
     private void subscribeToEvent() {
