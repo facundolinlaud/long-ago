@@ -1,9 +1,11 @@
-package com.facundolinlaud.supergame.quests;
+package com.facundolinlaud.supergame.quests.leafs;
 
 import com.badlogic.gdx.ai.msg.MessageDispatcher;
 import com.badlogic.gdx.ai.msg.MessageManager;
 import com.badlogic.gdx.ai.msg.Telegram;
 import com.badlogic.gdx.ai.msg.Telegraph;
+import com.facundolinlaud.supergame.quests.Blackboard;
+import com.facundolinlaud.supergame.quests.Task;
 import com.facundolinlaud.supergame.ui.controller.DialogUIController;
 import com.facundolinlaud.supergame.utils.Debugger;
 

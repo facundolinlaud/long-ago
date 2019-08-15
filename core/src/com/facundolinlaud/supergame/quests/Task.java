@@ -1,9 +1,11 @@
 package com.facundolinlaud.supergame.quests;
 
+import com.facundolinlaud.supergame.quests.composites.CompositeTask;
+
 public abstract class Task {
     protected CompositeTask parent;
 
-    abstract void activate();
+    public abstract void activate();
 
     public void completed() {
         parent.childCompleted(this);

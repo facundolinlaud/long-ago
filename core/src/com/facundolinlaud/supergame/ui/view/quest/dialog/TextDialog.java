@@ -7,11 +7,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import static com.facundolinlaud.supergame.utils.events.Messages.QUEST_DIALOG_CONTINUED;
 
 public class TextDialog extends BaseDialog {
-    private static final int HEIGHT = 120;
     private MessageDispatcher messageDispatcher;
 
     public TextDialog(Skin skin) {
-        super(skin, HEIGHT);
+        super(skin);
         messageDispatcher = MessageManager.getInstance();
     }
 

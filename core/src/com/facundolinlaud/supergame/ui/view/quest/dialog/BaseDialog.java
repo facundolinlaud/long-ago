@@ -14,41 +14,35 @@ public class BaseDialog {
     private static final int WIDTH = 400;
     private static final int PAD = 10;
 
-    protected Table container;
+    protected Table table;
     protected Label titleLabel;
     protected TypingLabel messageLabel;
 
-    public BaseDialog(Skin skin, float height) {
-        setupTable(skin, height);
+    public BaseDialog(Skin skin) {
+        setupTable(skin);
         setupTitle(skin);
-        setupDialog(skin);
-
-        container.align(Align.topLeft);
-        container.add(titleLabel).fillX().left();
-        container.row().padBottom(3 * PAD);
-        container.add(messageLabel).width(WIDTH - PAD).left();
+        setupMessage(skin);
+        layoutWidgets();
     }
 
     public void showDialog(String title, String message){
         titleLabel.setText(title);
         messageLabel.setText(message);
         messageLabel.restart();
-        container.setVisible(true);
+
+        table.setVisible(true);
+
+        messageLabel.pack();
+        table.pack();
     }
 
-    protected void hideDialog(){
-        container.setVisible(false);
-    }
-
-    private void setupTable(Skin skin, float height){
-        container = new Table(skin);
-        container.setPosition((Gdx.graphics.getWidth() - WIDTH) / 2, 100);
-        container.setBackground(skin.getDrawable(Themes.Background.SLOT));
-        container.setSize(WIDTH, height);
-        container.align(Align.topLeft);
-        container.setVisible(false);
-        container.setWidth(WIDTH);
-        container.pad(PAD);
+    private void setupTable(Skin skin){
+        table = new Table(skin);
+        table.align(Align.topLeft);
+        table.setPosition((Gdx.graphics.getWidth() - WIDTH) / 2, 100);
+        table.setBackground(skin.getDrawable(Themes.Background.SLOT));
+        table.setVisible(false);
+        table.pad(PAD);
     }
 
     private void setupTitle(Skin skin){
@@ -56,13 +50,23 @@ public class BaseDialog {
         titleLabel.setColor(Color.ROYAL);
     }
 
-    private void setupDialog(Skin skin){
-        messageLabel = new TypingLabel("Body", skin, Themes.Label.SMALL_CAPS_14);
+    private void setupMessage(Skin skin){
+        messageLabel = new TypingLabel("Message", skin, Themes.Label.SMALL_CAPS_14);
         messageLabel.setColor(Themes.Colors.GRAY);
         messageLabel.setWrap(true);
     }
 
+    private void layoutWidgets() {
+        table.add(titleLabel).left();
+        table.row();
+        table.add(messageLabel).width(WIDTH - PAD).left();
+    }
+
+    protected void hideDialog(){
+        table.setVisible(false);
+    }
+
     public Actor get() {
-        return container;
+        return table;
     }
 }

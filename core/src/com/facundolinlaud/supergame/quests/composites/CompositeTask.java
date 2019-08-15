@@ -1,5 +1,6 @@
-package com.facundolinlaud.supergame.quests;
+package com.facundolinlaud.supergame.quests.composites;
 
+import com.facundolinlaud.supergame.quests.Task;
 import com.facundolinlaud.supergame.utils.Debugger;
 
 import java.util.LinkedList;
@@ -16,7 +17,7 @@ public abstract class CompositeTask extends Task {
         children.forEach(child -> child.setParent(this));
     }
 
-    void childFailed(Task child) {
+    public void childFailed(Task child) {
         Debugger.debug("Task " + child + " failed");
         children.addAll(0, completed);
         completed.clear();
@@ -24,5 +25,5 @@ public abstract class CompositeTask extends Task {
         activate();
     }
 
-    abstract void childCompleted(Task child);
+    public abstract void childCompleted(Task child);
 }

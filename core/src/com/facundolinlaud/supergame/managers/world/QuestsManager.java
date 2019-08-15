@@ -2,6 +2,13 @@ package com.facundolinlaud.supergame.managers.world;
 
 import com.badlogic.ashley.core.Entity;
 import com.facundolinlaud.supergame.quests.*;
+import com.facundolinlaud.supergame.quests.composites.ParallelTask;
+import com.facundolinlaud.supergame.quests.composites.Quest;
+import com.facundolinlaud.supergame.quests.composites.SequentialTask;
+import com.facundolinlaud.supergame.quests.leafs.GoldRewardTask;
+import com.facundolinlaud.supergame.quests.leafs.InputDialogTask;
+import com.facundolinlaud.supergame.quests.leafs.SlayTask;
+import com.facundolinlaud.supergame.quests.leafs.TextDialogTask;
 import com.facundolinlaud.supergame.ui.controller.DialogUIController;
 
 import java.util.Arrays;
@@ -15,9 +22,9 @@ public class QuestsManager {
     }
 
     public Quest getNewQuest(Blackboard blackboard){
-        String title = "Some dude";
-        String firstDialog = "Hey there...{WAIT} I'm looking for some help...{WAIT} Do you want to help me?{WAIT}" +
-                "I will pay you 5 coins for it.{WAIT} What do you say?";
+        String title = "Fisherman";
+        String firstDialog = "Hey...{WAIT} You!{WAIT} I need your help with something...{WAIT} " +
+                "I'll pay you good coin for your sword.{WAIT} What do you say?{WAIT} Want to help an old man?";
         String secondDialog = "I need you to slay one Orc and two Skeletons.{WAIT}" +
                 "They are harrasing my sheeeeeeepsssss!!{WAIT} Will you help me?";
         String thirdDialog = "Thank you for your help!{WAIT} Here's what I promised!";

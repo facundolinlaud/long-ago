@@ -1,5 +1,6 @@
-package com.facundolinlaud.supergame.quests;
+package com.facundolinlaud.supergame.quests.composites;
 
+import com.facundolinlaud.supergame.quests.Task;
 import com.facundolinlaud.supergame.utils.Debugger;
 
 import java.util.LinkedList;

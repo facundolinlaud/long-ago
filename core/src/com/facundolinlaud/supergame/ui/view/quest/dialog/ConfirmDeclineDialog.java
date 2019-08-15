@@ -14,23 +14,14 @@ import static com.facundolinlaud.supergame.utils.events.Messages.QUEST_DIALOG_AC
 import static com.facundolinlaud.supergame.utils.events.Messages.QUEST_DIALOG_DECLINED;
 
 public class ConfirmDeclineDialog extends BaseDialog {
-    private static final int HEIGHT = 140;
     private MessageDispatcher messageDispatcher;
     private Table buttonsTable;
 
     public ConfirmDeclineDialog(Skin skin) {
-        super(skin, HEIGHT);
+        super(skin);
+
         messageDispatcher = MessageManager.getInstance();
-
         setupTable(skin);
-    }
-
-    public void onQuestDialogAccepted(){
-        messageDispatcher.dispatchMessage(QUEST_DIALOG_ACCEPTED);
-    }
-
-    public void onQuestDialogDeclined(){
-        messageDispatcher.dispatchMessage(QUEST_DIALOG_DECLINED);
     }
 
     private void setupTable(Skin skin) {
@@ -38,10 +29,11 @@ public class ConfirmDeclineDialog extends BaseDialog {
         TextButton declineButton = new TextButton("Decline", skin, Themes.TextButton.DEFAULT);
 
         buttonsTable = new Table(skin);
-        buttonsTable.add(acceptButton).fill().padRight(10).height(40).width(60);
-        buttonsTable.add(declineButton).fill().padLeft(10).height(40).width(60);
-        container.row().center();
-        container.add(buttonsTable).padTop(10).padBottom(10);
+        buttonsTable.add(acceptButton).padRight(10).height(30).width(70).fill();
+        buttonsTable.add(declineButton).padLeft(10).height(30).width(70).fill();
+
+        table.row().center();
+        table.add(buttonsTable).padTop(10);
 
         acceptButton.addListener(new ClickListener(Input.Buttons.LEFT){
             @Override
@@ -58,5 +50,13 @@ public class ConfirmDeclineDialog extends BaseDialog {
                 onQuestDialogDeclined();
             }
         });
+    }
+
+    public void onQuestDialogAccepted(){
+        messageDispatcher.dispatchMessage(QUEST_DIALOG_ACCEPTED);
+    }
+
+    public void onQuestDialogDeclined(){
+        messageDispatcher.dispatchMessage(QUEST_DIALOG_DECLINED);
     }
 }
