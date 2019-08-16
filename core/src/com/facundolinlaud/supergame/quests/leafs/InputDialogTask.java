@@ -28,6 +28,9 @@ public class InputDialogTask extends Task implements Telegraph {
 
     @Override
     public void activate() {
+        if(dialogUIController.isBusy())
+            failed();
+
         dialogUIController.showConfirmDeclineDialog(title, message);
         subscribeToEvent();
         Debugger.debug("[DIALOG] Activating");

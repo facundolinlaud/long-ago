@@ -32,7 +32,7 @@ public class AgentBuilder {
         this.entity = new Entity();
 
         this.entity.add(new RenderComponent(new SpriteRenderPositionStrategyImpl(), RenderPriority.AGENT))
-            .add(new AgentComponent(id))
+            .add(new IdComponent(id))
             .add(new BodyComponent(PhysicsFactory.get().createItemBody(), this.entity))
             .add(new StatusComponent())
             .add(new AnimableSpriteComponent())
@@ -111,6 +111,11 @@ public class AgentBuilder {
 
     public AgentBuilder withMana(float totalMana){
         this.entity.add(new ManaComponent(totalMana));
+        return this;
+    }
+
+    public AgentBuilder talkable(){
+        this.entity.add(new InteractionComponent());
         return this;
     }
 

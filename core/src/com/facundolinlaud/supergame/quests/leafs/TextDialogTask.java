@@ -26,6 +26,9 @@ public class TextDialogTask extends Task implements Telegraph {
 
     @Override
     public void activate() {
+        if(dialogUIController.isBusy())
+            failed();
+
         dialogUIController.showTextDialog(title, message);
         subscribeToEvent();
         Debugger.debug("[DIALOG] Activating");

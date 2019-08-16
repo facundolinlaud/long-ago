@@ -1,14 +1,12 @@
 package com.facundolinlaud.supergame.managers.world;
 
 import com.badlogic.ashley.core.Entity;
-import com.facundolinlaud.supergame.quests.*;
+import com.facundolinlaud.supergame.quests.Blackboard;
+import com.facundolinlaud.supergame.quests.Task;
 import com.facundolinlaud.supergame.quests.composites.ParallelTask;
 import com.facundolinlaud.supergame.quests.composites.Quest;
 import com.facundolinlaud.supergame.quests.composites.SequentialTask;
-import com.facundolinlaud.supergame.quests.leafs.GoldRewardTask;
-import com.facundolinlaud.supergame.quests.leafs.InputDialogTask;
-import com.facundolinlaud.supergame.quests.leafs.SlayTask;
-import com.facundolinlaud.supergame.quests.leafs.TextDialogTask;
+import com.facundolinlaud.supergame.quests.leafs.*;
 import com.facundolinlaud.supergame.ui.controller.DialogUIController;
 
 import java.util.Arrays;
@@ -29,11 +27,15 @@ public class QuestsManager {
                 "They are harrasing my sheeeeeeepsssss!!{WAIT} Will you help me?";
         String thirdDialog = "Thank you for your help!{WAIT} Here's what I promised!";
 
+        InteractionTask talkToTask1 = new InteractionTask(2);
         TextDialogTask dialogTask1 = new TextDialogTask(title, firstDialog, blackboard);
-        InputDialogTask dialogTask2 = new InputDialogTask(title, secondDialog, blackboard);
+        TextDialogTask dialogTask2 = new TextDialogTask(title, "So?", blackboard);
+        InputDialogTask dialogTask3 = new InputDialogTask(title, secondDialog, blackboard);
         LinkedList<Task> dialogs = new LinkedList();
+        dialogs.add(talkToTask1);
         dialogs.add(dialogTask1);
         dialogs.add(dialogTask2);
+        dialogs.add(dialogTask3);
 
         SequentialTask sequentialTask1 = new SequentialTask(dialogs);
 
@@ -45,12 +47,12 @@ public class QuestsManager {
 
         ParallelTask parallelTask1 = new ParallelTask(slays);
 
-        TextDialogTask dialogTask3 = new TextDialogTask(title, thirdDialog, blackboard);
+        TextDialogTask dialogTask4 = new TextDialogTask(title, thirdDialog, blackboard);
         GoldRewardTask goldRewardTask = new GoldRewardTask(blackboard, 5);
         LinkedList<Task> composites = new LinkedList();
         composites.add(sequentialTask1);
         composites.add(parallelTask1);
-        composites.add(dialogTask3);
+        composites.add(dialogTask4);
         composites.add(goldRewardTask);
 
         return new Quest(composites, Arrays.asList());

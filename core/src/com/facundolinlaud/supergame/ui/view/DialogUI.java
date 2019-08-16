@@ -33,4 +33,8 @@ public class DialogUI {
         if(textDialog.get().isVisible())
             textDialog.onContinueKeyPressed();
     }
+
+    public boolean isBusy() {
+        return textDialog.get().isVisible() || confirmCancelDialog.get().isVisible();
+    }
 }

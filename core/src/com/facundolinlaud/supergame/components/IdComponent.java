@@ -2,10 +2,10 @@ package com.facundolinlaud.supergame.components;
 
 import com.badlogic.ashley.core.Component;
 
-public class AgentComponent implements Component {
+public class IdComponent implements Component {
     private int id;
 
-    public AgentComponent(int id) {
+    public IdComponent(int id) {
         this.id = id;
     }
 

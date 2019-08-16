@@ -118,6 +118,7 @@ public class WorldScreen implements Screen {
         engine.addSystem(new ProjectileSystem(engine));
         engine.addSystem(new SkillCoolDownSystem());
         engine.addSystem(new HealthSystem(resources.getBatch()));
+        engine.addSystem(new InteractionSystem(uiManager.getDialogUIController(), playerInputManager, weManager));
 
         uiManager.initializeSystems(engine);
     }

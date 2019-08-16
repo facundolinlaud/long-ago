@@ -19,6 +19,10 @@ public class DialogUIController implements Telegraph {
         questUI.showConfirmDeclineDialog(title, message);
     }
 
+    public boolean isBusy(){
+        return questUI.isBusy();
+    }
+
     @Override
     public boolean handleMessage(Telegram msg) {
         return false;

@@ -8,8 +8,8 @@ import com.facundolinlaud.supergame.factory.ItemFactory;
 public class WorldEntitiesManager {
     private Factories factories;
     private Engine engine;
-
     private Entity player;
+    private Entity talkable;
 
     public WorldEntitiesManager(Engine engine, Factories factories) {
         this.engine = engine;
@@ -18,15 +18,25 @@ public class WorldEntitiesManager {
         addPlayer();
         addCoins();
         addSword();
+        addTalkable();
+    }
+
+    private void addTalkable(){
+        talkable = factories.getAgentFactory().getDummyAgent(2)
+                .talkable()
+                .at(30, 35)
+                .build();
+
+        engine.addEntity(talkable);
     }
 
     private void addPlayer(){
-        this.player = this.factories.getAgentFactory()
+        player = factories.getAgentFactory()
                 .getPlayer()
-                .at(17, 40)
+                .at(29, 35)
                 .build();
 
-        this.engine.addEntity(this.player);
+        engine.addEntity(player);
     }
 
     /* For testing purposes */

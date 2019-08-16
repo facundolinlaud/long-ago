@@ -37,35 +37,39 @@ public class AgentFactory {
     }
 
     private AgentBuilder getDummyAgent(Agent agent, int id){
+        Map<EquipSlot, Entity> equipment = buildEquipment(agent.getBody(), agent.getEquipment());
+
         AgentBuilder builder = new AgentBuilder(agent.getVelocity(), id)
+                .withEquipment(equipment, Messages.EQUIPMENT_CHANGED)
                 .withAttributes(agent.getAttributes());
 
         return builder;
     }
 
+    public AgentBuilder getDummyAgent(int id){
+        return getDummyAgent(agents.get(id), id);
+    }
+
     public AgentBuilder getAI(int id){
         Agent agent = agents.get(id);
-        Map<EquipSlot, Entity> equipment = buildEquipment(agent.getBody(), agent.getEquipment());
         SkillsInformation skillsInfo = agent.getSkillsInformation();
 
         return getDummyAgent(agent, id)
                 .withAI(agent.getNpcInformation())
-                .withEquipment(equipment)
                 .withParticles(particleFactory.getEffect(ParticleType.BLACK_SMOKE))
                 .withSkills(skillsFactory.get(skillsInfo.getSkills()), skillsInfo.getAssignablePoints());
     }
 
     public AgentBuilder getPlayer(){
         Agent agent = agents.get(MAIN_PLAYER_ID);
-        Map<EquipSlot, Entity> equipment = buildEquipment(agent.getBody(), agent.getEquipment());
         SkillsInformation skillsInfo = agent.getSkillsInformation();
 
         return getDummyAgent(agent, MAIN_PLAYER_ID)
                 .withBag(buildBag(agent.getBag()), agent.getGold(), Messages.INVENTORY_CHANGED)
-                .withEquipment(equipment, Messages.EQUIPMENT_CHANGED)
                 .withKeyboardControl()
                 .withSkills(skillsFactory.get(skillsInfo.getSkills()), skillsInfo.getAssignablePoints(),
-                        Messages.SKILLS_CHANGED);
+                        Messages.SKILLS_CHANGED)
+                .talkable();
     }
 
     private Map<EquipSlot, Entity> buildEquipment(Map<EquipSlot, String> body, Map<EquipSlot, Integer> model) {
