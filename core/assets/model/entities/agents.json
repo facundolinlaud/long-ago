@@ -86,6 +86,35 @@
 				"viewDistance": 5.0,
 				"behaviorType": "AGGRESSIVE"
 			}
+		},
+		"3": {
+			"name": "Elf",
+			"velocity": 2.0,
+			"skillsInformation": {
+				"skills": [2, 3, 4, 5]
+			},
+			"attributes": {
+				"strength": 10,
+				"agility": 10,
+				"stamina": 15,
+				"intelligence": 1
+			},
+			"body": {
+				"SHADOW": "sprites/living/body/shadow.png",
+				"BODY": "sprites/living/body/darkelf.png"
+			},
+			"equipment": {
+				"CHEST": 2,
+				"SHOES": 6,
+				"WEAPON": 17,
+				"HELMET": 8,
+				"PANTS": 9,
+				"BOW": 14
+			},
+			"npcInformation": {
+				"viewDistance": 5.0,
+				"behaviorType": "AGGRESSIVE"
+			}
 		}
 	}
 }

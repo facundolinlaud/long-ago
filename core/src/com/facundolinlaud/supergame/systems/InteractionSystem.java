@@ -13,8 +13,10 @@ import com.facundolinlaud.supergame.components.player.KeyboardComponent;
 import com.facundolinlaud.supergame.managers.world.PlayerInputManager;
 import com.facundolinlaud.supergame.managers.world.WorldEntitiesManager;
 import com.facundolinlaud.supergame.model.status.Action;
+import com.facundolinlaud.supergame.model.status.Direction;
 import com.facundolinlaud.supergame.ui.controller.DialogUIController;
 import com.facundolinlaud.supergame.utils.Mappers;
+import com.facundolinlaud.supergame.utils.PositionUtils;
 import com.facundolinlaud.supergame.utils.events.Messages;
 
 public class InteractionSystem extends EntitySystem {
@@ -59,8 +61,8 @@ public class InteractionSystem extends EntitySystem {
         if(closestInteractable == null)
             return;
 
-        int id = idm.get(closestInteractable).getId();
-        messageDispatcher.dispatchMessage(Messages.PLAYER_INTERACTION, (Object) id);
+        lookAt(closestInteractable, playerPosition);
+        dispatchPlayerInteractionMessage(closestInteractable);
     }
 
     private boolean cantInteract(Entity player) {
@@ -86,5 +88,18 @@ public class InteractionSystem extends EntitySystem {
             return null;
 
         return bestInteractable;
+    }
+
+    private void lookAt(Entity closestInteractable, Vector2 position){
+        Vector2 closesInteractablePosition = pm.get(closestInteractable).getPosition();
+        Direction newAgentDirection = PositionUtils.getFacingDirection(closesInteractablePosition, position);
+
+        StatusComponent statusComponent = sm.get(closestInteractable);
+        statusComponent.setDirection(newAgentDirection);
+    }
+
+    private void dispatchPlayerInteractionMessage(Entity closestInteractable) {
+        int id = idm.get(closestInteractable).getId();
+        messageDispatcher.dispatchMessage(Messages.PLAYER_INTERACTION, (Object) id);
     }
 }
