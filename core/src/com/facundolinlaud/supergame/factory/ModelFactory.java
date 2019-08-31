@@ -1,8 +1,8 @@
 package com.facundolinlaud.supergame.factory;
 
 import com.badlogic.gdx.Gdx;
-import com.facundolinlaud.supergame.model.agent.Agent;
-import com.facundolinlaud.supergame.model.agent.Agents;
+import com.facundolinlaud.supergame.dto.agent.Agent;
+import com.facundolinlaud.supergame.dto.agent.Agents;
 import com.facundolinlaud.supergame.model.item.Item;
 import com.facundolinlaud.supergame.model.item.Items;
 import com.facundolinlaud.supergame.model.particle.ParticleType;
@@ -18,9 +18,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * Created by facundo on 27/7/16.

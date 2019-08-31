@@ -22,7 +22,7 @@ public class SpawnTask extends Task {
 
     @Override
     public void activate() {
-        Entity agent = agentFactory.getAI(agentId)
+        Entity agent = agentFactory.create(agentId)
                 .at(position.x, position.y)
                 .build();
 

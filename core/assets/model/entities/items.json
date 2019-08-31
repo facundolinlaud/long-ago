@@ -256,6 +256,30 @@
 			    "equipType": "SPEAR",
 			    "attack": 15
 		    }
+		},
+		"21": {
+			"name": "Leather Teal Pants",
+		    "texture": "sprites/items/pants/leather_teal.png",
+		    "picture": "pictures/items/pants/leather_teal.png",
+		    "weight": 0.5,
+		    "marketValue": 0,
+		    "rarity": "COMMON",
+		    "equipmentInformation": {
+				"equipSlot": "PANTS",
+			    "defense": 1
+		    }
+		},
+		"22": {
+			"name": "Tabard",
+		    "texture": "sprites/items/armor/tabard.png",
+		    "picture": "pictures/items/armor/tabard.png",
+		    "weight": 0.5,
+		    "marketValue": 0,
+		    "rarity": "COMMON",
+		    "equipmentInformation": {
+				"equipSlot": "CHEST",
+			    "defense": 1
+		    }
 		}
 	}
 }

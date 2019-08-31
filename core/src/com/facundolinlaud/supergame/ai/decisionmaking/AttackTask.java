@@ -24,7 +24,6 @@ public class AttackTask extends LeafTask<Blackboard> {
     private ComponentMapper<StatusComponent> sm = Mappers.status;
     private ComponentMapper<ManaComponent> mm = Mappers.mana;
     private ComponentMapper<SkillsComponent> ssm = Mappers.skills;
-    private ComponentMapper<PositionComponent> pm = Mappers.position;
 
     private Random rand;
 

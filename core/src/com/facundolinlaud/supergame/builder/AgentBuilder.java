@@ -13,8 +13,9 @@ import com.facundolinlaud.supergame.components.sprite.StackedSpritesComponent;
 import com.facundolinlaud.supergame.factory.ModelFactory;
 import com.facundolinlaud.supergame.factory.PhysicsFactory;
 import com.facundolinlaud.supergame.model.RenderPriority;
-import com.facundolinlaud.supergame.model.agent.Attributes;
-import com.facundolinlaud.supergame.model.agent.NPCInformation;
+import com.facundolinlaud.supergame.dto.agent.Attributes;
+import com.facundolinlaud.supergame.dto.agent.AIInformation;
+import com.facundolinlaud.supergame.model.ai.BehaviorType;
 import com.facundolinlaud.supergame.model.equip.EquipSlot;
 import com.facundolinlaud.supergame.model.skill.Skill;
 import com.facundolinlaud.supergame.strategies.renderposition.SpriteRenderPositionStrategyImpl;
@@ -41,8 +42,8 @@ public class AgentBuilder {
             .add(new VelocityComponent(velocity));
     }
 
-    public AgentBuilder withAI(NPCInformation npcInformation){
-        this.entity.add(new AIComponent(npcInformation));
+    public AgentBuilder withAI(BehaviorType behaviorType, float viewDistance){
+        this.entity.add(new AIComponent(behaviorType, viewDistance));
         return this;
     }
 
@@ -75,6 +76,7 @@ public class AgentBuilder {
     }
 
     public AgentBuilder withBag(List<Entity> bag, int gold){
+
         this.entity.add(new BagComponent(bag, gold));
         return this;
     }
