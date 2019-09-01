@@ -137,6 +137,7 @@ public class WorldScreen implements Screen {
         mapManager.renderUpperLayer();
         physicsManager.render();
         lightsManager.render();
+        questsManager.tick();
 
         uiManager.render();
     }
