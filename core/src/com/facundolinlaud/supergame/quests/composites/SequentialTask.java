@@ -6,7 +6,7 @@ import com.facundolinlaud.supergame.utils.Debugger;
 import java.util.LinkedList;
 
 public class SequentialTask<T> extends CompositeTask<T> {
-    public SequentialTask(LinkedList<Task> children) {
+    public SequentialTask(Task...children) {
         super(children);
     }
 

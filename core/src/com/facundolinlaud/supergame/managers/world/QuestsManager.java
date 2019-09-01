@@ -6,7 +6,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.facundolinlaud.supergame.factory.AgentFactory;
 import com.facundolinlaud.supergame.quests.PoolableTask;
 import com.facundolinlaud.supergame.quests.QuestBlackboard;
-import com.facundolinlaud.supergame.quests.Task;
 import com.facundolinlaud.supergame.quests.composites.ParallelTask;
 import com.facundolinlaud.supergame.quests.composites.Quest;
 import com.facundolinlaud.supergame.quests.composites.SequentialTask;
@@ -15,7 +14,6 @@ import com.facundolinlaud.supergame.ui.controller.DialogUIController;
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.Set;
 
 public class QuestsManager {
@@ -50,14 +48,7 @@ public class QuestsManager {
         String secondDialog = "Thank you very much!{WAIT} Here's the gold I promised...";
         TextDialogTask dialogTask2 = new TextDialogTask(title, secondDialog);
 
-        LinkedList<Task> composites = new LinkedList();
-        composites.add(dialogTask1);
-        composites.add(spawnTask);
-        composites.add(slayTask);
-        composites.add(goldRewardTask);
-        composites.add(dialogTask2);
-
-        return new Quest(composites, Arrays.asList(), blackboard);
+        return new Quest(Arrays.asList(), blackboard, dialogTask1, spawnTask, slayTask, goldRewardTask, dialogTask2);
     }
 
     public Quest getA(QuestBlackboard blackboard){
@@ -73,32 +64,16 @@ public class QuestsManager {
         TextDialogTask dialogTask1 = new TextDialogTask(title, firstDialog);
         TextDialogTask dialogTask2 = new TextDialogTask(title, "So?");
         InputDialogTask dialogTask3 = new InputDialogTask(title, secondDialog);
-        LinkedList<Task> dialogs = new LinkedList();
-        dialogs.add(spawnTask1);
-        dialogs.add(talkToTask1);
-        dialogs.add(dialogTask1);
-        dialogs.add(dialogTask2);
-        dialogs.add(dialogTask3);
-
-        SequentialTask sequentialTask1 = new SequentialTask(dialogs);
+        SequentialTask sequentialTask1 = new SequentialTask(spawnTask1, talkToTask1, dialogTask1, dialogTask2, dialogTask3);
 
         SlayTask slayTask1 = new SlayTask(1, 1);
         SlayTask slayTask2 = new SlayTask(2, 2);
-
-        LinkedList<Task> slays = new LinkedList();
-        slays.add(slayTask1);
-        slays.add(slayTask2);
-
-        ParallelTask parallelTask1 = new ParallelTask(slays);
+        ParallelTask parallelTask1 = new ParallelTask(slayTask1, slayTask2);
 
         TextDialogTask dialogTask4 = new TextDialogTask(title, thirdDialog);
         GoldRewardTask goldRewardTask = new GoldRewardTask(10);
-        LinkedList<Task> composites = new LinkedList();
-        composites.add(sequentialTask1);
-        composites.add(parallelTask1);
-        composites.add(dialogTask4);
-        composites.add(goldRewardTask);
 
-        return new Quest(composites, Arrays.asList(getB(blackboard)), blackboard);
+        return new Quest(Arrays.asList(getB(blackboard)), blackboard, sequentialTask1,
+                parallelTask1, dialogTask4, goldRewardTask);
     }
 }

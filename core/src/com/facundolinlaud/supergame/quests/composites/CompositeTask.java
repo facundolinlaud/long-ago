@@ -3,12 +3,17 @@ package com.facundolinlaud.supergame.quests.composites;
 import com.facundolinlaud.supergame.quests.Task;
 import com.facundolinlaud.supergame.utils.Debugger;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
 public abstract class CompositeTask<T> extends Task<T> {
     protected LinkedList<Task> children;
     protected List<Task> completed;
+
+    public CompositeTask(Task... children){
+        this(new LinkedList(Arrays.asList(children)));
+    }
 
     public CompositeTask(LinkedList<Task> children) {
         this.children = children;

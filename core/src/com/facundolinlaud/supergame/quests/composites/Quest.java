@@ -10,7 +10,7 @@ import java.util.List;
 public class Quest extends SequentialTask {
     private List<Quest> nextQuests;
 
-    public Quest(LinkedList<Task> children, List<Quest> nextQuests, QuestBlackboard blackboard) {
+    public Quest(List<Quest> nextQuests, QuestBlackboard blackboard, Task...children) {
         super(children);
         this.nextQuests = nextQuests;
         setBlackboard(blackboard);
