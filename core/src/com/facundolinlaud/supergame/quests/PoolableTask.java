@@ -1,6 +1,6 @@
 package com.facundolinlaud.supergame.quests;
 
-public abstract class PoolableTask extends Task<QuestBlackboard> {
+public abstract class PoolableTask extends Task {
     @Override
     public void activate() {
         getBlackboard().getQuestsManager().addPoolableTask(this);

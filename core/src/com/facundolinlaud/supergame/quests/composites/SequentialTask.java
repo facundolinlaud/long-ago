@@ -3,9 +3,7 @@ package com.facundolinlaud.supergame.quests.composites;
 import com.facundolinlaud.supergame.quests.Task;
 import com.facundolinlaud.supergame.utils.Debugger;
 
-import java.util.LinkedList;
-
-public class SequentialTask<T> extends CompositeTask<T> {
+public class SequentialTask extends CompositeTask {
     public SequentialTask(Task...children) {
         super(children);
     }

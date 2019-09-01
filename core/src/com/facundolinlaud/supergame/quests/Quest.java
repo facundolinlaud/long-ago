@@ -5,10 +5,10 @@ import com.facundolinlaud.supergame.utils.Debugger;
 
 import java.util.List;
 
-public class Quest extends SequentialTask<QuestBlackboard> {
+public class Quest extends SequentialTask {
     private List<Quest> nextQuests;
 
-    public Quest(List<Quest> nextQuests, QuestBlackboard blackboard, Task...children) {
+    public Quest(List<Quest> nextQuests, Blackboard blackboard, Task...children) {
         super(children);
         this.nextQuests = nextQuests;
         setBlackboard(blackboard);

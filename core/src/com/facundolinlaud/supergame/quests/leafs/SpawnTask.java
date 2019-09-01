@@ -4,10 +4,10 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.math.Vector2;
 import com.facundolinlaud.supergame.factory.AgentFactory;
-import com.facundolinlaud.supergame.quests.QuestBlackboard;
+import com.facundolinlaud.supergame.quests.Blackboard;
 import com.facundolinlaud.supergame.quests.Task;
 
-public class SpawnTask extends Task<QuestBlackboard> {
+public class SpawnTask extends Task {
     private int agentId;
     private Vector2 position;
 

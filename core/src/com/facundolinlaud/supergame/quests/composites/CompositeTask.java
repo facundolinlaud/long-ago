@@ -1,5 +1,6 @@
 package com.facundolinlaud.supergame.quests.composites;
 
+import com.facundolinlaud.supergame.quests.Blackboard;
 import com.facundolinlaud.supergame.quests.Task;
 import com.facundolinlaud.supergame.utils.Debugger;
 
@@ -7,7 +8,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-public abstract class CompositeTask<T> extends Task<T> {
+public abstract class CompositeTask extends Task {
     protected LinkedList<Task> children;
     protected List<Task> completed;
 
@@ -31,7 +32,7 @@ public abstract class CompositeTask<T> extends Task<T> {
     }
 
     @Override
-    protected void onBlackboardAvailable(T blackboard) {
+    protected void onBlackboardAvailable(Blackboard blackboard) {
         children.forEach(child -> child.setBlackboard(blackboard));
     }
 

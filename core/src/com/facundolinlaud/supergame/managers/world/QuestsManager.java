@@ -5,7 +5,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.math.Vector2;
 import com.facundolinlaud.supergame.factory.AgentFactory;
 import com.facundolinlaud.supergame.quests.PoolableTask;
-import com.facundolinlaud.supergame.quests.QuestBlackboard;
+import com.facundolinlaud.supergame.quests.Blackboard;
 import com.facundolinlaud.supergame.quests.composites.ParallelTask;
 import com.facundolinlaud.supergame.quests.Quest;
 import com.facundolinlaud.supergame.quests.composites.SequentialTask;
@@ -22,7 +22,7 @@ public class QuestsManager {
     public QuestsManager(Entity player, DialogUIController dialogUIController, AgentFactory agentFactory, Engine engine) {
         this.poolableTasks = new HashSet();
 
-        QuestBlackboard blackboard = new QuestBlackboard(player, dialogUIController, agentFactory, engine, this);
+        Blackboard blackboard = new Blackboard(player, dialogUIController, agentFactory, engine, this);
         getA(blackboard).activate();
     }
 
@@ -38,7 +38,7 @@ public class QuestsManager {
         poolableTasks.forEach(poolableTask -> poolableTask.tick());
     }
 
-    public Quest getB(QuestBlackboard blackboard){
+    public Quest getB(Blackboard blackboard){
         String title = "Fisherman";
         String firstDialog = "Now I need you to kill an elf.{WAIT} Will you?";
         InputDialogTask dialogTask1 = new InputDialogTask(title, firstDialog);
@@ -51,7 +51,7 @@ public class QuestsManager {
         return new Quest(Arrays.asList(), blackboard, dialogTask1, spawnTask, slayTask, goldRewardTask, dialogTask2);
     }
 
-    public Quest getA(QuestBlackboard blackboard){
+    public Quest getA(Blackboard blackboard){
         String title = "Fisherman";
         String firstDialog = "Hey...{WAIT} You!{WAIT} I need your help with something...{WAIT} " +
                 "I'll pay you good coin for your sword.{WAIT} What do you say?{WAIT} Want to help an old man?";

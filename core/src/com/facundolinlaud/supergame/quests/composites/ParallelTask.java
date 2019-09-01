@@ -4,7 +4,7 @@ import com.facundolinlaud.supergame.quests.Task;
 
 import java.util.LinkedList;
 
-public class ParallelTask<T> extends CompositeTask<T> {
+public class ParallelTask extends CompositeTask {
     public ParallelTask(Task...children) {
         super(children);
     }

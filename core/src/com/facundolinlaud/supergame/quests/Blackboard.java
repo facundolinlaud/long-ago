@@ -6,15 +6,15 @@ import com.facundolinlaud.supergame.factory.AgentFactory;
 import com.facundolinlaud.supergame.managers.world.QuestsManager;
 import com.facundolinlaud.supergame.ui.controller.DialogUIController;
 
-public class QuestBlackboard {
+public class Blackboard {
     private Entity player;
     private DialogUIController dialogUIController;
     private AgentFactory agentFactory;
     private Engine engine;
     private QuestsManager questsManager;
 
-    public QuestBlackboard(Entity player, DialogUIController dialogUIController, AgentFactory agentFactory,
-                           Engine engine, QuestsManager questsManager) {
+    public Blackboard(Entity player, DialogUIController dialogUIController, AgentFactory agentFactory,
+                      Engine engine, QuestsManager questsManager) {
         this.player = player;
         this.dialogUIController = dialogUIController;
         this.agentFactory = agentFactory;
