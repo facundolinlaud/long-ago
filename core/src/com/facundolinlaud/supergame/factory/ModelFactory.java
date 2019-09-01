@@ -3,6 +3,8 @@ package com.facundolinlaud.supergame.factory;
 import com.badlogic.gdx.Gdx;
 import com.facundolinlaud.supergame.dto.agent.Agent;
 import com.facundolinlaud.supergame.dto.agent.Agents;
+import com.facundolinlaud.supergame.dto.composite.SequentialTaskDto;
+import com.facundolinlaud.supergame.dto.quests.QuestDto;
 import com.facundolinlaud.supergame.model.item.Item;
 import com.facundolinlaud.supergame.model.item.Items;
 import com.facundolinlaud.supergame.model.particle.ParticleType;
@@ -14,7 +16,6 @@ import com.facundolinlaud.supergame.model.skill.SkillsModel;
 import com.facundolinlaud.supergame.model.sprite.RawAnimationModel;
 import com.facundolinlaud.supergame.model.sprite.SpriteModel;
 import com.facundolinlaud.supergame.model.sprite.SpritesModels;
-import com.facundolinlaud.supergame.quests.leafs.InputDialogTask;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
@@ -33,7 +34,7 @@ public class ModelFactory implements Disposable {
     private static final String SPRITES_MODELS_PATH = "model/textures/sprites.json";
     private static final String SKILL_BAR_MODEL_PATH = "model/player/skill_bar.json";
     private static final String SKILL_TREE_MODEL_PATH = "model/player/skill_tree.json";
-    private static final String QUESTS_MODELS_PATH = "model/entities/quests.json";
+    private static final String QUESTS_MODELS_DIRECTORY = "model/quests/";
 
     private static Map<String, Object> cache = new HashMap<>();
     private static ObjectMapper mapper = new ObjectMapper();
@@ -75,6 +76,19 @@ public class ModelFactory implements Disposable {
     public static SkillTreeModel getSkillTree(){
         SkillTreeModel skillTree = (SkillTreeModel) readModel(SKILL_TREE_MODEL_PATH, SkillTreeModel.class);
         return skillTree;
+    }
+
+    public static QuestDto getQuest(String questFile){
+        ObjectMapper customMapper = new ObjectMapper().enableDefaultTyping();
+
+        try {
+            return customMapper.readValue(Gdx.files.internal(QUESTS_MODELS_DIRECTORY + questFile)
+                    .file(), QuestDto.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
     private static Object readModel(String modelPath, Class clazz){

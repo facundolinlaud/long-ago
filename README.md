@@ -32,6 +32,7 @@ Thanks!
 - [x] Player and NPC attributes
 - [x] Factories and domain information as Data Driven as posible
 - [x] Lights
+- [x] Quest system
 - [ ] Game experience (story line, quests, cities, well-designed npc's)
 - [ ] Scalable UI
 - [ ] Levels and player experience
@@ -67,6 +68,12 @@ The Action state will hold the state of it's respective agent. In other words: w
 
 On the other side, the Direction state will hold the direction the agent is facing. If he is walking to the right, then the action of the agent will be *WALKING* and it's direction will be *RIGHT*. As the game is a 2-dimensional world, each agent will always posses a valid direction.
 
+## Quest System
+The quest system was done using the Composite Pattern with some extra funcionality like supporting container nodes that traverse their children in sequence or in parallel (SequentialTask and ParallelTask respectively) like behavior trees. A quest can listen to events and perform events. These are the leaves in the tree. Find [the composite implementation here](https://github.com/facundolinlaud/long-ago/tree/master/core/src/com/facundolinlaud/supergame/quests).
+
+Note that the quest system not only supports subscription to world events, but also polling through the PoolableTask class. The QuestManager class has a set of active poolable tasks that are executed once every frame. They add and remove themselves to the set when activated and completed respectively.
+
+Finally, making the quest system data driven was a little bit tricky as it involved a polymorphic deserialization of the composite object that is basically a tree. Jackson is kind of picky when it comes to polymorphism so I had to use a dto for each task in the composite, where each dto knows how to return a proper task model version of itself. Basically, the quest tree is read and built in the QuestFactory class and the first quest is started in the QuestManager class.
 ## Artificial Intelligence System
 ### Decision Making Module (Behaviour Trees)
 ### Path Finding Module (A\*)

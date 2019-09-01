@@ -12,10 +12,6 @@ public abstract class CompositeTask extends Task {
     protected LinkedList<Task> children;
     protected List<Task> completed;
 
-    public CompositeTask(Task... children){
-        this(new LinkedList(Arrays.asList(children)));
-    }
-
     public CompositeTask(LinkedList<Task> children) {
         this.children = children;
         this.completed = new LinkedList();
