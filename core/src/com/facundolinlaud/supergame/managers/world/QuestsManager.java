@@ -7,7 +7,7 @@ import com.facundolinlaud.supergame.factory.AgentFactory;
 import com.facundolinlaud.supergame.quests.PoolableTask;
 import com.facundolinlaud.supergame.quests.QuestBlackboard;
 import com.facundolinlaud.supergame.quests.composites.ParallelTask;
-import com.facundolinlaud.supergame.quests.composites.Quest;
+import com.facundolinlaud.supergame.quests.Quest;
 import com.facundolinlaud.supergame.quests.composites.SequentialTask;
 import com.facundolinlaud.supergame.quests.leafs.*;
 import com.facundolinlaud.supergame.ui.controller.DialogUIController;

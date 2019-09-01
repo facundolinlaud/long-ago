@@ -14,6 +14,7 @@ import com.facundolinlaud.supergame.model.skill.SkillsModel;
 import com.facundolinlaud.supergame.model.sprite.RawAnimationModel;
 import com.facundolinlaud.supergame.model.sprite.SpriteModel;
 import com.facundolinlaud.supergame.model.sprite.SpritesModels;
+import com.facundolinlaud.supergame.quests.leafs.InputDialogTask;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
@@ -32,8 +33,10 @@ public class ModelFactory implements Disposable {
     private static final String SPRITES_MODELS_PATH = "model/textures/sprites.json";
     private static final String SKILL_BAR_MODEL_PATH = "model/player/skill_bar.json";
     private static final String SKILL_TREE_MODEL_PATH = "model/player/skill_tree.json";
+    private static final String QUESTS_MODELS_PATH = "model/entities/quests.json";
 
     private static Map<String, Object> cache = new HashMap<>();
+    private static ObjectMapper mapper = new ObjectMapper();
 
     public static RawAnimationModel getDefaultAnimationModel(){
         return (RawAnimationModel) readModel(DEFAULT_ANIMATION_MODEL_PATH, RawAnimationModel.class);
@@ -78,8 +81,6 @@ public class ModelFactory implements Disposable {
         if(cache.containsKey(modelPath)){
             return cache.get(modelPath);
         }else {
-            ObjectMapper mapper = new ObjectMapper();
-
             try {
                 Object o = mapper.readValue(Gdx.files.internal(modelPath).file(), clazz);
                 cache.put(modelPath, o);

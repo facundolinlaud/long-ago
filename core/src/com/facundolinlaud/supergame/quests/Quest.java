@@ -1,13 +1,11 @@
-package com.facundolinlaud.supergame.quests.composites;
+package com.facundolinlaud.supergame.quests;
 
-import com.facundolinlaud.supergame.quests.QuestBlackboard;
-import com.facundolinlaud.supergame.quests.Task;
+import com.facundolinlaud.supergame.quests.composites.SequentialTask;
 import com.facundolinlaud.supergame.utils.Debugger;
 
-import java.util.LinkedList;
 import java.util.List;
 
-public class Quest extends SequentialTask {
+public class Quest extends SequentialTask<QuestBlackboard> {
     private List<Quest> nextQuests;
 
     public Quest(List<Quest> nextQuests, QuestBlackboard blackboard, Task...children) {
