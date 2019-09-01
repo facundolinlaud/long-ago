@@ -9,6 +9,7 @@ import com.facundolinlaud.supergame.components.player.KeyboardComponent;
 import com.facundolinlaud.supergame.model.skill.Skill;
 import com.facundolinlaud.supergame.ui.view.OverlayUI;
 import com.facundolinlaud.supergame.utils.Mappers;
+import com.facundolinlaud.supergame.utils.events.Messages;
 import com.facundolinlaud.supergame.utils.events.SkillCastedEvent;
 
 import java.util.Map;
@@ -61,6 +62,9 @@ public class OverlayUIController implements Telegraph {
                 break;
             case REJECTED_SKILL_DUE_TO_WEAPON:
                 this.overlayUI.popNoAdequateWeaponNotification();
+                break;
+            case CUSTOM_MESSAGE:
+                this.overlayUI.popNotification((String) msg.extraInfo);
                 break;
         }
 

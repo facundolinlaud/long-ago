@@ -1,6 +1,7 @@
 package com.facundolinlaud.supergame.components;
 
 import com.badlogic.ashley.core.Component;
+import com.badlogic.gdx.ai.msg.MessageManager;
 import com.facundolinlaud.supergame.model.skill.Skill;
 import com.facundolinlaud.supergame.model.skill.SkillType;
 import javafx.collections.FXCollections;
@@ -23,9 +24,10 @@ public class SkillsComponent implements Component {
         this.assignablePoints = assignablePoints;
     }
 
-    public SkillsComponent(List<Skill> skills, int assignablePoints, ListChangeListener<? super Skill> listener) {
+    public SkillsComponent(List<Skill> skills, int assignablePoints, int onChangeMessage) {
         this(skills, assignablePoints);
-        this.skills.addListener(listener);
+        this.skills.addListener((ListChangeListener<? super Skill>)
+                c -> MessageManager.getInstance().dispatchMessage(onChangeMessage));
     }
 
     public ObservableList<Skill> getSkills() {

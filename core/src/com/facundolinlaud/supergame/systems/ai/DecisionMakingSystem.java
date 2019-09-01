@@ -12,7 +12,7 @@ import com.facundolinlaud.supergame.utils.Distances;
 import com.facundolinlaud.supergame.utils.Mappers;
 
 public class DecisionMakingSystem extends EntitySystem {
-    private final static float INTERVAL = 0.5f;
+    private final static float INTERVAL = 0.1f;
     private static final float MINIMUM_DISTANCE_FOR_ACTIVE_IA = 25f;
 
     private ComponentMapper<PositionComponent> pm = Mappers.position;

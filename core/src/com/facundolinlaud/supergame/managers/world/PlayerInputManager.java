@@ -25,6 +25,10 @@ public class PlayerInputManager extends ClickListener {
         return Gdx.input.isKeyJustPressed(Input.Keys.E);
     }
 
+    public boolean isInteractionRequested(){
+        return Gdx.input.isKeyJustPressed(Input.Keys.F);
+    }
+
     public boolean isPressingSkillButton(){
         return skillKeysPressed.size() > 0;
     }
@@ -85,20 +89,27 @@ public class PlayerInputManager extends ClickListener {
 
     @Override
     public boolean keyDown(InputEvent event, int keycode) {
+        handleMovementKeys(keycode);
+        handleSkillsKeys(keycode);
+
+        return super.keyDown(event, keycode);
+    }
+
+    private void handleMovementKeys(int keycode) {
         Direction direction = keycodeToDirection(keycode);
 
         if(direction != null && !movementKeysPressed.contains(direction)){
             movementKeysPressed.push(direction);
         }
+    }
 
+    private void handleSkillsKeys(int keycode) {
         if(isSkillKey(keycode)){
             int skillId = keycodeToSkillId(keycode);
 
             if(!skillKeysPressed.contains(skillId))
                 skillKeysPressed.push(skillId);
         }
-
-        return super.keyDown(event, keycode);
     }
 
     @Override

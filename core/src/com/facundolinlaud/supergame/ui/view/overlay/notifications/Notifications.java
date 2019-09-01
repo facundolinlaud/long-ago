@@ -32,6 +32,10 @@ public class Notifications {
         popNotification("You don´t have the appropiate weapon for this skill!", Color.FIREBRICK);
     }
 
+    public void popNotification(String text){
+        popNotification(text, Color.LIME);
+    }
+
     private void popNotification(String text, Color color) {
         Label label = new Label(text, skin, Themes.Label.BOLD_16);
         label.setColor(color);

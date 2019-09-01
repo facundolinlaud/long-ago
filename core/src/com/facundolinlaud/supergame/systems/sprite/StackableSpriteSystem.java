@@ -24,7 +24,11 @@ public class StackableSpriteSystem extends IteratingSystem {
     private ComponentMapper<WearComponent> wm = Mappers.wear;
 
     public StackableSpriteSystem() {
-        super(Family.all(RefreshSpriteRequirementComponent.class, StackedSpritesComponent.class, RenderComponent.class).get());
+        super(Family.all(
+                RefreshSpriteRequirementComponent.class,
+                StackedSpritesComponent.class,
+                RenderComponent.class,
+                WearComponent.class).get());
     }
 
     @Override

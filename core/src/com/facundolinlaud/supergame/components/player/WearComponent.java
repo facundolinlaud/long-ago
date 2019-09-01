@@ -2,12 +2,14 @@ package com.facundolinlaud.supergame.components.player;
 
 import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.gdx.ai.msg.MessageManager;
 import com.facundolinlaud.supergame.model.equip.EquipSlot;
 import javafx.collections.FXCollections;
 import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableMap;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -22,14 +24,14 @@ public class WearComponent implements Component {
         this.wearables = FXCollections.observableMap(wearables);
     }
 
-    public WearComponent(Map<EquipSlot, Entity> wearables,
-                         MapChangeListener<? super EquipSlot, ? super Entity> listener) {
+    public WearComponent(Map<EquipSlot, Entity> wearables, int onChangeMessage) {
         this(wearables);
-        this.wearables.addListener(listener);
+        this.wearables.addListener((MapChangeListener<? super EquipSlot, ? super Entity>) change ->
+                MessageManager.getInstance().dispatchMessage(onChangeMessage));
     }
 
     public List<Entity> asList(){
-        return wearables.keySet().stream().sorted((e1, e2) -> e1.getRenderPriority() - e2.getRenderPriority()).map(e -> wearables.get(e)).collect(Collectors.toList());
+        return wearables.keySet().stream().sorted(Comparator.comparingInt(EquipSlot::getRenderPriority)).map(e -> wearables.get(e)).collect(Collectors.toList());
     }
 
     public List<Entity> getEquipmentAsList(){

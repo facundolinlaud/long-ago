@@ -4,6 +4,8 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.ai.msg.MessageDispatcher;
+import com.badlogic.gdx.ai.msg.MessageManager;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.facundolinlaud.supergame.components.BodyComponent;
@@ -27,6 +29,7 @@ import com.facundolinlaud.supergame.systems.sprite.StackedSpritesSystem;
 public class WorldScreen implements Screen {
     private GameResources resources;
     private Factories factories;
+    private MessageDispatcher messageDispatcher;
 
     private CameraManager cameraManager;
     private MapManager mapManager;
@@ -37,10 +40,12 @@ public class WorldScreen implements Screen {
     private UIManager uiManager;
     private LightsManager lightsManager;
     private PlayerInputManager playerInputManager;
+    private QuestsManager questsManager;
 
     private Stage stage;
 
     public WorldScreen(GameResources resources) {
+        this.messageDispatcher = MessageManager.getInstance();
         this.resources = resources;
 
         initializeStage();
@@ -71,6 +76,8 @@ public class WorldScreen implements Screen {
         this.uiManager = new UIManager(stage, mapManager.getCamera(), weManager.getPlayer());
         this.lightsManager = new LightsManager(physicsManager.getWorld(), mapManager.getCamera(), weManager.getPlayer());
         this.playerInputManager = new PlayerInputManager();
+        this.questsManager = new QuestsManager(factories, weManager.getPlayer(),
+                uiManager.getDialogUIController(), resources.getEngine());
     }
 
     private void initializeListeners() {
@@ -112,12 +119,14 @@ public class WorldScreen implements Screen {
         engine.addSystem(new ProjectileSystem(engine));
         engine.addSystem(new SkillCoolDownSystem());
         engine.addSystem(new HealthSystem(resources.getBatch()));
+        engine.addSystem(new InteractionSystem(uiManager.getDialogUIController(), playerInputManager, weManager));
 
         uiManager.initializeSystems(engine);
     }
 
     @Override
     public void render(float delta) {
+        messageDispatcher.update();
         cameraManager.render(delta);
         mapManager.render();
 
@@ -128,6 +137,7 @@ public class WorldScreen implements Screen {
         mapManager.renderUpperLayer();
         physicsManager.render();
         lightsManager.render();
+        questsManager.tick();
 
         uiManager.render();
     }

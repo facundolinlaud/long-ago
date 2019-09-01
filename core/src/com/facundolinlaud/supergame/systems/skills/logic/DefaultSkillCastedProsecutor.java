@@ -47,9 +47,9 @@ public class DefaultSkillCastedProsecutor extends BaseSkillCastedProsecutor {
         for(Entity victim : victims){
             if(victim != caster){
                 PositionComponent victimPosition = pm.get(victim);
-                createHitParticleEffect(victim, skill);
 
                 if(area.contains(victimPosition.x, victimPosition.y)){
+                    createHitParticleEffect(victim, skill);
                     applyEffectsToVictim(caster, victim, skill);
                 }
             }

@@ -24,7 +24,7 @@ public class AIManager implements EntityListener {
     private PathFinderAuthority pathFinderAuthority;
 
     public AIManager(MapManager mapManager, PhysicsManager physicsManager) {
-        this.entitiesBehaviours = new HashMap<>();
+        this.entitiesBehaviours = new HashMap();
         this.pathFinderAuthority = new PathFinderAuthority(mapManager, physicsManager);
     }
 

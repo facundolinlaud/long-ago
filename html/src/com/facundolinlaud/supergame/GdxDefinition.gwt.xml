@@ -9,6 +9,9 @@
 
 	<inherits name='Game' />
 	<entry-point class='com.facundolinlaud.supergame.client.HtmlLauncher' />
-	
+
 	<set-configuration-property name="gdx.assetpath" value="../core/assets" />
+
+	<inherits name="com.rafaskoberg.gdx.typinglabel.typinglabel" />
+	<inherits name="regexodus"/>
 </module>

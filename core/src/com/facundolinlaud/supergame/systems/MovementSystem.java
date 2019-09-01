@@ -19,7 +19,6 @@ public class MovementSystem extends IteratingSystem  {
     private ComponentMapper<StatusComponent> sm = Mappers.status;
     private ComponentMapper<BodyComponent> bm = Mappers.body;
 
-
     public MovementSystem() {
         super(Family.all(StatusComponent.class, PositionComponent.class, VelocityComponent.class, BodyComponent.class).get());
     }

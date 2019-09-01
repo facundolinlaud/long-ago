@@ -4,6 +4,28 @@
 			"regionSize": 64
 		}, "sprites/items/armor/mail.png": {
 			"regionSize": 64
+		}, "sprites/living/body/darkelf.png": {
+			"regionSize": 64
+		}, "sprites/living/body/darkelf2.png": {
+			"regionSize": 64
+		}, "sprites/living/body/light.png": {
+			"regionSize": 64
+		}, "sprites/living/body/orc.png": {
+			"regionSize": 64
+		}, "sprites/living/body/red_orc.png": {
+			"regionSize": 64
+		}, "sprites/living/body/skeleton.png": {
+			"regionSize": 64
+		}, "sprites/living/body/tanned.png": {
+			"regionSize": 64
+		}, "sprites/living/body/tanned2.png": {
+			"regionSize": 64
+		}, "sprites/living/body/dark.png": {
+			"regionSize": 64
+		}, "sprites/living/body/dark2.png": {
+			"regionSize": 64
+		}, "sprites/living/body/shadow.png": {
+			"regionSize": 64
 		}, "sprites/items/armor/plate.png": {
 			"regionSize": 64
 		}, "sprites/items/arms/plate.png": {

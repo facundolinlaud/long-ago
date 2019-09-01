@@ -6,10 +6,13 @@ import com.facundolinlaud.supergame.factory.Factories;
 import com.facundolinlaud.supergame.factory.ItemFactory;
 
 public class WorldEntitiesManager {
+    private static final Integer MAIN_PLAYER_ID = 0;
+    private static final Integer ORC = 2;
+
     private Factories factories;
     private Engine engine;
-
     private Entity player;
+    private Entity talkable;
 
     public WorldEntitiesManager(Engine engine, Factories factories) {
         this.engine = engine;
@@ -21,12 +24,13 @@ public class WorldEntitiesManager {
     }
 
     private void addPlayer(){
-        this.player = this.factories.getAgentFactory()
-                .getPlayer()
-                .at(17, 40)
+        player = factories.getAgentFactory()
+                .create(MAIN_PLAYER_ID)
+                .withKeyboardControl()
+                .at(29, 35)
                 .build();
 
-        this.engine.addEntity(this.player);
+        engine.addEntity(player);
     }
 
     /* For testing purposes */

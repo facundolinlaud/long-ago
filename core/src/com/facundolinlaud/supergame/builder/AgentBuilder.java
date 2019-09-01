@@ -13,13 +13,12 @@ import com.facundolinlaud.supergame.components.sprite.StackedSpritesComponent;
 import com.facundolinlaud.supergame.factory.ModelFactory;
 import com.facundolinlaud.supergame.factory.PhysicsFactory;
 import com.facundolinlaud.supergame.model.RenderPriority;
-import com.facundolinlaud.supergame.model.agent.Attributes;
-import com.facundolinlaud.supergame.model.agent.NPCInformation;
+import com.facundolinlaud.supergame.dto.agent.Attributes;
+import com.facundolinlaud.supergame.dto.agent.AIInformation;
+import com.facundolinlaud.supergame.model.ai.BehaviorType;
 import com.facundolinlaud.supergame.model.equip.EquipSlot;
 import com.facundolinlaud.supergame.model.skill.Skill;
 import com.facundolinlaud.supergame.strategies.renderposition.SpriteRenderPositionStrategyImpl;
-import javafx.collections.ListChangeListener;
-import javafx.collections.MapChangeListener;
 
 import java.util.List;
 import java.util.Map;
@@ -30,10 +29,11 @@ public class AgentBuilder {
 
     private Entity entity;
 
-    public AgentBuilder(float velocity) {
+    public AgentBuilder(float velocity, int id) {
         this.entity = new Entity();
 
         this.entity.add(new RenderComponent(new SpriteRenderPositionStrategyImpl(), RenderPriority.AGENT))
+            .add(new IdComponent(id))
             .add(new BodyComponent(PhysicsFactory.get().createItemBody(), this.entity))
             .add(new StatusComponent())
             .add(new AnimableSpriteComponent())
@@ -42,8 +42,8 @@ public class AgentBuilder {
             .add(new VelocityComponent(velocity));
     }
 
-    public AgentBuilder withAI(NPCInformation npcInformation){
-        this.entity.add(new AIComponent(npcInformation));
+    public AgentBuilder withAI(BehaviorType behaviorType, float viewDistance){
+        this.entity.add(new AIComponent(behaviorType, viewDistance));
         return this;
     }
 
@@ -57,9 +57,8 @@ public class AgentBuilder {
         return this;
     }
 
-    public AgentBuilder withEquipment(Map<EquipSlot, Entity> equipment,
-                                      MapChangeListener<? super EquipSlot, ? super Entity> listener){
-        this.entity.add(new WearComponent(equipment, listener));
+    public AgentBuilder withEquipment(Map<EquipSlot, Entity> equipment, int onChangeMessage){
+        this.entity.add(new WearComponent(equipment, onChangeMessage));
         return this;
     }
 
@@ -76,13 +75,14 @@ public class AgentBuilder {
         return withHealth(health, health).withMana(mana);
     }
 
-    public AgentBuilder withBag(List<Entity> bag){
-        this.entity.add(new BagComponent(bag));
+    public AgentBuilder withBag(List<Entity> bag, int gold){
+
+        this.entity.add(new BagComponent(bag, gold));
         return this;
     }
 
-    public AgentBuilder withBag(List<Entity> bag, ListChangeListener<? super Entity> listener){
-        this.entity.add(new BagComponent(bag, listener));
+    public AgentBuilder withBag(List<Entity> bag, int gold, int onChangeMessage){
+        this.entity.add(new BagComponent(bag, gold, onChangeMessage));
         return this;
     }
 
@@ -106,14 +106,18 @@ public class AgentBuilder {
         return this;
     }
 
-    public AgentBuilder withSkills(List<Skill> skills, int assignablePoints,
-                                   ListChangeListener<? super Skill> listener){
-        this.entity.add(new SkillsComponent(skills, assignablePoints, listener));
+    public AgentBuilder withSkills(List<Skill> skills, int assignablePoints, int onChangeMessage){
+        this.entity.add(new SkillsComponent(skills, assignablePoints, onChangeMessage));
         return this;
     }
 
     public AgentBuilder withMana(float totalMana){
         this.entity.add(new ManaComponent(totalMana));
+        return this;
+    }
+
+    public AgentBuilder talkable(){
+        this.entity.add(new InteractionComponent());
         return this;
     }
 

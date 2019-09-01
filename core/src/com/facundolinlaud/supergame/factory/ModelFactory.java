@@ -1,8 +1,10 @@
 package com.facundolinlaud.supergame.factory;
 
 import com.badlogic.gdx.Gdx;
-import com.facundolinlaud.supergame.model.agent.Agent;
-import com.facundolinlaud.supergame.model.agent.Agents;
+import com.facundolinlaud.supergame.dto.agent.Agent;
+import com.facundolinlaud.supergame.dto.agent.Agents;
+import com.facundolinlaud.supergame.dto.composite.SequentialTaskDto;
+import com.facundolinlaud.supergame.dto.quests.QuestDto;
 import com.facundolinlaud.supergame.model.item.Item;
 import com.facundolinlaud.supergame.model.item.Items;
 import com.facundolinlaud.supergame.model.particle.ParticleType;
@@ -18,9 +20,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * Created by facundo on 27/7/16.
@@ -34,8 +34,10 @@ public class ModelFactory implements Disposable {
     private static final String SPRITES_MODELS_PATH = "model/textures/sprites.json";
     private static final String SKILL_BAR_MODEL_PATH = "model/player/skill_bar.json";
     private static final String SKILL_TREE_MODEL_PATH = "model/player/skill_tree.json";
+    private static final String QUESTS_MODELS_DIRECTORY = "model/quests/";
 
     private static Map<String, Object> cache = new HashMap<>();
+    private static ObjectMapper mapper = new ObjectMapper();
 
     public static RawAnimationModel getDefaultAnimationModel(){
         return (RawAnimationModel) readModel(DEFAULT_ANIMATION_MODEL_PATH, RawAnimationModel.class);
@@ -76,12 +78,23 @@ public class ModelFactory implements Disposable {
         return skillTree;
     }
 
+    public static QuestDto getQuest(String questFile){
+        ObjectMapper customMapper = new ObjectMapper().enableDefaultTyping();
+
+        try {
+            return customMapper.readValue(Gdx.files.internal(QUESTS_MODELS_DIRECTORY + questFile)
+                    .file(), QuestDto.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
     private static Object readModel(String modelPath, Class clazz){
         if(cache.containsKey(modelPath)){
             return cache.get(modelPath);
         }else {
-            ObjectMapper mapper = new ObjectMapper();
-
             try {
                 Object o = mapper.readValue(Gdx.files.internal(modelPath).file(), clazz);
                 cache.put(modelPath, o);

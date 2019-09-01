@@ -18,7 +18,6 @@ import com.facundolinlaud.supergame.systems.ui.ProfileUISystem;
 import com.facundolinlaud.supergame.systems.ui.SkillCastingUISystem;
 import com.facundolinlaud.supergame.ui.controller.*;
 import com.facundolinlaud.supergame.ui.view.*;
-import com.facundolinlaud.supergame.ui.view.cross.GothicWindow;
 import com.facundolinlaud.supergame.ui.view.utils.Window;
 import com.facundolinlaud.supergame.utils.events.Messages;
 
@@ -45,6 +44,7 @@ public class UIManager implements Renderable {
     private EquipmentUI equipmentUI;
     private LabelDamagesUI labelDamagesUI;
     private SkillTreeUI skillTreeUI;
+    private DialogUI dialogUI;
 
     private InventoryUIController inventoryUIController;
     private OverlayUIController overlayUIController;
@@ -52,6 +52,7 @@ public class UIManager implements Renderable {
     private EquipmentUIController equipmentUIController;
     private LabelDamagesController labelDamagesController;
     private SkillTreeController skillTreeController;
+    private DialogUIController dialogUIController;
 
     private WindowsOrchestrator windowsOrchestrator;
     private MessageDispatcher messageDispatcher;
@@ -97,6 +98,7 @@ public class UIManager implements Renderable {
         this.equipmentUI = new EquipmentUI(skin, itemsDAD);
         this.labelDamagesUI = new LabelDamagesUI(stage, skin);
         this.skillTreeUI = new SkillTreeUI(skin, skillsDAD);
+        this.dialogUI = new DialogUI(stage, skin);
     }
 
     private void initializeControllers(Camera camera, Entity player) {
@@ -106,6 +108,7 @@ public class UIManager implements Renderable {
         this.equipmentUIController = new EquipmentUIController(this.equipmentUI, player);
         this.labelDamagesController = new LabelDamagesController(this.labelDamagesUI, camera);
         this.skillTreeController = new SkillTreeController(this.skillTreeUI, player);
+        this.dialogUIController = new DialogUIController(this.dialogUI);
     }
 
     private void addUIToStage() {
@@ -117,21 +120,26 @@ public class UIManager implements Renderable {
     }
 
     private void subscribeListeners(){
-        this.messageDispatcher.addListener(this.inventoryUIController, Messages.ITEM_FROM_INVENTORY_DROPPED);
-        this.messageDispatcher.addListener(this.inventoryUIController, Messages.ITEMS_IN_INVENTORY_SWAPPED);
-        this.messageDispatcher.addListener(this.inventoryUIController, Messages.INVENTORY_CHANGED);
-        this.messageDispatcher.addListener(this.attributesUIController, Messages.ATTRIBUTE_UPGRADED);
-        this.messageDispatcher.addListener(this.equipmentUIController, Messages.ITEM_UNEQUIPPED);
-        this.messageDispatcher.addListener(this.equipmentUIController, Messages.ITEM_EQUIPPED);
-        this.messageDispatcher.addListener(this.equipmentUIController, Messages.EQUIPMENT_CHANGED);
-        this.messageDispatcher.addListener(this.overlayUIController, Messages.SKILL_CASTED);
-        this.messageDispatcher.addListener(this.overlayUIController, Messages.REJECTED_SKILL_DUE_TO_NO_MANA);
-        this.messageDispatcher.addListener(this.overlayUIController, Messages.REJECTED_SKILL_DUE_TO_NOT_READY);
-        this.messageDispatcher.addListener(this.overlayUIController, Messages.REJECTED_SKILL_DUE_TO_WEAPON);
-        this.messageDispatcher.addListener(this.overlayUIController, Messages.SKILLS_CHANGED);
-        this.messageDispatcher.addListener(this.labelDamagesController, Messages.ENTITY_ATTACKED);
-        this.messageDispatcher.addListener(this.skillTreeController, Messages.SKILL_UNLOCK_REQUEST);
-        this.messageDispatcher.addListener(this.skillTreeController, Messages.SKILLS_CHANGED);
+        this.messageDispatcher.addListeners(this.inventoryUIController,
+                Messages.ITEM_FROM_INVENTORY_DROPPED,
+                Messages.ITEMS_IN_INVENTORY_SWAPPED,
+                Messages.INVENTORY_CHANGED);
+        this.messageDispatcher.addListeners(this.equipmentUIController,
+                Messages.ITEM_UNEQUIPPED,
+                Messages.ITEM_EQUIPPED,
+                Messages.EQUIPMENT_CHANGED);
+        this.messageDispatcher.addListeners(this.overlayUIController,
+                Messages.SKILL_CASTED,
+                Messages.REJECTED_SKILL_DUE_TO_NO_MANA,
+                Messages.REJECTED_SKILL_DUE_TO_NOT_READY,
+                Messages.REJECTED_SKILL_DUE_TO_WEAPON,
+                Messages.SKILLS_CHANGED,
+                Messages.CUSTOM_MESSAGE);
+        this.messageDispatcher.addListeners(this.skillTreeController,
+                Messages.SKILL_UNLOCK_REQUEST,
+                Messages.SKILLS_CHANGED);
+        this.messageDispatcher.addListeners(this.attributesUIController, Messages.ATTRIBUTE_UPGRADED);
+        this.messageDispatcher.addListeners(this.labelDamagesController, Messages.ENTITY_ATTACKED);
     }
 
     private void setCustomCursor() {
@@ -151,11 +159,16 @@ public class UIManager implements Renderable {
         windowsOrchestrator.register(Window.INVENTORY, this.inventoryUI.get());
         windowsOrchestrator.register(Window.ATTRIBUTES, this.attributesUI.get());
         windowsOrchestrator.register(Window.SKILL_TREE, this.skillTreeUI.get());
+        windowsOrchestrator.register(this.dialogUI);
         stage.addListener(windowsOrchestrator);
     }
 
     public OverlayUIController getOverlayUIController(){
         return this.overlayUIController;
+    }
+
+    public DialogUIController getDialogUIController() {
+        return dialogUIController;
     }
 
     @Override

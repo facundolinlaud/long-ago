@@ -37,6 +37,7 @@ public class Themes {
 
     public static class Background {
         public static final String DARK = "static-background";
+        public static final String SLOT = "gothic-slot";
     }
 
     public static class ImageButton {

@@ -23,7 +23,7 @@ import java.util.Random;
 
 public class SpawnLocationSystem extends IntervalIteratingSystem implements Telegraph {
     public static final int ZERO_AGENTS_SPAWNED = 0;
-    private static float INTERVAL = 8f;
+    private static float INTERVAL = 3f;
 
     private ComponentMapper<SpawnLocationComponent> sl = Mappers.spawnLocation;
     private ComponentMapper<SpawnedAgentComponent> sa = Mappers.spawnedAgent;
@@ -55,7 +55,7 @@ public class SpawnLocationSystem extends IntervalIteratingSystem implements Tele
 
             spawns.put(spawnEntity, spawns.get(spawnEntity) + 1);
 
-            Entity agent = agentFactory.getAI(spawnLocation.getAgentID())
+            Entity agent = agentFactory.create(spawnLocation.getAgentID())
                     .at(spawnPosition.x, spawnPosition.y)
                     .build();
 
@@ -88,7 +88,7 @@ public class SpawnLocationSystem extends IntervalIteratingSystem implements Tele
         AgentDiedEvent event = (AgentDiedEvent) msg.extraInfo;
         removeAgentFromSpawnListsIfExists(event.getAgent());
 
-        return true;
+        return false;
     }
 
     private void removeAgentFromSpawnListsIfExists(Entity agent) {
