@@ -4,28 +4,28 @@ import com.badlogic.gdx.ai.msg.MessageDispatcher;
 import com.badlogic.gdx.ai.msg.MessageManager;
 import com.badlogic.gdx.ai.msg.Telegram;
 import com.badlogic.gdx.ai.msg.Telegraph;
-import com.facundolinlaud.supergame.quests.Blackboard;
+import com.facundolinlaud.supergame.quests.QuestBlackboard;
 import com.facundolinlaud.supergame.quests.Task;
 import com.facundolinlaud.supergame.ui.controller.DialogUIController;
 import com.facundolinlaud.supergame.utils.Debugger;
 
 import static com.facundolinlaud.supergame.utils.events.Messages.QUEST_DIALOG_CONTINUED;
 
-public class TextDialogTask extends Task implements Telegraph {
+public class TextDialogTask extends Task<QuestBlackboard> implements Telegraph {
     private String title;
     private String message;
-    private DialogUIController dialogUIController;
     private MessageDispatcher messageDispatcher;
 
-    public TextDialogTask(String title, String message, Blackboard blackboard) {
+    public TextDialogTask(String title, String message) {
         this.title = title;
         this.message = message;
-        this.dialogUIController = blackboard.getDialogUIController();
         this.messageDispatcher = MessageManager.getInstance();
     }
 
     @Override
     public void activate() {
+        DialogUIController dialogUIController = getBlackboard().getDialogUIController();
+
         if(dialogUIController.isBusy())
             failed();
 

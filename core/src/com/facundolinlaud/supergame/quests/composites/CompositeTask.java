@@ -6,7 +6,7 @@ import com.facundolinlaud.supergame.utils.Debugger;
 import java.util.LinkedList;
 import java.util.List;
 
-public abstract class CompositeTask extends Task {
+public abstract class CompositeTask<T> extends Task<T> {
     protected LinkedList<Task> children;
     protected List<Task> completed;
 
@@ -23,6 +23,11 @@ public abstract class CompositeTask extends Task {
         completed.clear();
 
         activate();
+    }
+
+    @Override
+    protected void onBlackboardAvailable(T blackboard) {
+        children.forEach(child -> child.setBlackboard(blackboard));
     }
 
     public abstract void childCompleted(Task child);

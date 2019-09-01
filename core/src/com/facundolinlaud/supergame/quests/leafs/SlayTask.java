@@ -7,6 +7,7 @@ import com.badlogic.gdx.ai.msg.MessageManager;
 import com.badlogic.gdx.ai.msg.Telegram;
 import com.badlogic.gdx.ai.msg.Telegraph;
 import com.facundolinlaud.supergame.components.IdComponent;
+import com.facundolinlaud.supergame.quests.QuestBlackboard;
 import com.facundolinlaud.supergame.quests.Task;
 import com.facundolinlaud.supergame.utils.Debugger;
 import com.facundolinlaud.supergame.utils.Mappers;
@@ -14,7 +15,7 @@ import com.facundolinlaud.supergame.utils.events.AgentDiedEvent;
 
 import static com.facundolinlaud.supergame.utils.events.Messages.AGENT_DIED;
 
-public class SlayTask extends Task implements Telegraph {
+public class SlayTask extends Task<QuestBlackboard> implements Telegraph {
     private ComponentMapper<IdComponent> idm = Mappers.id;
     private MessageDispatcher messageDispatcher;
     private int agentId;

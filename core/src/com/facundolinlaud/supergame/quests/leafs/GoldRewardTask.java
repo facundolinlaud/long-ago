@@ -3,19 +3,17 @@ package com.facundolinlaud.supergame.quests.leafs;
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.facundolinlaud.supergame.components.player.BagComponent;
-import com.facundolinlaud.supergame.quests.Blackboard;
+import com.facundolinlaud.supergame.quests.QuestBlackboard;
 import com.facundolinlaud.supergame.quests.Task;
 import com.facundolinlaud.supergame.utils.Debugger;
 import com.facundolinlaud.supergame.utils.Mappers;
 
-public class GoldRewardTask extends Task {
+public class GoldRewardTask extends Task<QuestBlackboard> {
     private ComponentMapper<BagComponent> bm = Mappers.bag;
 
-    private Entity player;
     private int gold;
 
-    public GoldRewardTask(Blackboard blackboard, int gold) {
-        this.player = blackboard.getPlayer();
+    public GoldRewardTask(int gold) {
         this.gold = gold;
     }
 
@@ -34,6 +32,7 @@ public class GoldRewardTask extends Task {
 
     public void reward() {
         Debugger.debug("[GOLD] Rewarding " + gold);
-        bm.get(this.player).addGold(this.gold);
+        Entity player = getBlackboard().getPlayer();
+        bm.get(player).addGold(this.gold);
     }
 }

@@ -4,24 +4,23 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.math.Vector2;
 import com.facundolinlaud.supergame.factory.AgentFactory;
-import com.facundolinlaud.supergame.quests.Blackboard;
+import com.facundolinlaud.supergame.quests.QuestBlackboard;
 import com.facundolinlaud.supergame.quests.Task;
 
-public class SpawnTask extends Task {
+public class SpawnTask extends Task<QuestBlackboard> {
     private int agentId;
     private Vector2 position;
-    private AgentFactory agentFactory;
-    private Engine engine;
 
-    public SpawnTask(int agentId, Vector2 position, Blackboard blackboard) {
+    public SpawnTask(int agentId, Vector2 position) {
         this.agentId = agentId;
         this.position = position;
-        this.engine = blackboard.getEngine();
-        this.agentFactory = blackboard.getAgentFactory();
     }
 
     @Override
     public void activate() {
+        Engine engine = getBlackboard().getEngine();
+        AgentFactory agentFactory = getBlackboard().getAgentFactory();
+
         Entity agent = agentFactory.create(agentId)
                 .at(position.x, position.y)
                 .build();

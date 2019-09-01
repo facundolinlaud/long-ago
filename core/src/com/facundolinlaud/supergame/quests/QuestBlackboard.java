@@ -5,13 +5,13 @@ import com.badlogic.ashley.core.Entity;
 import com.facundolinlaud.supergame.factory.AgentFactory;
 import com.facundolinlaud.supergame.ui.controller.DialogUIController;
 
-public class Blackboard {
+public class QuestBlackboard {
     private Entity player;
     private DialogUIController dialogUIController;
     private AgentFactory agentFactory;
     private Engine engine;
 
-    public Blackboard(Entity player, DialogUIController dialogUIController, AgentFactory agentFactory, Engine engine) {
+    public QuestBlackboard(Entity player, DialogUIController dialogUIController, AgentFactory agentFactory, Engine engine) {
         this.player = player;
         this.dialogUIController = dialogUIController;
         this.agentFactory = agentFactory;

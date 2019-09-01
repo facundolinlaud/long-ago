@@ -3,12 +3,13 @@ package com.facundolinlaud.supergame.quests.leafs;
 import com.badlogic.gdx.ai.msg.MessageManager;
 import com.badlogic.gdx.ai.msg.Telegram;
 import com.badlogic.gdx.ai.msg.Telegraph;
+import com.facundolinlaud.supergame.quests.QuestBlackboard;
 import com.facundolinlaud.supergame.quests.Task;
 import com.facundolinlaud.supergame.utils.Debugger;
 
 import static com.facundolinlaud.supergame.utils.events.Messages.PLAYER_INTERACTION;
 
-public class InteractionTask extends Task implements Telegraph {
+public class InteractionTask extends Task<QuestBlackboard> implements Telegraph {
     private int agentId;
 
     public InteractionTask(int agentId) {
