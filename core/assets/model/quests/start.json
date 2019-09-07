@@ -5,6 +5,10 @@
 	"children": ["com.facundolinlaud.supergame.dto.composite.TaskListDto", [{
 		"@class": "com.facundolinlaud.supergame.dto.composite.SequentialTaskDto",
 		"children": ["com.facundolinlaud.supergame.dto.composite.TaskListDto", [{
+			"@class": "com.facundolinlaud.supergame.dto.quests.TextDialogTaskDto",
+			"title": "Long Ago",
+			"message": "Welcome to Long Ago!\n{COLOR=GREEN}WASD{CLEARCOLOR}: Movement\n{COLOR=CORAL}1,...,9{CLEARCOLOR}: cast skills\n{COLOR=GREEN}E{CLEARCOLOR}: Pick item up\n{COLOR=CORAL}F{CLEARCOLOR}: Continue/fast forward dialog\n{COLOR=GREEN}I{CLEARCOLOR}: Inventory\n{COLOR=CORAL}C{CLEARCOLOR}: Equipment\n{COLOR=GREEN}K{CLEARCOLOR}: Skills\n{COLOR=CORAL}P{CLEARCOLOR}: Attributes\n{COLOR=GREEN}F{CLEARCOLOR}: Talk to NPC (quest giving npc's)"
+		},{
 			"@class": "com.facundolinlaud.supergame.dto.quests.SpawnTaskDto",
 			"agentId": 3,
 			"position": {

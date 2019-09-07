@@ -18,7 +18,7 @@ public class LightsManager implements Renderable {
 
     private static final int RAYS_COUNT = 32;
     private static final Color LIGHTS_COLOR = new Color(0f, 0f, 0f, 1f);
-    private static final Color NIGHT_LIGHT_COLOR = new Color(0.1f, 0.1f, 0.55f, 0.1f);
+    private static final Color NIGHT_LIGHT_COLOR = new Color(0.1f, 0.1f, 0.55f, 0.16f);
 
     private static final Color NIGHT_LIGHT_COLOR_FOR_DIFFUSED = new Color(0.1f, 0.1f, 0.5f, 0.6f);
     private static final Color AMBIENT_LIGHT_COLOR = new Color(722711);

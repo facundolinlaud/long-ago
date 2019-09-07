@@ -241,6 +241,28 @@
 			"y": 7,
 			"length": 4,
 			"playMode": "NORMAL"
+
+
+		}, "SWING_CASTING_UP": {
+			"x": 2,
+			"y": 12,
+			"length": 1,
+			"playMode": "REVERSED"
+		}, "SWING_CASTING_LEFT": {
+			"x": 2,
+			"y": 13,
+			"length": 1,
+			"playMode": "REVERSED"
+		}, "SWING_CASTING_DOWN": {
+			"x": 2,
+			"y": 14,
+			"length": 1,
+			"playMode": "REVERSED"
+		}, "SWING_CASTING_RIGHT": {
+			"x": 2,
+			"y": 15,
+			"length": 1,
+			"playMode": "REVERSED"
 		}
 	}
 }

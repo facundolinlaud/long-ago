@@ -149,7 +149,7 @@
 			"interruptible": false,
 			"equipmentRequired": "SWORD",
 
-			"castingAction": "STANDING",
+			"castingAction": "SWING_CASTING",
 			"executingAction": "SWINGING",
 			"animationFlow": "TRAVERSE",
 

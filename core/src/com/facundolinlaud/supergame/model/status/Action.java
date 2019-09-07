@@ -15,6 +15,7 @@ public enum Action {
     SWINGING("SWINGING"),
 
     MELEE_DASH_CASTING("MELEE_DASH_CASTING"),
+    SWING_CASTING("SWING_CASTING"),
     DASHING("DASHING"),
 
     AIMING("AIMING"),
@@ -50,6 +51,7 @@ public enum Action {
     }
 
     public boolean isCasting() {
-        return this == SPELL_CASTING || this == RANGE_CASTING || this == MELEE_DASH_CASTING || this == SPELL_PRECASTING;
+        return this == SPELL_CASTING || this == RANGE_CASTING ||
+                this == MELEE_DASH_CASTING || this == SPELL_PRECASTING || this == SWING_CASTING;
     }
 }
