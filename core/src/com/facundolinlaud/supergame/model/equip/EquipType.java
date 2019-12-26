@@ -17,16 +17,4 @@ public enum EquipType {
     public String getName() {
         return name;
     }
-
-    public static EquipType fromString(String name){
-        if(name != null){
-            for (EquipType w : EquipType.values()) {
-                if (name.endsWith(w.name)) {
-                    return w;
-                }
-            }
-        }
-
-        return null;
-    }
 }

@@ -11,6 +11,7 @@ import com.facundolinlaud.supergame.dto.agent.CombatInformation;
 import com.facundolinlaud.supergame.model.equip.EquipSlot;
 import com.facundolinlaud.supergame.model.particle.ParticleType;
 import com.facundolinlaud.supergame.model.skill.Skill;
+import com.facundolinlaud.supergame.model.sprite.RawAnimationModel;
 import com.facundolinlaud.supergame.utils.events.Messages;
 
 import java.util.HashMap;
@@ -24,25 +25,32 @@ import static com.facundolinlaud.supergame.utils.events.Messages.SKILLS_CHANGED;
 public class AgentFactory {
     private Engine engine;
     private ItemFactory itemFactory;
-    private ParticleFactory particleFactory;
     private SkillsFactory skillsFactory;
+    private ParticleFactory particleFactory;
+    private AnimationsFactory animationsFactory;
     private Map<Integer, Agent> agents;
 
-    public AgentFactory(Engine engine, ItemFactory itemFactory, ParticleFactory particleFactory, SkillsFactory skillsFactory) {
+    public AgentFactory(Engine engine, Factories factories) {
         this.engine = engine;
         this.agents = ModelFactory.getAgentsModel();
-        this.itemFactory = itemFactory;
-        this.particleFactory = particleFactory;
-        this.skillsFactory = skillsFactory;
+        this.itemFactory = factories.getItemFactory();
+        this.skillsFactory = factories.getSkillsFactory();
+        this.particleFactory = factories.getParticleFactory();
+        this.animationsFactory = factories.getAnimationsFactory();
     }
 
     public AgentBuilder create(int id){
         Agent agent = agents.get(id);
 
+        RawAnimationModel rawAnimationModel = animationsFactory.get(agent.getAnimationModel());
         Map<EquipSlot, Entity> equipment = buildEquipment(agent.getBody(), agent.getEquipment());
-        AgentBuilder builder = new AgentBuilder(agent.getVelocity(), id)
+
+        AgentBuilder builder = new AgentBuilder(id)
+                .withVelocity(agent.getVelocity())
+                .withAnimations(rawAnimationModel)
                 .withEquipment(equipment, Messages.EQUIPMENT_CHANGED)
-                .withParticles(particleFactory.getEffect(ParticleType.BLACK_SMOKE));
+                .withParticles(particleFactory.getEffect(ParticleType.BLACK_SMOKE))
+                .withBody();
 
         if(agent.hasAI()){
             AIInformation ai = agent.getAiInformation();

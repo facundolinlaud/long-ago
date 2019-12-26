@@ -1,139 +1,142 @@
 {
-	"agents": {
-		"0": {
-			"name": "Player",
-			"velocity": 1.9,
-			"talkable": true,
-			"bagInformation": {
-				"gold": 50,
-				"bag": [9, 9, 0, 10, 15, 16, 17, 18, 19, 20]
-			},
-			"combatInformation": {
-				"skills": [1, 2, 3, 4],
-				"assignablePoints": 6,
-				"attributes": {
-					"strength": 170,
-					"agility": 30,
-					"stamina": 20,
-					"intelligence": 90
-				}
-			},
-			"body": {
-				"SHADOW": "sprites/living/body/shadow.png",
-				"BODY": "sprites/living/body/light.png",
-				"HAIR_BASE": "sprites/living/hair/long.png",
-				"HAIR_COLOR": "sprites/living/hair/long/blonde.png"
-			},
-			"equipment": {
-				"CHEST": 1,
-				"SHOES": 6,
-				"WEAPON": 11,
-				"HELMET": 8,
-				"BELT": 4,
-				"GLOVES": 7,
-				"BOW": 14
+	"0": {
+		"name": "Player",
+		"velocity": 1.9,
+		"talkable": true,
+		"animationModel": "DEFAULT",
+		"bagInformation": {
+			"gold": 50,
+			"bag": [9, 9, 0, 10, 15, 16, 17, 18, 19, 20]
+		},
+		"combatInformation": {
+			"skills": [1, 2, 3, 4],
+			"assignablePoints": 6,
+			"attributes": {
+				"strength": 170,
+				"agility": 30,
+				"stamina": 20,
+				"intelligence": 90
 			}
 		},
-		"1": {
-			"name": "Skeleton",
-			"velocity": 1.9,
-			"combatInformation": {
-				"skills": [1, 2, 3],
-				"attributes": {
-					"strength": 5,
-					"agility": 5,
-					"stamina": 5,
-					"intelligence": 10
-				}
-			},
-			"body": {
-				"SHADOW": "sprites/living/body/shadow.png",
-				"BODY": "sprites/living/body/skeleton.png",
-				"HAIR_BASE": "sprites/living/hair/mohawk.png",
-				"HAIR_COLOR": "sprites/living/hair/mohawk/mohawk.png"
-			},
-			"equipment": {
-				"CHEST": 0,
-				"SHOES": 5,
-				"WEAPON": 12,
-				"HELMET" : 8,
-				"BOW": 14
-			},
-			"aiInformation": {
-				"viewDistance": 5.0,
-				"behaviorType": "AGGRESSIVE"
+		"body": {
+			"SHADOW": "sprites/living/body/shadow.png",
+			"BODY": "sprites/living/body/light.png",
+			"HAIR_BASE": "sprites/living/hair/long.png",
+			"HAIR_COLOR": "sprites/living/hair/long/blonde.png"
+		},
+		"equipment": {
+			"CHEST": 1,
+			"SHOES": 6,
+			"WEAPON": 11,
+			"HELMET": 8,
+			"BELT": 4,
+			"GLOVES": 7,
+			"BOW": 14
+		}
+	},
+	"1": {
+		"name": "Skeleton",
+		"velocity": 1.9,
+		"animationModel": "DEFAULT",
+		"combatInformation": {
+			"skills": [1, 2, 3],
+			"attributes": {
+				"strength": 5,
+				"agility": 5,
+				"stamina": 5,
+				"intelligence": 10
 			}
 		},
-		"2": {
-			"name": "Orc",
-			"velocity": 1.4,
-			"combatInformation": {
-				"skills": [0],
-				"attributes": {
-					"strength": 10,
-					"agility": 10,
-					"stamina": 15,
-					"intelligence": 1
-				}
-			},
-			"body": {
-				"SHADOW": "sprites/living/body/shadow.png",
-				"BODY": "sprites/living/body/orc.png"
-			},
-			"equipment": {
-				"CHEST": 2,
-				"SHOES": 5,
-				"WEAPON": 12
-			},
-			"aiInformation": {
-				"viewDistance": 5.0,
-				"behaviorType": "AGGRESSIVE"
+		"body": {
+			"SHADOW": "sprites/living/body/shadow.png",
+			"BODY": "sprites/living/body/skeleton.png",
+			"HAIR_BASE": "sprites/living/hair/mohawk.png",
+			"HAIR_COLOR": "sprites/living/hair/mohawk/mohawk.png"
+		},
+		"equipment": {
+			"CHEST": 0,
+			"SHOES": 5,
+			"WEAPON": 12,
+			"HELMET" : 8,
+			"BOW": 14
+		},
+		"aiInformation": {
+			"viewDistance": 5.0,
+			"behaviorType": "AGGRESSIVE"
+		}
+	},
+	"2": {
+		"name": "Orc",
+		"velocity": 1.4,
+		"animationModel": "DEFAULT",
+		"combatInformation": {
+			"skills": [0],
+			"attributes": {
+				"strength": 10,
+				"agility": 10,
+				"stamina": 15,
+				"intelligence": 1
 			}
 		},
-		"3": {
-			"name": "Fisherman",
-			"velocity": 2.0,
-			"talkable": true,
-			"body": {
-				"SHADOW": "sprites/living/body/shadow.png",
-				"BODY": "sprites/living/body/darkelf.png",
-				"HAIR_BASE": "sprites/living/hair/long.png",
-				"HAIR_COLOR": "sprites/living/hair/long/brunette.png"
-			},
-			"equipment": {
-				"CHEST": 22,
-				"SHOES": 5,
-				"PANTS": 21
+		"body": {
+			"SHADOW": "sprites/living/body/shadow.png",
+			"BODY": "sprites/living/body/orc.png"
+		},
+		"equipment": {
+			"CHEST": 2,
+			"SHOES": 5,
+			"WEAPON": 12
+		},
+		"aiInformation": {
+			"viewDistance": 5.0,
+			"behaviorType": "AGGRESSIVE"
+		}
+	},
+	"3": {
+		"name": "Fisherman",
+		"velocity": 2.0,
+		"talkable": true,
+		"animationModel": "DEFAULT",
+		"body": {
+			"SHADOW": "sprites/living/body/shadow.png",
+			"BODY": "sprites/living/body/darkelf.png",
+			"HAIR_BASE": "sprites/living/hair/long.png",
+			"HAIR_COLOR": "sprites/living/hair/long/brunette.png"
+		},
+		"equipment": {
+			"CHEST": 22,
+			"SHOES": 5,
+			"PANTS": 21
+		}
+	},
+	"4": {
+		"name": "Aggresive Elf",
+		"velocity": 2.0,
+		"animationModel": "DEFAULT",
+		"combatInformation": {
+			"skills": [2, 3, 4, 5],
+			"attributes": {
+				"strength": 10,
+				"agility": 10,
+				"stamina": 15,
+				"intelligence": 1
 			}
 		},
-		"4": {
-			"name": "Aggresive Elf",
-			"velocity": 2.0,
-			"combatInformation": {
-				"skills": [2, 3, 4, 5],
-				"attributes": {
-					"strength": 10,
-					"agility": 10,
-					"stamina": 15,
-					"intelligence": 1
-				}
-			},
-			"body": {
-				"SHADOW": "sprites/living/body/shadow.png",
-				"BODY": "sprites/living/body/darkelf.png"
-			},
-			"equipment": {
-				"CHEST": 2,
-				"SHOES": 6,
-				"WEAPON": 17,
-				"HELMET": 8,
-				"PANTS": 9,
-				"BOW": 14
-			},
-			"aiInformation": {
-				"viewDistance": 9.0,
-				"behaviorType": "AGGRESSIVE"
-			}
+		"body": {
+			"SHADOW": "sprites/living/body/shadow.png",
+			"BODY": "sprites/living/body/darkelf.png"
+		},
+		"equipment": {
+			"CHEST": 2,
+			"SHOES": 6,
+			"WEAPON": 17,
+			"HELMET": 8,
+			"PANTS": 9,
+			"BOW": 14
+		},
+		"aiInformation": {
+			"viewDistance": 9.0,
+			"behaviorType": "AGGRESSIVE"
 		}
 	}
 }

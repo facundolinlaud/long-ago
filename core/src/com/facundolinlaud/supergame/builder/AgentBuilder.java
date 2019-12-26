@@ -18,6 +18,7 @@ import com.facundolinlaud.supergame.dto.agent.AIInformation;
 import com.facundolinlaud.supergame.model.ai.BehaviorType;
 import com.facundolinlaud.supergame.model.equip.EquipSlot;
 import com.facundolinlaud.supergame.model.skill.Skill;
+import com.facundolinlaud.supergame.model.sprite.RawAnimationModel;
 import com.facundolinlaud.supergame.strategies.renderposition.SpriteRenderPositionStrategyImpl;
 
 import java.util.List;
@@ -29,17 +30,12 @@ public class AgentBuilder {
 
     private Entity entity;
 
-    public AgentBuilder(float velocity, int id) {
+    public AgentBuilder(int id) {
         this.entity = new Entity();
 
-        this.entity.add(new RenderComponent(new SpriteRenderPositionStrategyImpl(), RenderPriority.AGENT))
-            .add(new IdComponent(id))
-            .add(new BodyComponent(PhysicsFactory.get().createItemBody(), this.entity))
+        this.entity
             .add(new StatusComponent())
-            .add(new AnimableSpriteComponent())
-            .add(new StackedSpritesComponent(ModelFactory.getDefaultAnimationModel()))
-            .add(new RefreshSpriteRequirementComponent())
-            .add(new VelocityComponent(velocity));
+            .add(new IdComponent(id));
     }
 
     public AgentBuilder withAI(BehaviorType behaviorType, float viewDistance){
@@ -118,6 +114,25 @@ public class AgentBuilder {
 
     public AgentBuilder talkable(){
         this.entity.add(new InteractionComponent());
+        return this;
+    }
+
+    public AgentBuilder withAnimations(RawAnimationModel rawAnimationModel){
+        this.entity.add(new RenderComponent(new SpriteRenderPositionStrategyImpl(), RenderPriority.AGENT))
+                   .add(new AnimableSpriteComponent())
+                   .add(new StackedSpritesComponent(rawAnimationModel))
+                   .add(new RefreshSpriteRequirementComponent());
+
+        return this;
+    }
+
+    public AgentBuilder withVelocity(float velocity){
+        this.entity.add(new VelocityComponent(velocity));
+        return this;
+    }
+
+    public AgentBuilder withBody(){
+        this.entity.add(new BodyComponent(PhysicsFactory.get().createItemBody(), this.entity));
         return this;
     }
 

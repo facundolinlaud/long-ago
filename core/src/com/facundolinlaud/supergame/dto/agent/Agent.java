@@ -12,6 +12,7 @@ public class Agent {
     private int health;
     private float velocity;
     private boolean talkable;
+    private String animationModel;
     private Map<EquipSlot, String> body;
     private Map<EquipSlot, Integer> equipment;
 
@@ -65,6 +66,14 @@ public class Agent {
 
     public void setTalkable(boolean talkable) {
         this.talkable = talkable;
+    }
+
+    public String getAnimationModel() {
+        return animationModel;
+    }
+
+    public void setAnimationModel(String animationModel) {
+        this.animationModel = animationModel;
     }
 
     public Map<EquipSlot, String> getBody() {
