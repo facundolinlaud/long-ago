@@ -4,7 +4,6 @@ import com.facundolinlaud.supergame.model.equip.EquipType;
 import com.facundolinlaud.supergame.model.light.LightModel;
 import com.facundolinlaud.supergame.model.particle.ParticleType;
 import com.facundolinlaud.supergame.model.status.Action;
-import com.sun.istack.internal.Nullable;
 
 public class Skill {
     private String name;
@@ -34,8 +33,8 @@ public class Skill {
     private float baseHeal;
 
     /* Projectile or two-click-skill based information */
-    @Nullable private ProjectileInformation projectileInformation;
-    @Nullable private TwoClickInformation twoClickInformation;
+    private ProjectileInformation projectileInformation;
+    private TwoClickInformation twoClickInformation;
 
     /* Particles */
     private ParticleType areaParticle;
@@ -43,10 +42,10 @@ public class Skill {
 
     /* Lights */
     private boolean hasLightEffect;
-    @Nullable private LightModel lightModel;
+    private LightModel lightModel;
 
     /* Screen Shake */
-    @Nullable private ScreenShake screenShake;
+    private ScreenShake screenShake;
 
     public void setHasLightEffect(boolean hasLightEffect) {
         this.hasLightEffect = hasLightEffect;

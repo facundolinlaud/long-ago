@@ -10,7 +10,6 @@ import com.facundolinlaud.supergame.components.PositionComponent;
 import com.facundolinlaud.supergame.components.RenderComponent;
 import com.facundolinlaud.supergame.utils.Dimensions;
 import com.facundolinlaud.supergame.utils.Mappers;
-import sun.nio.ch.SelectorProviderImpl;
 
 import java.util.Comparator;
 import java.util.List;

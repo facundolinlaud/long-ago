@@ -1,7 +1,6 @@
 package com.facundolinlaud.supergame.dto.agent;
 
 import com.facundolinlaud.supergame.model.equip.EquipSlot;
-import com.sun.istack.internal.Nullable;
 
 import java.util.Map;
 
@@ -16,9 +15,9 @@ public class Agent {
     private Map<EquipSlot, String> body;
     private Map<EquipSlot, Integer> equipment;
 
-    @Nullable private BagInformation bagInformation;
-    @Nullable private CombatInformation combatInformation;
-    @Nullable private AIInformation aiInformation;
+    private BagInformation bagInformation;
+    private CombatInformation combatInformation;
+    private AIInformation aiInformation;
 
     public String getName() {
         return name;

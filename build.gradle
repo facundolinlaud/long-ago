@@ -29,6 +29,8 @@ allprojects {
         mavenCentral()
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
         maven { url "https://oss.sonatype.org/content/repositories/releases/" }
+        google()
+        jcenter()         // Required for org.jetbrains.trove4j:trove4j library
     }
 }
 
@@ -46,44 +48,24 @@ project(":desktop") {
     }
 }
 
-project(":html") {
-    apply plugin: "gwt"
-    apply plugin: "war"
-
-
-    dependencies {
-        compile project(":core")
-        compile "com.badlogicgames.gdx:gdx-backend-gwt:$gdxVersion"
-        compile "com.badlogicgames.gdx:gdx:$gdxVersion:sources"
-        compile "com.badlogicgames.gdx:gdx-backend-gwt:$gdxVersion:sources"
-        compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion:sources"
-        compile "com.badlogicgames.gdx:gdx-box2d-gwt:$gdxVersion:sources"
-        compile "com.badlogicgames.box2dlights:box2dlights:$box2DLightsVersion:sources"
-        compile "com.badlogicgames.ashley:ashley:$ashleyVersion:sources"
-        compile "com.badlogicgames.gdx:gdx-ai:$aiVersion:sources"
-
-        compile "com.github.tommyettinger:regexodus:$regExodusVersion:sources"
-        compile "com.rafaskoberg.gdx:typing-label:$typingLabelVersion:sources"
-    }
-}
-
 project(":core") {
     apply plugin: "java"
 
 
     dependencies {
-        compile "com.badlogicgames.gdx:gdx:$gdxVersion"
-        compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
-        compile "com.badlogicgames.box2dlights:box2dlights:$box2DLightsVersion"
-        compile "com.badlogicgames.ashley:ashley:$ashleyVersion"
-        compile "com.badlogicgames.gdx:gdx-ai:$aiVersion"
-        compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
+        implementation "com.badlogicgames.gdx:gdx:$gdxVersion"
+        implementation "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
+        implementation "com.badlogicgames.box2dlights:box2dlights:$box2DLightsVersion"
+        implementation "com.badlogicgames.ashley:ashley:$ashleyVersion"
+        implementation "com.badlogicgames.gdx:gdx-ai:$aiVersion"
+        implementation "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
 
-        compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.7.5'
-        compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.7.5'
-        compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.7.5'
+        implementation group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.7.5'
+        implementation group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.7.5'
+        implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.7.5'
 
-        compile "com.rafaskoberg.gdx:typing-label:$typingLabelVersion"
+        implementation "com.rafaskoberg.gdx:typing-label:$typingLabelVersion"
+        implementation 'org.apache.commons:commons-lang3:3.9'
     }
 }
 

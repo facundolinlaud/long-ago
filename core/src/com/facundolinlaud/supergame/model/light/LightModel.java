@@ -1,13 +1,11 @@
 package com.facundolinlaud.supergame.model.light;
 
-import com.sun.istack.internal.Nullable;
-
 public class LightModel {
     private float distance;
     private LightType type;
-    @Nullable private float x;
-    @Nullable private float y;
-    @Nullable private float duration;
+    private float x;
+    private float y;
+    private float duration;
 
     public float getX() {
         return x;

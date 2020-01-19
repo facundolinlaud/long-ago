@@ -8,7 +8,7 @@ import com.badlogic.gdx.utils.Align;
 import com.facundolinlaud.supergame.model.skill.ProjectileInformation;
 import com.facundolinlaud.supergame.model.skill.Skill;
 import com.facundolinlaud.supergame.ui.view.utils.Themes;
-import com.sun.xml.internal.ws.util.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import static com.facundolinlaud.supergame.ui.view.utils.Themes.Colors.BLUE;
 import static com.facundolinlaud.supergame.ui.view.utils.Themes.Colors.GRAY;

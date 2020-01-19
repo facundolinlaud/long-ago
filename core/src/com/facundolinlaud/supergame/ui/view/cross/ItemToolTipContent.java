@@ -10,7 +10,7 @@ import com.facundolinlaud.supergame.factory.TextureFactory;
 import com.facundolinlaud.supergame.model.item.Rarity;
 import com.facundolinlaud.supergame.ui.model.Item;
 import com.facundolinlaud.supergame.ui.model.equipment.Equipable;
-import com.sun.xml.internal.ws.util.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import static com.facundolinlaud.supergame.ui.view.utils.Themes.Colors.BLUE;
 import static com.facundolinlaud.supergame.ui.view.utils.Themes.Colors.GRAY;
