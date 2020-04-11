@@ -55,11 +55,21 @@ public class SkillCastingSystem extends IteratingSystem {
     }
 
     @Override
-    protected void processEntity(Entity caster, float deltaTime) {
-        SkillCastingComponent skillCastingComponent = scm.get(caster);
-        Skill skill = skillCastingComponent.skill;
+    protected void processEntity(Entity caster, float delta) {
+        SkillCastingComponent casting = scm.get(caster);
+//
+//        if(casting.hasEnded()){
+//            Skill castedSkill = casting.skill;
+//            SkillCastedEvent event = new SkillCastedEvent(caster, castedSkill);
+//            messageDispatcher.dispatchMessage(Messages.SKILL_CASTED, event);
+//        }else{
+//            casting.tick(delta);
+//        }
 
-        if(skillCastingComponent.hasCastingTimeEnded()){
+        /* viejo */
+        Skill skill = casting.skill;
+
+        if(casting.hasEnded()){
             setExecutingActionToCaster(caster, skill);
             executeSkill(caster, skill);
             caster.remove(SkillCastingComponent.class);
@@ -67,10 +77,10 @@ public class SkillCastingSystem extends IteratingSystem {
 
             float lockDownTime = skill.getLockdownTime();
             putCasterOnSkillLockDown(caster, lockDownTime);
-        }else if(skillCastingComponent.hasJustStarted())
+        }else if(casting.hasJustStarted())
             setCastingActionToCaster(caster, skill);
 
-        skillCastingComponent.tick(deltaTime);
+        casting.tick(delta);
     }
 
     private void setCastingActionToCaster(Entity caster, Skill skill) {

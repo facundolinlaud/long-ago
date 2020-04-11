@@ -1,10 +1,8 @@
-package com.facundolinlaud.supergame.quests;
+package com.facundolinlaud.supergame.behaviortree;
 
-import com.facundolinlaud.supergame.quests.composites.CompositeTask;
-
-public abstract class Task {
+public abstract class Task<T extends Blackboard> {
     protected CompositeTask parent;
-    private Blackboard blackboard;
+    private T blackboard;
 
     public abstract void activate();
 
@@ -20,14 +18,14 @@ public abstract class Task {
         this.parent = parent;
     }
 
-    public void setBlackboard(Blackboard blackboard){
+    public void setBlackboard(T blackboard){
         this.blackboard = blackboard;
         onBlackboardAvailable(blackboard);
     }
 
-    public Blackboard getBlackboard(){
+    public T getBlackboard(){
         return this.blackboard;
     }
 
-    protected void onBlackboardAvailable(Blackboard blackboard){}
+    protected void onBlackboardAvailable(T blackboard){}
 }

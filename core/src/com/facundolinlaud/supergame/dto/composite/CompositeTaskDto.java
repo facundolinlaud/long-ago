@@ -1,6 +1,6 @@
 package com.facundolinlaud.supergame.dto.composite;
 
-import com.facundolinlaud.supergame.quests.Task;
+import com.facundolinlaud.supergame.behaviortree.Task;
 
 import java.util.LinkedList;
 import java.util.stream.Collectors;

@@ -24,5 +24,6 @@ public class Messages {
     public static final int QUEST_DIALOG_ACCEPTED = 20;
     public static final int QUEST_DIALOG_DECLINED = 21;
     public static final int PLAYER_INTERACTION = 22;
+    public static final int SKILL_CASTING_ENDED = 23;
     public static final int CUSTOM_MESSAGE = 99;
 }

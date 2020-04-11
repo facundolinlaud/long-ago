@@ -12,6 +12,10 @@ public class ManaComponent implements Component {
         this.currentMana = totalMana;
     }
 
+    public boolean canCast(int mana){
+        return currentMana >= mana;
+    }
+
     public boolean canCast(Skill skill){
         return currentMana >= skill.getManaConsumption();
     }

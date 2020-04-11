@@ -16,7 +16,7 @@ public class SkillCastingComponent implements Component {
         this.timeToCast -= delta;
     }
 
-    public boolean hasCastingTimeEnded(){
+    public boolean hasEnded(){
         return this.timeToCast <= 0;
     }
 

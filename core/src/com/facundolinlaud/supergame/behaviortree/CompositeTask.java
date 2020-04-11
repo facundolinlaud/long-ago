@@ -1,7 +1,5 @@
-package com.facundolinlaud.supergame.quests.composites;
+package com.facundolinlaud.supergame.behaviortree;
 
-import com.facundolinlaud.supergame.quests.Blackboard;
-import com.facundolinlaud.supergame.quests.Task;
 import com.facundolinlaud.supergame.utils.Debugger;
 
 import java.util.LinkedList;

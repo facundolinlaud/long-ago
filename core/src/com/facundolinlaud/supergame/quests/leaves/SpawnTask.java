@@ -1,13 +1,13 @@
-package com.facundolinlaud.supergame.quests.leafs;
+package com.facundolinlaud.supergame.quests.leaves;
 
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.math.Vector2;
 import com.facundolinlaud.supergame.factory.AgentFactory;
-import com.facundolinlaud.supergame.quests.Blackboard;
-import com.facundolinlaud.supergame.quests.Task;
+import com.facundolinlaud.supergame.behaviortree.Task;
+import com.facundolinlaud.supergame.quests.QuestBlackboard;
 
-public class SpawnTask extends Task {
+public class SpawnTask extends Task<QuestBlackboard> {
     private int agentId;
     private Vector2 position;
 

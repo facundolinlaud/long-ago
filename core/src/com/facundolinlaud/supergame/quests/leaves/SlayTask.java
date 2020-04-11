@@ -1,4 +1,4 @@
-package com.facundolinlaud.supergame.quests.leafs;
+package com.facundolinlaud.supergame.quests.leaves;
 
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
@@ -7,8 +7,7 @@ import com.badlogic.gdx.ai.msg.MessageManager;
 import com.badlogic.gdx.ai.msg.Telegram;
 import com.badlogic.gdx.ai.msg.Telegraph;
 import com.facundolinlaud.supergame.components.IdComponent;
-import com.facundolinlaud.supergame.quests.Blackboard;
-import com.facundolinlaud.supergame.quests.Task;
+import com.facundolinlaud.supergame.behaviortree.Task;
 import com.facundolinlaud.supergame.utils.Debugger;
 import com.facundolinlaud.supergame.utils.Mappers;
 import com.facundolinlaud.supergame.utils.events.AgentDiedEvent;

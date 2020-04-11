@@ -2,7 +2,7 @@ package com.facundolinlaud.supergame.factory;
 
 import com.facundolinlaud.supergame.dto.composite.QuestListDto;
 import com.facundolinlaud.supergame.dto.quests.QuestDto;
-import com.facundolinlaud.supergame.quests.Blackboard;
+import com.facundolinlaud.supergame.quests.QuestBlackboard;
 import com.facundolinlaud.supergame.quests.Quest;
 
 import java.util.HashMap;
@@ -17,7 +17,7 @@ public class QuestsFactory {
         quests = new HashMap();
     }
 
-    public Quest buildQuestChain(Blackboard blackboard) {
+    public Quest buildQuestChain(QuestBlackboard blackboard) {
         QuestDto dto = ModelFactory.getQuest(INITIAL_QUEST);
         processQuestModel(INITIAL_QUEST, dto);
         withBlackboard(blackboard);
@@ -44,7 +44,7 @@ public class QuestsFactory {
         return dto.build();
     }
 
-    private void withBlackboard(Blackboard blackboard) {
+    private void withBlackboard(QuestBlackboard blackboard) {
         for(Quest q : quests.values())
             q.setBlackboard(blackboard);
     }
