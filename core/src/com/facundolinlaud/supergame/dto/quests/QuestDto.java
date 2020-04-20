@@ -1,7 +1,7 @@
 package com.facundolinlaud.supergame.dto.quests;
 
-import com.facundolinlaud.supergame.dto.composite.QuestListDto;
-import com.facundolinlaud.supergame.dto.composite.SequentialTaskDto;
+import com.facundolinlaud.supergame.dto.behaviortree.QuestListDto;
+import com.facundolinlaud.supergame.dto.behaviortree.SequentialTaskDto;
 import com.facundolinlaud.supergame.quests.Quest;
 
 public class QuestDto extends SequentialTaskDto {

@@ -1,0 +1,56 @@
+{
+  "@class": "com.facundolinlaud.supergame.dto.skills.SkillDto",
+  "name": "Blow",
+  "children": ["com.facundolinlaud.supergame.dto.behaviortree.TaskListDto", [
+    {
+      "@class": "com.facundolinlaud.supergame.dto.skills.leaves.RequireManaTaskDto",
+      "mana": 10.0
+    },{
+      "@class": "com.facundolinlaud.supergame.dto.skills.leaves.SetActionTaskDto",
+      "action": "SPELL_PRECASTING"
+    },{
+      "@class": "com.facundolinlaud.supergame.dto.behaviortree.WaitTaskDto",
+      "time": 1.0
+    },{
+      "@class": "com.facundolinlaud.supergame.dto.skills.leaves.SetActionTaskDto",
+      "action": "SWINGING"
+    }, {
+      "@class": "com.facundolinlaud.supergame.dto.skills.leaves.PushAgentsInAreaTaskDto",
+      "shape": {
+        "@class": "com.facundolinlaud.supergame.utils.shape.Rectangle",
+        "width": 2.0,
+        "height": 3.0
+      },
+      "offset": 1.0
+    },{
+      "@class": "com.facundolinlaud.supergame.dto.behaviortree.IterateTaskDto",
+      "children": ["com.facundolinlaud.supergame.dto.behaviortree.TaskListDto", [
+        {
+          "@class": "com.facundolinlaud.supergame.dto.behaviortree.stack.RePushValueTaskDto",
+          "deepness": 1,
+          "times": 1
+        },{
+          "@class": "com.facundolinlaud.supergame.dto.skills.leaves.AffectAgentHealthTaskDto",
+          "amount": 50.0
+        },{
+          "@class": "com.facundolinlaud.supergame.dto.skills.leaves.PushEntityPositionTaskDto"
+        },{
+          "@class": "com.facundolinlaud.supergame.dto.behaviortree.stack.RePushValueTaskDto",
+          "deepness": 1,
+          "times": 1
+        },{
+          "@class": "com.facundolinlaud.supergame.dto.skills.leaves.DisplayLightTaskDto",
+          "lightType" : "DIMMING",
+          "distance": 6.0,
+          "duration": 1.0
+        },{
+          "@class": "com.facundolinlaud.supergame.dto.skills.leaves.DisplayParticlesTaskDto",
+          "particleType": "BLUE_HIT"
+        }
+      ]]
+    },{
+      "@class": "com.facundolinlaud.supergame.dto.skills.leaves.SetActionTaskDto",
+      "action": "STANDING"
+    }
+  ]]
+}

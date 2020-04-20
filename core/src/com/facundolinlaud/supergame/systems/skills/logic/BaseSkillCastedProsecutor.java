@@ -57,7 +57,10 @@ public abstract class BaseSkillCastedProsecutor {
     }
 
     protected void shakeScreen(Skill skill, Vector2 epicenter) {
-        if(skill.hasScreenShake())
-            this.cameraManager.shake(skill.getScreenShake(), epicenter);
+        if(skill.hasScreenShake()) {
+            float power = skill.getScreenShake().getPower();
+            float duration = skill.getScreenShake().getDuration();
+            this.cameraManager.shake(power, duration, epicenter);
+        }
     }
 }

@@ -1,4 +1,4 @@
-package com.facundolinlaud.supergame.dto.composite;
+package com.facundolinlaud.supergame.dto.behaviortree;
 
 import com.facundolinlaud.supergame.behaviortree.Task;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;

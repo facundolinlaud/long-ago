@@ -2,12 +2,13 @@ package com.facundolinlaud.supergame.quests;
 
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
-import com.facundolinlaud.supergame.behaviortree.TaskPoolableManager;
+import com.facundolinlaud.supergame.behaviortree.Blackboard;
+import com.facundolinlaud.supergame.behaviortree.PoolableTaskManager;
 import com.facundolinlaud.supergame.factory.AgentFactory;
 import com.facundolinlaud.supergame.managers.world.QuestsManager;
 import com.facundolinlaud.supergame.ui.controller.DialogUIController;
 
-public class QuestBlackboard implements com.facundolinlaud.supergame.behaviortree.Blackboard {
+public class QuestBlackboard extends Blackboard {
     private Entity player;
     private DialogUIController dialogUIController;
     private AgentFactory agentFactory;
@@ -40,7 +41,7 @@ public class QuestBlackboard implements com.facundolinlaud.supergame.behaviortre
     }
 
     @Override
-    public TaskPoolableManager getDomainManager() {
+    public PoolableTaskManager getDomainManager() {
         return this.questsManager;
     }
 }

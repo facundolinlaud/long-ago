@@ -2,9 +2,9 @@
 	"@class": "com.facundolinlaud.supergame.dto.quests.QuestDto",
 	"name": "Help the Fisherman",
 	"nextQuests": ["slay.json"],
-	"children": ["com.facundolinlaud.supergame.dto.composite.TaskListDto", [{
-		"@class": "com.facundolinlaud.supergame.dto.composite.SequentialTaskDto",
-		"children": ["com.facundolinlaud.supergame.dto.composite.TaskListDto", [{
+	"children": ["com.facundolinlaud.supergame.dto.behaviortree.TaskListDto", [{
+		"@class": "com.facundolinlaud.supergame.dto.behaviortree.SequentialTaskDto",
+		"children": ["com.facundolinlaud.supergame.dto.behaviortree.TaskListDto", [{
 			"@class": "com.facundolinlaud.supergame.dto.quests.TextDialogTaskDto",
 			"title": "Long Ago",
 			"message": "Welcome to Long Ago!\n{COLOR=GREEN}WASD{CLEARCOLOR}: Movement\n{COLOR=CORAL}1,...,9{CLEARCOLOR}: cast skills\n{COLOR=GREEN}E{CLEARCOLOR}: Pick item up\n{COLOR=CORAL}F{CLEARCOLOR}: Continue/fast forward dialog\n{COLOR=GREEN}I{CLEARCOLOR}: Inventory\n{COLOR=CORAL}C{CLEARCOLOR}: Equipment\n{COLOR=GREEN}K{CLEARCOLOR}: Skills\n{COLOR=CORAL}P{CLEARCOLOR}: Attributes\n{COLOR=GREEN}F{CLEARCOLOR}: Talk to NPC (quest giving npc's)"
@@ -28,8 +28,8 @@
 			"message": "I need you to slay one Orc and two Skeletons.{WAIT} They are harrasing my sheeeeeeepsssss!!{WAIT} Will you help me?"
 		}]]
 	},{
-		"@class": "com.facundolinlaud.supergame.dto.composite.ParallelTaskDto",
-		"children": ["com.facundolinlaud.supergame.dto.composite.TaskListDto", [{
+		"@class": "com.facundolinlaud.supergame.dto.behaviortree.ParallelTaskDto",
+		"children": ["com.facundolinlaud.supergame.dto.behaviortree.TaskListDto", [{
 			"@class": "com.facundolinlaud.supergame.dto.quests.SlayTaskDto",
 			"agentId": 1,
 			"total": 1
@@ -39,8 +39,8 @@
 			"total": 1
 		}]]
 	},{
-		"@class": "com.facundolinlaud.supergame.dto.composite.SequentialTaskDto",
-		"children": ["com.facundolinlaud.supergame.dto.composite.TaskListDto", [{
+		"@class": "com.facundolinlaud.supergame.dto.behaviortree.SequentialTaskDto",
+		"children": ["com.facundolinlaud.supergame.dto.behaviortree.TaskListDto", [{
 			"@class": "com.facundolinlaud.supergame.dto.quests.TextDialogTaskDto",
 			"title": "Fisherman",
 			"message": "Thank you for your help!{WAIT} Here's what I promised!"

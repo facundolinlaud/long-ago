@@ -11,5 +11,6 @@ public abstract class PoolableTask<T extends Blackboard> extends Task<T> {
     @Override
     public void completed() {
         getBlackboard().getDomainManager().removePoolableTask(this);
+        super.completed();
     }
 }

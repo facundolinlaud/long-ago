@@ -1,13 +1,13 @@
-package com.facundolinlaud.supergame.dto.composite;
+package com.facundolinlaud.supergame.dto.behaviortree;
 
 import com.facundolinlaud.supergame.behaviortree.Task;
-import com.facundolinlaud.supergame.behaviortree.SequentialTask;
+import com.facundolinlaud.supergame.behaviortree.ParallelTask;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 @JsonTypeInfo(use=JsonTypeInfo.Id.CLASS, include= JsonTypeInfo.As.PROPERTY, property="@class")
-public class SequentialTaskDto extends CompositeTaskDto {
+public class ParallelTaskDto extends CompositeTaskDto {
     @Override
     public Task build() {
-        return new SequentialTask(buildChildren());
+        return new ParallelTask(buildChildren());
     }
 }

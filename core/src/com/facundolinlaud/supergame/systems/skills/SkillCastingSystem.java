@@ -57,16 +57,7 @@ public class SkillCastingSystem extends IteratingSystem {
     @Override
     protected void processEntity(Entity caster, float delta) {
         SkillCastingComponent casting = scm.get(caster);
-//
-//        if(casting.hasEnded()){
-//            Skill castedSkill = casting.skill;
-//            SkillCastedEvent event = new SkillCastedEvent(caster, castedSkill);
-//            messageDispatcher.dispatchMessage(Messages.SKILL_CASTED, event);
-//        }else{
-//            casting.tick(delta);
-//        }
 
-        /* viejo */
         Skill skill = casting.skill;
 
         if(casting.hasEnded()){

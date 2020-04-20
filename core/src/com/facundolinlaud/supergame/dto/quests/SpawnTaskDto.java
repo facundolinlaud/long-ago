@@ -1,7 +1,7 @@
 package com.facundolinlaud.supergame.dto.quests;
 
 import com.badlogic.gdx.math.Vector2;
-import com.facundolinlaud.supergame.dto.composite.TaskDto;
+import com.facundolinlaud.supergame.dto.behaviortree.TaskDto;
 import com.facundolinlaud.supergame.behaviortree.Task;
 import com.facundolinlaud.supergame.quests.leaves.SpawnTask;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;

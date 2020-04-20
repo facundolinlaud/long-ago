@@ -1,6 +1,6 @@
 package com.facundolinlaud.supergame.factory;
 
-import com.facundolinlaud.supergame.dto.composite.QuestListDto;
+import com.facundolinlaud.supergame.dto.behaviortree.QuestListDto;
 import com.facundolinlaud.supergame.dto.quests.QuestDto;
 import com.facundolinlaud.supergame.quests.QuestBlackboard;
 import com.facundolinlaud.supergame.quests.Quest;

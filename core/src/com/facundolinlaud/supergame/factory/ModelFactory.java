@@ -3,6 +3,7 @@ package com.facundolinlaud.supergame.factory;
 import com.badlogic.gdx.Gdx;
 import com.facundolinlaud.supergame.dto.agent.Agent;
 import com.facundolinlaud.supergame.dto.quests.QuestDto;
+import com.facundolinlaud.supergame.dto.skills.SkillDto;
 import com.facundolinlaud.supergame.model.item.Item;
 import com.facundolinlaud.supergame.model.particle.ParticleType;
 import com.facundolinlaud.supergame.model.skill.Skill;
@@ -13,7 +14,9 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -29,6 +32,8 @@ public class ModelFactory implements Disposable {
     private static final String SKILL_BAR_MODEL_PATH = "model/player/skill_bar.json";
     private static final String SKILL_TREE_MODEL_PATH = "model/player/skill_tree.json";
     private static final String QUESTS_MODELS_DIRECTORY = "model/quests/";
+    private static final String SKILLS_MODELS_DIRECTORY = "model/skills/";
+    private static final String SKILLS_MODELS_PATH = SKILLS_MODELS_DIRECTORY + "skills.json";
 
     private static Map<String, Object> cache = new HashMap<>();
     private static ObjectMapper mapper = new ObjectMapper();
@@ -86,6 +91,25 @@ public class ModelFactory implements Disposable {
         }
 
         return null;
+    }
+
+    public static List<String> getSkills(){
+        TypeReference<ArrayList<String>> typeRef = new TypeReference<ArrayList<String>>() {};
+        return (List<String>) readModel(SKILLS_MODELS_PATH, typeRef);
+    }
+
+    public static SkillDto getSkill(String skillFile){
+        return (SkillDto) readModelWithDefaultTyping(SKILLS_MODELS_DIRECTORY + skillFile, SkillDto.class);
+    }
+
+    private static Object readModelWithDefaultTyping(String path, Class clazz){
+        ObjectMapper customMapper = new ObjectMapper().enableDefaultTyping();
+
+        try {
+            return customMapper.readValue(Gdx.files.internal(path).file(), clazz);
+        } catch (IOException e) {
+            throw new Error(e.getMessage(), e);
+        }
     }
 
     private static Object readModel(String modelPath, TypeReference typeRef){

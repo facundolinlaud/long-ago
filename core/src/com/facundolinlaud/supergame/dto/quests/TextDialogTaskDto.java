@@ -1,6 +1,6 @@
 package com.facundolinlaud.supergame.dto.quests;
 
-import com.facundolinlaud.supergame.dto.composite.TaskDto;
+import com.facundolinlaud.supergame.dto.behaviortree.TaskDto;
 import com.facundolinlaud.supergame.behaviortree.Task;
 import com.facundolinlaud.supergame.quests.leaves.TextDialogTask;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;

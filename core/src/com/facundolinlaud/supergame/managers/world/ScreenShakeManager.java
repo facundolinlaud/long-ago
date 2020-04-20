@@ -17,15 +17,15 @@ public class ScreenShakeManager {
         this.position = new Vector3();
     }
 
-    public void shake(ScreenShake screenShake) {
+    public void shake(float power, float duration) {
+        this.power = power;
         random = new Random();
-        power = screenShake.getPower();
-        timeLeft = screenShake.getDuration();
+        timeLeft = duration;
         currentTime = 0;
     }
 
     public Vector3 tick(float delta) {
-        if(currentTime <= timeLeft) {
+        if (currentTime <= timeLeft) {
             currentPower = power * ((timeLeft - currentTime) / timeLeft);
 
             position.x = (random.nextFloat() - 0.5f) * 2 * currentPower;

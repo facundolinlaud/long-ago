@@ -11,6 +11,10 @@ import com.facundolinlaud.supergame.utils.Mappers;
 
 import static com.facundolinlaud.supergame.utils.events.Messages.REJECTED_SKILL_DUE_TO_NO_MANA;
 
+/**
+ * Pops: nothing
+ * Pushes: nothing
+ */
 public class RequireManaTask extends Task<SkillBlackboard> {
     private static ComponentMapper<ManaComponent> mm = Mappers.mana;
     private MessageDispatcher messageDispatcher = MessageManager.getInstance();
@@ -23,6 +27,8 @@ public class RequireManaTask extends Task<SkillBlackboard> {
 
     @Override
     public void activate() {
+        System.out.println("Activating RequireMana");
+
         Entity caster = getBlackboard().getCaster();
         ManaComponent manaComponent = mm.get(caster);
 

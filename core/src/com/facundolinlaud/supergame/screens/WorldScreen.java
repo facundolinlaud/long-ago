@@ -12,9 +12,13 @@ import com.facundolinlaud.supergame.components.BodyComponent;
 import com.facundolinlaud.supergame.components.ai.AIComponent;
 import com.facundolinlaud.supergame.engine.GameResources;
 import com.facundolinlaud.supergame.factory.Factories;
+import com.facundolinlaud.supergame.factory.SkillsFactory2;
 import com.facundolinlaud.supergame.listeners.PhysicsEntitiesListener;
 import com.facundolinlaud.supergame.listeners.ProjectilesCollisionListener;
 import com.facundolinlaud.supergame.managers.world.*;
+import com.facundolinlaud.supergame.services.AgentsService;
+import com.facundolinlaud.supergame.services.CombatService;
+import com.facundolinlaud.supergame.services.ParticlesService;
 import com.facundolinlaud.supergame.systems.*;
 import com.facundolinlaud.supergame.systems.ai.DecisionMakingSystem;
 import com.facundolinlaud.supergame.systems.ai.MoveToSystem;
@@ -31,6 +35,10 @@ public class WorldScreen implements Screen {
     private Factories factories;
     private MessageDispatcher messageDispatcher;
 
+    private AgentsService agentsService;
+    private CombatService combatService;
+    private ParticlesService particlesService;
+
     private CameraManager cameraManager;
     private MapManager mapManager;
     private PhysicsManager physicsManager;
@@ -41,6 +49,7 @@ public class WorldScreen implements Screen {
     private LightsManager lightsManager;
     private PlayerInputManager playerInputManager;
     private QuestsManager questsManager;
+    private SkillsManager skillsManager;
 
     private Stage stage;
 
@@ -50,6 +59,7 @@ public class WorldScreen implements Screen {
 
         initializeStage();
         initializeFactories();
+        initializeServices();
         initializeManagers();
         initializeListeners();
         initializeSystems();
@@ -62,8 +72,14 @@ public class WorldScreen implements Screen {
         Gdx.input.setInputProcessor(stage);
     }
 
-    private void initializeFactories(){
+    private void initializeFactories() {
         this.factories = new Factories(resources.getEngine());
+    }
+
+    private void initializeServices() {
+        this.agentsService = new AgentsService(resources.getEngine());
+        this.combatService = new CombatService(resources.getEngine());
+        this.particlesService = new ParticlesService(resources.getEngine(), factories.getParticleFactory());
     }
 
     private void initializeManagers() {
@@ -78,6 +94,8 @@ public class WorldScreen implements Screen {
         this.playerInputManager = new PlayerInputManager();
         this.questsManager = new QuestsManager(factories, weManager.getPlayer(),
                 uiManager.getDialogUIController(), resources.getEngine());
+        this.skillsManager = new SkillsManager(new SkillsFactory2(), lightsManager, cameraManager, agentsService,
+                combatService, particlesService);
     }
 
     private void initializeListeners() {
@@ -107,7 +125,7 @@ public class WorldScreen implements Screen {
         engine.addSystem(new CameraFocusSystem(cameraManager));
         engine.addSystem(new PhysicsSystem(physicsManager.getWorld()));
         engine.addSystem(new PickUpSystem());
-        engine.addSystem(new KeyPressSkillCastingRequestSystem());
+        engine.addSystem(new KeyPressSkillCastingRequestSystem(skillsManager));
         engine.addSystem(new KeyPressThenClickCastingRequestSystem(playerInputManager));
         engine.addSystem(new SkillCastingSystem(engine, factories.getParticleFactory(),
                 lightsManager, cameraManager));
@@ -138,6 +156,7 @@ public class WorldScreen implements Screen {
         physicsManager.render();
         lightsManager.render();
         questsManager.tick(delta);
+        skillsManager.tick(delta);
 
         uiManager.render();
     }
@@ -159,11 +178,14 @@ public class WorldScreen implements Screen {
     }
 
     @Override
-    public void show() {}
+    public void show() {
+    }
 
     @Override
-    public void pause() {}
+    public void pause() {
+    }
 
     @Override
-    public void resume() {}
+    public void resume() {
+    }
 }

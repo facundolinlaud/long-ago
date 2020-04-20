@@ -2,7 +2,7 @@
 	"@class": "com.facundolinlaud.supergame.dto.quests.QuestDto",
 	"name": "Help the Fisherman",
 	"nextQuests": [],
-	"children": ["com.facundolinlaud.supergame.dto.composite.TaskListDto", [{
+	"children": ["com.facundolinlaud.supergame.dto.behaviortree.TaskListDto", [{
 		"@class": "com.facundolinlaud.supergame.dto.quests.InteractionTaskDto",
 		"agentId": 3
 	},{

@@ -26,9 +26,9 @@ public class CameraManager {
                 VIEWPORT_WIDTH_IN_METERS * (height / width));
     }
 
-    public void shake(ScreenShake screenShake, Vector2 epicenter) {
+    public void shake(float power, float duration, Vector2 epicenter) {
         if(cameraCloseToEpicenter(epicenter))
-            shakeManager.shake(screenShake);
+            shakeManager.shake(power, duration);
     }
 
     private boolean cameraCloseToEpicenter(Vector2 epicenter) {
