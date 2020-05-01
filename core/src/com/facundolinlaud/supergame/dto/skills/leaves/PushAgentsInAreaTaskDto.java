@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 public class PushAgentsInAreaTaskDto extends TaskDto {
     private Shape shape;
     private float offset;
+    private boolean ignoreCaster;
 
     public void setShape(Shape shape) {
         this.shape = shape;
@@ -20,8 +21,12 @@ public class PushAgentsInAreaTaskDto extends TaskDto {
         this.offset = offset;
     }
 
+    public void setIgnoreCaster(boolean ignoreCaster) {
+        this.ignoreCaster = ignoreCaster;
+    }
+
     @Override
     public Task build() {
-        return new PushAgentsInAreaTask(shape, offset);
+        return new PushAgentsInAreaTask(shape, offset, ignoreCaster);
     }
 }

@@ -6,7 +6,6 @@ import com.badlogic.ashley.core.Family;
 import com.facundolinlaud.supergame.components.skills.SkillCastingRequestComponent;
 import com.facundolinlaud.supergame.components.skills.SkillClickComponent;
 import com.facundolinlaud.supergame.managers.world.SkillsManager;
-import com.facundolinlaud.supergame.model.skill.Skill;
 import com.facundolinlaud.supergame.utils.Mappers;
 
 public class KeyPressSkillCastingRequestSystem extends CastingRequestSystem {
@@ -21,7 +20,7 @@ public class KeyPressSkillCastingRequestSystem extends CastingRequestSystem {
 
     @Override
     protected void processEntity(Entity caster, float deltaTime) {
-        skillsManager.requestCasting(caster, "Blow");
+//        skillsManager.requestCasting(caster, "Blow");
 //        SkillCastingRequestComponent requestComponent = scrm.get(caster);
 //        Skill skill = requestComponent.getRequestedSkill();
 //

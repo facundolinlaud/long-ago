@@ -30,4 +30,10 @@ public class PushEntityPositionTask extends Task {
 
         completed();
     }
+
+    @Override
+    public void completed() {
+        System.out.println("Completing PushEntityPosition");
+        super.completed();
+    }
 }

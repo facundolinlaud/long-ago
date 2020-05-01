@@ -119,7 +119,7 @@ public class WorldScreen implements Screen {
         engine.addSystem(new StackableSpriteSystem());
         engine.addSystem(new StackedSpritesSystem());
         engine.addSystem(new AnimableSpriteSystem());
-        engine.addSystem(new PlayerInputSystem(playerInputManager, factories.getSkillsFactory(),
+        engine.addSystem(new PlayerInputSystem(playerInputManager, skillsManager, factories.getSkillsFactory(),
                 uiManager.getOverlayUIController()));
         engine.addSystem(new MovementSystem());
         engine.addSystem(new CameraFocusSystem(cameraManager));

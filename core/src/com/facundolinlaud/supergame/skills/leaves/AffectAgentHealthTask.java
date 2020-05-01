@@ -29,4 +29,10 @@ public class AffectAgentHealthTask extends Task<SkillBlackboard> {
         combatService.affectAgent(caster, target, amount);
         completed();
     }
+
+    @Override
+    public void completed() {
+        System.out.println("Completing AffectAgentHealth");
+        super.completed();
+    }
 }

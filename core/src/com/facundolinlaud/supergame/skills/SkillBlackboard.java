@@ -57,7 +57,7 @@ public class SkillBlackboard extends Blackboard {
     }
 
     @Override
-    public PoolableTaskManager getDomainManager() {
+    public SkillsManager getDomainManager() {
         return skillsManager;
     }
 

@@ -1,5 +1,6 @@
 package com.facundolinlaud.supergame.quests;
 
+import com.facundolinlaud.supergame.behaviortree.Blackboard;
 import com.facundolinlaud.supergame.behaviortree.SequentialTask;
 import com.facundolinlaud.supergame.behaviortree.Task;
 import com.facundolinlaud.supergame.utils.Debugger;

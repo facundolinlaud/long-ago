@@ -28,4 +28,10 @@ public class SetActionTask extends Task<SkillBlackboard> {
 
         completed();
     }
+
+    @Override
+    public void completed() {
+        System.out.println("Completing SetAction");
+        super.completed();
+    }
 }

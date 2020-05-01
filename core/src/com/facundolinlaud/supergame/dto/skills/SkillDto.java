@@ -4,18 +4,18 @@ import com.facundolinlaud.supergame.dto.behaviortree.SequentialTaskDto;
 import com.facundolinlaud.supergame.skills.Skill;
 
 public class SkillDto extends SequentialTaskDto {
-    private String name;
+    private String id;
 
-    public void setName(String name) {
-        this.name = name;
+    public String getId() {
+        return id;
     }
 
-    public String getName() {
-        return name;
+    public void setId(String id) {
+        this.id = id;
     }
 
     @Override
     public Skill build() {
-        return new Skill(name, buildChildren());
+        return new Skill(id, buildChildren());
     }
 }

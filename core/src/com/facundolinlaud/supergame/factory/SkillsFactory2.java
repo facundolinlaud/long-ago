@@ -20,7 +20,7 @@ public class SkillsFactory2 {
 
         this.skills = files.stream()
             .map(ModelFactory::getSkill)
-            .collect(Collectors.toMap(SkillDto::getName, Function.identity()));
+            .collect(Collectors.toMap(SkillDto::getId, Function.identity()));
     }
 
     public Skill buildSkill(String skillName){

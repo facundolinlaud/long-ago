@@ -9,7 +9,11 @@ import com.facundolinlaud.supergame.services.ParticlesService;
 import com.facundolinlaud.supergame.skills.Skill;
 import com.facundolinlaud.supergame.skills.SkillBlackboard;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class SkillsManager extends PoolableTaskManager {
+    private Set<Entity> casters;
     private SkillsFactory2 factory;
     private LightsManager lightsManager;
     private CameraManager cameraManager;
@@ -20,6 +24,7 @@ public class SkillsManager extends PoolableTaskManager {
     public SkillsManager(SkillsFactory2 factory, LightsManager lightsManager, CameraManager cameraManager,
                          AgentsService agentsService, CombatService combatService, ParticlesService particlesService) {
         this.factory = factory;
+        this.casters = new HashSet();
         this.lightsManager = lightsManager;
         this.cameraManager = cameraManager;
         this.agentsService = agentsService;
@@ -27,14 +32,27 @@ public class SkillsManager extends PoolableTaskManager {
         this.particlesService = particlesService;
     }
 
-    private boolean asd = false;
     public void requestCasting(Entity caster, String skillName) {
-        if(asd) return;
-        asd = true;
+        if (casters.contains(caster)) {
+            return;
+        }
+
+        System.out.println("## START CASTING ##");
+        this.casters.add(caster);
+        cast(caster, skillName);
+    }
+
+    private void cast(Entity caster, String skillName) {
         SkillBlackboard skillBlackboard = new SkillBlackboard(this, lightsManager, cameraManager,
                 agentsService, combatService, particlesService, caster);
+
         Skill skill = factory.buildSkill(skillName);
         skill.setBlackboard(skillBlackboard);
         skill.activate();
+    }
+
+    public void endCasting(Entity caster) {
+        System.out.println("## END CASTING ##");
+        this.casters.remove(caster);
     }
 }

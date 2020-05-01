@@ -30,4 +30,10 @@ public class DisplayParticlesTask extends Task<SkillBlackboard> {
 
         completed();
     }
+
+    @Override
+    public void completed() {
+        System.out.println("Completing DisplayParticles");
+        super.completed();
+    }
 }

@@ -11,13 +11,11 @@ import com.badlogic.gdx.ai.msg.Telegraph;
 import com.facundolinlaud.supergame.components.StatusComponent;
 import com.facundolinlaud.supergame.components.player.BagComponent;
 import com.facundolinlaud.supergame.components.player.KeyboardComponent;
-import com.facundolinlaud.supergame.components.skills.SkillCastingRequestComponent;
-import com.facundolinlaud.supergame.components.skills.SkillClickComponent;
 import com.facundolinlaud.supergame.factory.ModelFactory;
 import com.facundolinlaud.supergame.factory.SkillsFactory;
 import com.facundolinlaud.supergame.managers.world.PlayerInputManager;
+import com.facundolinlaud.supergame.managers.world.SkillsManager;
 import com.facundolinlaud.supergame.model.skill.Skill;
-import com.facundolinlaud.supergame.model.skill.SkillType;
 import com.facundolinlaud.supergame.model.status.Action;
 import com.facundolinlaud.supergame.model.status.Direction;
 import com.facundolinlaud.supergame.ui.controller.OverlayUIController;
@@ -40,31 +38,33 @@ public class PlayerInputSystem extends IteratingSystem implements Telegraph {
     private ComponentMapper<StatusComponent> sm = Mappers.status;
     private ComponentMapper<BagComponent> bm = Mappers.bag;
 
+    private SkillsManager skillsManager;
     private PlayerInputManager playerInputObserver;
     private MessageDispatcher messageDispatcher;
     private ObservableMap<Integer, Skill> buttonsToSkills;
 
-    public PlayerInputSystem(PlayerInputManager playerInputObserver, SkillsFactory skillsFactory, OverlayUIController
-                             overlayUIController) {
+    public PlayerInputSystem(PlayerInputManager playerInputObserver, SkillsManager skillsManager,
+                             SkillsFactory skillsFactory, OverlayUIController overlayUIController) {
         super(Family.all(StatusComponent.class, KeyboardComponent.class).get());
         this.messageDispatcher = MessageManager.getInstance();
         this.playerInputObserver = playerInputObserver;
+        this.skillsManager = skillsManager;
         this.buttonsToSkills = new ObservableMapWrapper(new HashMap());
 
         addListeners(overlayUIController);
         loadButtonsToSkills(skillsFactory);
     }
 
-    private void addListeners(OverlayUIController overlayUIController){
+    private void addListeners(OverlayUIController overlayUIController) {
         this.buttonsToSkills.addListener((MapChangeListener<Integer, Skill>)
                 change -> overlayUIController.updateSkillBar(buttonsToSkills));
         this.messageDispatcher.addListener(this, SKILL_EQUIPPED);
         this.messageDispatcher.addListener(this, SKILL_DROPPED);
     }
 
-    private void loadButtonsToSkills(SkillsFactory skillsFactory){
+    private void loadButtonsToSkills(SkillsFactory skillsFactory) {
         Map<Integer, Integer> skillBar = ModelFactory.getSkillBar();
-        for(Map.Entry<Integer, Integer> entry : skillBar.entrySet()){
+        for (Map.Entry<Integer, Integer> entry : skillBar.entrySet()) {
             Skill skill = skillsFactory.get(entry.getValue());
             buttonsToSkills.put(entry.getKey(), skill);
         }
@@ -75,18 +75,18 @@ public class PlayerInputSystem extends IteratingSystem implements Telegraph {
         StatusComponent status = sm.get(player);
         BagComponent bag = bm.get(player);
 
-        if(status.getAction().isBusy())
+        if (status.getAction().isBusy())
             return;
 
         boolean isSkillCastingRequested = playerInputObserver.isPressingSkillButton();
         Direction newDirection = playerInputObserver.getPlayersNewDirection();
 
-        if(newDirection != null && !isSkillCastingRequested){
+        if (newDirection != null && !isSkillCastingRequested) {
             handleMovementCase(status, newDirection);
-        }else{
-            if(isSkillCastingRequested){
+        } else {
+            if (isSkillCastingRequested) {
                 handleSkillCastingCase(player);
-            }else{
+            } else {
                 status.setAction(Action.STANDING);
             }
         }
@@ -102,25 +102,19 @@ public class PlayerInputSystem extends IteratingSystem implements Telegraph {
     private void handleSkillCastingCase(Entity caster) {
         Integer pressedSkillButton = playerInputObserver.getPressedSkillButton();
 
-        if(!existsSkillForButton(pressedSkillButton))
+        if (!skillForButtonExists(pressedSkillButton))
             return;
 
-        Skill requestedSkill = buttonsToSkills.get(pressedSkillButton);
-        SkillType skillType = requestedSkill.getSkillType();
-
-        if(skillType.isTwoClick())
-            caster.add(new SkillClickComponent());
-
-        caster.add(new SkillCastingRequestComponent(requestedSkill));
+        skillsManager.requestCasting(caster, "blow");
     }
 
-    private boolean existsSkillForButton(int pressedSkillButton){
+    private boolean skillForButtonExists(int pressedSkillButton) {
         return buttonsToSkills.containsKey(pressedSkillButton);
     }
 
     @Override
     public boolean handleMessage(Telegram msg) {
-        switch(msg.message){
+        switch (msg.message) {
             case SKILL_EQUIPPED:
                 onSkillEquipped((SkillEquippedEvent) msg.extraInfo);
                 break;

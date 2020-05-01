@@ -1,5 +1,6 @@
 package com.facundolinlaud.supergame.dto.behaviortree;
 
+import com.facundolinlaud.supergame.behaviortree.Blackboard;
 import com.facundolinlaud.supergame.behaviortree.Task;
 import com.facundolinlaud.supergame.behaviortree.SequentialTask;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -8,6 +9,6 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 public class SequentialTaskDto extends CompositeTaskDto {
     @Override
     public Task build() {
-        return new SequentialTask(buildChildren());
+        return new SequentialTask<Blackboard>(buildChildren());
     }
 }

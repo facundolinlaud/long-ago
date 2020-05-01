@@ -2,7 +2,7 @@ package com.facundolinlaud.supergame.behaviortree;
 
 import java.util.LinkedList;
 
-public class ParallelTask extends CompositeTask {
+public class ParallelTask<T extends Blackboard> extends CompositeTask<T> {
     public ParallelTask(LinkedList<Task> children) {
         super(children);
     }

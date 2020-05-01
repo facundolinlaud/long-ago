@@ -11,41 +11,50 @@ import java.util.stream.IntStream;
  * elements to be iterated over, and the last one is an integer of value n, that indicates how
  * many elements there are to be iterated over. This task consumes all of these parameters upon
  * activation.
- *
+ * <p>
  * Before sequentially activating the children, this task pushes to the stack the current element
  * being iterated.
  */
 public class IterateTask extends SequentialTask {
-    private boolean started;
+    private boolean isFirstActivate;
     private Stack<Value> iterables;
 
     public IterateTask(LinkedList<Task> children) {
         super(children);
-        this.started = false;
+        this.isFirstActivate = true;
         this.iterables = new Stack();
     }
 
     @Override
     public void activate() {
-        Stack<Value> stack = getBlackboard().getStack();
+        if (isFirstActivate) {
+            popIterablesFromStack();
 
-        if (!started) {
-            popIterablesFromStack(stack);
-            started = true;
+            if(iterables.isEmpty()){
+                completed();
+                return;
+            }
+
+            isFirstActivate = false;
+            Value poped = iterables.pop();
+            getBlackboard().getStack().add(poped);
         }
 
-        if (iterables.isEmpty()) {
-            completed();
-            return;
-        }
-
-        stack.add(iterables.pop());
         super.activate();
     }
 
+    @Override
+    public void childCompleted(Task child) {
+        if (children.isEmpty() && !iterables.isEmpty()) {
+            getBlackboard().getStack().add(iterables.pop());
+        }
 
-    private void popIterablesFromStack(Stack<Value> stack) {
+        super.childCompleted(child);
+    }
+
+    private void popIterablesFromStack() {
+        Stack<Value> stack = getBlackboard().getStack();
         int n = stack.pop().getFloatValue().intValue();
-        IntStream.range(1, n).forEach(i -> iterables.add(stack.pop()));
+        IntStream.range(0, n).forEach(i -> iterables.add(stack.pop()));
     }
 }

@@ -9,11 +9,6 @@ public abstract class Shape {
     private float x;
     private float y;
 
-    public void setPosition(Vector2 position) {
-        this.x = position.x;
-        this.y = position.y;
-    }
-
     public void setX(float x) {
         this.x = x;
     }
@@ -46,6 +41,8 @@ public abstract class Shape {
                 break;
         }
     }
+
+    public abstract void setPosition(Vector2 position);
 
     public abstract boolean contains(float x, float y);
 }

@@ -38,4 +38,10 @@ public class DisplayLightTask extends Task<SkillBlackboard> {
         lightsManager.create(lightModel, x, y);
         completed();
     }
+
+    @Override
+    public void completed() {
+        System.out.println("Completing DisplayLight");
+        super.completed();
+    }
 }

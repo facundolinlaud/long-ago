@@ -40,6 +40,12 @@ public class RequireManaTask extends Task<SkillBlackboard> {
         }
     }
 
+    @Override
+    public void completed() {
+        System.out.println("Completing RequireMana");
+        super.completed();
+    }
+
     private void dispatchNoManaMessage() {
         messageDispatcher.dispatchMessage(REJECTED_SKILL_DUE_TO_NO_MANA);
     }

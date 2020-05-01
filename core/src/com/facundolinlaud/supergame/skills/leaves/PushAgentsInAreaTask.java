@@ -27,10 +27,12 @@ public class PushAgentsInAreaTask extends Task<SkillBlackboard> {
 
     private Shape shape;
     private float offset;
+    private boolean ignoreCaster;
 
-    public PushAgentsInAreaTask(Shape shape, float offset) {
+    public PushAgentsInAreaTask(Shape shape, float offset, boolean ignoreCaster) {
         this.shape = shape;
         this.offset = offset;
+        this.ignoreCaster = ignoreCaster;
     }
 
     @Override
@@ -46,6 +48,10 @@ public class PushAgentsInAreaTask extends Task<SkillBlackboard> {
         shape.traslate(casterDirection, offset);
 
         List<Entity> agents = getBlackboard().getAgentsService().in(shape);
+
+        if(ignoreCaster && agents.contains(caster))
+            agents.remove(caster);
+
         pushAgentsToStack(agents);
         completed();
     }
@@ -62,5 +68,11 @@ public class PushAgentsInAreaTask extends Task<SkillBlackboard> {
         Stack<Value> stack = getBlackboard().getStack();
         agents.forEach(agent -> stack.push(new Value(agent)));
         stack.push(new Value(agents.size()));
+    }
+
+    @Override
+    public void completed() {
+        System.out.println("Completing PushAgentsInArea");
+        super.completed();
     }
 }
