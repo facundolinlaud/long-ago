@@ -9,11 +9,11 @@ import com.facundolinlaud.supergame.skills.SkillBlackboard;
  * Pops: two float-values corresponding to the x and y agent position values respectively
  * Pushes: nothing
  */
-public class ShakeScreenTask extends Task<SkillBlackboard> {
+public class ScreenShakeTask extends Task<SkillBlackboard> {
     private float power;
     private float duration;
 
-    public ShakeScreenTask(float power, float duration) {
+    public ScreenShakeTask(float power, float duration) {
         this.power = power;
         this.duration = duration;
     }

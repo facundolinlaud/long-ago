@@ -3,6 +3,7 @@ package com.facundolinlaud.supergame.behaviortree;
 import com.facundolinlaud.supergame.behaviortree.stack.Value;
 
 import java.util.LinkedList;
+import java.util.ListIterator;
 import java.util.Stack;
 import java.util.stream.IntStream;
 
@@ -15,46 +16,56 @@ import java.util.stream.IntStream;
  * Before sequentially activating the children, this task pushes to the stack the current element
  * being iterated.
  */
-public class IterateTask extends SequentialTask {
-    private boolean isFirstActivate;
+public class IterateTask extends CompositeTask {
     private Stack<Value> iterables;
+    private ListIterator<Task> currentChildren;
 
     public IterateTask(LinkedList<Task> children) {
         super(children);
-        this.isFirstActivate = true;
         this.iterables = new Stack();
+        this.currentChildren = children.listIterator();
     }
 
     @Override
     public void activate() {
-        if (isFirstActivate) {
-            popIterablesFromStack();
+        popIterablesFromStack();
 
-            if(iterables.isEmpty()){
-                completed();
-                return;
-            }
+        if (!iterables.isEmpty()) nextCycle();
+        else completed();
+    }
 
-            isFirstActivate = false;
-            Value poped = iterables.pop();
-            getBlackboard().getStack().add(poped);
-        }
+    private void nextCycle() {
+        popNextValueIntoStack();
 
-        super.activate();
+        currentChildren = children.listIterator();
+        currentChildren.next().activate();
+    }
+
+    private void popNextValueIntoStack() {
+        getBlackboard().getStack().add(iterables.pop());
     }
 
     @Override
     public void childCompleted(Task child) {
-        if (children.isEmpty() && !iterables.isEmpty()) {
-            getBlackboard().getStack().add(iterables.pop());
+        if(isCurrentCycleOver()){
+            if(iterables.isEmpty()){
+                completed();
+            }else{
+                nextCycle();
+            }
+        }else{
+            currentChildren.next().activate();
         }
+    }
 
-        super.childCompleted(child);
+    private boolean isCurrentCycleOver() {
+        return !currentChildren.hasNext();
     }
 
     private void popIterablesFromStack() {
         Stack<Value> stack = getBlackboard().getStack();
         int n = stack.pop().getFloatValue().intValue();
+
         IntStream.range(0, n).forEach(i -> iterables.add(stack.pop()));
     }
 }
