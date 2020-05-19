@@ -31,26 +31,15 @@ public class ProjectileSkillCastingStrategy implements SkillCastingStrategy {
         PositionComponent positionComponent = pm.get(caster);
         Vector2 origin = positionComponent.getPosition();
         Vector2 destination = epicenterStrategy.calculate(caster);
-        Vector2 direction = resolveDirection(origin, destination);
 
         String texture = skill.getProjectileInformation().getTexture();
 
-        Entity projectile = new ProjectileBuilder(caster, skill, origin)
-                .withOrigin(origin, direction)
-                .withDirection(direction)
-                .withPicture(texture, calculateRotation(direction))
+        Entity projectile = new ProjectileBuilder(caster, 20f, origin)
+                .to(destination, 7f)
+                .withPicture(texture)
                 .withParticles(particleFactory.getEffect(skill.getProjectileInformation().getParticle()))
                 .build();
 
         engine.addEntity(projectile);
-    }
-
-    private float calculateRotation(Vector2 direction){
-        return direction.angle();
-    }
-
-    private Vector2 resolveDirection(Vector2 origin, Vector2 destination){
-        Vector2 direction = new Vector2(destination.x - origin.x, destination.y - origin.y);
-        return direction.scl(1 / direction.len());
     }
 }

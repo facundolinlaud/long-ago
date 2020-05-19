@@ -8,7 +8,10 @@ import com.badlogic.gdx.ai.msg.MessageDispatcher;
 import com.badlogic.gdx.ai.msg.MessageManager;
 import com.badlogic.gdx.ai.msg.Telegram;
 import com.badlogic.gdx.ai.msg.Telegraph;
+import com.badlogic.gdx.math.Vector2;
+import com.facundolinlaud.supergame.components.PositionComponent;
 import com.facundolinlaud.supergame.components.StatusComponent;
+import com.facundolinlaud.supergame.components.TargetComponent;
 import com.facundolinlaud.supergame.components.player.BagComponent;
 import com.facundolinlaud.supergame.components.player.KeyboardComponent;
 import com.facundolinlaud.supergame.factory.ModelFactory;
@@ -35,19 +38,21 @@ import static com.facundolinlaud.supergame.utils.events.Messages.SKILL_EQUIPPED;
  * Created by facundo on 3/20/16.
  */
 public class PlayerInputSystem extends IteratingSystem implements Telegraph {
+    private ComponentMapper<TargetComponent> tm = Mappers.target;
+    private ComponentMapper<PositionComponent> pm = Mappers.position;
     private ComponentMapper<StatusComponent> sm = Mappers.status;
     private ComponentMapper<BagComponent> bm = Mappers.bag;
 
     private SkillsManager skillsManager;
-    private PlayerInputManager playerInputObserver;
+    private PlayerInputManager playerInputManager;
     private MessageDispatcher messageDispatcher;
     private ObservableMap<Integer, Skill> buttonsToSkills;
 
-    public PlayerInputSystem(PlayerInputManager playerInputObserver, SkillsManager skillsManager,
+    public PlayerInputSystem(PlayerInputManager playerInputManager, SkillsManager skillsManager,
                              SkillsFactory skillsFactory, OverlayUIController overlayUIController) {
-        super(Family.all(StatusComponent.class, KeyboardComponent.class).get());
+        super(Family.all(StatusComponent.class, KeyboardComponent.class, TargetComponent.class).get());
         this.messageDispatcher = MessageManager.getInstance();
-        this.playerInputObserver = playerInputObserver;
+        this.playerInputManager = playerInputManager;
         this.skillsManager = skillsManager;
         this.buttonsToSkills = new ObservableMapWrapper(new HashMap());
 
@@ -72,14 +77,16 @@ public class PlayerInputSystem extends IteratingSystem implements Telegraph {
 
     @Override
     protected void processEntity(Entity player, float deltaTime) {
+        updateTarget(player);
+
         StatusComponent status = sm.get(player);
         BagComponent bag = bm.get(player);
 
         if (status.getAction().isBusy())
             return;
 
-        boolean isSkillCastingRequested = playerInputObserver.isPressingSkillButton();
-        Direction newDirection = playerInputObserver.getPlayersNewDirection();
+        boolean isSkillCastingRequested = playerInputManager.isPressingSkillButton();
+        Direction newDirection = playerInputManager.getPlayersNewDirection();
 
         if (newDirection != null && !isSkillCastingRequested) {
             handleMovementCase(status, newDirection);
@@ -91,7 +98,18 @@ public class PlayerInputSystem extends IteratingSystem implements Telegraph {
             }
         }
 
-        bag.setGathering(playerInputObserver.isGatheringRequested());
+        bag.setGathering(playerInputManager.isGatheringRequested());
+    }
+
+    private void updateTarget(Entity player) {
+        PositionComponent positionComponent = pm.get(player);
+        Vector2 playerPosition = positionComponent.getPosition();
+        Vector2 cursorPosition = playerInputManager.getCursorPositionInMetersRelativeToScreenCenter();
+        Vector2 clickedPosition = new Vector2(playerPosition.x + cursorPosition.x, playerPosition.y - cursorPosition.y);
+
+        TargetComponent targetComponent = tm.get(player);
+        targetComponent.setPosition(clickedPosition);
+        targetComponent.setClicking(playerInputManager.isClicking());
     }
 
     private void handleMovementCase(StatusComponent status, Direction newDirection) {
@@ -100,7 +118,7 @@ public class PlayerInputSystem extends IteratingSystem implements Telegraph {
     }
 
     private void handleSkillCastingCase(Entity caster) {
-        Integer pressedSkillButton = playerInputObserver.getPressedSkillButton();
+        Integer pressedSkillButton = playerInputManager.getPressedSkillButton();
 
         if (!skillForButtonExists(pressedSkillButton))
             return;

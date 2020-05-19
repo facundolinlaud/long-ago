@@ -13,18 +13,21 @@ import com.facundolinlaud.supergame.components.skills.ProjectileComponent;
 import com.facundolinlaud.supergame.factory.PhysicsFactory;
 import com.facundolinlaud.supergame.factory.TextureFactory;
 import com.facundolinlaud.supergame.model.RenderPriority;
-import com.facundolinlaud.supergame.model.skill.Skill;
 
 public class ProjectileBuilder {
-    public static final float SHOOTING_FORCE = 7f;
     public static final float ORIGIN_OFFSET = 0.6f;
     private Entity entity;
+    private Vector2 origin;
+    private Vector2 direction;
 
-    public ProjectileBuilder(Entity caster, Skill skill, Vector2 origin) {
-        this.entity = new Entity().add(new ProjectileComponent(caster, skill, origin));
+    public ProjectileBuilder(Entity caster, float maxTravelDistance, Vector2 origin) {
+        this.entity = new Entity().add(new ProjectileComponent(caster, maxTravelDistance, origin));
+        this.origin = origin;
     }
 
-    public ProjectileBuilder withPicture(String imageName, float rotation){
+    public ProjectileBuilder withPicture(String imageName) {
+        float rotation = calculateRotation(direction);
+
         Sprite sprite = TextureFactory.getSprite(imageName);
         sprite.setRotation(rotation);
 
@@ -33,28 +36,42 @@ public class ProjectileBuilder {
         return this;
     }
 
-    public ProjectileBuilder withOrigin(Vector2 origin, Vector2 direction){
-        this.entity.add(new PositionComponent(origin.x + ORIGIN_OFFSET * direction.x,
-                origin.y + ORIGIN_OFFSET * direction.y));
+    public ProjectileBuilder to(Vector2 destination, float shootingForce) {
+        direction = resolveDirection(origin, destination);
 
-        return this;
-    }
+        PositionComponent positionComponent = new PositionComponent(
+                origin.x + ORIGIN_OFFSET * direction.x,
+                origin.y + ORIGIN_OFFSET * direction.y);
 
-    public ProjectileBuilder withDirection(Vector2 direction){
         Body body = PhysicsFactory.get().createProjectileBody();
-        body.applyForceToCenter(SHOOTING_FORCE * direction.x, SHOOTING_FORCE * direction.y, true);
+        body.applyForceToCenter(
+                shootingForce * direction.x,
+                shootingForce * direction.y,
+                true);
         BodyComponent bodyComponent = new BodyComponent(body, this.entity);
-        this.entity.add(bodyComponent);
+
+        this.entity
+                .add(bodyComponent)
+                .add(positionComponent);
 
         return this;
     }
 
-    public ProjectileBuilder withParticles(ParticleEffectPool.PooledEffect effect){
+    public ProjectileBuilder withParticles(ParticleEffectPool.PooledEffect effect) {
         this.entity.add(new ParticleComponent(effect, false));
         return this;
     }
 
-    public Entity build(){
+    public Entity build() {
         return this.entity;
+    }
+
+    private float calculateRotation(Vector2 direction) {
+        return direction.angle();
+    }
+
+    private Vector2 resolveDirection(Vector2 origin, Vector2 destination) {
+        Vector2 direction = new Vector2(destination.x - origin.x, destination.y - origin.y);
+        return direction.scl(1 / direction.len());
     }
 }

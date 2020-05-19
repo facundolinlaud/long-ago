@@ -35,7 +35,8 @@ public class AgentBuilder {
 
         this.entity
             .add(new StatusComponent())
-            .add(new IdComponent(id));
+            .add(new IdComponent(id))
+            .add(new TargetComponent());
     }
 
     public AgentBuilder withAI(BehaviorType behaviorType, float viewDistance){

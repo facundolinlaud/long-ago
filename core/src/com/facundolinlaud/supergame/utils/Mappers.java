@@ -50,4 +50,5 @@ public class Mappers {
     public static final ComponentMapper<ManaComponent> mana = ComponentMapper.getFor(ManaComponent.class);
     public static final ComponentMapper<IdComponent> id = ComponentMapper.getFor(IdComponent.class);
     public static final ComponentMapper<InteractionComponent> interaction = ComponentMapper.getFor(InteractionComponent.class);
+    public static final ComponentMapper<TargetComponent> target = ComponentMapper.getFor(TargetComponent.class);
 }

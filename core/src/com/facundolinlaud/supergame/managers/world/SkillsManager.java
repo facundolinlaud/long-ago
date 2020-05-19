@@ -6,6 +6,7 @@ import com.facundolinlaud.supergame.factory.SkillsFactory2;
 import com.facundolinlaud.supergame.services.AgentsService;
 import com.facundolinlaud.supergame.services.CombatService;
 import com.facundolinlaud.supergame.services.ParticlesService;
+import com.facundolinlaud.supergame.services.ProjectilesService;
 import com.facundolinlaud.supergame.skills.Skill;
 import com.facundolinlaud.supergame.skills.SkillBlackboard;
 
@@ -20,9 +21,11 @@ public class SkillsManager extends PoolableTaskManager {
     private AgentsService agentsService;
     private CombatService combatService;
     private ParticlesService particlesService;
+    private ProjectilesService projectilesService;
 
     public SkillsManager(SkillsFactory2 factory, LightsManager lightsManager, CameraManager cameraManager,
-                         AgentsService agentsService, CombatService combatService, ParticlesService particlesService) {
+                         AgentsService agentsService, CombatService combatService, ParticlesService particlesService,
+                         ProjectilesService projectilesService) {
         this.factory = factory;
         this.casters = new HashSet();
         this.lightsManager = lightsManager;
@@ -30,6 +33,7 @@ public class SkillsManager extends PoolableTaskManager {
         this.agentsService = agentsService;
         this.combatService = combatService;
         this.particlesService = particlesService;
+        this.projectilesService = projectilesService;
     }
 
     public void requestCasting(Entity caster, String skillName) {
@@ -43,8 +47,8 @@ public class SkillsManager extends PoolableTaskManager {
     }
 
     private void cast(Entity caster, String skillName) {
-        SkillBlackboard skillBlackboard = new SkillBlackboard(this, lightsManager, cameraManager,
-                agentsService, combatService, particlesService, caster);
+        SkillBlackboard skillBlackboard = new SkillBlackboard(caster, this, lightsManager, cameraManager,
+                agentsService, combatService, particlesService, projectilesService);
 
         Skill skill = factory.buildSkill(skillName);
         skill.setBlackboard(skillBlackboard);

@@ -19,6 +19,7 @@ import com.facundolinlaud.supergame.managers.world.*;
 import com.facundolinlaud.supergame.services.AgentsService;
 import com.facundolinlaud.supergame.services.CombatService;
 import com.facundolinlaud.supergame.services.ParticlesService;
+import com.facundolinlaud.supergame.services.ProjectilesService;
 import com.facundolinlaud.supergame.systems.*;
 import com.facundolinlaud.supergame.systems.ai.DecisionMakingSystem;
 import com.facundolinlaud.supergame.systems.ai.MoveToSystem;
@@ -38,6 +39,7 @@ public class WorldScreen implements Screen {
     private AgentsService agentsService;
     private CombatService combatService;
     private ParticlesService particlesService;
+    private ProjectilesService projectilesService;
 
     private CameraManager cameraManager;
     private MapManager mapManager;
@@ -80,6 +82,7 @@ public class WorldScreen implements Screen {
         this.agentsService = new AgentsService(resources.getEngine());
         this.combatService = new CombatService(resources.getEngine());
         this.particlesService = new ParticlesService(resources.getEngine(), factories.getParticleFactory());
+        this.projectilesService = new ProjectilesService(resources.getEngine(), factories.getParticleFactory());
     }
 
     private void initializeManagers() {
@@ -95,7 +98,7 @@ public class WorldScreen implements Screen {
         this.questsManager = new QuestsManager(factories, weManager.getPlayer(),
                 uiManager.getDialogUIController(), resources.getEngine());
         this.skillsManager = new SkillsManager(new SkillsFactory2(), lightsManager, cameraManager, agentsService,
-                combatService, particlesService);
+                combatService, particlesService, projectilesService);
     }
 
     private void initializeListeners() {

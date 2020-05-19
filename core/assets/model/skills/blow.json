@@ -7,13 +7,13 @@
       "mana": 10.0
     },{
       "@class": "com.facundolinlaud.supergame.dto.skills.leaves.SetActionTaskDto",
-      "action": "SPELL_CASTING"
+      "action": "SPELL_PRECASTING"
     },{
       "@class": "com.facundolinlaud.supergame.dto.behaviortree.WaitTaskDto",
       "time": 1.0
     },{
       "@class": "com.facundolinlaud.supergame.dto.skills.leaves.SetActionTaskDto",
-      "action": "SWINGING"
+      "action": "SPELL_CASTING"
     }, {
       "@class": "com.facundolinlaud.supergame.dto.skills.leaves.PushAgentsInAreaTaskDto",
       "ignoreCaster": true,
@@ -53,6 +53,32 @@
           "duration": 0.8
         }
       ]]
+    },{
+      "@class": "com.facundolinlaud.supergame.dto.skills.leaves.SetActionTaskDto",
+      "action": "AIMING"
+    },{
+      "@class": "com.facundolinlaud.supergame.dto.behaviortree.WaitTaskDto",
+      "time": 0.5
+    },{
+      "@class": "com.facundolinlaud.supergame.dto.skills.leaves.WaitForClickTaskDto"
+    },{
+      "@class": "com.facundolinlaud.supergame.dto.skills.leaves.SetActionTaskDto",
+      "action": "PRESHOOTING"
+    },{
+      "@class": "com.facundolinlaud.supergame.dto.behaviortree.WaitTaskDto",
+      "time": 0.1
+    },{
+      "@class": "com.facundolinlaud.supergame.dto.skills.leaves.ShootTaskDto",
+      "texture": "pictures/projectiles/arrow2.png",
+      "maxTravelDistance": 15.0,
+      "particleType": "FIRE_PROJECTILE",
+      "shootingForce": 7.0
+    },{
+      "@class": "com.facundolinlaud.supergame.dto.skills.leaves.SetActionTaskDto",
+      "action": "SHOOTING"
+    },{
+      "@class": "com.facundolinlaud.supergame.dto.behaviortree.WaitTaskDto",
+      "time": 0.4
     },{
       "@class": "com.facundolinlaud.supergame.dto.skills.leaves.SetActionTaskDto",
       "action": "STANDING"
