@@ -2,8 +2,8 @@ package com.facundolinlaud.supergame.behaviortree;
 
 import java.util.LinkedList;
 
-public class SelectTask<T extends Blackboard> extends SequentialTask<T> {
-    public SelectTask(LinkedList<Task> children) {
+public class SelectorTask<T extends Blackboard> extends SequentialTask<T> {
+    public SelectorTask(LinkedList<Task> children) {
         super(children);
     }
 

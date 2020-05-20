@@ -71,7 +71,7 @@
       "@class": "com.facundolinlaud.supergame.dto.skills.leaves.SetActionTaskDto",
       "action": "SHOOTING"
     },{
-      "@class": "com.facundolinlaud.supergame.dto.behaviortree.SelectTaskDto",
+      "@class": "com.facundolinlaud.supergame.dto.behaviortree.SelectorTaskDto",
       "children": ["com.facundolinlaud.supergame.dto.behaviortree.TaskListDto", [
         {
           "@class": "com.facundolinlaud.supergame.dto.behaviortree.SequentialTaskDto",
