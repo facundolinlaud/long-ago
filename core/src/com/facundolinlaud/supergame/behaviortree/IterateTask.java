@@ -16,7 +16,7 @@ import java.util.stream.IntStream;
  * Before sequentially activating the children, this task pushes to the stack the current element
  * being iterated.
  */
-public class IterateTask extends CompositeTask {
+public class IterateTask<T extends Blackboard> extends CompositeTask<T> {
     private Stack<Value> iterables;
     private ListIterator<Task> currentChildren;
 
@@ -42,18 +42,18 @@ public class IterateTask extends CompositeTask {
     }
 
     private void popNextValueIntoStack() {
-        getBlackboard().getStack().add(iterables.pop());
+        stack.add(iterables.pop());
     }
 
     @Override
     public void childCompleted(Task child) {
-        if(isCurrentCycleOver()){
-            if(iterables.isEmpty()){
+        if (isCurrentCycleOver()) {
+            if (iterables.isEmpty()) {
                 completed();
-            }else{
+            } else {
                 nextCycle();
             }
-        }else{
+        } else {
             currentChildren.next().activate();
         }
     }
@@ -63,8 +63,7 @@ public class IterateTask extends CompositeTask {
     }
 
     private void popIterablesFromStack() {
-        Stack<Value> stack = getBlackboard().getStack();
-        int n = stack.pop().getFloatValue().intValue();
+        int n = stack.pop().getFloat().intValue();
 
         IntStream.range(0, n).forEach(i -> iterables.add(stack.pop()));
     }

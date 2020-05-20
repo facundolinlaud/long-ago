@@ -11,6 +11,8 @@ import com.facundolinlaud.supergame.skills.SkillBlackboard;
  * Pushes: nothing
  */
 public class DisplayParticlesTask extends Task<SkillBlackboard> {
+    private ParticlesService particlesService;
+
     private ParticleType particleType;
 
     public DisplayParticlesTask(ParticleType particleType) {
@@ -18,16 +20,19 @@ public class DisplayParticlesTask extends Task<SkillBlackboard> {
     }
 
     @Override
+    protected void onBlackboardAvailable(SkillBlackboard blackboard) {
+        particlesService = blackboard.getParticlesService();
+    }
+
+    @Override
     public void activate() {
         System.out.println("Activating DisplayParticles");
 
-        float y = getBlackboard().popFloat();
-        float x = getBlackboard().popFloat();
+        float y = stack.pop().getFloat();
+        float x = stack.pop().getFloat();
         Vector2 position = new Vector2(x, y);
 
-        ParticlesService particlesService = getBlackboard().getParticlesService();
         particlesService.create(particleType, position);
-
         completed();
     }
 

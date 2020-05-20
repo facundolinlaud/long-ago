@@ -4,7 +4,6 @@ import com.facundolinlaud.supergame.behaviortree.Task;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Stack;
 import java.util.stream.IntStream;
 
@@ -25,17 +24,16 @@ public class RePushValueTask extends Task {
 
     @Override
     public void activate() {
-        Stack<Value> stack = getBlackboard().getStack();
         List<Value> copies = copy(stack, deepness);
 
-        for(int i = 0; i < times; i++){
+        for (int i = 0; i < times; i++) {
             copies.forEach(value -> stack.push(value));
         }
 
         completed();
     }
 
-    private List<Value> copy(Stack<Value> stack, int deepness){
+    private List<Value> copy(Stack<Value> stack, int deepness) {
         LinkedList<Value> list = new LinkedList();
 
         IntStream.range(0, deepness).forEach(i -> list.addFirst(stack.pop()));

@@ -13,10 +13,19 @@ public class ShootTaskDto extends TaskDto {
     private ParticleType particleType;
     private float shootingForce;
 
-    public ShootTaskDto(String texture, float maxTravelDistance, ParticleType particleType, float shootingForce) {
+    public void setTexture(String texture) {
         this.texture = texture;
+    }
+
+    public void setMaxTravelDistance(float maxTravelDistance) {
         this.maxTravelDistance = maxTravelDistance;
+    }
+
+    public void setParticleType(ParticleType particleType) {
         this.particleType = particleType;
+    }
+
+    public void setShootingForce(float shootingForce) {
         this.shootingForce = shootingForce;
     }
 

@@ -1,18 +1,15 @@
 package com.facundolinlaud.supergame.behaviortree.stack;
 
+import com.facundolinlaud.supergame.behaviortree.Blackboard;
 import com.facundolinlaud.supergame.behaviortree.Task;
 
-import java.util.Stack;
-
-public class MultiplyValuesTask extends Task {
+public class MultiplyValuesTask<T extends Blackboard> extends Task<T> {
     @Override
     public void activate() {
-        Stack<Value> stack = getBlackboard().getStack();
-
         Value a = stack.pop();
         Value b = stack.pop();
 
-        Float result = a.getFloatValue() * b.getFloatValue();
+        Float result = a.getFloat() * b.getFloat();
 
         stack.add(new Value(result));
         completed();

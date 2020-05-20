@@ -10,6 +10,8 @@ import com.facundolinlaud.supergame.skills.SkillBlackboard;
  * Pushes: nothing
  */
 public class ScreenShakeTask extends Task<SkillBlackboard> {
+    private CameraManager cameraManager;
+
     private float power;
     private float duration;
 
@@ -19,14 +21,18 @@ public class ScreenShakeTask extends Task<SkillBlackboard> {
     }
 
     @Override
+    protected void onBlackboardAvailable(SkillBlackboard blackboard) {
+        cameraManager = blackboard.getCameraManager();
+    }
+
+    @Override
     public void activate() {
         System.out.println("Activating ShakeScreen");
 
-        float y = getBlackboard().popFloat();
-        float x = getBlackboard().popFloat();
+        float y = stack.pop().getFloat();
+        float x = stack.pop().getFloat();
         Vector2 position = new Vector2(x, y);
 
-        CameraManager cameraManager = getBlackboard().getCameraManager();
         cameraManager.shake(power, duration, position);
 
         completed();

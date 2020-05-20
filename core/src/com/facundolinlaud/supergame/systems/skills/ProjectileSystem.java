@@ -6,11 +6,9 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
 import com.facundolinlaud.supergame.components.BodyComponent;
 import com.facundolinlaud.supergame.components.PositionComponent;
 import com.facundolinlaud.supergame.components.skills.ProjectileComponent;
-import com.facundolinlaud.supergame.model.skill.Skill;
 import com.facundolinlaud.supergame.strategies.skills.projectile.ProjectileDestructionStrategy;
 import com.facundolinlaud.supergame.utils.Mappers;
 
@@ -23,7 +21,7 @@ public class ProjectileSystem extends IteratingSystem {
 
     private ProjectileDestructionStrategy destructionStrategy;
 
-    public ProjectileSystem(Engine engine){
+    public ProjectileSystem(Engine engine) {
         super(Family.all(ProjectileComponent.class, PositionComponent.class, BodyComponent.class).get());
         this.destructionStrategy = new ProjectileDestructionStrategy(engine);
     }
@@ -34,15 +32,17 @@ public class ProjectileSystem extends IteratingSystem {
         destroyProjectileIfTravelledTooFar(projectile);
     }
 
-    private void destroyProjectileIfTravelledTooFar(Entity projectile){
+    private void destroyProjectileIfTravelledTooFar(Entity projectile) {
         ProjectileComponent projectileComponent = prm.get(projectile);
         PositionComponent positionComponent = pom.get(projectile);
 
         Vector2 currentPosition = positionComponent.getPosition();
         projectileComponent.travel(currentPosition);
 
-        if(projectileComponent.hasTravelDistanceMaxedOut())
+        if (projectileComponent.hasTravelDistanceMaxedOut()) {
             destructionStrategy.destroy(projectile);
+            projectileComponent.getOnMiss().run();
+        }
     }
 
     private void applyGravityToProjectile(Entity projectile) {

@@ -14,14 +14,19 @@ import com.facundolinlaud.supergame.factory.PhysicsFactory;
 import com.facundolinlaud.supergame.factory.TextureFactory;
 import com.facundolinlaud.supergame.model.RenderPriority;
 
+import java.util.function.Consumer;
+
 public class ProjectileBuilder {
     public static final float ORIGIN_OFFSET = 0.6f;
+
     private Entity entity;
     private Vector2 origin;
     private Vector2 direction;
 
-    public ProjectileBuilder(Entity caster, float maxTravelDistance, Vector2 origin) {
-        this.entity = new Entity().add(new ProjectileComponent(caster, maxTravelDistance, origin));
+    public ProjectileBuilder(Entity caster, float maxTravelDistance, Vector2 origin,
+                             Consumer<Entity> onHit, Runnable onMiss) {
+        ProjectileComponent p = new ProjectileComponent(caster, maxTravelDistance, origin, onHit, onMiss);
+        this.entity = new Entity().add(p);
         this.origin = origin;
     }
 

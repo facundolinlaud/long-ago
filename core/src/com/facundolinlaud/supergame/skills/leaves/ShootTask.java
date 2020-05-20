@@ -12,8 +12,14 @@ import com.facundolinlaud.supergame.services.ProjectilesService;
 import com.facundolinlaud.supergame.skills.SkillBlackboard;
 import com.facundolinlaud.supergame.utils.Mappers;
 
-import java.util.Stack;
+import java.util.function.Consumer;
 
+/**
+ * Pops: two float-values corresponding to the x and y projectile destination values respectively
+ * Pushes:
+ * * if an agent is hit, then it is pushed and the task completed()
+ * * if no agent is hit, then it's a miss, nothing is pushed and the task is failed()
+ */
 public class ShootTask extends Task<SkillBlackboard> {
     private ComponentMapper<PositionComponent> pm = Mappers.position;
 
@@ -22,7 +28,6 @@ public class ShootTask extends Task<SkillBlackboard> {
     private ParticleType particleType;
     private float shootingForce;
 
-    private Stack<Value> stack;
     private ProjectilesService projectilesService;
 
     public ShootTask(String texture, float maxTravelDistance, ParticleType particleType, float shootingForce) {
@@ -33,9 +38,14 @@ public class ShootTask extends Task<SkillBlackboard> {
     }
 
     @Override
+    protected void onBlackboardAvailable(SkillBlackboard blackboard) {
+        this.projectilesService = getBlackboard().getProjectilesService();
+    }
+
+    @Override
     public void activate() {
-        float y = stack.pop().getFloatValue();
-        float x = stack.pop().getFloatValue();
+        float y = stack.pop().getFloat();
+        float x = stack.pop().getFloat();
 
         Entity caster = getBlackboard().getCaster();
         PositionComponent positionComponent = pm.get(caster);
@@ -43,18 +53,19 @@ public class ShootTask extends Task<SkillBlackboard> {
         Vector2 destination = new Vector2(x, y);
 
         createProjectile(caster, origin, destination);
-        completed();
-    }
-
-    @Override
-    protected void onBlackboardAvailable(SkillBlackboard blackboard) {
-        this.projectilesService = getBlackboard().getProjectilesService();
-        this.stack = getBlackboard().getStack();
     }
 
     private void createProjectile(Entity caster, Vector2 origin, Vector2 destination) {
-        ProjectileBuilder projectile = new ProjectileBuilder(caster, maxTravelDistance, origin)
-                .to(destination, shootingForce) // 7f
+        Consumer<Entity> onHit = victim -> {
+            Value value = new Value(victim);
+            stack.push(value);
+            this.completed();
+        };
+
+        Runnable onMiss = () -> this.failed();
+
+        ProjectileBuilder projectile = new ProjectileBuilder(caster, maxTravelDistance, origin, onHit, onMiss)
+                .to(destination, shootingForce)
                 .withPicture(texture);
 
         projectilesService.create(projectile, particleType);

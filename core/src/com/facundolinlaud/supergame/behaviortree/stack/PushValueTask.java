@@ -11,7 +11,7 @@ public class PushValueTask extends Task {
 
     @Override
     public void activate() {
-        getBlackboard().getStack().push(value);
+        stack.push(value);
         completed();
     }
 }

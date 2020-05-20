@@ -12,6 +12,7 @@ import com.facundolinlaud.supergame.skills.SkillBlackboard;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.Stack;
 
 public class SkillsManager extends PoolableTaskManager {
     private Set<Entity> casters;
@@ -52,6 +53,7 @@ public class SkillsManager extends PoolableTaskManager {
 
         Skill skill = factory.buildSkill(skillName);
         skill.setBlackboard(skillBlackboard);
+        skill.setStack(new Stack());
         skill.activate();
     }
 

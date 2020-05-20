@@ -23,21 +23,21 @@ public class Value {
         this.entityValue = entityValue;
     }
 
-    public String getStringValue() {
+    public String getString() {
         if(stringValue == null)
             throw new NullValueException();
 
         return stringValue;
     }
 
-    public Float getFloatValue() {
+    public Float getFloat() {
         if(floatValue == null)
             throw new NullValueException();
 
         return floatValue;
     }
 
-    public Entity getEntityValue() {
+    public Entity getEntity() {
         if(entityValue == null)
             throw new NullValueException();
 

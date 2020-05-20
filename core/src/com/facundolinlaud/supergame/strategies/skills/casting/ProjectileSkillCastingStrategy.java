@@ -28,18 +28,18 @@ public class ProjectileSkillCastingStrategy implements SkillCastingStrategy {
 
     @Override
     public void executeSkillEffects(Entity caster, Skill skill) {
-        PositionComponent positionComponent = pm.get(caster);
-        Vector2 origin = positionComponent.getPosition();
-        Vector2 destination = epicenterStrategy.calculate(caster);
-
-        String texture = skill.getProjectileInformation().getTexture();
-
-        Entity projectile = new ProjectileBuilder(caster, 20f, origin)
-                .to(destination, 7f)
-                .withPicture(texture)
-                .withParticles(particleFactory.getEffect(skill.getProjectileInformation().getParticle()))
-                .build();
-
-        engine.addEntity(projectile);
+//        PositionComponent positionComponent = pm.get(caster);
+//        Vector2 origin = positionComponent.getPosition();
+//        Vector2 destination = epicenterStrategy.calculate(caster);
+//
+//        String texture = skill.getProjectileInformation().getTexture();
+//
+//        Entity projectile = new ProjectileBuilder(caster, 20f, origin)
+//                .to(destination, 7f)
+//                .withPicture(texture)
+//                .withParticles(particleFactory.getEffect(skill.getProjectileInformation().getParticle()))
+//                .build();
+//
+//        engine.addEntity(projectile);
     }
 }

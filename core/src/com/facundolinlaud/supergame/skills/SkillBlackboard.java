@@ -2,7 +2,6 @@ package com.facundolinlaud.supergame.skills;
 
 import com.badlogic.ashley.core.Entity;
 import com.facundolinlaud.supergame.behaviortree.Blackboard;
-import com.facundolinlaud.supergame.behaviortree.stack.Value;
 import com.facundolinlaud.supergame.managers.world.CameraManager;
 import com.facundolinlaud.supergame.managers.world.LightsManager;
 import com.facundolinlaud.supergame.managers.world.SkillsManager;
@@ -67,24 +66,4 @@ public class SkillBlackboard extends Blackboard {
         return skillsManager;
     }
 
-    /**
-     * Stack delegations
-     *
-     * @return
-     */
-    public Entity popEntity() {
-        return getStack().pop().getEntityValue();
-    }
-
-    public Float popFloat() {
-        return getStack().pop().getFloatValue();
-    }
-
-    public String popString() {
-        return getStack().pop().getStringValue();
-    }
-
-    public void push(Value value) {
-        getStack().push(value);
-    }
 }

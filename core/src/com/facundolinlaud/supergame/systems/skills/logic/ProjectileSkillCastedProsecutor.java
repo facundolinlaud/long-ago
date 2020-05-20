@@ -27,26 +27,26 @@ public class ProjectileSkillCastedProsecutor extends BaseSkillCastedProsecutor {
     }
 
     public void hit(Entity victim, Entity projectile) {
-        if(!prm.has(projectile))
-            return;
-
-        ProjectileComponent projectileComponent = prm.get(projectile);
-        PositionComponent projectilePosition = pm.get(projectile);
-
-        Vector2 position = projectilePosition.getPosition();
-        Entity caster = projectileComponent.getCaster();
-        Skill skill = projectileComponent.getSkill();
-
-        if(victim == caster)
-            return;
-
-        applyEffects(victim, caster, skill);
-        createAreaParticleEffect(skill, position);
-        createHitParticleEffect(victim, skill);
-        createLightEffect(skill, position);
-        shakeScreen(skill, position);
-
-        this.destructionStrategy.destroy(projectile);
+//        if(!prm.has(projectile))
+//            return;
+//
+//        ProjectileComponent projectileComponent = prm.get(projectile);
+//        PositionComponent projectilePosition = pm.get(projectile);
+//
+//        Vector2 position = projectilePosition.getPosition();
+//        Entity caster = projectileComponent.getCaster();
+//        Skill skill = projectileComponent.getSkill();
+//
+//        if(victim == caster)
+//            return;
+//
+//        applyEffects(victim, caster, skill);
+//        createAreaParticleEffect(skill, position);
+//        createHitParticleEffect(victim, skill);
+//        createLightEffect(skill, position);
+//        shakeScreen(skill, position);
+//
+//        this.destructionStrategy.destroy(projectile);
     }
 
     private void applyEffects(Entity victim, Entity caster, Skill skill) {

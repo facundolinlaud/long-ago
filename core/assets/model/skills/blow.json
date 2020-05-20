@@ -68,14 +68,45 @@
       "@class": "com.facundolinlaud.supergame.dto.behaviortree.WaitTaskDto",
       "time": 0.1
     },{
-      "@class": "com.facundolinlaud.supergame.dto.skills.leaves.ShootTaskDto",
-      "texture": "pictures/projectiles/arrow2.png",
-      "maxTravelDistance": 15.0,
-      "particleType": "FIRE_PROJECTILE",
-      "shootingForce": 7.0
-    },{
       "@class": "com.facundolinlaud.supergame.dto.skills.leaves.SetActionTaskDto",
       "action": "SHOOTING"
+    },{
+      "@class": "com.facundolinlaud.supergame.dto.behaviortree.SelectTaskDto",
+      "children": ["com.facundolinlaud.supergame.dto.behaviortree.TaskListDto", [
+        {
+          "@class": "com.facundolinlaud.supergame.dto.behaviortree.SequentialTaskDto",
+          "children": ["com.facundolinlaud.supergame.dto.behaviortree.TaskListDto", [
+            {
+              "@class": "com.facundolinlaud.supergame.dto.skills.leaves.ShootTaskDto",
+              "texture": "pictures/projectiles/arrow2.png",
+              "maxTravelDistance": 15.0,
+              "particleType": "FIRE_PROJECTILE",
+              "shootingForce": 7.0
+            },{
+              "@class": "com.facundolinlaud.supergame.dto.skills.leaves.PushEntityPositionTaskDto"
+            },{
+              "@class": "com.facundolinlaud.supergame.dto.behaviortree.stack.RePushValueTaskDto",
+              "deepness": 2,
+              "times": 3
+            },{
+              "@class": "com.facundolinlaud.supergame.dto.skills.leaves.DisplayLightTaskDto",
+              "lightType" : "DIMMING",
+              "distance": 6.0,
+              "duration": 1.0
+            },{
+              "@class": "com.facundolinlaud.supergame.dto.skills.leaves.DisplayParticlesTaskDto",
+              "particleType": "BLACK_SMOKE"
+            },{
+              "@class": "com.facundolinlaud.supergame.dto.skills.leaves.ScreenShakeTaskDto",
+              "power": 0.1,
+              "duration": 0.8
+            }
+          ]]
+        },{
+          "@class": "com.facundolinlaud.supergame.dto.skills.leaves.SetActionTaskDto",
+          "action": "FALLING"
+        }
+      ]]
     },{
       "@class": "com.facundolinlaud.supergame.dto.behaviortree.WaitTaskDto",
       "time": 0.4

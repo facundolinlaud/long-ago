@@ -109,8 +109,7 @@ public class WorldScreen implements Screen {
         engine.addEntityListener(Family.all(AIComponent.class).get(),
                 this.aiManager);
 
-        this.physicsManager.getWorld().setContactListener(new ProjectilesCollisionListener(engine,
-                factories.getParticleFactory(), lightsManager, cameraManager));
+        this.physicsManager.getWorld().setContactListener(new ProjectilesCollisionListener(projectilesService));
 
         this.stage.addListener(playerInputManager);
     }

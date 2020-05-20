@@ -12,8 +12,6 @@ import com.facundolinlaud.supergame.model.status.Direction;
 import com.facundolinlaud.supergame.skills.SkillBlackboard;
 import com.facundolinlaud.supergame.utils.Mappers;
 
-import java.util.Stack;
-
 import static com.facundolinlaud.supergame.utils.PositionUtils.getFacingDirection;
 
 /**
@@ -57,7 +55,6 @@ public class WaitForClickTask extends PoolableTask<SkillBlackboard> {
     private void pushIfClicking(TargetComponent targetComponent) {
         if (targetComponent.isClicking()) {
             Vector2 clickedPosition = targetComponent.getPosition();
-            Stack<Value> stack = getBlackboard().getStack();
             stack.push(new Value(clickedPosition.x));
             stack.push(new Value(clickedPosition.y));
 

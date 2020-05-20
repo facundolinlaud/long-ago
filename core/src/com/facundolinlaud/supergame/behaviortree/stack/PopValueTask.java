@@ -5,7 +5,7 @@ import com.facundolinlaud.supergame.behaviortree.Task;
 public class PopValueTask extends Task {
     @Override
     public void activate() {
-        getBlackboard().getStack().pop();
+        stack.pop();
         completed();
     }
 }

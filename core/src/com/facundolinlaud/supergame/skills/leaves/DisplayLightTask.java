@@ -11,6 +11,8 @@ import com.facundolinlaud.supergame.skills.SkillBlackboard;
  * Pushes: nothing
  */
 public class DisplayLightTask extends Task<SkillBlackboard> {
+    private LightsManager lightsManager;
+
     private LightType lightType;
     private float distance;
     private float duration;
@@ -22,13 +24,17 @@ public class DisplayLightTask extends Task<SkillBlackboard> {
     }
 
     @Override
+    protected void onBlackboardAvailable(SkillBlackboard blackboard) {
+        lightsManager = blackboard.getLightsManager();
+    }
+
+    @Override
     public void activate() {
         System.out.println("Activating DisplayLight");
 
-        float y = getBlackboard().popFloat();
-        float x = getBlackboard().popFloat();
+        float y = stack.pop().getFloat();
+        float x = stack.pop().getFloat();
 
-        LightsManager lightsManager = getBlackboard().getLightsManager();
         LightModel lightModel = new LightModel();
 
         // refactor

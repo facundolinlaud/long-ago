@@ -1,23 +1,19 @@
 package com.facundolinlaud.supergame.listeners;
 
-import com.badlogic.ashley.core.Engine;
+import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.physics.box2d.*;
-import com.facundolinlaud.supergame.factory.ParticleFactory;
-import com.facundolinlaud.supergame.managers.world.CameraManager;
-import com.facundolinlaud.supergame.managers.world.LightsManager;
-import com.facundolinlaud.supergame.managers.world.ScreenShakeManager;
-import com.facundolinlaud.supergame.strategies.skills.projectile.ProjectileDestructionStrategy;
-import com.facundolinlaud.supergame.systems.skills.logic.ProjectileSkillCastedProsecutor;
+import com.facundolinlaud.supergame.components.skills.ProjectileComponent;
+import com.facundolinlaud.supergame.services.ProjectilesService;
+import com.facundolinlaud.supergame.utils.Mappers;
 
 public class ProjectilesCollisionListener implements ContactListener {
-    private ProjectileDestructionStrategy destructionStrategy;
-    private ProjectileSkillCastedProsecutor prosecutor;
+    private ComponentMapper<ProjectileComponent> prm = Mappers.projectile;
 
-    public ProjectilesCollisionListener(Engine engine, ParticleFactory particleFactory,
-                                        LightsManager lightsManager, CameraManager cameraManager){
-        this.prosecutor = new ProjectileSkillCastedProsecutor(engine, particleFactory, lightsManager, cameraManager);
-        this.destructionStrategy = new ProjectileDestructionStrategy(engine);
+    private ProjectilesService projectilesService;
+
+    public ProjectilesCollisionListener(ProjectilesService projectilesService) {
+        this.projectilesService = projectilesService;
     }
 
     @Override
@@ -28,22 +24,29 @@ public class ProjectilesCollisionListener implements ContactListener {
         Body a = contact.getFixtureA().getBody();
         Body b = contact.getFixtureB().getBody();
 
-        if(a.isBullet()){
+        if (a.isBullet()) {
             projectile = (Entity) a.getUserData();
 
-            if(b.getUserData() != null)
+            if (b.getUserData() != null)
                 victim = (Entity) b.getUserData();
-        } else if(b.isBullet()){
+        } else if (b.isBullet()) {
             projectile = (Entity) b.getUserData();
 
-            if(a.getUserData() != null)
+            if (a.getUserData() != null)
                 victim = (Entity) a.getUserData();
-        } else return;
+        } else {
+            return;
+        }
 
-        if(isVictimValid(victim))
-            prosecutor.hit(victim, projectile);
+        ProjectileComponent projectileComponent = prm.get(projectile);
 
-        destructionStrategy.destroy(projectile);
+        if (isVictimValid(victim)) {
+            projectileComponent.getOnHit().accept(victim);
+        } else {
+            projectileComponent.getOnMiss().run();
+        }
+
+        projectilesService.destroy(projectile);
     }
 
     private boolean isVictimValid(Entity victim) {
@@ -51,11 +54,14 @@ public class ProjectilesCollisionListener implements ContactListener {
     }
 
     @Override
-    public void endContact(Contact contact) { }
+    public void endContact(Contact contact) {
+    }
 
     @Override
-    public void preSolve(Contact contact, Manifold oldManifold) { }
+    public void preSolve(Contact contact, Manifold oldManifold) {
+    }
 
     @Override
-    public void postSolve(Contact contact, ContactImpulse impulse) { }
+    public void postSolve(Contact contact, ContactImpulse impulse) {
+    }
 }

@@ -1,6 +1,9 @@
 package com.facundolinlaud.supergame.behaviortree;
 
+import com.facundolinlaud.supergame.behaviortree.stack.Value;
+
 import java.util.LinkedList;
+import java.util.Stack;
 
 public class ParallelTask<T extends Blackboard> extends CompositeTask<T> {
     public ParallelTask(LinkedList<Task> children) {
@@ -18,6 +21,14 @@ public class ParallelTask<T extends Blackboard> extends CompositeTask<T> {
 
     @Override
     public void activate() {
-        children.forEach(task -> task.activate());
+        Stack<Value> clone = (Stack<Value>) stack.clone();
+
+        children.forEach(task -> {
+            task.setStack(clone);
+            task.activate();
+        });
     }
+
+    @Override
+    protected void onStackAvailable(Stack<Value> stack) {}
 }

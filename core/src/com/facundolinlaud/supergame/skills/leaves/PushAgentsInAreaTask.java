@@ -13,13 +13,12 @@ import com.facundolinlaud.supergame.utils.Mappers;
 import com.facundolinlaud.supergame.utils.shape.Shape;
 
 import java.util.List;
-import java.util.Stack;
 
 /**
  * Pops: nothing
  * Pushes: n+1 values where:
- *  The first n are entity-values
- *  The n+1 value is an integer-value of value n
+ * The first n are entity-values
+ * The n+1 value is an integer-value of value n
  */
 public class PushAgentsInAreaTask extends Task<SkillBlackboard> {
     private ComponentMapper<PositionComponent> pm = Mappers.position;
@@ -49,23 +48,22 @@ public class PushAgentsInAreaTask extends Task<SkillBlackboard> {
 
         List<Entity> agents = getBlackboard().getAgentsService().in(shape);
 
-        if(ignoreCaster && agents.contains(caster))
+        if (ignoreCaster && agents.contains(caster))
             agents.remove(caster);
 
         pushAgentsToStack(agents);
         completed();
     }
 
-    private Vector2 getCasterPosition(Entity caster){
+    private Vector2 getCasterPosition(Entity caster) {
         return pm.get(caster).getPosition();
     }
 
-    private Direction getCasterDirection(Entity caster){
+    private Direction getCasterDirection(Entity caster) {
         return sm.get(caster).getDirection();
     }
 
-    private void pushAgentsToStack(List<Entity> agents){
-        Stack<Value> stack = getBlackboard().getStack();
+    private void pushAgentsToStack(List<Entity> agents) {
         agents.forEach(agent -> stack.push(new Value(agent)));
         stack.push(new Value(agents.size()));
     }

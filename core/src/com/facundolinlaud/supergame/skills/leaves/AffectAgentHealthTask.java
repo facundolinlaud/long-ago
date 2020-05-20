@@ -10,6 +10,8 @@ import com.facundolinlaud.supergame.skills.SkillBlackboard;
  * Pushes: nothing
  */
 public class AffectAgentHealthTask extends Task<SkillBlackboard> {
+    private CombatService combatService;
+
     private float amount;
 
     public AffectAgentHealthTask(float amount) {
@@ -17,13 +19,16 @@ public class AffectAgentHealthTask extends Task<SkillBlackboard> {
     }
 
     @Override
+    protected void onBlackboardAvailable(SkillBlackboard blackboard) {
+        combatService = blackboard.getCombatService();
+    }
+
+    @Override
     public void activate() {
         System.out.println("Activating AffectAgentHealth");
 
         SkillBlackboard blackboard = getBlackboard();
-
-        CombatService combatService = blackboard.getCombatService();
-        Entity target = blackboard.popEntity();
+        Entity target = stack.pop().getEntity();
         Entity caster = blackboard.getCaster();
 
         combatService.affectAgent(caster, target, amount);
