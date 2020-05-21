@@ -7,7 +7,6 @@ import com.badlogic.gdx.ai.msg.Telegraph;
 import com.facundolinlaud.supergame.behaviortree.Task;
 import com.facundolinlaud.supergame.quests.QuestBlackboard;
 import com.facundolinlaud.supergame.ui.controller.DialogUIController;
-import com.facundolinlaud.supergame.utils.Debugger;
 
 import static com.facundolinlaud.supergame.utils.events.Messages.QUEST_DIALOG_ACCEPTED;
 import static com.facundolinlaud.supergame.utils.events.Messages.QUEST_DIALOG_DECLINED;
@@ -33,13 +32,11 @@ public class InputDialogTask extends Task<QuestBlackboard> implements Telegraph 
 
         dialogUIController.showConfirmDeclineDialog(title, message);
         subscribeToEvent();
-        Debugger.debug("[DIALOG] Activating");
     }
 
     @Override
     public void completed() {
         unsubscribeFromEvent();
-        Debugger.debug("[GOLD] Completed");
         super.completed();
     }
 

@@ -25,19 +25,11 @@ public class AffectAgentHealthTask extends Task<SkillBlackboard> {
 
     @Override
     public void activate() {
-        System.out.println("Activating AffectAgentHealth");
-
         SkillBlackboard blackboard = getBlackboard();
         Entity target = stack.pop().getEntity();
         Entity caster = blackboard.getCaster();
 
         combatService.affectAgent(caster, target, amount);
         completed();
-    }
-
-    @Override
-    public void completed() {
-        System.out.println("Completing AffectAgentHealth");
-        super.completed();
     }
 }

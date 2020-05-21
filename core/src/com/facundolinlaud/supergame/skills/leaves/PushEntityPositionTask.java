@@ -17,8 +17,6 @@ public class PushEntityPositionTask extends Task<SkillBlackboard> {
 
     @Override
     public void activate() {
-        System.out.println("Activating PushEntityPosition");
-
         Entity entity = stack.pop().getEntity();
         PositionComponent positionComponent = pm.get(entity);
 
@@ -30,7 +28,6 @@ public class PushEntityPositionTask extends Task<SkillBlackboard> {
 
     @Override
     public void completed() {
-        System.out.println("Completing PushEntityPosition");
         super.completed();
     }
 }

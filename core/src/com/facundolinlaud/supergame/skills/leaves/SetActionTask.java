@@ -20,18 +20,10 @@ public class SetActionTask extends Task<SkillBlackboard> {
 
     @Override
     public void activate() {
-        System.out.println("Activating SetAction");
-
         Entity caster = getBlackboard().getCaster();
         StatusComponent statusComponent = Mappers.status.get(caster);
         statusComponent.setAction(action);
 
         completed();
-    }
-
-    @Override
-    public void completed() {
-        System.out.println("Completing SetAction");
-        super.completed();
     }
 }

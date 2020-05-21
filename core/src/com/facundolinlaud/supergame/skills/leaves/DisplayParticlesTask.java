@@ -26,19 +26,11 @@ public class DisplayParticlesTask extends Task<SkillBlackboard> {
 
     @Override
     public void activate() {
-        System.out.println("Activating DisplayParticles");
-
         float y = stack.pop().getFloat();
         float x = stack.pop().getFloat();
         Vector2 position = new Vector2(x, y);
 
         particlesService.create(particleType, position);
         completed();
-    }
-
-    @Override
-    public void completed() {
-        System.out.println("Completing DisplayParticles");
-        super.completed();
     }
 }

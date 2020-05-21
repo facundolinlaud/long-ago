@@ -27,8 +27,6 @@ public class RequireManaTask extends Task<SkillBlackboard> {
 
     @Override
     public void activate() {
-        System.out.println("Activating RequireMana");
-
         Entity caster = getBlackboard().getCaster();
         ManaComponent manaComponent = mm.get(caster);
 
@@ -38,12 +36,6 @@ public class RequireManaTask extends Task<SkillBlackboard> {
             dispatchNoManaMessage();
             failed();
         }
-    }
-
-    @Override
-    public void completed() {
-        System.out.println("Completing RequireMana");
-        super.completed();
     }
 
     private void dispatchNoManaMessage() {

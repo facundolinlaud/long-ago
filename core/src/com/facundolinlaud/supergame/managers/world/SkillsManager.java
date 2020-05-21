@@ -42,7 +42,6 @@ public class SkillsManager extends PoolableTaskManager {
             return;
         }
 
-        System.out.println("## START CASTING ##");
         this.casters.add(caster);
         cast(caster, skillName);
     }
@@ -58,7 +57,6 @@ public class SkillsManager extends PoolableTaskManager {
     }
 
     public void endCasting(Entity caster) {
-        System.out.println("## END CASTING ##");
         this.casters.remove(caster);
     }
 }

@@ -8,7 +8,6 @@ import com.badlogic.gdx.ai.msg.Telegram;
 import com.badlogic.gdx.ai.msg.Telegraph;
 import com.facundolinlaud.supergame.components.IdComponent;
 import com.facundolinlaud.supergame.behaviortree.Task;
-import com.facundolinlaud.supergame.utils.Debugger;
 import com.facundolinlaud.supergame.utils.Mappers;
 import com.facundolinlaud.supergame.utils.events.AgentDiedEvent;
 
@@ -31,13 +30,11 @@ public class SlayTask extends Task implements Telegraph {
     @Override
     public void activate() {
         messageDispatcher.addListener(this, AGENT_DIED);
-        Debugger.debug("[SLAY" + agentId + "] Activating to kill " + total + " of agent id " + agentId);
     }
 
     @Override
     public void completed() {
         messageDispatcher.removeListener(this, AGENT_DIED);
-        Debugger.debug("[SLAY" + agentId + "] Completed");
         super.completed();
     }
 
@@ -45,13 +42,9 @@ public class SlayTask extends Task implements Telegraph {
     public boolean handleMessage(Telegram msg) {
         if(msg.message == AGENT_DIED) {
             AgentDiedEvent e = (AgentDiedEvent) msg.extraInfo;
-            Debugger.debug("    [SLAY" + agentId + "] Received death");
 
             if(!e.wasHandled()){
-                Debugger.debug("    [SLAY" + agentId + "] Handling");
                 onAgentDead(e);
-            }else{
-                Debugger.debug("    [SLAY" + agentId + "] Not handling");
             }
         }
 
@@ -66,7 +59,6 @@ public class SlayTask extends Task implements Telegraph {
             if(agentComponent.getId() == agentId){
                 event.setHandled();
                 current++;
-                Debugger.debug("    [SLAY" + agentId + "] Agent(" + agentId + ") killed  (" + current + "/" + total + ")");
             }
         }
 

@@ -16,13 +16,11 @@ public class Skill extends SequentialTask<SkillBlackboard> {
 
     @Override
     public void activate() {
-        System.out.println("Activating skill");
         super.activate();
     }
 
     @Override
     public void completed() {
-        System.out.println("Completing skill");
         Entity caster = getBlackboard().getCaster();
         getBlackboard().getDomainManager().endCasting(caster);
     }

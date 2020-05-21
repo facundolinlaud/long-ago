@@ -4,7 +4,6 @@ import com.badlogic.gdx.ai.msg.MessageManager;
 import com.badlogic.gdx.ai.msg.Telegram;
 import com.badlogic.gdx.ai.msg.Telegraph;
 import com.facundolinlaud.supergame.behaviortree.Task;
-import com.facundolinlaud.supergame.utils.Debugger;
 
 import static com.facundolinlaud.supergame.utils.events.Messages.PLAYER_INTERACTION;
 
@@ -17,7 +16,6 @@ public class InteractionTask extends Task implements Telegraph {
 
     @Override
     public void activate() {
-        Debugger.debug("[INTERACTION] Activating talk to agent id " + agentId);
         subscribeToEvents();
     }
 
@@ -34,7 +32,6 @@ public class InteractionTask extends Task implements Telegraph {
         int eventAgentId = (int) msg.extraInfo;
 
         if(eventAgentId == agentId){
-            Debugger.debug("[INTERACTION] Completed talk to agent id " + agentId);
             unsubscribeToEvents();
             super.completed();
         }

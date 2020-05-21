@@ -36,8 +36,6 @@ public class PushAgentsInAreaTask extends Task<SkillBlackboard> {
 
     @Override
     public void activate() {
-        System.out.println("Activating PushAgentsInArea");
-
         Entity caster = getBlackboard().getCaster();
 
         Vector2 casterPosition = getCasterPosition(caster);
@@ -66,11 +64,5 @@ public class PushAgentsInAreaTask extends Task<SkillBlackboard> {
     private void pushAgentsToStack(List<Entity> agents) {
         agents.forEach(agent -> stack.push(new Value(agent)));
         stack.push(new Value(agents.size()));
-    }
-
-    @Override
-    public void completed() {
-        System.out.println("Completing PushAgentsInArea");
-        super.completed();
     }
 }

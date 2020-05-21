@@ -30,24 +30,11 @@ public class DisplayLightTask extends Task<SkillBlackboard> {
 
     @Override
     public void activate() {
-        System.out.println("Activating DisplayLight");
-
         float y = stack.pop().getFloat();
         float x = stack.pop().getFloat();
 
-        LightModel lightModel = new LightModel();
-
-        // refactor
-        lightModel.setDistance(distance);
-        lightModel.setDuration(duration);
-        lightModel.setType(lightType);
+        LightModel lightModel = new LightModel(distance, duration, lightType);
         lightsManager.create(lightModel, x, y);
         completed();
-    }
-
-    @Override
-    public void completed() {
-        System.out.println("Completing DisplayLight");
-        super.completed();
     }
 }

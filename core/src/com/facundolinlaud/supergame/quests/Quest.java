@@ -2,7 +2,6 @@ package com.facundolinlaud.supergame.quests;
 
 import com.facundolinlaud.supergame.behaviortree.KeepTryingTask;
 import com.facundolinlaud.supergame.behaviortree.Task;
-import com.facundolinlaud.supergame.utils.Debugger;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -18,7 +17,7 @@ public class Quest extends KeepTryingTask {
     }
 
     public void addNextQuest(Quest quest) {
-        this.nextQuests.add(quest);
+        nextQuests.add(quest);
     }
 
     public String getName() {
@@ -27,7 +26,6 @@ public class Quest extends KeepTryingTask {
 
     @Override
     public void completed() {
-        Debugger.debug("[QUEST] Completed. Nexts Quests...");
         nextQuests.forEach(quest -> quest.activate());
     }
 }

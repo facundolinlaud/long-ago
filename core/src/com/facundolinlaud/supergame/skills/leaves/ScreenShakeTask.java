@@ -27,8 +27,6 @@ public class ScreenShakeTask extends Task<SkillBlackboard> {
 
     @Override
     public void activate() {
-        System.out.println("Activating ShakeScreen");
-
         float y = stack.pop().getFloat();
         float x = stack.pop().getFloat();
         Vector2 position = new Vector2(x, y);
@@ -36,11 +34,5 @@ public class ScreenShakeTask extends Task<SkillBlackboard> {
         cameraManager.shake(power, duration, position);
 
         completed();
-    }
-
-    @Override
-    public void completed() {
-        System.out.println("Completing ShakeScreen");
-        super.completed();
     }
 }
