@@ -67,4 +67,9 @@ public class IterateTask<T extends Blackboard> extends CompositeTask<T> {
 
         IntStream.range(0, n).forEach(i -> iterables.add(stack.pop()));
     }
+
+    @Override
+    void childFailed(Task child) {
+        failed();
+    }
 }

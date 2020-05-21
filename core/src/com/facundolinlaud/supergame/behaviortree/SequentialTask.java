@@ -8,6 +8,11 @@ public class SequentialTask<T extends Blackboard> extends CompositeTask<T> {
     }
 
     @Override
+    public void activate() {
+        children.removeFirst().activate();
+    }
+
+    @Override
     public void childCompleted(Task child) {
         if (children.isEmpty()) {
             completed();
@@ -17,10 +22,7 @@ public class SequentialTask<T extends Blackboard> extends CompositeTask<T> {
     }
 
     @Override
-    public void activate() {
-        Task child = children.removeFirst();
-
-        completed.add(child);
-        child.activate();
+    public void childFailed(Task child) {
+        failed();
     }
 }
