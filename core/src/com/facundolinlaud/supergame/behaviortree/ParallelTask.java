@@ -6,8 +6,13 @@ import java.util.LinkedList;
 import java.util.Stack;
 
 public class ParallelTask<T extends Blackboard> extends CompositeTask<T> {
+    private int completedChildren;
+
     public ParallelTask(LinkedList<Task> children) {
         super(children);
+
+        this.stack = new Stack();
+        this.completedChildren = 0;
     }
 
     @Override
@@ -22,9 +27,9 @@ public class ParallelTask<T extends Blackboard> extends CompositeTask<T> {
 
     @Override
     public void childCompleted(Task child) {
-        children.remove(child);
+        completedChildren ++;
 
-        if(children.isEmpty())
+        if(completedChildren == children.size())
             completed();
     }
 
@@ -35,4 +40,9 @@ public class ParallelTask<T extends Blackboard> extends CompositeTask<T> {
 
     @Override
     protected void onStackAvailable(Stack<Value> stack) {}
+
+    @Override
+    public void reset() {
+        completedChildren = 0;
+    }
 }

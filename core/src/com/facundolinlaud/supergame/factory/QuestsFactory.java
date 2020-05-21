@@ -2,8 +2,8 @@ package com.facundolinlaud.supergame.factory;
 
 import com.facundolinlaud.supergame.dto.behaviortree.QuestListDto;
 import com.facundolinlaud.supergame.dto.quests.QuestDto;
-import com.facundolinlaud.supergame.quests.QuestBlackboard;
 import com.facundolinlaud.supergame.quests.Quest;
+import com.facundolinlaud.supergame.quests.QuestBlackboard;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -31,7 +31,7 @@ public class QuestsFactory {
 
         QuestListDto nextQuests = dto.getNextQuests();
 
-        for(String nextId : nextQuests){
+        for (String nextId : nextQuests) {
             QuestDto nextQuestDto = ModelFactory.getQuest(nextId);
             Quest nextQuest = processQuestModel(nextId, nextQuestDto);
             quest.addNextQuest(nextQuest);
@@ -45,7 +45,6 @@ public class QuestsFactory {
     }
 
     private void withBlackboard(QuestBlackboard blackboard) {
-        for(Quest q : quests.values())
-            q.setBlackboard(blackboard);
+        quests.values().forEach(q -> q.setBlackboard(blackboard));
     }
 }

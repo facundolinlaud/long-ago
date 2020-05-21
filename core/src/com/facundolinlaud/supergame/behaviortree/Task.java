@@ -37,9 +37,9 @@ public abstract class Task<T extends Blackboard> {
         return this.blackboard;
     }
 
-    protected void onBlackboardAvailable(T blackboard) {
-    }
+    protected void onBlackboardAvailable(T blackboard) {}
 
-    protected void onStackAvailable(Stack<Value> stack) {
-    }
+    protected void onStackAvailable(Stack<Value> stack) {}
+
+    public void reset(){}
 }

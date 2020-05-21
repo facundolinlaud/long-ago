@@ -9,15 +9,15 @@ public class SequentialTask<T extends Blackboard> extends CompositeTask<T> {
 
     @Override
     public void activate() {
-        children.removeFirst().activate();
+        childrenIterator.next().activate();
     }
 
     @Override
     public void childCompleted(Task child) {
-        if (children.isEmpty()) {
-            completed();
-        } else {
+        if (childrenIterator.hasNext()) {
             activate();
+        } else {
+            completed();
         }
     }
 

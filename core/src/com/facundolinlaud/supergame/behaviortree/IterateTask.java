@@ -18,12 +18,10 @@ import java.util.stream.IntStream;
  */
 public class IterateTask<T extends Blackboard> extends CompositeTask<T> {
     private Stack<Value> iterables;
-    private ListIterator<Task> currentChildren;
 
     public IterateTask(LinkedList<Task> children) {
         super(children);
-        this.iterables = new Stack();
-        this.currentChildren = children.listIterator();
+        iterables = new Stack();
     }
 
     @Override
@@ -37,8 +35,8 @@ public class IterateTask<T extends Blackboard> extends CompositeTask<T> {
     private void nextCycle() {
         popNextValueIntoStack();
 
-        currentChildren = children.listIterator();
-        currentChildren.next().activate();
+        childrenIterator = children.listIterator();
+        childrenIterator.next().activate();
     }
 
     private void popNextValueIntoStack() {
@@ -54,12 +52,12 @@ public class IterateTask<T extends Blackboard> extends CompositeTask<T> {
                 nextCycle();
             }
         } else {
-            currentChildren.next().activate();
+            childrenIterator.next().activate();
         }
     }
 
     private boolean isCurrentCycleOver() {
-        return !currentChildren.hasNext();
+        return !childrenIterator.hasNext();
     }
 
     private void popIterablesFromStack() {

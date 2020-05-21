@@ -9,7 +9,7 @@ public class SelectorTask<T extends Blackboard> extends SequentialTask<T> {
 
     @Override
     public void childFailed(Task child) {
-        if (children.isEmpty()) {
+        if (!childrenIterator.hasNext()) {
             failed();
             return;
         }

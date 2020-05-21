@@ -38,6 +38,8 @@ public class ProjectilesCollisionListener implements ContactListener {
             return;
         }
 
+        if(!prm.has(projectile)) return;
+
         ProjectileComponent projectileComponent = prm.get(projectile);
 
         if (isVictimValid(victim)) {

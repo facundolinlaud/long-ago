@@ -1,24 +1,23 @@
 package com.facundolinlaud.supergame.quests;
 
-import com.facundolinlaud.supergame.behaviortree.Blackboard;
-import com.facundolinlaud.supergame.behaviortree.SequentialTask;
+import com.facundolinlaud.supergame.behaviortree.KeepTryingTask;
 import com.facundolinlaud.supergame.behaviortree.Task;
 import com.facundolinlaud.supergame.utils.Debugger;
 
 import java.util.LinkedList;
 import java.util.List;
 
-public class Quest extends SequentialTask {
+public class Quest extends KeepTryingTask {
     private String name;
     private List<Quest> nextQuests;
 
-    public Quest(String name, LinkedList<Task> children) {
-        super(children);
+    public Quest(String name, Task child) {
+        super(child);
         this.name = name;
         this.nextQuests = new LinkedList();
     }
 
-    public void addNextQuest(Quest quest){
+    public void addNextQuest(Quest quest) {
         this.nextQuests.add(quest);
     }
 
