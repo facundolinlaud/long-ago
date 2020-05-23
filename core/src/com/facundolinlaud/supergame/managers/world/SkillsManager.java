@@ -2,13 +2,14 @@ package com.facundolinlaud.supergame.managers.world;
 
 import com.badlogic.ashley.core.Entity;
 import com.facundolinlaud.supergame.behaviortree.PoolableTaskManager;
-import com.facundolinlaud.supergame.factory.SkillsFactory2;
+import com.facundolinlaud.supergame.factory.SkillsFactory;
+import com.facundolinlaud.supergame.model.skill.Skill;
 import com.facundolinlaud.supergame.services.AgentsService;
 import com.facundolinlaud.supergame.services.CombatService;
 import com.facundolinlaud.supergame.services.ParticlesService;
 import com.facundolinlaud.supergame.services.ProjectilesService;
-import com.facundolinlaud.supergame.skills.Skill;
 import com.facundolinlaud.supergame.skills.SkillBlackboard;
+import com.facundolinlaud.supergame.skills.SkillTask;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -16,7 +17,7 @@ import java.util.Stack;
 
 public class SkillsManager extends PoolableTaskManager {
     private Set<Entity> casters;
-    private SkillsFactory2 factory;
+    private SkillsFactory factory;
     private LightsManager lightsManager;
     private CameraManager cameraManager;
     private AgentsService agentsService;
@@ -24,7 +25,7 @@ public class SkillsManager extends PoolableTaskManager {
     private ParticlesService particlesService;
     private ProjectilesService projectilesService;
 
-    public SkillsManager(SkillsFactory2 factory, LightsManager lightsManager, CameraManager cameraManager,
+    public SkillsManager(SkillsFactory factory, LightsManager lightsManager, CameraManager cameraManager,
                          AgentsService agentsService, CombatService combatService, ParticlesService particlesService,
                          ProjectilesService projectilesService) {
         this.factory = factory;
@@ -37,23 +38,23 @@ public class SkillsManager extends PoolableTaskManager {
         this.projectilesService = projectilesService;
     }
 
-    public void requestCasting(Entity caster, String skillName) {
+    public void requestCasting(Entity caster, Skill skill) {
         if (casters.contains(caster)) {
             return;
         }
 
         this.casters.add(caster);
-        cast(caster, skillName);
+        SkillTask skillTask = skill.getSkillDto().build();
+        cast(caster, skillTask);
     }
 
-    private void cast(Entity caster, String skillName) {
+    private void cast(Entity caster, SkillTask skillTask) {
         SkillBlackboard skillBlackboard = new SkillBlackboard(caster, this, lightsManager, cameraManager,
                 agentsService, combatService, particlesService, projectilesService);
 
-        Skill skill = factory.buildSkill(skillName);
-        skill.setBlackboard(skillBlackboard);
-        skill.setStack(new Stack());
-        skill.activate();
+        skillTask.setBlackboard(skillBlackboard);
+        skillTask.setStack(new Stack());
+        skillTask.activate();
     }
 
     public void endCasting(Entity caster) {

@@ -3,7 +3,7 @@ package com.facundolinlaud.supergame.listeners;
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.physics.box2d.*;
-import com.facundolinlaud.supergame.components.skills.ProjectileComponent;
+import com.facundolinlaud.supergame.components.ProjectileComponent;
 import com.facundolinlaud.supergame.services.ProjectilesService;
 import com.facundolinlaud.supergame.utils.Mappers;
 

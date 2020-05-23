@@ -68,8 +68,9 @@ public class PlayerInputSystem extends IteratingSystem implements Telegraph {
     }
 
     private void loadButtonsToSkills(SkillsFactory skillsFactory) {
-        Map<Integer, Integer> skillBar = ModelFactory.getSkillBar();
-        for (Map.Entry<Integer, Integer> entry : skillBar.entrySet()) {
+        Map<Integer, String> skillBar = ModelFactory.getSkillBar();
+
+        for (Map.Entry<Integer, String> entry : skillBar.entrySet()) {
             Skill skill = skillsFactory.get(entry.getValue());
             buttonsToSkills.put(entry.getKey(), skill);
         }
@@ -123,7 +124,8 @@ public class PlayerInputSystem extends IteratingSystem implements Telegraph {
         if (!skillForButtonExists(pressedSkillButton))
             return;
 
-        skillsManager.requestCasting(caster, "blow");
+        Skill pressedSkill = buttonsToSkills.get(pressedSkillButton);
+        skillsManager.requestCasting(caster, pressedSkill);
     }
 
     private boolean skillForButtonExists(int pressedSkillButton) {

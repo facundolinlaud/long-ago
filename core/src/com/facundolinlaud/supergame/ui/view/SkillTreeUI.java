@@ -17,7 +17,7 @@ public class SkillTreeUI implements UI {
         this.window.setPosition(980, 0);
     }
 
-    public void update(Map<Integer, Skill> allSkills, List<Skill> playerSkills, int assignablePoints){
+    public void update(Map<String, Skill> allSkills, List<Skill> playerSkills, int assignablePoints){
         this.window.update(allSkills, playerSkills, assignablePoints);
     }
 

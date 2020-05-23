@@ -9,7 +9,7 @@
 			"bag": [9, 9, 0, 10, 15, 16, 17, 18, 19, 20]
 		},
 		"combatInformation": {
-			"skills": [1, 2, 3, 4],
+			"skills": ["fire_arrow"],
 			"assignablePoints": 6,
 			"attributes": {
 				"strength": 170,
@@ -39,7 +39,7 @@
 		"velocity": 1.9,
 		"animationModel": "DEFAULT",
 		"combatInformation": {
-			"skills": [1, 2, 3],
+			"skills": ["fire_arrow"],
 			"attributes": {
 				"strength": 5,
 				"agility": 5,
@@ -70,7 +70,7 @@
 		"velocity": 1.4,
 		"animationModel": "DEFAULT",
 		"combatInformation": {
-			"skills": [0],
+			"skills": ["fire_arrow"],
 			"attributes": {
 				"strength": 10,
 				"agility": 10,
@@ -114,7 +114,7 @@
 		"velocity": 2.0,
 		"animationModel": "DEFAULT",
 		"combatInformation": {
-			"skills": [2, 3, 4, 5],
+			"skills": ["fire_arrow"],
 			"attributes": {
 				"strength": 10,
 				"agility": 10,

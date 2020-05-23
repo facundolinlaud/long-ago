@@ -6,12 +6,9 @@ import com.facundolinlaud.supergame.behaviortree.Task;
 
 import java.util.LinkedList;
 
-public class Skill extends SequentialTask<SkillBlackboard> {
-    private String id;
-
-    public Skill(String id, LinkedList<Task> children) {
+public class SkillTask extends SequentialTask<SkillBlackboard> {
+    public SkillTask(LinkedList<Task> children) {
         super(children);
-        this.id = id;
     }
 
     @Override

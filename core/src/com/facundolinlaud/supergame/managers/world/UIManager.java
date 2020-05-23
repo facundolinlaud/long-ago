@@ -12,10 +12,10 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TooltipManager;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
+import com.facundolinlaud.supergame.factory.SkillsFactory;
 import com.facundolinlaud.supergame.managers.Renderable;
 import com.facundolinlaud.supergame.systems.ui.AttributesUISystem;
 import com.facundolinlaud.supergame.systems.ui.ProfileUISystem;
-import com.facundolinlaud.supergame.systems.ui.SkillCastingUISystem;
 import com.facundolinlaud.supergame.ui.controller.*;
 import com.facundolinlaud.supergame.ui.view.*;
 import com.facundolinlaud.supergame.ui.view.utils.Window;
@@ -57,11 +57,14 @@ public class UIManager implements Renderable {
     private WindowsOrchestrator windowsOrchestrator;
     private MessageDispatcher messageDispatcher;
 
-    public UIManager(Stage stage, Camera camera, Entity player) {
+    private SkillsFactory skillsFactory;
+
+    public UIManager(Stage stage, Camera camera, Entity player, SkillsFactory skillsFactory) {
         this.skin = new Skin(Gdx.files.internal(SKIN_JSON_PATH));
         this.skin.addRegions(new TextureAtlas(Gdx.files.internal(TEXTURE_ATLAS_PATH)));
         this.stage = stage;
         this.messageDispatcher = MessageManager.getInstance();
+        this.skillsFactory = skillsFactory;
 
         configureToolTips();
         initializeDragAndDrop();
@@ -82,7 +85,7 @@ public class UIManager implements Renderable {
         tm.instant();
     }
 
-    private void initializeDragAndDrop(){
+    private void initializeDragAndDrop() {
         this.itemsDAD = new DragAndDrop();
         this.itemsDAD.setDragTime(MIN_DRAG_TIME_IN_MILLISECONDS);
 
@@ -107,7 +110,7 @@ public class UIManager implements Renderable {
         this.attributesUIController = new AttributesUIController(this.attributesUI);
         this.equipmentUIController = new EquipmentUIController(this.equipmentUI, player);
         this.labelDamagesController = new LabelDamagesController(this.labelDamagesUI, camera);
-        this.skillTreeController = new SkillTreeController(this.skillTreeUI, player);
+        this.skillTreeController = new SkillTreeController(skillsFactory, this.skillTreeUI, player);
         this.dialogUIController = new DialogUIController(this.dialogUI);
     }
 
@@ -119,7 +122,7 @@ public class UIManager implements Renderable {
         this.stage.addActor(this.skillTreeUI.get());
     }
 
-    private void subscribeListeners(){
+    private void subscribeListeners() {
         this.messageDispatcher.addListeners(this.inventoryUIController,
                 Messages.ITEM_FROM_INVENTORY_DROPPED,
                 Messages.ITEMS_IN_INVENTORY_SWAPPED,
@@ -148,10 +151,9 @@ public class UIManager implements Renderable {
         pm.dispose();
     }
 
-    public void initializeSystems(Engine engine){
+    public void initializeSystems(Engine engine) {
         engine.addSystem(new ProfileUISystem(this.overlayUIController));
         engine.addSystem(new AttributesUISystem(this.attributesUIController));
-        engine.addSystem(new SkillCastingUISystem(this.overlayUIController));
     }
 
     private void registerWindows() {
@@ -163,7 +165,7 @@ public class UIManager implements Renderable {
         stage.addListener(windowsOrchestrator);
     }
 
-    public OverlayUIController getOverlayUIController(){
+    public OverlayUIController getOverlayUIController() {
         return this.overlayUIController;
     }
 
@@ -172,7 +174,7 @@ public class UIManager implements Renderable {
     }
 
     @Override
-    public void render(){
+    public void render() {
         stage.act();
         stage.draw();
     }

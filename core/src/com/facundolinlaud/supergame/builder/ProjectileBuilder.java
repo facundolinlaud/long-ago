@@ -9,7 +9,7 @@ import com.facundolinlaud.supergame.components.BodyComponent;
 import com.facundolinlaud.supergame.components.ParticleComponent;
 import com.facundolinlaud.supergame.components.PositionComponent;
 import com.facundolinlaud.supergame.components.RenderComponent;
-import com.facundolinlaud.supergame.components.skills.ProjectileComponent;
+import com.facundolinlaud.supergame.components.ProjectileComponent;
 import com.facundolinlaud.supergame.factory.PhysicsFactory;
 import com.facundolinlaud.supergame.factory.TextureFactory;
 import com.facundolinlaud.supergame.model.RenderPriority;

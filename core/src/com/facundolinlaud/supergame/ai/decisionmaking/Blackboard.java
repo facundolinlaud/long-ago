@@ -5,6 +5,8 @@ import com.badlogic.gdx.ai.btree.LeafTask;
 import com.badlogic.gdx.math.Vector2;
 import com.facundolinlaud.supergame.ai.pathfinding.MapGraph;
 import com.facundolinlaud.supergame.ai.pathfinding.Node;
+import com.facundolinlaud.supergame.factory.SkillsFactory;
+import com.facundolinlaud.supergame.managers.world.SkillsManager;
 
 import java.util.Map;
 
@@ -13,8 +15,11 @@ public class Blackboard {
     private Vector2 agentPosition;
     private MapGraph mapGraph;
     private Entity agent;
+    private SkillsManager skillsManager;
 
-    public Blackboard(){}
+    public Blackboard(SkillsManager skillsManager){
+        this.skillsManager = skillsManager;
+    }
 
     public Vector2 getPlayerPosition() {
         return playerPosition;
@@ -46,5 +51,13 @@ public class Blackboard {
 
     public void setMapGraph(MapGraph mapGraph) {
         this.mapGraph = mapGraph;
+    }
+
+    public SkillsManager getSkillsManager() {
+        return skillsManager;
+    }
+
+    public void setSkillsManager(SkillsManager skillsManager) {
+        this.skillsManager = skillsManager;
     }
 }

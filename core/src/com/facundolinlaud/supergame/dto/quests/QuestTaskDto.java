@@ -2,9 +2,9 @@ package com.facundolinlaud.supergame.dto.quests;
 
 import com.facundolinlaud.supergame.dto.behaviortree.KeepTryingTaskDto;
 import com.facundolinlaud.supergame.dto.behaviortree.QuestListDto;
-import com.facundolinlaud.supergame.quests.Quest;
+import com.facundolinlaud.supergame.quests.QuestTask;
 
-public class QuestDto extends KeepTryingTaskDto {
+public class QuestTaskDto extends KeepTryingTaskDto {
     private String name;
     private QuestListDto nextQuests;
 
@@ -25,7 +25,7 @@ public class QuestDto extends KeepTryingTaskDto {
     }
 
     @Override
-    public Quest build() {
-        return new Quest(name, getChild().build());
+    public QuestTask build() {
+        return new QuestTask(name, getChild().build());
     }
 }

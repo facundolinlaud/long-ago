@@ -24,11 +24,11 @@ import java.util.Map;
 public class SkillTreeWindow extends GothicWindow {
     private static final String TITLE = "Skills";
 
-    private static final int EMPTY_SPACE = -1;
-    private static final int DOWN_ARROW = -2;
-    private static final int LEFT_ARROW = -3;
-    private static final int RIGHT_ARROW = -4;
-    private static final int VERTICAL_LONG_ARROW = -5;
+    private static final String EMPTY_SPACE = "";
+    private static final String DOWN_ARROW = "↓";
+    private static final String LEFT_ARROW = "←";
+    private static final String RIGHT_ARROW = "→";
+    private static final String VERTICAL_LONG_ARROW = "|";
 
     private static final int SKILL_FRAME_SIZE = 42;
     private static final int EMPTY_SPACE_SIZE = 32;
@@ -36,9 +36,9 @@ public class SkillTreeWindow extends GothicWindow {
     private Skin skin;
     private Table grid;
     private Label pointsLeft;
-    private Map<Integer, Drawable> arrows;
+    private Map<String, Drawable> arrows;
     private DragAndDrop dragAndDrop;
-    private List<List<Integer>> visualRepresentation;
+    private List<List<String>> visualRepresentation;
 
     public SkillTreeWindow(Skin skin, DragAndDrop dragAndDrop) {
         super(TITLE, skin, Themes.Background.DARK);
@@ -62,7 +62,7 @@ public class SkillTreeWindow extends GothicWindow {
         add(pointsLeft).right();
     }
 
-    public void update(Map<Integer, Skill> allSkills, List<Skill> playerSkills, int assignablePoints){
+    public void update(Map<String, Skill> allSkills, List<Skill> playerSkills, int assignablePoints) {
         drawGrid(allSkills, playerSkills);
         drawPointsLeft(assignablePoints);
     }
@@ -71,36 +71,36 @@ public class SkillTreeWindow extends GothicWindow {
         this.arrows = new HashMap();
         this.arrows.put(DOWN_ARROW, skin.getDrawable("down-arrow"));
         this.arrows.put(LEFT_ARROW, skin.getDrawable("left-arrow"));
-        this.arrows.put(RIGHT_ARROW, skin.getDrawable( "right-arrow"));
+        this.arrows.put(RIGHT_ARROW, skin.getDrawable("right-arrow"));
         this.arrows.put(VERTICAL_LONG_ARROW, skin.getDrawable("vertical-long-arrow"));
     }
 
-    private void drawGrid(Map<Integer, Skill> allSkills, List<Skill> playerSkills){
+    private void drawGrid(Map<String, Skill> allSkills, List<Skill> playerSkills) {
         this.grid.reset();
 
-        for(int x = 0; x < visualRepresentation.size(); x++){
-            for(int y = 0; y < visualRepresentation.get(x).size(); y++){
-                int cell = visualRepresentation.get(x).get(y);
+        for (int x = 0; x < visualRepresentation.size(); x++) {
+            for (int y = 0; y < visualRepresentation.get(x).size(); y++) {
+                String cell = visualRepresentation.get(x).get(y);
 
-                if(isSkill(cell)) {
+                if (isSkill(cell)) {
                     boolean disabled = !isSkillUnlocked(allSkills, playerSkills, cell);
 
                     Skill skill = allSkills.get(cell);
                     SkillTreeFramedSlot frame = new SkillTreeFramedSlot(skin, skill, disabled);
                     grid.add(frame).size(SKILL_FRAME_SIZE, SKILL_FRAME_SIZE);
 
-                    if(disabled) {
+                    if (disabled) {
                         registerUnlockRequestListener(skill, frame);
-                    }else{
+                    } else {
                         registerAsDraggableSlot(dragAndDrop, frame);
                     }
-                }else if(cell == EMPTY_SPACE){
+                } else if (cell == EMPTY_SPACE) {
                     grid.add().size(EMPTY_SPACE_SIZE, EMPTY_SPACE_SIZE);
-                }else{
+                } else {
                     Image arrow = new Image(arrows.get(cell));
                     Cell<Image> addedCell = grid.add(arrow);
 
-                    if(!isAnHorizontalArrow(cell))
+                    if (!isHorizontalArrow(cell))
                         addedCell.fillY();
                     else
                         addedCell.fillX();
@@ -112,7 +112,7 @@ public class SkillTreeWindow extends GothicWindow {
     }
 
     private void registerUnlockRequestListener(Skill skill, SkillTreeFramedSlot frame) {
-        frame.addListener(new ClickListener(Input.Buttons.RIGHT){
+        frame.addListener(new ClickListener(Input.Buttons.RIGHT) {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 MessageManager.getInstance().dispatchMessage(Messages.SKILL_UNLOCK_REQUEST, skill);
@@ -124,7 +124,7 @@ public class SkillTreeWindow extends GothicWindow {
         this.pointsLeft.setText("Assignable Points Left: " + String.valueOf(assignablePoints));
     }
 
-    private boolean isSkillUnlocked(Map<Integer, Skill> allSkills, List<Skill> playerSkills, int cell) {
+    private boolean isSkillUnlocked(Map<String, Skill> allSkills, List<Skill> playerSkills, String cell) {
         Skill skill = allSkills.get(cell);
         return playerSkills.contains(skill);
     }
@@ -133,11 +133,19 @@ public class SkillTreeWindow extends GothicWindow {
         dragAndDrop.addSource(new SkillSlotSource(frame.getSlot(), SlotType.SKILL_TREE_SLOT));
     }
 
-    private boolean isAnHorizontalArrow(int cell) {
-        return cell == LEFT_ARROW || cell == RIGHT_ARROW;
+    private boolean isHorizontalArrow(String cell) {
+        return LEFT_ARROW.equals(cell) || RIGHT_ARROW.equals(cell);
     }
 
-    private boolean isSkill(int cell) {
-        return cell >= 0;
+    private boolean isVerticalArrow(String cell) {
+        return VERTICAL_LONG_ARROW.equals(cell) || DOWN_ARROW.equals(cell);
+    }
+
+    private boolean isEmptySpace(String cell) {
+        return EMPTY_SPACE.equals(cell);
+    }
+
+    private boolean isSkill(String cell) {
+        return !isVerticalArrow(cell) && !isHorizontalArrow(cell) && !isEmptySpace(cell);
     }
 }

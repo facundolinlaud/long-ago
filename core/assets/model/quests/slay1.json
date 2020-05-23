@@ -1,5 +1,5 @@
 {
-  "@class": "com.facundolinlaud.supergame.dto.quests.QuestDto",
+  "@class": "com.facundolinlaud.supergame.dto.quests.QuestTaskDto",
   "name": "Help the Fisherman",
   "nextQuests": ["slay2.json"],
   "child": {

@@ -12,15 +12,15 @@ public class ManaComponent implements Component {
         this.currentMana = totalMana;
     }
 
-    public boolean canCast(int mana){
+    public boolean canCast(int mana) {
         return currentMana >= mana;
     }
 
-    public boolean canCast(Skill skill){
+    public boolean canCast(Skill skill) {
         return currentMana >= skill.getManaConsumption();
     }
 
-    public void cast(Skill skill){
+    public void cast(Skill skill) {
         this.currentMana = Math.max(0, currentMana - skill.getManaConsumption());
     }
 
@@ -32,7 +32,7 @@ public class ManaComponent implements Component {
         return this.totalMana;
     }
 
-    public void regenerate(float points){
+    public void regenerate(float points) {
         this.currentMana = Math.min(currentMana + points, totalMana);
     }
 }

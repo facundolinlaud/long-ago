@@ -1,4 +1,4 @@
-package com.facundolinlaud.supergame.systems.skills;
+package com.facundolinlaud.supergame.systems;
 
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Engine;
@@ -8,8 +8,8 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.math.Vector2;
 import com.facundolinlaud.supergame.components.BodyComponent;
 import com.facundolinlaud.supergame.components.PositionComponent;
-import com.facundolinlaud.supergame.components.skills.ProjectileComponent;
-import com.facundolinlaud.supergame.strategies.skills.projectile.ProjectileDestructionStrategy;
+import com.facundolinlaud.supergame.components.ProjectileComponent;
+import com.facundolinlaud.supergame.strategies.projectile.ProjectileDestructionStrategy;
 import com.facundolinlaud.supergame.utils.Mappers;
 
 public class ProjectileSystem extends IteratingSystem {

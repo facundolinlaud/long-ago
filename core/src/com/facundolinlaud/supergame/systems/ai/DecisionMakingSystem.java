@@ -8,6 +8,7 @@ import com.facundolinlaud.supergame.components.PositionComponent;
 import com.facundolinlaud.supergame.components.ai.AIComponent;
 import com.facundolinlaud.supergame.components.player.KeyboardComponent;
 import com.facundolinlaud.supergame.managers.world.AIManager;
+import com.facundolinlaud.supergame.managers.world.SkillsManager;
 import com.facundolinlaud.supergame.utils.Distances;
 import com.facundolinlaud.supergame.utils.Mappers;
 
@@ -22,8 +23,8 @@ public class DecisionMakingSystem extends EntitySystem {
     private AIManager aiManager;
     private float accumulator = 0f;
 
-    public DecisionMakingSystem(AIManager aiManager) {
-        this.blackboard = new Blackboard();
+    public DecisionMakingSystem(AIManager aiManager, SkillsManager skillsManager) {
+        this.blackboard = new Blackboard(skillsManager);
         this.aiManager = aiManager;
     }
 

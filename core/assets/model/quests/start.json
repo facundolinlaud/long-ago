@@ -1,5 +1,5 @@
 {
-	"@class": "com.facundolinlaud.supergame.dto.quests.QuestDto",
+	"@class": "com.facundolinlaud.supergame.dto.quests.QuestTaskDto",
 	"name": "Welcome to Long Ago",
 	"nextQuests": ["slay1.json"],
 	"child": {

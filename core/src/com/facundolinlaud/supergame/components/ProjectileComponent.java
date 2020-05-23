@@ -1,4 +1,4 @@
-package com.facundolinlaud.supergame.components.skills;
+package com.facundolinlaud.supergame.components;
 
 import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.Entity;

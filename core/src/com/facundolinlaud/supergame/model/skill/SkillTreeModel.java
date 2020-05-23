@@ -4,7 +4,7 @@ import java.util.List;
 
 public class SkillTreeModel {
     private List<List<Boolean>> dependencyGraph;
-    private List<List<Integer>> visualRepresentation;
+    private List<List<String>> visualRepresentation;
 
     public SkillTreeModel() {
     }
@@ -17,11 +17,11 @@ public class SkillTreeModel {
         this.dependencyGraph = dependencyGraph;
     }
 
-    public List<List<Integer>> getVisualRepresentation() {
+    public List<List<String>> getVisualRepresentation() {
         return visualRepresentation;
     }
 
-    public void setVisualRepresentation(List<List<Integer>> visualRepresentation) {
+    public void setVisualRepresentation(List<List<String>> visualRepresentation) {
         this.visualRepresentation = visualRepresentation;
     }
 }

@@ -7,7 +7,7 @@ import com.facundolinlaud.supergame.builder.ProjectileBuilder;
 import com.facundolinlaud.supergame.components.BodyComponent;
 import com.facundolinlaud.supergame.components.ParticleComponent;
 import com.facundolinlaud.supergame.components.RenderComponent;
-import com.facundolinlaud.supergame.components.skills.ProjectileComponent;
+import com.facundolinlaud.supergame.components.ProjectileComponent;
 import com.facundolinlaud.supergame.factory.ParticleFactory;
 import com.facundolinlaud.supergame.model.particle.ParticleType;
 import com.facundolinlaud.supergame.utils.Mappers;

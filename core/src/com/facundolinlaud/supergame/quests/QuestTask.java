@@ -6,17 +6,17 @@ import com.facundolinlaud.supergame.behaviortree.Task;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Quest extends KeepTryingTask {
+public class QuestTask extends KeepTryingTask {
     private String name;
-    private List<Quest> nextQuests;
+    private List<QuestTask> nextQuests;
 
-    public Quest(String name, Task child) {
+    public QuestTask(String name, Task child) {
         super(child);
         this.name = name;
         this.nextQuests = new LinkedList();
     }
 
-    public void addNextQuest(Quest quest) {
+    public void addNextQuest(QuestTask quest) {
         nextQuests.add(quest);
     }
 
