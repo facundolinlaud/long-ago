@@ -17,6 +17,11 @@ public class SkillTask extends SequentialTask<SkillBlackboard> {
     }
 
     @Override
+    public void failed() {
+        completed();
+    }
+
+    @Override
     public void completed() {
         Entity caster = getBlackboard().getCaster();
         getBlackboard().getDomainManager().endCasting(caster);

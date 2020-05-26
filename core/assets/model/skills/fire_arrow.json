@@ -14,6 +14,9 @@
         "@class": "com.facundolinlaud.supergame.dto.skills.leaves.RequireManaTaskDto",
         "mana": 10.0
       },{
+        "@class": "com.facundolinlaud.supergame.dto.skills.leaves.RequireEquipmentTaskDto",
+        "equipType": "BOW"
+      },{
         "@class": "com.facundolinlaud.supergame.dto.skills.leaves.SetActionTaskDto",
         "action": "SPELL_PRECASTING"
       },{
