@@ -1,5 +1,6 @@
 package com.facundolinlaud.supergame.utils;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
 /**
@@ -30,14 +31,13 @@ public class Dimensions {
         return (int) (meters * PX_PER_METER);
     }
 
-    public static final Vector2 toMeters(Vector2 px){
-        return new Vector2(toMeters(px.x), toMeters(px.y));
-    }
+    public static final Vector2 calculateGlobalPositionInPixelsToMetersRelativeToCenter(float x, float y){
+        float width = Gdx.graphics.getWidth();
+        float height = Gdx.graphics.getHeight();
 
-    public static final Vector2 calculateGlobalPositionInPixelsToMetersRelativeToCenter(Vector2 px){
-        float x = px.x - SCREEN_WIDTH / 2f;
-        float y = px.y - SCREEN_HEIGHT / 2f;
+        float relativeX = x - width / 2f;
+        float relativeY = y - height / 2f;
 
-        return new Vector2(toMeters(x), toMeters(y));
+        return new Vector2(toMeters(relativeX), toMeters(relativeY));
     }
 }

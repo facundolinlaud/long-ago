@@ -4,11 +4,14 @@ import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ai.msg.MessageDispatcher;
 import com.badlogic.gdx.ai.msg.MessageManager;
 import com.badlogic.gdx.ai.msg.Telegram;
 import com.badlogic.gdx.ai.msg.Telegraph;
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.facundolinlaud.supergame.components.PositionComponent;
 import com.facundolinlaud.supergame.components.StatusComponent;
 import com.facundolinlaud.supergame.components.TargetComponent;
@@ -16,6 +19,7 @@ import com.facundolinlaud.supergame.components.player.BagComponent;
 import com.facundolinlaud.supergame.components.player.KeyboardComponent;
 import com.facundolinlaud.supergame.factory.ModelFactory;
 import com.facundolinlaud.supergame.factory.SkillsFactory;
+import com.facundolinlaud.supergame.managers.world.CameraManager;
 import com.facundolinlaud.supergame.managers.world.PlayerInputManager;
 import com.facundolinlaud.supergame.managers.world.SkillsManager;
 import com.facundolinlaud.supergame.model.skill.Skill;
@@ -31,6 +35,7 @@ import javafx.collections.ObservableMap;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.facundolinlaud.supergame.utils.Dimensions.calculateGlobalPositionInPixelsToMetersRelativeToCenter;
 import static com.facundolinlaud.supergame.utils.events.Messages.SKILL_DROPPED;
 import static com.facundolinlaud.supergame.utils.events.Messages.SKILL_EQUIPPED;
 
@@ -44,16 +49,19 @@ public class PlayerInputSystem extends IteratingSystem implements Telegraph {
     private ComponentMapper<BagComponent> bm = Mappers.bag;
 
     private SkillsManager skillsManager;
+    private CameraManager cameraManager;
     private PlayerInputManager playerInputManager;
     private MessageDispatcher messageDispatcher;
     private ObservableMap<Integer, Skill> buttonsToSkills;
 
     public PlayerInputSystem(PlayerInputManager playerInputManager, SkillsManager skillsManager,
-                             SkillsFactory skillsFactory, OverlayUIController overlayUIController) {
+                             CameraManager cameraManager, SkillsFactory skillsFactory,
+                             OverlayUIController overlayUIController) {
         super(Family.all(StatusComponent.class, KeyboardComponent.class, TargetComponent.class).get());
         this.messageDispatcher = MessageManager.getInstance();
         this.playerInputManager = playerInputManager;
         this.skillsManager = skillsManager;
+        this.cameraManager = cameraManager;
         this.buttonsToSkills = new ObservableMapWrapper(new HashMap());
 
         addListeners(overlayUIController);
@@ -105,12 +113,25 @@ public class PlayerInputSystem extends IteratingSystem implements Telegraph {
     private void updateTarget(Entity player) {
         PositionComponent positionComponent = pm.get(player);
         Vector2 playerPosition = positionComponent.getPosition();
-        Vector2 cursorPosition = playerInputManager.getCursorPositionInMetersRelativeToScreenCenter();
-        Vector2 clickedPosition = new Vector2(playerPosition.x + cursorPosition.x, playerPosition.y - cursorPosition.y);
+        Vector2 unprojectedCursorPosition = getUnprojectedCursorPosition();
+        Vector2 clickedPosition = new Vector2(playerPosition.x - unprojectedCursorPosition.x, playerPosition.y - unprojectedCursorPosition.y);
 
         TargetComponent targetComponent = tm.get(player);
         targetComponent.setPosition(clickedPosition);
         targetComponent.setClicking(playerInputManager.isClicking());
+    }
+
+    private Vector2 getUnprojectedCursorPosition(){
+        Camera camera = cameraManager.getCamera();
+
+        Vector3 cursor = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0f);
+        camera.unproject(cursor);
+
+        Vector3 center = new Vector3(Gdx.graphics.getWidth() / 2f, Gdx.graphics.getHeight() / 2f, 0f);
+        camera.unproject(center);
+
+        Vector3 translation = center.sub(cursor);
+        return new Vector2(translation.x, translation.y);
     }
 
     private void handleMovementCase(StatusComponent status, Direction newDirection) {

@@ -2,16 +2,22 @@ package com.facundolinlaud.supergame.skills.leaves;
 
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.facundolinlaud.supergame.behaviortree.PoolableTask;
 import com.facundolinlaud.supergame.behaviortree.stack.Value;
 import com.facundolinlaud.supergame.components.PositionComponent;
 import com.facundolinlaud.supergame.components.StatusComponent;
 import com.facundolinlaud.supergame.components.TargetComponent;
+import com.facundolinlaud.supergame.managers.world.CameraManager;
 import com.facundolinlaud.supergame.model.status.Direction;
 import com.facundolinlaud.supergame.skills.SkillBlackboard;
 import com.facundolinlaud.supergame.utils.Mappers;
 
+import java.util.Vector;
+
+import static com.facundolinlaud.supergame.utils.Dimensions.calculateGlobalPositionInPixelsToMetersRelativeToCenter;
+import static com.facundolinlaud.supergame.utils.Dimensions.toMeters;
 import static com.facundolinlaud.supergame.utils.PositionUtils.getFacingDirection;
 
 /**
@@ -24,6 +30,12 @@ public class WaitForClickTask extends PoolableTask<SkillBlackboard> {
     private ComponentMapper<StatusComponent> sm = Mappers.status;
 
     private Entity caster;
+    private CameraManager cameraManager;
+
+    @Override
+    protected void onBlackboardAvailable(SkillBlackboard blackboard) {
+        this.cameraManager = blackboard.getCameraManager();
+    }
 
     @Override
     public void activate() {
@@ -41,12 +53,11 @@ public class WaitForClickTask extends PoolableTask<SkillBlackboard> {
 
     private void face(TargetComponent targetComponent) {
         PositionComponent positionComponent = pm.get(caster);
+        Vector2 playerPosition = positionComponent.getPosition();
+        Vector2 clickedPosition = targetComponent.getPosition();
+        Vector2 delta = new Vector2(clickedPosition.x - playerPosition.x, playerPosition.y - clickedPosition.y);
 
-        Vector2 cursorPosition = targetComponent.getPosition();
-        Vector2 casterPosition = positionComponent.getPosition();
-        Vector2 relativePosition = casterPosition.sub(cursorPosition);
-
-        Direction newDirection = getFacingDirection(relativePosition);
+        Direction newDirection = getFacingDirection(delta);
 
         StatusComponent statusComponent = sm.get(caster);
         statusComponent.setDirection(newDirection);
