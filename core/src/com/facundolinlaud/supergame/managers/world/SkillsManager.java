@@ -20,18 +20,20 @@ public class SkillsManager extends PoolableTaskManager {
     private SkillsFactory factory;
     private LightsManager lightsManager;
     private CameraManager cameraManager;
+    private UIManager uiManager;
     private AgentsService agentsService;
     private CombatService combatService;
     private ParticlesService particlesService;
     private ProjectilesService projectilesService;
 
     public SkillsManager(SkillsFactory factory, LightsManager lightsManager, CameraManager cameraManager,
-                         AgentsService agentsService, CombatService combatService, ParticlesService particlesService,
-                         ProjectilesService projectilesService) {
+                         UIManager uiManager, AgentsService agentsService, CombatService combatService,
+                         ParticlesService particlesService, ProjectilesService projectilesService) {
         this.factory = factory;
         this.casters = new HashSet();
         this.lightsManager = lightsManager;
         this.cameraManager = cameraManager;
+        this.uiManager = uiManager;
         this.agentsService = agentsService;
         this.combatService = combatService;
         this.particlesService = particlesService;
@@ -50,7 +52,7 @@ public class SkillsManager extends PoolableTaskManager {
 
     private void cast(Entity caster, SkillTask skillTask) {
         SkillBlackboard skillBlackboard = new SkillBlackboard(caster, this, lightsManager, cameraManager,
-                agentsService, combatService, particlesService, projectilesService);
+                uiManager, agentsService, combatService, particlesService, projectilesService);
 
         skillTask.setBlackboard(skillBlackboard);
         skillTask.setStack(new Stack());

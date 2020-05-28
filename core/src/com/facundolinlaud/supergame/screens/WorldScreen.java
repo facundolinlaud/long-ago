@@ -97,8 +97,8 @@ public class WorldScreen implements Screen {
         this.playerInputManager = new PlayerInputManager(cameraManager);
         this.questsManager = new QuestsManager(factories, weManager.getPlayer(),
                 uiManager.getDialogUIController(), resources.getEngine());
-        this.skillsManager = new SkillsManager(new SkillsFactory(), lightsManager, cameraManager, agentsService,
-                combatService, particlesService, projectilesService);
+        this.skillsManager = new SkillsManager(new SkillsFactory(), lightsManager, cameraManager, uiManager,
+                agentsService, combatService, particlesService, projectilesService);
     }
 
     private void initializeListeners() {

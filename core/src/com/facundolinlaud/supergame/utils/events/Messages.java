@@ -1,7 +1,6 @@
 package com.facundolinlaud.supergame.utils.events;
 
 public class Messages {
-    public static final int SKILL_CASTED = 0;
     public static final int ENTITY_ATTACKED = 1;
     public static final int AGENT_DIED = 2;
     public static final int ITEM_FROM_INVENTORY_DROPPED = 3;

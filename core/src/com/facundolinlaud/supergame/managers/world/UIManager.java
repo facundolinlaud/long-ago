@@ -132,7 +132,6 @@ public class UIManager implements Renderable {
                 Messages.ITEM_EQUIPPED,
                 Messages.EQUIPMENT_CHANGED);
         this.messageDispatcher.addListeners(this.overlayUIController,
-                Messages.SKILL_CASTED,
                 Messages.REJECTED_SKILL_DUE_TO_NO_MANA,
                 Messages.REJECTED_SKILL_DUE_TO_NOT_READY,
                 Messages.REJECTED_SKILL_DUE_TO_WEAPON,

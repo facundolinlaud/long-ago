@@ -9,8 +9,6 @@ import com.facundolinlaud.supergame.components.player.KeyboardComponent;
 import com.facundolinlaud.supergame.model.skill.Skill;
 import com.facundolinlaud.supergame.ui.view.OverlayUI;
 import com.facundolinlaud.supergame.utils.Mappers;
-import com.facundolinlaud.supergame.utils.events.Messages;
-import com.facundolinlaud.supergame.utils.events.SkillCastedEvent;
 
 import java.util.Map;
 
@@ -50,10 +48,7 @@ public class OverlayUIController implements Telegraph {
 
     @Override
     public boolean handleMessage(Telegram msg) {
-        switch(msg.message){
-            case SKILL_CASTED:
-                onSkillCasted((SkillCastedEvent) msg.extraInfo);
-                break;
+        switch (msg.message) {
             case REJECTED_SKILL_DUE_TO_NO_MANA:
                 this.overlayUI.popNoManaNotification();
                 break;
@@ -71,24 +66,15 @@ public class OverlayUIController implements Telegraph {
         return true;
     }
 
-    private void onSkillCasted(SkillCastedEvent event){
-        Entity caster = event.getCaster();
+    public void updateCastingBar(String skillName, float progress) {
+        this.overlayUI.updateCastingBar(skillName, progress);
+    }
 
-        if(isMainPlayer(caster))
-            overlayUI.beginCooldown(event.getSkill());
+    public void updateSkillBar(Map<Integer, Skill> buttonsToSkills) {
+        overlayUI.updateSkillBar(buttonsToSkills);
     }
 
     private boolean isMainPlayer(Entity entity){
         return km.has(entity);
     }
-
-    public void updateCastingBar(String skillName, float timeToCast, float castTime) {
-        float castingBarValue = timeToCast * 100 / castTime;
-        this.overlayUI.updateCastingBar(skillName, castingBarValue);
-    }
-
-    public void updateSkillBar(Map<Integer, Skill> buttonsToSkills){
-        overlayUI.updateSkillBar(buttonsToSkills);
-    }
-
 }
