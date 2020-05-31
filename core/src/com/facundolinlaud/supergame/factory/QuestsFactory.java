@@ -1,9 +1,9 @@
 package com.facundolinlaud.supergame.factory;
 
-import com.facundolinlaud.supergame.dto.composite.QuestListDto;
-import com.facundolinlaud.supergame.dto.quests.QuestDto;
-import com.facundolinlaud.supergame.quests.Blackboard;
-import com.facundolinlaud.supergame.quests.Quest;
+import com.facundolinlaud.supergame.dto.behaviortree.QuestListDto;
+import com.facundolinlaud.supergame.dto.quests.QuestTaskDto;
+import com.facundolinlaud.supergame.quests.QuestTask;
+import com.facundolinlaud.supergame.quests.QuestBlackboard;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,41 +11,40 @@ import java.util.Map;
 public class QuestsFactory {
     private static final String INITIAL_QUEST = "start.json";
 
-    private Map<String, Quest> quests;
+    private Map<String, QuestTask> quests;
 
     public QuestsFactory() {
         quests = new HashMap();
     }
 
-    public Quest buildQuestChain(Blackboard blackboard) {
-        QuestDto dto = ModelFactory.getQuest(INITIAL_QUEST);
+    public QuestTask buildQuestChain(QuestBlackboard blackboard) {
+        QuestTaskDto dto = ModelFactory.getQuest(INITIAL_QUEST);
         processQuestModel(INITIAL_QUEST, dto);
         withBlackboard(blackboard);
 
         return quests.get(INITIAL_QUEST);
     }
 
-    private Quest processQuestModel(String questId, QuestDto dto) {
-        Quest quest = buildQuest(dto);
+    private QuestTask processQuestModel(String questId, QuestTaskDto dto) {
+        QuestTask quest = buildQuest(dto);
         quests.put(questId, quest);
 
         QuestListDto nextQuests = dto.getNextQuests();
 
-        for(String nextId : nextQuests){
-            QuestDto nextQuestDto = ModelFactory.getQuest(nextId);
-            Quest nextQuest = processQuestModel(nextId, nextQuestDto);
+        for (String nextId : nextQuests) {
+            QuestTaskDto nextQuestDto = ModelFactory.getQuest(nextId);
+            QuestTask nextQuest = processQuestModel(nextId, nextQuestDto);
             quest.addNextQuest(nextQuest);
         }
 
         return quest;
     }
 
-    private Quest buildQuest(QuestDto dto) {
+    private QuestTask buildQuest(QuestTaskDto dto) {
         return dto.build();
     }
 
-    private void withBlackboard(Blackboard blackboard) {
-        for(Quest q : quests.values())
-            q.setBlackboard(blackboard);
+    private void withBlackboard(QuestBlackboard blackboard) {
+        quests.values().forEach(q -> q.setBlackboard(blackboard));
     }
 }

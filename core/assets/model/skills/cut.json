@@ -1,0 +1,78 @@
+{
+  "id": "cut",
+  "name": "Cut",
+  "cooldown": 2.0,
+  "picturePath": "pictures/skills/dash.png",
+  "disabledPicturePath": "pictures/skills/disabled/dash.png",
+  "description": "A modest cut",
+  "skillType": "MELEE",
+  "manaConsumption": 0.0,
+  "skillDto": {
+    "@class": "com.facundolinlaud.supergame.dto.skills.SkillTaskDto",
+    "children": ["com.facundolinlaud.supergame.dto.behaviortree.TaskListDto", [
+      {
+        "@class": "com.facundolinlaud.supergame.dto.skills.leaves.RequireEquipmentTaskDto",
+        "equipType": "DAGGER"
+      },{
+        "@class": "com.facundolinlaud.supergame.dto.skills.leaves.StartCoolDownTaskDto"
+      },{
+        "@class": "com.facundolinlaud.supergame.dto.behaviortree.ParallelTaskDto",
+        "children": ["com.facundolinlaud.supergame.dto.behaviortree.TaskListDto", [
+          {
+            "@class": "com.facundolinlaud.supergame.dto.skills.leaves.DisplayCastBarTaskDto",
+            "label": "Cut",
+            "totalTime": 0.2
+          },{
+            "@class": "com.facundolinlaud.supergame.dto.behaviortree.SequentialTaskDto",
+            "children": ["com.facundolinlaud.supergame.dto.behaviortree.TaskListDto", [
+              {
+                "@class": "com.facundolinlaud.supergame.dto.skills.leaves.SetActionTaskDto",
+                "action": "SWINGING"
+              },{
+                "@class": "com.facundolinlaud.supergame.dto.behaviortree.WaitTaskDto",
+                "time": 0.5
+              },{
+                "@class": "com.facundolinlaud.supergame.dto.skills.leaves.PushCasterTaskDto"
+              },{
+                "@class": "com.facundolinlaud.supergame.dto.skills.leaves.PushEntityPositionTaskDto"
+              },{
+                "@class": "com.facundolinlaud.supergame.dto.skills.leaves.PushAgentsInAreaTaskDto",
+                "ignoreCaster": true,
+                "offset": 0.5,
+                "shape": {
+                  "@class": "com.facundolinlaud.supergame.utils.shape.Rectangle",
+                  "width": 1.0,
+                  "height": 1.0
+                }
+              },{
+                "@class": "com.facundolinlaud.supergame.dto.behaviortree.IterateTaskDto",
+                "children": ["com.facundolinlaud.supergame.dto.behaviortree.TaskListDto", [
+                  {
+                    "@class": "com.facundolinlaud.supergame.dto.behaviortree.stack.RePushValueTaskDto",
+                    "deepness": 1,
+                    "times": 1
+                  },{
+                    "@class": "com.facundolinlaud.supergame.dto.skills.leaves.AffectAgentHealthTaskDto",
+                    "amount": 50.0
+                  },{
+                    "@class": "com.facundolinlaud.supergame.dto.skills.leaves.PushEntityPositionTaskDto"
+                  },{
+                    "@class": "com.facundolinlaud.supergame.dto.behaviortree.stack.RePushValueTaskDto",
+                    "deepness": 2,
+                    "times": 1
+                  },{
+                    "@class": "com.facundolinlaud.supergame.dto.skills.leaves.DisplayParticlesTaskDto",
+                    "particleType": "BLACK_SMOKE"
+                  }
+                ]]
+              },{
+                "@class": "com.facundolinlaud.supergame.dto.skills.leaves.SetActionTaskDto",
+                "action": "STANDING"
+              }
+            ]]
+          }
+        ]]
+      }
+    ]]
+  }
+}

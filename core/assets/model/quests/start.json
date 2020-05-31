@@ -1,56 +1,10 @@
 {
-	"@class": "com.facundolinlaud.supergame.dto.quests.QuestDto",
-	"name": "Help the Fisherman",
-	"nextQuests": ["slay.json"],
-	"children": ["com.facundolinlaud.supergame.dto.composite.TaskListDto", [{
-		"@class": "com.facundolinlaud.supergame.dto.composite.SequentialTaskDto",
-		"children": ["com.facundolinlaud.supergame.dto.composite.TaskListDto", [{
-			"@class": "com.facundolinlaud.supergame.dto.quests.TextDialogTaskDto",
-			"title": "Long Ago",
-			"message": "Welcome to Long Ago!\n{COLOR=GREEN}WASD{CLEARCOLOR}: Movement\n{COLOR=CORAL}1,...,9{CLEARCOLOR}: cast skills\n{COLOR=GREEN}E{CLEARCOLOR}: Pick item up\n{COLOR=CORAL}F{CLEARCOLOR}: Continue/fast forward dialog\n{COLOR=GREEN}I{CLEARCOLOR}: Inventory\n{COLOR=CORAL}C{CLEARCOLOR}: Equipment\n{COLOR=GREEN}K{CLEARCOLOR}: Skills\n{COLOR=CORAL}P{CLEARCOLOR}: Attributes\n{COLOR=GREEN}F{CLEARCOLOR}: Talk to NPC (quest giving npc's)"
-		},{
-			"@class": "com.facundolinlaud.supergame.dto.quests.SpawnTaskDto",
-			"agentId": 3,
-			"position": {
-				"x": 20,
-				"y": 35
-			}
-		},{
-			"@class": "com.facundolinlaud.supergame.dto.quests.InteractionTaskDto",
-			"agentId": 3
-		},{
-			"@class": "com.facundolinlaud.supergame.dto.quests.TextDialogTaskDto",
-			"title": "Fisherman",
-			"message": "Hey...{WAIT} You!{WAIT} I need your help with something...{WAIT} I'll pay you good coin for your sword.{WAIT} What do you say?{WAIT} Want to help an old man?"
-		},{
-			"@class": "com.facundolinlaud.supergame.dto.quests.InputDialogTaskDto",
-			"title": "Fisherman",
-			"message": "I need you to slay one Orc and two Skeletons.{WAIT} They are harrasing my sheeeeeeepsssss!!{WAIT} Will you help me?"
-		}]]
-	},{
-		"@class": "com.facundolinlaud.supergame.dto.composite.ParallelTaskDto",
-		"children": ["com.facundolinlaud.supergame.dto.composite.TaskListDto", [{
-			"@class": "com.facundolinlaud.supergame.dto.quests.SlayTaskDto",
-			"agentId": 1,
-			"total": 1
-		},{
-			"@class": "com.facundolinlaud.supergame.dto.quests.SlayTaskDto",
-			"agentId": 2,
-			"total": 1
-		}]]
-	},{
-		"@class": "com.facundolinlaud.supergame.dto.composite.SequentialTaskDto",
-		"children": ["com.facundolinlaud.supergame.dto.composite.TaskListDto", [{
-			"@class": "com.facundolinlaud.supergame.dto.quests.TextDialogTaskDto",
-			"title": "Fisherman",
-			"message": "Thank you for your help!{WAIT} Here's what I promised!"
-		},{
-			"@class": "com.facundolinlaud.supergame.dto.quests.TextDialogTaskDto",
-			"title": "Fisherman",
-			"message": "I've got some more work to do...{WAIT} Come talk to me when you are ready."
-		},{
-			"@class": "com.facundolinlaud.supergame.dto.quests.GoldRewardTaskDto",
-			"gold": 10
-		}]]
-	}]]
+	"@class": "com.facundolinlaud.supergame.dto.quests.QuestTaskDto",
+	"name": "Welcome to Long Ago",
+	"nextQuests": ["slay1.json"],
+	"child": {
+		"@class": "com.facundolinlaud.supergame.dto.quests.TextDialogTaskDto",
+		"title": "Long Ago",
+		"message": "Welcome to Long Ago!\n{COLOR=GREEN}WASD{CLEARCOLOR}: Movement\n{COLOR=CORAL}1,...,9{CLEARCOLOR}: cast skills\n{COLOR=GREEN}E{CLEARCOLOR}: Pick item up\n{COLOR=CORAL}F{CLEARCOLOR}: Continue/fast forward dialog\n{COLOR=GREEN}I{CLEARCOLOR}: Inventory\n{COLOR=CORAL}C{CLEARCOLOR}: Equipment\n{COLOR=GREEN}K{CLEARCOLOR}: Skills\n{COLOR=CORAL}P{CLEARCOLOR}: Attributes\n{COLOR=GREEN}F{CLEARCOLOR}: Talk to NPC (quest giving npc's)"
+	}
 }

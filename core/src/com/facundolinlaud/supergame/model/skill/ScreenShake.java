@@ -4,6 +4,7 @@ public class ScreenShake {
     private float power;
     private float duration;
 
+
     public float getPower() {
         return power;
     }

@@ -9,7 +9,6 @@ import com.facundolinlaud.supergame.components.items.ItemComponent;
 import com.facundolinlaud.supergame.components.player.BagComponent;
 import com.facundolinlaud.supergame.components.player.KeyboardComponent;
 import com.facundolinlaud.supergame.components.player.WearComponent;
-import com.facundolinlaud.supergame.components.skills.*;
 import com.facundolinlaud.supergame.components.spawn.SpawnLocationComponent;
 import com.facundolinlaud.supergame.components.spawn.SpawnedAgentComponent;
 import com.facundolinlaud.supergame.components.sprite.AnimableSpriteComponent;
@@ -35,11 +34,6 @@ public class Mappers {
     public static final ComponentMapper<StackableSpriteComponent> stackableSprite = ComponentMapper.getFor(StackableSpriteComponent.class);
     public static final ComponentMapper<StackedSpritesComponent> stackedSprites = ComponentMapper.getFor(StackedSpritesComponent.class);
     public static final ComponentMapper<AnimableSpriteComponent> animableSprite = ComponentMapper.getFor(AnimableSpriteComponent.class);
-    public static final ComponentMapper<SkillCastingRequestComponent> skillCastingRequest = ComponentMapper.getFor(SkillCastingRequestComponent.class);
-    public static final ComponentMapper<SkillTargetedComponent> skillTargeted = ComponentMapper.getFor(SkillTargetedComponent.class);
-    public static final ComponentMapper<SkillCastingComponent> skillCasting = ComponentMapper.getFor(SkillCastingComponent.class);
-    public static final ComponentMapper<SkillLockDownComponent> skillLockDown = ComponentMapper.getFor(SkillLockDownComponent.class);
-    public static final ComponentMapper<SkillClickComponent> skillClick = ComponentMapper.getFor(SkillClickComponent.class);
     public static final ComponentMapper<ParticleComponent> particle = ComponentMapper.getFor(ParticleComponent.class);
     public static final ComponentMapper<AIComponent> ai = ComponentMapper.getFor(AIComponent.class);
     public static final ComponentMapper<AIMoveToComponent> aiMoveTo = ComponentMapper.getFor(AIMoveToComponent.class);
@@ -50,4 +44,5 @@ public class Mappers {
     public static final ComponentMapper<ManaComponent> mana = ComponentMapper.getFor(ManaComponent.class);
     public static final ComponentMapper<IdComponent> id = ComponentMapper.getFor(IdComponent.class);
     public static final ComponentMapper<InteractionComponent> interaction = ComponentMapper.getFor(InteractionComponent.class);
+    public static final ComponentMapper<TargetComponent> target = ComponentMapper.getFor(TargetComponent.class);
 }

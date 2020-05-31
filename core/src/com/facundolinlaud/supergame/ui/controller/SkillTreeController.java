@@ -5,7 +5,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.ai.msg.Telegram;
 import com.badlogic.gdx.ai.msg.Telegraph;
 import com.facundolinlaud.supergame.components.SkillsComponent;
-import com.facundolinlaud.supergame.factory.ModelFactory;
+import com.facundolinlaud.supergame.factory.SkillsFactory;
 import com.facundolinlaud.supergame.model.skill.Skill;
 import com.facundolinlaud.supergame.ui.view.SkillTreeUI;
 import com.facundolinlaud.supergame.utils.Mappers;
@@ -19,10 +19,12 @@ import static com.facundolinlaud.supergame.utils.events.Messages.SKILL_UNLOCK_RE
 public class SkillTreeController implements Telegraph {
     private ComponentMapper<SkillsComponent> sm = Mappers.skills;
 
+    private SkillsFactory skillsFactory;
     private SkillTreeUI skillTreeUI;
     private Entity player;
 
-    public SkillTreeController(SkillTreeUI skillTreeUI, Entity player) {
+    public SkillTreeController(SkillsFactory skillsFactory, SkillTreeUI skillTreeUI, Entity player) {
+        this.skillsFactory = skillsFactory;
         this.skillTreeUI = skillTreeUI;
         this.player = player;
 
@@ -31,7 +33,7 @@ public class SkillTreeController implements Telegraph {
 
     public void updateSkillTreeUI() {
         SkillsComponent skillsComponent = sm.get(player);
-        Map<Integer, Skill> allSkills = ModelFactory.getSkillsModel();
+        Map<String, Skill> allSkills = skillsFactory.getSkills();
         List<Skill> playerSkills = skillsComponent.getSkills();
         int assignablePoints = skillsComponent.getAssignablePoints();
 
@@ -41,7 +43,7 @@ public class SkillTreeController implements Telegraph {
 
     @Override
     public boolean handleMessage(Telegram msg) {
-        switch(msg.message){
+        switch (msg.message) {
             case SKILL_UNLOCK_REQUEST:
                 onSkillUnlockRequest((Skill) msg.extraInfo);
                 break;
@@ -57,7 +59,7 @@ public class SkillTreeController implements Telegraph {
         SkillsComponent skills = sm.get(player);
         List<Skill> allPlayerSkills = skills.getSkills();
 
-        if(!allPlayerSkills.contains(skill) && skills.getAssignablePoints() > 0) {
+        if (!allPlayerSkills.contains(skill) && skills.getAssignablePoints() > 0) {
             skills.consumeAssignablePoint();
             allPlayerSkills.add(skill);
         }

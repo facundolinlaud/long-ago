@@ -53,7 +53,6 @@ public class LightsManager implements Renderable {
     public void create(LightModel model, float x, float y){
         switch (model.getType()){
             case POINT:
-                break;
             case FLICKERING:
                 break;
             case DIMMING:

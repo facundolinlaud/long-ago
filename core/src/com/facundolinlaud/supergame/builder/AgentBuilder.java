@@ -29,32 +29,32 @@ public class AgentBuilder {
     private static final int MANA_PER_INTELLIGENCE_POINT = 10;
 
     private Entity entity;
+    private BodyComponent bodyComponent;
 
     public AgentBuilder(int id) {
-        this.entity = new Entity();
-
-        this.entity
+        entity = new Entity()
             .add(new StatusComponent())
-            .add(new IdComponent(id));
+            .add(new IdComponent(id))
+            .add(new TargetComponent());
     }
 
     public AgentBuilder withAI(BehaviorType behaviorType, float viewDistance){
-        this.entity.add(new AIComponent(behaviorType, viewDistance));
+        entity.add(new AIComponent(behaviorType, viewDistance));
         return this;
     }
 
     public AgentBuilder withHealth(float total, float current){
-        this.entity.add(new HealthComponent(total, current));
+        entity.add(new HealthComponent(total, current));
         return this;
     }
 
     public AgentBuilder withEquipment(Map<EquipSlot, Entity> equipment){
-        this.entity.add(new WearComponent(equipment));
+        entity.add(new WearComponent(equipment));
         return this;
     }
 
     public AgentBuilder withEquipment(Map<EquipSlot, Entity> equipment, int onChangeMessage){
-        this.entity.add(new WearComponent(equipment, onChangeMessage));
+        entity.add(new WearComponent(equipment, onChangeMessage));
         return this;
     }
 
@@ -62,7 +62,7 @@ public class AgentBuilder {
         float health = attr.getStamina() * HEALTH_PER_STAMINA_POINT;
         float mana = attr.getIntelligence() * MANA_PER_INTELLIGENCE_POINT;
 
-        this.entity.add(new AttributesComponent(
+        entity.add(new AttributesComponent(
                 attr.getAgility(),
                 attr.getStrength(),
                 attr.getIntelligence(),
@@ -73,52 +73,52 @@ public class AgentBuilder {
 
     public AgentBuilder withBag(List<Entity> bag, int gold){
 
-        this.entity.add(new BagComponent(bag, gold));
+        entity.add(new BagComponent(bag, gold));
         return this;
     }
 
     public AgentBuilder withBag(List<Entity> bag, int gold, int onChangeMessage){
-        this.entity.add(new BagComponent(bag, gold, onChangeMessage));
+        entity.add(new BagComponent(bag, gold, onChangeMessage));
         return this;
     }
 
     public AgentBuilder withKeyboardControl(){
-        this.entity.add(new KeyboardComponent());
+        entity.add(new KeyboardComponent());
         return this;
     }
 
     public AgentBuilder at(float x, float y){
-        this.entity.add(new PositionComponent(x, y));
+        entity.add(new PositionComponent(x, y));
         return this;
     }
 
     public AgentBuilder withParticles(ParticleEffectPool.PooledEffect pooledEffect){
-        this.entity.add(new ParticleComponent(pooledEffect, false));
+        entity.add(new ParticleComponent(pooledEffect, false));
         return this;
     }
 
     public AgentBuilder withSkills(List<Skill> skills, int assignablePoints){
-        this.entity.add(new SkillsComponent(skills, assignablePoints));
+        entity.add(new SkillsComponent(skills, assignablePoints));
         return this;
     }
 
     public AgentBuilder withSkills(List<Skill> skills, int assignablePoints, int onChangeMessage){
-        this.entity.add(new SkillsComponent(skills, assignablePoints, onChangeMessage));
+        entity.add(new SkillsComponent(skills, assignablePoints, onChangeMessage));
         return this;
     }
 
     public AgentBuilder withMana(float totalMana){
-        this.entity.add(new ManaComponent(totalMana));
+        entity.add(new ManaComponent(totalMana));
         return this;
     }
 
     public AgentBuilder talkable(){
-        this.entity.add(new InteractionComponent());
+        entity.add(new InteractionComponent());
         return this;
     }
 
     public AgentBuilder withAnimations(RawAnimationModel rawAnimationModel){
-        this.entity.add(new RenderComponent(new SpriteRenderPositionStrategyImpl(), RenderPriority.AGENT))
+        entity.add(new RenderComponent(new SpriteRenderPositionStrategyImpl(), RenderPriority.AGENT))
                    .add(new AnimableSpriteComponent())
                    .add(new StackedSpritesComponent(rawAnimationModel))
                    .add(new RefreshSpriteRequirementComponent());
@@ -127,17 +127,23 @@ public class AgentBuilder {
     }
 
     public AgentBuilder withVelocity(float velocity){
-        this.entity.add(new VelocityComponent(velocity));
+        entity.add(new VelocityComponent(velocity));
         return this;
     }
 
     public AgentBuilder withBody(){
-        this.entity.add(new BodyComponent(PhysicsFactory.get().createItemBody(), this.entity));
+        bodyComponent = new BodyComponent(PhysicsFactory.get().createItemBody());
+        entity.add(bodyComponent);
+
         return this;
     }
 
+    public void shootable(){
+        bodyComponent.setShootable(entity);
+    }
+
     public Entity build(){
-        return this.entity;
+        return entity;
     }
 
 }

@@ -1,16 +1,12 @@
 package com.facundolinlaud.supergame.ui.controller;
 
-import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.ai.msg.Telegram;
 import com.badlogic.gdx.ai.msg.Telegraph;
 import com.badlogic.gdx.math.Vector2;
-import com.facundolinlaud.supergame.components.player.KeyboardComponent;
 import com.facundolinlaud.supergame.model.skill.Skill;
 import com.facundolinlaud.supergame.ui.view.OverlayUI;
-import com.facundolinlaud.supergame.utils.Mappers;
-import com.facundolinlaud.supergame.utils.events.Messages;
-import com.facundolinlaud.supergame.utils.events.SkillCastedEvent;
+import com.facundolinlaud.supergame.utils.events.SkillCooldownStartEvent;
 
 import java.util.Map;
 
@@ -20,12 +16,12 @@ import static com.facundolinlaud.supergame.utils.events.Messages.*;
  * Created by facundo on 3/29/16.
  */
 public class OverlayUIController implements Telegraph {
-    private ComponentMapper<KeyboardComponent> km = Mappers.keyboard;
-
     private OverlayUI overlayUI;
+    private Entity player;
 
-    public OverlayUIController(OverlayUI overlayUI) {
+    public OverlayUIController(OverlayUI overlayUI, Entity player) {
         this.overlayUI = overlayUI;
+        this.player = player;
     }
 
     public void setHealth(float health, float total) {
@@ -50,45 +46,39 @@ public class OverlayUIController implements Telegraph {
 
     @Override
     public boolean handleMessage(Telegram msg) {
-        switch(msg.message){
-            case SKILL_CASTED:
-                onSkillCasted((SkillCastedEvent) msg.extraInfo);
-                break;
+        switch (msg.message) {
             case REJECTED_SKILL_DUE_TO_NO_MANA:
-                this.overlayUI.popNoManaNotification();
+                overlayUI.popNoManaNotification();
                 break;
             case REJECTED_SKILL_DUE_TO_NOT_READY:
-                this.overlayUI.popSkillNotReadyNotification();
+                overlayUI.popSkillNotReadyNotification();
                 break;
             case REJECTED_SKILL_DUE_TO_WEAPON:
-                this.overlayUI.popNoAdequateWeaponNotification();
+                overlayUI.popNoAdequateWeaponNotification();
                 break;
             case CUSTOM_MESSAGE:
-                this.overlayUI.popNotification((String) msg.extraInfo);
+                overlayUI.popNotification((String) msg.extraInfo);
+                break;
+            case SKILL_COOLDOWN_START:
+                SkillCooldownStartEvent event = (SkillCooldownStartEvent) msg.extraInfo;
+                onSkillCooldownStart(event);
                 break;
         }
 
         return true;
     }
 
-    private void onSkillCasted(SkillCastedEvent event){
-        Entity caster = event.getCaster();
-
-        if(isMainPlayer(caster))
-            overlayUI.beginCooldown(event.getSkill());
+    public void updateCastingBar(String skillName, float progress) {
+        this.overlayUI.updateCastingBar(skillName, progress);
     }
 
-    private boolean isMainPlayer(Entity entity){
-        return km.has(entity);
-    }
-
-    public void updateCastingBar(String skillName, float timeToCast, float castTime) {
-        float castingBarValue = timeToCast * 100 / castTime;
-        this.overlayUI.updateCastingBar(skillName, castingBarValue);
-    }
-
-    public void updateSkillBar(Map<Integer, Skill> buttonsToSkills){
+    public void updateSkillBar(Map<Integer, Skill> buttonsToSkills) {
         overlayUI.updateSkillBar(buttonsToSkills);
     }
 
+    private void onSkillCooldownStart(SkillCooldownStartEvent event) {
+        if (event.getCaster().equals(player)) {
+            overlayUI.beginCooldown(event.getSkill());
+        }
+    }
 }

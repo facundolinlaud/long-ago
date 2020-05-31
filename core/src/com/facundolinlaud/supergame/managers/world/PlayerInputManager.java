@@ -6,7 +6,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.facundolinlaud.supergame.model.status.Direction;
-import com.facundolinlaud.supergame.utils.Dimensions;
 
 import java.util.Stack;
 
@@ -15,44 +14,46 @@ public class PlayerInputManager extends ClickListener {
     private Stack<Integer> skillKeysPressed;
     private Vector2 latestClickedPosition;
     private boolean isClicking;
+    private CameraManager cameraManager;
 
-    public PlayerInputManager() {
+    public PlayerInputManager(CameraManager cameraManager) {
         this.movementKeysPressed = new Stack<>();
         this.skillKeysPressed = new Stack<>();
+        this.cameraManager = cameraManager;
     }
 
-    public boolean isGatheringRequested(){
+    public boolean isGatheringRequested() {
         return Gdx.input.isKeyJustPressed(Input.Keys.E);
     }
 
-    public boolean isInteractionRequested(){
+    public boolean isInteractionRequested() {
         return Gdx.input.isKeyJustPressed(Input.Keys.F);
     }
 
-    public boolean isPressingSkillButton(){
+    public boolean isPressingSkillButton() {
         return skillKeysPressed.size() > 0;
     }
 
-    public Direction getPlayersNewDirection(){
+    public Direction getPlayersNewDirection() {
         int keysPressed = movementKeysPressed.size();
 
-        if(keysPressed == 0)
+        if (keysPressed == 0)
             return null;
         else
             return movementKeysPressed.peek();
     }
 
-    public Integer getPressedSkillButton(){
+    public Integer getPressedSkillButton() {
         int keysPressed = skillKeysPressed.size();
 
-        if(keysPressed == 0)
+        if (keysPressed == 0)
             return null;
         else
             return skillKeysPressed.pop();
     }
 
-    private Direction keycodeToDirection(int keycode){
-        switch(keycode){
+    private Direction keycodeToDirection(int keycode) {
+        switch (keycode) {
             case Input.Keys.W:
                 return Direction.UP;
             case Input.Keys.S:
@@ -66,21 +67,12 @@ public class PlayerInputManager extends ClickListener {
         return null;
     }
 
-    private boolean isSkillKey(int keycode){
+    private boolean isSkillKey(int keycode) {
         return keycode >= Input.Keys.NUM_1 && keycode <= Input.Keys.NUM_9;
     }
 
-    private int keycodeToSkillId(int keycode){
+    private int keycodeToSkillId(int keycode) {
         return keycode - Input.Keys.NUM_1;
-    }
-
-    public Vector2 getLatestClickedPositionInMetersRelativeToScreenCenter() {
-        return Dimensions.calculateGlobalPositionInPixelsToMetersRelativeToCenter(latestClickedPosition);
-    }
-
-    public Vector2 getCursorPositionInMetersRelativeToScreenCenter(){
-        Vector2 mousePosition = new Vector2(Gdx.input.getX(), Gdx.input.getY());
-        return Dimensions.calculateGlobalPositionInPixelsToMetersRelativeToCenter(mousePosition);
     }
 
     public boolean isClicking() {
@@ -98,16 +90,16 @@ public class PlayerInputManager extends ClickListener {
     private void handleMovementKeys(int keycode) {
         Direction direction = keycodeToDirection(keycode);
 
-        if(direction != null && !movementKeysPressed.contains(direction)){
+        if (direction != null && !movementKeysPressed.contains(direction)) {
             movementKeysPressed.push(direction);
         }
     }
 
     private void handleSkillsKeys(int keycode) {
-        if(isSkillKey(keycode)){
+        if (isSkillKey(keycode)) {
             int skillId = keycodeToSkillId(keycode);
 
-            if(!skillKeysPressed.contains(skillId))
+            if (!skillKeysPressed.contains(skillId))
                 skillKeysPressed.push(skillId);
         }
     }
@@ -116,7 +108,7 @@ public class PlayerInputManager extends ClickListener {
     public boolean keyUp(InputEvent event, int keycode) {
         Direction direction = keycodeToDirection(keycode);
 
-        if(direction != null)
+        if (direction != null)
             movementKeysPressed.remove(direction);
 
         return super.keyUp(event, keycode);

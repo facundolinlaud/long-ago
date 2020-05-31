@@ -4,24 +4,30 @@ import com.facundolinlaud.supergame.model.skill.Skill;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class SkillsFactory {
-    private Map<Integer, Skill> skills;
+    private Map<String, Skill> skills;
 
     public SkillsFactory() {
-        this.skills = ModelFactory.getSkillsModel();
+        Set<String> files = ModelFactory.getSkills();
+
+        this.skills = files.stream()
+                .map(ModelFactory::getSkill)
+                .collect(Collectors.toMap(Skill::getId, Function.identity()));
     }
 
-    public Skill get(int id) {
-        return skills.get(id);
+    public Skill get(String id) {
+        return this.skills.get(id);
     }
 
-    public List<Skill> get(List<Integer> ids){
-        return ids.stream().map(id -> get(id)).collect(Collectors.toList());
+    public List<Skill> get(List<String> ids) {
+        return ids.stream().map(this::get).collect(Collectors.toList());
     }
 
-    public Map<Integer, Skill> getSkills() {
+    public Map<String, Skill> getSkills() {
         return skills;
     }
 }

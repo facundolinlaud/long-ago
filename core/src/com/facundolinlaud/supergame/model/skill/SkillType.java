@@ -2,7 +2,7 @@ package com.facundolinlaud.supergame.model.skill;
 
 public enum SkillType {
     SPELL("SPELL"),
-    NORMAL("NORMAL"),
+    MELEE("MELEE"),
     PROJECTILE("PROJECTILE");
 
 

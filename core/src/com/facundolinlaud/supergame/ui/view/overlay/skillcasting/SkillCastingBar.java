@@ -17,7 +17,7 @@ public class SkillCastingBar extends Table {
         setWidth(400);
         padBottom(DISTANCE_FROM_SKILL_BAR);
 
-        this.castingBar = new ProgressBar(0, 100, 1,
+        this.castingBar = new ProgressBar(0, 1, 0.01f,
                 false, skin, Themes.ProgressBar.CASTING_BAR);
 //        this.castingBar.getStyle().background.setMinHeight(40);
 //        this.castingBar.getStyle().knobBefore.setMinHeight(40);
@@ -29,7 +29,7 @@ public class SkillCastingBar extends Table {
     }
 
     public void updateCastingBar(String skillName, float castingBarValue){
-        boolean isStillCasting = castingBarValue > 0;
+        boolean isStillCasting = castingBarValue < 1;
         this.setVisible(isStillCasting);
 
         skillLabel.setText(skillName);

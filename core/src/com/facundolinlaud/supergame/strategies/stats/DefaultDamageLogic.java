@@ -35,7 +35,7 @@ public class DefaultDamageLogic implements DamageLogic {
         }
 
         switch(skill.getSkillType()){
-            case NORMAL:
+            case MELEE:
                 attributesAdditive = attributes.getStrength();
                 break;
             case SPELL:

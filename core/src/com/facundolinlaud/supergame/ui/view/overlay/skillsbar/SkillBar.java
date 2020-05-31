@@ -16,7 +16,7 @@ public class SkillBar extends Table {
 
     private Array<SkillBarSlot> slots;
 
-    public SkillBar(Skin skin, Map<Integer, Skill> skills, DragAndDrop skillsDAD) {
+    public SkillBar(Skin skin, Map<String, Skill> skills, DragAndDrop skillsDAD) {
         super(skin);
         this.setBackground("spellbar");
         this.slots = new Array<>(false, SIZE);

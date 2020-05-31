@@ -53,10 +53,10 @@ public class HealthSystem extends IteratingSystem {
     protected void processEntity(Entity entity, float deltaTime) {
         HealthComponent healthComponent = hm.get(entity);
 
-        if(healthComponent.isFull())
+        if (healthComponent.isFull())
             return;
 
-        if(healthComponent.getCurrentHealth() <= 0)
+        if (healthComponent.getCurrentHealth() <= 0)
             healthComponent.getZeroHealthStrategy().onZeroHealth(entity);
         else
             updateHealthBar(entity, healthComponent);

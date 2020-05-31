@@ -3,15 +3,15 @@ package com.facundolinlaud.supergame.dto.agent;
 import java.util.List;
 
 public class CombatInformation {
-    private List<Integer> skills;
+    private List<String> skills;
     private int assignablePoints;
     private Attributes attributes;
 
-    public List<Integer> getSkills() {
+    public List<String> getSkills() {
         return skills;
     }
 
-    public void setSkills(List<Integer> skills) {
+    public void setSkills(List<String> skills) {
         this.skills = skills;
     }
 

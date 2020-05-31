@@ -7,6 +7,14 @@ public class LightModel {
     private float y;
     private float duration;
 
+    public LightModel() {}
+
+    public LightModel(float distance, float duration, LightType lightType) {
+        this.distance = distance;
+        this.duration = duration;
+        this.type = lightType;
+    }
+
     public float getX() {
         return x;
     }

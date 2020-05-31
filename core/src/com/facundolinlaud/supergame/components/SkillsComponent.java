@@ -34,49 +34,45 @@ public class SkillsComponent implements Component {
         return skills;
     }
 
-    public List<Skill> getMeleeSkills(){
-        return skills.stream().filter(skill -> SkillType.NORMAL.equals(skill.getSkillType()))
+    public List<Skill> getMeleeSkills() {
+        return skills.stream().filter(skill -> SkillType.MELEE.equals(skill.getSkillType()))
                 .collect(Collectors.toList());
     }
 
-    public List<Skill> getRangedSkills(){
-        return skills.stream().filter(skill -> !SkillType.NORMAL.equals(skill.getSkillType()))
+    public List<Skill> getRangedSkills() {
+        return skills.stream().filter(skill -> !SkillType.MELEE.equals(skill.getSkillType()))
                 .collect(Collectors.toList());
     }
 
-    public void add(Skill skill){
+    public void add(Skill skill) {
         this.skills.add(skill);
     }
 
-    public List<Skill> getAvailableSkills(){
+    public List<Skill> getAvailableSkills() {
         return skills.stream().filter(skill -> !skillsInCooldown.containsKey(skill)).collect(Collectors.toList());
     }
 
-    public boolean isCoolingDown(Skill skill){
+    public boolean has(Skill skill){
+        return skills.contains(skill);
+    }
+
+    public boolean isCoolingDown(Skill skill) {
         return skillsInCooldown.containsKey(skill);
     }
 
-    public void startCoolDown(Skill skill){
+    public void startCoolDown(Skill skill) {
         skillsInCooldown.put(skill, skill.getCooldown());
-    }
-
-    public boolean hasSkill(Skill skill){
-        return skills.contains(skill);
     }
 
     public Map<Skill, Float> getSkillsInCooldown() {
         return skillsInCooldown;
     }
 
-    public boolean canCast(Skill skill) {
-        return this.getAvailableSkills().contains(skill);
-    }
-
     public int getAssignablePoints() {
         return assignablePoints;
     }
 
-    public void consumeAssignablePoint(){
-        this.assignablePoints --;
+    public void consumeAssignablePoint() {
+        this.assignablePoints--;
     }
 }

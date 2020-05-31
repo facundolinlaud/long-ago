@@ -6,11 +6,10 @@ import com.badlogic.gdx.ai.btree.LeafTask;
 import com.badlogic.gdx.ai.btree.Task;
 import com.badlogic.gdx.math.Vector2;
 import com.facundolinlaud.supergame.components.ManaComponent;
-import com.facundolinlaud.supergame.components.PositionComponent;
 import com.facundolinlaud.supergame.components.SkillsComponent;
 import com.facundolinlaud.supergame.components.StatusComponent;
-import com.facundolinlaud.supergame.components.skills.SkillCastingRequestComponent;
-import com.facundolinlaud.supergame.components.skills.SkillClickComponent;
+import com.facundolinlaud.supergame.components.TargetComponent;
+import com.facundolinlaud.supergame.managers.world.SkillsManager;
 import com.facundolinlaud.supergame.model.skill.Skill;
 import com.facundolinlaud.supergame.model.skill.SkillType;
 import com.facundolinlaud.supergame.model.status.Action;
@@ -35,36 +34,37 @@ public class AttackTask extends LeafTask<Blackboard> {
     public Status execute() {
         Blackboard blackboard = getObject();
         Entity attacker = blackboard.getAgent();
+        SkillsManager skillsManager = blackboard.getSkillsManager();
 
         StatusComponent agentStatus = sm.get(attacker);
         Action action = agentStatus.getAction();
 
         /* TODO: Fix this. For some reason Return SUCCEEDED keeps tasks returning as SUCCEEDED instead of FRESH */
-        if(firstTimeExecutingTask()){
-            if(canCast(action)) {
+        if (firstTimeExecutingTask()) {
+            if (canCast(action)) {
                 Skill skill = getBestFittingSkill(attacker);
 
-                if(skill == null)
+                if (skill == null)
                     return Status.FAILED;
 
-                attackPlayer(attacker, blackboard.getPlayerPosition(), skill);
+                attackPlayer(attacker, blackboard.getPlayerPosition(), skill, skillsManager);
             }
-        }else{
-            if(isCastingDone(action))
+        } else {
+            if (isCastingDone(action))
                 return Status.SUCCEEDED;
         }
 
         return Status.RUNNING;
     }
 
-    private Skill getBestFittingSkill(Entity caster){
+    private Skill getBestFittingSkill(Entity caster) {
         SkillsComponent skills = ssm.get(caster);
         ManaComponent manaComponent = mm.get(caster);
 
         List<Skill> options = skills.getAvailableSkills().stream()
                 .filter(skill -> manaComponent.canCast(skill)).collect(Collectors.toList());
 
-        if(options.isEmpty())
+        if (options.isEmpty())
             return null;
 
         return random(options);
@@ -86,13 +86,13 @@ public class AttackTask extends LeafTask<Blackboard> {
         return !action.isCasting();
     }
 
-    void attackPlayer(Entity attacker, Vector2 playerPosition, Skill skill){
+    void attackPlayer(Entity attacker, Vector2 playerPosition, Skill skill, SkillsManager skillsManager) {
         SkillType skillType = skill.getSkillType();
 
-        if(skillType == SkillType.SPELL || skillType == SkillType.PROJECTILE)
-            attacker.add(new SkillClickComponent(playerPosition));
+        if (skillType == SkillType.SPELL || skillType == SkillType.PROJECTILE)
+            attacker.add(new TargetComponent(playerPosition));
 
-        attacker.add(new SkillCastingRequestComponent(skill));
+        skillsManager.requestCasting(attacker, skill);
     }
 
     @Override

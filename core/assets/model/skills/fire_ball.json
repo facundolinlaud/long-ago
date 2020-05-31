@@ -1,0 +1,90 @@
+{
+  "id": "fire_ball",
+  "name": "Fire Ball",
+  "cooldown": 2.0,
+  "picturePath": "pictures/skills/fire_ball.png",
+  "disabledPicturePath": "pictures/skills/disabled/fire_ball.png",
+  "description": "A fierce fire ball",
+  "skillType": "PROJECTILE",
+  "manaConsumption": 10.0,
+  "skillDto": {
+    "@class": "com.facundolinlaud.supergame.dto.skills.SkillTaskDto",
+    "children": ["com.facundolinlaud.supergame.dto.behaviortree.TaskListDto", [
+      {
+        "@class": "com.facundolinlaud.supergame.dto.behaviortree.ParallelTaskDto",
+        "children": ["com.facundolinlaud.supergame.dto.behaviortree.TaskListDto", [
+          {
+            "@class": "com.facundolinlaud.supergame.dto.skills.leaves.DisplayCastBarTaskDto",
+            "label": "Fire Ball",
+            "totalTime": 1.0
+          },{
+            "@class": "com.facundolinlaud.supergame.dto.behaviortree.SequentialTaskDto",
+            "children": ["com.facundolinlaud.supergame.dto.behaviortree.TaskListDto", [
+              {
+                "@class": "com.facundolinlaud.supergame.dto.skills.leaves.RequireManaTaskDto",
+                "mana": 15.0
+              },{
+                "@class": "com.facundolinlaud.supergame.dto.skills.leaves.SetActionTaskDto",
+                "action": "SPELL_PRECASTING"
+              },{
+                "@class": "com.facundolinlaud.supergame.dto.behaviortree.WaitTaskDto",
+                "time": 1.0
+              },{
+                "@class": "com.facundolinlaud.supergame.dto.skills.leaves.WaitForClickTaskDto"
+              },{
+                "@class": "com.facundolinlaud.supergame.dto.skills.leaves.SetActionTaskDto",
+                "action": "SPELL_CASTING"
+              },{
+                "@class": "com.facundolinlaud.supergame.dto.behaviortree.WaitTaskDto",
+                "time": 0.1
+              },{
+                "@class": "com.facundolinlaud.supergame.dto.behaviortree.SucceedTaskDto",
+                "child": {
+                  "@class": "com.facundolinlaud.supergame.dto.behaviortree.SequentialTaskDto",
+                  "children": ["com.facundolinlaud.supergame.dto.behaviortree.TaskListDto", [
+                    {
+                      "@class": "com.facundolinlaud.supergame.dto.skills.leaves.StartCoolDownTaskDto"
+                    },{
+                      "@class": "com.facundolinlaud.supergame.dto.skills.leaves.ShootTaskDto",
+                      "maxTravelDistance": 15.0,
+                      "particleType": "FIRE_PROJECTILE",
+                      "shootingForce": 7.0
+                    },{
+                      "@class": "com.facundolinlaud.supergame.dto.behaviortree.stack.RePushValueTaskDto",
+                      "deepness": 1,
+                      "times": 1
+                    },{
+                      "@class": "com.facundolinlaud.supergame.dto.skills.leaves.AffectAgentHealthTaskDto",
+                      "amount": 20.0
+                    },{
+                      "@class": "com.facundolinlaud.supergame.dto.skills.leaves.PushEntityPositionTaskDto"
+                    },{
+                      "@class": "com.facundolinlaud.supergame.dto.behaviortree.stack.RePushValueTaskDto",
+                      "deepness": 2,
+                      "times": 3
+                    },{
+                      "@class": "com.facundolinlaud.supergame.dto.skills.leaves.DisplayLightTaskDto",
+                      "lightType" : "DIMMING",
+                      "distance": 6.0,
+                      "duration": 1.0
+                    },{
+                      "@class": "com.facundolinlaud.supergame.dto.skills.leaves.DisplayParticlesTaskDto",
+                      "particleType": "EXPLOSION"
+                    },{
+                      "@class": "com.facundolinlaud.supergame.dto.skills.leaves.ScreenShakeTaskDto",
+                      "power": 0.05,
+                      "duration": 0.4
+                    }
+                  ]]
+                }
+              },{
+                "@class": "com.facundolinlaud.supergame.dto.skills.leaves.SetActionTaskDto",
+                "action": "STANDING"
+              }
+            ]]
+          }
+        ]]
+      }
+    ]]
+  }
+}
