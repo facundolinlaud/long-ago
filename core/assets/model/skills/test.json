@@ -36,6 +36,10 @@
                 "@class": "com.facundolinlaud.supergame.dto.skills.leaves.SetActionTaskDto",
                 "action": "SPELL_CASTING"
               },{
+                "@class": "com.facundolinlaud.supergame.dto.skills.leaves.PushCasterTaskDto"
+              },{
+                "@class": "com.facundolinlaud.supergame.dto.skills.leaves.PushEntityPositionTaskDto"
+              },{
                 "@class": "com.facundolinlaud.supergame.dto.skills.leaves.PushAgentsInAreaTaskDto",
                 "ignoreCaster": true,
                 "offset": 1.0,

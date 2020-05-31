@@ -52,6 +52,10 @@ public class SkillsComponent implements Component {
         return skills.stream().filter(skill -> !skillsInCooldown.containsKey(skill)).collect(Collectors.toList());
     }
 
+    public boolean has(Skill skill){
+        return skills.contains(skill);
+    }
+
     public boolean isCoolingDown(Skill skill) {
         return skillsInCooldown.containsKey(skill);
     }

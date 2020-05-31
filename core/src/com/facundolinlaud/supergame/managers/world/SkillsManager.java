@@ -16,7 +16,9 @@ import com.facundolinlaud.supergame.skills.SkillTask;
 import com.facundolinlaud.supergame.utils.Mappers;
 import com.facundolinlaud.supergame.utils.events.SkillCooldownStartEvent;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Stack;
 
 import static com.facundolinlaud.supergame.utils.events.Messages.REJECTED_SKILL_DUE_TO_NOT_READY;
 import static com.facundolinlaud.supergame.utils.events.Messages.SKILL_COOLDOWN_START;
@@ -51,7 +53,7 @@ public class SkillsManager extends PoolableTaskManager {
     public void requestCasting(Entity caster, Skill skill) {
         if (isAlreadyCasting(caster)) return;
 
-        if (isSkillCoolingDown(caster, skill)) {
+        if (!canCast(caster, skill)) {
             messageDispatcher.dispatchMessage(REJECTED_SKILL_DUE_TO_NOT_READY);
             return;
         }
@@ -79,9 +81,13 @@ public class SkillsManager extends PoolableTaskManager {
         return castings.containsKey(caster);
     }
 
-    private boolean isSkillCoolingDown(Entity caster, Skill skill) {
+    private boolean canCast(Entity caster, Skill skill) {
         SkillsComponent skillsComponent = sm.get(caster);
-        return skillsComponent.isCoolingDown(skill);
+
+        boolean isCoolingDown = skillsComponent.isCoolingDown(skill);
+        boolean hasSkill = skillsComponent.has(skill);
+
+        return !isCoolingDown && hasSkill;
     }
 
     public void startCoolDown(Entity caster) {

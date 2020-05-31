@@ -121,7 +121,7 @@ public class SkillTreeWindow extends GothicWindow {
     }
 
     private void drawPointsLeft(int assignablePoints) {
-        this.pointsLeft.setText("Assignable Points Left: " + String.valueOf(assignablePoints));
+        this.pointsLeft.setText("Assignable Points Left: " + assignablePoints);
     }
 
     private boolean isSkillUnlocked(Map<String, Skill> allSkills, List<Skill> playerSkills, String cell) {

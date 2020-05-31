@@ -10,14 +10,14 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, property = "@class")
 public class PushAgentsInAreaTaskDto extends TaskDto {
     private Shape shape;
-    private float offset;
+    private Float offset;
     private boolean ignoreCaster;
 
     public void setShape(Shape shape) {
         this.shape = shape;
     }
 
-    public void setOffset(float offset) {
+    public void setOffset(Float offset) {
         this.offset = offset;
     }
 

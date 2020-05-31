@@ -9,7 +9,8 @@
 			"bag": [9, 9, 0, 10, 15, 16, 17, 18, 19, 20]
 		},
 		"combatInformation": {
-			"skills": ["fire_arrow"],
+			"skills": ["fire_arrow", "cut", "fire_ball", "triple_fire_arrow", "fire_storm"],
+
 			"assignablePoints": 6,
 			"attributes": {
 				"strength": 170,
@@ -39,7 +40,7 @@
 		"velocity": 1.9,
 		"animationModel": "DEFAULT",
 		"combatInformation": {
-			"skills": ["fire_arrow"],
+			"skills": ["fire_ball", "triple_fire_arrow", "triple_fire_arrow","fire_storm"],
 			"attributes": {
 				"strength": 5,
 				"agility": 5,

@@ -1,19 +1,11 @@
 {
-	"dependencyGraph": [
-		[false, false, false, false, false, false, false],
-		[true, false, false, false, false, false, false],
-		[false, false, false, true, false, false, false],
-		[false, false, false, false, false, false, false],
-		[false, false, false, false, false, false, false],
-		[false, false, false, false, true, false, false],
-		[false, false, true, false, true, false, false] 
-	], "visualRepresentation": [
-		["", "", "", "", ""],
-		["|", "", "↓", "", "↓"],
-		["|", "", "", "→", ""],
-		["↓", "", "", "", ""],
-		["", "", "", "", ""],
-		["↓", "", "", "", ""],
-		["", "", "", "", ""]
+	"visualRepresentation": [
+		["fire_arrow",			"", "fire_ball", "", "cut"],
+		["|", 		   			"", "|", "", ""],
+		["|",		   			"", "|", "", ""],
+		["↓", 		   			"", "↓", "", ""],
+		["triple_fire_arrow", 	"→", "fire_storm", "", ""],
+		["", 		   			"", "", "", ""],
+		["",           			"", "", "", ""]
 	]
 }

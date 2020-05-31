@@ -15,20 +15,21 @@ import com.facundolinlaud.supergame.utils.shape.Shape;
 import java.util.List;
 
 /**
- * Pops: nothing
+ * Pops: two float-values corresponding to the x and y area center respectively
  * Pushes: n+1 values where:
  * The first n are entity-values
  * The n+1 value is an integer-value of value n
+ *
+ * If offset is null, then no traslation with the caster's direction will be performed
  */
 public class PushAgentsInAreaTask extends Task<SkillBlackboard> {
-    private ComponentMapper<PositionComponent> pm = Mappers.position;
     private ComponentMapper<StatusComponent> sm = Mappers.status;
 
     private Shape shape;
-    private float offset;
+    private Float offset;
     private boolean ignoreCaster;
 
-    public PushAgentsInAreaTask(Shape shape, float offset, boolean ignoreCaster) {
+    public PushAgentsInAreaTask(Shape shape, Float offset, boolean ignoreCaster) {
         this.shape = shape;
         this.offset = offset;
         this.ignoreCaster = ignoreCaster;
@@ -36,13 +37,18 @@ public class PushAgentsInAreaTask extends Task<SkillBlackboard> {
 
     @Override
     public void activate() {
+        float y = stack.pop().getFloat();
+        float x = stack.pop().getFloat();
+        Vector2 areaPosition = new Vector2(x, y);
+
         Entity caster = getBlackboard().getCaster();
 
-        Vector2 casterPosition = getCasterPosition(caster);
-        Direction casterDirection = getCasterDirection(caster);
+        shape.setPosition(areaPosition);
 
-        shape.setPosition(casterPosition);
-        shape.traslate(casterDirection, offset);
+        if (offset != null) {
+            Direction casterDirection = getCasterDirection(caster);
+            shape.traslate(casterDirection, offset);
+        }
 
         List<Entity> agents = getBlackboard().getAgentsService().in(shape);
 
@@ -51,10 +57,6 @@ public class PushAgentsInAreaTask extends Task<SkillBlackboard> {
 
         pushAgentsToStack(agents);
         completed();
-    }
-
-    private Vector2 getCasterPosition(Entity caster) {
-        return pm.get(caster).getPosition();
     }
 
     private Direction getCasterDirection(Entity caster) {

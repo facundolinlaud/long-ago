@@ -32,6 +32,10 @@
                 "@class": "com.facundolinlaud.supergame.dto.behaviortree.WaitTaskDto",
                 "time": 0.5
               },{
+                "@class": "com.facundolinlaud.supergame.dto.skills.leaves.PushCasterTaskDto"
+              },{
+                "@class": "com.facundolinlaud.supergame.dto.skills.leaves.PushEntityPositionTaskDto"
+              },{
                 "@class": "com.facundolinlaud.supergame.dto.skills.leaves.PushAgentsInAreaTaskDto",
                 "ignoreCaster": true,
                 "offset": 0.5,
