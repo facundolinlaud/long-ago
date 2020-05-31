@@ -43,6 +43,7 @@ public class ParallelTask<T extends Blackboard> extends CompositeTask<T> {
 
     @Override
     public void reset() {
+        super.reset();
         completedChildren = 0;
     }
 }

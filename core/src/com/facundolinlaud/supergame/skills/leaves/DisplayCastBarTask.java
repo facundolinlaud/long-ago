@@ -20,7 +20,6 @@ public class DisplayCastBarTask extends PoolableTask<SkillBlackboard> {
 
     public DisplayCastBarTask(String title, float totalTime) {
         this.title = title;
-        ;
         this.elapsedTime = 0f;
         this.totalTime = totalTime;
         this.foundOutIfMainPlayer = false;
@@ -51,5 +50,11 @@ public class DisplayCastBarTask extends PoolableTask<SkillBlackboard> {
 
     private boolean isMainPlayer(Entity entity) {
         return km.has(entity);
+    }
+
+    @Override
+    public void reset() {
+        elapsedTime = 0f;
+        foundOutIfMainPlayer = false;
     }
 }

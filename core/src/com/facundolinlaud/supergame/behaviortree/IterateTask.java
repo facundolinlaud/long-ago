@@ -3,7 +3,6 @@ package com.facundolinlaud.supergame.behaviortree;
 import com.facundolinlaud.supergame.behaviortree.stack.Value;
 
 import java.util.LinkedList;
-import java.util.ListIterator;
 import java.util.Stack;
 import java.util.stream.IntStream;
 
@@ -34,8 +33,7 @@ public class IterateTask<T extends Blackboard> extends CompositeTask<T> {
 
     private void nextCycle() {
         popNextValueIntoStack();
-
-        childrenIterator = children.listIterator();
+        reset();
         childrenIterator.next().activate();
     }
 

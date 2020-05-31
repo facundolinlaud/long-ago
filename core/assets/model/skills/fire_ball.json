@@ -50,6 +50,13 @@
                       "particleType": "FIRE_PROJECTILE",
                       "shootingForce": 7.0
                     },{
+                      "@class": "com.facundolinlaud.supergame.dto.behaviortree.stack.RePushValueTaskDto",
+                      "deepness": 1,
+                      "times": 1
+                    },{
+                      "@class": "com.facundolinlaud.supergame.dto.skills.leaves.AffectAgentHealthTaskDto",
+                      "amount": 20.0
+                    },{
                       "@class": "com.facundolinlaud.supergame.dto.skills.leaves.PushEntityPositionTaskDto"
                     },{
                       "@class": "com.facundolinlaud.supergame.dto.behaviortree.stack.RePushValueTaskDto",

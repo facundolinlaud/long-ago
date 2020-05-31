@@ -11,10 +11,8 @@
     "@class": "com.facundolinlaud.supergame.dto.skills.SkillTaskDto",
     "children": ["com.facundolinlaud.supergame.dto.behaviortree.TaskListDto", [
       {
-        "@class": "com.facundolinlaud.supergame.dto.behaviortree.stack.PushValueTaskDto",
-        "number": 3.0
-      },{
-        "@class": "com.facundolinlaud.supergame.dto.behaviortree.IterateTaskDto",
+        "@class": "com.facundolinlaud.supergame.dto.behaviortree.RepeatTaskDto",
+        "times": 3,
         "children": ["com.facundolinlaud.supergame.dto.behaviortree.TaskListDto", [
           {
             "@class": "com.facundolinlaud.supergame.dto.behaviortree.ParallelTaskDto",
@@ -56,6 +54,13 @@
                           "maxTravelDistance": 15.0,
                           "particleType": "FIRE_PROJECTILE",
                           "shootingForce": 7.0
+                        },{
+                          "@class": "com.facundolinlaud.supergame.dto.behaviortree.stack.RePushValueTaskDto",
+                          "deepness": 1,
+                          "times": 1
+                        },{
+                          "@class": "com.facundolinlaud.supergame.dto.skills.leaves.AffectAgentHealthTaskDto",
+                          "amount": 25.0
                         },{
                           "@class": "com.facundolinlaud.supergame.dto.skills.leaves.PushEntityPositionTaskDto"
                         },{
