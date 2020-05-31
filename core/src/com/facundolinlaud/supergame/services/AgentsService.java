@@ -7,6 +7,7 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.facundolinlaud.supergame.components.HealthComponent;
 import com.facundolinlaud.supergame.components.PositionComponent;
+import com.facundolinlaud.supergame.components.player.KeyboardComponent;
 import com.facundolinlaud.supergame.utils.Mappers;
 import com.facundolinlaud.supergame.utils.shape.Shape;
 
@@ -14,6 +15,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class AgentsService extends Service {
+    private ComponentMapper<KeyboardComponent> km = Mappers.keyboard;
     private ComponentMapper<PositionComponent> pm = Mappers.position;
 
     public AgentsService(Engine engine) {
@@ -34,5 +36,9 @@ public class AgentsService extends Service {
         }
 
         return entities;
+    }
+
+    public boolean isMainPlayer(Entity entity) {
+        return km.has(entity);
     }
 }

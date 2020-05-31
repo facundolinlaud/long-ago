@@ -1,10 +1,12 @@
 package com.facundolinlaud.supergame.ui.controller;
 
+import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.ai.msg.Telegram;
 import com.badlogic.gdx.ai.msg.Telegraph;
 import com.badlogic.gdx.math.Vector2;
 import com.facundolinlaud.supergame.model.skill.Skill;
 import com.facundolinlaud.supergame.ui.view.OverlayUI;
+import com.facundolinlaud.supergame.utils.events.SkillCooldownStartEvent;
 
 import java.util.Map;
 
@@ -15,9 +17,11 @@ import static com.facundolinlaud.supergame.utils.events.Messages.*;
  */
 public class OverlayUIController implements Telegraph {
     private OverlayUI overlayUI;
+    private Entity player;
 
-    public OverlayUIController(OverlayUI overlayUI) {
+    public OverlayUIController(OverlayUI overlayUI, Entity player) {
         this.overlayUI = overlayUI;
+        this.player = player;
     }
 
     public void setHealth(float health, float total) {
@@ -44,16 +48,20 @@ public class OverlayUIController implements Telegraph {
     public boolean handleMessage(Telegram msg) {
         switch (msg.message) {
             case REJECTED_SKILL_DUE_TO_NO_MANA:
-                this.overlayUI.popNoManaNotification();
+                overlayUI.popNoManaNotification();
                 break;
             case REJECTED_SKILL_DUE_TO_NOT_READY:
-                this.overlayUI.popSkillNotReadyNotification();
+                overlayUI.popSkillNotReadyNotification();
                 break;
             case REJECTED_SKILL_DUE_TO_WEAPON:
-                this.overlayUI.popNoAdequateWeaponNotification();
+                overlayUI.popNoAdequateWeaponNotification();
                 break;
             case CUSTOM_MESSAGE:
-                this.overlayUI.popNotification((String) msg.extraInfo);
+                overlayUI.popNotification((String) msg.extraInfo);
+                break;
+            case SKILL_COOLDOWN_START:
+                SkillCooldownStartEvent event = (SkillCooldownStartEvent) msg.extraInfo;
+                onSkillCooldownStart(event);
                 break;
         }
 
@@ -68,7 +76,9 @@ public class OverlayUIController implements Telegraph {
         overlayUI.updateSkillBar(buttonsToSkills);
     }
 
-    public void beginCooldown(Skill skill){
-        overlayUI.beginCooldown(skill);
+    private void onSkillCooldownStart(SkillCooldownStartEvent event) {
+        if (event.getCaster().equals(player)) {
+            overlayUI.beginCooldown(event.getSkill());
+        }
     }
 }

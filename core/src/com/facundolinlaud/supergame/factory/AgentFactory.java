@@ -39,7 +39,7 @@ public class AgentFactory {
         this.animationsFactory = factories.getAnimationsFactory();
     }
 
-    public AgentBuilder create(int id){
+    public AgentBuilder create(int id) {
         Agent agent = agents.get(id);
 
         RawAnimationModel rawAnimationModel = animationsFactory.get(agent.getAnimationModel());
@@ -52,25 +52,26 @@ public class AgentFactory {
                 .withParticles(particleFactory.getEffect(ParticleType.BLACK_SMOKE))
                 .withBody();
 
-        if(agent.hasAI()){
+        if (agent.hasAI()) {
             AIInformation ai = agent.getAiInformation();
             builder.withAI(ai.getBehaviorType(), ai.getViewDistance());
         }
 
-        if(agent.hasBag()){
+        if (agent.hasBag()) {
             BagInformation bagInformation = agent.getBagInformation();
             List<Entity> bag = buildBag(bagInformation.getBag());
             builder.withBag(bag, bagInformation.getGold(), INVENTORY_CHANGED);
         }
 
-        if(agent.hasCombat()){
+        if (agent.hasCombat()) {
             CombatInformation ci = agent.getCombatInformation();
             List<Skill> skills = skillsFactory.get(ci.getSkills());
             builder.withSkills(skills, ci.getAssignablePoints(), SKILLS_CHANGED)
-                   .withAttributes(ci.getAttributes());
+                    .withAttributes(ci.getAttributes())
+                    .shootable();
         }
 
-        if(agent.isTalkable())
+        if (agent.isTalkable())
             builder.talkable();
 
         return builder;
@@ -79,14 +80,14 @@ public class AgentFactory {
     private Map<EquipSlot, Entity> buildEquipment(Map<EquipSlot, String> body, Map<EquipSlot, Integer> model) {
         Map<EquipSlot, Entity> equipment = new HashMap();
 
-        for(Map.Entry<EquipSlot, String> entry : body.entrySet()){
+        for (Map.Entry<EquipSlot, String> entry : body.entrySet()) {
             Entity overlay = new Entity()
                     .add(new StackableSpriteComponent(SpriteFactory.get(entry.getValue())));
 
             equipment.put(entry.getKey(), overlay);
         }
 
-        for(Map.Entry<EquipSlot, Integer> entry : model.entrySet()){
+        for (Map.Entry<EquipSlot, Integer> entry : model.entrySet()) {
             Entity item = itemFactory.getItem(entry.getValue()).build();
             equipment.put(entry.getKey(), item);
             engine.addEntity(item);
@@ -98,7 +99,7 @@ public class AgentFactory {
     private List<Entity> buildBag(List<Integer> model) {
         List<Entity> bag = new LinkedList();
 
-        for(Integer id : model) {
+        for (Integer id : model) {
             Entity item = itemFactory.getItem(id).build();
             engine.addEntity(item);
             bag.add(item);

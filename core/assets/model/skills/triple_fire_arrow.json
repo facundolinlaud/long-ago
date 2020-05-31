@@ -20,7 +20,7 @@
               {
                 "@class": "com.facundolinlaud.supergame.dto.skills.leaves.DisplayCastBarTaskDto",
                 "label": "Fire arrow",
-                "totalTime": 0.6
+                "totalTime": 0.3
               },{
                 "@class": "com.facundolinlaud.supergame.dto.behaviortree.SequentialTaskDto",
                 "children": ["com.facundolinlaud.supergame.dto.behaviortree.TaskListDto", [
@@ -47,8 +47,6 @@
                       "@class": "com.facundolinlaud.supergame.dto.behaviortree.SequentialTaskDto",
                       "children": ["com.facundolinlaud.supergame.dto.behaviortree.TaskListDto", [
                         {
-                          "@class": "com.facundolinlaud.supergame.dto.skills.leaves.StartCoolDownTaskDto"
-                        },{
                           "@class": "com.facundolinlaud.supergame.dto.skills.leaves.ShootTaskDto",
                           "texture": "pictures/projectiles/arrow2.png",
                           "maxTravelDistance": 15.0,
@@ -94,6 +92,8 @@
       },{
         "@class": "com.facundolinlaud.supergame.dto.skills.leaves.SetActionTaskDto",
         "action": "STANDING"
+      },{
+        "@class": "com.facundolinlaud.supergame.dto.skills.leaves.StartCoolDownTaskDto"
       }
     ]]
   }

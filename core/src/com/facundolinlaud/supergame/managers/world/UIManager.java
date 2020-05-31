@@ -19,7 +19,8 @@ import com.facundolinlaud.supergame.systems.ui.ProfileUISystem;
 import com.facundolinlaud.supergame.ui.controller.*;
 import com.facundolinlaud.supergame.ui.view.*;
 import com.facundolinlaud.supergame.ui.view.utils.Window;
-import com.facundolinlaud.supergame.utils.events.Messages;
+
+import static com.facundolinlaud.supergame.utils.events.Messages.*;
 
 /**
  * Created by facundo on 3/25/16.
@@ -105,7 +106,7 @@ public class UIManager implements Renderable {
     }
 
     private void initializeControllers(Camera camera, Entity player) {
-        this.overlayUIController = new OverlayUIController(this.overlayUI);
+        this.overlayUIController = new OverlayUIController(this.overlayUI, player);
         this.inventoryUIController = new InventoryUIController(this.inventoryUI, player);
         this.attributesUIController = new AttributesUIController(this.attributesUI);
         this.equipmentUIController = new EquipmentUIController(this.equipmentUI, player);
@@ -124,24 +125,25 @@ public class UIManager implements Renderable {
 
     private void subscribeListeners() {
         this.messageDispatcher.addListeners(this.inventoryUIController,
-                Messages.ITEM_FROM_INVENTORY_DROPPED,
-                Messages.ITEMS_IN_INVENTORY_SWAPPED,
-                Messages.INVENTORY_CHANGED);
+                ITEM_FROM_INVENTORY_DROPPED,
+                ITEMS_IN_INVENTORY_SWAPPED,
+                INVENTORY_CHANGED);
         this.messageDispatcher.addListeners(this.equipmentUIController,
-                Messages.ITEM_UNEQUIPPED,
-                Messages.ITEM_EQUIPPED,
-                Messages.EQUIPMENT_CHANGED);
+                ITEM_UNEQUIPPED,
+                ITEM_EQUIPPED,
+                EQUIPMENT_CHANGED);
         this.messageDispatcher.addListeners(this.overlayUIController,
-                Messages.REJECTED_SKILL_DUE_TO_NO_MANA,
-                Messages.REJECTED_SKILL_DUE_TO_NOT_READY,
-                Messages.REJECTED_SKILL_DUE_TO_WEAPON,
-                Messages.SKILLS_CHANGED,
-                Messages.CUSTOM_MESSAGE);
+                REJECTED_SKILL_DUE_TO_NO_MANA,
+                REJECTED_SKILL_DUE_TO_NOT_READY,
+                REJECTED_SKILL_DUE_TO_WEAPON,
+                SKILLS_CHANGED,
+                CUSTOM_MESSAGE,
+                SKILL_COOLDOWN_START);
         this.messageDispatcher.addListeners(this.skillTreeController,
-                Messages.SKILL_UNLOCK_REQUEST,
-                Messages.SKILLS_CHANGED);
-        this.messageDispatcher.addListeners(this.attributesUIController, Messages.ATTRIBUTE_UPGRADED);
-        this.messageDispatcher.addListeners(this.labelDamagesController, Messages.ENTITY_ATTACKED);
+                SKILL_UNLOCK_REQUEST,
+                SKILLS_CHANGED);
+        this.messageDispatcher.addListeners(this.attributesUIController, ATTRIBUTE_UPGRADED);
+        this.messageDispatcher.addListeners(this.labelDamagesController, ENTITY_ATTACKED);
     }
 
     private void setCustomCursor() {

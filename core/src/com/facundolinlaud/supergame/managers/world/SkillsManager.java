@@ -14,10 +14,12 @@ import com.facundolinlaud.supergame.services.ProjectilesService;
 import com.facundolinlaud.supergame.skills.SkillBlackboard;
 import com.facundolinlaud.supergame.skills.SkillTask;
 import com.facundolinlaud.supergame.utils.Mappers;
+import com.facundolinlaud.supergame.utils.events.SkillCooldownStartEvent;
 
 import java.util.*;
 
 import static com.facundolinlaud.supergame.utils.events.Messages.REJECTED_SKILL_DUE_TO_NOT_READY;
+import static com.facundolinlaud.supergame.utils.events.Messages.SKILL_COOLDOWN_START;
 
 public class SkillsManager extends PoolableTaskManager {
     private ComponentMapper<SkillsComponent> sm = Mappers.skills;
@@ -88,6 +90,7 @@ public class SkillsManager extends PoolableTaskManager {
         SkillsComponent skillsComponent = sm.get(caster);
         skillsComponent.startCoolDown(skill);
 
-        uiManager.getOverlayUIController().beginCooldown(skill);
+        SkillCooldownStartEvent event = new SkillCooldownStartEvent(caster, skill);
+        messageDispatcher.dispatchMessage(SKILL_COOLDOWN_START, event);
     }
 }
