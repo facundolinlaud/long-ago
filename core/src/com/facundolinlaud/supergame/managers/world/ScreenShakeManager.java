@@ -1,7 +1,6 @@
 package com.facundolinlaud.supergame.managers.world;
 
 import com.badlogic.gdx.math.Vector3;
-import com.facundolinlaud.supergame.model.skill.ScreenShake;
 
 import java.util.Random;
 

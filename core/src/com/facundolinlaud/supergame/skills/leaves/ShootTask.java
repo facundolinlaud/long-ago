@@ -7,7 +7,6 @@ import com.facundolinlaud.supergame.behaviortree.Task;
 import com.facundolinlaud.supergame.behaviortree.stack.Value;
 import com.facundolinlaud.supergame.builder.ProjectileBuilder;
 import com.facundolinlaud.supergame.components.PositionComponent;
-import com.facundolinlaud.supergame.model.particle.ParticleType;
 import com.facundolinlaud.supergame.services.ProjectilesService;
 import com.facundolinlaud.supergame.skills.SkillBlackboard;
 import com.facundolinlaud.supergame.utils.Mappers;
@@ -25,15 +24,15 @@ public class ShootTask extends Task<SkillBlackboard> {
 
     private String texture;
     private float maxTravelDistance;
-    private ParticleType particleType;
+    private String particleId;
     private float shootingForce;
 
     private ProjectilesService projectilesService;
 
-    public ShootTask(String texture, float maxTravelDistance, ParticleType particleType, float shootingForce) {
+    public ShootTask(String texture, float maxTravelDistance, String particleId, float shootingForce) {
         this.texture = texture;
         this.maxTravelDistance = maxTravelDistance;
-        this.particleType = particleType;
+        this.particleId = particleId;
         this.shootingForce = shootingForce;
     }
 
@@ -67,8 +66,8 @@ public class ShootTask extends Task<SkillBlackboard> {
         ProjectileBuilder projectile = new ProjectileBuilder(caster, maxTravelDistance, origin, onHit, onMiss)
                 .to(destination, shootingForce);
 
-        if(texture != null) projectile.withPicture(texture);
+        if (texture != null) projectile.withPicture(texture);
 
-        projectilesService.create(projectile, particleType);
+        projectilesService.create(projectile, particleId);
     }
 }

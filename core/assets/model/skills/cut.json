@@ -62,7 +62,7 @@
                     "times": 1
                   },{
                     "@class": "com.facundolinlaud.supergame.dto.skills.leaves.DisplayParticlesTaskDto",
-                    "particleType": "BLACK_SMOKE"
+                    "particleId": "black_smoke"
                   }
                 ]]
               },{

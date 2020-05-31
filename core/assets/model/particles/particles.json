@@ -1,7 +1,7 @@
 {
-	"EXPLOSION": "particles/explosion.p",
-	"BLACK_SMOKE": "particles/black_smoke.p",
-	"FIRE_PROJECTILE": "particles/fire_projectile.p",
-	"BLUE_HIT": "particles/blue_hit.p",
-	"BLUE_VORTERIX": "particles/blue_vorterix.p"
+	"explosion": "particles/explosion.p",
+	"black_smoke": "particles/black_smoke.p",
+	"fire_projectile": "particles/fire_projectile.p",
+	"blue_hit": "particles/blue_hit.p",
+	"blue_vorterix": "particles/blue_vorterix.p"
 }

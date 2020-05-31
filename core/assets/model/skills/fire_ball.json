@@ -47,7 +47,7 @@
                     },{
                       "@class": "com.facundolinlaud.supergame.dto.skills.leaves.ShootTaskDto",
                       "maxTravelDistance": 15.0,
-                      "particleType": "FIRE_PROJECTILE",
+                      "particleId": "fire_projectile",
                       "shootingForce": 7.0
                     },{
                       "@class": "com.facundolinlaud.supergame.dto.behaviortree.stack.RePushValueTaskDto",
@@ -69,7 +69,7 @@
                       "duration": 1.0
                     },{
                       "@class": "com.facundolinlaud.supergame.dto.skills.leaves.DisplayParticlesTaskDto",
-                      "particleType": "EXPLOSION"
+                      "particleId": "explosion"
                     },{
                       "@class": "com.facundolinlaud.supergame.dto.skills.leaves.ScreenShakeTaskDto",
                       "power": 0.05,

@@ -4,7 +4,6 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.math.Vector2;
 import com.facundolinlaud.supergame.factory.ParticleFactory;
-import com.facundolinlaud.supergame.model.particle.ParticleType;
 
 public class ParticlesService extends Service {
     private ParticleFactory particleFactory;
@@ -14,9 +13,9 @@ public class ParticlesService extends Service {
         this.particleFactory = particleFactory;
     }
 
-    public void create(ParticleType particleType, Vector2 position) {
+    public void create(String particleId, Vector2 position) {
         Entity particle = particleFactory
-                .create(particleType)
+                .create(particleId)
                 .at(position)
                 .build();
 

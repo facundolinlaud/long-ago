@@ -4,7 +4,6 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.graphics.g2d.ParticleEffectPool.PooledEffect;
 import com.facundolinlaud.supergame.builder.ParticleBuilder;
 import com.facundolinlaud.supergame.managers.world.ParticleManager;
-import com.facundolinlaud.supergame.model.particle.ParticleType;
 
 public class ParticleFactory {
     private ParticleManager particleManager;
@@ -13,20 +12,20 @@ public class ParticleFactory {
         this.particleManager = particleManager;
     }
 
-    public PooledEffect getEffect(ParticleType type){
-        PooledEffect effect = particleManager.getPooledParticleEffect(type);
+    public PooledEffect getEffect(String particleId) {
+        PooledEffect effect = particleManager.getPooledParticleEffect(particleId);
         effect.start();
 
         return effect;
     }
 
-    public ParticleBuilder create(ParticleType particleType, Entity entity){
-        PooledEffect effect = getEffect(particleType);
+    public ParticleBuilder create(String particleId, Entity entity) {
+        PooledEffect effect = getEffect(particleId);
         return new ParticleBuilder(effect, entity);
     }
 
-    public ParticleBuilder create(ParticleType particleType){
-        PooledEffect effect = getEffect(particleType);
+    public ParticleBuilder create(String particleId) {
+        PooledEffect effect = getEffect(particleId);
         return new ParticleBuilder(effect);
     }
 }

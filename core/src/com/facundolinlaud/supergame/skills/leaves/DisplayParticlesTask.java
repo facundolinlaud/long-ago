@@ -2,7 +2,6 @@ package com.facundolinlaud.supergame.skills.leaves;
 
 import com.badlogic.gdx.math.Vector2;
 import com.facundolinlaud.supergame.behaviortree.Task;
-import com.facundolinlaud.supergame.model.particle.ParticleType;
 import com.facundolinlaud.supergame.services.ParticlesService;
 import com.facundolinlaud.supergame.skills.SkillBlackboard;
 
@@ -13,10 +12,10 @@ import com.facundolinlaud.supergame.skills.SkillBlackboard;
 public class DisplayParticlesTask extends Task<SkillBlackboard> {
     private ParticlesService particlesService;
 
-    private ParticleType particleType;
+    private String particleId;
 
-    public DisplayParticlesTask(ParticleType particleType) {
-        this.particleType = particleType;
+    public DisplayParticlesTask(String particleId) {
+        this.particleId = particleId;
     }
 
     @Override
@@ -30,7 +29,7 @@ public class DisplayParticlesTask extends Task<SkillBlackboard> {
         float x = stack.pop().getFloat();
         Vector2 position = new Vector2(x, y);
 
-        particlesService.create(particleType, position);
+        particlesService.create(particleId, position);
         completed();
     }
 }

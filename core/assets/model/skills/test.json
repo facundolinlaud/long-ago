@@ -71,7 +71,7 @@
                     "duration": 1.0
                   },{
                     "@class": "com.facundolinlaud.supergame.dto.skills.leaves.DisplayParticlesTaskDto",
-                    "particleType": "BLACK_SMOKE"
+                    "particleId": "black_smoke"
                   },{
                     "@class": "com.facundolinlaud.supergame.dto.skills.leaves.ScreenShakeTaskDto",
                     "power": 0.1,
@@ -105,7 +105,7 @@
                         "@class": "com.facundolinlaud.supergame.dto.skills.leaves.ShootTaskDto",
                         "texture": "pictures/projectiles/arrow2.png",
                         "maxTravelDistance": 15.0,
-                        "particleType": "FIRE_PROJECTILE",
+                        "particleId": "fire_projectile",
                         "shootingForce": 7.0
                       },{
                         "@class": "com.facundolinlaud.supergame.dto.skills.leaves.PushEntityPositionTaskDto"
@@ -120,7 +120,7 @@
                         "duration": 1.0
                       },{
                         "@class": "com.facundolinlaud.supergame.dto.skills.leaves.DisplayParticlesTaskDto",
-                        "particleType": "BLACK_SMOKE"
+                        "particleId": "black_smoke"
                       },{
                         "@class": "com.facundolinlaud.supergame.dto.skills.leaves.ScreenShakeTaskDto",
                         "power": 0.1,

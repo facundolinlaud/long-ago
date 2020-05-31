@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.facundolinlaud.supergame.dto.agent.Agent;
 import com.facundolinlaud.supergame.dto.quests.QuestTaskDto;
 import com.facundolinlaud.supergame.model.item.Item;
-import com.facundolinlaud.supergame.model.particle.ParticleType;
 import com.facundolinlaud.supergame.model.skill.Skill;
 import com.facundolinlaud.supergame.model.skill.SkillTreeModel;
 import com.facundolinlaud.supergame.model.sprite.RawAnimationModel;
@@ -13,7 +12,10 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by facundo on 27/7/16.
@@ -40,9 +42,9 @@ public class ModelFactory implements Disposable {
         return (Map<String, RawAnimationModel>) readModel(ANIMATIONS_MODEL_PATH, typeRef);
     }
 
-    public static Map<ParticleType, String> getParticlesModel() {
-        TypeReference<HashMap<ParticleType, String>> typeRef = new TypeReference<HashMap<ParticleType, String>>() {};
-        return (Map<ParticleType, String>) readModel(PARTICLES_MODEL_PATH, typeRef);
+    public static Map<String, String> getParticlesModel() {
+        TypeReference<HashMap<String, String>> typeRef = new TypeReference<HashMap<String, String>>() {};
+        return (Map<String, String>) readModel(PARTICLES_MODEL_PATH, typeRef);
     }
 
     public static Map<String, SpriteModel> getSpriteModels() {

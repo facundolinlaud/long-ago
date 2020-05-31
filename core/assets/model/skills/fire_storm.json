@@ -48,7 +48,7 @@
                 "duration": 1.0
               },{
                 "@class": "com.facundolinlaud.supergame.dto.skills.leaves.DisplayParticlesTaskDto",
-                "particleType": "BLACK_SMOKE"
+                "particleId": "black_smoke"
               },{
                 "@class": "com.facundolinlaud.supergame.dto.skills.leaves.ScreenShakeTaskDto",
                 "power": 0.1,
@@ -84,7 +84,7 @@
                     "duration": 1.0
                   },{
                     "@class": "com.facundolinlaud.supergame.dto.skills.leaves.DisplayParticlesTaskDto",
-                    "particleType": "BLACK_SMOKE"
+                    "particleId": "black_smoke"
                   }
                 ]]
               },{

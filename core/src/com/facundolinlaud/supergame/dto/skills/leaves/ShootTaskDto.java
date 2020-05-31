@@ -2,7 +2,6 @@ package com.facundolinlaud.supergame.dto.skills.leaves;
 
 import com.facundolinlaud.supergame.behaviortree.Task;
 import com.facundolinlaud.supergame.dto.behaviortree.TaskDto;
-import com.facundolinlaud.supergame.model.particle.ParticleType;
 import com.facundolinlaud.supergame.skills.leaves.ShootTask;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
@@ -10,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 public class ShootTaskDto extends TaskDto {
     private String texture;
     private float maxTravelDistance;
-    private ParticleType particleType;
+    private String particleId;
     private float shootingForce;
 
     public void setTexture(String texture) {
@@ -21,8 +20,8 @@ public class ShootTaskDto extends TaskDto {
         this.maxTravelDistance = maxTravelDistance;
     }
 
-    public void setParticleType(ParticleType particleType) {
-        this.particleType = particleType;
+    public void setParticleId(String particleId) {
+        this.particleId = particleId;
     }
 
     public void setShootingForce(float shootingForce) {
@@ -31,6 +30,6 @@ public class ShootTaskDto extends TaskDto {
 
     @Override
     public Task build() {
-        return new ShootTask(texture, maxTravelDistance, particleType, shootingForce);
+        return new ShootTask(texture, maxTravelDistance, particleId, shootingForce);
     }
 }

@@ -9,7 +9,6 @@ import com.facundolinlaud.supergame.dto.agent.Agent;
 import com.facundolinlaud.supergame.dto.agent.BagInformation;
 import com.facundolinlaud.supergame.dto.agent.CombatInformation;
 import com.facundolinlaud.supergame.model.equip.EquipSlot;
-import com.facundolinlaud.supergame.model.particle.ParticleType;
 import com.facundolinlaud.supergame.model.skill.Skill;
 import com.facundolinlaud.supergame.model.sprite.RawAnimationModel;
 import com.facundolinlaud.supergame.utils.events.Messages;
@@ -23,6 +22,8 @@ import static com.facundolinlaud.supergame.utils.events.Messages.INVENTORY_CHANG
 import static com.facundolinlaud.supergame.utils.events.Messages.SKILLS_CHANGED;
 
 public class AgentFactory {
+    private static final String BLACK_SMOKE_PARTICLE_ID = "black_smoke";
+
     private Engine engine;
     private ItemFactory itemFactory;
     private SkillsFactory skillsFactory;
@@ -49,7 +50,7 @@ public class AgentFactory {
                 .withVelocity(agent.getVelocity())
                 .withAnimations(rawAnimationModel)
                 .withEquipment(equipment, Messages.EQUIPMENT_CHANGED)
-                .withParticles(particleFactory.getEffect(ParticleType.BLACK_SMOKE))
+                .withParticles(particleFactory.getEffect(BLACK_SMOKE_PARTICLE_ID))
                 .withBody();
 
         if (agent.hasAI()) {
