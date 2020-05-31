@@ -1,14 +1,10 @@
 package com.facundolinlaud.supergame.ui.controller;
 
-import com.badlogic.ashley.core.ComponentMapper;
-import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.ai.msg.Telegram;
 import com.badlogic.gdx.ai.msg.Telegraph;
 import com.badlogic.gdx.math.Vector2;
-import com.facundolinlaud.supergame.components.player.KeyboardComponent;
 import com.facundolinlaud.supergame.model.skill.Skill;
 import com.facundolinlaud.supergame.ui.view.OverlayUI;
-import com.facundolinlaud.supergame.utils.Mappers;
 
 import java.util.Map;
 
@@ -18,8 +14,6 @@ import static com.facundolinlaud.supergame.utils.events.Messages.*;
  * Created by facundo on 3/29/16.
  */
 public class OverlayUIController implements Telegraph {
-    private ComponentMapper<KeyboardComponent> km = Mappers.keyboard;
-
     private OverlayUI overlayUI;
 
     public OverlayUIController(OverlayUI overlayUI) {
@@ -74,7 +68,7 @@ public class OverlayUIController implements Telegraph {
         overlayUI.updateSkillBar(buttonsToSkills);
     }
 
-    private boolean isMainPlayer(Entity entity){
-        return km.has(entity);
+    public void beginCooldown(Skill skill){
+        overlayUI.beginCooldown(skill);
     }
 }

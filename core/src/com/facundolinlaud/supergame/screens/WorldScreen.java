@@ -97,8 +97,8 @@ public class WorldScreen implements Screen {
         this.playerInputManager = new PlayerInputManager(cameraManager);
         this.questsManager = new QuestsManager(factories, weManager.getPlayer(),
                 uiManager.getDialogUIController(), resources.getEngine());
-        this.skillsManager = new SkillsManager(new SkillsFactory(), lightsManager, cameraManager, uiManager,
-                agentsService, combatService, particlesService, projectilesService);
+        this.skillsManager = new SkillsManager(lightsManager, cameraManager, uiManager, agentsService, combatService,
+                particlesService, projectilesService);
     }
 
     private void initializeListeners() {
@@ -133,6 +133,7 @@ public class WorldScreen implements Screen {
         engine.addSystem(new ProjectileSystem(engine));
         engine.addSystem(new HealthSystem(resources.getBatch()));
         engine.addSystem(new InteractionSystem(uiManager.getDialogUIController(), playerInputManager, weManager));
+        engine.addSystem(new SkillCoolDownSystem());
 
         uiManager.initializeSystems(engine);
     }

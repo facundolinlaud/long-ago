@@ -65,8 +65,9 @@ public class ShootTask extends Task<SkillBlackboard> {
         Runnable onMiss = () -> this.failed();
 
         ProjectileBuilder projectile = new ProjectileBuilder(caster, maxTravelDistance, origin, onHit, onMiss)
-                .to(destination, shootingForce)
-                .withPicture(texture);
+                .to(destination, shootingForce);
+
+        if(texture != null) projectile.withPicture(texture);
 
         projectilesService.create(projectile, particleType);
     }

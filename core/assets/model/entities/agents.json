@@ -70,7 +70,7 @@
 		"velocity": 1.4,
 		"animationModel": "DEFAULT",
 		"combatInformation": {
-			"skills": ["fire_arrow"],
+			"skills": ["cut"],
 			"attributes": {
 				"strength": 10,
 				"agility": 10,
@@ -85,7 +85,7 @@
 		"equipment": {
 			"CHEST": 2,
 			"SHOES": 5,
-			"WEAPON": 12
+			"WEAPON": 10
 		},
 		"aiInformation": {
 			"viewDistance": 5.0,

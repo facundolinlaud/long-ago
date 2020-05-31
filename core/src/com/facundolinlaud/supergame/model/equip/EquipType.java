@@ -5,8 +5,7 @@ public enum EquipType {
     DAGGER("DAGGER"),
     SWORD("SWORD"),
     BOW("BOW"),
-    WAND("WAND"),
-    NOT_IMPORTANT("NOT_IMPORTANT");
+    WAND("WAND");
 
     private String name;
 

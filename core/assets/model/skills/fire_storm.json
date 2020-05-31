@@ -1,12 +1,12 @@
 {
-  "id": "fire_arrow",
-  "name": "Fire arrow",
+  "id": "fire_ball",
+  "name": "Fire Ball",
   "cooldown": 2.0,
-  "picturePath": "pictures/skills/fire_arrow.png",
-  "disabledPicturePath": "pictures/skills/disabled/fire_arrow.png",
-  "description": "A fierce fire arrow",
-  "skillType": "PROJECTILE",
-  "manaConsumption": 0.0,
+  "picturePath": "pictures/skills/fire_storm.png",
+  "disabledPicturePath": "pictures/skills/disabled/fire_storm.png",
+  "description": "A fierce fire storm",
+  "skillType": "SPELL",
+  "manaConsumption": 20.0,
   "skillDto": {
     "@class": "com.facundolinlaud.supergame.dto.skills.SkillTaskDto",
     "children": ["com.facundolinlaud.supergame.dto.behaviortree.TaskListDto", [
@@ -15,28 +15,30 @@
         "children": ["com.facundolinlaud.supergame.dto.behaviortree.TaskListDto", [
           {
             "@class": "com.facundolinlaud.supergame.dto.skills.leaves.DisplayCastBarTaskDto",
-            "label": "Fire arrow",
-            "totalTime": 0.6
+            "label": "Fire Ball",
+            "totalTime": 1.0
           },{
             "@class": "com.facundolinlaud.supergame.dto.behaviortree.SequentialTaskDto",
             "children": ["com.facundolinlaud.supergame.dto.behaviortree.TaskListDto", [
               {
+                "@class": "com.facundolinlaud.supergame.dto.skills.leaves.RequireManaTaskDto",
+                "mana": 20.0
+              },{
                 "@class": "com.facundolinlaud.supergame.dto.skills.leaves.SetActionTaskDto",
-                "action": "AIMING"
+                "action": "SPELL_PRECASTING"
               },{
                 "@class": "com.facundolinlaud.supergame.dto.behaviortree.WaitTaskDto",
-                "time": 0.5
+                "time": 1.0
               },{
                 "@class": "com.facundolinlaud.supergame.dto.skills.leaves.WaitForClickTaskDto"
               },{
                 "@class": "com.facundolinlaud.supergame.dto.skills.leaves.SetActionTaskDto",
-                "action": "PRESHOOTING"
+                "action": "SPELL_CASTING"
               },{
                 "@class": "com.facundolinlaud.supergame.dto.behaviortree.WaitTaskDto",
-                "time": 0.1
+                "time": 1.0
               },{
-                "@class": "com.facundolinlaud.supergame.dto.skills.leaves.SetActionTaskDto",
-                "action": "SHOOTING"
+                
               },{
                 "@class": "com.facundolinlaud.supergame.dto.behaviortree.SucceedTaskDto",
                 "child": {
@@ -46,7 +48,6 @@
                       "@class": "com.facundolinlaud.supergame.dto.skills.leaves.StartCoolDownTaskDto"
                     },{
                       "@class": "com.facundolinlaud.supergame.dto.skills.leaves.ShootTaskDto",
-                      "texture": "pictures/projectiles/arrow2.png",
                       "maxTravelDistance": 15.0,
                       "particleType": "FIRE_PROJECTILE",
                       "shootingForce": 7.0
@@ -63,17 +64,14 @@
                       "duration": 1.0
                     },{
                       "@class": "com.facundolinlaud.supergame.dto.skills.leaves.DisplayParticlesTaskDto",
-                      "particleType": "BLACK_SMOKE"
+                      "particleType": "EXPLOSION"
                     },{
                       "@class": "com.facundolinlaud.supergame.dto.skills.leaves.ScreenShakeTaskDto",
-                      "power": 0.1,
-                      "duration": 0.8
+                      "power": 0.05,
+                      "duration": 0.4
                     }
                   ]]
                 }
-              },{
-                "@class": "com.facundolinlaud.supergame.dto.behaviortree.WaitTaskDto",
-                "time": 0.4
               },{
                 "@class": "com.facundolinlaud.supergame.dto.skills.leaves.SetActionTaskDto",
                 "action": "STANDING"

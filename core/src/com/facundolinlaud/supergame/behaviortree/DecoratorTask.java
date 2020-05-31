@@ -9,6 +9,7 @@ public abstract class DecoratorTask<T extends Blackboard> extends BranchTask<T> 
 
     public DecoratorTask(Task child) {
         this.child = child;
+        child.setParent(this);
     }
 
     @Override

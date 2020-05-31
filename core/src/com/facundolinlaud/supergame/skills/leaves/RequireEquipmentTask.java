@@ -14,6 +14,10 @@ import com.facundolinlaud.supergame.utils.Mappers;
 
 import static com.facundolinlaud.supergame.utils.events.Messages.REJECTED_SKILL_DUE_TO_WEAPON;
 
+/**
+ * Pops: nothing
+ * Pushes: nothing
+ */
 public class RequireEquipmentTask extends Task<SkillBlackboard> {
     private ComponentMapper<WearComponent> wm = Mappers.wear;
     private ComponentMapper<EquipableComponent> em = Mappers.equipable;
@@ -43,9 +47,6 @@ public class RequireEquipmentTask extends Task<SkillBlackboard> {
     }
 
     private boolean hasAdequateWeapon() {
-        if(EquipType.NOT_IMPORTANT.equals(equipType))
-            return true;
-
         WearComponent wearComponent = wm.get(caster);
 
         if(EquipType.BOW.equals(equipType)){
