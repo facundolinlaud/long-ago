@@ -78,7 +78,7 @@ public class AgentFactory {
         return builder;
     }
 
-    private Map<EquipSlot, Entity> buildEquipment(Map<EquipSlot, String> body, Map<EquipSlot, Integer> model) {
+    private Map<EquipSlot, Entity> buildEquipment(Map<EquipSlot, String> body, Map<EquipSlot, String> model) {
         Map<EquipSlot, Entity> equipment = new HashMap();
 
         for (Map.Entry<EquipSlot, String> entry : body.entrySet()) {
@@ -88,7 +88,7 @@ public class AgentFactory {
             equipment.put(entry.getKey(), overlay);
         }
 
-        for (Map.Entry<EquipSlot, Integer> entry : model.entrySet()) {
+        for (Map.Entry<EquipSlot, String> entry : model.entrySet()) {
             Entity item = itemFactory.getItem(entry.getValue()).build();
             equipment.put(entry.getKey(), item);
             engine.addEntity(item);
@@ -97,10 +97,10 @@ public class AgentFactory {
         return equipment;
     }
 
-    private List<Entity> buildBag(List<Integer> model) {
+    private List<Entity> buildBag(List<String> model) {
         List<Entity> bag = new LinkedList();
 
-        for (Integer id : model) {
+        for (String id : model) {
             Entity item = itemFactory.getItem(id).build();
             engine.addEntity(item);
             bag.add(item);

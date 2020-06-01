@@ -11,19 +11,19 @@ import java.util.Map;
  * Created by facundo on 27/7/16.
  */
 public class ItemFactory {
-    public static final int SABER = 11;
-    public static final int COINS = 13;
+    public static final String SABER = "saber";
+    public static final String COINS = "coins";
 
-    private Map<Integer, Item> models;
+    private Map<String, Item> models;
 
     public ItemFactory() {
         this.models = ModelFactory.getItemsModel();
     }
 
-    public ItemBuilder getItem(Integer id) {
+    public ItemBuilder getItem(String id) {
         Item model = models.get(id);
 
-        ItemBuilder itemBuilder = new ItemBuilder(model)
+        ItemBuilder itemBuilder = new ItemBuilder(id, model)
                 .pickupable()
                 .withRender(model.getPicture());
 

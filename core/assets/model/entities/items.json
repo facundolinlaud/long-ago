@@ -1,5 +1,5 @@
 {
-	"0": {
+	"leather_armor": {
 		"name": "Leather Armor",
 	    "texture": "sprites/items/armor/leather.png",
 	    "picture": "pictures/items/armor/leather.png",
@@ -11,7 +11,7 @@
 		    "defense": 3
 	    }
 	},
-	"1": {
+	"mail_armor": {
 		"name": "Mail Armor",
 	    "texture": "sprites/items/armor/mail.png",
 	    "picture": "pictures/items/armor/mail.png",
@@ -23,7 +23,7 @@
 		    "defense": 4
 	    }
 	},
-	"2": {
+	"leather_plate": {
 		"name": "Leather Plate",
 	    "texture": "sprites/items/armor/plate.png",
 	    "picture": "pictures/items/armor/plate.png",
@@ -35,7 +35,7 @@
 		    "defense": 6
 	    }
 	},
-	"3": {
+	"plate_gloves": {
 		"name": "Plate Gloves",
 	    "texture": "sprites/items/arms/plate.png",
 	    "picture": "pictures/items/arms/plate.png",
@@ -47,7 +47,7 @@
 		    "defense": 2
 	    }
 	},
-	"4": {
+	"leather_belt": {
 		"name": "Leather Belt",
 		"rarity": "COMMON",
 	    "texture": "sprites/items/belts/belt.png",
@@ -59,7 +59,7 @@
 		    "defense": 1
 	    }
 	},
-	"5": {
+	"leather_boots": {
 		"name": "Leather Boots",
 		"rarity": "COMMON",
 	    "texture": "sprites/items/boots/leather_boots.png",
@@ -71,7 +71,7 @@
 		    "defense": 1
 	    }
 	},
-	"6": {
+	"metal_boots": {
 		"name": "Metal Boots",
 		"rarity": "UNCOMMON",
 	    "texture": "sprites/items/boots/metal_boots.png",
@@ -83,7 +83,7 @@
 		    "defense": 2
 	    }
 	},
-	"7": {
+	"plate_gloves": {
 		"name": "Plate Gloves",
 	    "texture": "sprites/items/gloves/metal_gloves.png",
 	    "picture": "pictures/items/gloves/metal_gloves.png",
@@ -95,7 +95,7 @@
 		    "defense": 2
 	    }
 	},
-	"8": {
+	"hood": {
 		"name": "Hood",
 	    "texture": "sprites/items/helmets/cloth_hood.png",
 	    "picture": "pictures/items/helmets/cloth_hood.png",
@@ -107,7 +107,7 @@
 		    "defense": 0
 	    }
 	},
-	"9": {
+	"plate_pants": {
 		"name": "Plate Pants",
 	    "texture": "sprites/items/pants/plate.png",
 	    "picture": "pictures/items/pants/plate.png",
@@ -119,7 +119,7 @@
 		    "defense": 5
 	    }
 	},
-	"10": {
+	"dagger": {
 		"name": "Dagger",
 	    "texture": "sprites/items/weapon/dagger.png",
 	    "picture": "pictures/items/weapon/dagger.png",
@@ -132,7 +132,7 @@
 		    "attack": 3
 	    }
 	},
-	"11": {
+	"saber": {
 		"name": "Saber",
 	    "texture": "sprites/items/weapon/saber.png",
 	    "picture": "pictures/items/weapon/saber.png",
@@ -145,7 +145,7 @@
 		    "attack": 5
 	    }
 	},
-	"12": {
+	"spear": {
 		"name": "Spear",
 	    "texture": "sprites/items/weapon/spear.png",
 	    "picture": "pictures/items/weapon/spear.png",
@@ -158,14 +158,14 @@
 		    "attack": 4
 	    }
 	},
-	"13": {
+	"coins": {
 		"name": "Coins",
 	    "picture": "pictures/items/others/coins.png",
 	    "weight": 1.0,
 	    "rarity": "COMMON",
 	    "marketValue": 10
 	},
-	"14": {
+	"great_bow": {
 		"name": "Great Bow",
 	    "texture": "sprites/items/weapon/great_bow.png",
 	    "picture": "pictures/items/weapon/great_bow.png",
@@ -178,7 +178,7 @@
 		    "attack": 4
 	    }
 	},
-	"15": {
+	"big_spear": {
 		"name": "Big Spear",
 	    "texture": "sprites/items/weapon/big_spear.png",
 	    "picture": "pictures/items/weapon/big_spear.png",
@@ -191,7 +191,7 @@
 		    "attack": 5
 	    }
 	},
-	"16": {
+	"great_spear": {
 		"name": "Great Spear",
 	    "texture": "sprites/items/weapon/great_spear.png",
 	    "picture": "pictures/items/weapon/great_spear.png",
@@ -204,7 +204,7 @@
 		    "attack": 5
 	    }
 	},
-	"17": {
+	"long_sword": {
 		"name": "Long Sword",
 	    "texture": "sprites/items/weapon/long_sword.png",
 	    "picture": "pictures/items/weapon/long_sword.png",
@@ -217,7 +217,7 @@
 		    "attack": 5
 	    }
 	},
-	"18": {
+	"mace": {
 		"name": "Mace",
 	    "texture": "sprites/items/weapon/mace.png",
 	    "picture": "pictures/items/weapon/mace.png",
@@ -230,7 +230,7 @@
 		    "attack": 5
 	    }
 	},
-	"19": {
+	"rapier": {
 		"name": "Rapier",
 	    "texture": "sprites/items/weapon/rapier.png",
 	    "picture": "pictures/items/weapon/rapier.png",
@@ -243,7 +243,7 @@
 		    "attack": 5
 	    }
 	},
-	"20": {
+	"trident": {
 		"name": "Trident",
 	    "texture": "sprites/items/weapon/trident.png",
 	    "picture": "pictures/items/weapon/trident.png",
@@ -256,7 +256,7 @@
 		    "attack": 15
 	    }
 	},
-	"21": {
+	"teal_leather_pants": {
 		"name": "Leather Teal Pants",
 	    "texture": "sprites/items/pants/leather_teal.png",
 	    "picture": "pictures/items/pants/leather_teal.png",
@@ -268,7 +268,7 @@
 		    "defense": 1
 	    }
 	},
-	"22": {
+	"tabard": {
 		"name": "Tabard",
 	    "texture": "sprites/items/armor/tabard.png",
 	    "picture": "pictures/items/armor/tabard.png",

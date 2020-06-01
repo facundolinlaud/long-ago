@@ -3,14 +3,14 @@ package com.facundolinlaud.supergame.dto.agent;
 import java.util.List;
 
 public class BagInformation {
-    private List<Integer> bag;
+    private List<String> bag;
     private int gold;
 
-    public List<Integer> getBag() {
+    public List<String> getBag() {
         return bag;
     }
 
-    public void setBag(List<Integer> bag) {
+    public void setBag(List<String> bag) {
         this.bag = bag;
     }
 

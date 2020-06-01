@@ -52,9 +52,9 @@ public class ModelFactory implements Disposable {
         return (Map<String, SpriteModel>) readModel(SPRITES_MODELS_PATH, typeRef);
     }
 
-    public static Map<Integer, Item> getItemsModel() {
-        TypeReference<HashMap<Integer, Item>> typeRef = new TypeReference<HashMap<Integer, Item>>() {};
-        return (Map<Integer, Item>) readModel(ITEMS_MODEL_PATH, typeRef);
+    public static Map<String, Item> getItemsModel() {
+        TypeReference<HashMap<String, Item>> typeRef = new TypeReference<HashMap<String, Item>>() {};
+        return (Map<String, Item>) readModel(ITEMS_MODEL_PATH, typeRef);
     }
 
     public static Map<String, Agent> getAgentsModel() {

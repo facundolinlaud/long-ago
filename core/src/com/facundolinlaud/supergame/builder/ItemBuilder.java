@@ -3,6 +3,7 @@ package com.facundolinlaud.supergame.builder;
 import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.facundolinlaud.supergame.components.IdComponent;
 import com.facundolinlaud.supergame.components.PositionComponent;
 import com.facundolinlaud.supergame.components.RenderComponent;
 import com.facundolinlaud.supergame.components.items.EquipableComponent;
@@ -22,33 +23,35 @@ public class ItemBuilder {
         this.item = item;
     }
 
-    public ItemBuilder(Item model) {
-        this.item = new Entity().add(new ItemComponent(model));
+    public ItemBuilder(String id, Item model) {
+        this.item = new Entity()
+                .add(new ItemComponent(model))
+                .add(new IdComponent(id));
     }
 
-    public ItemBuilder withRender(String picture){
+    public ItemBuilder withRender(String picture) {
         this.item.add(new RenderComponent(TextureFactory.getSprite(picture), RenderPriority.ITEM));
         return this;
     }
 
-    public ItemBuilder withRender(Sprite picture){
+    public ItemBuilder withRender(Sprite picture) {
         this.item.add(new RenderComponent(picture, RenderPriority.ITEM));
         return this;
     }
 
-    public ItemBuilder pickupable(){
+    public ItemBuilder pickupable() {
         item.add(new PickupableComponent());
         return this;
     }
 
-    public ItemBuilder withPosition(float x, float y){
+    public ItemBuilder withPosition(float x, float y) {
         item.add(new PositionComponent(x, y));
         return this;
     }
 
-    public ItemBuilder equipable(String spritesheet, EquipmentInformation eq){
+    public ItemBuilder equipable(String spritesheet, EquipmentInformation eq) {
         item.add(new EquipableComponent(eq))
-            .add(new StackableSpriteComponent(SpriteFactory.get(spritesheet)));
+                .add(new StackableSpriteComponent(SpriteFactory.get(spritesheet)));
         return this;
     }
 
@@ -57,11 +60,11 @@ public class ItemBuilder {
         return this;
     }
 
-    public ItemBuilder dropped(float x, float y){
+    public ItemBuilder dropped(float x, float y) {
         return pickupable().withPosition(x, y);
     }
 
-    public Entity build(){
+    public Entity build() {
         return item;
     }
 }

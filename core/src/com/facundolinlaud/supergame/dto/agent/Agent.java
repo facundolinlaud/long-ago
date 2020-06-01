@@ -13,7 +13,7 @@ public class Agent {
     private boolean talkable;
     private String animationModel;
     private Map<EquipSlot, String> body;
-    private Map<EquipSlot, Integer> equipment;
+    private Map<EquipSlot, String> equipment;
 
     private BagInformation bagInformation;
     private CombatInformation combatInformation;
@@ -83,11 +83,11 @@ public class Agent {
         this.body = body;
     }
 
-    public Map<EquipSlot, Integer> getEquipment() {
+    public Map<EquipSlot, String> getEquipment() {
         return equipment;
     }
 
-    public void setEquipment(Map<EquipSlot, Integer> equipment) {
+    public void setEquipment(Map<EquipSlot, String> equipment) {
         this.equipment = equipment;
     }
 
@@ -115,15 +115,15 @@ public class Agent {
         this.aiInformation = aiInformation;
     }
 
-    public boolean hasAI(){
+    public boolean hasAI() {
         return this.aiInformation != null;
     }
 
-    public boolean hasCombat(){
+    public boolean hasCombat() {
         return this.combatInformation != null;
     }
 
-    public boolean hasBag(){
+    public boolean hasBag() {
         return this.bagInformation != null;
     }
 }
