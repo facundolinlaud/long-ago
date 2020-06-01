@@ -1,5 +1,5 @@
 {
-	"0": {
+	"player": {
 		"name": "Player",
 		"velocity": 1.9,
 		"talkable": true,
@@ -35,7 +35,7 @@
 			"BOW": 14
 		}
 	},
-	"1": {
+	"skeleton": {
 		"name": "Skeleton",
 		"velocity": 1.9,
 		"animationModel": "DEFAULT",
@@ -66,7 +66,7 @@
 			"behaviorType": "AGGRESSIVE"
 		}
 	},
-	"2": {
+	"orc": {
 		"name": "Orc",
 		"velocity": 1.4,
 		"animationModel": "DEFAULT",
@@ -93,7 +93,7 @@
 			"behaviorType": "AGGRESSIVE"
 		}
 	},
-	"3": {
+	"fisherman": {
 		"name": "Fisherman",
 		"velocity": 2.0,
 		"talkable": true,
@@ -110,7 +110,7 @@
 			"PANTS": 21
 		}
 	},
-	"4": {
+	"aggresive_elf": {
 		"name": "Aggresive Elf",
 		"velocity": 2.0,
 		"animationModel": "DEFAULT",

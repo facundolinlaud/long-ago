@@ -16,11 +16,11 @@ import static com.facundolinlaud.supergame.utils.events.Messages.AGENT_DIED;
 public class SlayTask extends Task implements Telegraph {
     private ComponentMapper<IdComponent> idm = Mappers.id;
     private MessageDispatcher messageDispatcher;
-    private int agentId;
+    private String agentId;
     private int current;
     private int total;
 
-    public SlayTask(int agentId, int total) {
+    public SlayTask(String agentId, int total) {
         this.messageDispatcher = MessageManager.getInstance();
         this.agentId = agentId;
         this.total = total;

@@ -411,14 +411,14 @@
  <objectgroup name="spawn" locked="1">
   <object id="134" x="761.589" y="435.982" width="275.938" height="223.51">
    <properties>
-    <property name="agentID" type="int" value="1"/>
+    <property name="agentID" value="skeleton"/>
     <property name="agentsCount" type="int" value="4"/>
     <property name="spawn" value="true"/>
    </properties>
   </object>
   <object id="136" x="303.532" y="757.45" width="275.938" height="223.51">
    <properties>
-    <property name="agentID" type="int" value="2"/>
+    <property name="agentID" value="orc"/>
     <property name="agentsCount" type="int" value="5"/>
     <property name="spawn" value="true"/>
    </properties>

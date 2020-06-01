@@ -6,21 +6,21 @@
 		"@class": "com.facundolinlaud.supergame.dto.behaviortree.SequentialTaskDto",
 		"children": ["com.facundolinlaud.supergame.dto.behaviortree.TaskListDto", [{
 			"@class": "com.facundolinlaud.supergame.dto.quests.InteractionTaskDto",
-			"agentId": 3
+			"agentId": "fisherman"
 		},{
 			"@class": "com.facundolinlaud.supergame.dto.quests.TextDialogTaskDto",
 			"title": "Fisherman",
 			"message": "Now I need you to kill an elf.{WAIT} Will you?"
 		},{
 			"@class": "com.facundolinlaud.supergame.dto.quests.SpawnTaskDto",
-			"agentId": 4,
+			"agentId": "aggresive_elf",
 			"position": {
 				"x": 24,
 				"y": 35
 			}
 		},{
 			"@class": "com.facundolinlaud.supergame.dto.quests.SlayTaskDto",
-			"agentId": 4,
+			"agentId": "aggresive_elf",
 			"total": 1
 		},{
 			"@class": "com.facundolinlaud.supergame.dto.quests.TextDialogTaskDto",

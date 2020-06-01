@@ -3,13 +3,17 @@ package com.facundolinlaud.supergame.components;
 import com.badlogic.ashley.core.Component;
 
 public class IdComponent implements Component {
-    private int id;
+    private String id;
 
-    public IdComponent(int id) {
+    public IdComponent(String id) {
         this.id = id;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

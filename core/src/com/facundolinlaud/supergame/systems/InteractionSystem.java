@@ -99,7 +99,7 @@ public class InteractionSystem extends EntitySystem {
     }
 
     private void dispatchPlayerInteractionMessage(Entity closestInteractable) {
-        int id = idm.get(closestInteractable).getId();
-        messageDispatcher.dispatchMessage(Messages.PLAYER_INTERACTION, (Object) id);
+        String id = idm.get(closestInteractable).getId();
+        messageDispatcher.dispatchMessage(Messages.PLAYER_INTERACTION, id);
     }
 }

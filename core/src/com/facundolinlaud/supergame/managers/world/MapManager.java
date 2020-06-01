@@ -78,7 +78,7 @@ public class MapManager implements Renderable {
         for(MapObject object : spawnObjects){
             MapProperties properties = object.getProperties();
 
-            int id = (int) properties.get(AGENT_ID_PROPERTY);
+            String id = (String) properties.get(AGENT_ID_PROPERTY);
             int agentsCount = (int) properties.get(AGENTS_COUNT_PROPERTY);
             RectangleMapObject rmo = (RectangleMapObject) object;
 

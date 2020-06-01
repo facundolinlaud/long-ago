@@ -31,7 +31,7 @@ public class AgentBuilder {
     private Entity entity;
     private BodyComponent bodyComponent;
 
-    public AgentBuilder(int id) {
+    public AgentBuilder(String id) {
         entity = new Entity()
             .add(new StatusComponent())
             .add(new IdComponent(id))

@@ -57,9 +57,9 @@ public class ModelFactory implements Disposable {
         return (Map<Integer, Item>) readModel(ITEMS_MODEL_PATH, typeRef);
     }
 
-    public static Map<Integer, Agent> getAgentsModel() {
-        TypeReference<HashMap<Integer, Agent>> typeRef = new TypeReference<HashMap<Integer, Agent>>() {};
-        return (Map<Integer, Agent>) readModel(AGENTS_MODEL_PATH, typeRef);
+    public static Map<String, Agent> getAgentsModel() {
+        TypeReference<HashMap<String, Agent>> typeRef = new TypeReference<HashMap<String, Agent>>() {};
+        return (Map<String, Agent>) readModel(AGENTS_MODEL_PATH, typeRef);
     }
 
     public static Map<Integer, String> getSkillBar() {

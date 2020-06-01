@@ -8,9 +8,9 @@ import com.facundolinlaud.supergame.behaviortree.Task;
 import static com.facundolinlaud.supergame.utils.events.Messages.PLAYER_INTERACTION;
 
 public class InteractionTask extends Task implements Telegraph {
-    private int agentId;
+    private String agentId;
 
-    public InteractionTask(int agentId) {
+    public InteractionTask(String agentId) {
         this.agentId = agentId;
     }
 
@@ -29,9 +29,9 @@ public class InteractionTask extends Task implements Telegraph {
 
     @Override
     public boolean handleMessage(Telegram msg) {
-        int eventAgentId = (int) msg.extraInfo;
+        String eventAgentId = (String) msg.extraInfo;
 
-        if(eventAgentId == agentId){
+        if (eventAgentId == agentId) {
             unsubscribeToEvents();
             super.completed();
         }

@@ -29,7 +29,7 @@ public class AgentFactory {
     private SkillsFactory skillsFactory;
     private ParticleFactory particleFactory;
     private AnimationsFactory animationsFactory;
-    private Map<Integer, Agent> agents;
+    private Map<String, Agent> agents;
 
     public AgentFactory(Engine engine, Factories factories) {
         this.engine = engine;
@@ -40,7 +40,7 @@ public class AgentFactory {
         this.animationsFactory = factories.getAnimationsFactory();
     }
 
-    public AgentBuilder create(int id) {
+    public AgentBuilder create(String id) {
         Agent agent = agents.get(id);
 
         RawAnimationModel rawAnimationModel = animationsFactory.get(agent.getAnimationModel());

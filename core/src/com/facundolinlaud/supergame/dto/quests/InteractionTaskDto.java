@@ -1,31 +1,20 @@
 package com.facundolinlaud.supergame.dto.quests;
 
-import com.facundolinlaud.supergame.dto.behaviortree.TaskDto;
 import com.facundolinlaud.supergame.behaviortree.Task;
+import com.facundolinlaud.supergame.dto.behaviortree.TaskDto;
 import com.facundolinlaud.supergame.quests.leaves.InteractionTask;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
-@JsonTypeInfo(use=JsonTypeInfo.Id.CLASS, include= JsonTypeInfo.As.PROPERTY, property="@class")
+@JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "@class")
 public class InteractionTaskDto extends TaskDto {
-    private int agentId;
+    private String agentId;
 
-    public int getAgentId() {
-        return agentId;
-    }
-
-    public void setAgentId(int agentId) {
+    public void setAgentId(String agentId) {
         this.agentId = agentId;
     }
 
     @Override
     public Task build() {
         return new InteractionTask(agentId);
-    }
-
-    @Override
-    public String toString() {
-        return "InteractionTaskDto{" +
-                "agentId=" + agentId +
-                '}';
     }
 }

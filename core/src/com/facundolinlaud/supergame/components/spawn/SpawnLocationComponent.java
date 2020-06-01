@@ -5,7 +5,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.facundolinlaud.supergame.model.spawn.SpawnLocation;
 
 public class SpawnLocationComponent implements Component {
-    private int agentID;
+    private String agentID;
     private int agentsCount;
     private Rectangle rectangle;
 
@@ -15,7 +15,7 @@ public class SpawnLocationComponent implements Component {
         this.rectangle = s.getRectangle();
     }
 
-    public int getAgentID() {
+    public String getAgentID() {
         return agentID;
     }
 

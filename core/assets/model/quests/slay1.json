@@ -8,14 +8,14 @@
       "@class": "com.facundolinlaud.supergame.dto.behaviortree.SequentialTaskDto",
       "children": ["com.facundolinlaud.supergame.dto.behaviortree.TaskListDto", [{
         "@class": "com.facundolinlaud.supergame.dto.quests.SpawnTaskDto",
-        "agentId": 3,
+        "agentId": "fisherman",
         "position": {
           "x": 20,
           "y": 35
         }
       },{
         "@class": "com.facundolinlaud.supergame.dto.quests.InteractionTaskDto",
-        "agentId": 3
+        "agentId": "fisherman"
       },{
         "@class": "com.facundolinlaud.supergame.dto.quests.TextDialogTaskDto",
         "title": "Fisherman",
@@ -29,11 +29,11 @@
       "@class": "com.facundolinlaud.supergame.dto.behaviortree.ParallelTaskDto",
       "children": ["com.facundolinlaud.supergame.dto.behaviortree.TaskListDto", [{
         "@class": "com.facundolinlaud.supergame.dto.quests.SlayTaskDto",
-        "agentId": 1,
+        "agentId": "skeleton",
         "total": 1
       },{
         "@class": "com.facundolinlaud.supergame.dto.quests.SlayTaskDto",
-        "agentId": 2,
+        "agentId": "orc",
         "total": 1
       }]]
     },{
