@@ -7,6 +7,7 @@ import com.facundolinlaud.supergame.quests.QuestBlackboard;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Stack;
 
 public class QuestsFactory {
     private static final String INITIAL_QUEST = "start.json";

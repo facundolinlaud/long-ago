@@ -1,12 +1,16 @@
 package com.facundolinlaud.supergame.quests.leaves;
 
-import com.badlogic.ashley.core.Engine;
-import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.math.Vector2;
 import com.facundolinlaud.supergame.behaviortree.Task;
-import com.facundolinlaud.supergame.factory.AgentFactory;
+import com.facundolinlaud.supergame.behaviortree.stack.Value;
+import com.facundolinlaud.supergame.builder.AgentBuilder;
 import com.facundolinlaud.supergame.quests.QuestBlackboard;
+import com.facundolinlaud.supergame.services.AgentService;
 
+/**
+ * Pops: nothing
+ * Pushes: the spawned agent
+ */
 public class SpawnTask extends Task<QuestBlackboard> {
     private String agentId;
     private Vector2 position;
@@ -18,14 +22,15 @@ public class SpawnTask extends Task<QuestBlackboard> {
 
     @Override
     public void activate() {
-        Engine engine = getBlackboard().getEngine();
-        AgentFactory agentFactory = getBlackboard().getAgentFactory();
+        AgentService agentService = getBlackboard().getAgentService();
 
-        Entity agent = agentFactory.create(agentId)
-                .at(position.x, position.y)
-                .build();
+        AgentBuilder agent = agentService
+                .get(agentId)
+                .at(position.x, position.y);
 
-        engine.addEntity(agent);
+        agentService.add(agent);
+
+        stack.push(new Value(agent.build()));
         completed();
     }
 }

@@ -1,7 +1,6 @@
 package com.facundolinlaud.supergame.managers.world;
 
 import com.badlogic.ashley.core.Engine;
-import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ai.msg.MessageDispatcher;
 import com.badlogic.gdx.ai.msg.MessageManager;
@@ -14,6 +13,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.TooltipManager;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import com.facundolinlaud.supergame.factory.SkillsFactory;
 import com.facundolinlaud.supergame.managers.Renderable;
+import com.facundolinlaud.supergame.services.AgentService;
+import com.facundolinlaud.supergame.services.EquipmentService;
+import com.facundolinlaud.supergame.services.InventoryService;
 import com.facundolinlaud.supergame.systems.ui.AttributesUISystem;
 import com.facundolinlaud.supergame.systems.ui.ProfileUISystem;
 import com.facundolinlaud.supergame.ui.controller.*;
@@ -60,7 +62,8 @@ public class UIManager implements Renderable {
 
     private SkillsFactory skillsFactory;
 
-    public UIManager(Stage stage, Camera camera, Entity player, SkillsFactory skillsFactory) {
+    public UIManager(Stage stage, Camera camera, AgentService agentService, InventoryService inventoryService,
+                     EquipmentService equipmentService, SkillsFactory skillsFactory) {
         this.skin = new Skin(Gdx.files.internal(SKIN_JSON_PATH));
         this.skin.addRegions(new TextureAtlas(Gdx.files.internal(TEXTURE_ATLAS_PATH)));
         this.stage = stage;
@@ -71,7 +74,7 @@ public class UIManager implements Renderable {
         initializeDragAndDrop();
         initializeViews();
         registerWindows();
-        initializeControllers(camera, player);
+        initializeControllers(camera, agentService, inventoryService, equipmentService);
         addUIToStage();
         subscribeListeners();
         setCustomCursor();
@@ -105,14 +108,15 @@ public class UIManager implements Renderable {
         this.dialogUI = new DialogUI(stage, skin);
     }
 
-    private void initializeControllers(Camera camera, Entity player) {
-        this.overlayUIController = new OverlayUIController(this.overlayUI, player);
-        this.inventoryUIController = new InventoryUIController(this.inventoryUI, player);
-        this.attributesUIController = new AttributesUIController(this.attributesUI);
-        this.equipmentUIController = new EquipmentUIController(this.equipmentUI, player);
-        this.labelDamagesController = new LabelDamagesController(this.labelDamagesUI, camera);
-        this.skillTreeController = new SkillTreeController(skillsFactory, this.skillTreeUI, player);
-        this.dialogUIController = new DialogUIController(this.dialogUI);
+    private void initializeControllers(Camera camera, AgentService agentService, InventoryService inventoryService,
+                                       EquipmentService equipmentService) {
+        this.overlayUIController = new OverlayUIController(overlayUI, agentService);
+        this.inventoryUIController = new InventoryUIController(inventoryUI, inventoryService);
+        this.attributesUIController = new AttributesUIController(attributesUI);
+        this.equipmentUIController = new EquipmentUIController(equipmentUI, inventoryService, equipmentService);
+        this.labelDamagesController = new LabelDamagesController(labelDamagesUI, camera);
+        this.skillTreeController = new SkillTreeController(skillsFactory, this.skillTreeUI, agentService);
+        this.dialogUIController = new DialogUIController(dialogUI);
     }
 
     private void addUIToStage() {

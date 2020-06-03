@@ -2,7 +2,7 @@ package com.facundolinlaud.supergame.model.item;
 
 public class Item {
     private String name;
-    private String texture;
+    private String sprite;
     private String picture;
     private Rarity rarity;
 
@@ -19,12 +19,12 @@ public class Item {
         this.name = name;
     }
 
-    public String getTexture() {
-        return texture;
+    public String getSprite() {
+        return sprite;
     }
 
-    public void setTexture(String texture) {
-        this.texture = texture;
+    public void setSprite(String sprite) {
+        this.sprite = sprite;
     }
 
     public String getPicture() {
@@ -59,7 +59,7 @@ public class Item {
         this.equipmentInformation = equipmentInformation;
     }
 
-    public boolean isEquipable(){
+    public boolean isEquipable() {
         return this.equipmentInformation != null;
     }
 
@@ -69,17 +69,5 @@ public class Item {
 
     public void setRarity(Rarity rarity) {
         this.rarity = rarity;
-    }
-
-    @Override
-    public String toString() {
-        return "Item{" +
-                "name='" + name + '\'' +
-                ", texture='" + texture + '\'' +
-                ", picture='" + picture + '\'' +
-                ", weight=" + weight +
-                ", marketValue=" + marketValue +
-                ", equipmentInformation=" + equipmentInformation +
-                '}';
     }
 }

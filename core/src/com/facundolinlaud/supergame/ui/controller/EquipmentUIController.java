@@ -6,16 +6,16 @@ import com.badlogic.gdx.ai.msg.Telegram;
 import com.badlogic.gdx.ai.msg.Telegraph;
 import com.facundolinlaud.supergame.components.items.EquipableComponent;
 import com.facundolinlaud.supergame.components.items.ItemComponent;
-import com.facundolinlaud.supergame.components.player.BagComponent;
 import com.facundolinlaud.supergame.components.player.WearComponent;
-import com.facundolinlaud.supergame.components.sprite.RefreshSpriteRequirementComponent;
 import com.facundolinlaud.supergame.model.equip.EquipSlot;
+import com.facundolinlaud.supergame.services.EquipmentService;
+import com.facundolinlaud.supergame.services.InventoryService;
 import com.facundolinlaud.supergame.ui.model.Item;
 import com.facundolinlaud.supergame.ui.model.equipment.Equipable;
 import com.facundolinlaud.supergame.ui.view.EquipmentUI;
 import com.facundolinlaud.supergame.utils.Mappers;
-import com.facundolinlaud.supergame.utils.events.Messages;
 import com.facundolinlaud.supergame.utils.events.EquipItemEvent;
+import com.facundolinlaud.supergame.utils.events.Messages;
 import com.facundolinlaud.supergame.utils.events.UnequipItemEvent;
 
 import java.util.HashMap;
@@ -25,24 +25,24 @@ import java.util.Map;
  * Created by facundo on 4/2/16.
  */
 public class EquipmentUIController implements Telegraph {
-    private ComponentMapper<BagComponent> bm = Mappers.bag;
     private ComponentMapper<ItemComponent> im = Mappers.item;
-    private ComponentMapper<WearComponent> wm = Mappers.wear;
     private ComponentMapper<EquipableComponent> em = Mappers.equipable;
 
     private EquipmentUI ui;
-    private Entity player;
+    private InventoryService inventoryService;
+    private EquipmentService equipmentService;
 
-    public EquipmentUIController(EquipmentUI ui, Entity player) {
+    public EquipmentUIController(EquipmentUI ui, InventoryService inventoryService, EquipmentService equipmentService) {
         this.ui = ui;
-        this.player = player;
+        this.inventoryService = inventoryService;
+        this.equipmentService = equipmentService;
 
         refreshEquipment();
     }
 
     @Override
     public boolean handleMessage(Telegram msg) {
-        switch(msg.message){
+        switch (msg.message) {
             case Messages.ITEM_UNEQUIPPED:
                 onUnequipItemEvent((UnequipItemEvent) msg.extraInfo);
                 break;
@@ -58,15 +58,15 @@ public class EquipmentUIController implements Telegraph {
     }
 
     public void refreshEquipment() {
-        WearComponent wear = wm.get(player);
+        WearComponent wear = equipmentService.getPlayerEquipment();
         Map<EquipSlot, Entity> wearables = wear.wearables;
         Map<EquipSlot, Item> items = new HashMap<>();
 
-        for(EquipSlot equipSlot : wearables.keySet()){
+        for (EquipSlot equipSlot : wearables.keySet()) {
             Entity e = wearables.get(equipSlot);
 
             ItemComponent item = im.get(e);
-            if(item == null) continue;
+            if (item == null) continue;
 
             EquipableComponent equipable = em.get(e);
 
@@ -77,33 +77,19 @@ public class EquipmentUIController implements Telegraph {
         ui.update(items);
     }
 
-    private void onUnequipItemEvent(UnequipItemEvent event){
-        Item item = event.getItem();
+    private void onUnequipItemEvent(UnequipItemEvent event) {
+        EquipSlot equipSlot = event.getItem().getEquipable().getEquipSlot();
+        Entity equipment = equipmentService.unequip(equipSlot);
+        inventoryService.add(equipment);
 
-        WearComponent wearComponent = wm.get(player);
-        Entity itemEntity = wearComponent.wearables.remove(item.getEquipable().getEquipSlot());
-        BagComponent bagComponent = bm.get(player);
-        bagComponent.add(itemEntity);
-
-        refreshEquipperSprite();
-
-        System.out.println(item.getName() + " unequipped");
+        System.out.println(event.getItem().getName() + " unequipped");
     }
 
     private void onEquipItemEvent(EquipItemEvent event) {
-        Item item = event.getItem();
+        int positionInBag = event.getItem().getInvented().getPositionInBag();
+        Entity equipment = inventoryService.remove(positionInBag);
+        equipmentService.equip(equipment);
 
-        BagComponent bagComponent = bm.get(player);
-        Entity itemEntity = bagComponent.remove(item.getInvented().getPositionInBag());
-        WearComponent wearComponent = wm.get(player);
-        wearComponent.wearables.put(item.getEquipable().getEquipSlot(), itemEntity);
-
-        refreshEquipperSprite();
-
-        System.out.println(item.getName() + " equipped");
-    }
-
-    private void refreshEquipperSprite() {
-        player.add(new RefreshSpriteRequirementComponent());
+        System.out.println(event.getItem().getName() + " equipped");
     }
 }

@@ -7,9 +7,7 @@ import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
-import com.badlogic.gdx.physics.box2d.World;
 import com.facundolinlaud.supergame.factory.PhysicsFactory;
 import com.facundolinlaud.supergame.managers.Renderable;
 import com.facundolinlaud.supergame.utils.Dimensions;
@@ -28,7 +26,6 @@ public class PhysicsManager implements Renderable {
     private Camera camera;
     private TiledMap map;
 
-    private World world;
     private PhysicsFactory physicsFactory;
     private Box2DDebugRenderer physicsDebugRenderer;
 
@@ -43,20 +40,17 @@ public class PhysicsManager implements Renderable {
         populateObstacles();
     }
 
-    private void initialize(){
-        boolean doSleep = true;
-        world = new World(new Vector2(0, 0), doSleep);
+    private void initialize() {
         physicsDebugRenderer = new Box2DDebugRenderer();
         physicsFactory = PhysicsFactory.get();
-        physicsFactory.setWorld(world);
     }
 
-    private void populateObstacles(){
+    private void populateObstacles() {
         MapLayer layer = map.getLayers().get(COLLISION_LAYER);
         MapObjects objects = layer.getObjects();
         Iterator<MapObject> objectIt = objects.iterator();
 
-        while(objectIt.hasNext()) {
+        while (objectIt.hasNext()) {
             RectangleMapObject object = (RectangleMapObject) objectIt.next();
             Rectangle rectangle = object.getRectangle();
 
@@ -76,13 +70,8 @@ public class PhysicsManager implements Renderable {
     }
 
     @Override
-    public void render(){
-        if(DEBUG)
-            physicsDebugRenderer.render(world, camera.combined);
-    }
-
-    public World getWorld(){
-        return this.world;
+    public void render() {
+        if (DEBUG) physicsDebugRenderer.render(physicsFactory.getWorld(), camera.combined);
     }
 
     public List<Rectangle> getObstacles() {

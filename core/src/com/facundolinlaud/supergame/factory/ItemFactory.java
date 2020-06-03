@@ -1,7 +1,6 @@
 package com.facundolinlaud.supergame.factory;
 
 import com.facundolinlaud.supergame.builder.ItemBuilder;
-import com.facundolinlaud.supergame.model.RenderPriority;
 import com.facundolinlaud.supergame.model.item.EquipmentInformation;
 import com.facundolinlaud.supergame.model.item.Item;
 
@@ -29,7 +28,7 @@ public class ItemFactory {
 
         if(model.isEquipable()){
             EquipmentInformation eq = model.getEquipmentInformation();
-            itemBuilder.equipable(model.getTexture(), eq);
+            itemBuilder.equipable(model.getSprite(), eq);
         }
 
         return itemBuilder;

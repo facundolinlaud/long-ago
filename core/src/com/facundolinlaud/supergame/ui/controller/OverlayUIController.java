@@ -5,6 +5,7 @@ import com.badlogic.gdx.ai.msg.Telegram;
 import com.badlogic.gdx.ai.msg.Telegraph;
 import com.badlogic.gdx.math.Vector2;
 import com.facundolinlaud.supergame.model.skill.Skill;
+import com.facundolinlaud.supergame.services.AgentService;
 import com.facundolinlaud.supergame.ui.view.OverlayUI;
 import com.facundolinlaud.supergame.utils.events.SkillCooldownStartEvent;
 
@@ -17,11 +18,11 @@ import static com.facundolinlaud.supergame.utils.events.Messages.*;
  */
 public class OverlayUIController implements Telegraph {
     private OverlayUI overlayUI;
-    private Entity player;
+    private AgentService agentService;
 
-    public OverlayUIController(OverlayUI overlayUI, Entity player) {
+    public OverlayUIController(OverlayUI overlayUI, AgentService agentService) {
         this.overlayUI = overlayUI;
-        this.player = player;
+        this.agentService = agentService;
     }
 
     public void setHealth(float health, float total) {
@@ -77,7 +78,9 @@ public class OverlayUIController implements Telegraph {
     }
 
     private void onSkillCooldownStart(SkillCooldownStartEvent event) {
-        if (event.getCaster().equals(player)) {
+        Entity caster = event.getCaster();
+
+        if (agentService.isPlayer(caster)) {
             overlayUI.beginCooldown(event.getSkill());
         }
     }

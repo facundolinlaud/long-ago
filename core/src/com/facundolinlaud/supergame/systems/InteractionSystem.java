@@ -11,9 +11,9 @@ import com.facundolinlaud.supergame.components.PositionComponent;
 import com.facundolinlaud.supergame.components.StatusComponent;
 import com.facundolinlaud.supergame.components.player.KeyboardComponent;
 import com.facundolinlaud.supergame.managers.world.PlayerInputManager;
-import com.facundolinlaud.supergame.managers.world.WorldEntitiesManager;
 import com.facundolinlaud.supergame.model.status.Action;
 import com.facundolinlaud.supergame.model.status.Direction;
+import com.facundolinlaud.supergame.services.AgentService;
 import com.facundolinlaud.supergame.ui.controller.DialogUIController;
 import com.facundolinlaud.supergame.utils.Mappers;
 import com.facundolinlaud.supergame.utils.PositionUtils;
@@ -29,14 +29,14 @@ public class InteractionSystem extends EntitySystem {
     private ImmutableArray<Entity> interactables;
     private DialogUIController dialogUIController;
     private PlayerInputManager playerInputManager;
-    private WorldEntitiesManager worldEntitiesManager;
+    private AgentService agentService;
     private MessageDispatcher messageDispatcher;
 
     public InteractionSystem(DialogUIController dialogUIController, PlayerInputManager playerInputManager,
-                             WorldEntitiesManager worldEntitiesManager) {
+                             AgentService agentService) {
         this.dialogUIController = dialogUIController;
         this.playerInputManager = playerInputManager;
-        this.worldEntitiesManager = worldEntitiesManager;
+        this.agentService = agentService;
         this.messageDispatcher = MessageManager.getInstance();
     }
 
@@ -49,16 +49,16 @@ public class InteractionSystem extends EntitySystem {
     }
 
     @Override
-    public void update(float deltaTime){
-        Entity player = worldEntitiesManager.getPlayer();
+    public void update(float deltaTime) {
+        Entity player = agentService.getPlayer();
 
-        if(cantInteract(player))
+        if (cantInteract(player))
             return;
 
         Vector2 playerPosition = pm.get(player).getPosition();
         Entity closestInteractable = getClosestInteractable(playerPosition);
 
-        if(closestInteractable == null)
+        if (closestInteractable == null)
             return;
 
         lookAt(closestInteractable, playerPosition);
@@ -75,22 +75,22 @@ public class InteractionSystem extends EntitySystem {
         Entity bestInteractable = interactables.first();
         Vector2 bestPosition = pm.get(bestInteractable).getPosition();
 
-        for(Entity interactable : interactables){
+        for (Entity interactable : interactables) {
             Vector2 position = pm.get(interactable).getPosition();
 
-            if(position.dst(playerPosition) < bestPosition.dst(playerPosition)){
+            if (position.dst(playerPosition) < bestPosition.dst(playerPosition)) {
                 bestInteractable = interactable;
                 bestPosition = position;
             }
         }
 
-        if(bestPosition.dst(playerPosition) > MINIMUM_DISTANCE_FOR_CONVERSATION)
+        if (bestPosition.dst(playerPosition) > MINIMUM_DISTANCE_FOR_CONVERSATION)
             return null;
 
         return bestInteractable;
     }
 
-    private void lookAt(Entity closestInteractable, Vector2 position){
+    private void lookAt(Entity closestInteractable, Vector2 position) {
         Vector2 closesInteractablePosition = pm.get(closestInteractable).getPosition();
         Direction newAgentDirection = PositionUtils.getFacingDirection(closesInteractablePosition, position);
 

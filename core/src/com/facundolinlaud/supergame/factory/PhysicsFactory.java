@@ -2,7 +2,6 @@ package com.facundolinlaud.supergame.factory;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
-import com.facundolinlaud.supergame.utils.Dimensions;
 
 /**
  * Created by facundo on 27/7/16.
@@ -12,13 +11,17 @@ public class PhysicsFactory {
     private static final float DENSITY = 0.5f;
     private static final float FRICTION = 0.4f;
     private static final float RESTITUTION = 0.6f;
+    private static final Vector2 GRAVITY_VECTOR = new Vector2(0, 0);
+
     private static PhysicsFactory instance = null;
 
     private World world;
 
-    protected PhysicsFactory() {}
+    public PhysicsFactory() {
+        this.world = new World(GRAVITY_VECTOR, true);
+    }
 
-    public Body createObstacleBody(float x, float y, float width, float height){
+    public Body createObstacleBody(float x, float y, float width, float height) {
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.StaticBody;
         bodyDef.position.set(x, y);
@@ -29,7 +32,7 @@ public class PhysicsFactory {
         FixtureDef fixtureDef = createFixtureDefinition();
         fixtureDef.shape = square;
 
-        Fixture fixture = body.createFixture(fixtureDef);
+        body.createFixture(fixtureDef);
         square.dispose();
 
         return body;
@@ -59,7 +62,7 @@ public class PhysicsFactory {
         return body;
     }
 
-    private FixtureDef createFixtureDefinition(){
+    private FixtureDef createFixtureDefinition() {
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.density = DENSITY;
         fixtureDef.friction = FRICTION;
@@ -72,8 +75,8 @@ public class PhysicsFactory {
         this.world = world;
     }
 
-    public static PhysicsFactory get(){
-        if(instance == null){
+    public static PhysicsFactory get() {
+        if (instance == null) {
             instance = new PhysicsFactory();
         }
 
@@ -103,5 +106,9 @@ public class PhysicsFactory {
         body.setLinearDamping(3f);
         body.setBullet(true);
         return body;
+    }
+
+    public World getWorld() {
+        return world;
     }
 }

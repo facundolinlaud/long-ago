@@ -5,7 +5,6 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.math.Vector2;
 import com.facundolinlaud.supergame.behaviortree.Task;
 import com.facundolinlaud.supergame.behaviortree.stack.Value;
-import com.facundolinlaud.supergame.components.PositionComponent;
 import com.facundolinlaud.supergame.components.StatusComponent;
 import com.facundolinlaud.supergame.model.status.Direction;
 import com.facundolinlaud.supergame.skills.SkillBlackboard;
@@ -50,7 +49,7 @@ public class PushAgentsInAreaTask extends Task<SkillBlackboard> {
             shape.traslate(casterDirection, offset);
         }
 
-        List<Entity> agents = getBlackboard().getAgentsService().in(shape);
+        List<Entity> agents = getBlackboard().getAgentService().in(shape);
 
         if (ignoreCaster && agents.contains(caster))
             agents.remove(caster);

@@ -7,7 +7,7 @@ import com.badlogic.gdx.ai.msg.MessageManager;
 import com.facundolinlaud.supergame.behaviortree.PoolableTaskManager;
 import com.facundolinlaud.supergame.components.SkillsComponent;
 import com.facundolinlaud.supergame.model.skill.Skill;
-import com.facundolinlaud.supergame.services.AgentsService;
+import com.facundolinlaud.supergame.services.AgentService;
 import com.facundolinlaud.supergame.services.CombatService;
 import com.facundolinlaud.supergame.services.ParticlesService;
 import com.facundolinlaud.supergame.services.ProjectilesService;
@@ -18,7 +18,6 @@ import com.facundolinlaud.supergame.utils.events.SkillCooldownStartEvent;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Stack;
 
 import static com.facundolinlaud.supergame.utils.events.Messages.REJECTED_SKILL_DUE_TO_NOT_READY;
 import static com.facundolinlaud.supergame.utils.events.Messages.SKILL_COOLDOWN_START;
@@ -30,20 +29,20 @@ public class SkillsManager extends PoolableTaskManager {
     private LightsManager lightsManager;
     private CameraManager cameraManager;
     private UIManager uiManager;
-    private AgentsService agentsService;
+    private AgentService agentService;
     private CombatService combatService;
     private ParticlesService particlesService;
     private ProjectilesService projectilesService;
     private MessageDispatcher messageDispatcher;
 
     public SkillsManager(LightsManager lightsManager, CameraManager cameraManager,
-                         UIManager uiManager, AgentsService agentsService, CombatService combatService,
+                         UIManager uiManager, AgentService agentService, CombatService combatService,
                          ParticlesService particlesService, ProjectilesService projectilesService) {
         this.castings = new HashMap();
         this.lightsManager = lightsManager;
         this.cameraManager = cameraManager;
         this.uiManager = uiManager;
-        this.agentsService = agentsService;
+        this.agentService = agentService;
         this.combatService = combatService;
         this.particlesService = particlesService;
         this.projectilesService = projectilesService;
@@ -66,10 +65,9 @@ public class SkillsManager extends PoolableTaskManager {
 
     private void cast(Entity caster, SkillTask skillTask) {
         SkillBlackboard skillBlackboard = new SkillBlackboard(caster, this, lightsManager, cameraManager,
-                uiManager, agentsService, combatService, particlesService, projectilesService);
+                uiManager, agentService, combatService, particlesService, projectilesService);
 
         skillTask.setBlackboard(skillBlackboard);
-        skillTask.setStack(new Stack());
         skillTask.activate();
     }
 

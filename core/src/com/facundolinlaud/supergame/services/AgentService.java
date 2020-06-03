@@ -5,21 +5,31 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
+import com.facundolinlaud.supergame.builder.AgentBuilder;
 import com.facundolinlaud.supergame.components.HealthComponent;
 import com.facundolinlaud.supergame.components.PositionComponent;
 import com.facundolinlaud.supergame.components.player.KeyboardComponent;
+import com.facundolinlaud.supergame.factory.AgentFactory;
 import com.facundolinlaud.supergame.utils.Mappers;
 import com.facundolinlaud.supergame.utils.shape.Shape;
 
 import java.util.LinkedList;
 import java.util.List;
 
-public class AgentsService extends Service {
+public class AgentService extends Service {
+    public static final String PLAYER_ID = "player";
     private ComponentMapper<KeyboardComponent> km = Mappers.keyboard;
     private ComponentMapper<PositionComponent> pm = Mappers.position;
 
-    public AgentsService(Engine engine) {
+    private AgentFactory agentFactory;
+    private Entity player;
+
+    public AgentService(Engine engine, AgentFactory agentFactory) {
         super(engine);
+        this.agentFactory = agentFactory;
+
+        AgentBuilder player = agentFactory.create(PLAYER_ID).withKeyboardControl().at(29, 35);
+        this.add(player);
     }
 
     public List<Entity> in(Shape area) {
@@ -38,7 +48,29 @@ public class AgentsService extends Service {
         return entities;
     }
 
-    public boolean isMainPlayer(Entity entity) {
+    public AgentBuilder get(String id) {
+        return agentFactory.create(id);
+    }
+
+    public void add(AgentBuilder agentBuilder) {
+        Entity agent = agentBuilder.build();
+
+        if (isKeyboardControlled(agent)) {
+            player = agent;
+        }
+
+        getEngine().addEntity(agent);
+    }
+
+    private boolean isKeyboardControlled(Entity entity) {
         return km.has(entity);
+    }
+
+    public boolean isPlayer(Entity agent) {
+        return agent == player;
+    }
+
+    public Entity getPlayer() {
+        return player;
     }
 }

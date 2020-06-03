@@ -12,14 +12,11 @@ import com.facundolinlaud.supergame.components.BodyComponent;
 import com.facundolinlaud.supergame.components.ai.AIComponent;
 import com.facundolinlaud.supergame.engine.GameResources;
 import com.facundolinlaud.supergame.factory.Factories;
-import com.facundolinlaud.supergame.factory.SkillsFactory;
+import com.facundolinlaud.supergame.factory.PhysicsFactory;
 import com.facundolinlaud.supergame.listeners.PhysicsEntitiesListener;
 import com.facundolinlaud.supergame.listeners.ProjectilesCollisionListener;
 import com.facundolinlaud.supergame.managers.world.*;
-import com.facundolinlaud.supergame.services.AgentsService;
-import com.facundolinlaud.supergame.services.CombatService;
-import com.facundolinlaud.supergame.services.ParticlesService;
-import com.facundolinlaud.supergame.services.ProjectilesService;
+import com.facundolinlaud.supergame.services.*;
 import com.facundolinlaud.supergame.systems.*;
 import com.facundolinlaud.supergame.systems.ai.DecisionMakingSystem;
 import com.facundolinlaud.supergame.systems.ai.MoveToSystem;
@@ -35,17 +32,18 @@ public class WorldScreen implements Screen {
     private Factories factories;
     private MessageDispatcher messageDispatcher;
 
-    private AgentsService agentsService;
+    private AgentService agentService;
     private CombatService combatService;
     private ParticlesService particlesService;
     private ProjectilesService projectilesService;
+    private InventoryService inventoryService;
+    private EquipmentService equipmentService;
 
     private CameraManager cameraManager;
     private MapManager mapManager;
     private PhysicsManager physicsManager;
     private AIManager aiManager;
     private SpawnManager spawnManager;
-    private WorldEntitiesManager weManager;
     private UIManager uiManager;
     private LightsManager lightsManager;
     private PlayerInputManager playerInputManager;
@@ -78,10 +76,12 @@ public class WorldScreen implements Screen {
     }
 
     private void initializeServices() {
-        this.agentsService = new AgentsService(resources.getEngine());
+        this.agentService = new AgentService(resources.getEngine(), factories.getAgentFactory());
         this.combatService = new CombatService(resources.getEngine());
         this.particlesService = new ParticlesService(resources.getEngine(), factories.getParticleFactory());
         this.projectilesService = new ProjectilesService(resources.getEngine(), factories.getParticleFactory());
+        this.inventoryService = new InventoryService(resources.getEngine(), agentService);
+        this.equipmentService = new EquipmentService(resources.getEngine(), agentService);
     }
 
     private void initializeManagers() {
@@ -90,26 +90,25 @@ public class WorldScreen implements Screen {
         this.physicsManager = new PhysicsManager(mapManager.getCamera(), mapManager.getMap());
         this.aiManager = new AIManager(mapManager, physicsManager);
         this.spawnManager = new SpawnManager(resources.getEngine(), mapManager.getSpawnLocations());
-        this.weManager = new WorldEntitiesManager(resources.getEngine(), factories);
-        this.uiManager = new UIManager(stage, mapManager.getCamera(), weManager.getPlayer(),
+        this.uiManager = new UIManager(stage, mapManager.getCamera(), agentService, inventoryService, equipmentService,
                 factories.getSkillsFactory());
-        this.lightsManager = new LightsManager(physicsManager.getWorld(), mapManager.getCamera(), weManager.getPlayer());
+        this.lightsManager = new LightsManager(PhysicsFactory.get().getWorld(), mapManager.getCamera(), agentService);
         this.playerInputManager = new PlayerInputManager(cameraManager);
-        this.questsManager = new QuestsManager(factories, weManager.getPlayer(),
-                uiManager.getDialogUIController(), resources.getEngine());
-        this.skillsManager = new SkillsManager(lightsManager, cameraManager, uiManager, agentsService, combatService,
+        this.skillsManager = new SkillsManager(lightsManager, cameraManager, uiManager, agentService, combatService,
                 particlesService, projectilesService);
+        this.questsManager = new QuestsManager(factories, agentService, uiManager.getDialogUIController(),
+                resources.getEngine());
     }
 
     private void initializeListeners() {
         Engine engine = resources.getEngine();
 
         engine.addEntityListener(Family.all(BodyComponent.class).get(),
-                new PhysicsEntitiesListener(physicsManager.getWorld()));
+                new PhysicsEntitiesListener(PhysicsFactory.get().getWorld()));
         engine.addEntityListener(Family.all(AIComponent.class).get(),
                 this.aiManager);
 
-        this.physicsManager.getWorld().setContactListener(new ProjectilesCollisionListener(projectilesService));
+        PhysicsFactory.get().getWorld().setContactListener(new ProjectilesCollisionListener(projectilesService));
 
         this.stage.addListener(playerInputManager);
     }
@@ -125,14 +124,14 @@ public class WorldScreen implements Screen {
                 factories.getSkillsFactory(), uiManager.getOverlayUIController()));
         engine.addSystem(new MovementSystem());
         engine.addSystem(new CameraFocusSystem(cameraManager));
-        engine.addSystem(new PhysicsSystem(physicsManager.getWorld()));
+        engine.addSystem(new PhysicsSystem(PhysicsFactory.get().getWorld()));
         engine.addSystem(new PickUpSystem());
         engine.addSystem(new DecisionMakingSystem(aiManager, skillsManager));
         engine.addSystem(new MoveToSystem());
         engine.addSystem(new SpawnLocationSystem(factories.getAgentFactory()));
         engine.addSystem(new ProjectileSystem(engine));
         engine.addSystem(new HealthSystem(resources.getBatch()));
-        engine.addSystem(new InteractionSystem(uiManager.getDialogUIController(), playerInputManager, weManager));
+        engine.addSystem(new InteractionSystem(uiManager.getDialogUIController(), playerInputManager, agentService));
         engine.addSystem(new SkillCoolDownSystem());
 
         uiManager.initializeSystems(engine);

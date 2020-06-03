@@ -5,10 +5,12 @@ import com.facundolinlaud.supergame.behaviortree.SequentialTask;
 import com.facundolinlaud.supergame.behaviortree.Task;
 
 import java.util.LinkedList;
+import java.util.Stack;
 
 public class SkillTask extends SequentialTask<SkillBlackboard> {
     public SkillTask(LinkedList<Task> children) {
         super(children);
+        setStack(new Stack());
     }
 
     @Override

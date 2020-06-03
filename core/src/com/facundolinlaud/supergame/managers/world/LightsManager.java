@@ -11,6 +11,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.facundolinlaud.supergame.components.BodyComponent;
 import com.facundolinlaud.supergame.managers.Renderable;
 import com.facundolinlaud.supergame.model.light.LightModel;
+import com.facundolinlaud.supergame.services.AgentService;
 import com.facundolinlaud.supergame.utils.lights.DimmingLight;
 
 public class LightsManager implements Renderable {
@@ -27,7 +28,7 @@ public class LightsManager implements Renderable {
     private PointLight playerLight;
     private OrthographicCamera camera;
 
-    public LightsManager(World world, OrthographicCamera camera, Entity player) {
+    public LightsManager(World world, OrthographicCamera camera, AgentService agentService) {
         this.rayHandler = new RayHandler(world);
         this.rayHandler.setAmbientLight(NIGHT_LIGHT_COLOR);
         this.rayHandler.setBlur(true);
@@ -35,23 +36,23 @@ public class LightsManager implements Renderable {
         this.camera = camera;
 
         initializePlayerLight();
-        setPlayerLightBody(player);
+        setPlayerLightBody(agentService.getPlayer());
     }
 
-    private void initializePlayerLight(){
+    private void initializePlayerLight() {
         this.playerLight = new PointLight(rayHandler, RAYS_COUNT, LIGHTS_COLOR, 10, 20, 42);
         this.playerLight.setSoft(true);
         this.playerLight.setIgnoreAttachedBody(true);
         this.playerLight.setXray(true);
     }
 
-    private void setPlayerLightBody(Entity player){
+    private void setPlayerLightBody(Entity player) {
         Body body = bm.get(player).body;
         this.playerLight.attachToBody(body);
     }
 
-    public void create(LightModel model, float x, float y){
-        switch (model.getType()){
+    public void create(LightModel model, float x, float y) {
+        switch (model.getType()) {
             case POINT:
             case FLICKERING:
                 break;
@@ -67,7 +68,7 @@ public class LightsManager implements Renderable {
         rayHandler.updateAndRender();
     }
 
-    public void dispose(){
+    public void dispose() {
         rayHandler.dispose();
     }
 }

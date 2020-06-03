@@ -3,6 +3,7 @@ package com.facundolinlaud.supergame.builder;
 import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.Vector2;
 import com.facundolinlaud.supergame.components.IdComponent;
 import com.facundolinlaud.supergame.components.PositionComponent;
 import com.facundolinlaud.supergame.components.RenderComponent;
@@ -44,8 +45,8 @@ public class ItemBuilder {
         return this;
     }
 
-    public ItemBuilder withPosition(float x, float y) {
-        item.add(new PositionComponent(x, y));
+    public ItemBuilder withPosition(Vector2 position) {
+        item.add(new PositionComponent(position));
         return this;
     }
 
@@ -60,8 +61,8 @@ public class ItemBuilder {
         return this;
     }
 
-    public ItemBuilder dropped(float x, float y) {
-        return pickupable().withPosition(x, y);
+    public ItemBuilder dropped(Vector2 position) {
+        return pickupable().withPosition(position);
     }
 
     public Entity build() {

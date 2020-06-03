@@ -2,13 +2,13 @@ package com.facundolinlaud.supergame.skills.leaves;
 
 import com.badlogic.ashley.core.Entity;
 import com.facundolinlaud.supergame.behaviortree.PoolableTask;
-import com.facundolinlaud.supergame.services.AgentsService;
+import com.facundolinlaud.supergame.services.AgentService;
 import com.facundolinlaud.supergame.skills.SkillBlackboard;
 import com.facundolinlaud.supergame.ui.controller.OverlayUIController;
 
 public class DisplayCastBarTask extends PoolableTask<SkillBlackboard> {
     private OverlayUIController overlayUIController;
-    private AgentsService agentsService;
+    private AgentService agentService;
 
     private String title;
     private float totalTime;
@@ -25,14 +25,14 @@ public class DisplayCastBarTask extends PoolableTask<SkillBlackboard> {
     @Override
     protected void onBlackboardAvailable(SkillBlackboard blackboard) {
         overlayUIController = blackboard.getOverlayUIController();
-        agentsService = blackboard.getAgentsService();
+        agentService = blackboard.getAgentService();
     }
 
     @Override
     public void tick(float delta) {
         if (!foundOutIfMainPlayer) {
             Entity caster = getBlackboard().getCaster();
-            if (agentsService.isMainPlayer(caster)) {
+            if (agentService.isPlayer(caster)) {
                 foundOutIfMainPlayer = true;
             } else {
                 completed();

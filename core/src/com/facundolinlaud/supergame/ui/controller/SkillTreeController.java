@@ -7,6 +7,7 @@ import com.badlogic.gdx.ai.msg.Telegraph;
 import com.facundolinlaud.supergame.components.SkillsComponent;
 import com.facundolinlaud.supergame.factory.SkillsFactory;
 import com.facundolinlaud.supergame.model.skill.Skill;
+import com.facundolinlaud.supergame.services.AgentService;
 import com.facundolinlaud.supergame.ui.view.SkillTreeUI;
 import com.facundolinlaud.supergame.utils.Mappers;
 
@@ -21,17 +22,19 @@ public class SkillTreeController implements Telegraph {
 
     private SkillsFactory skillsFactory;
     private SkillTreeUI skillTreeUI;
-    private Entity player;
+    private AgentService agentService;
 
-    public SkillTreeController(SkillsFactory skillsFactory, SkillTreeUI skillTreeUI, Entity player) {
+    public SkillTreeController(SkillsFactory skillsFactory, SkillTreeUI skillTreeUI, AgentService agentService) {
         this.skillsFactory = skillsFactory;
         this.skillTreeUI = skillTreeUI;
-        this.player = player;
+        this.agentService = agentService;
 
         updateSkillTreeUI();
     }
 
     public void updateSkillTreeUI() {
+        Entity player = agentService.getPlayer();
+
         SkillsComponent skillsComponent = sm.get(player);
         Map<String, Skill> allSkills = skillsFactory.getSkills();
         List<Skill> playerSkills = skillsComponent.getSkills();
@@ -56,6 +59,8 @@ public class SkillTreeController implements Telegraph {
     }
 
     private void onSkillUnlockRequest(Skill skill) {
+        Entity player = agentService.getPlayer();
+
         SkillsComponent skills = sm.get(player);
         List<Skill> allPlayerSkills = skills.getSkills();
 

@@ -29,15 +29,16 @@ public class ItemDropZoneTarget extends Target {
 
     @Override
     public void drop(Source source, Payload payload, float x, float y, int pointer) {
-        ItemSlotSource slotSource = (ItemSlotSource) source;
         Item item = (Item) payload.getObject();
+        ItemSlotSource slotSource = (ItemSlotSource) source;
+        ItemDroppedEvent event = new ItemDroppedEvent(item);
 
-        switch(slotSource.getSlotType()){
+        switch (slotSource.getSlotType()) {
             case INVENTORY_SLOT:
-                this.messageDispatcher.dispatchMessage(Messages.ITEM_FROM_INVENTORY_DROPPED, new ItemDroppedEvent(item));
+                this.messageDispatcher.dispatchMessage(Messages.ITEM_FROM_INVENTORY_DROPPED, event);
                 break;
             case EQUIPMENT_SLOT:
-                this.messageDispatcher.dispatchMessage(Messages.ITEM_FROM_EQUIPMENT_DROPPED, new ItemDroppedEvent(item));
+                this.messageDispatcher.dispatchMessage(Messages.ITEM_FROM_EQUIPMENT_DROPPED, event);
                 break;
         }
     }
