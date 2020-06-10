@@ -46,7 +46,7 @@ public class ShootTask extends Task<SkillBlackboard> {
         float y = stack.pop().getFloat();
         float x = stack.pop().getFloat();
 
-        Entity caster = getBlackboard().getCaster();
+        Entity caster = getBlackboard().getAgent();
         PositionComponent positionComponent = pm.get(caster);
         Vector2 origin = positionComponent.getPosition();
         Vector2 destination = new Vector2(x, y);

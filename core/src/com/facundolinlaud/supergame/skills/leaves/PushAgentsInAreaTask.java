@@ -40,7 +40,7 @@ public class PushAgentsInAreaTask extends Task<SkillBlackboard> {
         float x = stack.pop().getFloat();
         Vector2 areaPosition = new Vector2(x, y);
 
-        Entity caster = getBlackboard().getCaster();
+        Entity caster = getBlackboard().getAgent();
 
         shape.setPosition(areaPosition);
 

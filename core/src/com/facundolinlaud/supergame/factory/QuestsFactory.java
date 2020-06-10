@@ -1,13 +1,12 @@
 package com.facundolinlaud.supergame.factory;
 
-import com.facundolinlaud.supergame.dto.behaviortree.QuestListDto;
+import com.facundolinlaud.supergame.dto.quests.QuestListDto;
 import com.facundolinlaud.supergame.dto.quests.QuestTaskDto;
 import com.facundolinlaud.supergame.quests.QuestTask;
 import com.facundolinlaud.supergame.quests.QuestBlackboard;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Stack;
 
 public class QuestsFactory {
     private static final String INITIAL_QUEST = "start.json";

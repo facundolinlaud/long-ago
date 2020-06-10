@@ -13,8 +13,8 @@ public class StartCoolDownTask extends Task<SkillBlackboard> {
     public void activate() {
         SkillBlackboard blackboard = getBlackboard();
 
-        Entity caster = blackboard.getCaster();
-        blackboard.getDomainManager().startCoolDown(caster);
+        Entity caster = blackboard.getAgent();
+        blackboard.getDomainTaskManager().startCoolDown(caster);
 
         completed();
     }

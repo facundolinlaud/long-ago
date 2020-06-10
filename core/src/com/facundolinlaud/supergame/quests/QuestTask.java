@@ -1,6 +1,6 @@
 package com.facundolinlaud.supergame.quests;
 
-import com.facundolinlaud.supergame.behaviortree.KeepTryingTask;
+import com.facundolinlaud.supergame.behaviortree.composites.KeepTryingTask;
 import com.facundolinlaud.supergame.behaviortree.Task;
 
 import java.util.LinkedList;

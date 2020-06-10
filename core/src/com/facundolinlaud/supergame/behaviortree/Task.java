@@ -1,5 +1,7 @@
 package com.facundolinlaud.supergame.behaviortree;
 
+import com.facundolinlaud.supergame.behaviortree.composites.Blackboard;
+import com.facundolinlaud.supergame.behaviortree.composites.BranchTask;
 import com.facundolinlaud.supergame.behaviortree.stack.Value;
 
 import java.util.Stack;
@@ -37,9 +39,12 @@ public abstract class Task<T extends Blackboard> {
         return this.blackboard;
     }
 
-    protected void onBlackboardAvailable(T blackboard) {}
+    protected void onBlackboardAvailable(T blackboard) {
+    }
 
-    protected void onStackAvailable(Stack<Value> stack) {}
+    protected void onStackAvailable(Stack<Value> stack) {
+    }
 
-    public void reset(){}
+    public void reset() {
+    }
 }

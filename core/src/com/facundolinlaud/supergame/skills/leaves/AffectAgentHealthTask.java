@@ -27,7 +27,7 @@ public class AffectAgentHealthTask extends Task<SkillBlackboard> {
     public void activate() {
         SkillBlackboard blackboard = getBlackboard();
         Entity target = stack.pop().getEntity();
-        Entity caster = blackboard.getCaster();
+        Entity caster = blackboard.getAgent();
 
         combatService.affectAgent(caster, target, amount);
         completed();

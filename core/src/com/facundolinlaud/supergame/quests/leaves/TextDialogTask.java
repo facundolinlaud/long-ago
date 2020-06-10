@@ -11,6 +11,8 @@ import com.facundolinlaud.supergame.ui.controller.DialogUIController;
 import static com.facundolinlaud.supergame.utils.events.Messages.QUEST_DIALOG_CONTINUED;
 
 public class TextDialogTask extends Task<QuestBlackboard> implements Telegraph {
+    private DialogUIController dialogUIController;
+
     private String title;
     private String message;
     private MessageDispatcher messageDispatcher;
@@ -22,9 +24,12 @@ public class TextDialogTask extends Task<QuestBlackboard> implements Telegraph {
     }
 
     @Override
-    public void activate() {
-        DialogUIController dialogUIController = getBlackboard().getDialogUIController();
+    protected void onBlackboardAvailable(QuestBlackboard blackboard) {
+        this.dialogUIController = blackboard.getUiManager().getDialogUIController();
+    }
 
+    @Override
+    public void activate() {
         if (dialogUIController.isBusy())
             failed();
 

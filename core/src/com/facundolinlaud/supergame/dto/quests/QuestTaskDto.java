@@ -1,7 +1,6 @@
 package com.facundolinlaud.supergame.dto.quests;
 
-import com.facundolinlaud.supergame.dto.behaviortree.KeepTryingTaskDto;
-import com.facundolinlaud.supergame.dto.behaviortree.QuestListDto;
+import com.facundolinlaud.supergame.dto.behaviortree.composites.KeepTryingTaskDto;
 import com.facundolinlaud.supergame.quests.QuestTask;
 
 public class QuestTaskDto extends KeepTryingTaskDto {

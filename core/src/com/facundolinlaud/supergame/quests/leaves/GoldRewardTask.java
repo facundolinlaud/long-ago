@@ -2,8 +2,8 @@ package com.facundolinlaud.supergame.quests.leaves;
 
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
-import com.facundolinlaud.supergame.components.player.BagComponent;
 import com.facundolinlaud.supergame.behaviortree.Task;
+import com.facundolinlaud.supergame.components.player.BagComponent;
 import com.facundolinlaud.supergame.quests.QuestBlackboard;
 import com.facundolinlaud.supergame.utils.Mappers;
 
@@ -28,7 +28,7 @@ public class GoldRewardTask extends Task<QuestBlackboard> {
     }
 
     public void reward() {
-        Entity player = getBlackboard().getPlayer();
-        bm.get(player).addGold(this.gold);
+        Entity agent = getBlackboard().getAgent();
+        bm.get(agent).addGold(this.gold);
     }
 }

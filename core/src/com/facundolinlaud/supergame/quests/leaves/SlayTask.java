@@ -6,8 +6,8 @@ import com.badlogic.gdx.ai.msg.MessageDispatcher;
 import com.badlogic.gdx.ai.msg.MessageManager;
 import com.badlogic.gdx.ai.msg.Telegram;
 import com.badlogic.gdx.ai.msg.Telegraph;
-import com.facundolinlaud.supergame.components.IdComponent;
 import com.facundolinlaud.supergame.behaviortree.Task;
+import com.facundolinlaud.supergame.components.IdComponent;
 import com.facundolinlaud.supergame.utils.Mappers;
 import com.facundolinlaud.supergame.utils.events.AgentDiedEvent;
 
@@ -40,10 +40,10 @@ public class SlayTask extends Task implements Telegraph {
 
     @Override
     public boolean handleMessage(Telegram msg) {
-        if(msg.message == AGENT_DIED) {
+        if (msg.message == AGENT_DIED) {
             AgentDiedEvent e = (AgentDiedEvent) msg.extraInfo;
 
-            if(!e.wasHandled()){
+            if (!e.wasHandled()) {
                 onAgentDead(e);
             }
         }
@@ -53,16 +53,16 @@ public class SlayTask extends Task implements Telegraph {
 
     private void onAgentDead(AgentDiedEvent event) {
         Entity agent = event.getAgent();
-        if(idm.has(agent)){
+        if (idm.has(agent)) {
             IdComponent agentComponent = idm.get(agent);
 
-            if(agentComponent.getId() == agentId){
+            if (agentComponent.getId() == agentId) {
                 event.setHandled();
                 current++;
             }
         }
 
-        if(current >= total){
+        if (current >= total) {
             completed();
         }
     }
