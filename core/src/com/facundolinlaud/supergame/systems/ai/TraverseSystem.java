@@ -8,21 +8,21 @@ import com.badlogic.gdx.math.Vector2;
 import com.facundolinlaud.supergame.components.PositionComponent;
 import com.facundolinlaud.supergame.components.StatusComponent;
 import com.facundolinlaud.supergame.components.ai.AIComponent;
-import com.facundolinlaud.supergame.components.ai.AIMoveToComponent;
+import com.facundolinlaud.supergame.components.ai.TraverseComponent;
 import com.facundolinlaud.supergame.model.status.Action;
 import com.facundolinlaud.supergame.model.status.Direction;
 import com.facundolinlaud.supergame.utils.Mappers;
 import java.awt.Point;
 
-public class MoveToSystem extends IteratingSystem {
+public class TraverseSystem extends IteratingSystem {
     private static final float EPSILON = 0.5f;
 
-    private ComponentMapper<AIMoveToComponent> mtm = Mappers.aiMoveTo;
+    private ComponentMapper<TraverseComponent> mtm = Mappers.aiMoveTo;
     private ComponentMapper<PositionComponent> pm = Mappers.position;
     private ComponentMapper<StatusComponent> sm = Mappers.status;
 
-    public MoveToSystem() {
-        super(Family.all(AIComponent.class, AIMoveToComponent.class).get());
+    public TraverseSystem() {
+        super(Family.all(AIComponent.class, TraverseComponent.class).get());
     }
 
     @Override
@@ -31,11 +31,11 @@ public class MoveToSystem extends IteratingSystem {
     }
 
     private void decideWhetherToKeepWalkingOrNot(Entity agent) {
-        AIMoveToComponent moveTo = mtm.get(agent);
+        TraverseComponent traversal = mtm.get(agent);
         PositionComponent position = pm.get(agent);
         StatusComponent status = sm.get(agent);
 
-        Point targetCell = moveTo.getNextCell();
+        Point targetCell = traversal.getNextCell();
         Vector2 agentPosition = position.getPosition();
 
         float differenceX = agentPosition.x - targetCell.x;
@@ -48,11 +48,12 @@ public class MoveToSystem extends IteratingSystem {
             Direction newDirection = resolveDirection(differenceX, differenceY, deltaX, deltaY);
             status.setDirection(newDirection);
             status.setAction(Action.WALKING);
-        }else if(moveTo.getPathLength() > 1) {
-            moveTo.popCell();
+        }else if(traversal.getPathLength() > 1) {
+            traversal.popCell();
         }else{
             status.setAction(Action.STANDING);
-            agent.remove(AIMoveToComponent.class);
+            agent.remove(TraverseComponent.class);
+            traversal.arrive();
         }
     }
 

@@ -19,7 +19,7 @@ import com.facundolinlaud.supergame.managers.world.*;
 import com.facundolinlaud.supergame.services.*;
 import com.facundolinlaud.supergame.systems.*;
 import com.facundolinlaud.supergame.systems.ai.DecisionMakingSystem;
-import com.facundolinlaud.supergame.systems.ai.MoveToSystem;
+import com.facundolinlaud.supergame.systems.ai.TraverseSystem;
 import com.facundolinlaud.supergame.systems.sprite.AnimableSpriteSystem;
 import com.facundolinlaud.supergame.systems.sprite.StackableSpriteSystem;
 import com.facundolinlaud.supergame.systems.sprite.StackedSpritesSystem;
@@ -127,7 +127,7 @@ public class WorldScreen implements Screen {
         engine.addSystem(new PhysicsSystem(PhysicsFactory.get().getWorld()));
         engine.addSystem(new PickUpSystem());
         engine.addSystem(new DecisionMakingSystem(aiManager, skillsManager));
-        engine.addSystem(new MoveToSystem());
+        engine.addSystem(new TraverseSystem());
         engine.addSystem(new SpawnLocationSystem(factories.getAgentFactory()));
         engine.addSystem(new ProjectileSystem(engine));
         engine.addSystem(new HealthSystem(resources.getBatch()));

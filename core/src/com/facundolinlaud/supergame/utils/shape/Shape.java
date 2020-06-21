@@ -6,8 +6,8 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, property = "@class")
 public abstract class Shape {
-    private float x;
-    private float y;
+    protected float x;
+    protected float y;
 
     public void setX(float x) {
         this.x = x;

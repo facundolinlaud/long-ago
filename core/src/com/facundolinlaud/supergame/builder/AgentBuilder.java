@@ -39,7 +39,7 @@ public class AgentBuilder {
     }
 
     public AgentBuilder withAI(BehaviorType behaviorType, float viewDistance){
-        entity.add(new AIComponent(behaviorType, viewDistance));
+        entity.add(new AIComponent(viewDistance, behaviorType));
         return this;
     }
 

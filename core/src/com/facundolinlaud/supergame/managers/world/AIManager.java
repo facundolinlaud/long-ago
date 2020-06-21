@@ -9,6 +9,7 @@ import com.badlogic.gdx.ai.btree.branch.Selector;
 import com.badlogic.gdx.ai.btree.branch.Sequence;
 import com.facundolinlaud.supergame.ai.decisionmaking.*;
 import com.facundolinlaud.supergame.ai.pathfinding.PathFinderAuthority;
+import com.facundolinlaud.supergame.behaviortree.PoolableTaskManager;
 import com.facundolinlaud.supergame.components.SkillsComponent;
 import com.facundolinlaud.supergame.components.ai.AIComponent;
 import com.facundolinlaud.supergame.utils.Mappers;
@@ -16,7 +17,7 @@ import com.facundolinlaud.supergame.utils.Mappers;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AIManager implements EntityListener {
+public class AIManager extends PoolableTaskManager implements EntityListener {
     private ComponentMapper<AIComponent> aim = Mappers.ai;
     private ComponentMapper<SkillsComponent> sm = Mappers.skills;
 
@@ -33,7 +34,7 @@ public class AIManager implements EntityListener {
         AIComponent aiComponent = aim.get(agent);
         BehaviorTree<?> behaviorTree;
 
-        switch(aiComponent.getBehaviorType()) {
+        switch (aiComponent.getBehaviorType()) {
             default:
                 behaviorTree = buildAggressiveBehavior(agent);
         }
@@ -46,7 +47,7 @@ public class AIManager implements EntityListener {
         entitiesBehaviours.remove(agent);
     }
 
-    public void step(Entity entity, Blackboard blackboard){
+    public void step(Entity entity, Blackboard blackboard) {
         BehaviorTree behaviorTree = entitiesBehaviours.get(entity);
         behaviorTree.setObject(blackboard);
         behaviorTree.step();
@@ -79,10 +80,10 @@ public class AIManager implements EntityListener {
         meleeSequence.addChild(faceTowardsPlayerTask);
         meleeSequence.addChild(meleeAttackTask);
 
-        if(hasRangedSkills)
+        if (hasRangedSkills)
             attackRandomSelector.addChild(rangedSequence);
 
-        if(hasMeleeSkills)
+        if (hasMeleeSkills)
             attackRandomSelector.addChild(meleeSequence);
 
         offensiveSequence.addChild(playerSeenTask);
@@ -94,5 +95,9 @@ public class AIManager implements EntityListener {
         behaviorTree.addChild(mainSelector);
 
         return behaviorTree;
+    }
+
+    public PathFinderAuthority getPathFinderAuthority() {
+        return pathFinderAuthority;
     }
 }

@@ -4,27 +4,30 @@ import com.badlogic.ashley.core.Component;
 import com.facundolinlaud.supergame.model.ai.BehaviorType;
 
 public class AIComponent implements Component {
+    private String faction;
     private float viewDistance;
     private BehaviorType behaviorType;
 
-    public AIComponent(BehaviorType behaviorType, float viewDistance) {
-        this.behaviorType = behaviorType;
+    public AIComponent(String faction, float viewDistance, BehaviorType behaviorType) {
+        this.faction = faction;
         this.viewDistance = viewDistance;
+        this.behaviorType = behaviorType;
+    }
+
+    public AIComponent(float viewDistance, BehaviorType behaviorType) {
+        this.viewDistance = viewDistance;
+        this.behaviorType = behaviorType;
     }
 
     public float getViewDistance() {
         return viewDistance;
     }
 
-    public void setViewDistance(float viewDistance) {
-        this.viewDistance = viewDistance;
-    }
-
     public BehaviorType getBehaviorType() {
         return behaviorType;
     }
 
-    public void setBehaviorType(BehaviorType behaviorType) {
-        this.behaviorType = behaviorType;
+    public String getFaction() {
+        return faction;
     }
 }

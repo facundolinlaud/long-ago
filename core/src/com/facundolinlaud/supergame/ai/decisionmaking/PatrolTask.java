@@ -10,7 +10,7 @@ import com.facundolinlaud.supergame.ai.pathfinding.Node;
 import com.facundolinlaud.supergame.ai.pathfinding.PathFinderAuthority;
 import com.facundolinlaud.supergame.ai.pathfinding.PathFinderResult;
 import com.facundolinlaud.supergame.components.StatusComponent;
-import com.facundolinlaud.supergame.components.ai.AIMoveToComponent;
+import com.facundolinlaud.supergame.components.ai.TraverseComponent;
 import com.facundolinlaud.supergame.utils.Mappers;
 
 import java.util.Random;
@@ -48,7 +48,7 @@ public class PatrolTask extends LeafTask<Blackboard> {
         if(!result.isFound() || isAgentsCell(path) || cellIsBehindTooManyObstacles(path))
             return Status.FAILED;
 
-        agent.add(new AIMoveToComponent(path));
+        agent.add(new TraverseComponent(path));
 
         return Status.RUNNING;
     }

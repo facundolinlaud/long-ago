@@ -6,6 +6,7 @@ import com.badlogic.gdx.ai.msg.MessageDispatcher;
 import com.badlogic.gdx.ai.msg.MessageManager;
 import com.facundolinlaud.supergame.behaviortree.PoolableTaskManager;
 import com.facundolinlaud.supergame.components.SkillsComponent;
+import com.facundolinlaud.supergame.factory.SkillsFactory;
 import com.facundolinlaud.supergame.model.skill.Skill;
 import com.facundolinlaud.supergame.services.AgentService;
 import com.facundolinlaud.supergame.services.CombatService;
@@ -26,6 +27,7 @@ public class SkillsManager extends PoolableTaskManager {
     private ComponentMapper<SkillsComponent> sm = Mappers.skills;
 
     private Map<Entity, Skill> castings;
+    private SkillsFactory skillsFactory;
     private LightsManager lightsManager;
     private CameraManager cameraManager;
     private UIManager uiManager;
@@ -35,10 +37,11 @@ public class SkillsManager extends PoolableTaskManager {
     private ProjectilesService projectilesService;
     private MessageDispatcher messageDispatcher;
 
-    public SkillsManager(LightsManager lightsManager, CameraManager cameraManager,
+    public SkillsManager(SkillsFactory skillsFactory, LightsManager lightsManager, CameraManager cameraManager,
                          UIManager uiManager, AgentService agentService, CombatService combatService,
                          ParticlesService particlesService, ProjectilesService projectilesService) {
         this.castings = new HashMap();
+        this.skillsFactory = skillsFactory;
         this.lightsManager = lightsManager;
         this.cameraManager = cameraManager;
         this.uiManager = uiManager;
@@ -49,18 +52,24 @@ public class SkillsManager extends PoolableTaskManager {
         this.messageDispatcher = MessageManager.getInstance();
     }
 
-    public void requestCasting(Entity caster, Skill skill) {
-        if (isAlreadyCasting(caster)) return;
+    public boolean requestCasting(Entity caster, String skillId) {
+        return requestCasting(caster, skillsFactory.get(skillId));
+    }
+
+    public boolean requestCasting(Entity caster, Skill skill) {
+        if (isAlreadyCasting(caster)) return false;
 
         if (!canCast(caster, skill)) {
             messageDispatcher.dispatchMessage(REJECTED_SKILL_DUE_TO_NOT_READY);
-            return;
+            return false;
         }
 
         this.castings.put(caster, skill);
 
         SkillTask skillTask = skill.getSkillDto().build();
         cast(caster, skillTask);
+
+        return true;
     }
 
     private void cast(Entity caster, SkillTask skillTask) {

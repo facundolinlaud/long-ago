@@ -1,24 +1,31 @@
 package com.facundolinlaud.supergame.components.ai;
 
 import com.badlogic.ashley.core.Component;
-import com.badlogic.gdx.ai.pfa.GraphPath;
 import com.facundolinlaud.supergame.ai.pathfinding.LinkedGraphPath;
 import com.facundolinlaud.supergame.ai.pathfinding.Node;
 
 import java.awt.*;
 
-public class AIMoveToComponent implements Component {
+public class TraverseComponent implements Component {
     private LinkedGraphPath<Node> path;
+    private Runnable onArrive;
 
-    public AIMoveToComponent(LinkedGraphPath<Node> path) {
+    public TraverseComponent(LinkedGraphPath<Node> path) {
         this.path = path;
+        this.onArrive = () -> {
+        };
     }
 
-    public void popCell(){
+    public TraverseComponent(LinkedGraphPath<Node> path, Runnable onArrive) {
+        this.path = path;
+        this.onArrive = onArrive;
+    }
+
+    public void popCell() {
         path.pop();
     }
 
-    public Point getNextCell(){
+    public Point getNextCell() {
         Node first = path.first();
         return new Point(first.getX(), first.getY());
     }
@@ -27,14 +34,11 @@ public class AIMoveToComponent implements Component {
         return path.getCount();
     }
 
-    public void setPath(LinkedGraphPath<Node> newPath){
+    public void setPath(LinkedGraphPath<Node> newPath) {
         this.path = newPath;
     }
 
-    @Override
-    public String toString() {
-        return "AIMoveToComponent{" +
-                "path=" + path +
-                '}';
+    public void arrive() {
+        onArrive.run();
     }
 }

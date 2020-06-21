@@ -9,11 +9,11 @@ import com.facundolinlaud.supergame.ai.pathfinding.LinkedGraphPath;
 import com.facundolinlaud.supergame.ai.pathfinding.Node;
 import com.facundolinlaud.supergame.ai.pathfinding.PathFinderAuthority;
 import com.facundolinlaud.supergame.ai.pathfinding.PathFinderResult;
-import com.facundolinlaud.supergame.components.ai.AIMoveToComponent;
+import com.facundolinlaud.supergame.components.ai.TraverseComponent;
 import com.facundolinlaud.supergame.utils.Mappers;
 
 public class ApproachPlayerTask extends LeafTask<Blackboard> {
-    private ComponentMapper<AIMoveToComponent> mtm = Mappers.aiMoveTo;
+    private ComponentMapper<TraverseComponent> mtm = Mappers.aiMoveTo;
 
     /* Counts starting and ending tile as well */
     public static final int MINIMUM_DISTANCE_FROM_PLAYER_DESIRED = 2;
@@ -51,7 +51,7 @@ public class ApproachPlayerTask extends LeafTask<Blackboard> {
         if(mtm.has(agent))
             mtm.get(agent).setPath(path);
         else
-            agent.add(new AIMoveToComponent(path));
+            agent.add(new TraverseComponent(path));
     }
 
     private void traceDebug(Vector2 agentPosition, PathFinderResult result) {
