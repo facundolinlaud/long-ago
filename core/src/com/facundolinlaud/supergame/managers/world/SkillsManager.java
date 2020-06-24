@@ -73,8 +73,8 @@ public class SkillsManager extends PoolableTaskManager {
     }
 
     private void cast(Entity caster, SkillTask skillTask) {
-        SkillBlackboard blackboard = new SkillBlackboard(caster, lightsManager, cameraManager, uiManager, agentService,
-                combatService, particlesService, projectilesService, this);
+        SkillBlackboard blackboard = new SkillBlackboard(caster, lightsManager, cameraManager, this,
+                uiManager, agentService, combatService, particlesService, projectilesService);
 
         skillTask.setBlackboard(blackboard);
         skillTask.activate();

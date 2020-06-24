@@ -1,4 +1,4 @@
-package com.facundolinlaud.supergame.ai.decisionmaking2;
+package com.facundolinlaud.supergame.ai.decisionmaking2.leaves;
 
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.facundolinlaud.supergame.behaviortree.Task;
 import com.facundolinlaud.supergame.behaviortree.composites.Blackboard;
 import com.facundolinlaud.supergame.components.PositionComponent;
-import com.facundolinlaud.supergame.components.ai.AIComponent;
+import com.facundolinlaud.supergame.components.ai.BehaviorComponent;
 import com.facundolinlaud.supergame.services.AgentService;
 import com.facundolinlaud.supergame.utils.Mappers;
 import com.facundolinlaud.supergame.utils.shape.Circle;
@@ -19,7 +19,7 @@ import java.util.List;
  */
 public class EnemySeenTask extends Task {
     private ComponentMapper<PositionComponent> pm = Mappers.position;
-    private ComponentMapper<AIComponent> aim = Mappers.ai;
+    private ComponentMapper<BehaviorComponent> aim = Mappers.ai;
 
     private AgentService agentService;
 
@@ -80,7 +80,7 @@ public class EnemySeenTask extends Task {
     }
 
     private boolean filterEnemyFaction(Entity agent) {
-        AIComponent aiComponent = aim.get(agent);
+        BehaviorComponent aiComponent = aim.get(agent);
         String faction = aiComponent.getFaction();
 
         return enemyFactions.contains(faction);

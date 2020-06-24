@@ -3,18 +3,16 @@ package com.facundolinlaud.supergame.builder;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.graphics.g2d.ParticleEffectPool;
 import com.facundolinlaud.supergame.components.*;
-import com.facundolinlaud.supergame.components.ai.AIComponent;
+import com.facundolinlaud.supergame.components.ai.BehaviorComponent;
 import com.facundolinlaud.supergame.components.player.BagComponent;
 import com.facundolinlaud.supergame.components.player.KeyboardComponent;
 import com.facundolinlaud.supergame.components.player.WearComponent;
 import com.facundolinlaud.supergame.components.sprite.AnimableSpriteComponent;
 import com.facundolinlaud.supergame.components.sprite.RefreshSpriteRequirementComponent;
 import com.facundolinlaud.supergame.components.sprite.StackedSpritesComponent;
-import com.facundolinlaud.supergame.factory.ModelFactory;
 import com.facundolinlaud.supergame.factory.PhysicsFactory;
 import com.facundolinlaud.supergame.model.RenderPriority;
 import com.facundolinlaud.supergame.dto.agent.Attributes;
-import com.facundolinlaud.supergame.dto.agent.AIInformation;
 import com.facundolinlaud.supergame.model.ai.BehaviorType;
 import com.facundolinlaud.supergame.model.equip.EquipSlot;
 import com.facundolinlaud.supergame.model.skill.Skill;
@@ -39,7 +37,7 @@ public class AgentBuilder {
     }
 
     public AgentBuilder withAI(BehaviorType behaviorType, float viewDistance){
-        entity.add(new AIComponent(viewDistance, behaviorType));
+        entity.add(new BehaviorComponent(viewDistance, behaviorType));
         return this;
     }
 

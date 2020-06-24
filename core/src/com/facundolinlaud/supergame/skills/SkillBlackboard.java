@@ -14,13 +14,15 @@ import com.facundolinlaud.supergame.services.ProjectilesService;
 public class SkillBlackboard extends Blackboard {
     private SkillsManager skillsManager;
 
-    public SkillBlackboard(Entity agent, LightsManager lightsManager, CameraManager cameraManager, UIManager uiManager,
-                           AgentService agentService, CombatService combatService, ParticlesService particlesService,
-                           ProjectilesService projectilesService, SkillsManager skillsManager) {
-        super(agent, lightsManager, cameraManager, uiManager, agentService, combatService, particlesService,
-                projectilesService);
+    public SkillBlackboard(Entity agent, LightsManager lightsManager, CameraManager cameraManager,
+                           SkillsManager skillsManager, UIManager uiManager, AgentService agentService,
+                           CombatService combatService, ParticlesService particlesService,
+                           ProjectilesService projectilesService) {
+        super(agent, lightsManager, cameraManager, skillsManager, uiManager, agentService, combatService,
+                particlesService, projectilesService);
         this.skillsManager = skillsManager;
     }
+
 
     @Override
     public SkillsManager getDomainTaskManager() {

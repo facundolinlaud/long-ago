@@ -2,7 +2,7 @@ package com.facundolinlaud.supergame.utils;
 
 import com.badlogic.ashley.core.ComponentMapper;
 import com.facundolinlaud.supergame.components.*;
-import com.facundolinlaud.supergame.components.ai.AIComponent;
+import com.facundolinlaud.supergame.components.ai.BehaviorComponent;
 import com.facundolinlaud.supergame.components.ai.TraverseComponent;
 import com.facundolinlaud.supergame.components.items.EquipableComponent;
 import com.facundolinlaud.supergame.components.items.ItemComponent;
@@ -35,7 +35,7 @@ public class Mappers {
     public static final ComponentMapper<StackedSpritesComponent> stackedSprites = ComponentMapper.getFor(StackedSpritesComponent.class);
     public static final ComponentMapper<AnimableSpriteComponent> animableSprite = ComponentMapper.getFor(AnimableSpriteComponent.class);
     public static final ComponentMapper<ParticleComponent> particle = ComponentMapper.getFor(ParticleComponent.class);
-    public static final ComponentMapper<AIComponent> ai = ComponentMapper.getFor(AIComponent.class);
+    public static final ComponentMapper<BehaviorComponent> ai = ComponentMapper.getFor(BehaviorComponent.class);
     public static final ComponentMapper<TraverseComponent> aiMoveTo = ComponentMapper.getFor(TraverseComponent.class);
     public static final ComponentMapper<SpawnLocationComponent> spawnLocation = ComponentMapper.getFor(SpawnLocationComponent.class);
     public static final ComponentMapper<SpawnedAgentComponent> spawnedAgent = ComponentMapper.getFor(SpawnedAgentComponent.class);

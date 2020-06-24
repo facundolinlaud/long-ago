@@ -7,7 +7,7 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.math.Vector2;
 import com.facundolinlaud.supergame.components.PositionComponent;
 import com.facundolinlaud.supergame.components.StatusComponent;
-import com.facundolinlaud.supergame.components.ai.AIComponent;
+import com.facundolinlaud.supergame.components.ai.BehaviorComponent;
 import com.facundolinlaud.supergame.components.ai.TraverseComponent;
 import com.facundolinlaud.supergame.model.status.Action;
 import com.facundolinlaud.supergame.model.status.Direction;
@@ -22,7 +22,7 @@ public class TraverseSystem extends IteratingSystem {
     private ComponentMapper<StatusComponent> sm = Mappers.status;
 
     public TraverseSystem() {
-        super(Family.all(AIComponent.class, TraverseComponent.class).get());
+        super(Family.all(BehaviorComponent.class, TraverseComponent.class).get());
     }
 
     @Override

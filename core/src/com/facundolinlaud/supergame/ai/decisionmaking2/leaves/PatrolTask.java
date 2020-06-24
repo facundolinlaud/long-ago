@@ -1,9 +1,9 @@
-package com.facundolinlaud.supergame.ai.decisionmaking2;
+package com.facundolinlaud.supergame.ai.decisionmaking2.leaves;
 
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.math.Vector2;
-import com.facundolinlaud.supergame.ai.AIBlackboard;
+import com.facundolinlaud.supergame.ai.decisionmaking2.BehaviorBlackboard;
 import com.facundolinlaud.supergame.ai.pathfinding.LinkedGraphPath;
 import com.facundolinlaud.supergame.ai.pathfinding.Node;
 import com.facundolinlaud.supergame.ai.pathfinding.PathFinderAuthority;
@@ -19,7 +19,7 @@ import java.util.Random;
  * Pops: nothing
  * Pushes: nothing
  */
-public class PatrolTask extends Task<AIBlackboard> {
+public class PatrolTask extends Task<BehaviorBlackboard> {
     private static final int MAXIMUM_WALKING_DISTANCE = 4;
     private ComponentMapper<PositionComponent> pm = Mappers.position;
 
@@ -31,7 +31,7 @@ public class PatrolTask extends Task<AIBlackboard> {
     }
 
     @Override
-    protected void onBlackboardAvailable(AIBlackboard blackboard) {
+    protected void onBlackboardAvailable(BehaviorBlackboard blackboard) {
         pathFinderAuthority = blackboard.getDomainTaskManager().getPathFinderAuthority();
     }
 

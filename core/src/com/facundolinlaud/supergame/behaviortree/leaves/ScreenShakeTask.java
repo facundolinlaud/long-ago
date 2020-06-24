@@ -6,7 +6,7 @@ import com.facundolinlaud.supergame.behaviortree.composites.Blackboard;
 import com.facundolinlaud.supergame.managers.world.CameraManager;
 
 /**
- * Pops: two float-values corresponding to the x and y agent position values respectively
+ * Pops: a position-value corresponding to the screen shake position
  * Pushes: nothing
  */
 public class ScreenShakeTask extends Task<Blackboard> {
@@ -27,10 +27,7 @@ public class ScreenShakeTask extends Task<Blackboard> {
 
     @Override
     public void activate() {
-        float y = stack.pop().getFloat();
-        float x = stack.pop().getFloat();
-        Vector2 position = new Vector2(x, y);
-
+        Vector2 position = stack.pop().getPosition();
         cameraManager.shake(power, duration, position);
 
         completed();

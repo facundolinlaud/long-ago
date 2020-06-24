@@ -16,7 +16,7 @@ import static com.facundolinlaud.supergame.utils.PositionUtils.getFacingDirectio
 
 /**
  * Pops: nothing
- * Pushes: two float-values corresponding to the x and y clicked position values respectively
+ * Pushes: a position-value corresponding to the clicked position
  */
 public class WaitForClickTask extends PoolableTask<Blackboard> {
     private ComponentMapper<TargetComponent> tm = Mappers.target;
@@ -54,8 +54,8 @@ public class WaitForClickTask extends PoolableTask<Blackboard> {
     private void pushIfClicking(TargetComponent targetComponent) {
         if (targetComponent.isClicking()) {
             Vector2 clickedPosition = targetComponent.getPosition();
-            stack.push(new Value(clickedPosition.x));
-            stack.push(new Value(clickedPosition.y));
+            Value value = new Value(clickedPosition);
+            stack.push(value);
 
             completed();
         }

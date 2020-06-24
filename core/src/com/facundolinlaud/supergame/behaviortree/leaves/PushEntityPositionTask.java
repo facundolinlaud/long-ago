@@ -11,7 +11,7 @@ import com.facundolinlaud.supergame.utils.Mappers;
 
 /**
  * Pops: an agent-value
- * Pushes: two float-values corresponding to the x and y agent position values respectively
+ * Pushes: a position-value corresponding to the agent position
  */
 public class PushEntityPositionTask extends Task<Blackboard> {
     private ComponentMapper<PositionComponent> pm = Mappers.position;
@@ -21,8 +21,8 @@ public class PushEntityPositionTask extends Task<Blackboard> {
         Entity entity = stack.pop().getEntity();
         PositionComponent positionComponent = pm.get(entity);
 
-        stack.push(new Value(positionComponent.x));
-        stack.push(new Value(positionComponent.y));
+        Value value = new Value(positionComponent.getPosition());
+        stack.push(value);
 
         completed();
     }

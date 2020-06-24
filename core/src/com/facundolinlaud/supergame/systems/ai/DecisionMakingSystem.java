@@ -5,9 +5,9 @@ import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.math.Vector2;
 import com.facundolinlaud.supergame.ai.decisionmaking.Blackboard;
 import com.facundolinlaud.supergame.components.PositionComponent;
-import com.facundolinlaud.supergame.components.ai.AIComponent;
+import com.facundolinlaud.supergame.components.ai.BehaviorComponent;
 import com.facundolinlaud.supergame.components.player.KeyboardComponent;
-import com.facundolinlaud.supergame.managers.world.AIManager;
+import com.facundolinlaud.supergame.managers.world.BehaviorManager;
 import com.facundolinlaud.supergame.managers.world.SkillsManager;
 import com.facundolinlaud.supergame.utils.Distances;
 import com.facundolinlaud.supergame.utils.Mappers;
@@ -20,10 +20,10 @@ public class DecisionMakingSystem extends EntitySystem {
 
     private Blackboard blackboard;
     private ImmutableArray<Entity> agents;
-    private AIManager aiManager;
+    private BehaviorManager aiManager;
     private float accumulator = 0f;
 
-    public DecisionMakingSystem(AIManager aiManager, SkillsManager skillsManager) {
+    public DecisionMakingSystem(BehaviorManager aiManager, SkillsManager skillsManager) {
         this.blackboard = new Blackboard(skillsManager);
         this.aiManager = aiManager;
     }
@@ -35,7 +35,7 @@ public class DecisionMakingSystem extends EntitySystem {
 
     @Override
     public void addedToEngine(Engine engine) {
-        this.agents = engine.getEntitiesFor(Family.all(AIComponent.class).get());
+        this.agents = engine.getEntitiesFor(Family.all(BehaviorComponent.class).get());
     }
 
     @Override

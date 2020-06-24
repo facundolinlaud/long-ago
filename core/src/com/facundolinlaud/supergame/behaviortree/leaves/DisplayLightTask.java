@@ -1,14 +1,14 @@
 package com.facundolinlaud.supergame.behaviortree.leaves;
 
+import com.badlogic.gdx.math.Vector2;
 import com.facundolinlaud.supergame.behaviortree.Task;
 import com.facundolinlaud.supergame.behaviortree.composites.Blackboard;
 import com.facundolinlaud.supergame.managers.world.LightsManager;
 import com.facundolinlaud.supergame.model.light.LightModel;
 import com.facundolinlaud.supergame.model.light.LightType;
-import com.facundolinlaud.supergame.skills.SkillBlackboard;
 
 /**
- * Pops: two float-values corresponding to the x and y agent position values respectively
+ * Pops: a position-value corresponding to the light position
  * Pushes: nothing
  */
 public class DisplayLightTask extends Task<Blackboard> {
@@ -31,11 +31,9 @@ public class DisplayLightTask extends Task<Blackboard> {
 
     @Override
     public void activate() {
-        float y = stack.pop().getFloat();
-        float x = stack.pop().getFloat();
-
+        Vector2 position = stack.pop().getPosition();
         LightModel lightModel = new LightModel(distance, duration, lightType);
-        lightsManager.create(lightModel, x, y);
+        lightsManager.create(lightModel, position.x, position.y);
         completed();
     }
 }

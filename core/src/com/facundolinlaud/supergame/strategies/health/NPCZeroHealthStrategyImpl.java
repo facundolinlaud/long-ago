@@ -7,7 +7,7 @@ import com.facundolinlaud.supergame.components.BodyComponent;
 import com.facundolinlaud.supergame.components.HealthComponent;
 import com.facundolinlaud.supergame.components.RenderComponent;
 import com.facundolinlaud.supergame.components.StatusComponent;
-import com.facundolinlaud.supergame.components.ai.AIComponent;
+import com.facundolinlaud.supergame.components.ai.BehaviorComponent;
 import com.facundolinlaud.supergame.model.RenderPriority;
 import com.facundolinlaud.supergame.model.status.Action;
 import com.facundolinlaud.supergame.utils.Mappers;
@@ -32,7 +32,7 @@ public class NPCZeroHealthStrategyImpl implements ZeroHealthStrategy {
     private void removeGeneralComponents(Entity npc) {
         npc.remove(HealthComponent.class);
         npc.remove(BodyComponent.class);
-        npc.remove(AIComponent.class);
+        npc.remove(BehaviorComponent.class);
     }
 
     private void adjustRenderPriority(Entity agent) {

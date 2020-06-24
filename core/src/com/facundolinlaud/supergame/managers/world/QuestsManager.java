@@ -11,12 +11,13 @@ import com.facundolinlaud.supergame.services.ProjectilesService;
 
 public class QuestsManager extends PoolableTaskManager {
     public QuestsManager(Factories factories, LightsManager lightsManager, CameraManager cameraManager,
-                         UIManager uiManager, AgentService agentService, CombatService combatService,
-                         ParticlesService particlesService, ProjectilesService projectilesService) {
+                         SkillsManager skillsManager, UIManager uiManager, AgentService agentService,
+                         CombatService combatService, ParticlesService particlesService,
+                         ProjectilesService projectilesService) {
         Entity player = agentService.getPlayer();
 
-        QuestBlackboard blackboard = new QuestBlackboard(player, lightsManager, cameraManager, uiManager, agentService,
-                combatService, particlesService, projectilesService, this);
+        QuestBlackboard blackboard = new QuestBlackboard(player, lightsManager, cameraManager, skillsManager, uiManager,
+                agentService, combatService, particlesService, projectilesService, this);
 
         factories.getQuestsFactory()
                 .buildQuestChain(blackboard)

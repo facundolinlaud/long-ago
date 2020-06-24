@@ -11,27 +11,27 @@ import com.facundolinlaud.supergame.ai.decisionmaking.*;
 import com.facundolinlaud.supergame.ai.pathfinding.PathFinderAuthority;
 import com.facundolinlaud.supergame.behaviortree.PoolableTaskManager;
 import com.facundolinlaud.supergame.components.SkillsComponent;
-import com.facundolinlaud.supergame.components.ai.AIComponent;
+import com.facundolinlaud.supergame.components.ai.BehaviorComponent;
 import com.facundolinlaud.supergame.utils.Mappers;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class AIManager extends PoolableTaskManager implements EntityListener {
-    private ComponentMapper<AIComponent> aim = Mappers.ai;
+public class BehaviorManager extends PoolableTaskManager implements EntityListener {
+    private ComponentMapper<BehaviorComponent> aim = Mappers.ai;
     private ComponentMapper<SkillsComponent> sm = Mappers.skills;
 
     private Map<Entity, BehaviorTree<?>> entitiesBehaviours;
     private PathFinderAuthority pathFinderAuthority;
 
-    public AIManager(MapManager mapManager, PhysicsManager physicsManager) {
+    public BehaviorManager(MapManager mapManager, PhysicsManager physicsManager) {
         this.entitiesBehaviours = new HashMap();
         this.pathFinderAuthority = new PathFinderAuthority(mapManager, physicsManager);
     }
 
     @Override
     public void entityAdded(Entity agent) {
-        AIComponent aiComponent = aim.get(agent);
+        BehaviorComponent aiComponent = aim.get(agent);
         BehaviorTree<?> behaviorTree;
 
         switch (aiComponent.getBehaviorType()) {
