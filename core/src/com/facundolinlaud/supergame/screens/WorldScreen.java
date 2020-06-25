@@ -18,7 +18,7 @@ import com.facundolinlaud.supergame.listeners.ProjectilesCollisionListener;
 import com.facundolinlaud.supergame.managers.world.*;
 import com.facundolinlaud.supergame.services.*;
 import com.facundolinlaud.supergame.systems.*;
-import com.facundolinlaud.supergame.systems.ai.DecisionMakingSystem;
+import com.facundolinlaud.supergame.systems.ai.BehaviorSystem;
 import com.facundolinlaud.supergame.systems.ai.TraverseSystem;
 import com.facundolinlaud.supergame.systems.sprite.AnimableSpriteSystem;
 import com.facundolinlaud.supergame.systems.sprite.StackableSpriteSystem;
@@ -42,7 +42,7 @@ public class WorldScreen implements Screen {
     private CameraManager cameraManager;
     private MapManager mapManager;
     private PhysicsManager physicsManager;
-    private BehaviorManager aiManager;
+    private BehaviorManager behaviorManager;
     private SpawnManager spawnManager;
     private UIManager uiManager;
     private LightsManager lightsManager;
@@ -88,7 +88,6 @@ public class WorldScreen implements Screen {
         this.cameraManager = new CameraManager();
         this.mapManager = new MapManager(resources.getBatch(), cameraManager.getCamera());
         this.physicsManager = new PhysicsManager(mapManager.getCamera(), mapManager.getMap());
-        this.aiManager = new BehaviorManager(mapManager, physicsManager);
         this.spawnManager = new SpawnManager(resources.getEngine(), mapManager.getSpawnLocations());
         this.uiManager = new UIManager(stage, mapManager.getCamera(), agentService, inventoryService, equipmentService,
                 factories.getSkillsFactory());
@@ -98,15 +97,18 @@ public class WorldScreen implements Screen {
                 agentService, combatService, particlesService, projectilesService);
         this.questsManager = new QuestsManager(factories, lightsManager, cameraManager, skillsManager, uiManager,
                 agentService, combatService, particlesService, projectilesService);
+        this.behaviorManager = new BehaviorManager(mapManager, physicsManager, skillsManager, lightsManager,
+                cameraManager, uiManager, agentService, combatService, particlesService, projectilesService);
     }
 
     private void initializeListeners() {
         Engine engine = resources.getEngine();
 
+        engine.addEntityListener(Family.all(BehaviorComponent.class).get(),
+                this.behaviorManager);
+
         engine.addEntityListener(Family.all(BodyComponent.class).get(),
                 new PhysicsEntitiesListener(PhysicsFactory.get().getWorld()));
-        engine.addEntityListener(Family.all(BehaviorComponent.class).get(),
-                this.aiManager);
 
         PhysicsFactory.get().getWorld().setContactListener(new ProjectilesCollisionListener(projectilesService));
 
@@ -126,7 +128,7 @@ public class WorldScreen implements Screen {
         engine.addSystem(new CameraFocusSystem(cameraManager));
         engine.addSystem(new PhysicsSystem(PhysicsFactory.get().getWorld()));
         engine.addSystem(new PickUpSystem());
-        engine.addSystem(new DecisionMakingSystem(aiManager, skillsManager));
+        engine.addSystem(new BehaviorSystem(agentService));
         engine.addSystem(new TraverseSystem());
         engine.addSystem(new SpawnLocationSystem(factories.getAgentFactory()));
         engine.addSystem(new ProjectileSystem(engine));
@@ -152,6 +154,7 @@ public class WorldScreen implements Screen {
         lightsManager.render();
         questsManager.tick(delta);
         skillsManager.tick(delta);
+        behaviorManager.tick(delta);
 
         uiManager.render();
     }

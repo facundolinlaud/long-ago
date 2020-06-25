@@ -1,4 +1,4 @@
-package com.facundolinlaud.supergame.ai.decisionmaking2;
+package com.facundolinlaud.supergame.ai.behavior;
 
 import com.facundolinlaud.supergame.behaviortree.composites.SelectorTask;
 
@@ -11,11 +11,18 @@ public class BehaviorTask extends SelectorTask {
 
     @Override
     public void completed() {
+        System.out.println("[BEHAVIOR] completed");
+        stack.clear();
         reset();
+        activate();
     }
 
     @Override
     public void failed() {
+        System.out.println("[BEHAVIOR] failed");
+
+        stack.clear();
         reset();
+        activate();
     }
 }

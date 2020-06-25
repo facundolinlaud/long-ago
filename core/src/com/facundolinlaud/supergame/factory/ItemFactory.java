@@ -22,11 +22,11 @@ public class ItemFactory {
     public ItemBuilder getItem(String id) {
         Item model = models.get(id);
 
-        ItemBuilder itemBuilder = new ItemBuilder(id, model)
+        ItemBuilder itemBuilder = new ItemBuilder(model)
                 .pickupable()
                 .withRender(model.getPicture());
 
-        if(model.isEquipable()){
+        if (model.isEquipable()) {
             EquipmentInformation eq = model.getEquipmentInformation();
             itemBuilder.equipable(model.getSprite(), eq);
         }

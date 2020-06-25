@@ -1,4 +1,4 @@
-package com.facundolinlaud.supergame.ai.decisionmaking2;
+package com.facundolinlaud.supergame.ai.behavior;
 
 import com.badlogic.ashley.core.Entity;
 import com.facundolinlaud.supergame.behaviortree.composites.Blackboard;

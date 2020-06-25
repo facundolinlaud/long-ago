@@ -17,7 +17,7 @@ import java.awt.Point;
 public class TraverseSystem extends IteratingSystem {
     private static final float EPSILON = 0.5f;
 
-    private ComponentMapper<TraverseComponent> mtm = Mappers.aiMoveTo;
+    private ComponentMapper<TraverseComponent> mtm = Mappers.traverse;
     private ComponentMapper<PositionComponent> pm = Mappers.position;
     private ComponentMapper<StatusComponent> sm = Mappers.status;
 
@@ -48,11 +48,14 @@ public class TraverseSystem extends IteratingSystem {
             Direction newDirection = resolveDirection(differenceX, differenceY, deltaX, deltaY);
             status.setDirection(newDirection);
             status.setAction(Action.WALKING);
+            System.out.println("traversal.walking() <--");
         }else if(traversal.getPathLength() > 1) {
             traversal.popCell();
+            System.out.println("traversal.popCell();");
         }else{
             status.setAction(Action.STANDING);
             agent.remove(TraverseComponent.class);
+            System.out.println("traversal.arrive();");
             traversal.arrive();
         }
     }

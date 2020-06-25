@@ -43,7 +43,7 @@
                 "time": 1.0
               },{
                 "@class": "com.facundolinlaud.supergame.dto.behaviortree.stack.RePushValueTaskDto",
-                "deepness": 2,
+                "deepness": 1,
                 "times": 4
               },{
                 "@class": "com.facundolinlaud.supergame.dto.behaviortree.leaves.DisplayLightTaskDto",
@@ -79,7 +79,7 @@
                     "@class": "com.facundolinlaud.supergame.dto.behaviortree.leaves.PushEntityPositionTaskDto"
                   },{
                     "@class": "com.facundolinlaud.supergame.dto.behaviortree.stack.RePushValueTaskDto",
-                    "deepness": 2,
+                    "deepness": 1,
                     "times": 3
                   },{
                     "@class": "com.facundolinlaud.supergame.dto.behaviortree.leaves.DisplayLightTaskDto",

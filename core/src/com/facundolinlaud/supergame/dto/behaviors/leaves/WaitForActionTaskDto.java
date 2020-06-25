@@ -1,6 +1,6 @@
 package com.facundolinlaud.supergame.dto.behaviors.leaves;
 
-import com.facundolinlaud.supergame.ai.decisionmaking2.leaves.WaitForActionTask;
+import com.facundolinlaud.supergame.ai.behavior.leaves.WaitForActionTask;
 import com.facundolinlaud.supergame.behaviortree.Task;
 import com.facundolinlaud.supergame.dto.behaviortree.TaskDto;
 import com.facundolinlaud.supergame.model.status.Action;

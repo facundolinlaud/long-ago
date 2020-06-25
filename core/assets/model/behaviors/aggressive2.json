@@ -1,0 +1,42 @@
+{
+  "@class": "com.facundolinlaud.supergame.dto.behaviors.BehaviorTaskDto",
+  "id": "aggressive",
+  "children": ["com.facundolinlaud.supergame.dto.behaviortree.TaskListDto", [
+    {
+      "@class": "com.facundolinlaud.supergame.dto.behaviortree.composites.SequentialTaskDto",
+      "children": ["com.facundolinlaud.supergame.dto.behaviortree.TaskListDto", [
+        {
+          "@class": "com.facundolinlaud.supergame.dto.behaviors.leaves.EnemySeenTaskDto",
+          "viewDistance": 10.0,
+          "enemyFactions": ["java.util.ArrayList", ["player", "zombies"]]
+        },{
+          "@class": "com.facundolinlaud.supergame.dto.behaviortree.leaves.PushEntityPositionTaskDto"
+        },{
+          "@class": "com.facundolinlaud.supergame.dto.behaviortree.stack.RePushValueTaskDto",
+          "deepness": 1,
+          "times": 3
+        },{
+          "@class": "com.facundolinlaud.supergame.dto.behaviors.leaves.TargetTaskDto"
+        },{
+          "@class": "com.facundolinlaud.supergame.dto.behaviors.leaves.RequestCastingTaskDto",
+          "skillId": "triple_fire_arrow"
+        },{
+          "@class": "com.facundolinlaud.supergame.dto.behaviors.leaves.TraverseToTaskDto"
+        },{
+          "@class": "com.facundolinlaud.supergame.dto.behaviors.leaves.FacePositionTaskDto"
+        },{
+          "@class": "com.facundolinlaud.supergame.dto.behaviors.leaves.RequestCastingTaskDto",
+          "skillId": "cut"
+        }
+      ]]
+    },{
+      "@class": "com.facundolinlaud.supergame.dto.behaviortree.leaves.WaitTaskDto",
+      "time": 2.0
+    },{
+      "@class": "com.facundolinlaud.supergame.dto.behaviors.leaves.PatrolTaskDto"
+    },{
+      "@class": "com.facundolinlaud.supergame.dto.behaviortree.leaves.WaitTaskDto",
+      "time": 2.0
+    }
+  ]]
+}

@@ -35,14 +35,15 @@ public class Mappers {
     public static final ComponentMapper<StackedSpritesComponent> stackedSprites = ComponentMapper.getFor(StackedSpritesComponent.class);
     public static final ComponentMapper<AnimableSpriteComponent> animableSprite = ComponentMapper.getFor(AnimableSpriteComponent.class);
     public static final ComponentMapper<ParticleComponent> particle = ComponentMapper.getFor(ParticleComponent.class);
-    public static final ComponentMapper<BehaviorComponent> ai = ComponentMapper.getFor(BehaviorComponent.class);
-    public static final ComponentMapper<TraverseComponent> aiMoveTo = ComponentMapper.getFor(TraverseComponent.class);
+    public static final ComponentMapper<BehaviorComponent> behavior = ComponentMapper.getFor(BehaviorComponent.class);
+    public static final ComponentMapper<TraverseComponent> traverse = ComponentMapper.getFor(TraverseComponent.class);
     public static final ComponentMapper<SpawnLocationComponent> spawnLocation = ComponentMapper.getFor(SpawnLocationComponent.class);
     public static final ComponentMapper<SpawnedAgentComponent> spawnedAgent = ComponentMapper.getFor(SpawnedAgentComponent.class);
     public static final ComponentMapper<ProjectileComponent> projectile = ComponentMapper.getFor(ProjectileComponent.class);
     public static final ComponentMapper<SkillsComponent> skills = ComponentMapper.getFor(SkillsComponent.class);
     public static final ComponentMapper<ManaComponent> mana = ComponentMapper.getFor(ManaComponent.class);
-    public static final ComponentMapper<IdComponent> id = ComponentMapper.getFor(IdComponent.class);
+    public static final ComponentMapper<TagComponent> tag = ComponentMapper.getFor(TagComponent.class);
     public static final ComponentMapper<InteractionComponent> interaction = ComponentMapper.getFor(InteractionComponent.class);
     public static final ComponentMapper<TargetComponent> target = ComponentMapper.getFor(TargetComponent.class);
+    public static final ComponentMapper<AgentComponent> agent = ComponentMapper.getFor(AgentComponent.class);
 }

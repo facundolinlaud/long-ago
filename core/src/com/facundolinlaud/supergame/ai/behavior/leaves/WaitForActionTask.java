@@ -1,4 +1,4 @@
-package com.facundolinlaud.supergame.ai.decisionmaking2.leaves;
+package com.facundolinlaud.supergame.ai.behavior.leaves;
 
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;

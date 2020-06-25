@@ -14,8 +14,8 @@ public class Circle extends Shape {
 
     @Override
     public void setPosition(Vector2 position) {
-        setX(position.x - radius);
-        setY(position.y - radius);
+        setX(position.x);
+        setY(position.y);
     }
 
     @Override

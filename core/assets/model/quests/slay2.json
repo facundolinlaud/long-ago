@@ -6,7 +6,7 @@
 		"@class": "com.facundolinlaud.supergame.dto.behaviortree.composites.SequentialTaskDto",
 		"children": ["com.facundolinlaud.supergame.dto.behaviortree.TaskListDto", [{
 			"@class": "com.facundolinlaud.supergame.dto.quests.leaves.InteractionTaskDto",
-			"agentId": "fisherman"
+			"agentTag": "fisherman"
 		},{
 			"@class": "com.facundolinlaud.supergame.dto.quests.leaves.TextDialogTaskDto",
 			"title": "Fisherman",
@@ -14,6 +14,7 @@
 		},{
 			"@class": "com.facundolinlaud.supergame.dto.quests.leaves.SpawnTaskDto",
 			"agentId": "aggresive_elf",
+			"agentTag": "boss1",
 			"position": {
 				"x": 24,
 				"y": 35

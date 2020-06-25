@@ -1,17 +1,19 @@
-package com.facundolinlaud.supergame.ai.decisionmaking2.leaves;
+package com.facundolinlaud.supergame.ai.behavior.leaves;
 
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.math.Vector2;
 import com.facundolinlaud.supergame.behaviortree.Task;
 import com.facundolinlaud.supergame.behaviortree.composites.Blackboard;
+import com.facundolinlaud.supergame.behaviortree.stack.Value;
+import com.facundolinlaud.supergame.components.AgentComponent;
 import com.facundolinlaud.supergame.components.PositionComponent;
-import com.facundolinlaud.supergame.components.ai.BehaviorComponent;
 import com.facundolinlaud.supergame.services.AgentService;
 import com.facundolinlaud.supergame.utils.Mappers;
 import com.facundolinlaud.supergame.utils.shape.Circle;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Pops: nothing
@@ -19,7 +21,7 @@ import java.util.List;
  */
 public class EnemySeenTask extends Task {
     private ComponentMapper<PositionComponent> pm = Mappers.position;
-    private ComponentMapper<BehaviorComponent> aim = Mappers.ai;
+    private ComponentMapper<AgentComponent> am = Mappers.agent;
 
     private AgentService agentService;
 
@@ -49,15 +51,20 @@ public class EnemySeenTask extends Task {
             nearAgents.remove(agent);
         }
 
-        nearAgents
+        nearAgents = nearAgents
                 .stream()
                 .filter(this::filterEnemyFaction)
-                .sorted(this::sortByCloseness);
+                .sorted(this::sortByCloseness)
+                .collect(Collectors.toList());
 
         if (nearAgents.isEmpty()) {
+            System.out.println("[EnemySeen] nobody");
             failed();
         } else {
-            stack.push(nearAgents.get(0));
+            Entity nearAgent = nearAgents.get(0);
+            System.out.println("[EnemySeen] seen " + nearAgent);
+            Value value = new Value(nearAgent);
+            stack.push(value);
             completed();
         }
 
@@ -80,8 +87,8 @@ public class EnemySeenTask extends Task {
     }
 
     private boolean filterEnemyFaction(Entity agent) {
-        BehaviorComponent aiComponent = aim.get(agent);
-        String faction = aiComponent.getFaction();
+        AgentComponent agentComponent = am.get(agent);
+        String faction = agentComponent.getFactionId();
 
         return enemyFactions.contains(faction);
     }

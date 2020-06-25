@@ -1,9 +1,9 @@
-package com.facundolinlaud.supergame.ai.decisionmaking2.leaves;
+package com.facundolinlaud.supergame.ai.behavior.leaves;
 
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.math.Vector2;
-import com.facundolinlaud.supergame.ai.decisionmaking2.BehaviorBlackboard;
+import com.facundolinlaud.supergame.ai.behavior.BehaviorBlackboard;
 import com.facundolinlaud.supergame.ai.pathfinding.LinkedGraphPath;
 import com.facundolinlaud.supergame.ai.pathfinding.Node;
 import com.facundolinlaud.supergame.ai.pathfinding.PathFinderAuthority;
@@ -20,7 +20,7 @@ import com.facundolinlaud.supergame.utils.Mappers;
 public class TraverseToTask extends PoolableTask<BehaviorBlackboard> {
     private static final int MINIMUM_DISTANCE_FROM_PLAYER_DESIRED = 2;
     private ComponentMapper<PositionComponent> pm = Mappers.position;
-    private ComponentMapper<TraverseComponent> mtm = Mappers.aiMoveTo;
+    private ComponentMapper<TraverseComponent> mtm = Mappers.traverse;
 
     private PathFinderAuthority pathFinderAuthority;
     private Entity agent;
@@ -39,17 +39,22 @@ public class TraverseToTask extends PoolableTask<BehaviorBlackboard> {
         super.activate();
     }
 
+    // move this logic to a system pls
     @Override
     public void tick(float delta) {
+        System.out.println("[Traverse] tick");
+
         Vector2 agentPosition = pm.get(agent).getPosition();
         PathFinderResult result = pathFinderAuthority.searchNodePath(agentPosition, targetPosition);
 
         if (!result.isFound()) {
+            System.out.println("[Traverse] fail");
             failed();
             return;
         }
 
         if (result.getPath().getCount() <= MINIMUM_DISTANCE_FROM_PLAYER_DESIRED) {
+            System.out.println("[Traverse] ok");
             completed();
             return;
         }

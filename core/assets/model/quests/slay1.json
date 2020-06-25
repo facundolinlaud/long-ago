@@ -9,13 +9,14 @@
       "children": ["com.facundolinlaud.supergame.dto.behaviortree.TaskListDto", [{
         "@class": "com.facundolinlaud.supergame.dto.quests.leaves.SpawnTaskDto",
         "agentId": "fisherman",
+        "agentTag": "fisherman",
         "position": {
           "x": 20,
           "y": 35
         }
       },{
         "@class": "com.facundolinlaud.supergame.dto.quests.leaves.InteractionTaskDto",
-        "agentId": "fisherman"
+        "agentTag": "fisherman"
       },{
         "@class": "com.facundolinlaud.supergame.dto.quests.leaves.TextDialogTaskDto",
         "title": "Fisherman",

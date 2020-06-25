@@ -9,18 +9,15 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "@class")
 public class SpawnTaskDto extends TaskDto {
     private String agentId;
+    private String agentTag;
     private Vector2 position;
-
-    public String getAgentId() {
-        return agentId;
-    }
 
     public void setAgentId(String agentId) {
         this.agentId = agentId;
     }
 
-    public Vector2 getPosition() {
-        return position;
+    public void setAgentTag(String agentTag) {
+        this.agentTag = agentTag;
     }
 
     public void setPosition(Vector2 position) {
@@ -29,6 +26,6 @@ public class SpawnTaskDto extends TaskDto {
 
     @Override
     public Task build() {
-        return new SpawnTask(agentId, position);
+        return new SpawnTask(agentId, agentTag, position);
     }
 }

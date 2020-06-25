@@ -1,4 +1,4 @@
-package com.facundolinlaud.supergame.ai.decisionmaking2.leaves;
+package com.facundolinlaud.supergame.ai.behavior.leaves;
 
 import com.badlogic.ashley.core.Entity;
 import com.facundolinlaud.supergame.behaviortree.Task;
@@ -20,8 +20,10 @@ public class RequestCastingTask extends Task {
         boolean casted = getBlackboard().getSkillsManager().requestCasting(caster, skillId);
 
         if (casted) {
+            System.out.println("[Casting] ok");
             completed();
         } else {
+            System.out.println("[Casting] failed");
             failed();
         }
     }

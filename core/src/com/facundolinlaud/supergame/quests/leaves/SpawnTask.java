@@ -13,10 +13,12 @@ import com.facundolinlaud.supergame.services.AgentService;
  */
 public class SpawnTask extends Task<QuestBlackboard> {
     private String agentId;
+    private String agentTag;
     private Vector2 position;
 
-    public SpawnTask(String agentId, Vector2 position) {
+    public SpawnTask(String agentId, String agentTag, Vector2 position) {
         this.agentId = agentId;
+        this.agentTag = agentTag;
         this.position = position;
     }
 
@@ -28,7 +30,7 @@ public class SpawnTask extends Task<QuestBlackboard> {
                 .get(agentId)
                 .at(position.x, position.y);
 
-        agentService.add(agent);
+        agentService.add(agent, agentTag);
 
         stack.push(new Value(agent.build()));
         completed();

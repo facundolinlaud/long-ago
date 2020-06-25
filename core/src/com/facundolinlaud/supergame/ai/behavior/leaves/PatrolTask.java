@@ -1,9 +1,9 @@
-package com.facundolinlaud.supergame.ai.decisionmaking2.leaves;
+package com.facundolinlaud.supergame.ai.behavior.leaves;
 
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.math.Vector2;
-import com.facundolinlaud.supergame.ai.decisionmaking2.BehaviorBlackboard;
+import com.facundolinlaud.supergame.ai.behavior.BehaviorBlackboard;
 import com.facundolinlaud.supergame.ai.pathfinding.LinkedGraphPath;
 import com.facundolinlaud.supergame.ai.pathfinding.Node;
 import com.facundolinlaud.supergame.ai.pathfinding.PathFinderAuthority;
@@ -42,11 +42,16 @@ public class PatrolTask extends Task<BehaviorBlackboard> {
         LinkedGraphPath<Node> path = result.getPath();
 
         if (!result.isFound() || isAgentsCell(path) || isWalkingDistanceTooLong(path)) {
+            System.out.println("[Patrol] patrol failed");
             failed();
             return;
         }
 
-        Runnable onArrive = () -> completed();
+        Runnable onArrive = () -> {
+            completed();
+            System.out.println("[Patrol] patrol completed");
+        };
+
         agent.add(new TraverseComponent(path, onArrive));
     }
 

@@ -1,9 +1,9 @@
-package com.facundolinlaud.supergame.ai.decisionmaking2.leaves;
+package com.facundolinlaud.supergame.ai.behavior.leaves;
 
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.math.Vector2;
-import com.facundolinlaud.supergame.ai.decisionmaking2.BehaviorBlackboard;
+import com.facundolinlaud.supergame.ai.behavior.BehaviorBlackboard;
 import com.facundolinlaud.supergame.behaviortree.Task;
 import com.facundolinlaud.supergame.components.TargetComponent;
 import com.facundolinlaud.supergame.utils.Mappers;
@@ -22,6 +22,7 @@ public class TargetTask extends Task<BehaviorBlackboard> {
         Entity agent = getBlackboard().getAgent();
         TargetComponent targetComponent = tm.get(agent);
         targetComponent.setPosition(position);
+        targetComponent.setClicking(true);
 
         completed();
     }

@@ -7,14 +7,14 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "@class")
 public class InteractionTaskDto extends TaskDto {
-    private String agentId;
+    private String agentTag;
 
-    public void setAgentId(String agentId) {
-        this.agentId = agentId;
+    public void setAgentTag(String agentTag) {
+        this.agentTag = agentTag;
     }
 
     @Override
     public Task build() {
-        return new InteractionTask(agentId);
+        return new InteractionTask(agentTag);
     }
 }

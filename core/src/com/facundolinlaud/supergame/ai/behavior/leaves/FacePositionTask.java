@@ -1,9 +1,9 @@
-package com.facundolinlaud.supergame.ai.decisionmaking2.leaves;
+package com.facundolinlaud.supergame.ai.behavior.leaves;
 
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.math.Vector2;
-import com.facundolinlaud.supergame.ai.decisionmaking2.BehaviorBlackboard;
+import com.facundolinlaud.supergame.ai.behavior.BehaviorBlackboard;
 import com.facundolinlaud.supergame.behaviortree.Task;
 import com.facundolinlaud.supergame.components.PositionComponent;
 import com.facundolinlaud.supergame.components.StatusComponent;
