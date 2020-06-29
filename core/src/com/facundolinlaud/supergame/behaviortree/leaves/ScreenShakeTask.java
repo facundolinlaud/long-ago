@@ -1,7 +1,7 @@
 package com.facundolinlaud.supergame.behaviortree.leaves;
 
 import com.badlogic.gdx.math.Vector2;
-import com.facundolinlaud.supergame.behaviortree.Task;
+import com.facundolinlaud.supergame.behaviortree.LeafTask;
 import com.facundolinlaud.supergame.behaviortree.composites.Blackboard;
 import com.facundolinlaud.supergame.managers.world.CameraManager;
 
@@ -9,7 +9,7 @@ import com.facundolinlaud.supergame.managers.world.CameraManager;
  * Pops: a position-value corresponding to the screen shake position
  * Pushes: nothing
  */
-public class ScreenShakeTask extends Task<Blackboard> {
+public class ScreenShakeTask extends LeafTask<Blackboard> {
     private CameraManager cameraManager;
 
     private float power;

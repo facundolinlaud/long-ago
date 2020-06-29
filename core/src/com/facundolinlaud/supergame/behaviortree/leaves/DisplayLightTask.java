@@ -1,7 +1,7 @@
 package com.facundolinlaud.supergame.behaviortree.leaves;
 
 import com.badlogic.gdx.math.Vector2;
-import com.facundolinlaud.supergame.behaviortree.Task;
+import com.facundolinlaud.supergame.behaviortree.LeafTask;
 import com.facundolinlaud.supergame.behaviortree.composites.Blackboard;
 import com.facundolinlaud.supergame.managers.world.LightsManager;
 import com.facundolinlaud.supergame.model.light.LightModel;
@@ -11,7 +11,7 @@ import com.facundolinlaud.supergame.model.light.LightType;
  * Pops: a position-value corresponding to the light position
  * Pushes: nothing
  */
-public class DisplayLightTask extends Task<Blackboard> {
+public class DisplayLightTask extends LeafTask<Blackboard> {
     private LightsManager lightsManager;
 
     private LightType lightType;

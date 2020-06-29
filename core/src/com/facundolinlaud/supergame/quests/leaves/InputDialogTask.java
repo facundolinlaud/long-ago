@@ -4,14 +4,14 @@ import com.badlogic.gdx.ai.msg.MessageDispatcher;
 import com.badlogic.gdx.ai.msg.MessageManager;
 import com.badlogic.gdx.ai.msg.Telegram;
 import com.badlogic.gdx.ai.msg.Telegraph;
-import com.facundolinlaud.supergame.behaviortree.Task;
+import com.facundolinlaud.supergame.behaviortree.LeafTask;
 import com.facundolinlaud.supergame.quests.QuestBlackboard;
 import com.facundolinlaud.supergame.ui.controller.DialogUIController;
 
 import static com.facundolinlaud.supergame.utils.events.Messages.QUEST_DIALOG_ACCEPTED;
 import static com.facundolinlaud.supergame.utils.events.Messages.QUEST_DIALOG_DECLINED;
 
-public class InputDialogTask extends Task<QuestBlackboard> implements Telegraph {
+public class InputDialogTask extends LeafTask<QuestBlackboard> implements Telegraph {
     private final int[] DIALOG_EVENTS = {QUEST_DIALOG_ACCEPTED, QUEST_DIALOG_DECLINED};
 
     private DialogUIController dialogUIController;

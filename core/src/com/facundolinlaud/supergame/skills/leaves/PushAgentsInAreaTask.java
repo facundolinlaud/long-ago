@@ -3,7 +3,7 @@ package com.facundolinlaud.supergame.skills.leaves;
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.math.Vector2;
-import com.facundolinlaud.supergame.behaviortree.Task;
+import com.facundolinlaud.supergame.behaviortree.LeafTask;
 import com.facundolinlaud.supergame.behaviortree.stack.Value;
 import com.facundolinlaud.supergame.components.StatusComponent;
 import com.facundolinlaud.supergame.model.status.Direction;
@@ -21,7 +21,7 @@ import java.util.List;
  * <p>
  * If offset is null, then no traslation with the caster's direction will be performed
  */
-public class PushAgentsInAreaTask extends Task<SkillBlackboard> {
+public class PushAgentsInAreaTask extends LeafTask<SkillBlackboard> {
     private ComponentMapper<StatusComponent> sm = Mappers.status;
 
     private Shape shape;

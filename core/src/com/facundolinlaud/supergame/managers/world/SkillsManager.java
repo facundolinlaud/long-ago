@@ -12,19 +12,19 @@ import com.facundolinlaud.supergame.services.*;
 import com.facundolinlaud.supergame.skills.SkillBlackboard;
 import com.facundolinlaud.supergame.skills.SkillTask;
 import com.facundolinlaud.supergame.utils.Mappers;
-import com.facundolinlaud.supergame.utils.events.SkillCooldownStartEvent;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import static com.facundolinlaud.supergame.utils.events.Messages.REJECTED_SKILL_DUE_TO_NOT_READY;
-import static com.facundolinlaud.supergame.utils.events.Messages.SKILL_COOLDOWN_START;
 
 public class SkillsManager extends PoolableTaskManager {
     private ComponentMapper<SkillsComponent> sm = Mappers.skills;
 
     private Map<Entity, Skill> castings;
+    private Map<Entity, SkillTask> tasks;
     private Map<Entity, Runnable> onSkillsEnd;
+
     private SkillsFactory skillsFactory;
     private LightsManager lightsManager;
     private CameraManager cameraManager;
@@ -41,6 +41,8 @@ public class SkillsManager extends PoolableTaskManager {
                          ParticlesService particlesService, ProjectilesService projectilesService) {
         this.castings = new HashMap();
         this.onSkillsEnd = new HashMap();
+        this.tasks = new HashMap();
+
         this.skillsFactory = skillsFactory;
         this.lightsManager = lightsManager;
         this.cameraManager = cameraManager;
@@ -70,11 +72,12 @@ public class SkillsManager extends PoolableTaskManager {
             return false;
         }
 
-        this.castings.put(caster, skill);
-
         SkillTask skillTask = skill.getSkillDto().build();
-        cast(caster, skillTask);
 
+        this.castings.put(caster, skill);
+        this.tasks.put(caster, skillTask);
+
+        cast(caster, skillTask);
         return true;
     }
 
@@ -88,8 +91,9 @@ public class SkillsManager extends PoolableTaskManager {
 
     public void endCasting(Entity caster) {
         castings.remove(caster);
+        tasks.remove(caster);
 
-        if(onSkillsEnd.containsKey(caster)){
+        if (onSkillsEnd.containsKey(caster)) {
             onSkillsEnd.remove(caster).run();
         }
     }
@@ -101,5 +105,13 @@ public class SkillsManager extends PoolableTaskManager {
     public void startCoolDown(Entity caster) {
         Skill skill = castings.get(caster);
         skillService.startCoolDown(caster, skill);
+    }
+
+    public void abort(Entity agent) {
+        // the currently executing leafs should be the ones aborting a flow, not all
+        if (tasks.containsKey(agent)) {
+            tasks.get(agent).abort();
+            endCasting(agent);
+        }
     }
 }

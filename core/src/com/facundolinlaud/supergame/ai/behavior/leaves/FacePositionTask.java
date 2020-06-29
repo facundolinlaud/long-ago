@@ -4,7 +4,7 @@ import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.math.Vector2;
 import com.facundolinlaud.supergame.ai.behavior.BehaviorBlackboard;
-import com.facundolinlaud.supergame.behaviortree.Task;
+import com.facundolinlaud.supergame.behaviortree.LeafTask;
 import com.facundolinlaud.supergame.components.PositionComponent;
 import com.facundolinlaud.supergame.components.StatusComponent;
 import com.facundolinlaud.supergame.model.status.Direction;
@@ -15,7 +15,7 @@ import com.facundolinlaud.supergame.utils.PositionUtils;
  * Pops: an entity-value representing the position where the agent will face towards
  * Pushes: nothing
  */
-public class FacePositionTask extends Task<BehaviorBlackboard> {
+public class FacePositionTask extends LeafTask<BehaviorBlackboard> {
     private ComponentMapper<StatusComponent> sm = Mappers.status;
     private ComponentMapper<PositionComponent> pm = Mappers.position;
 

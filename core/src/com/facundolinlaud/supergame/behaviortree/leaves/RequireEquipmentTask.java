@@ -4,13 +4,12 @@ import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.ai.msg.MessageDispatcher;
 import com.badlogic.gdx.ai.msg.MessageManager;
-import com.facundolinlaud.supergame.behaviortree.Task;
+import com.facundolinlaud.supergame.behaviortree.LeafTask;
 import com.facundolinlaud.supergame.behaviortree.composites.Blackboard;
 import com.facundolinlaud.supergame.components.items.EquipableComponent;
 import com.facundolinlaud.supergame.components.player.WearComponent;
 import com.facundolinlaud.supergame.model.equip.EquipSlot;
 import com.facundolinlaud.supergame.model.equip.EquipType;
-import com.facundolinlaud.supergame.skills.SkillBlackboard;
 import com.facundolinlaud.supergame.utils.Mappers;
 
 import static com.facundolinlaud.supergame.utils.events.Messages.REJECTED_SKILL_DUE_TO_WEAPON;
@@ -19,7 +18,7 @@ import static com.facundolinlaud.supergame.utils.events.Messages.REJECTED_SKILL_
  * Pops: nothing
  * Pushes: nothing
  */
-public class RequireEquipmentTask extends Task<Blackboard> {
+public class RequireEquipmentTask extends LeafTask<Blackboard> {
     private ComponentMapper<WearComponent> wm = Mappers.wear;
     private ComponentMapper<EquipableComponent> em = Mappers.equipable;
 
@@ -33,7 +32,7 @@ public class RequireEquipmentTask extends Task<Blackboard> {
 
     @Override
     public void activate() {
-        if(hasAdequateWeapon())
+        if (hasAdequateWeapon())
             completed();
         else {
             messageDispatcher.dispatchMessage(REJECTED_SKILL_DUE_TO_WEAPON);
@@ -45,9 +44,9 @@ public class RequireEquipmentTask extends Task<Blackboard> {
         Entity agent = getBlackboard().getAgent();
         WearComponent wearComponent = wm.get(agent);
 
-        if(EquipType.BOW.equals(equipType)){
+        if (EquipType.BOW.equals(equipType)) {
             return wearComponent.hasWearable(EquipSlot.BOW);
-        }else if(wearComponent.hasWearable(EquipSlot.WEAPON)){
+        } else if (wearComponent.hasWearable(EquipSlot.WEAPON)) {
             Entity weapon = wearComponent.getWearable(EquipSlot.WEAPON);
             EquipableComponent eq = em.get(weapon);
 

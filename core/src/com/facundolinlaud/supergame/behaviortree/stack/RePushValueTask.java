@@ -1,6 +1,6 @@
 package com.facundolinlaud.supergame.behaviortree.stack;
 
-import com.facundolinlaud.supergame.behaviortree.Task;
+import com.facundolinlaud.supergame.behaviortree.LeafTask;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -11,9 +11,7 @@ import java.util.stream.IntStream;
  * Pops: nothing
  * Pushes: the stack's top n times
  */
-public class RePushValueTask extends Task {
-    private static final int DEFAULT_DEEPNESS = 1;
-
+public class RePushValueTask extends LeafTask {
     private int deepness;
     private int times;
 

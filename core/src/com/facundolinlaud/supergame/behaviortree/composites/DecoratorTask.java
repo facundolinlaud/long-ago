@@ -27,4 +27,9 @@ public abstract class DecoratorTask<T extends Blackboard> extends BranchTask<T> 
     public void reset() {
         child.reset();
     }
+
+    @Override
+    protected void postAbort() {
+        child.abort();
+    }
 }

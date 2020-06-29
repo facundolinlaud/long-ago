@@ -9,16 +9,21 @@ import java.util.Stack;
 public abstract class Task<T extends Blackboard> {
     protected BranchTask parent;
     protected Stack<Value> stack;
+    protected boolean aborted;
     private T blackboard;
 
     abstract public void activate();
 
     public void completed() {
-        parent.childCompleted(this);
+        if (!aborted) {
+            parent.childCompleted(this);
+        }
     }
 
     public void failed() {
-        parent.childFailed(this);
+        if (!aborted) {
+            parent.childFailed(this);
+        }
     }
 
     public void setParent(BranchTask parent) {
@@ -39,12 +44,16 @@ public abstract class Task<T extends Blackboard> {
         return this.blackboard;
     }
 
-    protected void onBlackboardAvailable(T blackboard) {
+    protected abstract void onBlackboardAvailable(T blackboard);
+
+    protected abstract void onStackAvailable(Stack<Value> stack);
+
+    public abstract void reset();
+
+    public void abort() {
+        aborted = true;
+        postAbort();
     }
 
-    protected void onStackAvailable(Stack<Value> stack) {
-    }
-
-    public void reset() {
-    }
+    protected abstract void postAbort();
 }

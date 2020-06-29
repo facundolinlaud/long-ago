@@ -4,10 +4,9 @@ import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.ai.msg.MessageDispatcher;
 import com.badlogic.gdx.ai.msg.MessageManager;
-import com.facundolinlaud.supergame.behaviortree.Task;
+import com.facundolinlaud.supergame.behaviortree.LeafTask;
 import com.facundolinlaud.supergame.behaviortree.composites.Blackboard;
 import com.facundolinlaud.supergame.components.ManaComponent;
-import com.facundolinlaud.supergame.skills.SkillBlackboard;
 import com.facundolinlaud.supergame.utils.Mappers;
 
 import static com.facundolinlaud.supergame.utils.events.Messages.REJECTED_SKILL_DUE_TO_NO_MANA;
@@ -16,7 +15,7 @@ import static com.facundolinlaud.supergame.utils.events.Messages.REJECTED_SKILL_
  * Pops: nothing
  * Pushes: nothing
  */
-public class RequireManaTask extends Task<Blackboard> {
+public class RequireManaTask extends LeafTask<Blackboard> {
     private static ComponentMapper<ManaComponent> mm = Mappers.mana;
     private MessageDispatcher messageDispatcher = MessageManager.getInstance();
 

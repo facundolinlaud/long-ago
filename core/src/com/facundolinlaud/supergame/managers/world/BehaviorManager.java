@@ -14,6 +14,9 @@ import com.facundolinlaud.supergame.services.ParticlesService;
 import com.facundolinlaud.supergame.services.ProjectilesService;
 import com.facundolinlaud.supergame.utils.Mappers;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class BehaviorManager extends PoolableTaskManager implements EntityListener {
     private ComponentMapper<BehaviorComponent> bm = Mappers.behavior;
 
@@ -26,6 +29,8 @@ public class BehaviorManager extends PoolableTaskManager implements EntityListen
     private ParticlesService particlesService;
     private ProjectilesService projectilesService;
     private PathFindingManager pathFindingManager;
+
+    private Map<Entity, BehaviorTask> behaviors;
 
     public BehaviorManager(SkillsManager skillsManager, LightsManager lightsManager, CameraManager cameraManager,
                            UIManager uiManager, AgentService agentService, CombatService combatService,
@@ -40,6 +45,7 @@ public class BehaviorManager extends PoolableTaskManager implements EntityListen
         this.particlesService = particlesService;
         this.projectilesService = projectilesService;
         this.pathFindingManager = pathFindingManager;
+        this.behaviors = new HashMap();
     }
 
     @Override
@@ -58,12 +64,13 @@ public class BehaviorManager extends PoolableTaskManager implements EntityListen
 
         BehaviorComponent behaviorComponent = bm.get(agent);
         BehaviorTask behaviorTask = behaviorComponent.getBehaviorTask();
+        behaviors.put(agent, behaviorTask);
         behaviorTask.activate();
     }
 
     @Override
-    public void entityRemoved(Entity entity) {
-
+    public void entityRemoved(Entity agent) {
+        behaviors.remove(agent).abort();
     }
 
     public void onBehaviorFinished(Entity agent) {

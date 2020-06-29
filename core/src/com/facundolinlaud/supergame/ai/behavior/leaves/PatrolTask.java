@@ -7,7 +7,7 @@ import com.facundolinlaud.supergame.ai.behavior.BehaviorBlackboard;
 import com.facundolinlaud.supergame.ai.pathfinding.LinkedGraphPath;
 import com.facundolinlaud.supergame.ai.pathfinding.Node;
 import com.facundolinlaud.supergame.ai.pathfinding.PathFinderResult;
-import com.facundolinlaud.supergame.behaviortree.Task;
+import com.facundolinlaud.supergame.behaviortree.LeafTask;
 import com.facundolinlaud.supergame.components.PositionComponent;
 import com.facundolinlaud.supergame.components.ai.TraverseComponent;
 import com.facundolinlaud.supergame.managers.world.PathFindingManager;
@@ -19,7 +19,7 @@ import java.util.Random;
  * Pops: nothing
  * Pushes: nothing
  */
-public class PatrolTask extends Task<BehaviorBlackboard> {
+public class PatrolTask extends LeafTask<BehaviorBlackboard> {
     private static final int MAXIMUM_WALKING_DISTANCE = 4;
     private ComponentMapper<PositionComponent> pm = Mappers.position;
 

@@ -1,7 +1,7 @@
 package com.facundolinlaud.supergame.skills.leaves;
 
 import com.badlogic.ashley.core.Entity;
-import com.facundolinlaud.supergame.behaviortree.Task;
+import com.facundolinlaud.supergame.behaviortree.LeafTask;
 import com.facundolinlaud.supergame.services.CombatService;
 import com.facundolinlaud.supergame.skills.SkillBlackboard;
 
@@ -9,7 +9,7 @@ import com.facundolinlaud.supergame.skills.SkillBlackboard;
  * Pops: an agent entity-value
  * Pushes: nothing
  */
-public class AffectAgentHealthTask extends Task<SkillBlackboard> {
+public class AffectAgentHealthTask extends LeafTask<SkillBlackboard> {
     private CombatService combatService;
 
     private float amount;

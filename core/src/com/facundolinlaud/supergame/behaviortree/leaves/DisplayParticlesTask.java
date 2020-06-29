@@ -1,16 +1,15 @@
 package com.facundolinlaud.supergame.behaviortree.leaves;
 
 import com.badlogic.gdx.math.Vector2;
-import com.facundolinlaud.supergame.behaviortree.Task;
+import com.facundolinlaud.supergame.behaviortree.LeafTask;
 import com.facundolinlaud.supergame.behaviortree.composites.Blackboard;
 import com.facundolinlaud.supergame.services.ParticlesService;
-import com.facundolinlaud.supergame.skills.SkillBlackboard;
 
 /**
  * Pops: a position-value corresponding to the particles position
  * Pushes: nothing
  */
-public class DisplayParticlesTask extends Task<Blackboard> {
+public class DisplayParticlesTask extends LeafTask<Blackboard> {
     private ParticlesService particlesService;
 
     private String particleId;

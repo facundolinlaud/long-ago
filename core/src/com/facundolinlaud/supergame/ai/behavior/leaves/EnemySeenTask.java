@@ -3,7 +3,7 @@ package com.facundolinlaud.supergame.ai.behavior.leaves;
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.math.Vector2;
-import com.facundolinlaud.supergame.behaviortree.Task;
+import com.facundolinlaud.supergame.behaviortree.LeafTask;
 import com.facundolinlaud.supergame.behaviortree.composites.Blackboard;
 import com.facundolinlaud.supergame.behaviortree.stack.Value;
 import com.facundolinlaud.supergame.components.AgentComponent;
@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
  * Pops: nothing
  * Pushes: a near enemy if seen or fails if none
  */
-public class EnemySeenTask extends Task {
+public class EnemySeenTask extends LeafTask {
     private ComponentMapper<PositionComponent> pm = Mappers.position;
     private ComponentMapper<AgentComponent> am = Mappers.agent;
 

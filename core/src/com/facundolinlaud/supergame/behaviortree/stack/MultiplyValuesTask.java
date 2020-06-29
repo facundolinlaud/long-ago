@@ -1,9 +1,9 @@
 package com.facundolinlaud.supergame.behaviortree.stack;
 
+import com.facundolinlaud.supergame.behaviortree.LeafTask;
 import com.facundolinlaud.supergame.behaviortree.composites.Blackboard;
-import com.facundolinlaud.supergame.behaviortree.Task;
 
-public class MultiplyValuesTask<T extends Blackboard> extends Task<T> {
+public class MultiplyValuesTask<T extends Blackboard> extends LeafTask<T> {
     @Override
     public void activate() {
         Value a = stack.pop();

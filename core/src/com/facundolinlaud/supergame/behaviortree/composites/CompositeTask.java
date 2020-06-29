@@ -32,4 +32,9 @@ public abstract class CompositeTask<T extends Blackboard> extends BranchTask<T> 
         this.childrenIterator = children.iterator();
         children.forEach(child -> child.reset());
     }
+
+    @Override
+    protected void postAbort() {
+        children.forEach(Task::abort);
+    }
 }

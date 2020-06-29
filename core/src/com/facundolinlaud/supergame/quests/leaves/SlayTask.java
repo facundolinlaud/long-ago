@@ -6,14 +6,14 @@ import com.badlogic.gdx.ai.msg.MessageDispatcher;
 import com.badlogic.gdx.ai.msg.MessageManager;
 import com.badlogic.gdx.ai.msg.Telegram;
 import com.badlogic.gdx.ai.msg.Telegraph;
-import com.facundolinlaud.supergame.behaviortree.Task;
+import com.facundolinlaud.supergame.behaviortree.LeafTask;
 import com.facundolinlaud.supergame.components.AgentComponent;
 import com.facundolinlaud.supergame.utils.Mappers;
 import com.facundolinlaud.supergame.utils.events.AgentDiedEvent;
 
 import static com.facundolinlaud.supergame.utils.events.Messages.AGENT_DIED;
 
-public class SlayTask extends Task implements Telegraph {
+public class SlayTask extends LeafTask implements Telegraph {
     private ComponentMapper<AgentComponent> am = Mappers.agent;
     private MessageDispatcher messageDispatcher;
     private String agentId;
