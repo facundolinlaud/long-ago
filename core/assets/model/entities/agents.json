@@ -61,8 +61,7 @@
       "skills": [
         "fire_ball",
         "fire_arrow",
-        "triple_fire_arrow",
-        "fire_storm"
+        "spear_dash"
       ],
       "attributes": {
         "strength": 5,

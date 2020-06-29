@@ -19,6 +19,7 @@ import com.facundolinlaud.supergame.managers.world.*;
 import com.facundolinlaud.supergame.services.*;
 import com.facundolinlaud.supergame.systems.*;
 import com.facundolinlaud.supergame.systems.ai.BehaviorSystem;
+import com.facundolinlaud.supergame.systems.ai.PursueSystem;
 import com.facundolinlaud.supergame.systems.ai.TraverseSystem;
 import com.facundolinlaud.supergame.systems.sprite.AnimableSpriteSystem;
 import com.facundolinlaud.supergame.systems.sprite.StackableSpriteSystem;
@@ -48,6 +49,7 @@ public class WorldScreen implements Screen {
     private LightsManager lightsManager;
     private PlayerInputManager playerInputManager;
     private QuestsManager questsManager;
+    private PathFindingManager pathFindingManager;
     private SkillsManager skillsManager;
 
     private Stage stage;
@@ -97,8 +99,9 @@ public class WorldScreen implements Screen {
                 agentService, combatService, particlesService, projectilesService);
         this.questsManager = new QuestsManager(factories, lightsManager, cameraManager, skillsManager, uiManager,
                 agentService, combatService, particlesService, projectilesService);
-        this.behaviorManager = new BehaviorManager(mapManager, physicsManager, skillsManager, lightsManager,
-                cameraManager, uiManager, agentService, combatService, particlesService, projectilesService);
+        this.pathFindingManager = new PathFindingManager(mapManager, physicsManager);
+        this.behaviorManager = new BehaviorManager(skillsManager, lightsManager, cameraManager, uiManager, agentService,
+                combatService, particlesService, projectilesService, pathFindingManager);
     }
 
     private void initializeListeners() {
@@ -129,6 +132,7 @@ public class WorldScreen implements Screen {
         engine.addSystem(new PhysicsSystem(PhysicsFactory.get().getWorld()));
         engine.addSystem(new PickUpSystem());
         engine.addSystem(new BehaviorSystem(behaviorManager, agentService));
+        engine.addSystem(new PursueSystem(pathFindingManager));
         engine.addSystem(new TraverseSystem());
         engine.addSystem(new SpawnLocationSystem(factories.getAgentFactory()));
         engine.addSystem(new ProjectileSystem(engine));

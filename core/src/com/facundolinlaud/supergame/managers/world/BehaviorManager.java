@@ -5,7 +5,6 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntityListener;
 import com.facundolinlaud.supergame.ai.behavior.BehaviorBlackboard;
 import com.facundolinlaud.supergame.ai.behavior.BehaviorTask;
-import com.facundolinlaud.supergame.ai.pathfinding.PathFinderAuthority;
 import com.facundolinlaud.supergame.behaviortree.PoolableTaskManager;
 import com.facundolinlaud.supergame.components.ai.BehaviorComponent;
 import com.facundolinlaud.supergame.components.ai.BehavioringComponent;
@@ -14,8 +13,6 @@ import com.facundolinlaud.supergame.services.CombatService;
 import com.facundolinlaud.supergame.services.ParticlesService;
 import com.facundolinlaud.supergame.services.ProjectilesService;
 import com.facundolinlaud.supergame.utils.Mappers;
-
-import java.util.Stack;
 
 public class BehaviorManager extends PoolableTaskManager implements EntityListener {
     private ComponentMapper<BehaviorComponent> bm = Mappers.behavior;
@@ -28,13 +25,12 @@ public class BehaviorManager extends PoolableTaskManager implements EntityListen
     private CombatService combatService;
     private ParticlesService particlesService;
     private ProjectilesService projectilesService;
-    private PathFinderAuthority pathFinderAuthority;
+    private PathFindingManager pathFindingManager;
 
-    public BehaviorManager(MapManager mapManager, PhysicsManager physicsManager, SkillsManager skillsManager,
-                           LightsManager lightsManager, CameraManager cameraManager, UIManager uiManager,
-                           AgentService agentService, CombatService combatService, ParticlesService particlesService,
-                           ProjectilesService projectilesService) {
-        this.pathFinderAuthority = new PathFinderAuthority(mapManager, physicsManager);
+    public BehaviorManager(SkillsManager skillsManager, LightsManager lightsManager, CameraManager cameraManager,
+                           UIManager uiManager, AgentService agentService, CombatService combatService,
+                           ParticlesService particlesService, ProjectilesService projectilesService,
+                           PathFindingManager pathFindingManager) {
         this.skillsManager = skillsManager;
         this.lightsManager = lightsManager;
         this.cameraManager = cameraManager;
@@ -43,16 +39,14 @@ public class BehaviorManager extends PoolableTaskManager implements EntityListen
         this.combatService = combatService;
         this.particlesService = particlesService;
         this.projectilesService = projectilesService;
-    }
-
-    public PathFinderAuthority getPathFinderAuthority() {
-        return pathFinderAuthority;
+        this.pathFindingManager = pathFindingManager;
     }
 
     @Override
     public void entityAdded(Entity agent) {
         BehaviorBlackboard blackboard = new BehaviorBlackboard(agent, lightsManager, cameraManager, skillsManager,
-                uiManager, agentService, combatService, particlesService, projectilesService, this);
+                uiManager, agentService, combatService, particlesService, projectilesService, this,
+                pathFindingManager);
 
         BehaviorComponent behaviorComponent = bm.get(agent);
         BehaviorTask behaviorTask = behaviorComponent.getBehaviorTask();

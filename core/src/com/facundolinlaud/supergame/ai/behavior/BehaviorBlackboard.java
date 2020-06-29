@@ -10,18 +10,25 @@ import com.facundolinlaud.supergame.services.ProjectilesService;
 
 public class BehaviorBlackboard extends Blackboard {
     private BehaviorManager behaviorManager;
+    private PathFindingManager pathFindingManager;
 
     public BehaviorBlackboard(Entity agent, LightsManager lightsManager, CameraManager cameraManager,
                               SkillsManager skillsManager, UIManager uiManager, AgentService agentService,
                               CombatService combatService, ParticlesService particlesService,
-                              ProjectilesService projectilesService, BehaviorManager behaviorManager) {
+                              ProjectilesService projectilesService, BehaviorManager behaviorManager,
+                              PathFindingManager pathFindingManager) {
         super(agent, lightsManager, cameraManager, skillsManager, uiManager, agentService, combatService,
                 particlesService, projectilesService);
         this.behaviorManager = behaviorManager;
+        this.pathFindingManager = pathFindingManager;
     }
 
     @Override
     public BehaviorManager getDomainTaskManager() {
         return behaviorManager;
+    }
+
+    public PathFindingManager getPathFindingManager() {
+        return pathFindingManager;
     }
 }

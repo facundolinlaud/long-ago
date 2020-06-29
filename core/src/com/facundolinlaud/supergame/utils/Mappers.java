@@ -3,6 +3,7 @@ package com.facundolinlaud.supergame.utils;
 import com.badlogic.ashley.core.ComponentMapper;
 import com.facundolinlaud.supergame.components.*;
 import com.facundolinlaud.supergame.components.ai.BehaviorComponent;
+import com.facundolinlaud.supergame.components.ai.PursueComponent;
 import com.facundolinlaud.supergame.components.ai.TraverseComponent;
 import com.facundolinlaud.supergame.components.items.EquipableComponent;
 import com.facundolinlaud.supergame.components.items.ItemComponent;
@@ -46,4 +47,5 @@ public class Mappers {
     public static final ComponentMapper<InteractionComponent> interaction = ComponentMapper.getFor(InteractionComponent.class);
     public static final ComponentMapper<TargetComponent> target = ComponentMapper.getFor(TargetComponent.class);
     public static final ComponentMapper<AgentComponent> agent = ComponentMapper.getFor(AgentComponent.class);
+    public static final ComponentMapper<PursueComponent> pursue = ComponentMapper.getFor(PursueComponent.class);
 }

@@ -12,8 +12,7 @@ public class TraverseComponent implements Component {
 
     public TraverseComponent(LinkedGraphPath<Node> path) {
         this.path = path;
-        this.onArrive = () -> {
-        };
+        this.onArrive = () -> {};
     }
 
     public TraverseComponent(LinkedGraphPath<Node> path, Runnable onArrive) {
