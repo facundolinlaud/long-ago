@@ -14,11 +14,6 @@ public class SkillTask extends SequentialTask<SkillBlackboard> {
     }
 
     @Override
-    public void activate() {
-        super.activate();
-    }
-
-    @Override
     public void failed() {
         completed();
     }

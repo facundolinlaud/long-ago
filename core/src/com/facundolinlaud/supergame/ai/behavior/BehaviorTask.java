@@ -1,12 +1,15 @@
 package com.facundolinlaud.supergame.ai.behavior;
 
-import com.facundolinlaud.supergame.behaviortree.composites.SelectorTask;
+import com.badlogic.ashley.core.Entity;
+import com.facundolinlaud.supergame.behaviortree.composites.SequentialTask;
 
 import java.util.LinkedList;
+import java.util.Stack;
 
-public class BehaviorTask extends SelectorTask {
+public class BehaviorTask extends SequentialTask<BehaviorBlackboard> {
     public BehaviorTask(LinkedList children) {
         super(children);
+        setStack(new Stack());
     }
 
     @Override
@@ -14,15 +17,19 @@ public class BehaviorTask extends SelectorTask {
         System.out.println("[BEHAVIOR] completed");
         stack.clear();
         reset();
-        activate();
+        onBehaviorFinished();
     }
 
     @Override
     public void failed() {
         System.out.println("[BEHAVIOR] failed");
-
         stack.clear();
         reset();
-        activate();
+        onBehaviorFinished();
+    }
+
+    private void onBehaviorFinished() {
+        Entity agent = getBlackboard().getAgent();
+        getBlackboard().getDomainTaskManager().onBehaviorFinished(agent);
     }
 }

@@ -17,12 +17,15 @@ public class RequestCastingTask extends Task {
     @Override
     public void activate() {
         Entity caster = getBlackboard().getAgent();
-        boolean casted = getBlackboard().getSkillsManager().requestCasting(caster, skillId);
-
-        if (casted) {
-            System.out.println("[Casting] ok");
+        Runnable onSkillEnd = () -> {
+            System.out.println("[Casting] completed");
             completed();
-        } else {
+        };
+
+        System.out.println("[Casting] casting");
+        boolean casted = getBlackboard().getSkillsManager().requestCasting(caster, skillId, onSkillEnd);
+
+        if (!casted) {
             System.out.println("[Casting] failed");
             failed();
         }

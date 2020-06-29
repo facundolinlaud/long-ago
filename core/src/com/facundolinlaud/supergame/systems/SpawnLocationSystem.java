@@ -43,8 +43,6 @@ public class SpawnLocationSystem extends IntervalIteratingSystem implements Tele
         MessageManager.getInstance().addListener(this, Messages.AGENT_DIED);
     }
 
-    private static boolean spawned = false;
-
     @Override
     protected void processEntity(Entity spawnEntity) {
         SpawnLocationComponent spawnLocation = sl.get(spawnEntity);
@@ -53,9 +51,6 @@ public class SpawnLocationSystem extends IntervalIteratingSystem implements Tele
             spawns.put(spawnEntity, ZERO_AGENTS_SPAWNED);
 
         if(shouldSpawnAgent(spawnEntity, spawnLocation)){
-            if(spawned) return;
-            spawned = true;
-
             Vector2 spawnPosition = getPointInside(spawnLocation);
 
             spawns.put(spawnEntity, spawns.get(spawnEntity) + 1);

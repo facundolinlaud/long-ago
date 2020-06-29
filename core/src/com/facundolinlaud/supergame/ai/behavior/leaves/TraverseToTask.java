@@ -35,8 +35,8 @@ public class TraverseToTask extends PoolableTask<BehaviorBlackboard> {
 
     @Override
     public void activate() {
-        targetPosition = stack.pop().getPosition();
         super.activate();
+        targetPosition = stack.pop().getPosition();
     }
 
     // move this logic to a system pls

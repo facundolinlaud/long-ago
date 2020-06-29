@@ -8,10 +8,7 @@ import com.facundolinlaud.supergame.behaviortree.PoolableTaskManager;
 import com.facundolinlaud.supergame.components.SkillsComponent;
 import com.facundolinlaud.supergame.factory.SkillsFactory;
 import com.facundolinlaud.supergame.model.skill.Skill;
-import com.facundolinlaud.supergame.services.AgentService;
-import com.facundolinlaud.supergame.services.CombatService;
-import com.facundolinlaud.supergame.services.ParticlesService;
-import com.facundolinlaud.supergame.services.ProjectilesService;
+import com.facundolinlaud.supergame.services.*;
 import com.facundolinlaud.supergame.skills.SkillBlackboard;
 import com.facundolinlaud.supergame.skills.SkillTask;
 import com.facundolinlaud.supergame.utils.Mappers;
@@ -27,6 +24,7 @@ public class SkillsManager extends PoolableTaskManager {
     private ComponentMapper<SkillsComponent> sm = Mappers.skills;
 
     private Map<Entity, Skill> castings;
+    private Map<Entity, Runnable> onSkillsEnd;
     private SkillsFactory skillsFactory;
     private LightsManager lightsManager;
     private CameraManager cameraManager;
@@ -35,12 +33,14 @@ public class SkillsManager extends PoolableTaskManager {
     private CombatService combatService;
     private ParticlesService particlesService;
     private ProjectilesService projectilesService;
+    private SkillService skillService;
     private MessageDispatcher messageDispatcher;
 
     public SkillsManager(SkillsFactory skillsFactory, LightsManager lightsManager, CameraManager cameraManager,
                          UIManager uiManager, AgentService agentService, CombatService combatService,
                          ParticlesService particlesService, ProjectilesService projectilesService) {
         this.castings = new HashMap();
+        this.onSkillsEnd = new HashMap();
         this.skillsFactory = skillsFactory;
         this.lightsManager = lightsManager;
         this.cameraManager = cameraManager;
@@ -49,7 +49,13 @@ public class SkillsManager extends PoolableTaskManager {
         this.combatService = combatService;
         this.particlesService = particlesService;
         this.projectilesService = projectilesService;
+        this.skillService = new SkillService();
         this.messageDispatcher = MessageManager.getInstance();
+    }
+
+    public boolean requestCasting(Entity caster, String skillId, Runnable onSkillEnd) {
+        onSkillsEnd.put(caster, onSkillEnd);
+        return requestCasting(caster, skillId);
     }
 
     public boolean requestCasting(Entity caster, String skillId) {
@@ -59,7 +65,7 @@ public class SkillsManager extends PoolableTaskManager {
     public boolean requestCasting(Entity caster, Skill skill) {
         if (isAlreadyCasting(caster)) return false;
 
-        if (!canCast(caster, skill)) {
+        if (!skillService.canCast(caster, skill)) {
             messageDispatcher.dispatchMessage(REJECTED_SKILL_DUE_TO_NOT_READY);
             return false;
         }
@@ -82,28 +88,18 @@ public class SkillsManager extends PoolableTaskManager {
 
     public void endCasting(Entity caster) {
         castings.remove(caster);
+
+        if(onSkillsEnd.containsKey(caster)){
+            onSkillsEnd.remove(caster).run();
+        }
     }
 
     private boolean isAlreadyCasting(Entity caster) {
         return castings.containsKey(caster);
     }
 
-    private boolean canCast(Entity caster, Skill skill) {
-        SkillsComponent skillsComponent = sm.get(caster);
-
-        boolean isCoolingDown = skillsComponent.isCoolingDown(skill);
-        boolean hasSkill = skillsComponent.has(skill);
-
-        return !isCoolingDown && hasSkill;
-    }
-
     public void startCoolDown(Entity caster) {
         Skill skill = castings.get(caster);
-
-        SkillsComponent skillsComponent = sm.get(caster);
-        skillsComponent.startCoolDown(skill);
-
-        SkillCooldownStartEvent event = new SkillCooldownStartEvent(caster, skill);
-        messageDispatcher.dispatchMessage(SKILL_COOLDOWN_START, event);
+        skillService.startCoolDown(caster, skill);
     }
 }

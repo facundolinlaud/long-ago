@@ -8,6 +8,7 @@ import com.facundolinlaud.supergame.ai.behavior.BehaviorTask;
 import com.facundolinlaud.supergame.ai.pathfinding.PathFinderAuthority;
 import com.facundolinlaud.supergame.behaviortree.PoolableTaskManager;
 import com.facundolinlaud.supergame.components.ai.BehaviorComponent;
+import com.facundolinlaud.supergame.components.ai.BehavioringComponent;
 import com.facundolinlaud.supergame.services.AgentService;
 import com.facundolinlaud.supergame.services.CombatService;
 import com.facundolinlaud.supergame.services.ParticlesService;
@@ -56,12 +57,22 @@ public class BehaviorManager extends PoolableTaskManager implements EntityListen
         BehaviorComponent behaviorComponent = bm.get(agent);
         BehaviorTask behaviorTask = behaviorComponent.getBehaviorTask();
         behaviorTask.setBlackboard(blackboard);
-        behaviorTask.setStack(new Stack());
+    }
+
+    public void activate(Entity agent) {
+        agent.add(new BehavioringComponent());
+
+        BehaviorComponent behaviorComponent = bm.get(agent);
+        BehaviorTask behaviorTask = behaviorComponent.getBehaviorTask();
         behaviorTask.activate();
     }
 
     @Override
     public void entityRemoved(Entity entity) {
 
+    }
+
+    public void onBehaviorFinished(Entity agent) {
+        agent.remove(BehavioringComponent.class);
     }
 }

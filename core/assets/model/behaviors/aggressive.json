@@ -12,9 +12,25 @@
         },{
           "@class": "com.facundolinlaud.supergame.dto.behaviortree.leaves.PushEntityPositionTaskDto"
         },{
+          "@class": "com.facundolinlaud.supergame.dto.behaviortree.stack.RePushValueTaskDto",
+          "deepness": 1,
+          "times": 3
+        },{
+          "@class": "com.facundolinlaud.supergame.dto.behaviors.leaves.TargetTaskDto"
+        },{
+          "@class": "com.facundolinlaud.supergame.dto.behaviors.leaves.RequestCastingTaskDto",
+          "skillId": "triple_fire_arrow"
+        },{
           "@class": "com.facundolinlaud.supergame.dto.behaviors.leaves.TraverseToTaskDto"
+        },{
+          "@class": "com.facundolinlaud.supergame.dto.behaviors.leaves.FacePositionTaskDto"
+        },{
+          "@class": "com.facundolinlaud.supergame.dto.behaviors.leaves.RequestCastingTaskDto",
+          "skillId": "cut"
         }
       ]]
+    },{
+      "@class": "com.facundolinlaud.supergame.dto.behaviors.leaves.PatrolTaskDto"
     }
   ]]
 }

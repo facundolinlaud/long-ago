@@ -128,7 +128,7 @@ public class WorldScreen implements Screen {
         engine.addSystem(new CameraFocusSystem(cameraManager));
         engine.addSystem(new PhysicsSystem(PhysicsFactory.get().getWorld()));
         engine.addSystem(new PickUpSystem());
-        engine.addSystem(new BehaviorSystem(agentService));
+        engine.addSystem(new BehaviorSystem(behaviorManager, agentService));
         engine.addSystem(new TraverseSystem());
         engine.addSystem(new SpawnLocationSystem(factories.getAgentFactory()));
         engine.addSystem(new ProjectileSystem(engine));

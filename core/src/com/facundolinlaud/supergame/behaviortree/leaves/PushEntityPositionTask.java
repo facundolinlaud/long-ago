@@ -26,9 +26,4 @@ public class PushEntityPositionTask extends Task<Blackboard> {
 
         completed();
     }
-
-    @Override
-    public void completed() {
-        super.completed();
-    }
 }

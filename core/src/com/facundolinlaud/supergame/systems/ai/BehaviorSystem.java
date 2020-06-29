@@ -7,6 +7,8 @@ import com.badlogic.ashley.systems.IntervalIteratingSystem;
 import com.badlogic.gdx.math.Vector2;
 import com.facundolinlaud.supergame.components.PositionComponent;
 import com.facundolinlaud.supergame.components.ai.BehaviorComponent;
+import com.facundolinlaud.supergame.components.ai.BehavioringComponent;
+import com.facundolinlaud.supergame.managers.world.BehaviorManager;
 import com.facundolinlaud.supergame.services.AgentService;
 import com.facundolinlaud.supergame.utils.Distances;
 import com.facundolinlaud.supergame.utils.Mappers;
@@ -17,10 +19,12 @@ public class BehaviorSystem extends IntervalIteratingSystem {
     private ComponentMapper<PositionComponent> pm = Mappers.position;
     private ComponentMapper<BehaviorComponent> bm = Mappers.behavior;
 
+    private BehaviorManager behaviorManager;
     private AgentService agentService;
 
-    public BehaviorSystem(AgentService agentService) {
-        super(Family.all(BehaviorComponent.class).get(), INTERVAL);
+    public BehaviorSystem(BehaviorManager behaviorManager, AgentService agentService) {
+        super(Family.all(BehaviorComponent.class).exclude(BehavioringComponent.class).get(), INTERVAL);
+        this.behaviorManager = behaviorManager;
         this.agentService = agentService;
     }
 
@@ -32,7 +36,7 @@ public class BehaviorSystem extends IntervalIteratingSystem {
         Vector2 agentPosition = pm.get(agent).getPosition();
 
         if (isAgentActive(agentPosition, playerPosition)) {
-//            bm.get(agent).getBehaviorTask().activate();
+            behaviorManager.activate(agent);
         }
     }
 
