@@ -12,7 +12,8 @@ import com.facundolinlaud.supergame.components.ai.TraverseComponent;
 import com.facundolinlaud.supergame.model.status.Action;
 import com.facundolinlaud.supergame.model.status.Direction;
 import com.facundolinlaud.supergame.utils.Mappers;
-import java.awt.Point;
+
+import java.awt.*;
 
 public class TraverseSystem extends IteratingSystem {
     private static final float EPSILON = 0.5f;
@@ -27,13 +28,16 @@ public class TraverseSystem extends IteratingSystem {
 
     @Override
     protected void processEntity(Entity agent, float deltaTime) {
-        decideWhetherToKeepWalkingOrNot(agent);
-    }
-
-    private void decideWhetherToKeepWalkingOrNot(Entity agent) {
         TraverseComponent traversal = mtm.get(agent);
         PositionComponent position = pm.get(agent);
         StatusComponent status = sm.get(agent);
+
+        boolean closeEnough = traversal.getPathLength() < traversal.getSeekedProximity();
+
+        if (closeEnough) {
+            arrived(status, traversal, agent);
+            return;
+        }
 
         Point targetCell = traversal.getNextCell();
         Vector2 agentPosition = position.getPosition();
@@ -44,33 +48,34 @@ public class TraverseSystem extends IteratingSystem {
         float deltaX = Math.abs(differenceX);
         float deltaY = Math.abs(differenceY);
 
-        if(deltaX > EPSILON || deltaY > EPSILON){
+        if (deltaX > EPSILON || deltaY > EPSILON) {
             Direction newDirection = resolveDirection(differenceX, differenceY, deltaX, deltaY);
             status.setDirection(newDirection);
             status.setAction(Action.WALKING);
-            System.out.println("traversal.walking() <--");
-        }else if(traversal.getPathLength() > 1) {
+        } else if (traversal.getPathLength() > 1) {
             traversal.popCell();
-            System.out.println("traversal.popCell();");
-        }else{
-            status.setAction(Action.STANDING);
-            agent.remove(TraverseComponent.class);
-            System.out.println("traversal.arrive();");
-            traversal.arrive();
+        } else {
+            arrived(status, traversal, agent);
         }
     }
 
+    private void arrived(StatusComponent status, TraverseComponent traversal, Entity agent) {
+        status.setAction(Action.STANDING);
+        agent.remove(TraverseComponent.class);
+        traversal.arrive();
+    }
+
     private Direction resolveDirection(float differenceX, float differenceY, float deltaX, float deltaY) {
-        if(deltaX > EPSILON){
-            if(differenceX > 0){
+        if (deltaX > EPSILON) {
+            if (differenceX > 0) {
                 return Direction.LEFT;
-            }else{
+            } else {
                 return Direction.RIGHT;
             }
-        }else{
-            if(differenceY > 0){
+        } else {
+            if (differenceY > 0) {
                 return Direction.DOWN;
-            }else{
+            } else {
                 return Direction.UP;
             }
         }

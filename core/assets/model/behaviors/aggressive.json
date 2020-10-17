@@ -26,7 +26,7 @@
           "times": 2
         },{
           "@class": "com.facundolinlaud.supergame.dto.behaviors.leaves.PursueTaskDto",
-          "seekedProximity": 2.0
+          "seekedProximity": 3.0
         },{
           "@class": "com.facundolinlaud.supergame.dto.behaviortree.leaves.PushEntityPositionTaskDto"
         },{

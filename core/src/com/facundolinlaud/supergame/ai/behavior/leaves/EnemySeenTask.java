@@ -58,11 +58,9 @@ public class EnemySeenTask extends LeafTask {
                 .collect(Collectors.toList());
 
         if (nearAgents.isEmpty()) {
-            System.out.println("[EnemySeen] nobody");
             failed();
         } else {
             Entity nearAgent = nearAgents.get(0);
-            System.out.println("[EnemySeen] seen " + nearAgent);
             Value value = new Value(nearAgent);
             stack.push(value);
             completed();

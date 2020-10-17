@@ -118,6 +118,8 @@ public class WorldScreen implements Screen {
         this.stage.addListener(playerInputManager);
     }
 
+    OverlayRenderSystem overlayRenderSystem;
+
     private void initializeSystems() {
         Engine engine = resources.getEngine();
 
@@ -139,6 +141,8 @@ public class WorldScreen implements Screen {
         engine.addSystem(new HealthSystem(resources.getBatch()));
         engine.addSystem(new InteractionSystem(uiManager.getDialogUIController(), playerInputManager, agentService));
         engine.addSystem(new SkillCoolDownSystem());
+        engine.addSystem(new OverlayRenderSystem(cameraManager, resources));
+        engine.addSystem(new PositionTestSystem(cameraManager, resources));
 
         uiManager.initializeSystems(engine);
     }

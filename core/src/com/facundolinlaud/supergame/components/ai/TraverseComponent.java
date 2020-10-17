@@ -7,17 +7,22 @@ import com.facundolinlaud.supergame.ai.pathfinding.Node;
 import java.awt.*;
 
 public class TraverseComponent implements Component {
-    private LinkedGraphPath<Node> path;
-    private Runnable onArrive;
+    private static final float DEFAULT_SEEKED_PROXIMITY = 1;
 
-    public TraverseComponent(LinkedGraphPath<Node> path) {
-        this.path = path;
-        this.onArrive = () -> {};
-    }
+    private LinkedGraphPath<Node> path;
+    private float seekedProximity;
+    private Runnable onArrive;
 
     public TraverseComponent(LinkedGraphPath<Node> path, Runnable onArrive) {
         this.path = path;
         this.onArrive = onArrive;
+        this.seekedProximity = DEFAULT_SEEKED_PROXIMITY;
+    }
+
+    public TraverseComponent(LinkedGraphPath<Node> path, float seekedProximity, Runnable onArrive) {
+        this.path = path;
+        this.onArrive = onArrive;
+        this.seekedProximity = seekedProximity;
     }
 
     public void popCell() {
@@ -39,5 +44,9 @@ public class TraverseComponent implements Component {
 
     public void arrive() {
         onArrive.run();
+    }
+
+    public float getSeekedProximity() {
+        return seekedProximity;
     }
 }

@@ -48,4 +48,5 @@ public class Mappers {
     public static final ComponentMapper<TargetComponent> target = ComponentMapper.getFor(TargetComponent.class);
     public static final ComponentMapper<AgentComponent> agent = ComponentMapper.getFor(AgentComponent.class);
     public static final ComponentMapper<PursueComponent> pursue = ComponentMapper.getFor(PursueComponent.class);
+    public static final ComponentMapper<OverlayRenderComponent> overlayRender = ComponentMapper.getFor(OverlayRenderComponent.class);
 }

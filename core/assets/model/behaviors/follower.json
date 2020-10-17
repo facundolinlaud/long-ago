@@ -1,0 +1,19 @@
+{
+  "@class": "com.facundolinlaud.supergame.dto.behaviors.BehaviorTaskDto",
+  "id": "follower",
+  "children": ["com.facundolinlaud.supergame.dto.behaviortree.TaskListDto", [
+    {
+      "@class": "com.facundolinlaud.supergame.dto.behaviortree.composites.SequentialTaskDto",
+      "children": ["com.facundolinlaud.supergame.dto.behaviortree.TaskListDto", [
+        {
+          "@class": "com.facundolinlaud.supergame.dto.behaviors.leaves.EnemySeenTaskDto",
+          "viewDistance": 10.0,
+          "enemyFactions": ["java.util.ArrayList", ["player", "zombies"]]
+        },{
+          "@class": "com.facundolinlaud.supergame.dto.behaviors.leaves.PursueTaskDto",
+          "seekedProximity": 1.5
+        }
+      ]]
+    }
+  ]]
+}

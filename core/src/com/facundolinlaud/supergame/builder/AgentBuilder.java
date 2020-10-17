@@ -1,7 +1,9 @@
 package com.facundolinlaud.supergame.builder;
 
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.ParticleEffectPool;
+import com.badlogic.gdx.math.Vector2;
 import com.facundolinlaud.supergame.ai.behavior.BehaviorTask;
 import com.facundolinlaud.supergame.components.*;
 import com.facundolinlaud.supergame.components.ai.BehaviorComponent;
@@ -17,7 +19,8 @@ import com.facundolinlaud.supergame.model.RenderPriority;
 import com.facundolinlaud.supergame.model.equip.EquipSlot;
 import com.facundolinlaud.supergame.model.skill.Skill;
 import com.facundolinlaud.supergame.model.sprite.RawAnimationModel;
-import com.facundolinlaud.supergame.strategies.renderposition.SpriteRenderPositionStrategyImpl;
+import com.facundolinlaud.supergame.strategies.renderposition.SpriteRenderPositionStrategy;
+import com.facundolinlaud.supergame.utils.shape.Circle;
 
 import java.util.List;
 import java.util.Map;
@@ -33,6 +36,7 @@ public class AgentBuilder {
         entity = new Entity()
                 .add(new AgentComponent(agentId, factionId))
                 .add(new StatusComponent())
+                .add(new OverlayRenderComponent(new Circle(0.1f, new Vector2(0f, 0f)), Color.CORAL))
                 .add(new TargetComponent());
     }
 
@@ -121,7 +125,7 @@ public class AgentBuilder {
     }
 
     public AgentBuilder withAnimations(RawAnimationModel rawAnimationModel) {
-        entity.add(new RenderComponent(new SpriteRenderPositionStrategyImpl(), RenderPriority.AGENT))
+        entity.add(new RenderComponent(new SpriteRenderPositionStrategy(), RenderPriority.AGENT))
                 .add(new AnimableSpriteComponent())
                 .add(new StackedSpritesComponent(rawAnimationModel))
                 .add(new RefreshSpriteRequirementComponent());

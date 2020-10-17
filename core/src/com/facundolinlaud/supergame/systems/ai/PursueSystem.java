@@ -32,13 +32,7 @@ public class PursueSystem extends IteratingSystem {
         Entity pursuable = pursuableComponent.getPursuable();
         Vector2 agentPosition = pom.get(agent).getPosition();
         Vector2 pursuablePosition = pom.get(pursuable).getPosition();
-        float distance = agentPosition.dst(pursuablePosition);
-
-        if (distance <= pursuableComponent.getSeekedProximity()) {
-            agent.remove(PursueComponent.class);
-            pursuableComponent.getOnArrive().run();
-            return;
-        }
+        float seekedProximity = pursuableComponent.getSeekedProximity();
 
         PathFinderResult result = pathFindingManager.calculate(agentPosition, pursuablePosition);
 
@@ -54,11 +48,11 @@ public class PursueSystem extends IteratingSystem {
             tm.get(agent).setPath(path);
         } else {
             Runnable onArrive = () -> {
+                pursuableComponent.getOnArrive().run();
                 agent.remove(PursueComponent.class);
-                pursuableComponent.getOnArrive();
             };
 
-            agent.add(new TraverseComponent(path, onArrive));
+            agent.add(new TraverseComponent(path, seekedProximity, onArrive));
         }
     }
 }

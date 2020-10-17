@@ -84,7 +84,7 @@
       "BOW": "great_bow"
     },
     "behaviorInformation": {
-      "id": "aggressive"
+      "id": "follower"
     }
   },
   "orc": {

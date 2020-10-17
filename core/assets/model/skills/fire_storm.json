@@ -32,7 +32,18 @@
                 "@class": "com.facundolinlaud.supergame.dto.behaviortree.leaves.WaitTaskDto",
                 "time": 1.0
               },{
-                "@class": "com.facundolinlaud.supergame.dto.behaviortree.leaves.WaitForClickTaskDto"
+                "@class": "com.facundolinlaud.supergame.dto.behaviortree.leaves.WaitForClickTaskDto",
+                "areaColor": {
+                  "@class": "com.facundolinlaud.supergame.dto.ColorDto",
+                  "red": 1.0,
+                  "green": 0.0,
+                  "blue": 0.0,
+                  "alpha": 0.4
+                },
+                "areaShape": {
+                  "@class": "com.facundolinlaud.supergame.utils.shape.Circle",
+                  "radius": 3.0
+                }
               },{
                 "@class": "com.facundolinlaud.supergame.dto.behaviortree.leaves.PushAgentTaskDto"
               },{
@@ -61,9 +72,8 @@
                 "@class": "com.facundolinlaud.supergame.dto.skills.leaves.PushAgentsInAreaTaskDto",
                 "ignoreCaster": true,
                 "shape": {
-                  "@class": "com.facundolinlaud.supergame.utils.shape.Rectangle",
-                  "width": 4.0,
-                  "height": 5.0
+                  "@class": "com.facundolinlaud.supergame.utils.shape.Circle",
+                  "radius": 3.0
                 }
               },{
                 "@class": "com.facundolinlaud.supergame.dto.behaviortree.composites.IterateTaskDto",

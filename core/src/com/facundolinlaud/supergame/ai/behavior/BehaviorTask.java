@@ -1,12 +1,13 @@
 package com.facundolinlaud.supergame.ai.behavior;
 
 import com.badlogic.ashley.core.Entity;
+import com.facundolinlaud.supergame.behaviortree.composites.SelectorTask;
 import com.facundolinlaud.supergame.behaviortree.composites.SequentialTask;
 
 import java.util.LinkedList;
 import java.util.Stack;
 
-public class BehaviorTask extends SequentialTask<BehaviorBlackboard> {
+public class BehaviorTask extends SelectorTask<BehaviorBlackboard> {
     public BehaviorTask(LinkedList children) {
         super(children);
         setStack(new Stack());
@@ -14,7 +15,6 @@ public class BehaviorTask extends SequentialTask<BehaviorBlackboard> {
 
     @Override
     public void completed() {
-        System.out.println("[BEHAVIOR] completed");
         stack.clear();
         reset();
         onBehaviorFinished();
@@ -22,7 +22,6 @@ public class BehaviorTask extends SequentialTask<BehaviorBlackboard> {
 
     @Override
     public void failed() {
-        System.out.println("[BEHAVIOR] failed");
         stack.clear();
         reset();
         onBehaviorFinished();

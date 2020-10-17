@@ -47,7 +47,7 @@ public class PatrolTask extends LeafTask<BehaviorBlackboard> {
         }
 
         Runnable onArrive = () -> completed();
-        agent.add(new TraverseComponent(path, onArrive));
+        agent.add(new TraverseComponent(path, 1f, onArrive));
     }
 
     private PathFinderResult calculatePath(Entity agent) {
