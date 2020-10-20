@@ -84,7 +84,7 @@
       "BOW": "great_bow"
     },
     "behaviorInformation": {
-      "id": "follower"
+      "id": "ranged_aggressive"
     }
   },
   "orc": {
@@ -113,7 +113,7 @@
       "WEAPON": "dagger"
     },
     "behaviorInformation": {
-      "id": "aggressive"
+      "id": "follower"
     }
   },
   "fisherman": {
@@ -163,7 +163,7 @@
       "BOW": "great_bow"
     },
     "behaviorInformation": {
-      "id": "aggressive"
+      "id": "follower"
     }
   }
 }

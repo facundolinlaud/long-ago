@@ -55,6 +55,14 @@ public class SkillsManager extends PoolableTaskManager {
         this.messageDispatcher = MessageManager.getInstance();
     }
 
+    public boolean canCast(Entity caster, String skillId) {
+        return canCast(caster, skillsFactory.get(skillId));
+    }
+
+    public boolean canCast(Entity caster, Skill skill) {
+        return !isAlreadyCasting(caster) && skillService.canCast(caster, skill);
+    }
+
     public boolean requestCasting(Entity caster, String skillId, Runnable onSkillEnd) {
         onSkillsEnd.put(caster, onSkillEnd);
         return requestCasting(caster, skillId);
@@ -65,9 +73,7 @@ public class SkillsManager extends PoolableTaskManager {
     }
 
     public boolean requestCasting(Entity caster, Skill skill) {
-        if (isAlreadyCasting(caster)) return false;
-
-        if (!skillService.canCast(caster, skill)) {
+        if (!canCast(caster, skill)) {
             messageDispatcher.dispatchMessage(REJECTED_SKILL_DUE_TO_NOT_READY);
             return false;
         }

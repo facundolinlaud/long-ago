@@ -1,5 +1,6 @@
 package com.facundolinlaud.supergame.ai.pathfinding;
 
+import com.badlogic.gdx.ai.pfa.Connection;
 import com.badlogic.gdx.ai.pfa.DefaultConnection;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -68,22 +69,24 @@ public class MapGraphCreator {
                     continue;
                 }
 
+                Array<Connection<Node>> connections = nodes[x][y].getConnections();
+
                 if (x - 1 >= 0 && isTileWalkable(x - 1, y)) {
-                    nodes[x][y].getConnections().add(new DefaultConnection<>(nodes[x][y], nodes[x - 1][y]));
+                    connections.add(new DefaultConnection<>(nodes[x][y], nodes[x - 1][y]));
                 }
 
 
                 if (x + 1 < mapColumns && isTileWalkable(x + 1, y)) {
-                    nodes[x][y].getConnections().add(new DefaultConnection<>(nodes[x][y], nodes[x + 1][y]));
+                    connections.add(new DefaultConnection<>(nodes[x][y], nodes[x + 1][y]));
                 }
 
 
                 if (y - 1 >= 0 && isTileWalkable(x, y - 1)) {
-                    nodes[x][y].getConnections().add(new DefaultConnection<>(nodes[x][y], nodes[x][y - 1]));
+                    connections.add(new DefaultConnection<>(nodes[x][y], nodes[x][y - 1]));
                 }
 
                 if (y + 1 < mapRows && isTileWalkable(x, y + 1)) {
-                    nodes[x][y].getConnections().add(new DefaultConnection<>(nodes[x][y], nodes[x][y + 1]));
+                    connections.add(new DefaultConnection<>(nodes[x][y], nodes[x][y + 1]));
                 }
             }
         }

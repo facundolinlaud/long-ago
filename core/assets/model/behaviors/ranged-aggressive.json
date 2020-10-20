@@ -1,0 +1,53 @@
+{
+  "@class": "com.facundolinlaud.supergame.dto.behaviors.BehaviorTaskDto",
+  "id": "ranged_aggressive",
+  "children": ["com.facundolinlaud.supergame.dto.behaviortree.TaskListDto", [
+    {
+      "@class": "com.facundolinlaud.supergame.dto.behaviortree.composites.SequentialTaskDto",
+      "children": ["com.facundolinlaud.supergame.dto.behaviortree.TaskListDto", [
+        {
+          "@class": "com.facundolinlaud.supergame.dto.behaviors.leaves.EnemySeenTaskDto",
+          "viewDistance": 10.0,
+          "enemyFactions": ["java.util.ArrayList", ["player", "zombies"]]
+        },{
+          "@class": "com.facundolinlaud.supergame.dto.behaviortree.composites.SelectorTaskDto",
+          "children": ["com.facundolinlaud.supergame.dto.behaviortree.TaskListDto", [
+            {
+              "@class": "com.facundolinlaud.supergame.dto.behaviortree.composites.SequentialTaskDto",
+              "children": ["com.facundolinlaud.supergame.dto.behaviortree.TaskListDto", [
+                {
+                  "@class": "com.facundolinlaud.supergame.dto.behaviortree.stack.RePushValueTaskDto",
+                  "deepness": 1,
+                  "times": 2
+                },{
+                  "@class": "com.facundolinlaud.supergame.dto.behaviortree.leaves.PushEntityPositionTaskDto"
+                },{
+                  "@class": "com.facundolinlaud.supergame.dto.behaviors.leaves.TargetTaskDto"
+                },{
+                  "@class": "com.facundolinlaud.supergame.dto.behaviors.leaves.RequestCastingTaskDto",
+                  "skillId": "fire_arrow"
+                }
+              ]]
+            },{
+              "@class": "com.facundolinlaud.supergame.dto.behaviortree.composites.SequentialTaskDto",
+              "children": ["com.facundolinlaud.supergame.dto.behaviortree.TaskListDto", [
+                {
+                  "@class": "com.facundolinlaud.supergame.dto.behaviortree.stack.RePushValueTaskDto",
+                  "deepness": 1,
+                  "times": 2
+                },{
+                  "@class": "com.facundolinlaud.supergame.dto.behaviors.leaves.PursueTaskDto",
+                  "seekedProximity": 5.0
+                },{
+                  "@class": "com.facundolinlaud.supergame.dto.behaviortree.leaves.PushEntityPositionTaskDto"
+                },{
+                  "@class": "com.facundolinlaud.supergame.dto.behaviors.leaves.FacePositionTaskDto"
+                }]]
+            }]]
+        }
+      ]]
+    },{
+      "@class": "com.facundolinlaud.supergame.dto.behaviors.leaves.PatrolTaskDto"
+    }
+  ]]
+}

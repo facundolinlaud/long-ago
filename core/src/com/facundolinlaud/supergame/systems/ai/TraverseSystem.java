@@ -65,19 +65,27 @@ public class TraverseSystem extends IteratingSystem {
         traversal.arrive();
     }
 
+    private Direction resolveHorizontalDirection(float differenceX) {
+        if (differenceX > 0) {
+            return Direction.LEFT;
+        }
+
+        return Direction.RIGHT;
+    }
+
+    private Direction resolveVerticalDirection(float differenceY) {
+        if (differenceY > 0) {
+            return Direction.DOWN;
+        }
+
+        return Direction.UP;
+    }
+
     private Direction resolveDirection(float differenceX, float differenceY, float deltaX, float deltaY) {
         if (deltaX > EPSILON) {
-            if (differenceX > 0) {
-                return Direction.LEFT;
-            } else {
-                return Direction.RIGHT;
-            }
-        } else {
-            if (differenceY > 0) {
-                return Direction.DOWN;
-            } else {
-                return Direction.UP;
-            }
+            return resolveHorizontalDirection(differenceX);
         }
+
+        return resolveVerticalDirection(differenceY);
     }
 }
