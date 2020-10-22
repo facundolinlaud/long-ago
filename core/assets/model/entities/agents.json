@@ -1,6 +1,7 @@
 {
   "player": {
     "name": "Player",
+    "factionId": "player",
     "velocity": 1.9,
     "talkable": true,
     "animationModel": "DEFAULT",
@@ -53,14 +54,14 @@
   },
   "skeleton": {
     "name": "Skeleton",
+    "factionId": "skeletons",
     "velocity": 1.9,
     "animationModel": "DEFAULT",
     "combatInformation": {
       "skills": [
         "fire_ball",
-        "triple_fire_arrow",
-        "triple_fire_arrow",
-        "fire_storm"
+        "fire_arrow",
+        "spear_dash"
       ],
       "attributes": {
         "strength": 5,
@@ -82,13 +83,13 @@
       "HELMET": "hood",
       "BOW": "great_bow"
     },
-    "aiInformation": {
-      "viewDistance": 5.0,
-      "behaviorType": "AGGRESSIVE"
+    "behaviorInformation": {
+      "id": "ranged_aggressive"
     }
   },
   "orc": {
     "name": "Orc",
+    "factionId": "orcs",
     "velocity": 1.4,
     "animationModel": "DEFAULT",
     "combatInformation": {
@@ -111,13 +112,13 @@
       "SHOES": "leather_boots",
       "WEAPON": "dagger"
     },
-    "aiInformation": {
-      "viewDistance": 5.0,
-      "behaviorType": "AGGRESSIVE"
+    "behaviorInformation": {
+      "id": "follower"
     }
   },
   "fisherman": {
     "name": "Fisherman",
+    "factionId": "npcs",
     "velocity": 2.0,
     "talkable": true,
     "animationModel": "DEFAULT",
@@ -133,8 +134,9 @@
       "PANTS": "teal_leather_pants"
     }
   },
-  "aggresive_elf": {
-    "name": "Aggresive Elf",
+  "aggressive_elf": {
+    "name": "Aggressive Elf",
+    "factionId": "elves",
     "velocity": 2.0,
     "animationModel": "DEFAULT",
     "combatInformation": {
@@ -160,9 +162,8 @@
       "PANTS": "plate_pants",
       "BOW": "great_bow"
     },
-    "aiInformation": {
-      "viewDistance": 9.0,
-      "behaviorType": "AGGRESSIVE"
+    "behaviorInformation": {
+      "id": "follower"
     }
   }
 }

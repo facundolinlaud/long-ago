@@ -4,15 +4,18 @@ import com.badlogic.gdx.ai.msg.MessageDispatcher;
 import com.badlogic.gdx.ai.msg.MessageManager;
 import com.badlogic.gdx.ai.msg.Telegram;
 import com.badlogic.gdx.ai.msg.Telegraph;
-import com.facundolinlaud.supergame.behaviortree.Task;
+import com.facundolinlaud.supergame.behaviortree.LeafTask;
 import com.facundolinlaud.supergame.quests.QuestBlackboard;
 import com.facundolinlaud.supergame.ui.controller.DialogUIController;
 
 import static com.facundolinlaud.supergame.utils.events.Messages.QUEST_DIALOG_ACCEPTED;
 import static com.facundolinlaud.supergame.utils.events.Messages.QUEST_DIALOG_DECLINED;
 
-public class InputDialogTask extends Task<QuestBlackboard> implements Telegraph {
-    private final int[] DIALOG_EVENTS = { QUEST_DIALOG_ACCEPTED, QUEST_DIALOG_DECLINED };
+public class InputDialogTask extends LeafTask<QuestBlackboard> implements Telegraph {
+    private final int[] DIALOG_EVENTS = {QUEST_DIALOG_ACCEPTED, QUEST_DIALOG_DECLINED};
+
+    private DialogUIController dialogUIController;
+
     private String title;
     private String message;
     private MessageDispatcher messageDispatcher;
@@ -24,10 +27,13 @@ public class InputDialogTask extends Task<QuestBlackboard> implements Telegraph 
     }
 
     @Override
-    public void activate() {
-        DialogUIController dialogUIController = getBlackboard().getDialogUIController();
+    protected void onBlackboardAvailable(QuestBlackboard blackboard) {
+        this.dialogUIController = blackboard.getUiManager().getDialogUIController();
+    }
 
-        if(dialogUIController.isBusy())
+    @Override
+    public void activate() {
+        if (dialogUIController.isBusy())
             failed();
 
         dialogUIController.showConfirmDeclineDialog(title, message);
@@ -42,7 +48,7 @@ public class InputDialogTask extends Task<QuestBlackboard> implements Telegraph 
 
     @Override
     public boolean handleMessage(Telegram msg) {
-        switch(msg.message){
+        switch (msg.message) {
             case QUEST_DIALOG_ACCEPTED:
                 completed();
                 break;
@@ -55,7 +61,7 @@ public class InputDialogTask extends Task<QuestBlackboard> implements Telegraph 
     }
 
     @Override
-    public void failed(){
+    public void failed() {
         unsubscribeFromEvent();
         super.failed();
     }
@@ -64,7 +70,7 @@ public class InputDialogTask extends Task<QuestBlackboard> implements Telegraph 
         messageDispatcher.addListeners(this, DIALOG_EVENTS);
     }
 
-    private void unsubscribeFromEvent(){
+    private void unsubscribeFromEvent() {
         messageDispatcher.removeListener(this, DIALOG_EVENTS);
     }
 }

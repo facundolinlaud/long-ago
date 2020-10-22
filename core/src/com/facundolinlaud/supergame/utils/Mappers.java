@@ -2,8 +2,9 @@ package com.facundolinlaud.supergame.utils;
 
 import com.badlogic.ashley.core.ComponentMapper;
 import com.facundolinlaud.supergame.components.*;
-import com.facundolinlaud.supergame.components.ai.AIComponent;
-import com.facundolinlaud.supergame.components.ai.AIMoveToComponent;
+import com.facundolinlaud.supergame.components.ai.BehaviorComponent;
+import com.facundolinlaud.supergame.components.ai.PursueComponent;
+import com.facundolinlaud.supergame.components.ai.TraverseComponent;
 import com.facundolinlaud.supergame.components.items.EquipableComponent;
 import com.facundolinlaud.supergame.components.items.ItemComponent;
 import com.facundolinlaud.supergame.components.player.BagComponent;
@@ -35,14 +36,17 @@ public class Mappers {
     public static final ComponentMapper<StackedSpritesComponent> stackedSprites = ComponentMapper.getFor(StackedSpritesComponent.class);
     public static final ComponentMapper<AnimableSpriteComponent> animableSprite = ComponentMapper.getFor(AnimableSpriteComponent.class);
     public static final ComponentMapper<ParticleComponent> particle = ComponentMapper.getFor(ParticleComponent.class);
-    public static final ComponentMapper<AIComponent> ai = ComponentMapper.getFor(AIComponent.class);
-    public static final ComponentMapper<AIMoveToComponent> aiMoveTo = ComponentMapper.getFor(AIMoveToComponent.class);
+    public static final ComponentMapper<BehaviorComponent> behavior = ComponentMapper.getFor(BehaviorComponent.class);
+    public static final ComponentMapper<TraverseComponent> traverse = ComponentMapper.getFor(TraverseComponent.class);
     public static final ComponentMapper<SpawnLocationComponent> spawnLocation = ComponentMapper.getFor(SpawnLocationComponent.class);
     public static final ComponentMapper<SpawnedAgentComponent> spawnedAgent = ComponentMapper.getFor(SpawnedAgentComponent.class);
     public static final ComponentMapper<ProjectileComponent> projectile = ComponentMapper.getFor(ProjectileComponent.class);
     public static final ComponentMapper<SkillsComponent> skills = ComponentMapper.getFor(SkillsComponent.class);
     public static final ComponentMapper<ManaComponent> mana = ComponentMapper.getFor(ManaComponent.class);
-    public static final ComponentMapper<IdComponent> id = ComponentMapper.getFor(IdComponent.class);
+    public static final ComponentMapper<TagComponent> tag = ComponentMapper.getFor(TagComponent.class);
     public static final ComponentMapper<InteractionComponent> interaction = ComponentMapper.getFor(InteractionComponent.class);
     public static final ComponentMapper<TargetComponent> target = ComponentMapper.getFor(TargetComponent.class);
+    public static final ComponentMapper<AgentComponent> agent = ComponentMapper.getFor(AgentComponent.class);
+    public static final ComponentMapper<PursueComponent> pursue = ComponentMapper.getFor(PursueComponent.class);
+    public static final ComponentMapper<OverlayRenderComponent> overlayRender = ComponentMapper.getFor(OverlayRenderComponent.class);
 }

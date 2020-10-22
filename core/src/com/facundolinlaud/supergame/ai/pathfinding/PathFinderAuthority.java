@@ -1,5 +1,6 @@
 package com.facundolinlaud.supergame.ai.pathfinding;
 
+import com.badlogic.gdx.ai.pfa.PathFinder;
 import com.badlogic.gdx.ai.pfa.indexed.IndexedAStarPathFinder;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.math.Vector2;
@@ -9,7 +10,7 @@ import com.facundolinlaud.supergame.managers.world.PhysicsManager;
 public class PathFinderAuthority {
     public static final String HEIGHT = "height";
 
-    private IndexedAStarPathFinder<Node> pathfinder;
+    private PathFinder<Node> pathfinder;
     private MapGraphCreator mapGraphCreator;
     private MapGraph mapGraph;
 
@@ -50,5 +51,25 @@ public class PathFinderAuthority {
         int y = Math.round(vector.y);
 
         return x + y * tiledMapRows;
+    }
+
+    public void free(Vector2 oldPosition) {
+        int index = resolveNodeIndex(oldPosition);
+        Node node = mapGraph.getNode(index);
+        node.getConnections().forEach(c -> {
+            // Try to remove this casting some day
+            WeightedConnection wc = (WeightedConnection) c;
+            wc.markAsCheap();
+        });
+    }
+
+    public void occupy(Vector2 position) {
+        int index = resolveNodeIndex(position);
+        Node node = mapGraph.getNode(index);
+        node.getConnections().forEach(c -> {
+            // Try to remove this casting some day
+            WeightedConnection wc = (WeightedConnection) c;
+            wc.markAsExpensive();
+        });
     }
 }

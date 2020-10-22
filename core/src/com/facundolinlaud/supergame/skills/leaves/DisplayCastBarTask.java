@@ -24,14 +24,14 @@ public class DisplayCastBarTask extends PoolableTask<SkillBlackboard> {
 
     @Override
     protected void onBlackboardAvailable(SkillBlackboard blackboard) {
-        overlayUIController = blackboard.getOverlayUIController();
+        overlayUIController = blackboard.getUiManager().getOverlayUIController();
         agentService = blackboard.getAgentService();
     }
 
     @Override
     public void tick(float delta) {
         if (!foundOutIfMainPlayer) {
-            Entity caster = getBlackboard().getCaster();
+            Entity caster = getBlackboard().getAgent();
             if (agentService.isPlayer(caster)) {
                 foundOutIfMainPlayer = true;
             } else {

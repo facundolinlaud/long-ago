@@ -5,10 +5,10 @@ import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.ai.msg.MessageDispatcher;
 import com.badlogic.gdx.ai.msg.MessageManager;
 import com.badlogic.gdx.math.Vector2;
-import com.facundolinlaud.supergame.components.IdComponent;
 import com.facundolinlaud.supergame.components.InteractionComponent;
 import com.facundolinlaud.supergame.components.PositionComponent;
 import com.facundolinlaud.supergame.components.StatusComponent;
+import com.facundolinlaud.supergame.components.TagComponent;
 import com.facundolinlaud.supergame.components.player.KeyboardComponent;
 import com.facundolinlaud.supergame.managers.world.PlayerInputManager;
 import com.facundolinlaud.supergame.model.status.Action;
@@ -22,7 +22,7 @@ import com.facundolinlaud.supergame.utils.events.Messages;
 public class InteractionSystem extends EntitySystem {
     private final static float MINIMUM_DISTANCE_FOR_CONVERSATION = 1.8f;
 
-    private ComponentMapper<IdComponent> idm = Mappers.id;
+    private ComponentMapper<TagComponent> tm = Mappers.tag;
     private ComponentMapper<StatusComponent> sm = Mappers.status;
     private ComponentMapper<PositionComponent> pm = Mappers.position;
 
@@ -43,7 +43,7 @@ public class InteractionSystem extends EntitySystem {
     @Override
     public void addedToEngine(Engine engine) {
         interactables = engine.getEntitiesFor(Family.all(
-                IdComponent.class,
+                TagComponent.class,
                 InteractionComponent.class,
                 PositionComponent.class).exclude(KeyboardComponent.class).get());
     }
@@ -99,7 +99,7 @@ public class InteractionSystem extends EntitySystem {
     }
 
     private void dispatchPlayerInteractionMessage(Entity closestInteractable) {
-        String id = idm.get(closestInteractable).getId();
+        String id = tm.get(closestInteractable).getId();
         messageDispatcher.dispatchMessage(Messages.PLAYER_INTERACTION, id);
     }
 }

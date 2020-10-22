@@ -9,7 +9,8 @@ import com.badlogic.gdx.ai.msg.MessageManager;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.facundolinlaud.supergame.components.BodyComponent;
-import com.facundolinlaud.supergame.components.ai.AIComponent;
+import com.facundolinlaud.supergame.components.PositionComponent;
+import com.facundolinlaud.supergame.components.ai.BehaviorComponent;
 import com.facundolinlaud.supergame.engine.GameResources;
 import com.facundolinlaud.supergame.factory.Factories;
 import com.facundolinlaud.supergame.factory.PhysicsFactory;
@@ -18,8 +19,9 @@ import com.facundolinlaud.supergame.listeners.ProjectilesCollisionListener;
 import com.facundolinlaud.supergame.managers.world.*;
 import com.facundolinlaud.supergame.services.*;
 import com.facundolinlaud.supergame.systems.*;
-import com.facundolinlaud.supergame.systems.ai.DecisionMakingSystem;
-import com.facundolinlaud.supergame.systems.ai.MoveToSystem;
+import com.facundolinlaud.supergame.systems.ai.BehaviorSystem;
+import com.facundolinlaud.supergame.systems.ai.PursueSystem;
+import com.facundolinlaud.supergame.systems.ai.TraverseSystem;
 import com.facundolinlaud.supergame.systems.sprite.AnimableSpriteSystem;
 import com.facundolinlaud.supergame.systems.sprite.StackableSpriteSystem;
 import com.facundolinlaud.supergame.systems.sprite.StackedSpritesSystem;
@@ -42,12 +44,13 @@ public class WorldScreen implements Screen {
     private CameraManager cameraManager;
     private MapManager mapManager;
     private PhysicsManager physicsManager;
-    private AIManager aiManager;
+    private BehaviorManager behaviorManager;
     private SpawnManager spawnManager;
     private UIManager uiManager;
     private LightsManager lightsManager;
     private PlayerInputManager playerInputManager;
     private QuestsManager questsManager;
+    private PathFindingManager pathFindingManager;
     private SkillsManager skillsManager;
 
     private Stage stage;
@@ -88,25 +91,31 @@ public class WorldScreen implements Screen {
         this.cameraManager = new CameraManager();
         this.mapManager = new MapManager(resources.getBatch(), cameraManager.getCamera());
         this.physicsManager = new PhysicsManager(mapManager.getCamera(), mapManager.getMap());
-        this.aiManager = new AIManager(mapManager, physicsManager);
         this.spawnManager = new SpawnManager(resources.getEngine(), mapManager.getSpawnLocations());
         this.uiManager = new UIManager(stage, mapManager.getCamera(), agentService, inventoryService, equipmentService,
                 factories.getSkillsFactory());
         this.lightsManager = new LightsManager(PhysicsFactory.get().getWorld(), mapManager.getCamera(), agentService);
         this.playerInputManager = new PlayerInputManager(cameraManager);
-        this.skillsManager = new SkillsManager(lightsManager, cameraManager, uiManager, agentService, combatService,
-                particlesService, projectilesService);
-        this.questsManager = new QuestsManager(factories, agentService, uiManager.getDialogUIController(),
-                resources.getEngine());
+        this.skillsManager = new SkillsManager(factories.getSkillsFactory(), lightsManager, cameraManager, uiManager,
+                agentService, combatService, particlesService, projectilesService);
+        this.questsManager = new QuestsManager(factories, lightsManager, cameraManager, skillsManager, uiManager,
+                agentService, combatService, particlesService, projectilesService);
+        this.pathFindingManager = new PathFindingManager(mapManager, physicsManager);
+        this.behaviorManager = new BehaviorManager(skillsManager, lightsManager, cameraManager, uiManager, agentService,
+                combatService, particlesService, projectilesService, pathFindingManager);
     }
 
     private void initializeListeners() {
         Engine engine = resources.getEngine();
 
+        engine.addEntityListener(Family.all(BehaviorComponent.class).get(),
+                this.behaviorManager);
+
         engine.addEntityListener(Family.all(BodyComponent.class).get(),
                 new PhysicsEntitiesListener(PhysicsFactory.get().getWorld()));
-        engine.addEntityListener(Family.all(AIComponent.class).get(),
-                this.aiManager);
+
+        engine.addEntityListener(Family.all(BodyComponent.class, PositionComponent.class).get(),
+                this.pathFindingManager);
 
         PhysicsFactory.get().getWorld().setContactListener(new ProjectilesCollisionListener(projectilesService));
 
@@ -126,13 +135,16 @@ public class WorldScreen implements Screen {
         engine.addSystem(new CameraFocusSystem(cameraManager));
         engine.addSystem(new PhysicsSystem(PhysicsFactory.get().getWorld()));
         engine.addSystem(new PickUpSystem());
-        engine.addSystem(new DecisionMakingSystem(aiManager, skillsManager));
-        engine.addSystem(new MoveToSystem());
+        engine.addSystem(new BehaviorSystem(behaviorManager, agentService));
+        engine.addSystem(new PursueSystem(pathFindingManager));
+        engine.addSystem(new TraverseSystem());
         engine.addSystem(new SpawnLocationSystem(factories.getAgentFactory()));
         engine.addSystem(new ProjectileSystem(engine));
         engine.addSystem(new HealthSystem(resources.getBatch()));
         engine.addSystem(new InteractionSystem(uiManager.getDialogUIController(), playerInputManager, agentService));
         engine.addSystem(new SkillCoolDownSystem());
+        engine.addSystem(new OverlayRenderSystem(cameraManager, resources));
+        engine.addSystem(new NodeOccupationSystem(pathFindingManager));
 
         uiManager.initializeSystems(engine);
     }
@@ -152,6 +164,7 @@ public class WorldScreen implements Screen {
         lightsManager.render();
         questsManager.tick(delta);
         skillsManager.tick(delta);
+        behaviorManager.tick(delta);
 
         uiManager.render();
     }

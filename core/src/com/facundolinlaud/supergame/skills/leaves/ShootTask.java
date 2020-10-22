@@ -3,7 +3,7 @@ package com.facundolinlaud.supergame.skills.leaves;
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.math.Vector2;
-import com.facundolinlaud.supergame.behaviortree.Task;
+import com.facundolinlaud.supergame.behaviortree.LeafTask;
 import com.facundolinlaud.supergame.behaviortree.stack.Value;
 import com.facundolinlaud.supergame.builder.ProjectileBuilder;
 import com.facundolinlaud.supergame.components.PositionComponent;
@@ -14,12 +14,12 @@ import com.facundolinlaud.supergame.utils.Mappers;
 import java.util.function.Consumer;
 
 /**
- * Pops: two float-values corresponding to the x and y projectile destination values respectively
+ * Pops: a position-value corresponding to the projectile destination
  * Pushes:
  * * if an agent is hit, then it is pushed and the task completed()
  * * if no agent is hit, then it's a miss, nothing is pushed and the task is failed()
  */
-public class ShootTask extends Task<SkillBlackboard> {
+public class ShootTask extends LeafTask<SkillBlackboard> {
     private ComponentMapper<PositionComponent> pm = Mappers.position;
 
     private String texture;
@@ -43,13 +43,10 @@ public class ShootTask extends Task<SkillBlackboard> {
 
     @Override
     public void activate() {
-        float y = stack.pop().getFloat();
-        float x = stack.pop().getFloat();
-
-        Entity caster = getBlackboard().getCaster();
+        Entity caster = getBlackboard().getAgent();
         PositionComponent positionComponent = pm.get(caster);
         Vector2 origin = positionComponent.getPosition();
-        Vector2 destination = new Vector2(x, y);
+        Vector2 destination = stack.pop().getPosition();
 
         createProjectile(caster, origin, destination);
     }

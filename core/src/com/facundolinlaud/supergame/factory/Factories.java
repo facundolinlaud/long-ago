@@ -10,6 +10,7 @@ public class Factories {
     private ParticleFactory particleFactory;
     private ItemFactory itemFactory;
     private AgentFactory agentFactory;
+    private BehaviorFactory behaviorFactory;
 
     public Factories(Engine engine) {
         this.animationsFactory = new AnimationsFactory();
@@ -17,6 +18,7 @@ public class Factories {
         this.skillsFactory = new SkillsFactory();
         this.particleFactory = new ParticleFactory(new ParticleManager());
         this.itemFactory = new ItemFactory();
+        this.behaviorFactory = new BehaviorFactory();
         this.agentFactory = new AgentFactory(engine, this);
     }
 
@@ -44,4 +46,7 @@ public class Factories {
         return agentFactory;
     }
 
+    public BehaviorFactory getBehaviorFactory() {
+        return behaviorFactory;
+    }
 }

@@ -1,6 +1,6 @@
 package com.facundolinlaud.supergame.ai.pathfinding;
 
-import com.badlogic.gdx.ai.pfa.DefaultConnection;
+import com.badlogic.gdx.ai.pfa.Connection;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
@@ -27,15 +27,15 @@ public class MapGraphCreator {
     }
 
     private void calculateNodeObstacles(List<Rectangle> rectangleObstacles) {
-        for(Rectangle rectangle : rectangleObstacles){
+        for (Rectangle rectangle : rectangleObstacles) {
             int columns = (int) Math.ceil(rectangle.width);
             int rows = (int) Math.ceil(rectangle.height);
 
             int x = (int) rectangle.x;
             int y = (int) rectangle.y;
 
-            for(int column = 0; column < columns; column++){
-                for(int row = 0; row < rows; row++){
+            for (int column = 0; column < columns; column++) {
+                for (int row = 0; row < rows; row++) {
                     Point obstacle = new Point(x + column, y + row);
                     obstacles.add(obstacle);
                 }
@@ -43,7 +43,7 @@ public class MapGraphCreator {
         }
     }
 
-    public MapGraph createMapGraphFromTiledMap(){
+    public MapGraph createMapGraphFromTiledMap() {
         MapProperties prop = tiledMap.getProperties();
 
         int mapColumns = prop.get(WIDTH, Integer.class);
@@ -68,22 +68,24 @@ public class MapGraphCreator {
                     continue;
                 }
 
+                Array<Connection<Node>> connections = nodes[x][y].getConnections();
+
                 if (x - 1 >= 0 && isTileWalkable(x - 1, y)) {
-                    nodes[x][y].getConnections().add(new DefaultConnection<>(nodes[x][y], nodes[x - 1][y]));
+                    connections.add(new WeightedConnection<>(nodes[x][y], nodes[x - 1][y]));
                 }
 
 
                 if (x + 1 < mapColumns && isTileWalkable(x + 1, y)) {
-                    nodes[x][y].getConnections().add(new DefaultConnection<>(nodes[x][y], nodes[x + 1][y]));
+                    connections.add(new WeightedConnection<>(nodes[x][y], nodes[x + 1][y]));
                 }
 
 
                 if (y - 1 >= 0 && isTileWalkable(x, y - 1)) {
-                    nodes[x][y].getConnections().add(new DefaultConnection<>(nodes[x][y], nodes[x][y - 1]));
+                    connections.add(new WeightedConnection<>(nodes[x][y], nodes[x][y - 1]));
                 }
 
                 if (y + 1 < mapRows && isTileWalkable(x, y + 1)) {
-                    nodes[x][y].getConnections().add(new DefaultConnection<>(nodes[x][y], nodes[x][y + 1]));
+                    connections.add(new WeightedConnection<>(nodes[x][y], nodes[x][y + 1]));
                 }
             }
         }
@@ -91,7 +93,7 @@ public class MapGraphCreator {
         return new MapGraph(indexedNodes);
     }
 
-    private boolean isTileWalkable(int x, int y){
+    private boolean isTileWalkable(int x, int y) {
         Point point = new Point(x, y);
         return !obstacles.contains(point);
     }

@@ -21,7 +21,6 @@ public class MapGraph implements IndexedGraph<Node>{
         return nodes.size;
     }
 
-
     @Override
     public Array<Connection<Node>> getConnections(Node fromNode) {
         return fromNode.getConnections();

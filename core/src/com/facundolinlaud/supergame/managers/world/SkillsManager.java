@@ -6,26 +6,26 @@ import com.badlogic.gdx.ai.msg.MessageDispatcher;
 import com.badlogic.gdx.ai.msg.MessageManager;
 import com.facundolinlaud.supergame.behaviortree.PoolableTaskManager;
 import com.facundolinlaud.supergame.components.SkillsComponent;
+import com.facundolinlaud.supergame.factory.SkillsFactory;
 import com.facundolinlaud.supergame.model.skill.Skill;
-import com.facundolinlaud.supergame.services.AgentService;
-import com.facundolinlaud.supergame.services.CombatService;
-import com.facundolinlaud.supergame.services.ParticlesService;
-import com.facundolinlaud.supergame.services.ProjectilesService;
+import com.facundolinlaud.supergame.services.*;
 import com.facundolinlaud.supergame.skills.SkillBlackboard;
 import com.facundolinlaud.supergame.skills.SkillTask;
 import com.facundolinlaud.supergame.utils.Mappers;
-import com.facundolinlaud.supergame.utils.events.SkillCooldownStartEvent;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import static com.facundolinlaud.supergame.utils.events.Messages.REJECTED_SKILL_DUE_TO_NOT_READY;
-import static com.facundolinlaud.supergame.utils.events.Messages.SKILL_COOLDOWN_START;
 
 public class SkillsManager extends PoolableTaskManager {
     private ComponentMapper<SkillsComponent> sm = Mappers.skills;
 
     private Map<Entity, Skill> castings;
+    private Map<Entity, SkillTask> tasks;
+    private Map<Entity, Runnable> onSkillsEnd;
+
+    private SkillsFactory skillsFactory;
     private LightsManager lightsManager;
     private CameraManager cameraManager;
     private UIManager uiManager;
@@ -33,12 +33,17 @@ public class SkillsManager extends PoolableTaskManager {
     private CombatService combatService;
     private ParticlesService particlesService;
     private ProjectilesService projectilesService;
+    private SkillService skillService;
     private MessageDispatcher messageDispatcher;
 
-    public SkillsManager(LightsManager lightsManager, CameraManager cameraManager,
+    public SkillsManager(SkillsFactory skillsFactory, LightsManager lightsManager, CameraManager cameraManager,
                          UIManager uiManager, AgentService agentService, CombatService combatService,
                          ParticlesService particlesService, ProjectilesService projectilesService) {
         this.castings = new HashMap();
+        this.onSkillsEnd = new HashMap();
+        this.tasks = new HashMap();
+
+        this.skillsFactory = skillsFactory;
         this.lightsManager = lightsManager;
         this.cameraManager = cameraManager;
         this.uiManager = uiManager;
@@ -46,55 +51,73 @@ public class SkillsManager extends PoolableTaskManager {
         this.combatService = combatService;
         this.particlesService = particlesService;
         this.projectilesService = projectilesService;
+        this.skillService = new SkillService();
         this.messageDispatcher = MessageManager.getInstance();
     }
 
-    public void requestCasting(Entity caster, Skill skill) {
-        if (isAlreadyCasting(caster)) return;
+    public boolean canCast(Entity caster, String skillId) {
+        return canCast(caster, skillsFactory.get(skillId));
+    }
 
+    public boolean canCast(Entity caster, Skill skill) {
+        return !isAlreadyCasting(caster) && skillService.canCast(caster, skill);
+    }
+
+    public boolean requestCasting(Entity caster, String skillId, Runnable onSkillEnd) {
+        onSkillsEnd.put(caster, onSkillEnd);
+        return requestCasting(caster, skillId);
+    }
+
+    public boolean requestCasting(Entity caster, String skillId) {
+        return requestCasting(caster, skillsFactory.get(skillId));
+    }
+
+    public boolean requestCasting(Entity caster, Skill skill) {
         if (!canCast(caster, skill)) {
             messageDispatcher.dispatchMessage(REJECTED_SKILL_DUE_TO_NOT_READY);
-            return;
+            return false;
         }
 
-        this.castings.put(caster, skill);
-
         SkillTask skillTask = skill.getSkillDto().build();
+
+        this.castings.put(caster, skill);
+        this.tasks.put(caster, skillTask);
+
         cast(caster, skillTask);
+        return true;
     }
 
     private void cast(Entity caster, SkillTask skillTask) {
-        SkillBlackboard skillBlackboard = new SkillBlackboard(caster, this, lightsManager, cameraManager,
+        SkillBlackboard blackboard = new SkillBlackboard(caster, lightsManager, cameraManager, this,
                 uiManager, agentService, combatService, particlesService, projectilesService);
 
-        skillTask.setBlackboard(skillBlackboard);
+        skillTask.setBlackboard(blackboard);
         skillTask.activate();
     }
 
     public void endCasting(Entity caster) {
         castings.remove(caster);
+        tasks.remove(caster);
+
+        if (onSkillsEnd.containsKey(caster)) {
+            onSkillsEnd.remove(caster).run();
+        }
     }
 
     private boolean isAlreadyCasting(Entity caster) {
         return castings.containsKey(caster);
     }
 
-    private boolean canCast(Entity caster, Skill skill) {
-        SkillsComponent skillsComponent = sm.get(caster);
-
-        boolean isCoolingDown = skillsComponent.isCoolingDown(skill);
-        boolean hasSkill = skillsComponent.has(skill);
-
-        return !isCoolingDown && hasSkill;
-    }
-
     public void startCoolDown(Entity caster) {
         Skill skill = castings.get(caster);
+        skillService.startCoolDown(caster, skill);
+    }
 
-        SkillsComponent skillsComponent = sm.get(caster);
-        skillsComponent.startCoolDown(skill);
-
-        SkillCooldownStartEvent event = new SkillCooldownStartEvent(caster, skill);
-        messageDispatcher.dispatchMessage(SKILL_COOLDOWN_START, event);
+    public void abort(Entity agent) {
+        // the currently executing leafs should be the ones aborting a flow, not all
+        if (tasks.containsKey(agent)) {
+            tasks.get(agent).abort();
+            endCasting(agent);
+        }
     }
 }

@@ -2,12 +2,14 @@ package com.facundolinlaud.supergame.factory;
 
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
+import com.facundolinlaud.supergame.ai.behavior.BehaviorTask;
 import com.facundolinlaud.supergame.builder.AgentBuilder;
 import com.facundolinlaud.supergame.components.sprite.StackableSpriteComponent;
-import com.facundolinlaud.supergame.dto.agent.AIInformation;
 import com.facundolinlaud.supergame.dto.agent.Agent;
 import com.facundolinlaud.supergame.dto.agent.BagInformation;
+import com.facundolinlaud.supergame.dto.agent.BehaviorInformation;
 import com.facundolinlaud.supergame.dto.agent.CombatInformation;
+import com.facundolinlaud.supergame.dto.behaviors.BehaviorTaskDto;
 import com.facundolinlaud.supergame.model.equip.EquipSlot;
 import com.facundolinlaud.supergame.model.skill.Skill;
 import com.facundolinlaud.supergame.model.sprite.RawAnimationModel;
@@ -29,6 +31,7 @@ public class AgentFactory {
     private SkillsFactory skillsFactory;
     private ParticleFactory particleFactory;
     private AnimationsFactory animationsFactory;
+    private BehaviorFactory behaviorFactory;
     private Map<String, Agent> agents;
 
     public AgentFactory(Engine engine, Factories factories) {
@@ -38,6 +41,7 @@ public class AgentFactory {
         this.skillsFactory = factories.getSkillsFactory();
         this.particleFactory = factories.getParticleFactory();
         this.animationsFactory = factories.getAnimationsFactory();
+        this.behaviorFactory = factories.getBehaviorFactory();
     }
 
     public AgentBuilder create(String id) {
@@ -46,16 +50,20 @@ public class AgentFactory {
         RawAnimationModel rawAnimationModel = animationsFactory.get(agent.getAnimationModel());
         Map<EquipSlot, Entity> equipment = buildEquipment(agent.getBody(), agent.getEquipment());
 
-        AgentBuilder builder = new AgentBuilder(id)
+        AgentBuilder builder = new AgentBuilder(id, agent.getFactionId())
                 .withVelocity(agent.getVelocity())
                 .withAnimations(rawAnimationModel)
                 .withEquipment(equipment, Messages.EQUIPMENT_CHANGED)
                 .withParticles(particleFactory.getEffect(BLACK_SMOKE_PARTICLE_ID))
                 .withBody();
 
-        if (agent.hasAI()) {
-            AIInformation ai = agent.getAiInformation();
-            builder.withAI(ai.getBehaviorType(), ai.getViewDistance());
+        if (agent.hasBehavior()) {
+            BehaviorInformation behaviorInformation = agent.getBehaviorInformation();
+            String behaviorId = behaviorInformation.getId();
+            BehaviorTaskDto behaviorTaskDto = behaviorFactory.get(behaviorId);
+            BehaviorTask behaviorTask = behaviorTaskDto.build();
+            // hay que setearle el blackboard desde el manager o algo asi...
+            builder.withAI(behaviorTask);
         }
 
         if (agent.hasBag()) {

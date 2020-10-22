@@ -18,6 +18,7 @@ import java.util.List;
 
 public class AgentService extends Service {
     public static final String PLAYER_ID = "player";
+    public static final String PLAYER_TAG = "player";
     private ComponentMapper<KeyboardComponent> km = Mappers.keyboard;
     private ComponentMapper<PositionComponent> pm = Mappers.position;
 
@@ -29,7 +30,7 @@ public class AgentService extends Service {
         this.agentFactory = agentFactory;
 
         AgentBuilder player = agentFactory.create(PLAYER_ID).withKeyboardControl().at(29, 35);
-        this.add(player);
+        this.add(player, PLAYER_TAG);
     }
 
     public List<Entity> in(Shape area) {
@@ -52,7 +53,9 @@ public class AgentService extends Service {
         return agentFactory.create(id);
     }
 
-    public void add(AgentBuilder agentBuilder) {
+    public void add(AgentBuilder agentBuilder, String agentTag) {
+        agentBuilder.withTag(agentTag);
+
         Entity agent = agentBuilder.build();
 
         if (isKeyboardControlled(agent)) {

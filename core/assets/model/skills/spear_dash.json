@@ -1,0 +1,82 @@
+{
+  "id": "spear_dash",
+  "name": "Spear Dash",
+  "cooldown": 1.5,
+  "picturePath": "pictures/skills/spear_dash.png",
+  "disabledPicturePath": "pictures/skills/disabled/spear_dash.png",
+  "description": "A powerful spear dash",
+  "skillType": "MELEE",
+  "manaConsumption": 0.0,
+  "skillDto": {
+    "@class": "com.facundolinlaud.supergame.dto.skills.SkillTaskDto",
+    "children": ["com.facundolinlaud.supergame.dto.behaviortree.TaskListDto", [
+      {
+        "@class": "com.facundolinlaud.supergame.dto.behaviortree.leaves.RequireEquipmentTaskDto",
+        "equipType": "SPEAR"
+      },{
+        "@class": "com.facundolinlaud.supergame.dto.skills.leaves.StartCoolDownTaskDto"
+      },{
+        "@class": "com.facundolinlaud.supergame.dto.behaviortree.composites.ParallelTaskDto",
+        "children": ["com.facundolinlaud.supergame.dto.behaviortree.TaskListDto", [
+          {
+            "@class": "com.facundolinlaud.supergame.dto.skills.leaves.DisplayCastBarTaskDto",
+            "label": "Cut",
+            "totalTime": 0.2
+          },{
+            "@class": "com.facundolinlaud.supergame.dto.behaviortree.composites.SequentialTaskDto",
+            "children": ["com.facundolinlaud.supergame.dto.behaviortree.TaskListDto", [
+              {
+                "@class": "com.facundolinlaud.supergame.dto.behaviortree.leaves.PushAgentTaskDto"
+              },{
+                "@class": "com.facundolinlaud.supergame.dto.behaviortree.leaves.SetActionTaskDto",
+                "action": "DASHING"
+              },{
+                "@class": "com.facundolinlaud.supergame.dto.behaviortree.leaves.WaitTaskDto",
+                "time": 1.0
+              },{
+                "@class": "com.facundolinlaud.supergame.dto.behaviortree.leaves.PushAgentTaskDto"
+              },{
+                "@class": "com.facundolinlaud.supergame.dto.behaviortree.leaves.PushEntityPositionTaskDto"
+              },{
+                "@class": "com.facundolinlaud.supergame.dto.skills.leaves.PushAgentsInAreaTaskDto",
+                "ignoreCaster": true,
+                "offset": 0.5,
+                "shape": {
+                  "@class": "com.facundolinlaud.supergame.utils.shape.Rectangle",
+                  "width": 1.0,
+                  "height": 1.0
+                }
+              },{
+                "@class": "com.facundolinlaud.supergame.dto.behaviortree.composites.IterateTaskDto",
+                "children": ["com.facundolinlaud.supergame.dto.behaviortree.TaskListDto", [
+                  {
+                    "@class": "com.facundolinlaud.supergame.dto.behaviortree.stack.RePushValueTaskDto",
+                    "depth": 1,
+                    "times": 1
+                  },{
+                    "@class": "com.facundolinlaud.supergame.dto.skills.leaves.AffectAgentHealthTaskDto",
+                    "amount": 50.0
+                  },{
+                    "@class": "com.facundolinlaud.supergame.dto.behaviortree.leaves.PushEntityPositionTaskDto"
+                  },{
+                    "@class": "com.facundolinlaud.supergame.dto.behaviortree.stack.RePushValueTaskDto",
+                    "depth": 1,
+                    "times": 1
+                  },{
+                    "@class": "com.facundolinlaud.supergame.dto.behaviortree.leaves.DisplayParticlesTaskDto",
+                    "particleId": "black_smoke"
+                  }
+                ]]
+              },{
+                "@class": "com.facundolinlaud.supergame.dto.behaviortree.leaves.PushAgentTaskDto"
+              },{
+                "@class": "com.facundolinlaud.supergame.dto.behaviortree.leaves.SetActionTaskDto",
+                "action": "STANDING"
+              }
+            ]]
+          }
+        ]]
+      }
+    ]]
+  }
+}

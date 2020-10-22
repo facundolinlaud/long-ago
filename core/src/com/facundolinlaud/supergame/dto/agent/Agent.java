@@ -11,13 +11,14 @@ public class Agent {
     private int health;
     private float velocity;
     private boolean talkable;
+    private String factionId;
     private String animationModel;
     private Map<EquipSlot, String> body;
     private Map<EquipSlot, String> equipment;
 
     private BagInformation bagInformation;
     private CombatInformation combatInformation;
-    private AIInformation aiInformation;
+    private BehaviorInformation behaviorInformation;
 
     public String getName() {
         return name;
@@ -107,16 +108,24 @@ public class Agent {
         this.combatInformation = combatInformation;
     }
 
-    public AIInformation getAiInformation() {
-        return aiInformation;
+    public BehaviorInformation getBehaviorInformation() {
+        return behaviorInformation;
     }
 
-    public void setAiInformation(AIInformation aiInformation) {
-        this.aiInformation = aiInformation;
+    public void setBehaviorInformation(BehaviorInformation behaviorInformation) {
+        this.behaviorInformation = behaviorInformation;
     }
 
-    public boolean hasAI() {
-        return this.aiInformation != null;
+    public boolean hasBehavior() {
+        return this.behaviorInformation != null;
+    }
+
+    public String getFactionId() {
+        return factionId;
+    }
+
+    public void setFactionId(String factionId) {
+        this.factionId = factionId;
     }
 
     public boolean hasCombat() {

@@ -43,13 +43,12 @@ public class PhysicsSystem extends IteratingSystem {
         if(position.overridePhysicsSystem){
             position.overridePhysicsSystem = false;
 
-            body.body.setTransform(position.x + Dimensions.BOX_2D_OFFSET,
-                    position.y + Dimensions.BOX_2D_OFFSET, body.body.getAngle());
+            body.body.setTransform(position.x, position.y, body.body.getAngle());
         }else{
             Vector2 vector = body.body.getPosition();
 
-            position.x = vector.x - Dimensions.BOX_2D_OFFSET;
-            position.y = vector.y - Dimensions.BOX_2D_OFFSET;
+            position.x = vector.x;
+            position.y = vector.y;
         }
     }
 }

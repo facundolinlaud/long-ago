@@ -2,6 +2,7 @@ package com.facundolinlaud.supergame.factory;
 
 import com.badlogic.gdx.Gdx;
 import com.facundolinlaud.supergame.dto.agent.Agent;
+import com.facundolinlaud.supergame.dto.behaviors.BehaviorTaskDto;
 import com.facundolinlaud.supergame.dto.quests.QuestTaskDto;
 import com.facundolinlaud.supergame.model.item.Item;
 import com.facundolinlaud.supergame.model.skill.Skill;
@@ -31,6 +32,8 @@ public class ModelFactory implements Disposable {
     private static final String QUESTS_MODELS_DIRECTORY = "model/quests/";
     private static final String SKILLS_MODELS_DIRECTORY = "model/skills/";
     private static final String SKILLS_MODELS_PATH = "model/skills/skills.json";
+    private static final String BEHAVIORS_MODELS_DIRECTORY = "model/behaviors/";
+    private static final String BEHAVIORS_MODELS_PATH = "model/behaviors/behaviors.json";
 
     private static Map<String, Object> cache = new HashMap<>();
     private static ObjectMapper mapper = new ObjectMapper();
@@ -92,6 +95,16 @@ public class ModelFactory implements Disposable {
 
     public static Skill getSkill(String skillFile) {
         return (Skill) readModelWithDefaultTyping(SKILLS_MODELS_DIRECTORY + skillFile, Skill.class);
+    }
+
+    public static Set<String> getBehaviors() {
+        TypeReference<HashSet<String>> typeRef = new TypeReference<HashSet<String>>() {};
+        return (Set<String>) readModel(BEHAVIORS_MODELS_PATH, typeRef);
+    }
+
+    public static BehaviorTaskDto getBehavior(String behaviorFile) {
+        return (BehaviorTaskDto) readModelWithDefaultTyping(BEHAVIORS_MODELS_DIRECTORY + behaviorFile,
+                BehaviorTaskDto.class);
     }
 
     private static Object readModelWithDefaultTyping(String path, Class clazz) {

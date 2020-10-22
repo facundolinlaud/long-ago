@@ -3,51 +3,52 @@
   "name": "Help the Fisherman",
   "nextQuests": ["slay2.json"],
   "child": {
-    "@class": "com.facundolinlaud.supergame.dto.behaviortree.SequentialTaskDto",
+    "@class": "com.facundolinlaud.supergame.dto.behaviortree.composites.SequentialTaskDto",
     "children": ["com.facundolinlaud.supergame.dto.behaviortree.TaskListDto", [{
-      "@class": "com.facundolinlaud.supergame.dto.behaviortree.SequentialTaskDto",
+      "@class": "com.facundolinlaud.supergame.dto.behaviortree.composites.SequentialTaskDto",
       "children": ["com.facundolinlaud.supergame.dto.behaviortree.TaskListDto", [{
-        "@class": "com.facundolinlaud.supergame.dto.quests.SpawnTaskDto",
+        "@class": "com.facundolinlaud.supergame.dto.quests.leaves.SpawnTaskDto",
         "agentId": "fisherman",
+        "agentTag": "fisherman",
         "position": {
           "x": 20,
           "y": 35
         }
       },{
-        "@class": "com.facundolinlaud.supergame.dto.quests.InteractionTaskDto",
-        "agentId": "fisherman"
+        "@class": "com.facundolinlaud.supergame.dto.quests.leaves.InteractionTaskDto",
+        "agentTag": "fisherman"
       },{
-        "@class": "com.facundolinlaud.supergame.dto.quests.TextDialogTaskDto",
+        "@class": "com.facundolinlaud.supergame.dto.quests.leaves.TextDialogTaskDto",
         "title": "Fisherman",
         "message": "Hey...{WAIT} You!{WAIT} I need your help with something...{WAIT} I'll pay you good coin for your sword.{WAIT} What do you say?{WAIT} Want to help an old man?"
       },{
-        "@class": "com.facundolinlaud.supergame.dto.quests.InputDialogTaskDto",
+        "@class": "com.facundolinlaud.supergame.dto.quests.leaves.InputDialogTaskDto",
         "title": "Fisherman",
         "message": "I need you to slay one Orc and two Skeletons.{WAIT} They are harrasing my sheeeeeeepsssss!!{WAIT} Will you help me?"
       }]]
     },{
-      "@class": "com.facundolinlaud.supergame.dto.behaviortree.ParallelTaskDto",
+      "@class": "com.facundolinlaud.supergame.dto.behaviortree.composites.ParallelTaskDto",
       "children": ["com.facundolinlaud.supergame.dto.behaviortree.TaskListDto", [{
-        "@class": "com.facundolinlaud.supergame.dto.quests.SlayTaskDto",
+        "@class": "com.facundolinlaud.supergame.dto.quests.leaves.SlayTaskDto",
         "agentId": "skeleton",
         "total": 1
       },{
-        "@class": "com.facundolinlaud.supergame.dto.quests.SlayTaskDto",
+        "@class": "com.facundolinlaud.supergame.dto.quests.leaves.SlayTaskDto",
         "agentId": "orc",
         "total": 1
       }]]
     },{
-      "@class": "com.facundolinlaud.supergame.dto.behaviortree.SequentialTaskDto",
+      "@class": "com.facundolinlaud.supergame.dto.behaviortree.composites.SequentialTaskDto",
       "children": ["com.facundolinlaud.supergame.dto.behaviortree.TaskListDto", [{
-        "@class": "com.facundolinlaud.supergame.dto.quests.TextDialogTaskDto",
+        "@class": "com.facundolinlaud.supergame.dto.quests.leaves.TextDialogTaskDto",
         "title": "Fisherman",
         "message": "Thank you for your help!{WAIT} Here's what I promised!"
       },{
-        "@class": "com.facundolinlaud.supergame.dto.quests.TextDialogTaskDto",
+        "@class": "com.facundolinlaud.supergame.dto.quests.leaves.TextDialogTaskDto",
         "title": "Fisherman",
         "message": "I've got some more work to do...{WAIT} Come talk to me when you are ready."
       },{
-        "@class": "com.facundolinlaud.supergame.dto.quests.GoldRewardTaskDto",
+        "@class": "com.facundolinlaud.supergame.dto.quests.leaves.GoldRewardTaskDto",
         "gold": 10
       }]]
     }]]

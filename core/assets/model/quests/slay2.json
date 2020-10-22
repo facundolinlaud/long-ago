@@ -3,31 +3,32 @@
 	"name": "Help the Fisherman",
 	"nextQuests": [],
 	"child": {
-		"@class": "com.facundolinlaud.supergame.dto.behaviortree.SequentialTaskDto",
+		"@class": "com.facundolinlaud.supergame.dto.behaviortree.composites.SequentialTaskDto",
 		"children": ["com.facundolinlaud.supergame.dto.behaviortree.TaskListDto", [{
-			"@class": "com.facundolinlaud.supergame.dto.quests.InteractionTaskDto",
-			"agentId": "fisherman"
+			"@class": "com.facundolinlaud.supergame.dto.quests.leaves.InteractionTaskDto",
+			"agentTag": "fisherman"
 		},{
-			"@class": "com.facundolinlaud.supergame.dto.quests.TextDialogTaskDto",
+			"@class": "com.facundolinlaud.supergame.dto.quests.leaves.TextDialogTaskDto",
 			"title": "Fisherman",
 			"message": "Now I need you to kill an elf.{WAIT} Will you?"
 		},{
-			"@class": "com.facundolinlaud.supergame.dto.quests.SpawnTaskDto",
+			"@class": "com.facundolinlaud.supergame.dto.quests.leaves.SpawnTaskDto",
 			"agentId": "aggresive_elf",
+			"agentTag": "boss1",
 			"position": {
 				"x": 24,
 				"y": 35
 			}
 		},{
-			"@class": "com.facundolinlaud.supergame.dto.quests.SlayTaskDto",
+			"@class": "com.facundolinlaud.supergame.dto.quests.leaves.SlayTaskDto",
 			"agentId": "aggresive_elf",
 			"total": 1
 		},{
-			"@class": "com.facundolinlaud.supergame.dto.quests.TextDialogTaskDto",
+			"@class": "com.facundolinlaud.supergame.dto.quests.leaves.TextDialogTaskDto",
 			"title": "Fisherman",
 			"message": "Thank you for your help!{WAIT} Here's what I promised!"
 		},{
-			"@class": "com.facundolinlaud.supergame.dto.quests.GoldRewardTaskDto",
+			"@class": "com.facundolinlaud.supergame.dto.quests.leaves.GoldRewardTaskDto",
 			"gold": 20
 		}]]
 	}

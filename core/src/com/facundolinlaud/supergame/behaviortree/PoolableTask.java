@@ -1,16 +1,18 @@
 package com.facundolinlaud.supergame.behaviortree;
 
-public abstract class PoolableTask<T extends Blackboard> extends Task<T> {
+import com.facundolinlaud.supergame.behaviortree.composites.Blackboard;
+
+public abstract class PoolableTask<T extends Blackboard> extends LeafTask<T> {
     @Override
     public void activate() {
-        getBlackboard().getDomainManager().addPoolableTask(this);
+        getBlackboard().getDomainTaskManager().addPoolableTask(this);
     }
 
     public abstract void tick(float delta);
 
     @Override
     public void completed() {
-        getBlackboard().getDomainManager().removePoolableTask(this);
+        getBlackboard().getDomainTaskManager().removePoolableTask(this);
         super.completed();
     }
 }

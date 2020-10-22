@@ -1,13 +1,14 @@
 package com.facundolinlaud.supergame.utils.shape;
 
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.facundolinlaud.supergame.model.status.Direction;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, property = "@class")
 public abstract class Shape {
-    private float x;
-    private float y;
+    protected float x;
+    protected float y;
 
     public void setX(float x) {
         this.x = x;
@@ -45,4 +46,7 @@ public abstract class Shape {
     public abstract void setPosition(Vector2 position);
 
     public abstract boolean contains(float x, float y);
+
+    public abstract void render(ShapeRenderer shapeRenderer);
+
 }

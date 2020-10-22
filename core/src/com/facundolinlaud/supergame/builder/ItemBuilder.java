@@ -4,7 +4,6 @@ import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
-import com.facundolinlaud.supergame.components.IdComponent;
 import com.facundolinlaud.supergame.components.PositionComponent;
 import com.facundolinlaud.supergame.components.RenderComponent;
 import com.facundolinlaud.supergame.components.items.EquipableComponent;
@@ -24,10 +23,8 @@ public class ItemBuilder {
         this.item = item;
     }
 
-    public ItemBuilder(String id, Item model) {
-        this.item = new Entity()
-                .add(new ItemComponent(model))
-                .add(new IdComponent(id));
+    public ItemBuilder(Item model) {
+        this.item = new Entity().add(new ItemComponent(model));
     }
 
     public ItemBuilder withRender(String picture) {
