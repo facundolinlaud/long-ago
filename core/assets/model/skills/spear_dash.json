@@ -51,7 +51,7 @@
                 "children": ["com.facundolinlaud.supergame.dto.behaviortree.TaskListDto", [
                   {
                     "@class": "com.facundolinlaud.supergame.dto.behaviortree.stack.RePushValueTaskDto",
-                    "deepness": 1,
+                    "depth": 1,
                     "times": 1
                   },{
                     "@class": "com.facundolinlaud.supergame.dto.skills.leaves.AffectAgentHealthTaskDto",
@@ -60,7 +60,7 @@
                     "@class": "com.facundolinlaud.supergame.dto.behaviortree.leaves.PushEntityPositionTaskDto"
                   },{
                     "@class": "com.facundolinlaud.supergame.dto.behaviortree.stack.RePushValueTaskDto",
-                    "deepness": 1,
+                    "depth": 1,
                     "times": 1
                   },{
                     "@class": "com.facundolinlaud.supergame.dto.behaviortree.leaves.DisplayParticlesTaskDto",

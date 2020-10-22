@@ -6,11 +6,11 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 @JsonTypeInfo(use=JsonTypeInfo.Id.CLASS, property="@class")
 public class RePushValueTaskDto extends TaskDto {
-    private int deepness;
+    private int depth;
     private int times;
 
-    public void setDeepness(int deepness) {
-        this.deepness = deepness;
+    public void setDepth(int depth) {
+        this.depth = depth;
     }
 
     public void setTimes(int times) {
@@ -19,6 +19,6 @@ public class RePushValueTaskDto extends TaskDto {
 
     @Override
     public RePushValueTask build() {
-        return new RePushValueTask(deepness, times);
+        return new RePushValueTask(depth, times);
     }
 }

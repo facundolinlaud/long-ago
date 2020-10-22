@@ -55,7 +55,7 @@
                       "shootingForce": 7.0
                     },{
                       "@class": "com.facundolinlaud.supergame.dto.behaviortree.stack.RePushValueTaskDto",
-                      "deepness": 1,
+                      "depth": 1,
                       "times": 1
                     },{
                       "@class": "com.facundolinlaud.supergame.dto.skills.leaves.AffectAgentHealthTaskDto",
@@ -64,7 +64,7 @@
                       "@class": "com.facundolinlaud.supergame.dto.behaviortree.leaves.PushEntityPositionTaskDto"
                     },{
                       "@class": "com.facundolinlaud.supergame.dto.behaviortree.stack.RePushValueTaskDto",
-                      "deepness": 1,
+                      "depth": 1,
                       "times": 3
                     },{
                       "@class": "com.facundolinlaud.supergame.dto.behaviortree.leaves.DisplayLightTaskDto",

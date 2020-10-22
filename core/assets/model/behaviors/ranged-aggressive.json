@@ -17,7 +17,7 @@
               "children": ["com.facundolinlaud.supergame.dto.behaviortree.TaskListDto", [
                 {
                   "@class": "com.facundolinlaud.supergame.dto.behaviortree.stack.RePushValueTaskDto",
-                  "deepness": 1,
+                  "depth": 1,
                   "times": 2
                 },{
                   "@class": "com.facundolinlaud.supergame.dto.behaviortree.leaves.PushEntityPositionTaskDto"
@@ -33,7 +33,7 @@
               "children": ["com.facundolinlaud.supergame.dto.behaviortree.TaskListDto", [
                 {
                   "@class": "com.facundolinlaud.supergame.dto.behaviortree.stack.RePushValueTaskDto",
-                  "deepness": 1,
+                  "depth": 1,
                   "times": 2
                 },{
                   "@class": "com.facundolinlaud.supergame.dto.behaviors.leaves.PursueTaskDto",
