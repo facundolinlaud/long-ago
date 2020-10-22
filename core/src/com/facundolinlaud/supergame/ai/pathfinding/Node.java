@@ -9,11 +9,11 @@ public class Node {
     private final int y;
     private final Array<Connection<Node>> connections;
 
-    public Node (final int index, final int x, final int y, final int capacity) {
+    public Node(final int index, final int x, final int y, final int capacity) {
         this.index = index;
         this.x = x;
         this.y = y;
-        this.connections = new Array<>(capacity);
+        this.connections = new Array(capacity);
     }
 
     public int getIndex() {
