@@ -20,7 +20,7 @@ import java.util.List;
  * Created by facundo on 3/23/16.
  */
 public class MapManager implements Renderable {
-    public static final String PATH_TO_TILE_MAP = "map/test_green.tmx";
+    public static final String PATH_TO_TILE_MAP = "map/debug-map.tmx";
 
     public static final int[] BASE_LAYERS = new int[]{0, 1, 2};
     public static final int[] UPPER_LAYERS = new int[]{3};

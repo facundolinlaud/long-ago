@@ -25,7 +25,7 @@ public class PathFinderAuthority {
         this.tiledMapRows = prop.get(HEIGHT, Integer.class);
     }
 
-    public PathFinderResult searchNodePath(Vector2 from, Vector2 to){
+    public PathFinderResult searchNodePath(Vector2 from, Vector2 to) {
         LinkedGraphPath<Node> outPath = new LinkedGraphPath();
 
         int fromNodeIndex = resolveNodeIndex(from);
@@ -36,8 +36,14 @@ public class PathFinderAuthority {
 
         boolean pathFound = pathfinder.searchNodePath(fromNode, toNode, new ManhattanDistance(), outPath);
 
-        if(pathFound)
+        // el problema es que para que el agente pueda doblar precisament, la stanidng cell se tiene que eliminar
+        // solo si realmente el agente esta sobre el medio de la cell, sino no.
+        // como el pursue system va tickeando en todos los ticks y calcula desde el ((int) pos.x, (int) pos.y) entonces
+        // no importa que tan lejos o cerca estas realmente del centro de la cell, siempre desestima la standing cell
+        // apenas se toca
+        if (pathFound) {
             removeStandingCell(outPath);
+        }
 
         return new PathFinderResult(outPath, pathFound);
     }
@@ -46,9 +52,9 @@ public class PathFinderAuthority {
         outPath.pop();
     }
 
-    private int resolveNodeIndex(Vector2 vector){
-        int x = Math.round(vector.x);
-        int y = Math.round(vector.y);
+    private int resolveNodeIndex(Vector2 vector) {
+        int x = (int) vector.x;
+        int y = (int) vector.y;
 
         return x + y * tiledMapRows;
     }

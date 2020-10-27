@@ -2,7 +2,7 @@
   "player": {
     "name": "Player",
     "factionId": "player",
-    "velocity": 1.9,
+    "velocity": 3.0,
     "talkable": true,
     "animationModel": "DEFAULT",
     "bagInformation": {
@@ -84,7 +84,7 @@
       "BOW": "great_bow"
     },
     "behaviorInformation": {
-      "id": "ranged_aggressive"
+      "id": "follower"
     }
   },
   "orc": {

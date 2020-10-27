@@ -20,6 +20,7 @@ import com.facundolinlaud.supergame.managers.world.*;
 import com.facundolinlaud.supergame.services.*;
 import com.facundolinlaud.supergame.systems.*;
 import com.facundolinlaud.supergame.systems.ai.BehaviorSystem;
+import com.facundolinlaud.supergame.systems.ai.DebugTraverseSystem;
 import com.facundolinlaud.supergame.systems.ai.PursueSystem;
 import com.facundolinlaud.supergame.systems.ai.TraverseSystem;
 import com.facundolinlaud.supergame.systems.sprite.AnimableSpriteSystem;
@@ -145,6 +146,7 @@ public class WorldScreen implements Screen {
         engine.addSystem(new SkillCoolDownSystem());
         engine.addSystem(new OverlayRenderSystem(cameraManager, resources));
         engine.addSystem(new NodeOccupationSystem(pathFindingManager));
+        engine.addSystem(new DebugTraverseSystem(cameraManager, resources, pathFindingManager));
 
         uiManager.initializeSystems(engine);
     }

@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.facundolinlaud.supergame.ai.pathfinding.PathFinderAuthority;
 import com.facundolinlaud.supergame.ai.pathfinding.PathFinderResult;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -54,6 +55,10 @@ public class PathFindingManager implements EntityListener {
     }
 
     private Vector2 roundPosition(Vector2 position) {
-        return new Vector2(Math.round(position.x), Math.round((position.y)));
+        return new Vector2((int) position.x, (int) position.y);
+    }
+
+    public Collection<Vector2> getOccupatedCells() {
+        return occupation.values();
     }
 }

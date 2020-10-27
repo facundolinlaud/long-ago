@@ -29,7 +29,7 @@ public class AgentService extends Service {
         super(engine);
         this.agentFactory = agentFactory;
 
-        AgentBuilder player = agentFactory.create(PLAYER_ID).withKeyboardControl().at(29, 35);
+        AgentBuilder player = agentFactory.create(PLAYER_ID).withKeyboardControl().at(0, 0);
         this.add(player, PLAYER_TAG);
     }
 

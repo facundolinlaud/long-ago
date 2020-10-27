@@ -16,7 +16,9 @@ import com.facundolinlaud.supergame.utils.Mappers;
 import java.awt.*;
 
 public class TraverseSystem extends IteratingSystem {
-    private static final float EPSILON = 0.5f;
+    private static final float EPSILON = 0.15f;
+    private static final float HALF_METER = 0.5f;
+    private static final float ONE_METER = 1f;
 
     private ComponentMapper<TraverseComponent> mtm = Mappers.traverse;
     private ComponentMapper<PositionComponent> pm = Mappers.position;
@@ -32,18 +34,19 @@ public class TraverseSystem extends IteratingSystem {
         PositionComponent position = pm.get(agent);
         StatusComponent status = sm.get(agent);
 
-        boolean closeEnough = traversal.getPathLength() < traversal.getSeekedProximity();
+        float seekedProximity = Math.min(traversal.getSeekedProximity(), ONE_METER);
+        boolean closeEnough = traversal.getPathLength() < seekedProximity;
 
         if (closeEnough) {
-            arrived(status, traversal, agent);
+            onArrive(status, traversal, agent);
             return;
         }
 
         Point targetCell = traversal.getNextCell();
         Vector2 agentPosition = position.getPosition();
 
-        float differenceX = agentPosition.x - targetCell.x;
-        float differenceY = agentPosition.y - targetCell.y;
+        float differenceX = agentPosition.x - targetCell.x - HALF_METER;
+        float differenceY = agentPosition.y - targetCell.y - HALF_METER;
 
         float deltaX = Math.abs(differenceX);
         float deltaY = Math.abs(differenceY);
@@ -52,14 +55,13 @@ public class TraverseSystem extends IteratingSystem {
             Direction newDirection = resolveDirection(differenceX, differenceY, deltaX, deltaY);
             status.setDirection(newDirection);
             status.setAction(Action.WALKING);
-        } else if (traversal.getPathLength() > 1) {
-            traversal.popCell();
         } else {
-            arrived(status, traversal, agent);
+            System.out.println("Popped cell " + targetCell + " at " + agentPosition + " with deltaX=" + differenceX + " and deltaY=" + differenceY);
+            traversal.popCell();
         }
     }
 
-    private void arrived(StatusComponent status, TraverseComponent traversal, Entity agent) {
+    private void onArrive(StatusComponent status, TraverseComponent traversal, Entity agent) {
         status.setAction(Action.STANDING);
         agent.remove(TraverseComponent.class);
         traversal.arrive();
@@ -82,7 +84,7 @@ public class TraverseSystem extends IteratingSystem {
     }
 
     private Direction resolveDirection(float differenceX, float differenceY, float deltaX, float deltaY) {
-        if (deltaX > EPSILON) {
+        if (deltaX > EPSILON && deltaX > deltaY) {
             return resolveHorizontalDirection(differenceX);
         }
 

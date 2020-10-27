@@ -49,4 +49,8 @@ public class TraverseComponent implements Component {
     public float getSeekedProximity() {
         return seekedProximity;
     }
+
+    public LinkedGraphPath<Node> getPath() {
+        return path;
+    }
 }
