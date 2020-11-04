@@ -36,20 +36,7 @@ public class PathFinderAuthority {
 
         boolean pathFound = pathfinder.searchNodePath(fromNode, toNode, new ManhattanDistance(), outPath);
 
-        // el problema es que para que el agente pueda doblar precisament, la stanidng cell se tiene que eliminar
-        // solo si realmente el agente esta sobre el medio de la cell, sino no.
-        // como el pursue system va tickeando en todos los ticks y calcula desde el ((int) pos.x, (int) pos.y) entonces
-        // no importa que tan lejos o cerca estas realmente del centro de la cell, siempre desestima la standing cell
-        // apenas se toca
-        if (pathFound) {
-            removeStandingCell(outPath);
-        }
-
         return new PathFinderResult(outPath, pathFound);
-    }
-
-    private void removeStandingCell(LinkedGraphPath outPath) {
-        outPath.pop();
     }
 
     private int resolveNodeIndex(Vector2 vector) {
