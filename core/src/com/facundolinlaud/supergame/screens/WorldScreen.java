@@ -9,7 +9,6 @@ import com.badlogic.gdx.ai.msg.MessageManager;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.facundolinlaud.supergame.components.BodyComponent;
-import com.facundolinlaud.supergame.components.PositionComponent;
 import com.facundolinlaud.supergame.components.ai.BehaviorComponent;
 import com.facundolinlaud.supergame.engine.GameResources;
 import com.facundolinlaud.supergame.factory.Factories;
@@ -115,9 +114,6 @@ public class WorldScreen implements Screen {
         engine.addEntityListener(Family.all(BodyComponent.class).get(),
                 new PhysicsEntitiesListener(PhysicsFactory.get().getWorld()));
 
-        engine.addEntityListener(Family.all(BodyComponent.class, PositionComponent.class).get(),
-                this.pathFindingManager);
-
         PhysicsFactory.get().getWorld().setContactListener(new ProjectilesCollisionListener(projectilesService));
 
         this.stage.addListener(playerInputManager);
@@ -145,8 +141,7 @@ public class WorldScreen implements Screen {
         engine.addSystem(new InteractionSystem(uiManager.getDialogUIController(), playerInputManager, agentService));
         engine.addSystem(new SkillCoolDownSystem());
         engine.addSystem(new OverlayRenderSystem(cameraManager, resources));
-        engine.addSystem(new NodeOccupationSystem(pathFindingManager));
-        engine.addSystem(new DebugTraverseSystem(cameraManager, resources, pathFindingManager));
+        engine.addSystem(new DebugTraverseSystem(cameraManager, resources));
 
         uiManager.initializeSystems(engine);
     }

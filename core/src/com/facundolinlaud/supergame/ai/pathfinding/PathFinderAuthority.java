@@ -45,24 +45,4 @@ public class PathFinderAuthority {
 
         return x + y * tiledMapRows;
     }
-
-    public void free(Vector2 oldPosition) {
-        int index = resolveNodeIndex(oldPosition);
-        Node node = mapGraph.getNode(index);
-        node.getConnections().forEach(c -> {
-            // Try to remove this casting some day
-            WeightedConnection wc = (WeightedConnection) c;
-            wc.markAsCheap();
-        });
-    }
-
-    public void occupy(Vector2 position) {
-        int index = resolveNodeIndex(position);
-        Node node = mapGraph.getNode(index);
-        node.getConnections().forEach(c -> {
-            // Try to remove this casting some day
-            WeightedConnection wc = (WeightedConnection) c;
-            wc.markAsExpensive();
-        });
-    }
 }

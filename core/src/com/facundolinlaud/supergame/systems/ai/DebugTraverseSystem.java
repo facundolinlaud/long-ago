@@ -9,13 +9,11 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Vector2;
 import com.facundolinlaud.supergame.ai.pathfinding.Node;
 import com.facundolinlaud.supergame.components.ai.BehaviorComponent;
 import com.facundolinlaud.supergame.components.ai.TraverseComponent;
 import com.facundolinlaud.supergame.engine.GameResources;
 import com.facundolinlaud.supergame.managers.world.CameraManager;
-import com.facundolinlaud.supergame.managers.world.PathFindingManager;
 import com.facundolinlaud.supergame.utils.Mappers;
 import com.facundolinlaud.supergame.utils.PhasedIteratingSystem;
 
@@ -26,14 +24,12 @@ public class DebugTraverseSystem extends PhasedIteratingSystem {
     private Camera camera;
     private ShapeRenderer renderer;
     private SpriteBatch spriteBatch;
-    private PathFindingManager pathFindingManager;
 
-    public DebugTraverseSystem(CameraManager cameraManager, GameResources gameResources, PathFindingManager pathFindingManager) {
+    public DebugTraverseSystem(CameraManager cameraManager, GameResources gameResources) {
         super(Family.all(BehaviorComponent.class, TraverseComponent.class).get());
         this.camera = cameraManager.getCamera();
         this.spriteBatch = gameResources.getBatch();
         this.renderer = new ShapeRenderer();
-        this.pathFindingManager = pathFindingManager;
     }
 
     @Override
@@ -51,12 +47,7 @@ public class DebugTraverseSystem extends PhasedIteratingSystem {
         TraverseComponent traverseComponent = tm.get(entity);
         traverseComponent.getPath().forEach(this::drawNode);
         renderer.setColor(FADED_RED);
-        pathFindingManager.getOccupatedCells().forEach(this::drawNode);
         renderer.end();
-    }
-
-    private void drawNode(Vector2 position) {
-        renderer.rect(position.x, position.y, 1f, 1f);
     }
 
     private void drawNode(Node node) {
