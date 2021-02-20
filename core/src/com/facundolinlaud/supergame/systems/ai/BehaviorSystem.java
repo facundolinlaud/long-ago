@@ -17,7 +17,6 @@ public class BehaviorSystem extends IntervalIteratingSystem {
     private final static float INTERVAL = 0.1f;
     private static final float MINIMUM_DISTANCE_FOR_ACTIVE_IA = 25f;
     private ComponentMapper<PositionComponent> pm = Mappers.position;
-    private ComponentMapper<BehaviorComponent> bm = Mappers.behavior;
 
     private BehaviorManager behaviorManager;
     private AgentService agentService;

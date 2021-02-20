@@ -3,7 +3,7 @@ package com.facundolinlaud.supergame.systems.ai;
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
-import com.badlogic.ashley.systems.IteratingSystem;
+import com.badlogic.ashley.systems.IntervalIteratingSystem;
 import com.badlogic.gdx.math.Vector2;
 import com.facundolinlaud.supergame.ai.pathfinding.LinkedGraphPath;
 import com.facundolinlaud.supergame.ai.pathfinding.Node;
@@ -14,7 +14,9 @@ import com.facundolinlaud.supergame.components.ai.TraverseComponent;
 import com.facundolinlaud.supergame.managers.world.PathFindingManager;
 import com.facundolinlaud.supergame.utils.Mappers;
 
-public class PursueSystem extends IteratingSystem {
+public class PursueSystem extends IntervalIteratingSystem {
+    private static final float INTERVAL_IN_SECONDS = 0.4f;
+
     private ComponentMapper<TraverseComponent> tm = Mappers.traverse;
     private ComponentMapper<PositionComponent> pom = Mappers.position;
     private ComponentMapper<PursueComponent> pum = Mappers.pursue;
@@ -22,12 +24,12 @@ public class PursueSystem extends IteratingSystem {
     private PathFindingManager pathFindingManager;
 
     public PursueSystem(PathFindingManager pathFindingManager) {
-        super(Family.all(PursueComponent.class).get());
+        super(Family.all(PursueComponent.class).get(), INTERVAL_IN_SECONDS);
         this.pathFindingManager = pathFindingManager;
     }
 
     @Override
-    protected void processEntity(Entity agent, float deltaTime) {
+    protected void processEntity(Entity agent) {
         PursueComponent pursuableComponent = pum.get(agent);
         Entity pursuable = pursuableComponent.getPursuable();
         Vector2 agentPosition = pom.get(agent).getPosition();

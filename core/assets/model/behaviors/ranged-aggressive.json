@@ -6,9 +6,16 @@
       "@class": "com.facundolinlaud.supergame.dto.behaviortree.composites.SequentialTaskDto",
       "children": ["com.facundolinlaud.supergame.dto.behaviortree.TaskListDto", [
         {
-          "@class": "com.facundolinlaud.supergame.dto.behaviors.leaves.EnemySeenTaskDto",
-          "viewDistance": 10.0,
-          "enemyFactions": ["java.util.ArrayList", ["player", "zombies"]]
+          "@class": "com.facundolinlaud.supergame.dto.behaviortree.composites.SelectorTaskDto",
+          "children": ["com.facundolinlaud.supergame.dto.behaviortree.TaskListDto", [
+            {
+              "@class": "com.facundolinlaud.supergame.dto.behaviors.leaves.EnemyAttackedTaskDto"
+            },{
+              "@class": "com.facundolinlaud.supergame.dto.behaviors.leaves.EnemySeenTaskDto",
+              "viewDistance": 10.0,
+              "enemyFactions": ["java.util.ArrayList", ["player", "zombies"]]
+            }
+          ]]
         },{
           "@class": "com.facundolinlaud.supergame.dto.behaviortree.composites.SelectorTaskDto",
           "children": ["com.facundolinlaud.supergame.dto.behaviortree.TaskListDto", [

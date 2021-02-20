@@ -31,6 +31,9 @@ public class Dimensions {
         return (int) (meters * PX_PER_METER);
     }
 
+    /* Cells and Tiles */
+    public static final float ONE_CELL = 1;
+
     public static final Vector2 calculateGlobalPositionInPixelsToMetersRelativeToCenter(float x, float y){
         float width = Gdx.graphics.getWidth();
         float height = Gdx.graphics.getHeight();

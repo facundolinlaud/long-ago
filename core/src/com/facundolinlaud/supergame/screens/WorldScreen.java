@@ -9,7 +9,6 @@ import com.badlogic.gdx.ai.msg.MessageManager;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.facundolinlaud.supergame.components.BodyComponent;
-import com.facundolinlaud.supergame.components.PositionComponent;
 import com.facundolinlaud.supergame.components.ai.BehaviorComponent;
 import com.facundolinlaud.supergame.engine.GameResources;
 import com.facundolinlaud.supergame.factory.Factories;
@@ -20,6 +19,7 @@ import com.facundolinlaud.supergame.managers.world.*;
 import com.facundolinlaud.supergame.services.*;
 import com.facundolinlaud.supergame.systems.*;
 import com.facundolinlaud.supergame.systems.ai.BehaviorSystem;
+import com.facundolinlaud.supergame.systems.ai.DebugTraverseSystem;
 import com.facundolinlaud.supergame.systems.ai.PursueSystem;
 import com.facundolinlaud.supergame.systems.ai.TraverseSystem;
 import com.facundolinlaud.supergame.systems.sprite.AnimableSpriteSystem;
@@ -114,9 +114,6 @@ public class WorldScreen implements Screen {
         engine.addEntityListener(Family.all(BodyComponent.class).get(),
                 new PhysicsEntitiesListener(PhysicsFactory.get().getWorld()));
 
-        engine.addEntityListener(Family.all(BodyComponent.class, PositionComponent.class).get(),
-                this.pathFindingManager);
-
         PhysicsFactory.get().getWorld().setContactListener(new ProjectilesCollisionListener(projectilesService));
 
         this.stage.addListener(playerInputManager);
@@ -131,9 +128,7 @@ public class WorldScreen implements Screen {
         engine.addSystem(new AnimableSpriteSystem());
         engine.addSystem(new PlayerInputSystem(playerInputManager, skillsManager, cameraManager,
                 factories.getSkillsFactory(), uiManager.getOverlayUIController()));
-        engine.addSystem(new MovementSystem());
         engine.addSystem(new CameraFocusSystem(cameraManager));
-        engine.addSystem(new PhysicsSystem(PhysicsFactory.get().getWorld()));
         engine.addSystem(new PickUpSystem());
         engine.addSystem(new BehaviorSystem(behaviorManager, agentService));
         engine.addSystem(new PursueSystem(pathFindingManager));
@@ -144,7 +139,9 @@ public class WorldScreen implements Screen {
         engine.addSystem(new InteractionSystem(uiManager.getDialogUIController(), playerInputManager, agentService));
         engine.addSystem(new SkillCoolDownSystem());
         engine.addSystem(new OverlayRenderSystem(cameraManager, resources));
-        engine.addSystem(new NodeOccupationSystem(pathFindingManager));
+        engine.addSystem(new DebugTraverseSystem(cameraManager, resources));
+        engine.addSystem(new MovementSystem());
+        engine.addSystem(new PhysicsSystem(PhysicsFactory.get().getWorld()));
 
         uiManager.initializeSystems(engine);
     }
