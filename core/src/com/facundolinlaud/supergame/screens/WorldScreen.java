@@ -128,9 +128,7 @@ public class WorldScreen implements Screen {
         engine.addSystem(new AnimableSpriteSystem());
         engine.addSystem(new PlayerInputSystem(playerInputManager, skillsManager, cameraManager,
                 factories.getSkillsFactory(), uiManager.getOverlayUIController()));
-        engine.addSystem(new MovementSystem());
         engine.addSystem(new CameraFocusSystem(cameraManager));
-        engine.addSystem(new PhysicsSystem(PhysicsFactory.get().getWorld()));
         engine.addSystem(new PickUpSystem());
         engine.addSystem(new BehaviorSystem(behaviorManager, agentService));
         engine.addSystem(new PursueSystem(pathFindingManager));
@@ -142,6 +140,8 @@ public class WorldScreen implements Screen {
         engine.addSystem(new SkillCoolDownSystem());
         engine.addSystem(new OverlayRenderSystem(cameraManager, resources));
         engine.addSystem(new DebugTraverseSystem(cameraManager, resources));
+        engine.addSystem(new MovementSystem());
+        engine.addSystem(new PhysicsSystem(PhysicsFactory.get().getWorld()));
 
         uiManager.initializeSystems(engine);
     }

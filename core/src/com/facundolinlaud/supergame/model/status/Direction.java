@@ -29,4 +29,12 @@ public enum Direction {
 
         return null;
     }
+
+    public boolean isVertical(){
+        return this == UP || this == DOWN;
+    }
+
+    public boolean isHorizontal(){
+        return this == LEFT || this == RIGHT;
+    }
 }

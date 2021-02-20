@@ -36,7 +36,15 @@ public class PathFinderAuthority {
 
         boolean pathFound = pathfinder.searchNodePath(fromNode, toNode, new ManhattanDistance(), outPath);
 
+        if (pathFound) {
+            removeStandingCell(outPath);
+        }
+
         return new PathFinderResult(outPath, pathFound);
+    }
+
+    private void removeStandingCell(LinkedGraphPath outPath) {
+        outPath.pop();
     }
 
     private int resolveNodeIndex(Vector2 vector) {

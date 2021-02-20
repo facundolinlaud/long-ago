@@ -20,14 +20,9 @@ public class TraverseComponent implements Component {
         path.pop();
     }
 
-    public Vector2 getCurrentCell() {
+    public Vector2 getNextCell() {
         Node first = path.first();
         return new Vector2(first.getX(), first.getY());
-    }
-
-    public Vector2 getNextCell() {
-        Node cell = path.get(1);
-        return new Vector2(cell.getX(), cell.getY());
     }
 
     public int getPathLength() {
